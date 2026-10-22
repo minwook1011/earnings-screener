@@ -115,7 +115,7 @@
       '<div class="cal"><div class="weeks" id="weeks">' + chips + "</div>" +
       '<div class="wnav"><button data-step="-1"' + (wi <= 0 ? " disabled" : "") + '>‹ 이전 주</button><b>' + weekName(mon) + "</b><span>" + dot(mon) + " ~ " + dot(addDays(mon, 4)) + " · " + ((weeks[mon] || []).length) + '개</span><button data-step="0">이번 주</button><button data-step="1"' + (wi >= keys.length - 1 ? " disabled" : "") + ">다음 주 ›</button></div>" +
       '<div class="cal-grid">' + cols + "</div>" +
-      '<p class="note">텔레그램 '1단계 · 알림'에 올라온 회사만 나옵니다. 15분마다 확인해서 새 카드가 오면 발표일 칸에 추가됩니다.</p></div>';
+      '<p class="note">텔레그램 「1단계 · 알림」에 올라온 회사만 나옵니다. 15분마다 확인해서 새 카드가 오면 발표일 칸에 추가됩니다.</p></div>';
   }
 
   /* ---------- 2~4단계: 표 + 분기 성장률 줄 ---------- */
