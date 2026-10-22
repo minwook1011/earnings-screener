@@ -575,3 +575,22 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .dnm .picks { margin-left: 10px; }
 .dnm .picks .meh { margin-left: 0; }
 .dnm .good { font-size: 13px; padding: 6px 11px; font-family: inherit; }
+/* 보류 — 보라. 칸은 별로임 위, 머리줄 버튼으로 줄이기·펼치기 */
+:root { --hold-bg: #efe6ff; --hold-bd: #8b5cf6; --hold-tx: #5b21b6; --hold-on: #7c3aed; --hold-on-tx: #ffffff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hold-bg: rgba(139, 92, 246, .18); --hold-bd: #a78bfa; --hold-tx: #d6c6ff; --hold-on: #8b5cf6; --hold-on-tx: #ffffff; } }
+:root[data-theme="dark"] { --hold-bg: rgba(139, 92, 246, .18); --hold-bd: #a78bfa; --hold-tx: #d6c6ff; --hold-on: #8b5cf6; --hold-on-tx: #ffffff; }
+.hold { flex: none; font: inherit; font-size: 12px; font-weight: 700; line-height: 1; padding: 5px 9px; border-radius: 999px; border: 1.5px solid var(--hold-bd); background: var(--hold-bg); color: var(--hold-tx); cursor: pointer; white-space: nowrap; }
+.hold:hover, .hold.on { background: var(--hold-on); border-color: var(--hold-on); color: var(--hold-on-tx); }
+.hold:focus-visible { outline: 2px solid var(--hold-bd); outline-offset: 2px; }
+.main-t td.tk .hold { padding: 3px 7px; font-size: 10.5px; margin: 0; }
+.dnm .hold { font-size: 13px; padding: 6px 11px; font-family: inherit; }
+.hold-n { margin-left: 6px; font-size: 12px; font-weight: 700; color: var(--hold-tx); background: var(--hold-bg); border: 1px solid var(--hold-bd); border-radius: 999px; padding: 2px 8px; }
+.hold-sec { margin-top: 36px; border-top: 3px solid var(--hold-on); padding-top: 4px; }
+.hold-h { display: flex; align-items: baseline; gap: 10px; margin: 0 0 4px; padding: 10px 14px; font-size: 15px; font-weight: 800; color: var(--hold-on-tx); background: var(--hold-on); border-radius: 0 0 10px 10px; }
+.hold-h b { font-weight: 800; }
+.hold-h span { font-size: 12px; font-weight: 500; opacity: .85; }
+.hold-sec .meh-t tbody tr.main td { opacity: 1; }
+.pk-h { align-items: center; }
+.sec-tg { margin-left: auto; font: inherit; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; border: 1.5px solid currentColor; background: transparent; color: inherit; cursor: pointer; white-space: nowrap; }
+.sec-tg:hover { background: rgba(255, 255, 255, .22); }
+.sec-tg:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
