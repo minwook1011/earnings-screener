@@ -14,7 +14,7 @@
   ];
   var NOTE = {
     1: "실적을 발표한 기업을 이름과 티커만 모았습니다. 누르면 주가와 실적이 열립니다. 텔레그램 1단계 카드에서 [볼 후보]를 누르면 2단계로 올라갑니다.",
-    2: "볼 후보로 고른 회사입니다. 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 노란 테두리·'합병' = 인수 회사가 더해진 분기. 2단계 실적 분석 리서치가 붙습니다.",
+    2: "볼 후보로 고른 회사입니다. 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 분기 이름 위 '합병' = 그 분기부터 인수한 회사가 실적에 더해짐. 2단계 실적 분석 리서치가 붙습니다.",
     3: "다 같이 깊게 보고 매수 여부·비중·근거·다시 볼 조건을 정리합니다. 3단계 딥 리포트가 붙습니다.",
     4: "4단계까지 왔으면 사기 직전 좋은 종목입니다. 다 같이 보고 살지 말지 결정합니다."
   };
@@ -122,7 +122,7 @@
     { k: "rk", t: "#", cls: "l ns" }, { k: "c", t: "코드", cls: "l" }, { k: "n", t: "종목", cls: "l" },
     { k: "d", t: "발표" }, { k: "mc", t: "시총(억엔)" }, { k: "per", t: "PER" },
     { k: "rev", t: "매출 YoY" }, { k: "op", t: "영업이익 YoY" }, { k: "d1", t: "다음 날" }, { k: "vr", t: "거래량" },
-    { k: "up", t: "AI 렌즈", cls: "l" }, { k: "by", t: "올린 사람", cls: "l" }, { k: "res", t: "리서치", cls: "l ns" }
+    { k: "by", t: "올린 사람", cls: "l" }, { k: "res", t: "리서치", cls: "l ns" }
   ];
   function sorted(rows) {
     var k = S.sort, dir = S.dir;
@@ -185,8 +185,8 @@
         "<td>" + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
         "<td>" + pct(o.rev) + "</td><td>" + pct(o.op) + "</td><td>" + pct(o.d1) + "</td>" +
         "<td>" + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
-        '<td class="l">' + votes(o.lens) + '</td><td class="l by">' + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + resTag(o) + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="11">' + qline(o.c) + "</td></tr>";
+        '<td class="l by">' + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + resTag(o) + "</td></tr>" +
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="10">' + qline(o.c) + "</td></tr>";
     }).join("");
     return head + '<div class="tblwrap"><table class="main-t"><thead><tr>' + th + "</tr></thead><tbody>" + body + "</tbody></table></div>";
   }
@@ -429,6 +429,7 @@
   }
   function rerender() { document.getElementById("view").innerHTML = S.stage === 1 ? stage1() : stageN(S.stage); bindView(); }
   function bindView() {
+    var rl = app.querySelector(".rail"); if (rl) document.documentElement.style.setProperty("--railh", rl.offsetHeight + "px");
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = "jp/c/" + el.dataset.c; }; });
     var q = document.getElementById("q");
@@ -467,7 +468,7 @@
     }
     closePanel();
     var st = Math.min(4, Math.max(1, +h[1] || 1));
-    if (st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "mc" && !S.touched) S.sort = st === 2 ? "up" : "mc"; render(); }
+    if (st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "up") S.sort = "mc"; render(); }
   }
 
   window.addEventListener("hashchange", route);
