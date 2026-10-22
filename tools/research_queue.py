@@ -6,7 +6,8 @@
   4단계 회사          → 3단계 리포트를 그대로 쓰고, 결정 메모(stage4.md)는 사람이 쓴다
 
   python tools/research_queue.py          대기열 갱신 + 할 일 목록 출력(JSON)
-  python tools/research_queue.py done 5018 2 "한 줄 결론"   리서치 파일을 다 쓴 뒤 완료 표시
+  python tools/research_queue.py done 5018 2 "한 줄 결론" [아티팩트 링크]   리서치 파일을 다 쓴 뒤 완료 표시
+  리서치 전문은 claude.ai 아티팩트로 게시하고(공유: 링크가 있는 사람 보기) 그 링크를 넘기면 사이트에 '리서치 전문 보기' 버튼이 생긴다
 """
 import json
 import os
@@ -56,7 +57,7 @@ def refresh():
     print(json.dumps(todo, ensure_ascii=False, indent=1))
 
 
-def done(c, st, verdict):
+def done(c, st, verdict, artifact=None):
     idx = load_idx()
     path = os.path.join(DATA, "research", c, f"stage{st}.md")
     if not os.path.exists(path):
@@ -64,12 +65,14 @@ def done(c, st, verdict):
     title = open(path, encoding="utf-8").readline().lstrip("# ").strip()
     idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": SKILL[int(st)],
                                                "file": f"research/{c}/stage{st}.md", "title": title, "verdict": verdict}
+    if artifact and artifact.startswith("https://claude.ai/"):
+        idx["items"][c][str(st)]["artifact"] = artifact
     save_idx(idx)
     print(f"{c} {st}단계 리서치 완료 표시")
 
 
 if __name__ == "__main__":
     if len(sys.argv) >= 5 and sys.argv[1] == "done":
-        done(sys.argv[2], sys.argv[3], sys.argv[4])
+        done(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5] if len(sys.argv) > 5 else None)
     else:
         refresh()

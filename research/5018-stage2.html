@@ -1,0 +1,150 @@
+<title>모레스코 2단계 리서치</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* 레이아웃: 한 줄 기둥(본문 폭 ~68자) — 결론 상자 → 숫자 표 → 분기 막대 → 원인·부문·위험·확인 목록 */
+:root {
+  --bg: #f3f6fb; --surface: #ffffff; --ink: #172033; --ink-2: #3a4560; --mute: #66728a; --line: #e1e7f0;
+  --accent: #4f7fe0; --accent-soft: #eaf0fd; --up: #b0202f; --up-soft: #fbe5e8; --dn: #1a4aa8; --dn-soft: #e2eafb; --bar: #c9d8f7;
+  --sans: "Noto Sans KR", "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1522; --surface: #172033; --ink: #e6ebf5; --ink-2: #c3cbdb; --mute: #8f9ab0; --line: #2a3550;
+  --accent: #86a8f0; --accent-soft: rgba(134,168,240,.14); --up: #ffb3bb; --up-soft: rgba(240,143,154,.16); --dn: #b9cdfb; --dn-soft: rgba(134,168,240,.16); --bar: #3a5a96; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f1522; --surface: #172033; --ink: #e6ebf5; --ink-2: #c3cbdb; --mute: #8f9ab0; --line: #2a3550;
+  --accent: #86a8f0; --accent-soft: rgba(134,168,240,.14); --up: #ffb3bb; --up-soft: rgba(240,143,154,.16); --dn: #b9cdfb; --dn-soft: rgba(134,168,240,.16); --bar: #3a5a96; color-scheme: dark; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.75 var(--sans); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 56px; }
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 26px; }
+.eyebrow { font: 600 11px var(--mono); letter-spacing: .12em; color: var(--mute); text-transform: uppercase; }
+h1 { margin: 4px 0 6px; font-size: 26px; font-weight: 800; letter-spacing: -.02em; text-wrap: balance; }
+h1 small { font: 500 14px var(--mono); color: var(--accent); margin-left: 6px; }
+.meta { color: var(--mute); font-size: 13px; }
+h2 { font-size: 16px; margin: 0 0 10px; padding-top: 18px; border-top: 1px solid var(--line); text-wrap: balance; }
+.verdict { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+.verdict .pill { align-self: flex-start; font: 700 12px var(--sans); background: var(--accent-soft); color: var(--accent); border-radius: 999px; padding: 2px 10px; }
+.verdict p { margin: 0; }
+.verdict strong { font-weight: 800; }
+.tw { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 14px; }
+th, td { padding: 9px 14px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { font-size: 12px; color: var(--mute); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td.num, td.n { font-family: var(--mono); }
+.u { color: var(--up); font-weight: 700; } .d { color: var(--dn); font-weight: 700; }
+td.note { white-space: normal; text-align: left; color: var(--ink-2); font-size: 13px; min-width: 200px; }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 14px 8px; }
+figcaption { font-size: 13px; color: var(--ink-2); margin-bottom: 6px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+figcaption span { color: var(--mute); font-size: 12px; }
+svg { width: 100%; height: auto; display: block; }
+svg .bar { fill: var(--bar); } svg .bar.hi { fill: var(--accent); }
+svg .lab { font: 10px var(--mono); fill: var(--mute); text-anchor: middle; }
+svg .val { font: 600 10.5px var(--mono); fill: var(--ink-2); text-anchor: middle; }
+svg .grid { stroke: var(--line); }
+ul, ol { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+li strong { font-weight: 700; }
+.src { font-size: 12.5px; color: var(--mute); border-top: 1px solid var(--line); padding-top: 12px; }
+@media (max-width: 480px) { h1 { font-size: 22px; } body { font-size: 14.5px; } }
+</style>
+
+<main>
+  <header>
+    <div class="eyebrow">실적발표스크리너 · 2단계 실적 분석 · TSE 5018</div>
+    <h1>모레스코<small>5018</small></h1>
+    <div class="meta">2027년 2월기 2분기(6~8월) · 2026-10-15 16:00 발표 · 작성 2026-10-22</div>
+  </header>
+
+  <section class="verdict">
+    <span class="pill">결론 · 3단계로 올릴 만함</span>
+    <p><strong>영업이익이 4개 분기 연속 커졌고, 이번 분기 이익률은 13.4%로 1년 전 5.1%의 2.6배다.</strong> 회사도 연간 영업이익 예상을 24억엔에서 45억엔으로 올렸다.</p>
+    <p>다만 하반기 예상(20.4억엔)은 상반기(24.6억엔)보다 낮다. 회사가 보수적으로 잡았는지, 가격 효과가 줄어드는지가 3단계에서 볼 질문이다.</p>
+  </section>
+
+  <section>
+    <h2>숫자로 본 이번 실적</h2>
+    <div class="tw"><table>
+      <thead><tr><th>구분</th><th>1년 전(2Q)</th><th>이번(2Q)</th><th>증감</th></tr></thead>
+      <tbody>
+        <tr><td>매출</td><td class="num">83.5억엔</td><td class="num">103.2억엔</td><td class="num u">+23.6%</td></tr>
+        <tr><td>영업이익</td><td class="num">4.3억엔</td><td class="num">13.9억엔</td><td class="num u">+223%</td></tr>
+        <tr><td>영업이익률</td><td class="num">5.1%</td><td class="num">13.4%</td><td class="num u">+8.3%p</td></tr>
+        <tr><td>상반기 매출총이익률</td><td class="num">30.4%</td><td class="num">36.4%</td><td class="num u">+6.0%p</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <figure>
+    <figcaption>분기 영업이익(억엔) — 최근 두 분기에 계단을 한 번 더 올랐다<span>결산기 기준 분기 · 결산단신</span></figcaption>
+    <svg viewBox="0 0 640 210" role="img" aria-label="분기 영업이익 10개 분기">
+      <line class="grid" x1="20" x2="620" y1="180" y2="180"/>
+      <!-- 높이 = 값 × 10 (13.9억엔 → 139) -->
+      <rect class="bar" x="36" y="161" width="40" height="19"/><text class="val" x="56" y="155">1.9</text><text class="lab" x="56" y="198">25.1Q</text>
+      <rect class="bar" x="96" y="132" width="40" height="48"/><text class="val" x="116" y="126">4.8</text><text class="lab" x="116" y="198">25.2Q</text>
+      <rect class="bar" x="156" y="136" width="40" height="44"/><text class="val" x="176" y="130">4.4</text><text class="lab" x="176" y="198">25.3Q</text>
+      <rect class="bar" x="216" y="152" width="40" height="28"/><text class="val" x="236" y="146">2.8</text><text class="lab" x="236" y="198">25.4Q</text>
+      <rect class="bar" x="276" y="128" width="40" height="52"/><text class="val" x="296" y="122">5.2</text><text class="lab" x="296" y="198">26.1Q</text>
+      <rect class="bar" x="336" y="137" width="40" height="43"/><text class="val" x="356" y="131">4.3</text><text class="lab" x="356" y="198">26.2Q</text>
+      <rect class="bar" x="396" y="108" width="40" height="72"/><text class="val" x="416" y="102">7.2</text><text class="lab" x="416" y="198">26.3Q</text>
+      <rect class="bar" x="456" y="110" width="40" height="70"/><text class="val" x="476" y="104">7.0</text><text class="lab" x="476" y="198">26.4Q</text>
+      <rect class="bar hi" x="516" y="73" width="40" height="107"/><text class="val" x="536" y="67">10.7</text><text class="lab" x="536" y="198">27.1Q</text>
+      <rect class="bar hi" x="576" y="41" width="40" height="139"/><text class="val" x="596" y="35">13.9</text><text class="lab" x="596" y="198">27.2Q</text>
+    </svg>
+  </figure>
+
+  <section>
+    <h2>왜 좋아졌나</h2>
+    <ul>
+      <li><strong>가격 인상이 먹혔다.</strong> 원재료가 오른 만큼 국내외에서 값을 올렸고, 매출총이익률이 6%p 뛰었다.</li>
+      <li><strong>비싼 제품이 더 팔렸다.</strong> 데이터센터용 하드디스크 표면 윤활제 같은 고부가 제품 매출이 늘었다.</li>
+      <li><strong>적자 제품을 정리했다.</strong> 핫멜트 접착제 중 손해 보던 품목을 접었다.</li>
+      <li><strong>물량도 늘었다.</strong> 중국 밖 거점의 자동차 생산이 늘어 다이캐스트용 유제 판매가 증가했다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>지역별 상반기 영업이익</h2>
+    <div class="tw"><table>
+      <thead><tr><th>지역</th><th>1년 전</th><th>올해</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>일본</td><td class="num">5.8억엔</td><td class="num u">17.9억엔</td><td class="note">매출 +22%, 이익 3.1배 — 가격·믹스 효과의 중심</td></tr>
+        <tr><td>동남·남아시아</td><td class="num">1.0억엔</td><td class="num u">4.8억엔</td><td class="note">매출은 +4%인데 이익 4.7배</td></tr>
+        <tr><td>중국</td><td class="num">1.4억엔</td><td class="num u">2.0억엔</td><td class="note">완만한 개선</td></tr>
+        <tr><td>북미</td><td class="num">1.0억엔</td><td class="num d">−0.3억엔</td><td class="note">적자 전환 — 매출 −10%</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>회사 예상과 밸류에이션</h2>
+    <ul>
+      <li>연간 예상(2027년 2월기): 매출 400억엔, 영업이익 45억엔(종전 24억엔), 순이익 28억엔, 주당순이익 305엔.</li>
+      <li>상반기 진척률 55%(작년 40%). 하반기 예상 20.4억엔은 작년 하반기 14.2억엔보다 44% 많지만 이번 상반기보다는 적다.</li>
+      <li>배당 연 55엔 → 95엔. 시가총액 270억엔 기준 배당수익률 약 3%.</li>
+      <li>주가수익비율(PER) 9.6배(올해 순이익 예상 기준). 이익이 이 수준을 유지하면 싸다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>걸리는 점</h2>
+    <ol>
+      <li><strong>가격 효과의 지속성.</strong> 원재료값이 내리면 판가가 따라 내려갈 수 있다. 고객이 재협상을 요구하는 시점을 확인해야 한다.</li>
+      <li><strong>일회성 섞임.</strong> 적자 제품 정리는 한 번 효과다. 내년부터는 기저가 높아진다.</li>
+      <li><strong>북미 적자.</strong> 규모는 작지만 매출 감소와 함께 적자로 돌아섰다.</li>
+      <li><strong>배당 발표와 상한가가 겹쳤다.</strong> 다음 날 +20.1% 상한가에는 증배 효과가 섞여 있다.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>3단계에서 확인할 것</h2>
+    <ul>
+      <li>하드디스크 윤활제 매출 규모와 성장률(설명회 자료·질의응답).</li>
+      <li>가격 인상 품목 비중과 재협상 주기.</li>
+      <li>하반기 예상을 낮게 잡은 이유(회사 설명).</li>
+      <li>중기 계획의 이익률 목표와 이번 13% 수준 비교.</li>
+    </ul>
+  </section>
+
+  <p class="src">출처: TDnet 결산단신(2026-10-15, 2027년 2월기 2분기)·분기 실적 이력·세그먼트 정보, 텔레그램 2단계 카드. 투자 판단의 책임은 본인에게 있습니다.</p>
+</main>

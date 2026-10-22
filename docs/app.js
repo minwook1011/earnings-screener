@@ -24,7 +24,7 @@
     4: "3단계에서 다 같이 본 뒤 살지 말지 정할 종목이 이곳에 모입니다."
   };
   var GRADE_UP = { "서프라이즈": 1, "양호": 1, "호조": 1 }, GRADE_DN = { "부진": 1, "쇼크": 1, "미달": 1 };
-  var S = { cos: {}, list: [], qy: {}, fs: {}, res: { items: {} }, stage: 1, q: "", sort: "mc", dir: -1, view: "all" };
+  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, res: { items: {} }, stage: 1, q: "", sort: "mc", dir: -1, view: "all" };
   var app = document.getElementById("app");
 
   /* ---------- 도우미 ---------- */
@@ -230,32 +230,67 @@
       '</div><button class="x" id="px" aria-label="닫기">✕</button></div>' +
       '<div class="track">' + track + "</div>";
     var rec = d.rec, last = d.px && d.px.length ? d.px[d.px.length - 1][1] : o.px;
-    var kv = [["종가 (엔)", num(last, last < 100 ? 1 : 0)], ["시가총액 (억엔)", mcap(o.mc)], ["PER", o.per != null ? o.per.toFixed(1) + "배" : "—"],
-      ["매출 성장 (전년 같은 분기)", pct(o.rev)], ["영업이익 성장 (전년 같은 분기)", pct(o.op)], ["다음 날 주가", pct(o.d1)]];
-    if (rec && rec.progress && rec.progress.pct != null) kv.push(["진척률 차 (작년 대비 %p)", pct(rec.progress.diff != null ? rec.progress.diff : o.prog)]);
+    var kv = [["종가", num(last, last < 100 ? 1 : 0) + "엔"], ["시가총액", mcap(o.mc) + "억엔"], ["PER", o.per != null ? o.per.toFixed(1) + "배" : "—"],
+      ["다음 날 주가", pct(o.d1)], ["매출 YoY", pct(o.rev)], ["영업이익 YoY", pct(o.op)]];
+    if (rec && rec.progress && rec.progress.pct != null) kv.push(["진척률 차(%p)", pct(rec.progress.diff != null ? rec.progress.diff : o.prog)]);
     if (rec && rec.next_guide && rec.next_guide.op_g != null) kv.push(["다음 해 영업이익 예상", pct(rec.next_guide.op_g)]);
-    if (kv.length % 2) kv.push(["", ""]);
-    var bm = o.bm || (d.note && d.note.about) || "", c = o.card, L = c && c.lens;
+    if (o.vr) kv.push(["거래량(평소 대비)", o.vr.toFixed(1) + "배"]);
+    var bm = S.bm[o.c], sum = (bm && bm.sum) || (d.note && d.note.about) || o.bm || "";
+    var fr = fsRows(o, d);
     pin.innerHTML = head0 +
-      '<div class="dsec">분기 재무제표<span class="hint">억엔 · 칸 색 = 전년 같은 분기 대비 · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
-      '<div class="dsec">기본 정보</div><div class="kgrid">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
-      '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d) +
-      (bm ? '<div class="dsec">무엇을 하는 회사인가</div><div class="box"><p>' + esc(bm) + "</p></div>" : "") +
-      (d.note && d.note.summary_md ? '<div class="dsec">실적 요약<span class="hint">VANTAGE 실적 노트</span></div><div class="box md">' + mdRender(d.note.summary_md) + "</div>" : "") +
-      (c ? '<div class="dsec">텔레 카드<span class="hint">' + esc(c.ann || "") + " 발표 · " + esc(c.date || "") + "</span></div>" +
-        (c.val ? '<div class="box"><p>' + esc(c.val) + "</p></div>" : "") +
-        (L ? '<div class="box"><h4>AI 렌즈 — 3단계로 ' + L.up + " · 삭제 " + L.down + " (실제 인물 의견 아님)</h4>" + (L.rows || []).map(function (r) {
-          return '<div class="lensrow"><b class="' + (r.v === "up" ? "up" : "dn") + '">' + esc(r.who) + " · " + (r.v === "up" ? "3단계로" : "삭제") + "</b><span>" + esc(r.why) + "</span></div>";
-        }).join("") + "</div>" : "") +
-        (c.sections || []).filter(function (s) { return s.t.indexOf("비즈니스 모델") !== 0; }).map(function (s) {
-          return '<div class="box"><h4>' + esc(s.t) + "</h4>" + s.lines.map(function (l) { return "<p>" + esc(l) + "</p>"; }).join("") + "</div>";
-        }).join("") : "") +
+      (sum ? '<div class="dsec">기업 개요</div><div class="box"><p>' + esc(sum) + "</p></div>" : "") +
       (o.stage >= 2 ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
-      (o.stage >= 3 ? '<div class="dsec">3단계 리포트</div><div id="r3"></div>' : "");
+      (o.stage >= 3 ? '<div class="dsec">3단계 리포트</div><div id="r3"></div>' : "") +
+      '<div class="dsec">분기 재무제표<span class="hint">억엔 · 칸 색 = YoY · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
+      (fr.length > 1 ? '<div class="charts">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
+      '<div class="dsec">기본 정보</div><div class="kmini">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
+      bmBlock(bm) +
+      '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
     document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
+    pin.querySelectorAll(".bm-bar i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "%"; });
     bindChart(pin);
     var fw = pin.querySelector(".fswrap"); if (fw) fw.scrollLeft = fw.scrollWidth;
     [2, 3].forEach(function (st) { if (o.stage >= st) research(o, st, document.getElementById("r" + st)); });
+  }
+  /* BM — 사업부문별 매출 비중 + 2~3줄 설명 */
+  function bmBlock(bm) {
+    if (!bm || !bm.seg || !bm.seg.length) return "";
+    var mx = Math.max.apply(null, bm.seg.map(function (s) { return s.p || 0; })) || 1;
+    return '<div class="dsec">BM · 사업부문<span class="hint">매출 비중 · ' + esc(bm.asof || "") + "</span></div>" +
+      '<div class="bm">' + bm.seg.map(function (s) {
+        return '<div class="bm-r"><div class="bm-h"><b>' + esc(s.n) + '</b><span class="bm-p">' + (s.p != null ? s.p.toFixed(1) + "%" : "—") +
+          '</span></div><div class="bm-bar"><i data-w="' + (s.p != null ? (s.p / mx * 100).toFixed(1) : 0) + '"></i></div><p>' + esc(s.d || "") + "</p></div>";
+      }).join("") + "</div>";
+  }
+  /* 막대(금액) + 꺾은선(YoY) — 최근 10개 분기 */
+  function barLine(rows, k, title) {
+    var r = rows.slice(-10), W = 440, H = 190, L = 34, R = 38, T = 22, B = 26, n = r.length;
+    var vals = r.map(function (x) { return x.v[k]; }), ys = r.map(function (x) { return x.yoy[k]; });
+    var vmax = Math.max.apply(null, vals.map(function (v) { return Math.max(0, v || 0); })), vmin = Math.min(0, Math.min.apply(null, vals.map(function (v) { return v || 0; })));
+    if (vmax === vmin) vmax = vmin + 1;
+    var yv = ys.filter(function (v) { return v != null; }), ymax = Math.max.apply(null, yv.concat([10])), ymin = Math.min.apply(null, yv.concat([0]));
+    var pad = (ymax - ymin) * 0.12; ymax += pad; ymin -= pad;
+    var bw = (W - L - R) / n, x = function (i) { return L + bw * i + bw / 2; };
+    var yb = function (v) { return T + (H - T - B) * (1 - (v - vmin) / (vmax - vmin)); };
+    var yl = function (v) { return T + (H - T - B) * (1 - (v - ymin) / (ymax - ymin)); };
+    var bars = r.map(function (xq, i) {
+      var v = vals[i] || 0, y0 = yb(0), y1 = yb(v);
+      return '<rect class="b' + (xq.m ? " m" : "") + (v < 0 ? " neg" : "") + '" x="' + (x(i) - bw * 0.32).toFixed(1) + '" y="' + Math.min(y0, y1).toFixed(1) + '" width="' + (bw * 0.64).toFixed(1) + '" height="' + Math.max(1, Math.abs(y1 - y0)).toFixed(1) + '"><title>' + esc(xq.p + " " + num(v, Math.abs(v) < 100 ? 1 : 0) + "억엔" + (xq.m ? " · 합병" : "")) + "</title></rect>" +
+        '<text class="bl" x="' + x(i).toFixed(1) + '" y="' + (H - 9) + '">' + esc(xq.p) + "</text>";
+    }).join("");
+    var pts = [], dots = "";
+    ys.forEach(function (v, i) {
+      if (v == null) return;
+      pts.push(x(i).toFixed(1) + "," + yl(v).toFixed(1));
+      dots += '<circle class="yd" cx="' + x(i).toFixed(1) + '" cy="' + yl(v).toFixed(1) + '" r="3"><title>' + esc(r[i].p + " YoY " + pctTxt(v)) + "</title></circle>" +
+        '<text class="yt ' + (v >= 0 ? "u" : "d") + '" x="' + x(i).toFixed(1) + '" y="' + (yl(v) - 7).toFixed(1) + '">' + (Math.abs(v) >= 1000 ? Math.round(v / 100) / 10 + "k" : Math.round(v)) + "</text>";
+    });
+    var z = ymin < 0 && ymax > 0 ? '<line class="z" x1="' + L + '" x2="' + (W - R) + '" y1="' + yl(0).toFixed(1) + '" y2="' + yl(0).toFixed(1) + '"/>' : "";
+    return '<figure class="bl-chart"><figcaption><b>' + title + '</b><span><i class="kb"></i>금액(억엔) <i class="kl"></i>YoY(%)</span></figcaption>' +
+      '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + title + ' 10개 분기">' +
+      '<text class="ax" x="' + (L - 4) + '" y="' + (T - 8) + '" text-anchor="end">' + num(vmax, vmax < 100 ? 1 : 0) + "</text>" +
+      '<text class="ax" x="' + (W - R + 4) + '" y="' + (T - 8) + '">' + Math.round(ymax) + "%</text>" + z + bars +
+      (pts.length > 1 ? '<polyline class="yl" points="' + pts.join(" ") + '"/>' : "") + dots + "</svg></figure>";
   }
   function research(o, st, box) {
     var r = o.res[String(st)];
@@ -264,10 +299,17 @@
         (st === 2 ? "2단계 실적 분석 리서치" : "3단계 딥 리포트") + "가 자동으로 돌아 이곳에 붙습니다." + (r && r.queued ? " 대기열 등록 " + esc(r.queued) : "") + "</p></div></div>";
       return;
     }
-    box.innerHTML = '<div class="box"><p class="na">불러오는 중…</p></div>';
-    getText("data/jp/" + r.file).then(function (txt) {
-      box.innerHTML = '<div class="box md">' + mdRender(txt) + '</div><p class="note">' + esc(r.kind || "") + " · " + esc(r.written || "") + "</p>";
-    }).catch(function () { box.innerHTML = '<div class="box">리서치 파일을 못 불러왔습니다.</div>'; });
+    var link = r.artifact && /^https:\/\/claude\.ai\//.test(r.artifact)
+      ? '<a class="art" href="' + esc(r.artifact) + '" target="_blank" rel="noopener noreferrer">리서치 전문 보기 ↗</a>'
+      : '<button class="art" data-md="' + esc(r.file) + '">리서치 전문 펼치기</button>';
+    box.innerHTML = '<div class="box rsum"><div class="rs-top"><span class="tag ok">' + st + "단계 완료</span><b>" + esc(r.verdict || r.title || "") + "</b></div>" +
+      '<p class="na">' + esc(r.kind || "") + " · " + esc(r.written || "") + "</p>" + link + '<div class="rs-md"></div></div>';
+    var btn = box.querySelector("button.art");
+    if (btn) btn.onclick = function () {
+      var mdBox = box.querySelector(".rs-md");
+      if (mdBox.innerHTML) { mdBox.innerHTML = ""; btn.textContent = "리서치 전문 펼치기"; return; }
+      getText("data/jp/" + btn.dataset.md).then(function (txt) { mdBox.innerHTML = '<div class="md">' + mdRender(txt) + "</div>"; btn.textContent = "접기"; });
+    };
   }
   /* 분기 재무제표 — 열 = 분기(오른쪽이 최근), 행 = 매출·영업이익(이익률)·순이익, 칸마다 값·전 분기 대비·전년 대비 */
   function fsRows(o, d) {
@@ -435,9 +477,10 @@
     getJSON("data/jp/pipeline.json").catch(function () { return { companies: {} }; }),
     getJSON("data/jp/research/index.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/qyoy.json").catch(function () { return {}; }),
-    getJSON("data/jp/fs.json").catch(function () { return {}; })
+    getJSON("data/jp/fs.json").catch(function () { return {}; }),
+    getJSON("data/jp/bm.json").catch(function () { return {}; })
   ]).then(function (r) {
-    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.res = r[2];
+    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.res = r[2];
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
     S.ready = true; S.stage = 0;
