@@ -529,3 +529,17 @@ html.locked body > :not(#gate) { visibility: hidden; }
 :root[data-theme="dark"] { --ann: #f2c14e; }
 .main-t td.tk .ann { display: block; font: 700 11px var(--mono); color: var(--ann); margin-top: 3px; white-space: nowrap; }
 .ctl .today { font: 700 12.5px var(--jsans); color: var(--ink-mid); margin-top: 4px; }
+
+/* 별로임 — 눈에 띄는 노란 버튼, 누른 회사는 표 맨 아래로 흐리게 */
+:root { --meh-bg: #fff3b0; --meh-bd: #f2c200; --meh-tx: #6b4e00; --meh-on: #f5c400; --meh-on-tx: #3d2c00; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --meh-bg: rgba(245, 196, 0, .16); --meh-bd: #d9ad00; --meh-tx: #ffe07a; --meh-on: #f5c400; --meh-on-tx: #241a00; } }
+:root[data-theme="dark"] { --meh-bg: rgba(245, 196, 0, .16); --meh-bd: #d9ad00; --meh-tx: #ffe07a; --meh-on: #f5c400; --meh-on-tx: #241a00; }
+.nmrow { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.nmrow .nm { min-width: 0; }
+.meh { flex: none; font: inherit; font-size: 12px; font-weight: 700; line-height: 1; padding: 5px 9px; border-radius: 999px; border: 1.5px solid var(--meh-bd); background: var(--meh-bg); color: var(--meh-tx); cursor: pointer; white-space: nowrap; }
+.meh:hover { background: var(--meh-on); color: var(--meh-on-tx); }
+.meh.on { background: var(--meh-on); border-color: var(--meh-on); color: var(--meh-on-tx); }
+.meh:focus-visible { outline: 2px solid var(--meh-bd); outline-offset: 2px; }
+.dnm .meh { font-size: 13px; padding: 6px 11px; margin-left: 10px; vertical-align: middle; font-family: inherit; }
+.main-t tbody tr.is-meh td > *:not(.nmrow), .main-t tbody tr.is-meh .nm, .main-t tbody tr.is-meh .qbox { opacity: .5; }
+.meh-n { margin-left: 6px; font-size: 12px; font-weight: 700; color: var(--meh-tx); background: var(--meh-bg); border: 1px solid var(--meh-bd); border-radius: 999px; padding: 2px 8px; }
