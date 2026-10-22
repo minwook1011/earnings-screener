@@ -490,3 +490,9 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
   .tblwrap { overflow: visible; }
   .main-t thead th { position: sticky; top: calc(var(--navh) + var(--railh)); z-index: 20; box-shadow: 0 1px 0 var(--line); }
 }
+
+/* 2단계 표 — 머리줄 대신 숫자 위에 작은 이름(2026-10-22 사용자) */
+.main-t .cl { display: block; font: 600 10px var(--jsans); color: var(--ink-mute); letter-spacing: .02em; margin-bottom: 2px; white-space: nowrap; }
+.main-t tbody tr.main td { vertical-align: bottom; padding-top: 16px; }
+.main-t tbody tr.main td.l:nth-child(3) { vertical-align: bottom; }
+.main-t tbody tr:first-child.main { border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); }

@@ -163,6 +163,7 @@
       row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div></div>" +
       (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐</div>" : "");
   }
+  function cl(t) { return '<span class="cl">' + t + "</span>"; }
   function stageN(st) {
     var rows = sorted(S.list.filter(function (o) { return o.stage === st; }));
     var head = '<div class="ctl"><div class="fld"><span>정렬</span><select id="sort">' +
@@ -180,15 +181,15 @@
       return '<tr class="main" data-c="' + esc(o.c) + '">' +
         '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + "</td>" +
         '<td class="l"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + '</span><span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
-        '<td class="earn">' + md(o.d) + "</td>" +
-        '<td class="mc">' + mcap(o.mc) + '<i style="width:0"></i></td>'.replace('style="width:0"', 'data-w="' + w + '"') +
-        "<td>" + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
-        "<td>" + pct(o.rev) + "</td><td>" + pct(o.op) + "</td><td>" + pct(o.d1) + "</td>" +
-        "<td>" + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
-        '<td class="l by">' + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + resTag(o) + "</td></tr>" +
+        '<td class="earn">' + cl("발표") + md(o.d) + "</td>" +
+        '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
+        "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
+        "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
+        "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
+        '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
         '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="10">' + qline(o.c) + "</td></tr>";
     }).join("");
-    return head + '<div class="tblwrap"><table class="main-t"><thead><tr>' + th + "</tr></thead><tbody>" + body + "</tbody></table></div>";
+    return head + '<div class="tblwrap"><table class="main-t"><tbody>' + body + "</tbody></table></div>";
   }
 
   /* ---------- 상세 패널 ---------- */
