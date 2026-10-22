@@ -466,3 +466,14 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
 .main-t tbody tr.main:hover, .main-t tbody tr.main:hover + tr.qrow { background: transparent; }
 .main-t tbody tr.main:hover td { background: var(--surface-2); }
 .main-t tbody tr.main td.tk { color: var(--accent-ink); font-size: 13px; }
+
+/* 그래프 점·선 진하게(2026-10-22 사용자) */
+:root { --line-up: #c8243a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --line-up: #ff8a96; } }
+:root[data-theme="dark"] { --line-up: #ff8a96; }
+.bl-chart .yl { stroke: var(--line-up); stroke-width: 2.2; opacity: 1; }
+.bl-chart .yd { fill: var(--line-up); stroke: var(--surface); stroke-width: 1.5; }
+.bl-chart .yt { font-weight: 800; font-size: 10.5px; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.bl-chart .b { fill: var(--hn3-bg); }
+.bl-chart .kb { background: var(--hn3-bg); }
+.bl-chart .kl { background: var(--line-up); height: 2.5px; }

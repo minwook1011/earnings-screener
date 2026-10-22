@@ -282,7 +282,7 @@
     ys.forEach(function (v, i) {
       if (v == null) return;
       pts.push(x(i).toFixed(1) + "," + yl(v).toFixed(1));
-      dots += '<circle class="yd" cx="' + x(i).toFixed(1) + '" cy="' + yl(v).toFixed(1) + '" r="3"><title>' + esc(r[i].p + " YoY " + pctTxt(v)) + "</title></circle>" +
+      dots += '<circle class="yd" cx="' + x(i).toFixed(1) + '" cy="' + yl(v).toFixed(1) + '" r="3.6"><title>' + esc(r[i].p + " YoY " + pctTxt(v)) + "</title></circle>" +
         '<text class="yt ' + (v >= 0 ? "u" : "d") + '" x="' + x(i).toFixed(1) + '" y="' + (yl(v) - 7).toFixed(1) + '">' + (Math.abs(v) >= 1000 ? Math.round(v / 100) / 10 + "k" : Math.round(v)) + "</text>";
     });
     var z = ymin < 0 && ymax > 0 ? '<line class="z" x1="' + L + '" x2="' + (W - R) + '" y1="' + yl(0).toFixed(1) + '" y2="' + yl(0).toFixed(1) + '"/>' : "";
