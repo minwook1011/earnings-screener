@@ -184,32 +184,37 @@
   function stageN(st) {
     var q = S.q.trim().toLowerCase();
     var rows = sorted(S.list.filter(function (o) { return o.stage === st && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); }));
-    rows = rows.filter(function (o) { return !MEH[o.c]; }).concat(rows.filter(function (o) { return MEH[o.c]; }));
-    var nMeh = rows.filter(function (o) { return MEH[o.c]; }).length;
+    var mehRows = rows.filter(function (o) { return MEH[o.c]; });
+    rows = rows.filter(function (o) { return !MEH[o.c]; });
+    var nMeh = mehRows.length;
     var head = '<div class="ctl"><div class="fld"><span>정렬</span><select id="sort">' +
       COLS.filter(function (c) { return !/ns/.test(c.cls || ""); }).map(function (c) { return '<option value="' + c.k + '"' + (S.sort === c.k ? " selected" : "") + ">" + c.t + "</option>"; }).join("") +
       '</select><span class="today">' + todayKo() + '</span></div><div class="fld"><span>순서</span><div class="seg" id="dir"><button data-v="-1" aria-pressed="' + (S.dir === -1) + '">큰 순</button><button data-v="1" aria-pressed="' + (S.dir === 1) + '">작은 순</button></div></div>' +
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커" value="' + esc(S.q) + '"></div>' +
-      '<div class="count"><b>' + rows.length + "</b>개 기업" + (nMeh ? ' <span class="meh-n">별로임 ' + nMeh + "곳은 맨 아래</span>" : "") + "</div></div>" + '<p class="stage-note">' + NOTE[st] + "</p>";
-    if (!rows.length) return head + (q ? '<div class="empty">검색과 맞는 기업이 없습니다.</div>' : '<div class="empty-stage"><b>아직 ' + st + "단계 기업이 없습니다</b>" + EMPTY[st] + "</div>");
+      '<div class="count"><b>' + (rows.length + nMeh) + "</b>개 기업" + (nMeh ? ' <span class="meh-n">별로임 ' + nMeh + "곳은 맨 아래</span>" : "") + "</div></div>" + '<p class="stage-note">' + NOTE[st] + "</p>";
+    if (!rows.length && !nMeh) return head + (q ? '<div class="empty">검색과 맞는 기업이 없습니다.</div>' : '<div class="empty-stage"><b>아직 ' + st + "단계 기업이 없습니다</b>" + EMPTY[st] + "</div>");
     var th = COLS.map(function (c) {
       var ar = S.sort === c.k ? '<span class="ar">' + (S.dir < 0 ? "▼" : "▲") + "</span>" : "";
       return '<th class="' + (c.cls || "") + '" data-k="' + c.k + '">' + c.t + ar + "</th>";
     }).join("");
-    var maxmc = Math.max.apply(null, rows.map(function (o) { return o.mc || 0; })) || 1;
-    var body = rows.map(function (o, i) {
+    var maxmc = Math.max.apply(null, rows.concat(mehRows).map(function (o) { return o.mc || 0; })) || 1;
+    function row(o, i) {
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
       return '<tr class="main' + (MEH[o.c] ? " is-meh" : "") + '" data-c="' + esc(o.c) + '">' +
-        '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + "</td>" +
-        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span>" + mehBtn(o.c) + '</span><span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
+        '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + mehBtn(o.c) + "</td>" +
+        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span></span>" + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
         "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
         '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
-        '<tr class="qrow' + (MEH[o.c] ? " is-meh" : "") + '" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + qline(o.c) + "</td></tr>";
-    }).join("");
-    return head + '<div class="tblwrap"><table class="main-t"><tbody>' + body + "</tbody></table></div>";
+        (MEH[o.c] ? "" : '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + qline(o.c) + "</td></tr>");
+    }
+    var body = rows.map(row).join("");
+    /* 별로임 — 맨 아래 따로 구분, 분기 상자 없이 한 줄로 줄임 */
+    var meh = nMeh ? '<section class="meh-sec"><h3 class="meh-h">별로임 <b>' + nMeh + "곳</b><span>노란 버튼을 다시 누르면 위로 올라갑니다</span></h3>" +
+      '<div class="tblwrap"><table class="main-t meh-t"><tbody>' + mehRows.map(row).join("") + "</tbody></table></div></section>" : "";
+    return head + (rows.length ? '<div class="tblwrap"><table class="main-t"><tbody>' + body + "</tbody></table></div>" : '<div class="empty">별로임이 아닌 기업이 없습니다.</div>') + meh;
   }
 
   /* ---------- 상세 패널 ---------- */

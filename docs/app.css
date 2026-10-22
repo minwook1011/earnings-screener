@@ -543,3 +543,17 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .dnm .meh { font-size: 13px; padding: 6px 11px; margin-left: 10px; vertical-align: middle; font-family: inherit; }
 .main-t tbody tr.is-meh td > *:not(.nmrow), .main-t tbody tr.is-meh .nm, .main-t tbody tr.is-meh .qbox { opacity: .5; }
 .meh-n { margin-left: 6px; font-size: 12px; font-weight: 700; color: var(--meh-tx); background: var(--meh-bg); border: 1px solid var(--meh-bd); border-radius: 999px; padding: 2px 8px; }
+/* 표 안 별로임 버튼은 발표일 아래 */
+.main-t td.tk .meh { display: block; margin-top: 6px; font-size: 11px; padding: 4px 8px; }
+/* 별로임 칸 — 맨 아래 따로, 한 줄로 줄임 */
+.meh-sec { margin-top: 36px; border-top: 3px solid var(--meh-bd); padding-top: 4px; }
+.meh-h { display: flex; align-items: baseline; gap: 10px; margin: 0 0 4px; padding: 10px 14px; font-size: 15px; font-weight: 800; color: var(--meh-on-tx); background: var(--meh-on); border-radius: 0 0 10px 10px; }
+.meh-h b { font-weight: 800; }
+.meh-h span { font-size: 12px; font-weight: 500; opacity: .8; }
+.meh-t tbody tr.main td { padding-top: 7px !important; padding-bottom: 7px !important; font-size: 12px !important; border-bottom: 1px solid var(--line, rgba(0,0,0,.08)); }
+.meh-t tbody tr.main .ind, .meh-t tbody tr.main td.tk .ann { display: none; }
+.meh-t tbody tr.main .nm { font-size: 13px !important; }
+.meh-t td.tk .meh { margin-top: 3px; }
+.main-t tbody tr.is-meh td > *:not(.nmrow), .main-t tbody tr.is-meh .nm { opacity: 1; }
+.meh-t tbody tr.main td { opacity: .62; }
+.meh-t tbody tr.main td.tk { opacity: 1; }
