@@ -51,7 +51,7 @@ def refresh():
             path = os.path.join(DATA, "research", c, f"stage{st}.md")
             if it and it.get("status") == "완료":
                 continue
-            if it and it.get("status") == "진행 중":   # 다른 작업이 만드는 중 — 겹치지 않게 건너뜀
+            if it and it.get("status") in ("진행 중", "멈춤"):   # 만드는 중이거나 사용자가 멈춰 둔 곳 — 건너뜀
                 continue
             if not it:
                 idx["items"][c][str(st)] = {"status": "대기", "queued": now(), "kind": SKILL[st]}
@@ -105,7 +105,7 @@ def mark(c, st, status):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 5 and sys.argv[1] == "mark":   # mark <코드> <단계> 진행 중|대기
+    if len(sys.argv) >= 5 and sys.argv[1] == "mark":   # mark <코드> <단계> 진행 중|대기|멈춤
         mark(sys.argv[2], sys.argv[3], " ".join(sys.argv[4:]))
     elif len(sys.argv) >= 6 and sys.argv[1] == "attach":
         attach(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
