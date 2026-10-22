@@ -173,14 +173,14 @@
   /* 별로임 — 2단계에서 맘에 안 드는 회사를 표시해 표 맨 아래로 내린다. 이 브라우저에만 저장(2026-10-22 사용자) */
   var MEH = {};
   try { MEH = JSON.parse(localStorage.getItem("es-meh") || "{}") || {}; } catch (e) { MEH = {}; }
-  /* 좋음 — 2단계 회사를 3단계 탭으로 올린다(이 브라우저에만). 별로임과 함께 못 켬 */
+  /* 3단계로 — 2단계 회사를 3단계 탭으로 올린다(이 브라우저에만, 텔레와 무관). 별로임과 함께 못 켬 */
   var GOOD = {};
   try { GOOD = JSON.parse(localStorage.getItem("es-good") || "{}") || {}; } catch (e) { GOOD = {}; }
   function stOf(o) { return o.stage === 2 && GOOD[o.c] ? 3 : o.stage; }
   function mehBtn(c) {
     var o = S.cos[c] || {}, on = !!MEH[c], g = !!GOOD[c];
     return '<span class="picks"><button type="button" class="meh' + (on ? " on" : "") + '" data-meh="' + esc(c) + '" aria-pressed="' + on + '" title="' + (on ? "누르면 표시를 풉니다" : "누르면 표 맨 아래로 내립니다") + '">' + (on ? "별로임 ✓" : "별로임") + "</button>" +
-      (o.stage === 2 ? '<button type="button" class="good' + (g ? " on" : "") + '" data-good="' + esc(c) + '" aria-pressed="' + g + '" title="' + (g ? "누르면 2단계로 되돌립니다" : "누르면 3단계로 올립니다") + '">' + (g ? "좋음 ✓" : "좋음") + "</button>" : "") + "</span>";
+      (o.stage === 2 ? '<button type="button" class="good' + (g ? " on" : "") + '" data-good="' + esc(c) + '" aria-pressed="' + g + '" title="' + (g ? "누르면 2단계로 되돌립니다" : "누르면 3단계로 올립니다") + '">' + (g ? "3단계 ✓" : "3단계로") + "</button>" : "") + "</span>";
   }
   function save() {
     try { localStorage.setItem("es-meh", JSON.stringify(MEH)); localStorage.setItem("es-good", JSON.stringify(GOOD)); } catch (e) {}
