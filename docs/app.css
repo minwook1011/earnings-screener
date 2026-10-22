@@ -561,3 +561,17 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .main-t td.tk .tkc { display: block; }
 .main-t td.tk .ann { display: inline-block; vertical-align: middle; }
 .main-t td.tk .meh { display: inline-block; vertical-align: middle; margin: 3px 0 0 6px; padding: 3px 7px; font-size: 10.5px; }
+/* 발표일 아래 줄: 별로임 · 좋음 */
+:root { --good-bg: #ddf5e4; --good-bd: #2e9e55; --good-tx: #14612f; --good-on: #2e9e55; --good-on-tx: #ffffff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --good-bg: rgba(64, 190, 110, .16); --good-bd: #4cc27a; --good-tx: #9be3b4; --good-on: #3fb46d; --good-on-tx: #08210f; } }
+:root[data-theme="dark"] { --good-bg: rgba(64, 190, 110, .16); --good-bd: #4cc27a; --good-tx: #9be3b4; --good-on: #3fb46d; --good-on-tx: #08210f; }
+.picks { display: inline-flex; gap: 5px; vertical-align: middle; }
+.main-t td.tk .picks { display: flex; margin-top: 5px; }
+.main-t td.tk .picks .meh, .main-t td.tk .picks .good { margin: 0; }
+.good { flex: none; font: inherit; font-size: 12px; font-weight: 700; line-height: 1; padding: 5px 9px; border-radius: 999px; border: 1.5px solid var(--good-bd); background: var(--good-bg); color: var(--good-tx); cursor: pointer; white-space: nowrap; }
+.good:hover, .good.on { background: var(--good-on); border-color: var(--good-on); color: var(--good-on-tx); }
+.good:focus-visible { outline: 2px solid var(--good-bd); outline-offset: 2px; }
+.main-t td.tk .good { padding: 3px 7px; font-size: 10.5px; }
+.dnm .picks { margin-left: 10px; }
+.dnm .picks .meh { margin-left: 0; }
+.dnm .good { font-size: 13px; padding: 6px 11px; font-family: inherit; }

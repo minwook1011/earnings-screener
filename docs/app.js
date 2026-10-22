@@ -63,7 +63,7 @@
   }
 
   /* ---------- 머리·레일 ---------- */
-  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[o.stage]++; }); return n; }
+  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[stOf(o)]++; }); return n; }
   function head() {
     var n = counts();
     return '<header class="jhd"><div class="hd"><div class="jbrand">' +
@@ -173,17 +173,23 @@
   /* 별로임 — 2단계에서 맘에 안 드는 회사를 표시해 표 맨 아래로 내린다. 이 브라우저에만 저장(2026-10-22 사용자) */
   var MEH = {};
   try { MEH = JSON.parse(localStorage.getItem("es-meh") || "{}") || {}; } catch (e) { MEH = {}; }
+  /* 좋음 — 2단계 회사를 3단계 탭으로 올린다(이 브라우저에만). 별로임과 함께 못 켬 */
+  var GOOD = {};
+  try { GOOD = JSON.parse(localStorage.getItem("es-good") || "{}") || {}; } catch (e) { GOOD = {}; }
+  function stOf(o) { return o.stage === 2 && GOOD[o.c] ? 3 : o.stage; }
   function mehBtn(c) {
-    var on = !!MEH[c];
-    return '<button type="button" class="meh' + (on ? " on" : "") + '" data-meh="' + esc(c) + '" aria-pressed="' + on + '" title="' + (on ? "누르면 표시를 풉니다" : "누르면 표 맨 아래로 내립니다") + '">' + (on ? "별로임 ✓" : "별로임") + "</button>";
+    var o = S.cos[c] || {}, on = !!MEH[c], g = !!GOOD[c];
+    return '<span class="picks"><button type="button" class="meh' + (on ? " on" : "") + '" data-meh="' + esc(c) + '" aria-pressed="' + on + '" title="' + (on ? "누르면 표시를 풉니다" : "누르면 표 맨 아래로 내립니다") + '">' + (on ? "별로임 ✓" : "별로임") + "</button>" +
+      (o.stage === 2 ? '<button type="button" class="good' + (g ? " on" : "") + '" data-good="' + esc(c) + '" aria-pressed="' + g + '" title="' + (g ? "누르면 2단계로 되돌립니다" : "누르면 3단계로 올립니다") + '">' + (g ? "좋음 ✓" : "좋음") + "</button>" : "") + "</span>";
   }
-  function toggleMeh(c) {
-    if (MEH[c]) delete MEH[c]; else MEH[c] = 1;
-    try { localStorage.setItem("es-meh", JSON.stringify(MEH)); } catch (e) {}
+  function save() {
+    try { localStorage.setItem("es-meh", JSON.stringify(MEH)); localStorage.setItem("es-good", JSON.stringify(GOOD)); } catch (e) {}
   }
+  function toggleMeh(c) { if (MEH[c]) delete MEH[c]; else { MEH[c] = 1; delete GOOD[c]; } save(); }
+  function toggleGood(c) { if (GOOD[c]) delete GOOD[c]; else { GOOD[c] = 1; delete MEH[c]; } save(); }
   function stageN(st) {
     var q = S.q.trim().toLowerCase();
-    var rows = sorted(S.list.filter(function (o) { return o.stage === st && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); }));
+    var rows = sorted(S.list.filter(function (o) { return stOf(o) === st && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); }));
     var mehRows = rows.filter(function (o) { return MEH[o.c]; });
     rows = rows.filter(function (o) { return !MEH[o.c]; });
     var nMeh = mehRows.length;
@@ -275,8 +281,8 @@
       bmBlock(bm) +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
     document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
-    pin.querySelectorAll("[data-meh]").forEach(function (b) {
-      b.onclick = function () { toggleMeh(b.dataset.meh); drawPanel(o, d); if (app.querySelector("#view") && S.stage > 1) rerender(); };
+    pin.querySelectorAll("[data-meh],[data-good]").forEach(function (b) {
+      b.onclick = function () { if (b.dataset.meh) toggleMeh(b.dataset.meh); else toggleGood(b.dataset.good); drawPanel(o, d); if (app.querySelector("#view")) render(); };
     });
     pin.querySelectorAll(".bm-bar i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "%"; });
     bindChart(pin);
@@ -488,6 +494,7 @@
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = "jp/c/" + el.dataset.c; }; });
     app.querySelectorAll("[data-meh]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); toggleMeh(b.dataset.meh); rerender(); }; });
+    app.querySelectorAll("[data-good]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); toggleGood(b.dataset.good); render(); }; });
     var q = document.getElementById("q");
     if (q) q.oninput = function () { S.q = q.value; rerender(); var n = document.getElementById("q"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
     var so = document.getElementById("sort");
@@ -519,7 +526,7 @@
     if (!S.ready) return;
     if (h[1] === "c") {
       var o = S.cos[h[2]];
-      if (!app.querySelector("#view")) { S.stage = o ? o.stage : 1; render(); }
+      if (!app.querySelector("#view")) { S.stage = o ? stOf(o) : 1; render(); }
       openCo(h[2]); return;
     }
     closePanel();
