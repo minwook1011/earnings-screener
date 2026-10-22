@@ -14,7 +14,7 @@
   ];
   var NOTE = {
     1: "실적을 발표한 기업을 이름과 티커만 모았습니다. 누르면 주가와 실적이 열립니다. 텔레그램 1단계 카드에서 [볼 후보]를 누르면 2단계로 올라갑니다.",
-    2: "볼 후보로 고른 회사입니다. 둘째 줄은 최근 10개 분기의 매출·영업이익 성장률(전년 같은 분기 대비)입니다. 2단계 실적 분석 리서치가 붙습니다.",
+    2: "볼 후보로 고른 회사입니다. 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 노란 테두리·'합병' = 인수 회사가 더해진 분기. 2단계 실적 분석 리서치가 붙습니다.",
     3: "다 같이 깊게 보고 매수 여부·비중·근거·다시 볼 조건을 정리합니다. 3단계 딥 리포트가 붙습니다.",
     4: "4단계까지 왔으면 사기 직전 좋은 종목입니다. 다 같이 보고 살지 말지 결정합니다."
   };
@@ -121,7 +121,7 @@
   var COLS = [
     { k: "rk", t: "#", cls: "l ns" }, { k: "c", t: "코드", cls: "l" }, { k: "n", t: "종목", cls: "l" },
     { k: "d", t: "발표" }, { k: "mc", t: "시총(억엔)" }, { k: "per", t: "PER" },
-    { k: "rev", t: "매출성장" }, { k: "op", t: "영업이익성장" }, { k: "d1", t: "다음 날" }, { k: "vr", t: "거래량" },
+    { k: "rev", t: "매출 YoY" }, { k: "op", t: "영업이익 YoY" }, { k: "d1", t: "다음 날" }, { k: "vr", t: "거래량" },
     { k: "up", t: "AI 렌즈", cls: "l" }, { k: "by", t: "올린 사람", cls: "l" }, { k: "res", t: "리서치", cls: "l ns" }
   ];
   function sorted(rows) {
@@ -143,13 +143,15 @@
     if (!r) return '<span class="tag">없음</span>';
     return r.status === "완료" ? '<span class="tag ok">' + st + "단계 완료</span>" : '<span class="tag wait">' + st + "단계 " + esc(r.status) + "</span>";
   }
+  /* 성장률 칸 — 바탕만 파스텔, 글자는 진하게. 합병 분기는 숫자 그대로 + '합병' 표시 */
   function heat(v, t, m) {
-    if (m) return '<span class="hc mg" title="' + esc("합병 효과 — " + m + (v != null ? " · 실제 " + pctTxt(v) : t ? " · " + t : "")) + '">합병</span>';
-    if (t) return '<span class="hc ' + (t === "흑전" ? "p2" : "n2") + '">' + t + "</span>";
+    var mg = m ? '<i class="mgb">합병</i>' : "", tip = m ? ' title="' + esc("합병 효과 — " + m) + '"' : "";
+    if (t) return '<span class="hc ' + (t === "흑전" ? "p2" : "n2") + (m ? " m" : "") + '"' + tip + ">" + t + mg + "</span>";
     if (v == null) return '<span class="hc na">—</span>';
     var c = v >= 30 ? "p3" : v >= 10 ? "p2" : v > 0 ? "p1" : v > -10 ? "n1" : v > -30 ? "n2" : "n3";
-    return '<span class="hc ' + c + '">' + pctTxt(v).replace("%", "") + "</span>";
+    return '<span class="hc ' + c + (m ? " m" : "") + '"' + tip + ">" + pctTxt(v).replace("%", "") + mg + "</span>";
   }
+  function amt(v) { return '<span class="hc v">' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</span>"; }
   function qline(c) {
     var q = S.qy[c];
     if (!q || !q.length) return '<div class="ql-empty">분기 성장률 자료 없음 — 다음 갱신 때 채웁니다</div>';
@@ -157,7 +159,8 @@
     var cells = pad.concat(q);
     function row(lab, f) { return "<span class=\"ql-l\">" + lab + "</span>" + cells.map(function (x) { return x ? f(x) : '<span class="hc na"></span>'; }).join(""); }
     return '<div class="ql">' + row("", function (x) { return '<span class="ql-p">' + esc(x.p) + "</span>"; }) +
-      row("매출 성장", function (x) { return heat(x.r, null, x.m); }) + row("영업이익 성장", function (x) { return heat(x.o, x.ot, x.m); }) + "</div>" +
+      row("매출액", function (x) { return amt(x.s); }) + row("YoY", function (x) { return heat(x.r, null, x.m); }) +
+      row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div>" +
       (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 인수한 회사가 실적에 더해져 성장률이 부풀려진 분기</div>" : "");
   }
   function stageN(st) {
@@ -292,8 +295,8 @@
     var body = names.map(function (nm, r) {
       return '<tr><th class="l">' + nm + "</th>" + rows.map(function (x) {
         var v = x.v[r];
-        var opm = r === 1 && x.v[0] ? '<span class="fs-g"><i>이익률</i><em>' + (x.v[1] / x.v[0] * 100).toFixed(1) + "%</em></span>" : "";
-        return '<td class="fs-c ' + (x.m ? "mg" : tone(x.yoy[r])) + '"><b>' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</b>" + opm + sg("전분기", x.qoq[r]) + sg("전년", x.yoy[r]) + "</td>";
+        var opm = r === 1 && x.v[0] ? '<span class="fs-g"><i>OPM</i><em>' + (x.v[1] / x.v[0] * 100).toFixed(1) + "%</em></span>" : "";
+        return '<td class="fs-c ' + tone(x.yoy[r]) + (x.m ? " m" : "") + '"><b>' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</b>" + opm + sg("QoQ", x.qoq[r]) + sg("YoY", x.yoy[r]) + "</td>";
       }).join("") + "</tr>";
     }).join("");
     var mg = rows.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; });

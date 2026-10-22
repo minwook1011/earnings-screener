@@ -373,3 +373,32 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
 .fs-c.mg { background: var(--mg-bg); }
 .fs-c .up { color: var(--hp2-tx); } .fs-c .dn { color: var(--hn2-tx); }
 .fs tbody tr:hover { background: none; }
+
+/* 2026-10-22 사용자: 글자는 진하게, 흐릿함은 바탕(채우기)만 */
+:root { --tx-up: #b0202f; --tx-dn: #1a4aa8; --tx-mg: #8a5a12; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --tx-up: #ffb3bb; --tx-dn: #b9cdfb; --tx-mg: #f0cf94; } }
+:root[data-theme="dark"] { --tx-up: #ffb3bb; --tx-dn: #b9cdfb; --tx-mg: #f0cf94; }
+.hc { font-weight: 700; position: relative; }
+.hc.p1, .hc.p2, .hc.p3 { color: var(--tx-up); }
+.hc.n1, .hc.n2, .hc.n3 { color: var(--tx-dn); }
+.hc.v { background: transparent; color: var(--ink); font-weight: 600; }
+.hc.m { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--spike-line) 70%, transparent); }
+.hc .mgb { font: 700 9px var(--jsans); font-style: normal; color: var(--tx-mg); background: var(--mg-bg); border-radius: 3px; padding: 0 3px; margin-left: 3px; vertical-align: 1px; }
+.ql-l { color: var(--ink-mid); font-weight: 700; }
+.ql-m { color: var(--tx-mg); font-weight: 600; }
+.fs-c .up { color: var(--tx-up); } .fs-c .dn { color: var(--tx-dn); }
+.fs-g em { font-weight: 700; }
+.fs-g i { color: var(--ink-mid); }
+.qt .hc { color: inherit; }
+.qt .hc.p1, .qt .hc.p2, .qt .hc.p3 { color: var(--tx-up); } .qt .hc.n1, .qt .hc.n2, .qt .hc.n3 { color: var(--tx-dn); }
+.fs-c.m { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--spike-line) 70%, transparent); }
+
+/* 상세 재무제표 — 더 촘촘하게(2026-10-22 사용자: 너무 큼) */
+.fs thead th { padding: 7px 9px 5px; }
+.fs thead th b { font-size: 11.5px; }
+.fs tbody th { font-size: 11.5px; padding: 0 10px; }
+.fs-c { min-width: 86px; padding: 5px 9px 6px; }
+.fs-c b { font-size: 13.5px; margin-bottom: 1px; }
+.fs-g { font-size: 10.5px; line-height: 1.45; gap: 4px; }
+.fs-g i { font-size: 9.5px; }
+.fs-g em { min-width: 36px; }
