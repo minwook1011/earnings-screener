@@ -13,7 +13,7 @@
     { n: 4, lab: "4단계 · 결정", hint: "살지 말지 결정 직전" }
   ];
   var NOTE = {
-    1: "실적을 발표한 기업을 이름과 티커만 모았습니다. 누르면 주가와 실적이 열립니다. 텔레그램 1단계 카드에서 [볼 후보]를 누르면 2단계로 올라갑니다.",
+    1: "텔레그램 1단계 카드에 올라온 회사를 이름과 티커만 모았습니다. 누르면 주가와 실적이 열립니다. 텔레그램 1단계 카드에서 [볼 후보]를 누르면 2단계로 올라갑니다.",
     2: "볼 후보로 고른 회사입니다. 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 분기 이름 위 '합병' = 그 분기부터 인수한 회사가 실적에 더해짐. 2단계 실적 분석 리서치가 붙습니다.",
     3: "다 같이 깊게 보고 매수 여부·비중·근거·다시 볼 조건을 정리합니다. 3단계 딥 리포트가 붙습니다.",
     4: "4단계까지 왔으면 사기 직전 좋은 종목입니다. 다 같이 보고 살지 말지 결정합니다."
@@ -46,11 +46,12 @@
   /* ---------- 데이터 합치기 ---------- */
   function build(s1, pipe, res) {
     var cos = {};
-    (s1.rows || []).forEach(function (r) { var o = cos[r.c] = Object.assign({}, r); o.stage = 1; });
+    /* 1단계 = 텔레그램 '1단계 · 알림'에 올라온 회사만(2026-10-22 사용자). VANTAGE 실적 자료는 그 회사의 숫자를 채우는 데만 쓴다 */
+    var vt = {}; (s1.rows || []).forEach(function (r) { vt[r.c] = r; });
     /* 발표 예정(JPX) 회사는 1단계에 넣지 않는다 — 1단계 = 실적 발표로 올라온 기업만(2026-10-22 사용자) */
     Object.keys(pipe.companies || {}).forEach(function (c) {
       var t = pipe.companies[c], card = t.cards[String(t.stage)] || t.cards["1"] || {};
-      var o = cos[c] || (cos[c] = { c: c, n: t.n, d: annDate(card.ann, card.date), stage: 1 });
+      var o = cos[c] || (cos[c] = Object.assign({}, vt[c] || {}, { c: c, n: t.n, d: (vt[c] && vt[c].d) || annDate(card.ann, card.date), stage: 1 }));
       o.tn = t.n; o.stage = t.stage; o.tg = t; o.card = card; o.pre = false;
       o.by = card.by || null;
       ["mc", "per", "rev", "op", "d1"].forEach(function (k) { if (o[k] == null && card[k] != null) o[k] = card[k]; });
@@ -114,7 +115,7 @@
       '<div class="cal"><div class="weeks" id="weeks">' + chips + "</div>" +
       '<div class="wnav"><button data-step="-1"' + (wi <= 0 ? " disabled" : "") + '>‹ 이전 주</button><b>' + weekName(mon) + "</b><span>" + dot(mon) + " ~ " + dot(addDays(mon, 4)) + " · " + ((weeks[mon] || []).length) + '개</span><button data-step="0">이번 주</button><button data-step="1"' + (wi >= keys.length - 1 ? " disabled" : "") + ">다음 주 ›</button></div>" +
       '<div class="cal-grid">' + cols + "</div>" +
-      '<p class="note">실적을 발표한 기업만 나옵니다. 발표 후 자료가 들어오면 그날 칸에 추가됩니다.</p></div>';
+      '<p class="note">텔레그램 '1단계 · 알림'에 올라온 회사만 나옵니다. 15분마다 확인해서 새 카드가 오면 발표일 칸에 추가됩니다.</p></div>';
   }
 
   /* ---------- 2~4단계: 표 + 분기 성장률 줄 ---------- */
