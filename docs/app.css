@@ -594,3 +594,22 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .sec-tg { margin-left: auto; font: inherit; font-size: 12px; font-weight: 700; padding: 5px 10px; border-radius: 999px; border: 1.5px solid currentColor; background: transparent; color: inherit; cursor: pointer; white-space: nowrap; }
 .sec-tg:hover { background: rgba(255, 255, 255, .22); }
 .sec-tg:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+/* 보류 이유 말풍선 */
+.hnote { position: relative; flex: none; display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 22px; padding: 0; border-radius: 6px; border: 1.5px dashed var(--hold-bd); background: transparent; color: var(--hold-bd); cursor: pointer; }
+.hnote svg { width: 14px; height: 14px; fill: currentColor; }
+.hnote.has { border-style: solid; background: var(--hold-on); border-color: var(--hold-on); color: var(--hold-on-tx); }
+.hnote:focus-visible { outline: 2px solid var(--hold-bd); outline-offset: 2px; }
+.hnote-tip { position: absolute; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%); z-index: 30; width: max-content; max-width: 260px; padding: 8px 10px; border-radius: 10px; background: var(--hold-on); color: var(--hold-on-tx); font: 600 12px/1.45 var(--sans, inherit); text-align: left; white-space: normal; box-shadow: 0 6px 18px rgba(40, 20, 90, .25); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .12s; }
+.hnote-tip::after { content: ""; position: absolute; left: 50%; top: 100%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: var(--hold-on); }
+.hnote:hover .hnote-tip, .hnote:focus-visible .hnote-tip { opacity: 1; visibility: visible; }
+.main-t td.tk .hnote { width: 22px; height: 19px; }
+.dnm .hnote { width: 30px; height: 28px; }
+.dnm .hnote svg { width: 16px; height: 16px; }
+.hnote-t { display: block; margin-top: 3px; font-size: 12px; font-weight: 600; color: var(--hold-tx); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 420px; }
+.hpop { position: fixed; z-index: 1000; width: 300px; max-width: calc(100vw - 16px); padding: 12px; border-radius: 12px; background: var(--surface, #fff); color: var(--ink); border: 1.5px solid var(--hold-bd); box-shadow: 0 12px 32px rgba(40, 20, 90, .25); }
+.hpop b { display: block; font-size: 13px; margin-bottom: 8px; color: var(--hold-tx); }
+.hpop textarea { width: 100%; box-sizing: border-box; font: inherit; font-size: 13px; padding: 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface-2, transparent); color: var(--ink); resize: vertical; }
+.hpop textarea:focus { outline: 2px solid var(--hold-bd); outline-offset: 0; }
+.hpop-b { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
+.hpop-b button { font: inherit; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
+.hpop-b button.ok { background: var(--hold-on); border-color: var(--hold-on); color: var(--hold-on-tx); }

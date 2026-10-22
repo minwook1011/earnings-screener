@@ -173,7 +173,7 @@
   /* 내 표시(이 브라우저에만 저장, 텔레와 무관 — 2026-10-22 사용자): 하나만 켜짐
      3단계로 = 2단계 회사를 3단계 탭으로 · 보류 = 표 아래 보라 칸 · 별로임 = 맨 아래 노란 칸 */
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
-  var MEH = load("es-meh"), GOOD = load("es-good"), HOLD = load("es-hold"), OPEN = load("es-open");
+  var MEH = load("es-meh"), GOOD = load("es-good"), HOLD = load("es-hold"), OPEN = load("es-open"), HNOTE = load("es-hold-note");
   function stOf(o) { return o.stage === 2 && GOOD[o.c] ? 3 : o.stage; }
   function pick(kind, c, on, lab, onLab, tip) {
     return '<button type="button" class="' + kind + (on ? " on" : "") + '" data-pick="' + kind + '" data-pc="' + esc(c) + '" aria-pressed="' + on + '" title="' + (on ? "누르면 표시를 풉니다" : tip) + '">' + (on ? onLab : lab) + "</button>";
@@ -182,11 +182,40 @@
     var o = S.cos[c] || {};
     return '<span class="picks">' +
       (o.stage === 2 ? pick("good", c, !!GOOD[c], "3단계로", "3단계 ✓", "누르면 3단계 탭으로 올립니다") : "") +
-      pick("hold", c, !!HOLD[c], "보류", "보류 ✓", "누르면 표 아래 보류 칸으로 옮깁니다") +
+      pick("hold", c, !!HOLD[c], "보류", "보류 ✓", "누르면 표 아래 보류 칸으로 옮깁니다") + (HOLD[c] ? noteBtn(c) : "") +
       pick("meh", c, !!MEH[c], "별로임", "별로임 ✓", "누르면 표 맨 아래로 내립니다") + "</span>";
   }
+  /* 보류 이유 — 보류 옆 말풍선. 마우스를 올리면 이유가 뜨고, 누르면 적는 칸이 열린다 */
+  var BUBBLE = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 3h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3.5V14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>';
+  function noteBtn(c) {
+    var t = HNOTE[c] || "";
+    return '<button type="button" class="hnote' + (t ? " has" : "") + '" data-hnote="' + esc(c) + '" aria-label="보류 이유' + (t ? ": " + esc(t) : " 적기") + '">' + BUBBLE +
+      '<span class="hnote-tip" role="tooltip">' + (t ? esc(t) : "보류 이유 적기") + "</span></button>";
+  }
+  function closeNote() { var x = document.getElementById("hpop"); if (x) x.remove(); }
+  function openNote(btn, after) {
+    closeNote();
+    var c = btn.dataset.hnote, o = S.cos[c] || {}, r = btn.getBoundingClientRect();
+    var pop = document.createElement("div");
+    pop.id = "hpop"; pop.className = "hpop"; pop.setAttribute("role", "dialog"); pop.setAttribute("aria-label", "보류 이유");
+    pop.innerHTML = "<b>" + esc(o.n || c) + " · 보류 이유</b>" + '<textarea maxlength="300" rows="3" placeholder="예: 3분기 실적 보고 다시 · 재고 증가 확인 필요"></textarea>' +
+      '<div class="hpop-b"><button type="button" data-a="del">지우기</button><button type="button" data-a="x">닫기</button><button type="button" class="ok" data-a="ok">저장</button></div>';
+    document.body.appendChild(pop);
+    var ta = pop.querySelector("textarea"); ta.value = HNOTE[c] || "";
+    var w = pop.offsetWidth, h = pop.offsetHeight;
+    pop.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left)) + "px";
+    pop.style.top = (r.bottom + h + 8 < window.innerHeight ? r.bottom + 6 : Math.max(8, r.top - h - 6)) + "px";
+    function done(v) {
+      if (v != null) { v = v.trim(); if (v) HNOTE[c] = v; else delete HNOTE[c]; save(); }
+      closeNote(); if (v != null) after();
+    }
+    pop.onclick = function (e) { e.stopPropagation(); var a = e.target.dataset.a; if (a === "ok") done(ta.value); else if (a === "del") done(""); else if (a === "x") done(null); };
+    pop.onkeydown = function (e) { if (e.key === "Escape") { e.stopPropagation(); done(null); } else if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) done(ta.value); };
+    ta.focus();
+  }
+  document.addEventListener("click", function (e) { var x = document.getElementById("hpop"); if (x && !x.contains(e.target) && !e.target.closest("[data-hnote]")) closeNote(); });
   function save() {
-    try { [["es-meh", MEH], ["es-good", GOOD], ["es-hold", HOLD], ["es-open", OPEN]].forEach(function (x) { localStorage.setItem(x[0], JSON.stringify(x[1])); }); } catch (e) {}
+    try { [["es-meh", MEH], ["es-good", GOOD], ["es-hold", HOLD], ["es-open", OPEN], ["es-hold-note", HNOTE]].forEach(function (x) { localStorage.setItem(x[0], JSON.stringify(x[1])); }); } catch (e) {}
   }
   function togglePick(kind, c) {
     var m = { meh: MEH, good: GOOD, hold: HOLD }[kind], was = !!m[c];
@@ -215,7 +244,7 @@
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
       return '<tr class="main' + (MEH[o.c] ? " is-meh" : HOLD[o.c] ? " is-hold" : "") + '" data-c="' + esc(o.c) + '">' +
         '<td class="l rk">' + (i + 1) + '</td><td class="l tk"><span class="tkc">' + esc(o.c) + "</span>" + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + mehBtn(o.c) + "</td>" +
-        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span></span>" + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
+        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span></span>" + (HOLD[o.c] && HNOTE[o.c] ? '<span class="hnote-t">보류 이유 · ' + esc(HNOTE[o.c]) + "</span>" : "") + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
@@ -294,6 +323,7 @@
       bmBlock(bm) +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
     document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
+    pin.querySelectorAll("[data-hnote]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); openNote(b, function () { drawPanel(o, d); if (app.querySelector("#view")) render(); }); }; });
     pin.querySelectorAll("[data-pick]").forEach(function (b) {
       b.onclick = function () { togglePick(b.dataset.pick, b.dataset.pc); drawPanel(o, d); if (app.querySelector("#view")) render(); };
     });
@@ -507,6 +537,7 @@
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = "jp/c/" + el.dataset.c; }; });
     app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pick, b.dataset.pc); render(); }; });
+    app.querySelectorAll("[data-hnote]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); openNote(b, render); }; });
     app.querySelectorAll("[data-sec]").forEach(function (b) { b.onclick = function () { OPEN[b.dataset.sec] = !OPEN[b.dataset.sec]; save(); rerender(); }; });
     var q = document.getElementById("q");
     if (q) q.oninput = function () { S.q = q.value; rerender(); var n = document.getElementById("q"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
