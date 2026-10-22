@@ -24,7 +24,7 @@
     4: "3단계에서 다 같이 본 뒤 살지 말지 정할 종목이 이곳에 모입니다."
   };
   var GRADE_UP = { "서프라이즈": 1, "양호": 1, "호조": 1 }, GRADE_DN = { "부진": 1, "쇼크": 1, "미달": 1 };
-  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, res: { items: {} }, stage: 1, q: "", sort: "mc", dir: -1, view: "all" };
+  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, stage: 1, q: "", sort: "mc", dir: -1, view: "all" };
   var app = document.getElementById("app");
 
   /* ---------- 도우미 ---------- */
@@ -244,6 +244,7 @@
       (o.stage >= 3 ? '<div class="dsec">3단계 리포트</div><div id="r3"></div>' : "") +
       '<div class="dsec">분기 재무제표<span class="hint">억엔 · 칸 색 = YoY · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
       (fr.length > 1 ? '<div class="charts">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
+      (S.mo[o.c] ? '<details class="mo" id="mo"><summary><b>월차</b><span id="mo-sum">' + esc(S.mo[o.c]) + ' 까지 · 눌러서 펼치기</span></summary><div id="mo-body" class="mo-body"><p class="na">불러오는 중…</p></div></details>' : "") +
       '<div class="dsec">기본 정보</div><div class="kmini">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
       bmBlock(bm) +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
@@ -252,6 +253,28 @@
     bindChart(pin);
     var fw = pin.querySelector(".fswrap"); if (fw) fw.scrollLeft = fw.scrollWidth;
     [2, 3].forEach(function (st) { if (o.stage >= st) research(o, st, document.getElementById("r" + st)); });
+    if (S.mo[o.c]) monthly(o.c);
+  }
+  /* 월차 — 접어 두고, 펼치면 최근 13개월 표(전년 대비 칸은 100 기준 색) */
+  function monthly(c) {
+    getJSON("data/jp/monthly/" + c + ".json").then(function (m) {
+      var rows = m.rows.slice(-13), sum = document.getElementById("mo-sum"), body = document.getElementById("mo-body");
+      if (!body) return;
+      var last = rows[rows.length - 1], k = m.ratio.indexOf(true);
+      if (k >= 0 && last[k + 1] != null) sum.textContent = last[0].replace("-", "년 ") + "월 " + m.cols[k] + " " + last[k + 1] + "% · 눌러서 펼치기";
+      var head = '<tr><th class="l"></th>' + rows.map(function (r) { return "<th>" + esc(r[0].slice(2).replace("-", ".")) + "</th>"; }).join("") + "</tr>";
+      var body2 = m.cols.map(function (col, i) {
+        return '<tr><th class="l">' + esc(col) + "</th>" + rows.map(function (r) {
+          var v = r[i + 1];
+          if (v == null) return '<td class="na">—</td>';
+          return m.ratio[i] ? '<td class="mo-c ' + tone(v - 100) + '">' + v.toFixed(1) + "</td>" : "<td>" + num(v, v % 1 ? 1 : 0) + "</td>";
+        }).join("") + "</tr>";
+      }).join("");
+      body.innerHTML = '<div class="mo-wrap"><table class="mo-t"><thead>' + head + "</thead><tbody>" + body2 + "</tbody></table></div>" +
+        '<p class="note">전년 대비는 전년 같은 달 = 100. 칸 색: 100보다 크면 빨강, 작으면 파랑.' + (m.note ? " " + esc(m.note) + "." : "") +
+        (m.src && /^https:\/\//.test(m.src) ? ' <a href="' + esc(m.src) + '" target="_blank" rel="noopener noreferrer">원문 ↗</a>' : "") + "</p>";
+      var w = body.querySelector(".mo-wrap"); document.getElementById("mo").addEventListener("toggle", function () { w.scrollLeft = w.scrollWidth; });
+    }).catch(function () { var b = document.getElementById("mo-body"); if (b) b.innerHTML = '<p class="na">월차를 못 불러왔습니다.</p>'; });
   }
   /* BM — 사업부문별 매출 비중 + 2~3줄 설명 */
   function bmBlock(bm) {
@@ -480,9 +503,10 @@
     getJSON("data/jp/research/index.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/qyoy.json").catch(function () { return {}; }),
     getJSON("data/jp/fs.json").catch(function () { return {}; }),
-    getJSON("data/jp/bm.json").catch(function () { return {}; })
+    getJSON("data/jp/bm.json").catch(function () { return {}; }),
+    getJSON("data/jp/monthly/index.json").catch(function () { return {}; })
   ]).then(function (r) {
-    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.res = r[2];
+    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2];
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
     S.ready = true; S.stage = 0;

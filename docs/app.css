@@ -496,3 +496,21 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
 .main-t tbody tr.main td { vertical-align: bottom; padding-top: 16px; }
 .main-t tbody tr.main td.l:nth-child(3) { vertical-align: bottom; }
 .main-t tbody tr:first-child.main { border-top: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); }
+
+/* 월차 — 접어 두는 칸 */
+details.mo { margin-top: 12px; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 8px; }
+details.mo summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 10px; padding: 11px 14px; }
+details.mo summary::-webkit-details-marker { display: none; }
+details.mo summary::before { content: "▸"; color: var(--s2); font-size: 12px; }
+details.mo[open] summary::before { content: "▾"; }
+details.mo summary b { font-size: 13.5px; color: var(--ink); }
+details.mo summary span { font-size: 12px; color: var(--ink-mid); }
+.mo-body { padding: 0 12px 10px; }
+.mo-wrap { overflow-x: auto; }
+table.mo-t { min-width: 0; width: max-content; border-collapse: separate; border-spacing: 2px; }
+.mo-t th { position: static; background: none; cursor: default; font: 600 10.5px var(--mono); color: var(--th); padding: 4px 6px; text-align: right; border: 0; }
+.mo-t tbody th.l { font: 600 11.5px var(--jsans); color: var(--ink-mid); text-align: left; white-space: nowrap; position: sticky; left: 0; background: var(--surface); }
+.mo-t td { font: 600 11.5px var(--mono); padding: 4px 8px; border-radius: 4px; cursor: default; color: var(--ink); }
+.mo-t tr { cursor: default; } .mo-t tbody tr:hover { background: none; }
+.mo-c.p1 { background: var(--hp1-bg); color: var(--tx-up); } .mo-c.p2 { background: var(--hp2-bg); color: var(--tx-up); } .mo-c.p3 { background: var(--hp3-bg); color: var(--tx-up); }
+.mo-c.n1 { background: var(--hn1-bg); color: var(--tx-dn); } .mo-c.n2 { background: var(--hn2-bg); color: var(--tx-dn); } .mo-c.n3 { background: var(--hn3-bg); color: var(--tx-dn); }

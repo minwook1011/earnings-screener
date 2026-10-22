@@ -16,6 +16,10 @@
 3-1. **분기 성장률 줄** — 2단계 이상인데 `tools/qhist/jp.json` 에 없는 회사는 jp_guidance(`history='quarterly'`, `count=14`, 5종목씩)로 받아
    `[결산기 분기, 매출, 영업이익]`(백만엔, 누계만 있는 분기는 뺌)으로 넣고 `python tools/build_qyoy.py` → `docs/data/jp/qyoy.json`
    (새 결산이 나온 회사도 같은 방법으로 갱신)
+3-2. **월차** — `python tools/build_monthly.py` (VANTAGE 월차 원장에서 사이트 회사만, 열 이름 한국어로).
+   VANTAGE 에 없는데 월차를 내는 회사는 jp_monthly 도구(code=…, months=13)로 받아 `tools/monthly_extra/<코드>.json` 에 넣는다(예: 9993).
+3-3. **BM** — 2단계에 새로 들어온 회사는 jp_financials(items='外部顧客への売上高' 또는 'セグメント情報')로 부문 매출을 받아
+   `docs/data/jp/bm.json` 에 부문별 비중(p)·2~3줄 설명(d)·기업 개요(sum)를 쓴다. 단일 부문이면 100%.
 4. `python tools/research_queue.py` → 리서치가 없는 회사 목록(JSON)과 대기 표시
 5. 목록의 회사마다 리서치를 쓴다
    - 2단계: **2단계 실적분석리서치 스킬**(사용자가 만들 예정). 스킬이 없으면 `docs/data/jp/research/5018/stage2.md` 양식(결론 먼저·숫자 표·왜 좋아졌나·걸리는 점·3단계에서 확인할 것)
