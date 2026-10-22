@@ -49,7 +49,9 @@ def refresh():
                 continue
             it = idx["items"].setdefault(c, {}).get(str(st))
             path = os.path.join(DATA, "research", c, f"stage{st}.md")
-            if it and it.get("status") == "완료" and os.path.exists(path):
+            if it and it.get("status") == "완료":
+                continue
+            if it and it.get("status") == "진행 중":   # 다른 작업이 만드는 중 — 겹치지 않게 건너뜀
                 continue
             if not it:
                 idx["items"][c][str(st)] = {"status": "대기", "queued": now(), "kind": SKILL[st]}
@@ -94,8 +96,18 @@ def attach(c, st, html, verdict):
     print(f"{c} {st}단계 리서치 HTML 올림 → docs/{rel}")
 
 
+def mark(c, st, status):
+    idx = load_idx()
+    it = idx["items"].setdefault(c, {}).setdefault(str(st), {"kind": SKILL[int(st)]})
+    it["status"] = status
+    it["since"] = now()
+    save_idx(idx)
+
+
 if __name__ == "__main__":
-    if len(sys.argv) >= 6 and sys.argv[1] == "attach":
+    if len(sys.argv) >= 5 and sys.argv[1] == "mark":   # mark <코드> <단계> 진행 중|대기
+        mark(sys.argv[2], sys.argv[3], " ".join(sys.argv[4:]))
+    elif len(sys.argv) >= 6 and sys.argv[1] == "attach":
         attach(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
     elif len(sys.argv) >= 5 and sys.argv[1] == "done":
         done(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5] if len(sys.argv) > 5 else None)

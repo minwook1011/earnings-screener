@@ -225,6 +225,7 @@
       (o.g ? '<span class="chip ' + (GRADE_UP[o.g] ? "gu" : GRADE_DN[o.g] ? "gd" : "") + '">' + esc(o.g) + "</span>" : "") +
       (o.d ? '<span class="chip">' + md(o.d) + (o.pre ? " 발표 " + (o.est ? "예상" : "예정") : " 발표") + (o.p || o.q ? " · " + esc(o.p || o.q) : "") + "</span>" : "") +
       (o.by ? '<span class="chip">올린 사람 · ' + esc(o.by) + "</span>" : "") +
+      (o.card && o.card.memo ? '<span class="chip k">메모 · ' + esc(o.card.memo) + "</span>" : "") +
       '<a class="chip" href="https://kabutan.jp/stock/?code=' + encodeURIComponent(o.c) + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a></div>' +
       (rx.length ? '<div class="react">' + rx.map(function (r) { return '<span class="rx ' + (r[1] > 0 ? "up" : r[1] < 0 ? "dn" : "") + '">' + esc(r[0]) + "</span>"; }).join("") + "</div>" : "") +
       (d.note && d.note.headline ? '<p class="headline">' + esc(d.note.headline) + "</p>" : "") +
