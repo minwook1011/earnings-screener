@@ -48,7 +48,7 @@ def lkey(lab):
 def main():
     src = json.load(open(SRC, encoding="utf-8"))
     evt = json.load(open(EVT, encoding="utf-8")) if os.path.exists(EVT) else {}
-    out = {"_about": "최근 10개 분기 성장률(전년 같은 분기 대비 %, 오래된 것부터). r=매출 o=영업이익 ot=글자(흑전·적전·적지) m=합병·인수 효과(있으면 화면에 '합병')",
+    out = {"_about": "최근 10개 분기 성장률(전년 같은 분기 대비 %, 오래된 것부터). r=매출 o=영업이익 ot=글자(흑전·적전·적지) m=그 분기에 합병·인수한 회사가 처음 연결됨(화면: 분기 이름 위 '합병')",
            "_src": src.get("_fetched")}
     fsout = {"_about": "분기 재무제표(억엔) v=[매출,영업이익,순이익] qoq·yoy=같은 순서 %, m=합병 효과"}
     for c, rows in src.items():
@@ -65,7 +65,7 @@ def main():
                   "qoq": [growth(r[i], pq[i - 1])[0] if pq else None for i in (1, 2, 3)],
                   "yoy": [growth(r[i], py[i - 1])[0] if py else None for i in (1, 2, 3)]}
             for e in evt.get(c, []):
-                if lkey(e["from"]) <= lkey(it["p"]) <= lkey(e["to"]):
+                if e.get("at") == it["p"]:
                     it["m"] = e["note"]
             fs.append(it)
         fsout[c] = fs
@@ -81,7 +81,7 @@ def main():
                 o, ot = None, "적전"
             it = {"p": label(p), "r": r, "o": o, "ot": ot, "s": round(s / 100, 1), "op": round(op / 100, 1)}
             for e in evt.get(c, []) if not c.startswith("_") else []:
-                if lkey(e["from"]) <= lkey(it["p"]) <= lkey(e["to"]):
+                if e.get("at") == it["p"]:
                     it["m"] = e["note"]
             seq.append(it)
         out[c] = seq[-N:]

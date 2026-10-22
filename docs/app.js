@@ -145,11 +145,11 @@
   }
   /* 성장률 칸 — 바탕만 파스텔, 글자는 진하게. 합병 분기는 숫자 그대로 + '합병' 표시 */
   function heat(v, t, m) {
-    var mg = m ? '<i class="mgb">합병</i>' : "", tip = m ? ' title="' + esc("합병 효과 — " + m) + '"' : "";
-    if (t) return '<span class="hc ' + (t === "흑전" ? "p2" : "n2") + (m ? " m" : "") + '"' + tip + ">" + t + mg + "</span>";
+    var mg = "", tip = "";
+    if (t) return '<span class="hc ' + (t === "흑전" ? "p2" : "n2") + '"' + tip + ">" + t + mg + "</span>";
     if (v == null) return '<span class="hc na">—</span>';
     var c = v >= 30 ? "p3" : v >= 10 ? "p2" : v > 0 ? "p1" : v > -10 ? "n1" : v > -30 ? "n2" : "n3";
-    return '<span class="hc ' + c + (m ? " m" : "") + '"' + tip + ">" + pctTxt(v).replace("%", "") + mg + "</span>";
+    return '<span class="hc ' + c + '"' + tip + ">" + pctTxt(v).replace("%", "") + mg + "</span>";
   }
   function amt(v) { return '<span class="hc v">' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</span>"; }
   function qline(c) {
@@ -158,10 +158,10 @@
     var pad = []; for (var i = q.length; i < 10; i++) pad.push(null);
     var cells = pad.concat(q);
     function row(lab, f) { return "<span class=\"ql-l\">" + lab + "</span>" + cells.map(function (x) { return x ? f(x) : '<span class="hc na"></span>'; }).join(""); }
-    return '<div class="ql">' + row("", function (x) { return '<span class="ql-p">' + esc(x.p) + "</span>"; }) +
+    return '<div class="ql">' + row("", function (x) { return '<span class="ql-p">' + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + esc(x.p) + "</span>"; }) +
       row("매출액", function (x) { return amt(x.s); }) + row("YoY", function (x) { return heat(x.r, null, x.m); }) +
       row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div>" +
-      (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 인수한 회사가 실적에 더해져 성장률이 부풀려진 분기</div>" : "");
+      (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐</div>" : "");
   }
   function stageN(st) {
     var rows = sorted(S.list.filter(function (o) { return o.stage === st; }));
@@ -332,18 +332,18 @@
     if (!rows.length) return '<div class="box"><p class="na">분기 실적 자료가 아직 없습니다. 2단계로 올라가면 채워집니다.</p></div>';
     var names = ["매출", "영업이익", "순이익"];
     var head = '<tr><th class="l"></th>' + rows.map(function (x, i) {
-      return "<th><b>" + esc(x.p) + "</b>" + (x.m ? '<span class="tag mgt" title="' + esc(x.m) + '">합병</span>' : i === rows.length - 1 ? '<span class="fs-now">최근</span>' : x.sub ? "<small>" + esc(x.sub) + "</small>" : "") + "</th>";
+      return "<th>" + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + "<b>" + esc(x.p) + "</b>" + (i === rows.length - 1 ? '<span class="fs-now">최근</span>' : x.sub ? "<small>" + esc(x.sub) + "</small>" : "") + "</th>";
     }).join("") + "</tr>";
     var body = names.map(function (nm, r) {
       return '<tr><th class="l">' + nm + "</th>" + rows.map(function (x) {
         var v = x.v[r];
         var opm = r === 1 && x.v[0] ? '<span class="fs-g"><i>OPM</i><em>' + (x.v[1] / x.v[0] * 100).toFixed(1) + "%</em></span>" : "";
-        return '<td class="fs-c ' + tone(x.yoy[r]) + (x.m ? " m" : "") + '"><b>' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</b>" + opm + sg("QoQ", x.qoq[r]) + sg("YoY", x.yoy[r]) + "</td>";
+        return '<td class="fs-c ' + tone(x.yoy[r]) + '"><b>' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</b>" + opm + sg("QoQ", x.qoq[r]) + sg("YoY", x.yoy[r]) + "</td>";
       }).join("") + "</tr>";
     }).join("");
     var mg = rows.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
     return '<div class="fswrap"><table class="fs"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>" +
-      '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신.' + (mg.length ? " 합병 = " + esc(mg.join(" · ")) + " — 인수한 회사가 더해져 성장률이 부풀려진 분기." : "") + "</p>";
+      '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신.' + (mg.length ? " 합병 = " + esc(mg.join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐." : "") + "</p>";
   }
   function closePanel() { panel.classList.remove("on"); scrim.classList.remove("on"); document.body.style.overflow = ""; }
   scrim.onclick = function () { location.hash = "jp/" + S.stage; };

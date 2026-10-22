@@ -444,3 +444,8 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
 .rs-md:not(:empty) { margin-top: 12px; border-top: 1px solid var(--line-soft); padding-top: 6px; }
 .dsec { margin: 20px 0 10px; }
 @media (max-width: 760px) { .charts { grid-template-columns: 1fr; } }
+/* 합병 — 분기 이름 위에 작게(그 분기에만) */
+.mgh { display: block; font: 700 9.5px var(--jsans); font-style: normal; color: var(--tx-mg); line-height: 1.2; margin-bottom: 1px; cursor: help; }
+.ql-p .mgh { text-align: center; }
+.fs thead th .mgh { text-align: right; }
+.ql-p { align-self: end; }
