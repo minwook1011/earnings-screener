@@ -24,7 +24,7 @@
     4: "3단계에서 다 같이 본 뒤 살지 말지 정할 종목이 이곳에 모입니다."
   };
   var GRADE_UP = { "서프라이즈": 1, "양호": 1, "호조": 1 }, GRADE_DN = { "부진": 1, "쇼크": 1, "미달": 1 };
-  var S = { cos: {}, list: [], qy: {}, res: { items: {} }, stage: 1, q: "", sort: "mc", dir: -1, view: "all" };
+  var S = { cos: {}, list: [], qy: {}, fs: {}, res: { items: {} }, stage: 1, q: "", sort: "mc", dir: -1, view: "all" };
   var app = document.getElementById("app");
 
   /* ---------- 도우미 ---------- */
@@ -47,10 +47,12 @@
   function build(s1, pipe, res) {
     var cos = {};
     (s1.rows || []).forEach(function (r) { var o = cos[r.c] = Object.assign({}, r); o.stage = 1; });
+    (s1.upcoming || []).forEach(function (r) { if (!cos[r.c]) { var o = cos[r.c] = Object.assign({}, r); o.stage = 1; o.pre = true; } });
     Object.keys(pipe.companies || {}).forEach(function (c) {
       var t = pipe.companies[c], card = t.cards[String(t.stage)] || t.cards["1"] || {};
       var o = cos[c] || (cos[c] = { c: c, n: t.n, d: annDate(card.ann, card.date), stage: 1 });
-      o.tn = t.n; o.stage = t.stage; o.tg = t; o.card = card;
+      o.tn = t.n; o.stage = t.stage; o.tg = t; o.card = card; o.pre = false;
+      o.by = card.by || null;
       ["mc", "per", "rev", "op", "d1"].forEach(function (k) { if (o[k] == null && card[k] != null) o[k] = card[k]; });
       o.vr = card.vr; o.tags = card.tags; o.lens = card.lens;
       o.bm = section(card, "비즈니스 모델")[0] || "";
@@ -60,7 +62,7 @@
   }
 
   /* ---------- 머리·레일 ---------- */
-  function counts() { var n = { 1: S.list.length, 2: 0, 3: 0, 4: 0 }; S.list.forEach(function (o) { if (o.stage >= 2) n[o.stage]++; }); return n; }
+  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[o.stage]++; }); return n; }
   function head() {
     var n = counts();
     return '<header class="jhd"><div class="hd"><div class="jbrand">' +
@@ -73,22 +75,46 @@
       }).join("") + '<span class="rail-hint">' + esc(STAGES[S.stage - 1].hint) + "</span></div></nav>";
   }
 
-  /* ---------- 1단계: 이름·티커 목록 ---------- */
+  /* ---------- 1단계: 주간 실적 캘린더(월~금, 주 단위로 넘기기) ---------- */
+  var WD = "일월화수목금토", SHOW = 12;
+  function ymd(t) { return t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2); }
+  function monday(d) { var t = new Date(d + "T00:00:00"); t.setDate(t.getDate() - ((t.getDay() + 6) % 7)); return ymd(t); }
+  function addDays(d, n) { var t = new Date(d + "T00:00:00"); t.setDate(t.getDate() + n); return ymd(t); }
+  function dot(d) { return (+d.slice(5, 7)) + "." + d.slice(8, 10); }
+  function weekName(mon) { var th = new Date(addDays(mon, 3) + "T00:00:00"); return (th.getMonth() + 1) + "월 " + Math.ceil(th.getDate() / 7) + "주차"; }
   function stage1() {
-    var q = S.q.trim().toLowerCase();
-    var rows = S.list.filter(function (o) { return !q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0; });
-    rows.sort(function (a, b) { return (b.d || "").localeCompare(a.d || "") || (b.mc || 0) - (a.mc || 0); });
-    var byDay = {}, days = [];
-    rows.forEach(function (o) { var d = o.d || "날짜 없음"; if (!byDay[d]) { byDay[d] = []; days.push(d); } byDay[d].push(o); });
+    var q = S.q.trim().toLowerCase(), today = ymd(new Date());
+    var rows = S.list.filter(function (o) { return o.d && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); });
+    var weeks = {};
+    rows.forEach(function (o) { var w = monday(o.d); (weeks[w] = weeks[w] || []).push(o); });
+    var keys = Object.keys(weeks).sort();
+    if (!S.week || (!weeks[S.week] && keys.length)) {
+      var cur = monday(today);
+      S.week = weeks[cur] ? cur : keys.filter(function (k) { return k <= cur; }).pop() || keys[0];
+    }
+    var wi = keys.indexOf(S.week), mon = S.week;
+    var chips = keys.map(function (k) {
+      return '<button data-week="' + k + '" aria-pressed="' + (k === mon) + '"' + (k === monday(today) ? ' class="now"' : "") + "><b>" + weekName(k) + "</b><span>" + dot(k) + "~" + dot(addDays(k, 4)) + " · " + weeks[k].length + "</span></button>";
+    }).join("");
+    var cols = [0, 1, 2, 3, 4].map(function (i) {
+      var d = addDays(mon, i), list = (weeks[mon] || []).filter(function (o) { return o.d === d; });
+      list.sort(function (a, b) { return (b.stage - a.stage) || (b.mc || 0) - (a.mc || 0); });
+      var open = S.openDay === d, shown = open ? list : list.slice(0, SHOW);
+      return '<section class="cal-col' + (d === today ? " today" : d < today ? " past" : "") + '"><header><b>' + dot(d) + "(" + WD[new Date(d + "T00:00:00").getDay()] + ")</b><span>" + list.length + "개</span></header>" +
+        (list.length ? '<ul class="cal-list">' + shown.map(function (o) {
+          return '<li><button data-c="' + esc(o.c) + '" class="' + (o.stage > 1 ? "s" + o.stage + " lv" : "") + '" title="' + esc((o.n || "") + (o.en && o.en !== o.n ? " (" + o.en + ")" : "")) + '">' +
+            '<b class="tkr">' + esc(o.c) + '</b><span class="cnm">' + esc(o.n || o.en) + "</span>" +
+            (o.stage > 1 ? '<i class="stg">' + o.stage + "단계</i>" : o.pre && o.est ? '<i class="pre">예상</i>' : "") + "</button></li>";
+        }).join("") + "</ul>" : '<p class="cal-empty">발표 없음</p>') +
+        (list.length > SHOW ? '<button class="more" data-day="' + d + '">' + (open ? "접기" : "+" + (list.length - SHOW) + "개 더 보기") + "</button>" : "") + "</section>";
+    }).join("");
     return '<div class="ctl"><div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커" value="' + esc(S.q) + '"></div>' +
-      '<div class="count"><b>' + rows.length + "</b>개 기업</div></div>" +
+      '<div class="count"><b>' + counts()[1] + "</b>개 기업 발표 · 예정 <b>" + S.list.filter(function (o) { return o.pre; }).length + "</b>개</div></div>" +
       '<p class="stage-note">' + NOTE[1] + "</p>" +
-      (rows.length ? '<div class="days">' + days.map(function (d) {
-        return '<section class="day"><h3>' + (d.length === 10 ? md(d) + ' <small>' + "일월화수목금토"[new Date(d).getDay()] + "</small>" : esc(d)) + '<span>' + byDay[d].length + "</span></h3>" +
-          '<div class="tick">' + byDay[d].map(function (o) {
-            return '<button class="tk-b' + (o.stage > 1 ? " s" + o.stage + " lv" : "") + '" data-c="' + esc(o.c) + '"><b>' + esc(o.c) + "</b>" + esc(o.n || o.en) + (o.stage > 1 ? "<i>" + o.stage + "</i>" : "") + "</button>";
-          }).join("") + "</div></section>";
-      }).join("") + "</div>" : '<div class="empty">조건에 맞는 기업이 없습니다.</div>');
+      '<div class="cal"><div class="weeks" id="weeks">' + chips + "</div>" +
+      '<div class="wnav"><button data-step="-1"' + (wi <= 0 ? " disabled" : "") + '>‹ 이전 주</button><b>' + weekName(mon) + "</b><span>" + dot(mon) + " ~ " + dot(addDays(mon, 4)) + " · " + ((weeks[mon] || []).length) + '개</span><button data-step="0">이번 주</button><button data-step="1"' + (wi >= keys.length - 1 ? " disabled" : "") + ">다음 주 ›</button></div>" +
+      '<div class="cal-grid">' + cols + "</div>" +
+      '<p class="note">지난 날은 실적 발표 기업, 오늘 이후는 일본거래소(JPX) 공시 발표 예정일입니다. 예상 = 회사가 아직 날짜를 안 알려 작년 같은 분기로 추정한 날.</p></div>';
   }
 
   /* ---------- 2~4단계: 표 + 분기 성장률 줄 ---------- */
@@ -96,13 +122,13 @@
     { k: "rk", t: "#", cls: "l ns" }, { k: "c", t: "코드", cls: "l" }, { k: "n", t: "종목", cls: "l" },
     { k: "d", t: "발표" }, { k: "mc", t: "시총(억엔)" }, { k: "per", t: "PER" },
     { k: "rev", t: "매출성장" }, { k: "op", t: "영업이익성장" }, { k: "d1", t: "다음 날" }, { k: "vr", t: "거래량" },
-    { k: "up", t: "AI 렌즈", cls: "l" }, { k: "res", t: "리서치", cls: "l ns" }
+    { k: "up", t: "AI 렌즈", cls: "l" }, { k: "by", t: "올린 사람", cls: "l" }, { k: "res", t: "리서치", cls: "l ns" }
   ];
   function sorted(rows) {
     var k = S.sort, dir = S.dir;
     return rows.slice().sort(function (a, b) {
       var x = a[k], y = b[k];
-      if (k === "n" || k === "c" || k === "d") { x = x || ""; y = y || ""; return dir * String(x).localeCompare(String(y)); }
+      if (k === "n" || k === "c" || k === "d" || k === "by") { x = x || ""; y = y || ""; return dir * String(x).localeCompare(String(y)); }
       if (x == null) return 1; if (y == null) return -1;
       return dir * (x - y);
     });
@@ -117,7 +143,8 @@
     if (!r) return '<span class="tag">없음</span>';
     return r.status === "완료" ? '<span class="tag ok">' + st + "단계 완료</span>" : '<span class="tag wait">' + st + "단계 " + esc(r.status) + "</span>";
   }
-  function heat(v, t) {
+  function heat(v, t, m) {
+    if (m) return '<span class="hc mg" title="' + esc("합병 효과 — " + m + (v != null ? " · 실제 " + pctTxt(v) : t ? " · " + t : "")) + '">합병</span>';
     if (t) return '<span class="hc ' + (t === "흑전" ? "p2" : "n2") + '">' + t + "</span>";
     if (v == null) return '<span class="hc na">—</span>';
     var c = v >= 30 ? "p3" : v >= 10 ? "p2" : v > 0 ? "p1" : v > -10 ? "n1" : v > -30 ? "n2" : "n3";
@@ -130,7 +157,8 @@
     var cells = pad.concat(q);
     function row(lab, f) { return "<span class=\"ql-l\">" + lab + "</span>" + cells.map(function (x) { return x ? f(x) : '<span class="hc na"></span>'; }).join(""); }
     return '<div class="ql">' + row("", function (x) { return '<span class="ql-p">' + esc(x.p) + "</span>"; }) +
-      row("매출 성장", function (x) { return heat(x.r); }) + row("영업이익 성장", function (x) { return heat(x.o, x.ot); }) + "</div>";
+      row("매출 성장", function (x) { return heat(x.r, null, x.m); }) + row("영업이익 성장", function (x) { return heat(x.o, x.ot, x.m); }) + "</div>" +
+      (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 인수한 회사가 실적에 더해져 성장률이 부풀려진 분기</div>" : "");
   }
   function stageN(st) {
     var rows = sorted(S.list.filter(function (o) { return o.stage === st; }));
@@ -154,8 +182,8 @@
         "<td>" + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
         "<td>" + pct(o.rev) + "</td><td>" + pct(o.op) + "</td><td>" + pct(o.d1) + "</td>" +
         "<td>" + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
-        '<td class="l">' + votes(o.lens) + '</td><td class="l">' + resTag(o) + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="10">' + qline(o.c) + "</td></tr>";
+        '<td class="l">' + votes(o.lens) + '</td><td class="l by">' + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + resTag(o) + "</td></tr>" +
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="11">' + qline(o.c) + "</td></tr>";
     }).join("");
     return head + '<div class="tblwrap"><table class="main-t"><thead><tr>' + th + "</tr></thead><tbody>" + body + "</tbody></table></div>";
   }
@@ -186,75 +214,48 @@
       var when = s.n === 1 ? (o.d ? md(o.d) + " 발표" : "") : at[s.n] ? at[s.n].slice(5, 10).replace("-", "/") + " 진입" : "—";
       return '<div class="s' + s.n + " " + cls + '"><b>' + esc(s.lab) + "</b>" + esc(when) + "</div>";
     }).join("");
-    var tabs = [["base", "기본 정보"], ["q", "분기 실적"]];
-    if (o.card) tabs.push(["tg", "텔레 카드"]);
-    if (o.stage >= 2) tabs.push(["r2", "2단계 리서치"]);
-    if (o.stage >= 3) tabs.push(["r3", "3단계 리포트"]);
-    pin.innerHTML = '<div class="ptop"><div><div class="dtk">TSE : ' + esc(o.c) + "</div>" +
+    var head0 = '<div class="ptop"><div><div class="dtk">TSE : ' + esc(o.c) + "</div>" +
       '<h2 class="dnm" id="d-title">' + esc(o.n || o.en) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en) + ")</small>" : "") + "</h2>" +
       '<div class="chips">' + (o.cat ? '<span class="chip k">' + esc(o.cat) + "</span>" : "") +
       '<span class="chip st s' + o.stage + '">' + o.stage + "단계</span>" +
       (o.g ? '<span class="chip ' + (GRADE_UP[o.g] ? "gu" : GRADE_DN[o.g] ? "gd" : "") + '">' + esc(o.g) + "</span>" : "") +
-      (o.d ? '<span class="chip">' + md(o.d) + " 발표" + (o.p ? " · " + esc(o.p) : "") + "</span>" : "") +
+      (o.d ? '<span class="chip">' + md(o.d) + (o.pre ? " 발표 " + (o.est ? "예상" : "예정") : " 발표") + (o.p || o.q ? " · " + esc(o.p || o.q) : "") + "</span>" : "") +
+      (o.by ? '<span class="chip">올린 사람 · ' + esc(o.by) + "</span>" : "") +
       '<a class="chip" href="https://kabutan.jp/stock/?code=' + encodeURIComponent(o.c) + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a></div>' +
       (rx.length ? '<div class="react">' + rx.map(function (r) { return '<span class="rx ' + (r[1] > 0 ? "up" : r[1] < 0 ? "dn" : "") + '">' + esc(r[0]) + "</span>"; }).join("") + "</div>" : "") +
       (d.note && d.note.headline ? '<p class="headline">' + esc(d.note.headline) + "</p>" : "") +
       '</div><button class="x" id="px" aria-label="닫기">✕</button></div>' +
-      '<div class="track">' + track + "</div>" +
-      '<div class="ptabs">' + tabs.map(function (t, i) { return '<button data-tab="' + t[0] + '" aria-pressed="' + (i === 0) + '">' + t[1] + "</button>"; }).join("") + "</div>" +
-      '<div id="ptab"></div>';
-    document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
-    pin.querySelectorAll("[data-tab]").forEach(function (b) {
-      b.onclick = function () { pin.querySelectorAll("[data-tab]").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); showTab(o, d, b.dataset.tab); };
-    });
-    showTab(o, d, "base");
-  }
-  function showTab(o, d, t) {
-    var box = document.getElementById("ptab"), rec = d.rec || {};
-    if (t === "base") {
-      var last = d.px && d.px.length ? d.px[d.px.length - 1][1] : o.px;
-      var kv = [["종가 (엔)", num(last, last < 100 ? 1 : 0)], ["시가총액 (억엔)", mcap(o.mc)], ["PER", o.per != null ? o.per.toFixed(1) + "배" : "—"],
-        ["매출 성장 (전년 같은 분기)", pct(o.rev)], ["영업이익 성장 (전년 같은 분기)", pct(o.op)], ["다음 날 주가", pct(o.d1)]];
-      if (rec.progress && rec.progress.pct != null) kv.push(["진척률 차 (작년 대비 %p)", pct(rec.progress.diff != null ? rec.progress.diff : o.prog)]);
-      if (rec.next_guide && rec.next_guide.op_g != null) kv.push(["다음 해 영업이익 예상", pct(rec.next_guide.op_g)]);
-      if (kv.length % 2) kv.push(["", ""]);
-      var bm = o.bm || (d.note && d.note.about) || "";
-      box.innerHTML = '<div class="kgrid">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
-        '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.d) +
-        (bm ? '<div class="dsec">무엇을 하는 회사인가</div><div class="box"><p>' + esc(bm) + "</p></div>" : "") +
-        (d.note && d.note.summary_md ? '<div class="dsec">실적 요약<span class="hint">VANTAGE 실적 노트</span></div><div class="box md">' + mdRender(d.note.summary_md) + "</div>" : "") +
-        (o.card && section(o.card, "왜 좋았나").length ? '<div class="dsec">왜 좋았나<span class="hint">텔레 카드</span></div><div class="box">' + section(o.card, "왜 좋았나").map(function (l) { return "<p>" + esc(l) + "</p>"; }).join("") + "</div>" : "");
-      bindChart(box);
-      return;
-    }
-    if (t === "q") {
-      var q = S.qy[o.c], rows = "";
-      if (q && q.length) {
-        rows = q.slice().reverse().map(function (x, i) {
-          return '<tr class="' + (i === 0 ? "cur" : "") + '"><td class="l">' + esc(x.p) + "</td><td>" + num(x.s, 1) + "</td><td>" + heat(x.r) + "</td><td>" + num(x.op, 1) + "</td><td>" + heat(x.o, x.ot) + "</td><td>" + (x.s ? (x.op / x.s * 100).toFixed(1) + "%" : "—") + "</td></tr>";
-        }).join("");
-        box.innerHTML = '<div class="tblwrap"><table class="qt"><thead><tr><th class="l">분기</th><th>매출(억엔)</th><th>매출 성장</th><th>영업이익(억엔)</th><th>영업이익 성장</th><th>영업이익률</th></tr></thead><tbody>' + rows + "</tbody></table></div>" +
-          '<p class="note">결산기 기준 분기(예: 27.2Q = 2027년 결산기 2분기). 성장률은 전년 같은 분기 대비. 원천: 결산단신.</p>';
-      } else if (d.qs && d.qs.length) {
-        var k = (d.unit === "백만엔") ? 100 : 1;
-        rows = d.qs.slice().reverse().map(function (x, i) {
-          return '<tr class="' + (i === 0 ? "cur" : "") + '"><td class="l">' + esc(x.label) + "</td><td>" + num(x.rev / k, 1) + "</td><td>" + heat(x.yoy && x.yoy.rev) + "</td><td>" + num(x.op / k, 1) + "</td><td>" + heat(x.yoy && x.yoy.op) + "</td><td>" + (x.opm != null ? x.opm + "%" : "—") + "</td></tr>";
-        }).join("");
-        box.innerHTML = '<div class="tblwrap"><table class="qt"><thead><tr><th class="l">기간</th><th>매출(억엔)</th><th>매출 성장</th><th>영업이익(억엔)</th><th>영업이익 성장</th><th>영업이익률</th></tr></thead><tbody>' + rows + "</tbody></table></div>" +
-          '<p class="note">원천: VANTAGE 실적 리포트(최근 8분기).</p>';
-      } else box.innerHTML = '<div class="box"><p class="na">분기 실적 자료가 아직 없습니다. 2단계로 올라가면 채워집니다.</p></div>';
-      return;
-    }
-    if (t === "tg") {
-      var c = o.card, L = c.lens;
-      box.innerHTML = '<div class="box"><h4>' + esc(c.ann) + " 발표 · 텔레 " + esc(c.date) + "</h4><p>" + esc(c.val || "") + "</p></div>" +
+      '<div class="track">' + track + "</div>";
+    var rec = d.rec, last = d.px && d.px.length ? d.px[d.px.length - 1][1] : o.px;
+    var kv = [["종가 (엔)", num(last, last < 100 ? 1 : 0)], ["시가총액 (억엔)", mcap(o.mc)], ["PER", o.per != null ? o.per.toFixed(1) + "배" : "—"],
+      ["매출 성장 (전년 같은 분기)", pct(o.rev)], ["영업이익 성장 (전년 같은 분기)", pct(o.op)], ["다음 날 주가", pct(o.d1)]];
+    if (rec && rec.progress && rec.progress.pct != null) kv.push(["진척률 차 (작년 대비 %p)", pct(rec.progress.diff != null ? rec.progress.diff : o.prog)]);
+    if (rec && rec.next_guide && rec.next_guide.op_g != null) kv.push(["다음 해 영업이익 예상", pct(rec.next_guide.op_g)]);
+    if (kv.length % 2) kv.push(["", ""]);
+    var bm = o.bm || (d.note && d.note.about) || "", c = o.card, L = c && c.lens;
+    pin.innerHTML = head0 +
+      '<div class="dsec">분기 재무제표<span class="hint">억엔 · 칸 색 = 전년 같은 분기 대비 · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
+      '<div class="dsec">기본 정보</div><div class="kgrid">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
+      '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d) +
+      (bm ? '<div class="dsec">무엇을 하는 회사인가</div><div class="box"><p>' + esc(bm) + "</p></div>" : "") +
+      (d.note && d.note.summary_md ? '<div class="dsec">실적 요약<span class="hint">VANTAGE 실적 노트</span></div><div class="box md">' + mdRender(d.note.summary_md) + "</div>" : "") +
+      (c ? '<div class="dsec">텔레 카드<span class="hint">' + esc(c.ann || "") + " 발표 · " + esc(c.date || "") + "</span></div>" +
+        (c.val ? '<div class="box"><p>' + esc(c.val) + "</p></div>" : "") +
         (L ? '<div class="box"><h4>AI 렌즈 — 3단계로 ' + L.up + " · 삭제 " + L.down + " (실제 인물 의견 아님)</h4>" + (L.rows || []).map(function (r) {
           return '<div class="lensrow"><b class="' + (r.v === "up" ? "up" : "dn") + '">' + esc(r.who) + " · " + (r.v === "up" ? "3단계로" : "삭제") + "</b><span>" + esc(r.why) + "</span></div>";
         }).join("") + "</div>" : "") +
-        (c.sections || []).map(function (s) { return '<div class="box"><h4>' + esc(s.t) + "</h4>" + s.lines.map(function (l) { return "<p>" + esc(l) + "</p>"; }).join("") + "</div>"; }).join("");
-      return;
-    }
-    var st = t === "r2" ? 2 : 3, r = o.res[String(st)];
+        (c.sections || []).filter(function (s) { return s.t.indexOf("비즈니스 모델") !== 0; }).map(function (s) {
+          return '<div class="box"><h4>' + esc(s.t) + "</h4>" + s.lines.map(function (l) { return "<p>" + esc(l) + "</p>"; }).join("") + "</div>";
+        }).join("") : "") +
+      (o.stage >= 2 ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
+      (o.stage >= 3 ? '<div class="dsec">3단계 리포트</div><div id="r3"></div>' : "");
+    document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
+    bindChart(pin);
+    var fw = pin.querySelector(".fswrap"); if (fw) fw.scrollLeft = fw.scrollWidth;
+    [2, 3].forEach(function (st) { if (o.stage >= st) research(o, st, document.getElementById("r" + st)); });
+  }
+  function research(o, st, box) {
+    var r = o.res[String(st)];
     if (!r || r.status !== "완료") {
       box.innerHTML = '<div class="box wait"><span class="dot"></span><div><b>' + st + "단계 리서치 " + esc((r && r.status) || "대기") + "</b><p class=\"na\">" +
         (st === 2 ? "2단계 실적 분석 리서치" : "3단계 딥 리포트") + "가 자동으로 돌아 이곳에 붙습니다." + (r && r.queued ? " 대기열 등록 " + esc(r.queued) : "") + "</p></div></div>";
@@ -264,6 +265,40 @@
     getText("data/jp/" + r.file).then(function (txt) {
       box.innerHTML = '<div class="box md">' + mdRender(txt) + '</div><p class="note">' + esc(r.kind || "") + " · " + esc(r.written || "") + "</p>";
     }).catch(function () { box.innerHTML = '<div class="box">리서치 파일을 못 불러왔습니다.</div>'; });
+  }
+  /* 분기 재무제표 — 열 = 분기(오른쪽이 최근), 행 = 매출·영업이익(이익률)·순이익, 칸마다 값·전 분기 대비·전년 대비 */
+  function fsRows(o, d) {
+    var f = S.fs[o.c];
+    if (f && f.length) return f;
+    if (!d.qs || !d.qs.length) return [];
+    var k = d.unit === "백만엔" ? 100 : 1;
+    return d.qs.map(function (x) {
+      var y = x.yoy || {}, q = x.qoq || {};
+      return { p: x.cq || x.label, sub: x.label, v: [x.rev / k, x.op / k, x.ni != null ? x.ni / k : null], yoy: [y.rev, y.op, y.ni], qoq: [q.rev, q.op, q.ni] };
+    });
+  }
+  function tone(v) {
+    if (v == null || isNaN(v)) return "";
+    return v >= 30 ? "p3" : v >= 10 ? "p2" : v > 0 ? "p1" : v > -10 ? "n1" : v > -30 ? "n2" : "n3";
+  }
+  function sg(lab, v) { return '<span class="fs-g"><i>' + lab + '</i><em class="' + (v > 0 ? "up" : v < 0 ? "dn" : "na") + '">' + (v == null ? "—" : (v > 0 ? "+" : "") + Math.round(v) + "%") + "</em></span>"; }
+  function fsGrid(o, d) {
+    var rows = fsRows(o, d);
+    if (!rows.length) return '<div class="box"><p class="na">분기 실적 자료가 아직 없습니다. 2단계로 올라가면 채워집니다.</p></div>';
+    var names = ["매출", "영업이익", "순이익"];
+    var head = '<tr><th class="l"></th>' + rows.map(function (x, i) {
+      return "<th><b>" + esc(x.p) + "</b>" + (x.m ? '<span class="tag mgt" title="' + esc(x.m) + '">합병</span>' : i === rows.length - 1 ? '<span class="fs-now">최근</span>' : x.sub ? "<small>" + esc(x.sub) + "</small>" : "") + "</th>";
+    }).join("") + "</tr>";
+    var body = names.map(function (nm, r) {
+      return '<tr><th class="l">' + nm + "</th>" + rows.map(function (x) {
+        var v = x.v[r];
+        var opm = r === 1 && x.v[0] ? '<span class="fs-g"><i>이익률</i><em>' + (x.v[1] / x.v[0] * 100).toFixed(1) + "%</em></span>" : "";
+        return '<td class="fs-c ' + (x.m ? "mg" : tone(x.yoy[r])) + '"><b>' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</b>" + opm + sg("전분기", x.qoq[r]) + sg("전년", x.yoy[r]) + "</td>";
+      }).join("") + "</tr>";
+    }).join("");
+    var mg = rows.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
+    return '<div class="fswrap"><table class="fs"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>" +
+      '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신.' + (mg.length ? " 합병 = " + esc(mg.join(" · ")) + " — 인수한 회사가 더해져 성장률이 부풀려진 분기." : "") + "</p>";
   }
   function closePanel() { panel.classList.remove("on"); scrim.classList.remove("on"); document.body.style.overflow = ""; }
   scrim.onclick = function () { location.hash = "jp/" + S.stage; };
@@ -356,6 +391,19 @@
     var so = document.getElementById("sort");
     if (so) so.onchange = function () { S.sort = so.value; rerender(); };
     app.querySelectorAll("#dir button").forEach(function (b) { b.onclick = function () { S.dir = +b.dataset.v; rerender(); }; });
+    app.querySelectorAll("[data-week]").forEach(function (b) { b.onclick = function () { S.week = b.dataset.week; S.openDay = null; rerender(); }; });
+    app.querySelectorAll("[data-step]").forEach(function (b) {
+      b.onclick = function () {
+        var keys = [].map.call(app.querySelectorAll("[data-week]"), function (x) { return x.dataset.week; });
+        var st = +b.dataset.step;
+        if (st === 0) { var cur = monday(ymd(new Date())); S.week = keys.indexOf(cur) >= 0 ? cur : S.week; }
+        else S.week = keys[Math.max(0, Math.min(keys.length - 1, keys.indexOf(S.week) + st))];
+        S.openDay = null; rerender();
+      };
+    });
+    app.querySelectorAll("[data-day]").forEach(function (b) { b.onclick = function () { S.openDay = S.openDay === b.dataset.day ? null : b.dataset.day; rerender(); }; });
+    var wk = app.querySelector("#weeks [aria-pressed=true]");
+    if (wk) wk.parentNode.scrollLeft = wk.offsetLeft - wk.parentNode.clientWidth / 2 + wk.clientWidth / 2;
     app.querySelectorAll("th[data-k]").forEach(function (th) {
       if (/ns/.test(th.className)) return;
       th.onclick = function () { var k = th.dataset.k; if (S.sort === k) S.dir = -S.dir; else { S.sort = k; S.dir = (k === "n" || k === "c") ? 1 : -1; } rerender(); };
@@ -383,9 +431,10 @@
     getJSON("data/jp/stage1.json"),
     getJSON("data/jp/pipeline.json").catch(function () { return { companies: {} }; }),
     getJSON("data/jp/research/index.json").catch(function () { return { items: {} }; }),
-    getJSON("data/jp/qyoy.json").catch(function () { return {}; })
+    getJSON("data/jp/qyoy.json").catch(function () { return {}; }),
+    getJSON("data/jp/fs.json").catch(function () { return {}; })
   ]).then(function (r) {
-    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.res = r[2];
+    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.res = r[2];
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
     S.ready = true; S.stage = 0;

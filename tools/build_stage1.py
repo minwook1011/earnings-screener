@@ -69,7 +69,7 @@ def detail(c, data, rid):
             rec = r.get("rec") or {}
             out["rec"] = {k: rec.get(k) for k in ("date", "time", "period", "fy", "kind", "q", "q_yoy", "guide", "next_guide",
                                                     "revision", "beat", "cons", "progress", "px", "fyres") if rec.get(k) is not None}
-            out["qs"] = [{k: q.get(k) for k in ("label", "cq", "rev", "op", "ni", "opm", "yoy")} for q in (r.get("qs") or [])[-QS_N:]]
+            out["qs"] = [{k: q.get(k) for k in ("label", "cq", "rev", "op", "ni", "opm", "yoy", "qoq")} for q in (r.get("qs") or [])[-QS_N:]]
         nf = os.path.join(data, "jp", "reports", "notes", f"{rid}.json")
         if os.path.exists(nf):
             n = load(nf)
@@ -81,6 +81,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--vantage", default=r"C:\dev\vantage-0910")
     ap.add_argument("--days", type=int, default=45)
+    ap.add_argument("--ahead", type=int, default=35)
     a = ap.parse_args()
     data = os.path.join(a.vantage, "docs", "data")
 
@@ -124,8 +125,27 @@ def main():
             dump(d, os.path.join(DATA, "co", f"{c}.json"))
             extra += 1
 
+    # 발표 예정(JPX 공식 예정일, 없으면 작년 같은 분기로 추정 est) — 캘린더에 '예정'으로
+    today = datetime.now(KST).date().isoformat()
+    until = (datetime.now(KST).date() + timedelta(days=a.ahead)).isoformat()
+    upcoming = []
+    edf = os.path.join(data, "jp", "earnings_dates.json")
+    if os.path.exists(edf):
+        for c, e in load(edf).get("dates", {}).items():
+            d = e.get("date") or ""
+            if not (today <= d <= until) or (c in best and best[c]["d"] >= today):
+                continue
+            t = ta.get(c, {})
+            upcoming.append({"c": c, "n": t.get("name") or kn.get(c) or c, "cat": t.get("sector"), "d": d,
+                             "q": e.get("q"), "est": bool(e.get("est")), "mc": t.get("mcap"), "per": t.get("per")})
+            cf = os.path.join(DATA, "co", f"{c}.json")
+            if not os.path.exists(cf) or c not in best:
+                dump(detail(c, data, None), cf)
+    upcoming.sort(key=lambda x: (x["d"], -(x["mc"] or 0)))
+
     dump({"updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "since": since, "last": last,
-          "unit": {"mc": "억엔", "rev": "%", "op": "%", "d1": "%"}, "count": len(rows), "rows": rows},
+          "unit": {"mc": "억엔", "rev": "%", "op": "%", "d1": "%"}, "count": len(rows), "rows": rows,
+          "upcoming": upcoming},
          os.path.join(DATA, "stage1.json"))
     print(f"1단계 {len(rows)}곳 ({since} ~ {last}) · 상세 {len(rows) + extra}곳")
 

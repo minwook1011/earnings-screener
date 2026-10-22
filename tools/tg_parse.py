@@ -9,7 +9,8 @@
           6 = 3단계 · 딥   (매수 여부·비중·근거·다시 볼 조건)
          72 = 4단계 · 결정 (다 같이 보고 살지 말지 결정 — 사기 직전 종목)
         '볼 후보 취소' 글이 그 단계의 마지막 카드보다 늦으면 그 단계에서 뺀다.
-        사람 이름(누가 눌렀나)은 공개 사이트라 싣지 않는다.
+        누가 올렸나: "회사 코드\n볼 후보 · 이름 · 시각" 같은 기록 글(취소 글과 같은 꼴, 또는 카드 안 한 줄)이 있으면
+        그 단계 카드의 올린 사람(by)으로 싣는다(2026-10-22 사용자 요청). 지금 봇은 취소 때만 이름을 남긴다.
 
   실행  python tools/tg_parse.py
 """
@@ -27,6 +28,9 @@ TOPIC_STAGE = {2: 1, 4: 2, 6: 3, 72: 4}
 
 HEAD = re.compile(r"^(?P<n>.+?)\((?P<c>[0-9A-Z]{4})\)\s*·\s*(?P<d>\d{1,2}/\d{1,2})(?:\s+(?P<t>\d{1,2}:\d{2}))?")
 CANCEL = re.compile(r"^(?P<n>.+?)\s+(?P<c>[0-9A-Z]{4})\s*\n\s*볼 후보 취소")
+PICK = re.compile(r"^(?P<n>.+?)\s+(?P<c>[0-9A-Z]{4})\s*\n\s*(?P<ev>볼 후보|3단계로|4단계로)\s*·\s*(?P<who>[^·\n]+)")
+PICK_LINE = re.compile(r"^(?:볼 후보|3단계로|4단계로|올린 사람)\s*·\s*(?P<who>[^·\n]+)", re.M)
+EV_STAGE = {"볼 후보": 2, "3단계로": 3, "4단계로": 4}
 LENS_HEAD = re.compile(r"AI 렌즈[^·]*·\s*(?P<rest>.*)")
 LENS_ROW = re.compile(r"^(?P<who>버핏|멍거|카밀로|린치|오닐)\s*·\s*(?P<v>3단계로|삭제)\s*\+(?P<p>\d+)[−-](?P<m>\d+)\s*·\s*(?P<why>.+)$")
 NUM = re.compile(r"(?P<k>매출|영업이익)\s+(?P<v>[\d,\.]+(?:억|조)?)\s+(?P<g>[+\-−][\d,\.]+)%")
@@ -101,8 +105,13 @@ def main():
                 msgs[m["id"]] = m
     cos = {}
     cancels = []
+    picks = []
     for m in sorted(msgs.values(), key=lambda x: x["id"]):
         st = TOPIC_STAGE[m["topic_id"]]
+        pm = PICK.match(m["text"])
+        if pm:
+            picks.append((EV_STAGE[pm["ev"]], pm["c"], pm["who"].strip(), m["date"]))
+            continue
         cm = CANCEL.match(m["text"])
         if cm:
             cancels.append((st, cm["c"], m["id"], m["date"]))
@@ -113,6 +122,9 @@ def main():
         co = cos.setdefault(card["c"], {"c": card["c"], "n": card["n"], "cards": {}, "hist": []})
         co["n"] = card["n"]
         card.update({"msg": m["id"], "date": m["date"], "photo": bool(m.get("media"))})
+        pl = PICK_LINE.search(m["text"])
+        if pl:
+            card["by"] = pl["who"].strip()
         co["cards"][str(st)] = card
         co["hist"].append({"stage": st, "date": m["date"], "ev": "카드"})
     for st, c, mid, d in cancels:
@@ -120,6 +132,11 @@ def main():
         if co and str(st) in co["cards"] and co["cards"][str(st)]["msg"] < mid:
             co["cards"][str(st)]["cancelled"] = d
             co["hist"].append({"stage": st, "date": d, "ev": "볼 후보 취소"})
+    for st, c, who, d in picks:
+        co = cos.get(c)
+        if co and str(st) in co["cards"]:
+            co["cards"][str(st)]["by"] = who
+            co["hist"].append({"stage": st, "date": d, "ev": "올림", "who": who})
     for co in cos.values():
         live = [int(s) for s, cd in co["cards"].items() if not cd.get("cancelled")]
         co["stage"] = max(live) if live else 1

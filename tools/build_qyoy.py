@@ -13,8 +13,11 @@ import re
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "tools", "qhist", "jp.json")
+EVT = os.path.join(ROOT, "tools", "qhist", "events.json")   # 합병·인수로 부풀려진 분기
 OUT = os.path.join(ROOT, "docs", "data", "jp", "qyoy.json")
 N = 10
+FS_N = 12
+FS_OUT = os.path.join(ROOT, "docs", "data", "jp", "fs.json")
 
 
 def key(p):
@@ -37,16 +40,37 @@ def growth(cur, prev):
     return None, "적지" if prev < 0 else None
 
 
+def lkey(lab):
+    m = re.match(r"(\d+)\.(\d)Q", lab)
+    return (int(m.group(1)), int(m.group(2)))
+
+
 def main():
     src = json.load(open(SRC, encoding="utf-8"))
-    out = {"_about": "최근 10개 분기 성장률(전년 같은 분기 대비 %, 오래된 것부터). r=매출 o=영업이익 ot=글자(흑전·적전·적지)",
+    evt = json.load(open(EVT, encoding="utf-8")) if os.path.exists(EVT) else {}
+    out = {"_about": "최근 10개 분기 성장률(전년 같은 분기 대비 %, 오래된 것부터). r=매출 o=영업이익 ot=글자(흑전·적전·적지) m=합병·인수 효과(있으면 화면에 '합병')",
            "_src": src.get("_fetched")}
+    fsout = {"_about": "분기 재무제표(억엔) v=[매출,영업이익,순이익] qoq·yoy=같은 순서 %, m=합병 효과"}
     for c, rows in src.items():
         if c.startswith("_"):
             continue
-        by = {key(p): (s, op) for p, s, op in rows}
+        by = {key(r[0]): r[1:] for r in rows}
+        # 재무제표 표(상세 패널): 최근 12분기 매출·영업이익·순이익 + 전 분기 대비·전년 대비
+        fs = []
+        for r in sorted(rows, key=lambda r: key(r[0]))[-FS_N:]:
+            y, mo, q = key(r[0])
+            pq = by.get((y, mo, q - 1) if q > 1 else (y - 1, mo, 4))
+            py = by.get((y - 1, mo, q))
+            it = {"p": label(r[0]), "v": [round(x / 100, 1) for x in r[1:]],
+                  "qoq": [growth(r[i], pq[i - 1])[0] if pq else None for i in (1, 2, 3)],
+                  "yoy": [growth(r[i], py[i - 1])[0] if py else None for i in (1, 2, 3)]}
+            for e in evt.get(c, []):
+                if lkey(e["from"]) <= lkey(it["p"]) <= lkey(e["to"]):
+                    it["m"] = e["note"]
+            fs.append(it)
+        fsout[c] = fs
         seq = []
-        for p, s, op in sorted(rows, key=lambda r: key(r[0])):
+        for p, s, op, *_ in sorted(rows, key=lambda r: key(r[0])):
             y, mo, q = key(p)
             prev = by.get((y - 1, mo, q))
             if not prev:
@@ -55,10 +79,15 @@ def main():
             o, ot = growth(op, prev[1])
             if prev[1] > 0 and op <= 0:
                 o, ot = None, "적전"
-            seq.append({"p": label(p), "r": r, "o": o, "ot": ot, "s": round(s / 100, 1), "op": round(op / 100, 1)})
+            it = {"p": label(p), "r": r, "o": o, "ot": ot, "s": round(s / 100, 1), "op": round(op / 100, 1)}
+            for e in evt.get(c, []) if not c.startswith("_") else []:
+                if lkey(e["from"]) <= lkey(it["p"]) <= lkey(e["to"]):
+                    it["m"] = e["note"]
+            seq.append(it)
         out[c] = seq[-N:]
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    json.dump(fsout, open(FS_OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print("분기 성장률", {c: len(v) for c, v in out.items() if not c.startswith("_")})
 
 
