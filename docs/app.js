@@ -501,7 +501,7 @@
       openCo(h[2]); return;
     }
     closePanel();
-    var st = Math.min(4, Math.max(1, +h[1] || 1));
+    var st = Math.min(4, Math.max(1, +h[1] || 2));
     if (st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "up") S.sort = "mc"; render(); }
   }
 
