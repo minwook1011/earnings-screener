@@ -9,6 +9,7 @@
           6 = 3단계 · 딥   (매수 여부·비중·근거·다시 볼 조건)
          72 = 4단계 · 결정 (다 같이 보고 살지 말지 결정 — 사기 직전 종목)
         '볼 후보 취소' 글이 그 단계의 마지막 카드보다 늦으면 그 단계에서 뺀다.
+        한번 올라간 회사는 텔레에서 카드가 지워져도 남긴다(직전 pipeline.json 을 이어받고 gone 표시, 2026-10-22 사용자).
         누가 올렸나: "회사 코드\n볼 후보 · 이름 · 시각" 같은 기록 글(취소 글과 같은 꼴, 또는 카드 안 한 줄)이 있으면
         그 단계 카드의 올린 사람(by)으로 싣는다(2026-10-22 사용자 요청). 지금 봇은 취소 때만 이름을 남긴다.
 
@@ -98,7 +99,34 @@ def parse_card(text):
     return card
 
 
+def load_prev(path=OUT):
+    try:
+        return json.load(open(path, encoding="utf-8")).get("companies", {})
+    except (OSError, ValueError):
+        return {}
+
+
+def keep(cos, prev):
+    """한번 올라간 건 그대로 둔다(2026-10-22 사용자). 텔레에서 카드가 지워져도 전에 본 카드를 남기고 gone 표시.
+    '볼 후보 취소'로 내려간 단계는 새 카드에 cancelled 가 붙어 있으니 그대로 따른다."""
+    for c, old in prev.items():
+        co = cos.get(c)
+        if co is None:
+            co = cos[c] = {"c": c, "n": old.get("n"), "cards": {}, "hist": list(old.get("hist", []))}
+        for st, cd in old.get("cards", {}).items():
+            if st in co["cards"] or cd.get("cancelled"):
+                continue
+            cd = dict(cd)
+            cd.setdefault("gone", datetime.now(KST).strftime("%Y-%m-%d %H:%M"))
+            co["cards"][st] = cd
+
+
+PREV = {}
+
+
 def main():
+    global PREV
+    PREV = load_prev()
     msgs = {}
     for f in sorted(glob.glob(os.path.join(RAW, "*.json"))):
         for m in json.load(open(f, encoding="utf-8")).get("messages", []):
@@ -130,6 +158,7 @@ def main():
                 card["memo"] = pl["memo"].strip()
         co["cards"][str(st)] = card
         co["hist"].append({"stage": st, "date": m["date"], "ev": "카드"})
+    keep(cos, PREV)   # 지워진 카드를 먼저 되살린 뒤 취소를 적용 — 취소는 남긴 카드에도 먹힌다
     for st, c, mid, d in cancels:
         co = cos.get(c)
         if co and str(st) in co["cards"] and co["cards"][str(st)]["msg"] < mid:
@@ -144,6 +173,11 @@ def main():
         live = [int(s) for s, cd in co["cards"].items() if not cd.get("cancelled")]
         co["stage"] = max(live) if live else 1
         co["since"] = co["cards"][str(co["stage"])]["date"] if str(co["stage"]) in co["cards"] else None
+        top = co["cards"].get(str(co["stage"]), {})
+        if top.get("gone"):
+            co["gone"] = top["gone"]
+        else:
+            co.pop("gone", None)
         co["hist"].sort(key=lambda h: h["date"])
     counts = {str(s): sum(1 for c in cos.values() if c["stage"] == s) for s in (1, 2, 3, 4)}
     out = {"updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"),

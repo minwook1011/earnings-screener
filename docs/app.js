@@ -52,7 +52,7 @@
     Object.keys(pipe.companies || {}).forEach(function (c) {
       var t = pipe.companies[c], card = t.cards[String(t.stage)] || t.cards["1"] || {};
       var o = cos[c] || (cos[c] = Object.assign({}, vt[c] || {}, { c: c, n: t.n, d: (vt[c] && vt[c].d) || annDate(card.ann, card.date), stage: 1 }));
-      o.tn = t.n; o.stage = t.stage; o.tg = t; o.card = card; o.pre = false;
+      o.tn = t.n; o.stage = t.stage; o.tg = t; o.gone = t.gone || null; o.card = card; o.pre = false;
       o.by = card.by || null;
       ["mc", "per", "rev", "op", "d1"].forEach(function (k) { if (o[k] == null && card[k] != null) o[k] = card[k]; });
       o.vr = card.vr; o.tags = card.tags; o.lens = card.lens;
@@ -244,7 +244,7 @@
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
       return '<tr class="main' + (MEH[o.c] ? " is-meh" : HOLD[o.c] ? " is-hold" : "") + '" data-c="' + esc(o.c) + '">' +
         '<td class="l rk">' + (i + 1) + '</td><td class="l tk"><span class="tkc">' + esc(o.c) + "</span>" + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + mehBtn(o.c) + "</td>" +
-        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span></span>" + (HOLD[o.c] && HNOTE[o.c] ? '<span class="hnote-t">보류 이유 · ' + esc(HNOTE[o.c]) + "</span>" : "") + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
+        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span>" + (o.gone ? '<span class="gone" title="텔레그램에서 카드가 지워졌지만 사이트에는 남겨 둡니다(' + esc(o.gone) + ')">텔레에서 내려감</span>' : "") + "</span>" + (HOLD[o.c] && HNOTE[o.c] ? '<span class="hnote-t">보류 이유 · ' + esc(HNOTE[o.c]) + "</span>" : "") + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
@@ -294,7 +294,7 @@
     var head0 = '<div class="ptop"><div><div class="dtk">TSE : ' + esc(o.c) + "</div>" +
       '<h2 class="dnm" id="d-title">' + esc(o.n || o.en) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en) + ")</small>" : "") + mehBtn(o.c) + "</h2>" +
       '<div class="chips">' + (o.cat ? '<span class="chip k">' + esc(o.cat) + "</span>" : "") +
-      '<span class="chip st s' + o.stage + '">' + o.stage + "단계</span>" +
+      '<span class="chip st s' + o.stage + '">' + o.stage + "단계</span>" + (o.gone ? '<span class="gone" title="텔레그램에서 카드가 지워졌지만 사이트에는 남겨 둡니다(' + esc(o.gone) + ')">텔레에서 내려감</span>' : "") +
       (o.g ? '<span class="chip ' + (GRADE_UP[o.g] ? "gu" : GRADE_DN[o.g] ? "gd" : "") + '">' + esc(o.g) + "</span>" : "") +
       (o.d ? '<span class="chip">' + md(o.d) + (o.pre ? " 발표 " + (o.est ? "예상" : "예정") : " 발표") + (o.p || o.q ? " · " + esc(o.p || o.q) : "") + "</span>" : "") +
       (o.by ? '<span class="chip">올린 사람 · ' + esc(o.by) + "</span>" : "") +

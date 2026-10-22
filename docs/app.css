@@ -613,3 +613,6 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .hpop-b { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; }
 .hpop-b button { font: inherit; font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; }
 .hpop-b button.ok { background: var(--hold-on); border-color: var(--hold-on); color: var(--hold-on-tx); }
+/* 텔레에서 카드가 지워졌지만 남겨 둔 회사 */
+.gone { flex: none; display: inline-block; font-size: 11px; font-weight: 600; line-height: 1; padding: 4px 7px; border-radius: 6px; border: 1px dashed var(--ink-mute); color: var(--ink-mute); background: transparent; white-space: nowrap; vertical-align: middle; }
+.chips .gone { font-size: 12px; padding: 6px 9px; border-radius: 999px; }
