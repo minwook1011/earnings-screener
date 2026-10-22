@@ -44,6 +44,8 @@ def refresh():
     idx = load_idx()
     todo = []
     for c, co in pipe["companies"].items():
+        if co.get("gone"):   # 텔레에서 카드가 지워진 곳 — 사이트에선 '별로임', 새 리서치 안 함
+            continue
         for st in (2, 3):
             if co["stage"] < st:
                 continue

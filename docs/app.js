@@ -174,16 +174,20 @@
      3단계로 = 2단계 회사를 3단계 탭으로 · 보류 = 표 아래 보라 칸 · 별로임 = 맨 아래 노란 칸 */
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
   var MEH = load("es-meh"), GOOD = load("es-good"), HOLD = load("es-hold"), OPEN = load("es-open"), HNOTE = load("es-hold-note");
-  function stOf(o) { return o.stage === 2 && GOOD[o.c] ? 3 : o.stage; }
+  /* 텔레에서 카드가 지워진 2단계 이상 회사는 모두 보는 사람에게 2단계 '별로임' 칸으로(2026-10-23 사용자).
+     보류·3단계로를 누르거나 별로임을 끄면(MEH 값 0) 그 브라우저에선 따름 */
+  function autoMeh(c) { var o = S.cos[c] || {}; return !!(o.gone && o.stage >= 2 && !HOLD[c] && !GOOD[c] && MEH[c] !== 0); }
+  function isMeh(c) { return MEH[c] === 1 || autoMeh(c); }
+  function stOf(o) { return GOOD[o.c] && (o.stage === 2 || (o.gone && o.stage >= 2)) ? 3 : o.gone && o.stage >= 2 ? 2 : o.stage; }
   function pick(kind, c, on, lab, onLab, tip) {
     return '<button type="button" class="' + kind + (on ? " on" : "") + '" data-pick="' + kind + '" data-pc="' + esc(c) + '" aria-pressed="' + on + '" title="' + (on ? "누르면 표시를 풉니다" : tip) + '">' + (on ? onLab : lab) + "</button>";
   }
   function mehBtn(c) {
     var o = S.cos[c] || {};
     return '<span class="picks">' +
-      (o.stage === 2 ? pick("good", c, !!GOOD[c], "3단계로", "3단계 ✓", "누르면 3단계 탭으로 올립니다") : "") +
+      (stOf(o) === 2 ? pick("good", c, !!GOOD[c], "3단계로", "3단계 ✓", "누르면 3단계 탭으로 올립니다") : "") +
       pick("hold", c, !!HOLD[c], "보류", "보류 ✓", "누르면 표 아래 보류 칸으로 옮깁니다") + (HOLD[c] ? noteBtn(c) : "") +
-      pick("meh", c, !!MEH[c], "별로임", "별로임 ✓", "누르면 표 맨 아래로 내립니다") + "</span>";
+      pick("meh", c, isMeh(c), "별로임", "별로임 ✓", "누르면 표 맨 아래로 내립니다") + "</span>";
   }
   /* 보류 이유 — 보류 옆 말풍선. 마우스를 올리면 이유가 뜨고, 누르면 적는 칸이 열린다 */
   var BUBBLE = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 3h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3.5V14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>';
@@ -218,16 +222,17 @@
     try { [["es-meh", MEH], ["es-good", GOOD], ["es-hold", HOLD], ["es-open", OPEN], ["es-hold-note", HNOTE]].forEach(function (x) { localStorage.setItem(x[0], JSON.stringify(x[1])); }); } catch (e) {}
   }
   function togglePick(kind, c) {
-    var m = { meh: MEH, good: GOOD, hold: HOLD }[kind], was = !!m[c];
+    var m = { meh: MEH, good: GOOD, hold: HOLD }[kind], was = kind === "meh" ? isMeh(c) : !!m[c], auto = autoMeh(c);
     delete MEH[c]; delete GOOD[c]; delete HOLD[c];
     if (!was) m[c] = 1;
+    else if (kind === "meh" && auto) MEH[c] = 0;   // 자동 별로임을 끔
     save();
   }
   function stageN(st) {
     var q = S.q.trim().toLowerCase();
     var rows = sorted(S.list.filter(function (o) { return stOf(o) === st && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); }));
-    var mehRows = rows.filter(function (o) { return MEH[o.c]; }), holdRows = rows.filter(function (o) { return HOLD[o.c]; });
-    rows = rows.filter(function (o) { return !MEH[o.c] && !HOLD[o.c]; });
+    var mehRows = rows.filter(function (o) { return isMeh(o.c); }), holdRows = rows.filter(function (o) { return HOLD[o.c]; });
+    rows = rows.filter(function (o) { return !isMeh(o.c) && !HOLD[o.c]; });
     var nMeh = mehRows.length, nHold = holdRows.length;
     var head = '<div class="ctl"><div class="fld"><span>정렬</span><select id="sort">' +
       COLS.filter(function (c) { return !/ns/.test(c.cls || ""); }).map(function (c) { return '<option value="' + c.k + '"' + (S.sort === c.k ? " selected" : "") + ">" + c.t + "</option>"; }).join("") +
@@ -242,7 +247,7 @@
     var maxmc = Math.max.apply(null, rows.concat(mehRows, holdRows).map(function (o) { return o.mc || 0; })) || 1;
     function row(o, i, slim) {
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
-      return '<tr class="main' + (MEH[o.c] ? " is-meh" : HOLD[o.c] ? " is-hold" : "") + '" data-c="' + esc(o.c) + '">' +
+      return '<tr class="main' + (isMeh(o.c) ? " is-meh" : HOLD[o.c] ? " is-hold" : "") + '" data-c="' + esc(o.c) + '">' +
         '<td class="l rk">' + (i + 1) + '</td><td class="l tk"><span class="tkc">' + esc(o.c) + "</span>" + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + mehBtn(o.c) + "</td>" +
         '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span>" + (o.gone ? '<span class="gone" title="텔레그램에서 카드가 지워졌지만 사이트에는 남겨 둡니다(' + esc(o.gone) + ')">텔레에서 내려감</span>' : "") + "</span>" + (HOLD[o.c] && HNOTE[o.c] ? '<span class="hnote-t">보류 이유 · ' + esc(HNOTE[o.c]) + "</span>" : "") + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
