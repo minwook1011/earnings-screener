@@ -477,3 +477,10 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
 .bl-chart .b { fill: var(--hn3-bg); }
 .bl-chart .kb { background: var(--hn3-bg); }
 .bl-chart .kl { background: var(--line-up); height: 2.5px; }
+
+/* 본 줄 글자 크기 원래대로(볼드 유지), 구분선 진하게(2026-10-22 사용자) */
+.main-t tbody tr.main td { font-size: 12.5px; padding-top: 14px; }
+.main-t tbody tr.main .nm { font-size: 14px; }
+.main-t tbody tr.main td.tk { font-size: 12px; }
+.qbox { border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent); }
+.main-t tbody tr.qrow { border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); }
