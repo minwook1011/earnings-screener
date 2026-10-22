@@ -29,7 +29,8 @@ TOPIC_STAGE = {2: 1, 4: 2, 6: 3, 72: 4}
 HEAD = re.compile(r"^(?P<n>.+?)\((?P<c>[0-9A-Z]{4})\)\s*·\s*(?P<d>\d{1,2}/\d{1,2})(?:\s+(?P<t>\d{1,2}:\d{2}))?")
 CANCEL = re.compile(r"^(?P<n>.+?)\s+(?P<c>[0-9A-Z]{4})\s*\n\s*볼 후보 취소")
 PICK = re.compile(r"^(?P<n>.+?)\s+(?P<c>[0-9A-Z]{4})\s*\n\s*(?P<ev>볼 후보|3단계로|4단계로)\s*·\s*(?P<who>[^·\n]+)")
-PICK_LINE = re.compile(r"^(?:볼 후보|3단계로|4단계로|올린 사람)\s*·\s*(?P<who>[^·\n]+)", re.M)
+# 카드 안 한 줄 — "→ 3단계 · 손제현 · 10/22 · 메모"(2026-10-22 봇이 넣기 시작) 또는 "볼 후보 · 이름"
+PICK_LINE = re.compile(r"^(?:→\s*[1-4]단계|볼 후보|3단계로|4단계로|올린 사람)\s*·\s*(?P<who>[^·\n]+?)\s*(?:·\s*(?P<d>\d{1,2}/\d{1,2})\s*)?(?:·\s*(?P<memo>[^\n]+))?$", re.M)
 EV_STAGE = {"볼 후보": 2, "3단계로": 3, "4단계로": 4}
 LENS_HEAD = re.compile(r"AI 렌즈[^·]*·\s*(?P<rest>.*)")
 LENS_ROW = re.compile(r"^(?P<who>버핏|멍거|카밀로|린치|오닐)\s*·\s*(?P<v>3단계로|삭제)\s*\+(?P<p>\d+)[−-](?P<m>\d+)\s*·\s*(?P<why>.+)$")
@@ -125,6 +126,8 @@ def main():
         pl = PICK_LINE.search(m["text"])
         if pl:
             card["by"] = pl["who"].strip()
+            if pl["memo"]:
+                card["memo"] = pl["memo"].strip()
         co["cards"][str(st)] = card
         co["hist"].append({"stage": st, "date": m["date"], "ev": "카드"})
     for st, c, mid, d in cancels:
