@@ -179,15 +179,14 @@
     var body = rows.map(function (o, i) {
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
       return '<tr class="main" data-c="' + esc(o.c) + '">' +
-        '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + "</td>" +
+        '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + (o.d ? '<span class="ann">' + md(o.d) + " 발표</span>" : "") + "</td>" +
         '<td class="l"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + '</span><span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
-        '<td class="earn">' + cl("발표") + md(o.d) + "</td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
         "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
         '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="10">' + qline(o.c) + "</td></tr>";
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + qline(o.c) + "</td></tr>";
     }).join("");
     return head + '<div class="tblwrap"><table class="main-t"><tbody>' + body + "</tbody></table></div>";
   }
