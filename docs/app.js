@@ -240,8 +240,8 @@
     var fr = fsRows(o, d);
     pin.innerHTML = head0 +
       (sum ? '<div class="dsec">기업 개요</div><div class="box"><p>' + esc(sum) + "</p></div>" : "") +
-      (o.stage >= 2 ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
-      (o.stage >= 3 ? '<div class="dsec">3단계 리포트</div><div id="r3"></div>' : "") +
+      (o.stage >= 2 || o.res["2"] ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
+      (o.stage >= 3 || o.res["3"] ? '<div class="dsec">3단계 리포트</div><div id="r3"></div>' : "") +
       '<div class="dsec">분기 재무제표<span class="hint">억엔 · 칸 색 = YoY · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
       (fr.length > 1 ? '<div class="charts">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
       (S.mo[o.c] ? '<details class="mo" id="mo"><summary><b>월차</b><span id="mo-sum">' + esc(S.mo[o.c]) + ' 까지 · 눌러서 펼치기</span></summary><div id="mo-body" class="mo-body"><p class="na">불러오는 중…</p></div></details>' : "") +
@@ -252,7 +252,7 @@
     pin.querySelectorAll(".bm-bar i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "%"; });
     bindChart(pin);
     var fw = pin.querySelector(".fswrap"); if (fw) fw.scrollLeft = fw.scrollWidth;
-    [2, 3].forEach(function (st) { if (o.stage >= st) research(o, st, document.getElementById("r" + st)); });
+    [2, 3].forEach(function (st) { if (o.stage >= st || o.res[String(st)]) research(o, st, document.getElementById("r" + st)); });
     if (S.mo[o.c]) monthly(o.c);
   }
   /* 월차 — 접어 두고, 펼치면 최근 13개월 표(전년 대비 칸은 100 기준 색) */
@@ -323,7 +323,9 @@
         (st === 2 ? "2단계 실적 분석 리서치" : "3단계 딥 리포트") + "가 자동으로 돌아 이곳에 붙습니다." + (r && r.queued ? " 대기열 등록 " + esc(r.queued) : "") + "</p></div></div>";
       return;
     }
-    var link = r.artifact && /^https:\/\/claude\.ai\//.test(r.artifact)
+    var link = r.html && /^research\/[0-9A-Z]{4}\/stage[23]\.html$/.test(r.html)
+      ? '<a class="art" href="' + esc(r.html) + '" target="_blank" rel="noopener">리서치 전문 열기 ↗</a>'
+      : r.artifact && /^https:\/\/claude\.ai\//.test(r.artifact)
       ? '<a class="art" href="' + esc(r.artifact) + '" target="_blank" rel="noopener noreferrer">리서치 전문 보기 ↗</a>'
       : '<button class="art" data-md="' + esc(r.file) + '">리서치 전문 펼치기</button>';
     box.innerHTML = '<div class="box rsum"><div class="rs-top"><span class="tag ok">' + st + "단계 완료</span><b>" + esc(r.verdict || r.title || "") + "</b></div>" +

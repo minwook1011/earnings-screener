@@ -11,6 +11,7 @@
 """
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 
@@ -18,6 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "docs", "data", "jp")
 IDX = os.path.join(DATA, "research", "index.json")
 KST = timezone(timedelta(hours=9))
+NL = chr(10)
 SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
 
 
@@ -71,8 +73,31 @@ def done(c, st, verdict, artifact=None):
     print(f"{c} {st}단계 리서치 완료 표시")
 
 
+def attach(c, st, html, verdict):
+    """리서치 스킬이 만든 HTML 을 다시 쓰지 않고 사이트로 복사(토큰 0). 검색 노출 안 함 표시를 넣는다."""
+    src = open(html, encoding="utf-8").read()
+    if 'name="robots"' not in src:
+        meta = '<meta name="robots" content="noindex, nofollow, noarchive">'
+        if re.search(r"<head[^>]*>", src, re.I):
+            src = re.sub(r"(<head[^>]*>)", lambda m: m.group(1) + NL + meta, src, count=1, flags=re.I)
+        else:   # 아티팩트용 파일은 <head> 없이 시작한다
+            src = NL.join(['<!doctype html>', '<meta charset="utf-8">',
+                           '<meta name="viewport" content="width=device-width, initial-scale=1">', meta, src])
+    rel = f"research/{c}/stage{st}.html"
+    os.makedirs(os.path.join(DATA, "..", "..", "research", c), exist_ok=True)
+    open(os.path.join(DATA, "..", "..", rel), "w", encoding="utf-8").write(src)
+    title = (re.search(r"<title>([^<]*)", src) or [None, ""])[1].strip()
+    idx = load_idx()
+    idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": SKILL[int(st)],
+                                               "html": rel, "title": title, "verdict": verdict}
+    save_idx(idx)
+    print(f"{c} {st}단계 리서치 HTML 올림 → docs/{rel}")
+
+
 if __name__ == "__main__":
-    if len(sys.argv) >= 5 and sys.argv[1] == "done":
+    if len(sys.argv) >= 6 and sys.argv[1] == "attach":
+        attach(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    elif len(sys.argv) >= 5 and sys.argv[1] == "done":
         done(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5] if len(sys.argv) > 5 else None)
     else:
         refresh()
