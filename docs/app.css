@@ -528,3 +528,4 @@ html.locked body > :not(#gate) { visibility: hidden; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ann: #f2c14e; } }
 :root[data-theme="dark"] { --ann: #f2c14e; }
 .main-t td.tk .ann { display: block; font: 700 11px var(--mono); color: var(--ann); margin-top: 3px; white-space: nowrap; }
+.ctl .today { font: 700 12.5px var(--jsans); color: var(--ink-mid); margin-top: 4px; }

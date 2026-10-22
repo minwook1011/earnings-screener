@@ -163,12 +163,17 @@
       row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div></div>" +
       (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐</div>" : "");
   }
+  /* 오늘 날짜 — 한국 시각, 하루는 오전 6시에 바뀜(2026-10-22 사용자) */
+  function todayKo() {
+    var t = new Date(Date.now() + 9 * 3600000 - 6 * 3600000);
+    return (t.getUTCMonth() + 1) + "월 " + t.getUTCDate() + "일 (" + "일월화수목금토"[t.getUTCDay()] + ")";
+  }
   function cl(t) { return '<span class="cl">' + t + "</span>"; }
   function stageN(st) {
     var rows = sorted(S.list.filter(function (o) { return o.stage === st; }));
     var head = '<div class="ctl"><div class="fld"><span>정렬</span><select id="sort">' +
       COLS.filter(function (c) { return !/ns/.test(c.cls || ""); }).map(function (c) { return '<option value="' + c.k + '"' + (S.sort === c.k ? " selected" : "") + ">" + c.t + "</option>"; }).join("") +
-      '</select></div><div class="fld"><span>순서</span><div class="seg" id="dir"><button data-v="-1" aria-pressed="' + (S.dir === -1) + '">큰 순</button><button data-v="1" aria-pressed="' + (S.dir === 1) + '">작은 순</button></div></div>' +
+      '</select><span class="today">' + todayKo() + '</span></div><div class="fld"><span>순서</span><div class="seg" id="dir"><button data-v="-1" aria-pressed="' + (S.dir === -1) + '">큰 순</button><button data-v="1" aria-pressed="' + (S.dir === 1) + '">작은 순</button></div></div>' +
       '<div class="count"><b>' + rows.length + "</b>개 기업</div></div>" + '<p class="stage-note">' + NOTE[st] + "</p>";
     if (!rows.length) return head + '<div class="empty-stage"><b>아직 ' + st + "단계 기업이 없습니다</b>" + EMPTY[st] + "</div>";
     var th = COLS.map(function (c) {
@@ -179,7 +184,7 @@
     var body = rows.map(function (o, i) {
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
       return '<tr class="main" data-c="' + esc(o.c) + '">' +
-        '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + (o.d ? '<span class="ann">' + md(o.d) + " 발표</span>" : "") + "</td>" +
+        '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + "</td>" +
         '<td class="l"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + '</span><span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
