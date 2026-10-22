@@ -158,9 +158,9 @@
     var pad = []; for (var i = q.length; i < 10; i++) pad.push(null);
     var cells = pad.concat(q);
     function row(lab, f) { return "<span class=\"ql-l\">" + lab + "</span>" + cells.map(function (x) { return x ? f(x) : '<span class="hc na"></span>'; }).join(""); }
-    return '<div class="ql">' + row("", function (x) { return '<span class="ql-p">' + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + esc(x.p) + "</span>"; }) +
+    return '<div class="qbox"><div class="qcap">최근 10개 분기 · 억엔</div><div class="ql">' + row("", function (x) { return '<span class="ql-p">' + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + esc(x.p) + "</span>"; }) +
       row("매출액", function (x) { return amt(x.s); }) + row("YoY", function (x) { return heat(x.r, null, x.m); }) +
-      row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div>" +
+      row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div></div>" +
       (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐</div>" : "");
   }
   function stageN(st) {

@@ -449,3 +449,20 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
 .ql-p .mgh { text-align: center; }
 .fs thead th .mgh { text-align: right; }
 .ql-p { align-self: end; }
+
+/* 2단계 표 — 본 줄(발표·시총·PER…)과 분기 블록 구분(2026-10-22 사용자) */
+.main-t tbody tr.main td { padding-top: 16px; padding-bottom: 8px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.main-t tbody tr.main td .up { color: var(--tx-up); } .main-t tbody tr.main td .dn { color: var(--tx-dn); }
+.main-t tbody tr.main td.rk { font-size: 11px; font-weight: 500; color: var(--ink-mute); }
+.main-t tbody tr.main .nm { font-size: 15px; font-weight: 700; }
+.main-t tbody tr.main .ind { font-weight: 400; }
+.main-t tbody tr.qrow td { padding: 0 10px 16px; }
+.qbox { background: var(--surface-2); border: 1px solid var(--line-soft); border-radius: 8px; padding: 8px 12px 10px; max-width: 820px; }
+.qcap { font: 600 10.5px var(--jsans); color: var(--ink-mute); letter-spacing: .04em; text-align: left; margin-bottom: 2px; }
+.qbox .ql { max-width: none; }
+.qbox .ql-l { font-weight: 600; color: var(--ink-mid); font-size: 11px; }
+.qbox .hc.v { font-size: 11.5px; font-weight: 600; color: var(--ink-mid); }
+.qbox .hc { font-size: 11px; min-height: 19px; padding: 2px 0; }
+.main-t tbody tr.main:hover, .main-t tbody tr.main:hover + tr.qrow { background: transparent; }
+.main-t tbody tr.main:hover td { background: var(--surface-2); }
+.main-t tbody tr.main td.tk { color: var(--accent-ink); font-size: 13px; }
