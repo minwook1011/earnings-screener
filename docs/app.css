@@ -557,3 +557,7 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .main-t tbody tr.is-meh td > *:not(.nmrow), .main-t tbody tr.is-meh .nm { opacity: 1; }
 .meh-t tbody tr.main td { opacity: .62; }
 .meh-t tbody tr.main td.tk { opacity: 1; }
+/* 티커 아래 한 줄: 발표일 + 별로임 버튼 — 줄 높이를 늘리지 않게 */
+.main-t td.tk .tkc { display: block; }
+.main-t td.tk .ann { display: inline-block; vertical-align: middle; }
+.main-t td.tk .meh { display: inline-block; vertical-align: middle; margin: 3px 0 0 6px; padding: 3px 7px; font-size: 10.5px; }

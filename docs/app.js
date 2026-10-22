@@ -201,7 +201,7 @@
     function row(o, i) {
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
       return '<tr class="main' + (MEH[o.c] ? " is-meh" : "") + '" data-c="' + esc(o.c) + '">' +
-        '<td class="l rk">' + (i + 1) + '</td><td class="l tk">' + esc(o.c) + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + mehBtn(o.c) + "</td>" +
+        '<td class="l rk">' + (i + 1) + '</td><td class="l tk"><span class="tkc">' + esc(o.c) + "</span>" + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + mehBtn(o.c) + "</td>" +
         '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span></span>" + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
