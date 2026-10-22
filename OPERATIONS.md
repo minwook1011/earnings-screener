@@ -12,6 +12,10 @@
    - 토픽 72 → `tools/tg_raw/topic72.json` (4단계 · 결정)
    - 각 토픽 `limit` 은 넉넉히(200). 저장 형식은 `{"messages": [...]}` (읽기 도구 결과 그대로)
 3. `python tools/tg_parse.py` → `docs/data/jp/pipeline.json`
+   그다음 `python tools/build_stage1.py` 를 한 번 더(텔레 카드에만 있는 회사의 상세·주가 파일)
+3-1. **분기 성장률 줄** — 2단계 이상인데 `tools/qhist/jp.json` 에 없는 회사는 jp_guidance(`history='quarterly'`, `count=14`, 5종목씩)로 받아
+   `[결산기 분기, 매출, 영업이익]`(백만엔, 누계만 있는 분기는 뺌)으로 넣고 `python tools/build_qyoy.py` → `docs/data/jp/qyoy.json`
+   (새 결산이 나온 회사도 같은 방법으로 갱신)
 4. `python tools/research_queue.py` → 리서치가 없는 회사 목록(JSON)과 대기 표시
 5. 목록의 회사마다 리서치를 쓴다
    - 2단계: **2단계 실적분석리서치 스킬**(사용자가 만들 예정). 스킬이 없으면 `docs/data/jp/research/5018/stage2.md` 양식(결론 먼저·숫자 표·왜 좋아졌나·걸리는 점·3단계에서 확인할 것)

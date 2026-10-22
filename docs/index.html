@@ -3,44 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://cdn.jsdelivr.net; font-src https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <title>실적발표스크리너</title>
 <meta name="description" content="실적 발표 기업을 1단계(전체)부터 4단계(매수 결정)까지 걸러 보는 스크리너">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap">
+<link rel="stylesheet" href="app.css?v=5">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Cpath d='M8 22l5-6 4 3 7-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 </head>
 <body>
-<header id="top">
-  <div class="top-inner">
+<header id="topnav">
+  <div class="nav-in">
     <a class="brand" href="#jp">실적발표<span>스크리너</span></a>
     <nav class="market" aria-label="시장">
       <a href="#jp" data-m="jp">일본</a>
       <a href="#us" data-m="us">미국</a>
       <a href="#kr" data-m="kr">한국</a>
     </nav>
-    <span class="updated" id="updated"></span>
   </div>
 </header>
 
-<main id="app">
-  <div class="loading">불러오는 중…</div>
-</main>
+<main id="app"><div class="loading">불러오는 중…</div></main>
 
-<aside id="drawer" aria-hidden="true">
-  <div class="drawer-back" data-close></div>
-  <div class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="d-title">
-    <button class="drawer-x" data-close aria-label="닫기">✕</button>
-    <div id="drawer-body"></div>
-  </div>
-</aside>
+<div class="scrim" id="scrim"></div>
+<aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="d-title" tabindex="-1"><div class="pin" id="pin"></div></aside>
 
 <footer id="foot">
-  <p>1단계 목록은 실적 발표 자료, 2~4단계는 우리 텔레그램 그룹의 단계를 그대로 옮깁니다. 단계 이동은 텔레그램 버튼으로 합니다.</p>
-  <p>AI 렌즈는 실제 인물 의견이 아닙니다. 투자 판단의 책임은 본인에게 있습니다.</p>
+  <p>1단계는 실적 발표 자료, 2~4단계는 우리 텔레그램 그룹의 단계를 그대로 옮깁니다. 단계 이동은 텔레그램 버튼으로 합니다.</p>
+  <p>AI 렌즈는 실제 인물 의견이 아닙니다. 등락 색은 한국·일본 관행대로 상승 빨강, 하락 파랑입니다. 투자 판단의 책임은 본인에게 있습니다.</p>
 </footer>
-<script src="app.js"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
