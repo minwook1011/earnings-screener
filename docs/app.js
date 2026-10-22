@@ -47,7 +47,7 @@
   function build(s1, pipe, res) {
     var cos = {};
     (s1.rows || []).forEach(function (r) { var o = cos[r.c] = Object.assign({}, r); o.stage = 1; });
-    (s1.upcoming || []).forEach(function (r) { if (!cos[r.c]) { var o = cos[r.c] = Object.assign({}, r); o.stage = 1; o.pre = true; } });
+    /* 발표 예정(JPX) 회사는 1단계에 넣지 않는다 — 1단계 = 실적 발표로 올라온 기업만(2026-10-22 사용자) */
     Object.keys(pipe.companies || {}).forEach(function (c) {
       var t = pipe.companies[c], card = t.cards[String(t.stage)] || t.cards["1"] || {};
       var o = cos[c] || (cos[c] = { c: c, n: t.n, d: annDate(card.ann, card.date), stage: 1 });
@@ -114,7 +114,7 @@
       '<div class="cal"><div class="weeks" id="weeks">' + chips + "</div>" +
       '<div class="wnav"><button data-step="-1"' + (wi <= 0 ? " disabled" : "") + '>‹ 이전 주</button><b>' + weekName(mon) + "</b><span>" + dot(mon) + " ~ " + dot(addDays(mon, 4)) + " · " + ((weeks[mon] || []).length) + '개</span><button data-step="0">이번 주</button><button data-step="1"' + (wi >= keys.length - 1 ? " disabled" : "") + ">다음 주 ›</button></div>" +
       '<div class="cal-grid">' + cols + "</div>" +
-      '<p class="note">지난 날은 실적 발표 기업, 오늘 이후는 일본거래소(JPX) 공시 발표 예정일입니다. 예상 = 회사가 아직 날짜를 안 알려 작년 같은 분기로 추정한 날.</p></div>';
+      '<p class="note">실적을 발표한 기업만 나옵니다. 발표 후 자료가 들어오면 그날 칸에 추가됩니다.</p></div>';
   }
 
   /* ---------- 2~4단계: 표 + 분기 성장률 줄 ---------- */
