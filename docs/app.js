@@ -52,7 +52,7 @@
     Object.keys(pipe.companies || {}).forEach(function (c) {
       var t = pipe.companies[c], card = t.cards[String(t.stage)] || t.cards["1"] || {};
       var o = cos[c] || (cos[c] = Object.assign({}, vt[c] || {}, { c: c, n: t.n, d: (vt[c] && vt[c].d) || annDate(card.ann, card.date), stage: 1 }));
-      o.tn = t.n; o.stage = t.stage; o.tg = t; o.gone = t.gone || null; o.card = card; o.pre = false;
+      o.tn = t.n; o.stage = t.stage; o.tg = t; o.card = card; o.pre = false;
       o.by = card.by || null;
       ["mc", "per", "rev", "op", "d1"].forEach(function (k) { if (o[k] == null && card[k] != null) o[k] = card[k]; });
       o.vr = card.vr; o.tags = card.tags; o.lens = card.lens;
@@ -170,104 +170,47 @@
     return (t.getUTCMonth() + 1) + "월 " + t.getUTCDate() + "일 (" + "일월화수목금토"[t.getUTCDay()] + ")";
   }
   function cl(t) { return '<span class="cl">' + t + "</span>"; }
-  /* 내 표시(이 브라우저에만 저장, 텔레와 무관 — 2026-10-22 사용자): 하나만 켜짐
-     3단계로 = 2단계 회사를 3단계 탭으로 · 보류 = 표 아래 보라 칸 · 별로임 = 맨 아래 노란 칸 */
+  /* 3단계로 — 2단계 회사를 그 브라우저의 3단계 탭으로(텔레와 무관). 보류·별로임은 없앰(2026-10-23 사용자) */
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
-  var MEH = load("es-meh"), GOOD = load("es-good"), HOLD = load("es-hold"), OPEN = load("es-open"), HNOTE = load("es-hold-note");
-  /* 텔레에서 카드가 지워진 2단계 이상 회사는 모두 보는 사람에게 2단계 '별로임' 칸으로(2026-10-23 사용자).
-     보류·3단계로를 누르거나 별로임을 끄면(MEH 값 0) 그 브라우저에선 따름 */
-  function autoMeh(c) { var o = S.cos[c] || {}; return !!(o.gone && o.stage >= 2 && !HOLD[c] && !GOOD[c] && MEH[c] !== 0); }
-  function isMeh(c) { return MEH[c] === 1 || autoMeh(c); }
-  function stOf(o) { return GOOD[o.c] && (o.stage === 2 || (o.gone && o.stage >= 2)) ? 3 : o.gone && o.stage >= 2 ? 2 : o.stage; }
-  function pick(kind, c, on, lab, onLab, tip) {
-    return '<button type="button" class="' + kind + (on ? " on" : "") + '" data-pick="' + kind + '" data-pc="' + esc(c) + '" aria-pressed="' + on + '" title="' + (on ? "누르면 표시를 풉니다" : tip) + '">' + (on ? onLab : lab) + "</button>";
-  }
+  var GOOD = load("es-good");
+  function stOf(o) { return o.stage === 2 && GOOD[o.c] ? 3 : o.stage; }
   function mehBtn(c) {
-    var o = S.cos[c] || {};
-    return '<span class="picks">' +
-      (stOf(o) === 2 ? pick("good", c, !!GOOD[c], "3단계로", "3단계 ✓", "누르면 3단계 탭으로 올립니다") : "") +
-      pick("hold", c, !!HOLD[c], "보류", "보류 ✓", "누르면 표 아래 보류 칸으로 옮깁니다") + (HOLD[c] ? noteBtn(c) : "") +
-      pick("meh", c, isMeh(c), "별로임", "별로임 ✓", "누르면 표 맨 아래로 내립니다") + "</span>";
-  }
-  /* 보류 이유 — 보류 옆 말풍선. 마우스를 올리면 이유가 뜨고, 누르면 적는 칸이 열린다 */
-  var BUBBLE = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 3h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-4 3.5V14H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/></svg>';
-  function noteBtn(c) {
-    var t = HNOTE[c] || "";
-    return '<button type="button" class="hnote' + (t ? " has" : "") + '" data-hnote="' + esc(c) + '" aria-label="보류 이유' + (t ? ": " + esc(t) : " 적기") + '">' + BUBBLE +
-      '<span class="hnote-tip" role="tooltip">' + (t ? esc(t) : "보류 이유 적기") + "</span></button>";
-  }
-  function closeNote() { var x = document.getElementById("hpop"); if (x) x.remove(); }
-  function openNote(btn, after) {
-    closeNote();
-    var c = btn.dataset.hnote, o = S.cos[c] || {}, r = btn.getBoundingClientRect();
-    var pop = document.createElement("div");
-    pop.id = "hpop"; pop.className = "hpop"; pop.setAttribute("role", "dialog"); pop.setAttribute("aria-label", "보류 이유");
-    pop.innerHTML = "<b>" + esc(o.n || c) + " · 보류 이유</b>" + '<textarea maxlength="300" rows="3" placeholder="예: 3분기 실적 보고 다시 · 재고 증가 확인 필요"></textarea>' +
-      '<div class="hpop-b"><button type="button" data-a="del">지우기</button><button type="button" data-a="x">닫기</button><button type="button" class="ok" data-a="ok">저장</button></div>';
-    document.body.appendChild(pop);
-    var ta = pop.querySelector("textarea"); ta.value = HNOTE[c] || "";
-    var w = pop.offsetWidth, h = pop.offsetHeight;
-    pop.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, r.left)) + "px";
-    pop.style.top = (r.bottom + h + 8 < window.innerHeight ? r.bottom + 6 : Math.max(8, r.top - h - 6)) + "px";
-    function done(v) {
-      if (v != null) { v = v.trim(); if (v) HNOTE[c] = v; else delete HNOTE[c]; save(); }
-      closeNote(); if (v != null) after();
-    }
-    pop.onclick = function (e) { e.stopPropagation(); var a = e.target.dataset.a; if (a === "ok") done(ta.value); else if (a === "del") done(""); else if (a === "x") done(null); };
-    pop.onkeydown = function (e) { if (e.key === "Escape") { e.stopPropagation(); done(null); } else if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) done(ta.value); };
-    ta.focus();
-  }
-  document.addEventListener("click", function (e) { var x = document.getElementById("hpop"); if (x && !x.contains(e.target) && !e.target.closest("[data-hnote]")) closeNote(); });
-  function save() {
-    try { [["es-meh", MEH], ["es-good", GOOD], ["es-hold", HOLD], ["es-open", OPEN], ["es-hold-note", HNOTE]].forEach(function (x) { localStorage.setItem(x[0], JSON.stringify(x[1])); }); } catch (e) {}
+    var o = S.cos[c] || {}, g = !!GOOD[c];
+    if (o.stage !== 2) return "";
+    return '<span class="picks"><button type="button" class="good' + (g ? " on" : "") + '" data-pick="good" data-pc="' + esc(c) + '" aria-pressed="' + g + '" title="' + (g ? "누르면 2단계로 되돌립니다" : "누르면 3단계 탭으로 올립니다") + '">' + (g ? "3단계 ✓" : "3단계로") + "</button></span>";
   }
   function togglePick(kind, c) {
-    var m = { meh: MEH, good: GOOD, hold: HOLD }[kind], was = kind === "meh" ? isMeh(c) : !!m[c], auto = autoMeh(c);
-    delete MEH[c]; delete GOOD[c]; delete HOLD[c];
-    if (!was) m[c] = 1;
-    else if (kind === "meh" && auto) MEH[c] = 0;   // 자동 별로임을 끔
-    save();
+    if (GOOD[c]) delete GOOD[c]; else GOOD[c] = 1;
+    try { localStorage.setItem("es-good", JSON.stringify(GOOD)); } catch (e) {}
   }
   function stageN(st) {
     var q = S.q.trim().toLowerCase();
     var rows = sorted(S.list.filter(function (o) { return stOf(o) === st && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); }));
-    var mehRows = rows.filter(function (o) { return isMeh(o.c); }), holdRows = rows.filter(function (o) { return HOLD[o.c]; });
-    rows = rows.filter(function (o) { return !isMeh(o.c) && !HOLD[o.c]; });
-    var nMeh = mehRows.length, nHold = holdRows.length;
     var head = '<div class="ctl"><div class="fld"><span>정렬</span><select id="sort">' +
       COLS.filter(function (c) { return !/ns/.test(c.cls || ""); }).map(function (c) { return '<option value="' + c.k + '"' + (S.sort === c.k ? " selected" : "") + ">" + c.t + "</option>"; }).join("") +
       '</select><span class="today">' + todayKo() + '</span></div><div class="fld"><span>순서</span><div class="seg" id="dir"><button data-v="-1" aria-pressed="' + (S.dir === -1) + '">큰 순</button><button data-v="1" aria-pressed="' + (S.dir === 1) + '">작은 순</button></div></div>' +
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커" value="' + esc(S.q) + '"></div>' +
-      '<div class="count"><b>' + (rows.length + nHold + nMeh) + "</b>개 기업" + (nHold ? ' <span class="hold-n">보류 ' + nHold + "곳</span>" : "") + (nMeh ? ' <span class="meh-n">별로임 ' + nMeh + "곳</span>" : "") + "</div></div>" + '<p class="stage-note">' + NOTE[st] + "</p>";
-    if (!rows.length && !nMeh && !nHold) return head + (q ? '<div class="empty">검색과 맞는 기업이 없습니다.</div>' : '<div class="empty-stage"><b>아직 ' + st + "단계 기업이 없습니다</b>" + EMPTY[st] + "</div>");
+      '<div class="count"><b>' + rows.length + "</b>개 기업</div></div>" + '<p class="stage-note">' + NOTE[st] + "</p>";
+    if (!rows.length) return head + (q ? '<div class="empty">검색과 맞는 기업이 없습니다.</div>' : '<div class="empty-stage"><b>아직 ' + st + "단계 기업이 없습니다</b>" + EMPTY[st] + "</div>");
     var th = COLS.map(function (c) {
       var ar = S.sort === c.k ? '<span class="ar">' + (S.dir < 0 ? "▼" : "▲") + "</span>" : "";
       return '<th class="' + (c.cls || "") + '" data-k="' + c.k + '">' + c.t + ar + "</th>";
     }).join("");
-    var maxmc = Math.max.apply(null, rows.concat(mehRows, holdRows).map(function (o) { return o.mc || 0; })) || 1;
-    function row(o, i, slim) {
+    var maxmc = Math.max.apply(null, rows.map(function (o) { return o.mc || 0; })) || 1;
+    function row(o, i) {
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
-      return '<tr class="main' + (isMeh(o.c) ? " is-meh" : HOLD[o.c] ? " is-hold" : "") + '" data-c="' + esc(o.c) + '">' +
+      return '<tr class="main" data-c="' + esc(o.c) + '">' +
         '<td class="l rk">' + (i + 1) + '</td><td class="l tk"><span class="tkc">' + esc(o.c) + "</span>" + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + mehBtn(o.c) + "</td>" +
-        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span>" + (o.gone ? '<span class="gone" title="텔레그램에서 카드가 지워졌지만 사이트에는 남겨 둡니다(' + esc(o.gone) + ')">텔레에서 내려감</span>' : "") + "</span>" + (HOLD[o.c] && HNOTE[o.c] ? '<span class="hnote-t">보류 이유 · ' + esc(HNOTE[o.c]) + "</span>" : "") + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
+        '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span></span>" + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
         "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
         '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
-        (slim ? "" : '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + qline(o.c) + "</td></tr>");
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + qline(o.c) + "</td></tr>";
     }
-    var body = rows.map(function (o, i) { return row(o, i, false); }).join("");
-    /* 보류(보라)·별로임(노랑) — 표 아래 따로. 기본은 한 줄로 줄임, 머리줄 버튼으로 펼침 */
-    function sec(kind, lab, list, hint) {
-      if (!list.length) return "";
-      var open = !!OPEN[kind];
-      return '<section class="pk-sec ' + kind + '-sec"><h3 class="pk-h ' + kind + '-h">' + lab + " <b>" + list.length + "곳</b><span>" + hint + "</span>" +
-        '<button type="button" class="sec-tg" data-sec="' + kind + '" aria-expanded="' + open + '">' + (open ? "줄이기 ▲" : "펼치기 ▼") + "</button></h3>" +
-        '<div class="tblwrap"><table class="main-t' + (open ? "" : " meh-t") + '"><tbody>' + list.map(function (o, i) { return row(o, i, !open); }).join("") + "</tbody></table></div></section>";
-    }
-    return head + (rows.length ? '<div class="tblwrap"><table class="main-t"><tbody>' + body + "</tbody></table></div>" : '<div class="empty">보류·별로임이 아닌 기업이 없습니다.</div>') +
-      sec("hold", "보류", holdRows, "보라 버튼을 다시 누르면 위로 올라갑니다") + sec("meh", "별로임", mehRows, "노란 버튼을 다시 누르면 위로 올라갑니다");
+    var body = rows.map(row).join("");
+    return head + '<div class="tblwrap"><table class="main-t"><tbody>' + body + "</tbody></table></div>";
   }
 
   /* ---------- 상세 패널 ---------- */
@@ -299,7 +242,7 @@
     var head0 = '<div class="ptop"><div><div class="dtk">TSE : ' + esc(o.c) + "</div>" +
       '<h2 class="dnm" id="d-title">' + esc(o.n || o.en) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en) + ")</small>" : "") + mehBtn(o.c) + "</h2>" +
       '<div class="chips">' + (o.cat ? '<span class="chip k">' + esc(o.cat) + "</span>" : "") +
-      '<span class="chip st s' + o.stage + '">' + o.stage + "단계</span>" + (o.gone ? '<span class="gone" title="텔레그램에서 카드가 지워졌지만 사이트에는 남겨 둡니다(' + esc(o.gone) + ')">텔레에서 내려감</span>' : "") +
+      '<span class="chip st s' + o.stage + '">' + o.stage + "단계</span>" +
       (o.g ? '<span class="chip ' + (GRADE_UP[o.g] ? "gu" : GRADE_DN[o.g] ? "gd" : "") + '">' + esc(o.g) + "</span>" : "") +
       (o.d ? '<span class="chip">' + md(o.d) + (o.pre ? " 발표 " + (o.est ? "예상" : "예정") : " 발표") + (o.p || o.q ? " · " + esc(o.p || o.q) : "") + "</span>" : "") +
       (o.by ? '<span class="chip">올린 사람 · ' + esc(o.by) + "</span>" : "") +
@@ -328,7 +271,6 @@
       bmBlock(bm) +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
     document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
-    pin.querySelectorAll("[data-hnote]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); openNote(b, function () { drawPanel(o, d); if (app.querySelector("#view")) render(); }); }; });
     pin.querySelectorAll("[data-pick]").forEach(function (b) {
       b.onclick = function () { togglePick(b.dataset.pick, b.dataset.pc); drawPanel(o, d); if (app.querySelector("#view")) render(); };
     });
@@ -542,8 +484,6 @@
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = "jp/c/" + el.dataset.c; }; });
     app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pick, b.dataset.pc); render(); }; });
-    app.querySelectorAll("[data-hnote]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); openNote(b, render); }; });
-    app.querySelectorAll("[data-sec]").forEach(function (b) { b.onclick = function () { OPEN[b.dataset.sec] = !OPEN[b.dataset.sec]; save(); rerender(); }; });
     var q = document.getElementById("q");
     if (q) q.oninput = function () { S.q = q.value; rerender(); var n = document.getElementById("q"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
     var so = document.getElementById("sort");
