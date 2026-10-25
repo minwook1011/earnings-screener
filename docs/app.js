@@ -167,6 +167,16 @@
         return '<span class="hc ' + k + '">' + pctTxt(v) + "</span>";
       }).join("") + "</div></div>";
   }
+  /* 1년 주가 미니 차트(ret.json sp = 5거래일 간격 종가) — 2026-10-25 사용자: 수익률 상자 대신 3단계로 버튼 밑 빈칸에 */
+  function spark(c) {
+    var r = (S.ret.items || {})[c], p = r && r.sp;
+    if (!p || p.length < 2) return "";
+    var W = 104, H = 40, lo = Math.min.apply(null, p), hi = Math.max.apply(null, p), k = hi > lo ? hi - lo : 1;
+    var pts = p.map(function (v, i) { return (i * W / (p.length - 1)).toFixed(1) + "," + (2 + (H - 4) * (1 - (v - lo) / k)).toFixed(1); }).join(" ");
+    var ch = (p[p.length - 1] / p[0] - 1) * 100, cls = ch >= 0 ? "up" : "dn";
+    return '<div class="spark ' + cls + '" title="최근 1년 주가(주간) · ' + esc(md(r.d)) + " 종가 " + num(r.px, r.px < 100 ? 1 : 0) + '엔"><svg viewBox="0 0 ' + W + " " + H + '" width="' + W + '" height="' + H + '" aria-hidden="true"><polyline points="' + pts + '"/></svg>' +
+      '<span class="sp-l">1년 <b>' + pctTxt(Math.round(ch * 10) / 10) + "</b></span></div>";
+  }
   function qline(c) {
     var q = S.qy[c];
     if (!q || !q.length) return '<div class="ql-empty">분기 성장률 자료 없음 — 다음 갱신 때 채웁니다</div>';
@@ -242,7 +252,7 @@
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
         "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
         '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + '<div class="qwrap">' + qline(o.c) + rline(o.c) + "</div></td></tr>";
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td class="sp-td">' + spark(o.c) + '</td><td colspan="9">' + '<div class="qwrap">' + qline(o.c) + "</div></td></tr>";
     }
     var last = null, body = rows.map(function (o, i) {
       var sep = all && o.d !== last ? '<tr class="dsep"><td colspan="11">' + (o.d ? dlab(o.d) + " 발표" : "발표일 모름") + "</td></tr>" : "";
@@ -565,11 +575,12 @@
     return out.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
   }
   function docLink(d) { return '<a class="rbtn" href="' + esc(d.html) + '" target="_blank" rel="noopener noreferrer">' + esc(d.kind) + " 열기</a>"; }
-  function docRow(d, ann) {
-    return '<article class="rdoc"><div class="rd-meta"><span class="tag tg">' + esc(d.kind) + '</span><span class="mono">' + esc((d.date || "").slice(0, 10)) + "</span>" +
+  function docRow(d, ann, full) {
+    return '<article class="rdoc' + (full ? " pre" : "") + '"><div class="rd-meta"><span class="tag tg">' + esc(d.kind) + '</span><span class="mono">' + esc((d.date || "").slice(0, 10)) + "</span>" +
       (ann ? '<span class="ann">' + esc(dlab(ann)) + " 발표</span>" : "") + "</div>" +
       "<h3>" + esc(d.n) + ' <span class="mono">' + esc(d.c) + "</span></h3>" +
-      (d.sum ? "<p>" + esc(d.sum) + "</p>" : "") + '<div class="rd-act">' + docLink(d) +
+      (d.sum ? "<p>" + esc(d.sum) + "</p>" : "") +
+      (full ? '<div class="rd-q">' + spark(d.c) + (S.qy[d.c] && S.qy[d.c].length ? qline(d.c) : "") + "</div>" : "") + '<div class="rd-act">' + docLink(d) +
       (S.cos[d.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(d.c) + '">재무·주가 보기</a>' : "") +
       (S.xl[d.c] ? '<a class="rbtn ghost" href="data/jp/xlsx/' + esc(d.c) + '.xlsx?v=' + encodeURIComponent(S.xl[d.c]) + '" download>xlsx 다운로드</a>' : "") + "</div></article>";
   }
@@ -595,7 +606,7 @@
     } else {
       var pre = docs.filter(function (d) { return d.kind === "프리뷰" && hit(d); }).map(function (d) { return { d: d, a: nextAnn(d.c) || d.ann || "" }; })
         .sort(function (a, b) { return (a.a || "9") < (b.a || "9") ? -1 : (a.a || "9") > (b.a || "9") ? 1 : 0; });
-      body = pre.length ? '<div class="rdocs">' + pre.map(function (x) { return docRow(x.d, x.a); }).join("") + "</div>" :
+      body = pre.length ? '<div class="rdocs">' + pre.map(function (x) { return docRow(x.d, x.a, true); }).join("") + "</div>" :
         '<div class="empty-stage"><b>실적 프리뷰가 없습니다</b>관심 기업의 발표 전 프리뷰를 써 두면 발표일 순으로 여기에 모입니다.</div>';
     }
     var cnt = { watch: (S.room.watch || []).length, res: docs.length, pre: docs.filter(function (d) { return d.kind === "프리뷰"; }).length };

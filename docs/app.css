@@ -670,3 +670,16 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .rl { display: grid; grid-template-columns: repeat(6, minmax(46px, 1fr)); gap: 3px 4px; align-items: center; }
 .hc.p0, .hc.n0 { background: var(--h0-bg); }
 .hc.p0 { color: var(--tx-up); } .hc.n0 { color: var(--tx-dn); }
+
+/* 1년 주가 미니 차트 — 표 둘째 줄 왼쪽(3단계로 밑)·리서치룸 프리뷰 카드 (2026-10-25 사용자) */
+.main-t tbody tr.qrow td.sp-td { vertical-align: top; padding-top: 4px; }
+.spark { display: inline-flex; flex-direction: column; gap: 2px; }
+.spark svg { display: block; overflow: visible; }
+.spark polyline { fill: none; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.spark.up polyline { stroke: var(--up, #d0302f); }
+.spark.dn polyline { stroke: var(--down, #2f63d0); }
+.spark .sp-l { font-size: 11px; color: var(--ink-mid); }
+.spark.up .sp-l b { color: var(--up, #d0302f); }
+.spark.dn .sp-l b { color: var(--down, #2f63d0); }
+.rdoc .rd-q { display: flex; gap: 14px; align-items: flex-start; margin: 10px 0 4px; flex-wrap: wrap; }
+.rdoc .rd-q .qbox { flex: 1 1 520px; min-width: 0; overflow-x: auto; }

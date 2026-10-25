@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""주가 수익률 1D·5D·7D·1M·3M·12M — 2단계 이상 회사와 리서치룸 관심 기업(docs/data/jp/ret.json).
+"""주가 수익률 1D·5D·7D·1M·3M·12M + 1년 미니 차트(sp = 5거래일 간격 종가) — 2단계 이상 회사와 리서치룸 관심 기업·자료 회사(docs/data/jp/ret.json).
   야후 일봉(2년)으로 마지막 값 대비 수익률(%)을 낸다. D = 거래일, M = 달력 기준.
   너무 자주 받지 않게 마지막 갱신에서 MIN_AGE 분이 안 지났으면 건너뛴다(--force 로 무시).
 
@@ -47,6 +47,8 @@ def ret(px):
         return prev[-1] if prev else None
 
     out = {"d": d0.isoformat(), "px": round(p0, 1)}
+    yr = [p for d, p in px if d > date(d0.year - 1, d0.month, min(d0.day, 28))]
+    out["sp"] = [round(p, 1) for p in yr[::-1][::5][::-1]]   # 표의 미니 차트(2026-10-25 사용자) — 끝 값이 마지막 종가
     for k, base in (("d1", back_n(1)), ("d5", back_n(5)), ("d7", back_n(7)),
                     ("m1", back_m(1)), ("m3", back_m(3)), ("m12", back_m(12))):
         out[k] = round((p0 / base - 1) * 100, 1) if base else None
@@ -62,7 +64,8 @@ def targets():
     except (OSError, ValueError, KeyError):
         pass
     try:
-        for w in json.load(open(os.path.join(ROOT, "docs", "data", "room.json"), encoding="utf-8")).get("watch", []):
+        room = json.load(open(os.path.join(ROOT, "docs", "data", "room.json"), encoding="utf-8"))
+        for w in room.get("watch", []) + room.get("docs", []):
             if w.get("m", "jp") == "jp":
                 cs.add(w["c"])
     except (OSError, ValueError):
