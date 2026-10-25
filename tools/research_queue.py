@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-"""단계별 리서치 대기열 — 단계가 올라간 회사에 그 단계 리서치가 없으면 '대기'로 올린다.
+"""리서치 대기열 — 2단계 이상 회사에 2단계 실적 브리프가 없으면 '대기'로 올린다.
+  3·4단계는 텔레 기록만, 리서치 안 함(2026-10-25 사용자). 동시에 만드는 리포트는 최대 MAX 개.
 
-  2단계에 들어온 회사 → 2단계 실적 분석 리서치(docs/data/jp/research/<코드>/stage2.md)
-  3단계에 들어온 회사 → 3단계 딥 리포트       (…/stage3.md)
-  4단계 회사          → 3단계 리포트를 그대로 쓰고, 결정 메모(stage4.md)는 사람이 쓴다
-
-  python tools/research_queue.py          대기열 갱신 + 할 일 목록 출력(JSON)
+  python tools/research_queue.py          대기열 갱신 + {"running":[…], "free":빈 자리, "todo":[…]} 출력(JSON)
+                                          '진행 중'이 STALE 분보다 오래되면 죽은 작업으로 보고 '대기'로 되돌린다
   python tools/research_queue.py done 5018 2 "한 줄 결론" [아티팩트 링크]   리서치 파일을 다 쓴 뒤 완료 표시
   리서치 전문은 claude.ai 아티팩트로 게시하고(공유: 링크가 있는 사람 보기) 그 링크를 넘기면 사이트에 '리서치 전문 보기' 버튼이 생긴다
 """
@@ -21,6 +19,8 @@ IDX = os.path.join(DATA, "research", "index.json")
 KST = timezone(timedelta(hours=9))
 NL = chr(10)
 SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
+MAX = 4      # 동시에 도는 리포트 최대 수(2026-10-25 사용자)
+STALE = 90   # 분
 
 
 def now():
@@ -42,25 +42,28 @@ def save_idx(idx):
 def refresh():
     pipe = json.load(open(os.path.join(DATA, "pipeline.json"), encoding="utf-8"))
     idx = load_idx()
-    todo = []
+    cut = (datetime.now(KST) - timedelta(minutes=STALE)).strftime("%Y-%m-%d %H:%M")
+    todo, running = [], []
     for c, co in pipe["companies"].items():
-        if co["stage"] >= 4:   # 4단계는 넘겨놓기만 — 새 리서치 안 함(2026-10-23 사용자)
+        if co["stage"] < 2:
             continue
-        for st in (2, 3):
-            if co["stage"] < st:
-                continue
-            it = idx["items"].setdefault(c, {}).get(str(st))
-            path = os.path.join(DATA, "research", c, f"stage{st}.md")
-            if it and it.get("status") == "완료":
-                continue
-            if it and it.get("status") in ("진행 중", "멈춤"):   # 만드는 중이거나 사용자가 멈춰 둔 곳 — 건너뜀
-                continue
-            if not it:
-                idx["items"][c][str(st)] = {"status": "대기", "queued": now(), "kind": SKILL[st]}
-            todo.append({"c": c, "n": co["n"], "stage": st, "kind": SKILL[st],
-                         "file": f"docs/data/jp/research/{c}/stage{st}.md"})
+        it = idx["items"].setdefault(c, {}).get("2")
+        if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
+            it["status"] = "대기"   # 죽은 작업
+        if it and it.get("status") == "완료":
+            continue
+        if it and it.get("status") == "진행 중":
+            running.append(c)
+            continue
+        if it and it.get("status") == "멈춤":   # 사용자가 멈춰 둔 곳
+            continue
+        if not it:
+            idx["items"][c]["2"] = {"status": "대기", "queued": now(), "kind": SKILL[2]}
+        todo.append({"c": c, "n": co["n"], "stage": 2, "ann": (co["cards"].get("2") or {}).get("ann"),
+                     "since": co.get("since")})
+    todo.sort(key=lambda x: x.get("since") or "")   # 먼저 올라온 순
     save_idx(idx)
-    print(json.dumps(todo, ensure_ascii=False, indent=1))
+    print(json.dumps({"running": running, "free": max(0, MAX - len(running)), "todo": todo}, ensure_ascii=False, indent=1))
 
 
 def done(c, st, verdict, artifact=None):

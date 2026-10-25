@@ -26,6 +26,12 @@ RAW = os.path.join(ROOT, "tools", "tg_raw")
 OUT = os.path.join(ROOT, "docs", "data", "jp", "pipeline.json")
 KST = timezone(timedelta(hours=9))
 TOPIC_STAGE = {2: 1, 4: 2, 6: 3, 72: 4}
+# 이 시각 전에 3·4단계로 간 카드는 2단계로 내린다(2026-10-25 사용자 — 사이트는 2단계 리포트 중심, 3·4단계는 그 뒤로 텔레 기록만)
+RESET = "2026-10-25 14:00"
+
+
+def old_high(st, date):
+    return int(st) >= 3 and (date or "")[:16] < RESET
 
 HEAD = re.compile(r"^(?P<n>.+?)\((?P<c>[0-9A-Z]{4})\)\s*·\s*(?P<d>\d{1,2}/\d{1,2})(?:\s+(?P<t>\d{1,2}:\d{2}))?")
 CANCEL = re.compile(r"^(?P<n>.+?)\s+(?P<c>[0-9A-Z]{4})\s*\n\s*볼 후보 취소")
@@ -116,6 +122,10 @@ def keep(cos, prev):
         for st, cd in old.get("cards", {}).items():
             if st in co["cards"] or cd.get("cancelled"):
                 continue
+            if old_high(st, cd.get("date")):
+                st = "2"
+                if st in co["cards"]:
+                    continue
             cd = dict(cd)
             cd.setdefault("gone", datetime.now(KST).strftime("%Y-%m-%d %H:%M"))
             co["cards"][st] = cd
@@ -150,6 +160,10 @@ def main():
             continue
         co = cos.setdefault(card["c"], {"c": card["c"], "n": card["n"], "cards": {}, "hist": []})
         co["n"] = card["n"]
+        if old_high(st, m["date"]):
+            if "2" in co["cards"]:
+                continue
+            st = 2
         card.update({"msg": m["id"], "date": m["date"], "photo": bool(m.get("media"))})
         pl = PICK_LINE.search(m["text"])
         if pl:
