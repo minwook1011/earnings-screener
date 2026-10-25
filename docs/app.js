@@ -2,7 +2,7 @@
  *  1단계: 실적 발표 기업 이름·티커만 모아 둔 목록
  *  2~4단계: VANTAGE 스크리너 같은 표 + 기업마다 둘째 줄(최근 10개 분기 매출·영업이익 성장률)
  *  어느 기업이든 누르면 오른쪽 패널(주가 1년·분기 실적·텔레 카드·리서치)
- * 데이터: data/jp/stage1.json · pipeline.json · qyoy.json · research/index.json · co/<코드>.json
+ * 데이터: data/jp/stage1.json · pipeline.json · qyoy.json · ret.json(주가 수익률) · research/index.json · co/<코드>.json
  * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #room/watch|res|pre · #us · #kr */
 (function () {
   "use strict";
@@ -24,7 +24,7 @@
     4: "텔레 4단계로 간 회사가 이곳에 기록됩니다."
   };
   var GRADE_UP = { "서프라이즈": 1, "양호": 1, "호조": 1 }, GRADE_DN = { "부진": 1, "쇼크": 1, "미달": 1 };
-  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, xl: {}, room: { watch: [], docs: [] }, roomTab: "watch", stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
+  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, xl: {}, ret: { items: {} }, room: { watch: [], docs: [] }, roomTab: "watch", stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
   var app = document.getElementById("app");
 
   /* ---------- 도우미 ---------- */
@@ -153,6 +153,20 @@
     return '<span class="hc ' + c + '"' + tip + ">" + pctTxt(v).replace("%", "") + mg + "</span>";
   }
   function amt(v) { return '<span class="hc v">' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</span>"; }
+  /* 주가 수익률 1D~12M — 기간마다 색 기준이 다르다(짧을수록 작은 움직임도 진하게) */
+  var RET = [["d1", "1D", [1, 3, 6]], ["d5", "5D", [2, 5, 10]], ["d7", "7D", [3, 7, 12]], ["m1", "1M", [4, 10, 18]], ["m3", "3M", [6, 15, 30]], ["m12", "12M", [10, 30, 60]]];
+  function rline(c) {
+    var r = (S.ret.items || {})[c];
+    if (!r) return "";
+    return '<div class="qbox rbox"><div class="qcap">주가 수익률 · ' + esc(md(r.d)) + " 종가 " + num(r.px, r.px < 100 ? 1 : 0) + "엔</div><div class=\"rl\">" +
+      RET.map(function (x) { return '<span class="ql-p">' + x[1] + "</span>"; }).join("") +
+      RET.map(function (x) {
+        var v = r[x[0]], t = x[2];
+        if (v == null) return '<span class="hc na">—</span>';
+        var a = Math.abs(v), k = (v >= 0 ? "p" : "n") + (a >= t[2] ? 3 : a >= t[1] ? 2 : a >= t[0] ? 1 : 0);
+        return '<span class="hc ' + k + '">' + pctTxt(v) + "</span>";
+      }).join("") + "</div></div>";
+  }
   function qline(c) {
     var q = S.qy[c];
     if (!q || !q.length) return '<div class="ql-empty">분기 성장률 자료 없음 — 다음 갱신 때 채웁니다</div>';
@@ -228,7 +242,7 @@
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
         "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
         '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + qline(o.c) + "</td></tr>";
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td></td><td colspan="9">' + '<div class="qwrap">' + qline(o.c) + rline(o.c) + "</div></td></tr>";
     }
     var last = null, body = rows.map(function (o, i) {
       var sep = all && o.d !== last ? '<tr class="dsep"><td colspan="11">' + (o.d ? dlab(o.d) + " 발표" : "발표일 모름") + "</td></tr>" : "";
@@ -626,9 +640,10 @@
     getJSON("data/jp/bm.json").catch(function () { return {}; }),
     getJSON("data/jp/monthly/index.json").catch(function () { return {}; }),
     getJSON("data/jp/xlsx/index.json").catch(function () { return {}; }),
-    getJSON("data/room.json").catch(function () { return { watch: [], docs: [] }; })
+    getJSON("data/room.json").catch(function () { return { watch: [], docs: [] }; }),
+    getJSON("data/jp/ret.json").catch(function () { return { items: {} }; })
   ]).then(function (r) {
-    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
+    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
     S.ready = true; S.stage = 0;

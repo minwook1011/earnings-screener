@@ -662,3 +662,11 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .market a { white-space: nowrap; }
 @media (max-width: 480px) { .nav-in { gap: 8px; padding: 0 12px; } .market { overflow-x: auto; scrollbar-width: none; } .market a { padding: 6px 9px; font-size: 13px; } }
 .room-t, .room-t td, .room-t tr { box-sizing: border-box; }
+
+/* 주가 수익률 상자 — 분기 상자 옆(좁으면 아래) */
+.qwrap { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+.qwrap .qbox:first-child { flex: 1 1 560px; }
+.rbox { flex: 0 1 330px; }
+.rl { display: grid; grid-template-columns: repeat(6, minmax(46px, 1fr)); gap: 3px 4px; align-items: center; }
+.hc.p0, .hc.n0 { background: var(--h0-bg); }
+.hc.p0 { color: var(--tx-up); } .hc.n0 { color: var(--tx-dn); }
