@@ -3,7 +3,11 @@
 
   자료  결산단신 XBRL(TDnet → 거래소 보관소 www2.jpx.co.jp/disc). 목록은 yanoshin TDnet API.
         첨부 재무제표(손익·포괄손익·재무상태표·현금흐름표·부문)의 **항목 전부**를 싣는다.
-  양식  테크윙 재무모델 양식(맑은 고딕, 회색 머리줄, 회색 띠 구분줄, 비율 줄은 회색 글씨 수식).
+  양식  테크윙 재무모델 양식 그대로(tools/fmodel.py = 사용자 「재무모델링」 스킬 build_model.py 사본, 고정).
+        '연간' 시트: 12분기 + 10개년 + 5개년 추정(MW) 칸 · 목표주가 · 자산가치 · 기업가치.
+        '재무상태표' 시트: 5분기 + 5개년 · 현금흐름 요약 · 재무 비율.
+        두 시트 아래에 FPS 식 상세 표(같은 열): 손익·포괄손익·부문·현금흐름 전 항목 / 재무상태표 전 항목.
+        단위 백만엔(공시 단위).
   한국어 항목명은 tools/jp_labels_ko.json(일본어 → 한국어). 없는 말은 tools/jp_labels_missing.json 에 모이고
         엑셀에는 영어 요소명이 임시로 들어간다 → 사전에 채운 뒤 다시 돌리면 된다.
   섹터 자료  리서치 폴더의 <코드>_data.json(2단계 보고서 만들 때 모은 월차·수주·수출입 등)과 사이트 월차를
@@ -23,6 +27,9 @@ from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 
 import openpyxl
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import fmodel  # noqa: E402  테크윙 양식(재무모델링 스킬 build_model.py 사본)
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter as CL
 
@@ -69,7 +76,13 @@ def filings(code):
         m = re.search(r"(\d{18})\.pdf", t.get("document_url", ""))
         if m:
             out.append({"doc": m.group(1), "date": t.get("pubdate", "")[:10], "title": title})
-    return out[:NF]
+    keep, n_year = [], 0
+    for f in out:                     # 새것부터
+        annual = not re.search(r"四半期|中間", f["title"])
+        if len(keep) < 16 or (annual and n_year < 9):
+            keep.append(f)
+            n_year += annual
+    return keep
 
 
 def zip_of(code, doc):
@@ -174,6 +187,7 @@ def labels_of(z):
             for frm, to in arcs.items():
                 if frm in locs and to in labs:
                     out[locs[frm]] = labs[to]
+                    out.setdefault(locs[frm].split("_")[-1], labs[to])
     return out
 
 
@@ -187,6 +201,14 @@ def plabel(end, fsm):
     fy_start = end.year if end.month >= fsm else end.year - 1
     fy_end = fy_start + (1 if fsm != 1 else 0)
     return fy_end, q
+
+
+STD = ("jppfs_cor", "jpigp_cor", "jpcrp_cor", "jpdei_cor", "tse-ed-t")
+
+
+def norm(name):
+    pre, _, loc = name.rpartition(":")
+    return name if pre in STD else "co:" + loc
 
 
 def parse_filing(path):
@@ -210,9 +232,15 @@ def parse_filing(path):
                 c = ctx.get(f["ctx"])
                 if not c or f["v"] is None:
                     continue
-                out.append({"stmt": KIND[m.group(1)], "name": f["name"], "lab": lab, "order": order, "c": c,
-                            "v": f["v"], "fsm": fsm, "mem": [x for x in c["mem"] if not x.endswith("NonConsolidatedMember")]})   # 개별만 내는 회사
+                out.append({"stmt": KIND[m.group(1)], "name": norm(f["name"]), "lab": lab, "order": order, "c": c,
+                            "v": f["v"], "fsm": fsm,
+                            "mem": [norm(x) for x in c["mem"] if not x.endswith("NonConsolidatedMember")]})   # 개별만 내는 회사
     return out, jlab
+
+
+STDMEM = {"ReportableSegmentsMember": "보고부문 합계", "ReconcilingItemsMember": "조정액",
+          "TotalOfReportableSegmentsAndOthersMember": "합계",
+          "OperatingSegmentsNotIncludedInReportableSegmentsAndOtherRevenueGeneratingBusinessActivitiesMember": "기타"}
 
 
 # ---------- 모으기 ----------
@@ -240,7 +268,7 @@ def collect(code):
                 lab = x["lab"]
                 if x["mem"]:
                     mem = x["mem"][-1].split(":")[-1]
-                    lab = (jlab.get(mem) or jlab_all.get(mem) or mem) + " · " + x["lab"]
+                    lab = (STDMEM.get(mem) or jlab.get(mem) or jlab_all.get(mem) or mem) + " · " + x["lab"]
                 pos = D["rows"].index(prev[st]) + 1 if prev[st] in D["rows"] else len(D["rows"])
                 D["rows"].insert(pos, key)
                 D["seen"][key] = {"lab": lab, "name": x["name"], "mem": x["mem"]}
@@ -297,6 +325,7 @@ def ko(jp, name, KO, miss):
     parts = [p for p in jp.split(" · ")]
     out = []
     for p in parts:
+        p = re.sub(r"、?報告セグメント|\s*\[メンバー\]|メンバー$", "", p).strip()
         if not p:
             continue
         alt = [p] + [re.sub(r"四半期|中間|当期", w, p) for w in ("中間", "当期", "")] + [re.sub(r"（[^）]*△[^）]*）$", "", p)]
@@ -311,7 +340,7 @@ def ko(jp, name, KO, miss):
     return " · ".join(out) or eng(name)
 
 
-# ---------- 엑셀(테크윙 양식) ----------
+# ---------- 엑셀 공통(섹터 데이터 시트) ----------
 F = "맑은 고딕"
 GRAY = PatternFill("solid", fgColor="FFD9D9D9")
 BAND = PatternFill("solid", fgColor="FF808080")
@@ -322,31 +351,6 @@ CEN = Alignment(horizontal="center", vertical="center")
 LEFT = Alignment(horizontal="left", vertical="center")
 
 
-def sheet_head(ws, title, unit, note, cols, src):
-    ws.sheet_view.showGridLines = False
-    ws["A1"] = title
-    ws["A1"].font = Font(name=F, size=20, bold=True)
-    ws["A2"] = note
-    ws["A2"].font = Font(name=F, size=9, color="FFFF0000")
-    ws["B2"] = unit
-    ws["B2"].font = Font(name=F, size=9, color="FF808080")
-    head = ["항목", "참고"] + cols + ["출처"]
-    for i, h in enumerate(head, 1):
-        c = ws.cell(3, i, h)
-        c.font = Font(name=F, size=10, bold=True)
-        c.fill = GRAY
-        c.alignment = CEN
-        c.border = Border(top=THIN, bottom=THIN)
-    ws.column_dimensions["A"].width = 34
-    ws.column_dimensions["B"].width = 12
-    for i in range(len(cols)):
-        ws.column_dimensions[CL(3 + i)].width = 11
-    ws.column_dimensions[CL(3 + len(cols))].width = 40
-    c = ws.cell(4, 3 + len(cols), src)
-    c.font = Font(name=F, size=9, color="FF808080")
-    c.alignment = Alignment(wrap_text=True, vertical="top")
-    ws.freeze_panes = "C4"
-
 
 def band(ws, r, text, ncol):
     for i in range(1, ncol + 1):
@@ -355,102 +359,6 @@ def band(ws, r, text, ncol):
         c.fill = BAND
         c.alignment = CEN
 
-
-def val_row(ws, r, label, ref, vals, bold=False):
-    c = ws.cell(r, 1, label)
-    c.font = Font(name=F, size=11, bold=bold)
-    c.alignment = LEFT
-    if ref:
-        b = ws.cell(r, 2, ref)
-        b.font = Font(name=F, size=9, color="FF808080")
-        b.alignment = CEN
-    for i, v in enumerate(vals):
-        if v is None:
-            continue
-        c = ws.cell(r, 3 + i, round(v, 4))
-        c.font = Font(name=F, size=11, bold=bold)
-        c.number_format = NUM
-        c.alignment = CEN
-
-
-def ratio_row(ws, r, label, f):
-    """f(col_letter, i) → 수식(없으면 None). 회색 글씨 % 줄(테크윙 YoY·OPM 줄)."""
-    c = ws.cell(r, 1, label)
-    c.font = Font(name=F, size=11, color="FF808080")
-    c.alignment = LEFT
-    return c
-
-
-KEYS = {  # 손익 핵심 줄 아래 비율 줄
-    "Sales": [("YoY", "yoy")], "Revenue": [("YoY", "yoy")],
-    "GrossProfit": [("매출총이익률", "m")], "OperatingIncome": [("영업이익률", "m"), ("YoY", "yoy")],
-    "OperatingProfit": [("영업이익률", "m"), ("YoY", "yoy")], "OrdinaryIncome": [("경상이익률", "m")],
-    "ProfitLossAttributableToOwnersOfParent": [("순이익률", "m"), ("YoY", "yoy")],
-    "ProfitAttributableToOwnersOfParent": [("순이익률", "m"), ("YoY", "yoy")],
-}
-
-
-def keyof(name):
-    n = name.split(":")[-1]
-    for k in KEYS:
-        if n == k or n == k + "IFRS" or (k in ("Sales", "Revenue") and n in ("NetSales", "NetSalesIFRS", "RevenueIFRS", "OperatingRevenue1", "Revenues")):
-            return k
-    return None
-
-
-def write_stmt(ws, st, D, cols, KO, miss, mode, sales_row=None):
-    """mode: q = 분기 단독(손익·포괄), cf = 누계 그대로, bs = 시점."""
-    r = 4
-    nq = len(cols["q"])
-    first = None
-    for key in D["rows"]:
-        meta = D["seen"][key]
-        lab = ko(meta["lab"], meta["name"], KO, miss)
-        if mode == "bs":
-            src = D["inst"].get(key, {})
-            vals = [src.get(k) for k in cols["q"]] + [src.get((fy, 4)) for fy in cols["y"]]
-        else:
-            src = D["ytd"].get(key, {})
-            if mode == "q":
-                vals = [standalone(src, fy, q) for fy, q in cols["q"]]
-            else:
-                vals = [src.get(k) for k in cols["q"]]
-            vals += [src.get((fy, 4)) for fy in cols["y"]]
-        if not any(v is not None for v in vals):
-            continue
-        per_share = "PerShare" in meta["name"]
-        vals = [None if v is None else (v if per_share else v / 1e8) for v in vals]
-        bold = bool(re.search(r"(Total|GrossProfit|OperatingIncome|OperatingProfit|OrdinaryIncome|ProfitLoss|Sales$|Revenue)", meta["name"].split(":")[-1])) and not meta["mem"]
-        val_row(ws, r, lab, "엔/주" if per_share else ("근사" if per_share and mode == "q" else None), vals, bold)
-        if per_share:
-            for i in range(len(vals)):
-                ws.cell(r, 3 + i).number_format = '#,##0.00;\\(#,##0.00\\);"-"'
-        k = keyof(meta["name"]) if st == "PL" and not meta["mem"] else None
-        row_v = r
-        r += 1
-        if k in ("Sales", "Revenue") and first is None:
-            first = row_v
-        for txt, how in KEYS.get(k, []) if k else []:
-            ratio_row(ws, r, txt, None)
-            for i in range(len(vals)):
-                col, cl = 3 + i, CL(3 + i)
-                if how == "yoy":
-                    j = col - 4 if i < nq else col - 1
-                    if (i < nq and i < 4) or (i >= nq and i == nq):
-                        continue
-                    a, b = f"{cl}{row_v}", f"{CL(j)}{row_v}"
-                    fm = f'=IF(OR({a}="",{b}=""),"",IFERROR({a}/{b}-1,""))'
-                else:
-                    if not first:
-                        continue
-                    a, b = f"{cl}{row_v}", f"{cl}{first}"
-                    fm = f'=IF(OR({a}="",{b}=""),"",IFERROR({a}/{b},""))'
-                c = ws.cell(r, col, fm)
-                c.font = Font(name=F, size=11, color="FF808080")
-                c.number_format = PCT
-                c.alignment = CEN
-            r += 1
-    return r
 
 
 def table_block(ws, r, title, header, rows, src, width):
@@ -562,9 +470,287 @@ def sector_tables(code):
     return out
 
 
-def fy_note(fsm):
-    end = (fsm - 2) % 12 + 1
-    return f"{end}월 결산"
+# ---------- 테크윙 양식(사용자 재무모델링 스킬의 build_model.py = tools/fmodel.py) + 아래 상세 표 ----------
+SCALE, UNIT = 1e6, "백만엔"     # 일본 공시 단위 그대로
+NQ_T, NY_T, NB_Q, NB_Y = 12, 10, 5, 5   # 양식: 분기 12 · 연간 10 · 재무상태표 분기 5 · 연간 5
+
+# 양식 키 ← XBRL 요소(로컬 이름, 앞에서부터 먼저 찾은 것). 일본 기준·IFRS 둘 다
+PLMAP = {
+    "revenue": ["NetSales", "Revenue", "RevenueIFRS", "NetSalesIFRS", "OperatingRevenue1", "OperatingRevenue2", "Revenues",
+                "OperatingRevenuesSE", "NetSalesOfCompletedConstructionContracts", "OrdinaryIncomeBNK"],
+    "cogs": ["CostOfSales", "CostOfSalesIFRS", "OperatingCost", "CostOfSalesOfCompletedConstructionContracts"],
+    "gp": ["GrossProfit", "GrossProfitIFRS", "OperatingGrossProfit"],
+    "sga": ["SellingGeneralAndAdministrativeExpenses", "SellingGeneralAndAdministrativeExpensesIFRS", "TotalSellingGeneralAndAdministrativeExpenses"],
+    "op": ["OperatingIncome", "OperatingProfitLossIFRS", "OperatingIncomeLoss"],
+    "oth_inc": ["ExtraordinaryIncome", "OtherIncomeIFRS"],
+    "oth_exp": ["ExtraordinaryLoss", "OtherExpensesIFRS"],
+    "fin_inc": ["NonOperatingIncome", "FinanceIncomeIFRS"],
+    "fin_exp": ["NonOperatingExpenses", "FinanceCostsIFRS"],
+    "pbt": ["IncomeBeforeIncomeTaxes", "ProfitLossBeforeTaxIFRS", "IncomeLossBeforeIncomeTaxes"],
+    "tax": ["IncomeTaxes", "IncomeTaxExpenseIFRS", "TotalIncomeTaxes"],
+    "ni": ["ProfitLoss", "ProfitLossIFRS", "NetIncome", "NetIncomeLoss"],
+    "ni_owner": ["ProfitLossAttributableToOwnersOfParent", "ProfitLossAttributableToOwnersOfParentIFRS"],
+    "salary": ["SalariesAndAllowancesSGA", "SalariesSGA", "EmployeesSalariesAndBonusesSGA", "SalariesAndWagesSGA",
+               "SalaryAndAllowancesSGA", "PersonnelExpensesSGA"],
+    "dep": ["DepreciationSGA", "DepreciationAndAmortizationSGA"],
+    "fees": ["CommissionFeeSGA", "CommissionFeesSGA", "CommissionSGA"],
+    "rnd": ["ResearchAndDevelopmentExpensesSGA", "ResearchAndDevelopmentCostsSGA"],
+}
+BSMAP = {
+    "current_assets": ["CurrentAssets", "CurrentAssetsIFRS"],
+    "cash": ["CashAndDeposits", "CashAndCashEquivalentsIFRS", "CashAndDue"],
+    "st_fin": ["ShortTermInvestmentSecurities", "SecuritiesCA", "OtherFinancialAssetsCAIFRS"],
+    "receivables": ["NotesAndAccountsReceivableTradeAndContractAssets", "NotesAndAccountsReceivableTrade",
+                    "AccountsReceivableTradeAndContractAssets", "AccountsReceivableTrade", "TradeAndOtherReceivablesCAIFRS"],
+    "inventory": ["Inventories", "InventoriesCAIFRS"],
+    "noncurrent_assets": ["NoncurrentAssets", "NonCurrentAssetsIFRS"],
+    "ppe": ["PropertyPlantAndEquipment", "PropertyPlantAndEquipmentIFRS"],
+    "intangibles": ["IntangibleAssets", "IntangibleAssetsIFRS"],
+    "inv_property": ["InvestmentPropertyIFRS", "RealEstateForInvestmentNet", "RealEstateForInvestment"],
+    "total_assets": ["Assets", "AssetsIFRS"],
+    "current_liab": ["CurrentLiabilities", "TotalCurrentLiabilitiesIFRS", "CurrentLiabilitiesIFRS"],
+    "payables": ["NotesAndAccountsPayableTrade", "AccountsPayableTrade", "TradeAndOtherPayablesCLIFRS"],
+    "st_debt": ["ShortTermLoansPayable", "ShortTermBorrowings", "BorrowingsCLIFRS", "CommercialPapersLiabilities"],
+    "noncurrent_liab": ["NoncurrentLiabilities", "NonCurrentLabilitiesIFRS", "NonCurrentLiabilitiesIFRS"],
+    "lt_debt": ["LongTermLoansPayable", "BorrowingsNCLIFRS", "LongTermBorrowings"],
+    "bonds": ["BondsPayable", "ConvertibleBondTypeBondsWithSubscriptionRightsToSharesNCL", "BondsAndBorrowingsNCLIFRS"],
+    "total_liab": ["Liabilities", "LiabilitiesIFRS"],
+    "capital_stock": ["CapitalStock", "ShareCapitalIFRS"],
+    "retained": ["RetainedEarnings", "RetainedEarningsIFRS"],
+    "nci": ["NonControllingInterests", "NonControllingInterestsIFRS"],
+    "total_equity": ["NetAssets", "EquityIFRS"],
+}
+INV_PARTS = ["MerchandiseAndFinishedGoods", "Merchandise", "FinishedGoods", "WorkInProcess", "RawMaterialsAndSupplies",
+             "RawMaterials", "Supplies", "CostsOnUncompletedConstructionContracts", "RealEstateForSale"]
+CURRENT_LTD = ["CurrentPortionOfLongTermLoansPayable", "CurrentPortionOfBonds", "CurrentPortionOfConvertibleBonds"]
+CFMAP = {
+    "ocf": ["NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesIFRS"],
+    "capex": ["PurchaseOfPropertyPlantAndEquipmentInvCF", "PurchaseOfPropertyPlantAndEquipmentInvCFIFRS"],
+    "capex2": ["PurchaseOfIntangibleAssetsInvCF", "PurchaseOfIntangibleAssetsInvCFIFRS", "PurchaseOfSoftwareInvCF"],
+    "dividends": ["CashDividendsPaidFinCF", "DividendsPaidFinCFIFRS", "DividendsPaidToOwnersOfParentFinCFIFRS"],
+}
+
+
+def local(name):
+    return name.split(":")[-1]
+
+
+def pick(D, names, src="ytd"):
+    """요소 이름 목록(멤버 없는 줄)을 합쳐 {(fy, q): 값}. 요소 이름이 해마다 바뀌는 회사(예 매출 → 영업수익)가 있어
+    최근 기간까지 있는 이름을 먼저 쓰고, 빈 기간만 다른 이름으로 메운다."""
+    per = []
+    for i, n in enumerate(names):
+        got = {}
+        for k in D["rows"]:
+            m = D["seen"][k]
+            if not m["mem"] and local(m["name"]) == n:
+                for kk, v in D[src].get(k, {}).items():
+                    got.setdefault(kk, v)
+        if got:
+            per.append((max(got), -i, got))
+    out = {}
+    for _, _, got in sorted(per, reverse=True):
+        for kk, v in got.items():
+            out.setdefault(kk, v)
+    return out
+
+
+def qseq(last, n):
+    fy, q = last
+    out = []
+    for _ in range(n):
+        out.append((fy, q))
+        fy, q = (fy, q - 1) if q > 1 else (fy - 1, 4)
+    return out[::-1]
+
+
+def qlab(k):
+    return f"{k[0]}.{k[1]}Q"
+
+
+def shares_of(path):
+    """요약 XBRL 의 기말 발행주식수(자기주식 포함)."""
+    try:
+        z = zipfile.ZipFile(path)
+        for n in z.namelist():
+            if "Summary" in n and n.endswith("ixbrl.htm"):
+                s = z.read(n).decode("utf-8", "ignore")
+                m = re.search(r'name="tse-ed-t:NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock"[^>]*>([\d,]+)<', s)
+                if m:
+                    return int(m.group(1).replace(",", ""))
+    except (OSError, zipfile.BadZipFile):
+        pass
+    return None
+
+
+def price_of(code):
+    try:
+        r = json.load(open(os.path.join(ROOT, "docs", "data", "jp", "ret.json"), encoding="utf-8"))["items"].get(code)
+        if r:
+            return r["px"], r["d"].replace("-", ".")
+    except (OSError, ValueError, KeyError):
+        pass
+    return None, None
+
+
+def make_model(code, name, data, used, fsm, KO, miss):
+    PL, BS, CF, SG = data["PL"], data["BS"], data["CF"], data["SG"]
+    rev = pick(PL, PLMAP["revenue"])
+    if not rev:
+        return None
+    # 분기·연간 칸
+    have = sorted(k for k in rev)
+    last = have[-1]
+    qk = qseq(last, NQ_T)
+    yfy = sorted({fy for fy, q in rev if q == 4})
+    yk = list(range(yfy[-1] - NY_T + 1, yfy[-1] + 1)) if yfy else []
+    Q = {"labels": [qlab(k) for k in qk]}
+    Y = {"labels": yk}
+    for key, names in PLMAP.items():
+        ytd = pick(PL, names)
+        Q[key] = [standalone(ytd, fy, q) for fy, q in qk]
+        Y[key] = [ytd.get((fy, 4)) for fy in yk]
+    if not any(Y["ni_owner"]) and not any(Q["ni_owner"]):      # 개별만 내는 회사 = 순이익 전부 지배주주
+        Q["ni_owner"], Y["ni_owner"] = Q["ni"], Y["ni"]
+    for blk in (Q, Y):    # 비용은 양수(환입이면 음수) — XBRL 도 양수로 들어온다
+        for k in ("cogs", "sga", "tax"):
+            blk[k] = [v for v in blk[k]]
+    jgaap = not any(local(PL["seen"][k]["name"]).endswith("IFRS") for k in PL["rows"])
+    # 부문(외부 고객 매출, 부문 멤버별)
+    segs = []
+    seen_mem = []
+    for k in SG["rows"]:
+        m = SG["seen"][k]
+        if not m["mem"] or local(m["name"]) not in ("RevenuesFromExternalCustomers", "RevenueFromExternalCustomersIFRS", "NetSales"):
+            continue
+        mem = local(m["mem"][-1])
+        if mem in ("ReportableSegmentsMember", "ReconcilingItemsMember", "TotalOfReportableSegmentsAndOthersMember",
+                   "OperatingSegmentsNotIncludedInReportableSegmentsAndOtherRevenueGeneratingBusinessActivitiesMember") and mem != "":
+            if mem != "OperatingSegmentsNotIncludedInReportableSegmentsAndOtherRevenueGeneratingBusinessActivitiesMember":
+                continue
+        if mem in seen_mem:
+            continue
+        seen_mem.append(mem)
+        ytd = {}
+        for kk in SG["rows"]:
+            mm = SG["seen"][kk]
+            if mm["mem"] and local(mm["mem"][-1]) == mem and local(mm["name"]) == local(m["name"]):
+                for a, v in SG["ytd"].get(kk, {}).items():
+                    ytd.setdefault(a, v)
+        jl = m["lab"].split(" · ")[0]
+        nm = ko(jl, mem, KO, miss) if re.search(r"[぀-ヿ一-鿿]", jl) else (STDMEM.get(mem) or jl)
+        segs.append({"name": nm, "annual": [ytd.get((fy, 4)) for fy in yk],
+                     "quarterly": [standalone(ytd, fy, q) for fy, q in qk]})
+    # 재무상태표
+    def bs_series(keys):
+        out = {}
+        for key, names in BSMAP.items():
+            v = pick(BS, names, "inst")
+            out[key] = [v.get(k) for k in keys]
+        parts = [pick(BS, [n], "inst") for n in INV_PARTS]
+        out["inventory"] = [v if v is not None else (sum(p[k] for p in parts if k in p) if any(k in p for p in parts) else None)
+                            for v, k in zip(out["inventory"], keys)]
+        cl = [pick(BS, [n], "inst") for n in CURRENT_LTD]
+        out["current_ltd"] = [sum(p[k] for p in cl if k in p) if any(k in p for p in cl) else None for k in keys]
+        own = pick(BS, ["EquityAttributableToOwnersOfParentIFRS"], "inst")
+        sub = pick(BS, ["SubscriptionRightsToShares"], "inst")
+        out["equity_owner"] = [own.get(k) if own else (None if te is None else te - (nci or 0) - sub.get(k, 0))
+                               for k, te, nci in zip(keys, out["total_equity"], out["nci"])]
+        return out
+    ta = pick(BS, BSMAP["total_assets"], "inst")
+    bq = [k for k in qseq(max(ta), NB_Q)] if ta else []
+    by = sorted(fy for fy, q in ta if q == 4)[-NB_Y:] if ta else []
+    BQ = {"labels": [qlab(k) for k in bq], **bs_series(bq)}
+    BY = {"labels": by, **bs_series([(fy, 4) for fy in by])}
+    # 현금흐름(연간 + 분기 TTM)
+    cfv = {k: pick(CF, v) for k, v in CFMAP.items()}
+
+    def ttm(ytd, fy, q):
+        if q == 4:
+            return ytd.get((fy, 4))
+        a, b, c = ytd.get((fy, q)), ytd.get((fy - 1, 4)), ytd.get((fy - 1, q))
+        return None if None in (a, b, c) else a + b - c
+
+    def cf_block(keys, f):
+        ocf = [f(cfv["ocf"], *k) for k in keys]
+        c1 = [f(cfv["capex"], *k) for k in keys]
+        c2 = [f(cfv["capex2"], *k) for k in keys]
+        capex = [None if a is None else abs(a) + abs(b or 0) for a, b in zip(c1, c2)]
+        div = [f(cfv["dividends"], *k) for k in keys]
+        return {"ocf": ocf, "capex": capex, "dividends": [None if v is None else abs(v) for v in div]}
+    CFY = {"labels": by, **cf_block([(fy, 4) for fy in by], lambda d, fy, q: d.get((fy, q)))}
+    CFQ = {"labels": BQ["labels"], **cf_block(bq, ttm)}
+    px, pdate = price_of(code)
+    sh = shares_of(zip_of(code, used[0]["doc"])) if used else None
+    end_m = (fsm - 2) % 12 + 1 if fsm else 3
+    meta = {
+        "company": name, "ticker": code, "market": "JP", "currency": "JPY", "unit_label": UNIT, "scale": SCALE,
+        "fiscal_note": f"{end_m}월 결산 · {'일본 기준' if jgaap else 'IFRS'} · {qlab(last)} = {last[0]}년 {end_m}월 결산기 {last[1]}분기",
+        "tax_rate": 0.30,
+        "sources": ["결산단신 XBRL(TDnet·JPX 보관소) — 쓴 문서는 '출처' 시트", "분기 = 누계에서 앞 분기를 뺀 3개월 값",
+                    "주가: 야후 파이낸스 일봉" + (f" {pdate}" if pdate else "")],
+    }
+    if jgaap:
+        meta["labels"] = {"oth_inc": "특별이익", "oth_exp": "특별손실", "fin_inc": "영업외수익", "fin_exp": "영업외비용"}
+    model = {"meta": meta, "quarterly": Q, "annual": Y, "segments": segs,
+             "forecast": {"mw_years": [yk[-1] + i for i in range(1, 6)] if yk else []},
+             "bs": {"quarterly": BQ, "annual": BY}, "cf": {"annual": CFY, "quarterly": CFQ}}
+    if px and sh:
+        model["market_data"] = {"price": px, "shares": sh, "price_date": pdate}
+    return model, qk, yk, bq, by
+
+
+def detail_block(ws, r, title, cols, last_col, rows, note):
+    """FPS 식 상세 표 — 회색 띠 + 열 머리(양식과 같은 칸) + 줄들. rows = [(라벨, {열: 값}, 굵게)]."""
+    for c in range(1, last_col + 1):
+        cell = ws.cell(r, c, title if c == 1 else None)
+        cell.fill, cell.font, cell.alignment = fmodel.fill(fmodel.GRAY_SEC), fmodel.font(True, "FFFFFF"), fmodel.CENTER
+    ws.cell(r, 2, note).font = fmodel.font(True, "FFFFFF", 9)
+    r += 1
+    ws.cell(r, 1, "항목")
+    ws.cell(r, 2, "참고")
+    for c, kind, l in cols:
+        ws.cell(r, c, l)
+    for c in range(1, last_col + 1):
+        cell = ws.cell(r, c)
+        cell.fill, cell.font, cell.alignment = fmodel.fill(fmodel.GRAY_HDR), fmodel.font(True, size=10), fmodel.CENTER
+        cell.border = Border(top=fmodel.thin, bottom=fmodel.thin)
+    r += 1
+    for lab, vals, bold in rows:
+        ws.cell(r, 1, lab).font = fmodel.font(bold)
+        ws.cell(r, 1).alignment = fmodel.CENTER
+        for c, v in vals.items():
+            cell = ws.cell(r, c, v)
+            cell.number_format = fmodel.NUM
+            cell.font = fmodel.font(bold)
+            cell.alignment = fmodel.CENTER
+        r += 1
+    return r + 1
+
+
+BOLD = re.compile(r"^(NetSales|Revenue|GrossProfit|OperatingIncome|OrdinaryIncome|ProfitLoss|Assets$|Liabilities$|NetAssets|"
+                  r"CurrentAssets|NoncurrentAssets|CurrentLiabilities|NoncurrentLiabilities|NetCashProvided|ComprehensiveIncome|"
+                  r"IncomeBeforeIncomeTaxes|ShareholdersEquity|LiabilitiesAndNetAssets)")
+
+
+def stmt_rows(D, KO, miss, colmap, mode, with_mem=False):
+    """mode q: 분기 단독, cum: 누계 그대로, inst: 잔액. colmap = {열: (fy, q)}."""
+    rows = []
+    for key in D["rows"]:
+        m = D["seen"][key]
+        if m["mem"] and not with_mem:
+            continue
+        src = D["inst" if mode == "inst" else "ytd"].get(key, {})
+        vals = {}
+        for c, k in colmap.items():
+            v = (standalone(src, *k) if (mode == "q" and k[1] != 0) else src.get(k if k[1] else (k[0], 4)))
+            if v is not None:
+                vals[c] = v / SCALE
+        if not vals:
+            continue
+        lab = ko(m["lab"], m["name"], KO, miss)
+        rows.append((lab, vals, bool(BOLD.match(local(m["name"]))) and not m["mem"]))
+    return rows
 
 
 def build(code):
@@ -573,25 +759,54 @@ def build(code):
         print(code, "결산단신 XBRL 없음")
         return None
     KO, miss = ko_dict(), set()
-    qs = quarters(data)
-    ys = sorted({fy for fy, q in qs if q == 4} | {fy for st in ("PL", "CF") for d in data[st]["ytd"].values() for fy, q in d if q == 4})
-    cols = {"q": qs, "y": ys}
-    heads = [f"{fy % 100:02d}.{q}Q" for fy, q in qs] + [f"FY{fy % 100:02d}" for fy in ys]
-    name = (json.load(open(PIPE, encoding="utf-8"))["companies"].get(code, {}) or {}).get("n", code)
-    src = "결산단신 XBRL(거래소 공시, TDnet·JPX 보관소). 쓴 문서: " + ", ".join(
-        f"{f['date']}" for f in used[:4]) + (f" 외 {len(used) - 4}건" if len(used) > 4 else "") + " — '출처' 시트에 전부"
+    name = (json.load(open(PIPE, encoding="utf-8"))["companies"].get(code, {}) or {}).get("n")
+    if not name:
+        try:
+            name = next((w.get("n") for w in json.load(open(os.path.join(ROOT, "docs", "data", "room.json"), encoding="utf-8"))["watch"]
+                         if w["c"] == code), None)
+        except (OSError, ValueError, KeyError):
+            name = None
+    name = name or code
+    mk = make_model(code, name, data, used, fsm, KO, miss)
+    if not mk:
+        print(code, "매출 줄을 못 찾음")
+        return None
+    model, qk, yk, bq, by = mk
+    # 양식 그대로 2패스(재무상태표 참조 주소를 먼저 알아야 함)
     wb = openpyxl.Workbook()
-    wb.remove(wb.active)
-    note = f"결산기 기준(27.2Q = 2027년 결산기 2분기) · {fy_note(fsm or 4)} · 연결"
-    for st, title in STMTS:
-        D = data[st]
-        if not D["rows"]:
-            continue
-        ws = wb.create_sheet(title)
-        mode = {"BS": "bs", "CF": "cf"}.get(st, "q")
-        n = {"q": "분기 단독(누계 차분)", "cf": "누계(그 분기까지)", "bs": "분기 말 잔액"}[mode]
-        sheet_head(ws, f"{name} {title}", "(단위: 억엔)", f"{note} · {n} · 오른쪽 FY = 연간", heads, src)
-        write_stmt(ws, st, D, cols, KO, miss, mode)
+    A, qcol, ycol = fmodel.build_annual(wb, model)
+    model["_bs_latest_ref"] = fmodel.build_bs(wb, model, A, qcol, ycol)
+    wb = openpyxl.Workbook()
+    A, qcol, ycol = fmodel.build_annual(wb, model)
+    fmodel.build_bs(wb, model, A, qcol, ycol)
+    BSS, bcols = model["_bs_sheet"]
+    # ── 아랫단: 결산단신 전 항목(FPS 식) ──
+    ws = wb["연간"]
+    cols = A.cols
+    last_col = A.last_col
+    cmap = {}
+    for c, kind, l in cols:
+        if kind == "q":
+            cmap[c] = qk[Q_index(l, qk)]
+        elif kind == "y":
+            cmap[c] = (int(l), 4)
+    r = A.r + 1
+    blocks = [("손익계산서 · 전 항목", data["PL"], "q", False, "분기 = 3개월 단독"),
+              ("포괄손익 · 전 항목", data["CI"], "q", False, "분기 = 3개월 단독"),
+              ("부문 · 전 항목", data["SG"], "q", True, "부문 · 항목"),
+              ("현금흐름표 · 전 항목", data["CF"], "cum", False, "분기 = 결산기 첫날부터 누계(공시 그대로)")]
+    for title, D, mode, mem, note in blocks:
+        rows = stmt_rows(D, KO, miss, cmap, mode, mem)
+        if rows:
+            r = detail_block(ws, r, title, cols, last_col, rows, note)
+    ws = wb["재무상태표"]
+    bmap = {}
+    for c, kind, l in bcols:
+        bmap[c] = bq[[qlab(k) for k in bq].index(l)] if kind == "q" else (int(l), 4)
+    rows = stmt_rows(data["BS"], KO, miss, bmap, "inst")
+    if rows:
+        detail_block(ws, BSS.r + 1, "재무상태표 · 전 항목", bcols, BSS.last_col, rows, "분기 말 잔액")
+    # 섹터 데이터·출처
     sec = sector_tables(code)
     if sec:
         ws = wb.create_sheet("섹터 데이터")
@@ -606,8 +821,8 @@ def build(code):
             ws.column_dimensions[CL(i)].width = 11
         ws.column_dimensions[CL(width)].width = 44
         r = 4
-        for t, h, rows, s in sec:
-            r = table_block(ws, r, ko(t, t, KO, miss) if re.search(r"[぀-ヿ]", t) else kt(t), [kt(x) for x in h], rows, s, width)
+        for t, h, rows_, s in sec:
+            r = table_block(ws, r, ko(t, t, KO, miss) if re.search(r"[぀-ヿ]", t) else kt(t), [kt(x) for x in h], rows_, s, width)
     ws = wb.create_sheet("출처")
     ws.sheet_view.showGridLines = False
     ws["A1"] = "출처 · 쓴 결산단신"
@@ -625,6 +840,7 @@ def build(code):
         ws.cell(i, 3, PDF.format(code=code, doc=f["doc"]))
     for col, w in (("A", 12), ("B", 34), ("C", 60)):
         ws.column_dimensions[col].width = w
+    wb.calculation.fullCalcOnLoad = True
     os.makedirs(OUT, exist_ok=True)
     out = os.path.join(OUT, code + ".xlsx")
     wb.save(out)
@@ -641,8 +857,13 @@ def build(code):
         except (OSError, ValueError):
             old = []
         json.dump(sorted(set(old) | miss), open(MISSING, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    print(f"{code} 엑셀 → docs/data/jp/xlsx/{code}.xlsx (결산단신 {len(used)}건, 분기 {len(qs)}칸, 섹터 표 {len(sec)}개, 번역 필요 {len(miss)}개)")
+    print(f"{code} 엑셀 → docs/data/jp/xlsx/{code}.xlsx (결산단신 {len(used)}건, 분기 {qlab(qk[0])}~{qlab(qk[-1])}, "
+          f"연간 {yk[0]}~{yk[-1]}, 부문 {len(model['segments'])}개, 섹터 표 {len(sec)}개, 번역 필요 {len(miss)}개)")
     return miss
+
+
+def Q_index(l, qk):
+    return [qlab(k) for k in qk].index(l)
 
 
 if __name__ == "__main__":
