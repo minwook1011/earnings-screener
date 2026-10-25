@@ -63,7 +63,7 @@
   }
 
   /* ---------- 머리·레일 ---------- */
-  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (o.stage >= 3) n[o.stage]++; }); return n; }
+  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (stOf(o) >= 3) n[stOf(o)]++; }); return n; }
   function head() {
     var n = counts();
     return '<header class="jhd"><div class="hd"><div class="jbrand">' +
@@ -170,13 +170,26 @@
     return (t.getUTCMonth() + 1) + "월 " + t.getUTCDate() + "일 (" + "일월화수목금토"[t.getUTCDay()] + ")";
   }
   function cl(t) { return '<span class="cl">' + t + "</span>"; }
+  /* 3단계로 — 그 브라우저의 3단계 탭에도 올림(텔레·리서치와 무관, 2단계 목록에는 그대로 남음). 2026-10-25 사용자: 버튼 유지 */
+  function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
+  var GOOD = load("es-good");
+  function stOf(o) { return o.stage === 2 && GOOD[o.c] ? 3 : o.stage; }
+  function mehBtn(c) {
+    var o = S.cos[c] || {}, g = !!GOOD[c];
+    if (o.stage !== 2) return "";
+    return '<span class="picks"><button type="button" class="good' + (g ? " on" : "") + '" data-pick="good" data-pc="' + esc(c) + '" aria-pressed="' + g + '" title="' + (g ? "누르면 3단계 탭에서 뺍니다" : "누르면 이 브라우저의 3단계 탭에도 올립니다") + '">' + (g ? "3단계 ✓" : "3단계로") + "</button></span>";
+  }
+  function togglePick(c) {
+    if (GOOD[c]) delete GOOD[c]; else GOOD[c] = 1;
+    try { localStorage.setItem("es-good", JSON.stringify(GOOD)); } catch (e) {}
+  }
   /* 오늘(한국 시각, 오전 6시에 바뀜) — YYYY-MM-DD */
   function kstYmd() { var t = new Date(Date.now() + 3 * 3600000); return t.toISOString().slice(0, 10); }
   function dlab(d) { return md(d) + "(" + "일월화수목금토"[new Date(d + "T00:00:00").getDay()] + ")"; }
   /* 2단계 = 2단계 이상 전부(리포트 목록) — 날짜별(기본)·전체(발표순). 3·4단계 = 텔레 기록(2026-10-25 사용자) */
   function stageN(st) {
     var q = S.q.trim().toLowerCase();
-    var rows = S.list.filter(function (o) { return (st === 2 ? o.stage >= 2 : o.stage === st) && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); });
+    var rows = S.list.filter(function (o) { return (st === 2 ? o.stage >= 2 : stOf(o) === st) && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); });
     var day = st === 2 && S.view === "day" && !q, all = st === 2 && !day, nav = "";
     if (st === 2) {
       var dates = {}; S.list.forEach(function (o) { if (o.stage >= 2) dates[o.d || "-"] = (dates[o.d || "-"] || 0) + 1; });
@@ -208,7 +221,7 @@
     function row(o, i) {
       var w = Math.max(6, Math.round(60 * Math.sqrt((o.mc || 0) / maxmc)));
       return '<tr class="main" data-c="' + esc(o.c) + '">' +
-        '<td class="l rk">' + (i + 1) + '</td><td class="l tk"><span class="tkc">' + esc(o.c) + "</span>" + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + (st === 2 && o.stage >= 3 ? '<span class="stgtag s' + o.stage + '">' + o.stage + "단계</span>" : "") + "</td>" +
+        '<td class="l rk">' + (i + 1) + '</td><td class="l tk"><span class="tkc">' + esc(o.c) + "</span>" + (o.d ? '<span class="ann">' + md(o.d) + "(" + "일월화수목금토"[new Date(o.d + "T00:00:00").getDay()] + ") 발표</span>" : "") + (st === 2 && o.stage >= 3 ? '<span class="stgtag s' + o.stage + '">' + o.stage + "단계</span>" : "") + mehBtn(o.c) + "</td>" +
         '<td class="l"><span class="nmrow"><span class="nm">' + esc(o.n) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en.replace(/,? (Co\.,? )?(Ltd|Inc|Corporation|Holdings)\.?/g, "")) + ")</small>" : "") + "</span></span>" + '<span class="ind">' + esc(o.bm || o.cat || "") + "</span></td>" +
         '<td class="mc">' + cl("시총(억엔)") + mcap(o.mc) + "</td>" +
         "<td>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : "—") + "</td>" +
@@ -251,7 +264,7 @@
       return '<div class="s' + s.n + " " + cls + '"><b>' + esc(s.lab) + "</b>" + esc(when) + "</div>";
     }).join("");
     var head0 = '<div class="ptop"><div><div class="dtk">TSE : ' + esc(o.c) + "</div>" +
-      '<h2 class="dnm" id="d-title">' + esc(o.n || o.en) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en) + ")</small>" : "") + "</h2>" +
+      '<h2 class="dnm" id="d-title">' + esc(o.n || o.en) + (o.en && o.en !== o.n ? "<small>(" + esc(o.en) + ")</small>" : "") + mehBtn(o.c) + "</h2>" +
       '<div class="chips">' + (o.cat ? '<span class="chip k">' + esc(o.cat) + "</span>" : "") +
       '<span class="chip st s' + o.stage + '">' + o.stage + "단계</span>" +
       (o.g ? '<span class="chip ' + (GRADE_UP[o.g] ? "gu" : GRADE_DN[o.g] ? "gd" : "") + '">' + esc(o.g) + "</span>" : "") +
@@ -281,6 +294,9 @@
       bmBlock(bm) +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
     document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
+    pin.querySelectorAll("[data-pick]").forEach(function (b) {
+      b.onclick = function () { togglePick(b.dataset.pc); drawPanel(o, d); if (app.querySelector("#view")) render(); };
+    });
     pin.querySelectorAll(".bm-bar i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "%"; });
     bindChart(pin);
     var fw = pin.querySelector(".fswrap"); if (fw) fw.scrollLeft = fw.scrollWidth;
@@ -490,6 +506,7 @@
     var rl = app.querySelector(".rail"); if (rl) document.documentElement.style.setProperty("--railh", rl.offsetHeight + "px");
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = "jp/c/" + el.dataset.c; }; });
+    app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pc); render(); }; });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
     app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { S.day = b.dataset.dd; rerender(); }; });
     app.querySelectorAll("[data-dstep]").forEach(function (b) {
