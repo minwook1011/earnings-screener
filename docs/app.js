@@ -592,7 +592,7 @@
       body = '<div class="seg rk">' + kinds.map(function (k) { return '<button data-rk="' + esc(k) + '" aria-pressed="' + (k === f) + '">' + esc(k) + "</button>"; }).join("") + "</div>" +
         (list.length ? '<div class="rdocs">' + list.map(function (d) { return docRow(d, ""); }).join("") + "</div>" : '<div class="empty-stage"><b>자료가 없습니다</b></div>');
     } else {
-      var pre = docs.filter(function (d) { return d.kind === "프리뷰" && hit(d); }).map(function (d) { return { d: d, a: nextAnn(d.c) }; })
+      var pre = docs.filter(function (d) { return d.kind === "프리뷰" && hit(d); }).map(function (d) { return { d: d, a: nextAnn(d.c) || d.ann || "" }; })
         .sort(function (a, b) { return (a.a || "9") < (b.a || "9") ? -1 : (a.a || "9") > (b.a || "9") ? 1 : 0; });
       body = pre.length ? '<div class="rdocs">' + pre.map(function (x) { return docRow(x.d, x.a); }).join("") + "</div>" :
         '<div class="empty-stage"><b>실적 프리뷰가 없습니다</b>관심 기업의 발표 전 프리뷰를 써 두면 발표일 순으로 여기에 모입니다.</div>';
