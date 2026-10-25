@@ -622,3 +622,43 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .main-t td.tk .stgtag { display: inline-block; margin-top: 4px; padding: 1px 7px; border-radius: 999px; font-size: 10.5px; font-weight: 700; background: var(--cs); color: var(--c); }
 .main-t tr.dsep td { padding: 14px 8px 6px; font-size: 13px; font-weight: 700; color: var(--ann); border-bottom: 1px solid var(--line); text-align: left; }
 .main-t tr.dsep:first-child td { padding-top: 4px; }
+
+/* 리서치룸 */
+.rq { margin-left: auto; flex: 0 1 220px; min-width: 120px; font: inherit; font-size: 12.5px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); }
+.room-t { width: 100%; border-collapse: collapse; margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.room-t td { text-align: left; font-family: var(--jsans); white-space: normal; padding: 12px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; font-size: 13px; }
+.room-t tr:last-child td { border-bottom: 0; }
+.room-t .rn b { display: block; font-size: 14px; }
+.room-t .rn .mono { font-size: 11.5px; color: var(--ink-mute); margin-right: 6px; }
+.room-t .cat2 { font-size: 11px; color: var(--ink-mute); }
+.room-t .ra { white-space: nowrap; }
+.room-t .ann, .rdoc .ann { font: 700 11.5px var(--mono); color: var(--ann); }
+.room-t .rm { color: var(--ink-mid); max-width: 420px; }
+.room-t .rm small { display: block; margin-top: 3px; font-size: 11px; color: var(--ink-mute); }
+.room-t .rl { text-align: right; }
+.room-t .na { font-size: 11.5px; color: var(--ink-mute); }
+.rbtn { display: inline-block; margin: 2px 0 2px 6px; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; background: var(--accent); color: var(--on-accent); text-decoration: none; white-space: nowrap; }
+.rbtn.ghost { background: var(--surface); color: var(--accent-ink); border: 1px solid var(--line); }
+.rbtn:hover { text-decoration: underline; }
+.seg.rk { margin-top: 16px; display: inline-flex; flex-direction: row; width: auto; max-width: 100%; flex-wrap: wrap; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.rdocs { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; margin-top: 16px; }
+.rdoc { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
+.rdoc .rd-meta { display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: var(--ink-mute); flex-wrap: wrap; }
+.rdoc h3 { margin: 0; font-size: 15px; }
+.rdoc h3 .mono { font-size: 11.5px; color: var(--ink-mute); font-weight: 500; }
+.rdoc p { margin: 0; font-size: 12.5px; color: var(--ink-mid); line-height: 1.55; }
+.rdoc .rd-act { margin-top: auto; padding-top: 4px; }
+.rdoc .rd-act .rbtn:first-child { margin-left: 0; }
+@media (max-width: 720px) {
+  .room-t, .room-t tbody, .room-t tr, .room-t td { display: block; width: 100%; }
+  .room-t tr { border-bottom: 1px solid var(--line-soft); padding: 8px 0; }
+  .room-t td { border: 0; padding: 4px 14px; }
+  .room-t .rl { text-align: left; }
+  .room-t .rl .rbtn:first-child { margin-left: 0; }
+  .rdocs { grid-template-columns: 1fr; }
+  .rq { flex-basis: 140px; }
+}
+.seg.rk button { white-space: nowrap; }
+.market a { white-space: nowrap; }
+@media (max-width: 480px) { .nav-in { gap: 8px; padding: 0 12px; } .market { overflow-x: auto; scrollbar-width: none; } .market a { padding: 6px 9px; font-size: 13px; } }
+.room-t, .room-t td, .room-t tr { box-sizing: border-box; }

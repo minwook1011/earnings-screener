@@ -3,7 +3,7 @@
  *  2~4단계: VANTAGE 스크리너 같은 표 + 기업마다 둘째 줄(최근 10개 분기 매출·영업이익 성장률)
  *  어느 기업이든 누르면 오른쪽 패널(주가 1년·분기 실적·텔레 카드·리서치)
  * 데이터: data/jp/stage1.json · pipeline.json · qyoy.json · research/index.json · co/<코드>.json
- * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #us · #kr */
+ * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #room/watch|res|pre · #us · #kr */
 (function () {
   "use strict";
   var STAGES = [
@@ -24,7 +24,7 @@
     4: "텔레 4단계로 간 회사가 이곳에 기록됩니다."
   };
   var GRADE_UP = { "서프라이즈": 1, "양호": 1, "호조": 1 }, GRADE_DN = { "부진": 1, "쇼크": 1, "미달": 1 };
-  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, xl: {}, stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
+  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, xl: {}, room: { watch: [], docs: [] }, roomTab: "watch", stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
   var app = document.getElementById("app");
 
   /* ---------- 도우미 ---------- */
@@ -535,12 +535,76 @@
       th.onclick = function () { var k = th.dataset.k; if (S.sort === k) S.dir = -S.dir; else { S.sort = k; S.dir = (k === "n" || k === "c") ? 1 : -1; } rerender(); };
     });
   }
+  /* ---------- 리서치룸 — 관심 기업 · 리서치 모음 · 실적 프리뷰(data/room.json, 목록은 Claude 가 tools/room.py 로 고침) ---------- */
+  var ROOM_T = [{ k: "watch", lab: "관심 기업" }, { k: "res", lab: "리서치 모음" }, { k: "pre", lab: "실적 프리뷰" }];
+  function nextAnn(c) {
+    var u = (S.upc || {})[c], o = S.cos[c];
+    return u || (o && o.d && o.d >= ymd(new Date()) ? o.d : "");
+  }
+  function roomDocs() {
+    var out = (S.room.docs || []).map(function (d) { return Object.assign({}, d); });
+    Object.keys(S.res.items || {}).forEach(function (c) {
+      var r = S.res.items[c]["2"];
+      if (!r || r.status !== "완료" || !r.html) return;
+      out.push({ c: c, n: (S.cos[c] && (S.cos[c].tn || S.cos[c].n)) || c, kind: "2단계 리포트", date: r.written || "", title: r.title || "", sum: r.verdict || "", html: r.html });
+    });
+    return out.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+  }
+  function docLink(d) { return '<a class="rbtn" href="' + esc(d.html) + '" target="_blank" rel="noopener noreferrer">' + esc(d.kind) + " 열기</a>"; }
+  function docRow(d, ann) {
+    return '<article class="rdoc"><div class="rd-meta"><span class="tag tg">' + esc(d.kind) + '</span><span class="mono">' + esc((d.date || "").slice(0, 10)) + "</span>" +
+      (ann ? '<span class="ann">' + esc(dlab(ann)) + " 발표</span>" : "") + "</div>" +
+      "<h3>" + esc(d.n) + ' <span class="mono">' + esc(d.c) + "</span></h3>" +
+      (d.sum ? "<p>" + esc(d.sum) + "</p>" : "") + '<div class="rd-act">' + docLink(d) +
+      (S.cos[d.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(d.c) + '">재무·주가 보기</a>' : "") + "</div></article>";
+  }
+  function roomView() {
+    var t = S.roomTab, q = (S.rq || "").trim().toLowerCase(), docs = roomDocs(), body = "";
+    function hit(x) { return !q || (x.n + " " + x.c + " " + (x.memo || "") + " " + (x.title || "")).toLowerCase().indexOf(q) >= 0; }
+    if (t === "watch") {
+      var w = (S.room.watch || []).filter(hit);
+      body = w.length ? '<table class="room-t"><tbody>' + w.map(function (x) {
+        var mine = docs.filter(function (d) { return d.c === x.c; }), ann = nextAnn(x.c);
+        return '<tr><td class="rn"><b>' + esc(x.n) + '</b><span class="mono">' + esc(x.c) + "</span>" + (x.cat ? '<span class="cat2">' + esc(x.cat) + "</span>" : "") + "</td>" +
+          '<td class="ra">' + (ann ? '<span class="ann">' + esc(dlab(ann)) + " 발표</span>" : '<span class="na">발표일 미정</span>') + "</td>" +
+          '<td class="rm">' + esc(x.memo || "") + "<small>" + esc(x.added || "") + " 추가</small></td>" +
+          '<td class="rl">' + mine.map(docLink).join("") + (S.xl[x.c] ? '<a class="rbtn ghost" href="data/jp/xlsx/' + esc(x.c) + '.xlsx" download>xlsx</a>' : "") +
+          (S.cos[x.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(x.c) + '">재무·주가</a>' : "") + (mine.length ? "" : '<span class="na">자료 없음</span>') + "</td></tr>";
+      }).join("") + "</tbody></table>" : '<div class="empty-stage"><b>관심 기업이 없습니다</b>Claude 에게 "OOO 리서치룸에 추가"라고 말하면 여기에 올라갑니다.</div>';
+    } else if (t === "res") {
+      var kinds = ["전체"].concat(docs.map(function (d) { return d.kind; }).filter(function (k, i, a) { return a.indexOf(k) === i; }));
+      var f = S.rk && kinds.indexOf(S.rk) >= 0 ? S.rk : "전체";
+      var list = docs.filter(function (d) { return (f === "전체" || d.kind === f) && hit(d); });
+      body = '<div class="seg rk">' + kinds.map(function (k) { return '<button data-rk="' + esc(k) + '" aria-pressed="' + (k === f) + '">' + esc(k) + "</button>"; }).join("") + "</div>" +
+        (list.length ? '<div class="rdocs">' + list.map(function (d) { return docRow(d, ""); }).join("") + "</div>" : '<div class="empty-stage"><b>자료가 없습니다</b></div>');
+    } else {
+      var pre = docs.filter(function (d) { return d.kind === "프리뷰" && hit(d); }).map(function (d) { return { d: d, a: nextAnn(d.c) }; })
+        .sort(function (a, b) { return (a.a || "9") < (b.a || "9") ? -1 : (a.a || "9") > (b.a || "9") ? 1 : 0; });
+      body = pre.length ? '<div class="rdocs">' + pre.map(function (x) { return docRow(x.d, x.a); }).join("") + "</div>" :
+        '<div class="empty-stage"><b>실적 프리뷰가 없습니다</b>관심 기업의 발표 전 프리뷰를 써 두면 발표일 순으로 여기에 모입니다.</div>';
+    }
+    var cnt = { watch: (S.room.watch || []).length, res: docs.length, pre: docs.filter(function (d) { return d.kind === "프리뷰"; }).length };
+    return '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Research Room</div><h1>리서치룸</h1>' +
+      '<div class="sub">분석하고 싶은 기업, 돌린 리서치 전부, 실적 프리뷰를 모아 둡니다 &nbsp;|&nbsp; 갱신 <span class="mono">' + esc(S.room.updated || "—") + "</span></div></div>" +
+      '<div class="stats">' + ROOM_T.map(function (x) { return '<div class="stat"><b>' + cnt[x.k] + "</b><span>" + x.lab + "</span></div>"; }).join("") + "</div></div></header>" +
+      '<nav class="rail"><div class="rail-in">' + ROOM_T.map(function (x) {
+        return '<a class="cat s2" href="#room/' + x.k + '" aria-pressed="' + (t === x.k) + '">' + esc(x.lab) + '<span class="n">' + cnt[x.k] + "</span></a>";
+      }).join("") + '<input id="rq" class="rq" type="search" placeholder="이름·티커 검색" value="' + esc(S.rq || "") + '"></div></nav>' +
+      '<div class="wrap" id="view">' + body + "</div>";
+  }
+  function renderRoom() {
+    app.innerHTML = roomView();
+    app.querySelectorAll("[data-rk]").forEach(function (b) { b.onclick = function () { S.rk = b.dataset.rk; renderRoom(); }; });
+    var q = document.getElementById("rq");
+    if (q) q.oninput = function () { S.rq = q.value; renderRoom(); var n = document.getElementById("rq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+  }
   function soon(name) { return '<div class="soon"><h2>' + name + " 준비 중</h2><p>일본 탭과 같은 1~4단계 흐름으로 만들 예정입니다.</p></div>"; }
   function route() {
     var h = (location.hash || "#jp").slice(1).split("/"), m = h[0] || "jp";
     document.querySelectorAll(".market a").forEach(function (a) { a.classList.toggle("on", a.dataset.m === m); });
     if (m === "us" || m === "kr") { closePanel(); app.innerHTML = soon(m === "us" ? "미국" : "한국"); return; }
     if (!S.ready) return;
+    if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
     if (h[1] === "c") {
       var o = S.cos[h[2]];
       if (!app.querySelector("#view")) { S.stage = o ? Math.min(o.stage, 2) : 1; render(); }
@@ -561,9 +625,10 @@
     getJSON("data/jp/fs.json").catch(function () { return {}; }),
     getJSON("data/jp/bm.json").catch(function () { return {}; }),
     getJSON("data/jp/monthly/index.json").catch(function () { return {}; }),
-    getJSON("data/jp/xlsx/index.json").catch(function () { return {}; })
+    getJSON("data/jp/xlsx/index.json").catch(function () { return {}; }),
+    getJSON("data/room.json").catch(function () { return { watch: [], docs: [] }; })
   ]).then(function (r) {
-    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7];
+    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
     S.ready = true; S.stage = 0;
