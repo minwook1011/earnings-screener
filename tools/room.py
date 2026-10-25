@@ -73,6 +73,8 @@ def add(c, name=None, memo="", m="jp"):
         w["memo"] = memo
     save(d)
     print(f"관심 기업 추가: {w['n']}({c})")
+    if m == "jp":
+        xlsx(c)
 
 
 def noindex(src):
@@ -99,6 +101,17 @@ def doc(c, kind, html, summary):
     d["docs"].insert(0, {"c": c, "n": name, "kind": kind, "date": now(), "title": title, "sum": summary, "html": rel})
     save(d)
     print(f"{name}({c}) {kind} 올림 → docs/{rel}")
+    xlsx(c)
+
+
+def xlsx(c):
+    """표준 재무제표 엑셀도 같이(파이썬만, 토큰 0) — 사이트 리서치룸 'xlsx' 버튼."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import build_xlsx
+        build_xlsx.build(c)
+    except Exception as e:
+        print(f"{c} 엑셀 실패: {e}")
 
 
 if __name__ == "__main__":

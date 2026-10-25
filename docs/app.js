@@ -582,7 +582,7 @@
         return '<tr><td class="rn"><b>' + esc(x.n) + '</b><span class="mono">' + esc(x.c) + "</span>" + (x.cat ? '<span class="cat2">' + esc(x.cat) + "</span>" : "") + "</td>" +
           '<td class="ra">' + (ann ? '<span class="ann">' + esc(dlab(ann)) + " 발표</span>" : '<span class="na">발표일 미정</span>') + "</td>" +
           '<td class="rm">' + esc(x.memo || "") + "<small>" + esc(x.added || "") + " 추가</small></td>" +
-          '<td class="rl">' + mine.map(docLink).join("") + (S.xl[x.c] ? '<a class="rbtn ghost" href="data/jp/xlsx/' + esc(x.c) + '.xlsx" download>xlsx</a>' : "") +
+          '<td class="rl">' + mine.map(docLink).join("") + (S.xl[x.c] ? '<a class="rbtn ghost" href="data/jp/xlsx/' + esc(x.c) + '.xlsx?v=' + encodeURIComponent(S.xl[x.c]) + '" download>xlsx</a>' : "") +
           (S.cos[x.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(x.c) + '">재무·주가</a>' : "") + (mine.length ? "" : '<span class="na">자료 없음</span>') + "</td></tr>";
       }).join("") + "</tbody></table>" : '<div class="empty-stage"><b>관심 기업이 없습니다</b>Claude 에게 "OOO 리서치룸에 추가"라고 말하면 여기에 올라갑니다.</div>';
     } else if (t === "res") {
