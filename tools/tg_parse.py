@@ -51,8 +51,57 @@ def to_f(s):
         return None
 
 
+# 2026-10-23 부터 봇 카드 꼴: "📌 화낙 (6954)" / "- 현재 시총 5.17조 엔 / PER 22.6배" / "- 실적 발표일 10/23 15:30" / "- 발표 후 주가: …"
+HEAD2 = re.compile(r"^📌\s*(?P<n>.+?)\s*\((?P<c>[0-9A-Z]{4})\)")
+YOY2 = re.compile(r"^-\s*CY\dQ\d\d:.*\((?P<r>[+\-−][\d,\.]+)%/(?P<o>[+\-−][\d,\.]+)%")
+
+
+def parse_card2(lines, m):
+    card = {"c": m["c"], "n": m["n"].strip(), "ann": "", "sections": []}
+    sec = None
+    for ln in lines[1:]:
+        if not ln.strip():
+            continue
+        if ln.startswith("▶️"):
+            sec = {"t": ln.replace("▶️", "").strip(), "lines": []}
+            card["sections"].append(sec)
+            continue
+        if sec is not None:
+            sec["lines"].append(ln)
+            if sec["t"].startswith("실적"):
+                y = YOY2.match(ln)
+                if y and "rev" not in card:
+                    card["rev"], card["op"] = to_f(y["r"]), to_f(y["o"])
+            continue
+        mc = re.search(r"시총\s+([\d,\.]+)\s*(억|조)", ln)
+        if mc:
+            card["val"] = ln.lstrip("- ").strip()
+            card["mc"] = to_f(mc.group(1)) * (10000 if mc.group(2) == "조" else 1)
+            pe = re.search(r"PER\s+([\d,\.]+)배", ln)
+            if pe:
+                card["per"] = to_f(pe.group(1))
+        an = re.search(r"실적 발표일\s+(\d{1,2}/\d{1,2})(?:\s+(\d{1,2}:\d{2}))?", ln)
+        if an:
+            card["ann"] = an.group(1) + (" " + an.group(2) if an.group(2) else "")
+        d1 = re.search(r"종가\s+([+\-−][\d\.]+)%", ln)
+        if d1 and "다음 날" in ln:
+            card["d1"] = to_f(d1.group(1))
+        vr = re.search(r"거래량 평소의\s+([\d\.]+)배", ln)
+        if vr:
+            card["vr"] = to_f(vr.group(1))
+    for s_ in card["sections"]:
+        if s_["t"].startswith("실적"):
+            ty = [x for x in s_["lines"] if x.startswith("- ") and "CY" not in x and "억" not in x]
+            if ty:
+                card["tags"] = [x.strip() for x in ty[0][2:].split(",")]
+    return card if card["ann"] else None
+
+
 def parse_card(text):
     lines = [x.rstrip() for x in text.split("\n")]
+    m2 = HEAD2.match(lines[0]) if lines else None
+    if m2:
+        return parse_card2(lines, m2)
     m = HEAD.match(lines[0]) if lines else None
     if not m:
         return None
