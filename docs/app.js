@@ -570,7 +570,8 @@
       (ann ? '<span class="ann">' + esc(dlab(ann)) + " 발표</span>" : "") + "</div>" +
       "<h3>" + esc(d.n) + ' <span class="mono">' + esc(d.c) + "</span></h3>" +
       (d.sum ? "<p>" + esc(d.sum) + "</p>" : "") + '<div class="rd-act">' + docLink(d) +
-      (S.cos[d.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(d.c) + '">재무·주가 보기</a>' : "") + "</div></article>";
+      (S.cos[d.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(d.c) + '">재무·주가 보기</a>' : "") +
+      (S.xl[d.c] ? '<a class="rbtn ghost" href="data/jp/xlsx/' + esc(d.c) + '.xlsx?v=' + encodeURIComponent(S.xl[d.c]) + '" download>xlsx 다운로드</a>' : "") + "</div></article>";
   }
   function roomView() {
     var t = S.roomTab, q = (S.rq || "").trim().toLowerCase(), docs = roomDocs(), body = "";
