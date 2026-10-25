@@ -24,7 +24,7 @@
     4: "텔레 4단계로 간 회사가 이곳에 기록됩니다."
   };
   var GRADE_UP = { "서프라이즈": 1, "양호": 1, "호조": 1 }, GRADE_DN = { "부진": 1, "쇼크": 1, "미달": 1 };
-  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
+  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, xl: {}, stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
   var app = document.getElementById("app");
 
   /* ---------- 도우미 ---------- */
@@ -287,7 +287,7 @@
     pin.innerHTML = head0 +
       (sum ? '<div class="dsec">기업 개요</div><div class="box"><p>' + esc(sum) + "</p></div>" : "") +
       (o.stage >= 2 || o.res["2"] ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
-      '<div class="dsec">분기 재무제표<span class="hint">억엔 · 칸 색 = YoY · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
+      '<div class="dsec"><span>분기 재무제표' + (S.xl[o.c] ? ' <a class="xl" href="data/jp/xlsx/' + esc(o.c) + '.xlsx?v=' + encodeURIComponent(S.xl[o.c]) + '" download>xlsx 다운로드</a>' : '') + '</span><span class="hint">억엔 · 칸 색 = YoY · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
       (fr.length > 1 ? '<div class="charts">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
       (S.mo[o.c] ? '<details class="mo" id="mo"><summary><b>월차</b><span id="mo-sum">' + esc(S.mo[o.c]) + ' 까지 · 눌러서 펼치기</span></summary><div id="mo-body" class="mo-body"><p class="na">불러오는 중…</p></div></details>' : "") +
       '<div class="dsec">기본 정보</div><div class="kmini">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
@@ -560,9 +560,10 @@
     getJSON("data/jp/qyoy.json").catch(function () { return {}; }),
     getJSON("data/jp/fs.json").catch(function () { return {}; }),
     getJSON("data/jp/bm.json").catch(function () { return {}; }),
-    getJSON("data/jp/monthly/index.json").catch(function () { return {}; })
+    getJSON("data/jp/monthly/index.json").catch(function () { return {}; }),
+    getJSON("data/jp/xlsx/index.json").catch(function () { return {}; })
   ]).then(function (r) {
-    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2];
+    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7];
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
     S.ready = true; S.stage = 0;

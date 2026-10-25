@@ -99,6 +99,11 @@ def attach(c, st, html, verdict):
                                                "html": rel, "title": title, "verdict": verdict}
     save_idx(idx)
     print(f"{c} {st}단계 리서치 HTML 올림 → docs/{rel}")
+    try:   # 표준 재무제표 엑셀도 같이(파이썬만, 토큰 0)
+        import build_xlsx
+        build_xlsx.build(c)
+    except Exception as e:
+        print(f"{c} 엑셀 실패: {e}")
 
 
 def mark(c, st, status):
