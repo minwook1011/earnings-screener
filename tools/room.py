@@ -94,7 +94,8 @@ def doc(c, kind, html, summary, name=None, ann=None):
     dst = os.path.join(ROOT, "docs", rel)
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     src = open(html, encoding="utf-8").read()
-    out = noindex(src)
+    import research_queue
+    out = research_queue.light(noindex(src))
     if xlsx(c):   # 엑셀이 생기면 리포트 안에 'xlsx 다운로드' 버튼
         import build_xlsx
         out = build_xlsx.add_button(out, c)

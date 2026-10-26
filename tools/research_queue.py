@@ -90,6 +90,7 @@ def attach(c, st, html, verdict):
         else:   # 아티팩트용 파일은 <head> 없이 시작한다
             src = NL.join(['<!doctype html>', '<meta charset="utf-8">',
                            '<meta name="viewport" content="width=device-width, initial-scale=1">', meta, src])
+    src = light(src)
     try:   # 표준 재무제표 엑셀도 같이(파이썬만, 토큰 0) → 리포트 안에 'xlsx 다운로드' 버튼
         import build_xlsx
         build_xlsx.build(c)
@@ -105,6 +106,13 @@ def attach(c, st, html, verdict):
                                                "html": rel, "title": title, "verdict": verdict}
     save_idx(idx)
     print(f"{c} {st}단계 리서치 HTML 올림 → docs/{rel}")
+
+
+def light(src):
+    """리포트는 늘 밝은 화면 — 휴대폰 다크 모드에서 일부 칸 글자가 안 보여서(2026-10-26)."""
+    if re.search(r"<html[^>]*data-theme", src, re.I):
+        return src
+    return re.sub(r"<html", '<html data-theme="light"', src, count=1, flags=re.I)
 
 
 def mark(c, st, status):
