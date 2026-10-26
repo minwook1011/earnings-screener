@@ -63,6 +63,34 @@ def get(url, tries=3):
             time.sleep(2)
 
 
+_PAGES = {}
+
+
+def official(code, days=2):
+    """TDnet 공식 당일 목록(오늘·어제) — 위 LIST 는 한 시간 넘게 늦어 발표 직후 결산단신이 빠진다(2026-10-26 신에츠폴리머)."""
+    out, today = [], datetime.now(KST).date()
+    for k in range(days):
+        ymd = (today - timedelta(days=k)).strftime("%Y%m%d")
+        for page in range(1, 40):
+            u = f"https://www.release.tdnet.info/inbs/I_list_{page:03d}_{ymd}.html"
+            if u not in _PAGES:   # 한 번 실행 안에서 여러 회사가 같은 쪽을 다시 받지 않게
+                _PAGES[u] = get(u, tries=1)
+            raw = _PAGES[u]
+            if not raw:
+                break
+            s = raw.decode("utf-8", "ignore")
+            rows = re.findall(r"<tr>(.*?)</tr>", s, re.S)
+            if not any("kjCode" in r for r in rows):
+                break
+            for r in rows:
+                if f">{code}0</td>" not in r or "kjXbrl" not in r:
+                    continue
+                t = re.search(r'kjTitle[^>]*><a href="(\d{18})\.pdf"[^>]*>([^<]*)</a>', r)
+                if t and "決算短信" in t.group(2) and "訂正" not in t.group(2) and ".zip" in r:
+                    out.append({"doc": t.group(1), "date": f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}", "title": t.group(2).strip()})
+    return out
+
+
 def filings(code):
     raw = get(LIST.format(code=code))
     if not raw:
@@ -76,6 +104,8 @@ def filings(code):
         m = re.search(r"(\d{18})\.pdf", t.get("document_url", ""))
         if m:
             out.append({"doc": m.group(1), "date": t.get("pubdate", "")[:10], "title": title})
+    have = {f["doc"] for f in out}
+    out = sorted([f for f in official(code) if f["doc"] not in have] + out, key=lambda f: (f["date"], f["doc"]), reverse=True)
     keep, n_year = [], 0
     for f in out:                     # 새것부터
         annual = not re.search(r"四半期|中間", f["title"])

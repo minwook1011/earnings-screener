@@ -43,7 +43,7 @@ def refresh():
     pipe = json.load(open(os.path.join(DATA, "pipeline.json"), encoding="utf-8"))
     idx = load_idx()
     cut = (datetime.now(KST) - timedelta(minutes=STALE)).strftime("%Y-%m-%d %H:%M")
-    todo, running = [], []
+    todo, running, wait = [], [], []
     for c, co in pipe["companies"].items():
         if co["stage"] < 2:
             continue
@@ -59,11 +59,34 @@ def refresh():
             continue
         if not it:
             idx["items"][c]["2"] = {"status": "대기", "queued": now(), "kind": SKILL[2]}
+        ann = (co["cards"].get("2") or {}).get("ann")
+        if not filed(c, ann):   # 이번 결산단신이 아직 안 잡히면 지난 분기로 쓰게 되니 기다린다(2026-10-26 신에츠폴리머)
+            wait.append(c)
+            continue
         todo.append({"c": c, "n": co["n"], "stage": 2, "ann": (co["cards"].get("2") or {}).get("ann"),
                      "since": co.get("since")})
     todo.sort(key=lambda x: x.get("since") or "")   # 먼저 올라온 순
     save_idx(idx)
-    print(json.dumps({"running": running, "free": max(0, MAX - len(running)), "todo": todo}, ensure_ascii=False, indent=1))
+    print(json.dumps({"running": running, "free": max(0, MAX - len(running)), "todo": todo, "wait": wait}, ensure_ascii=False, indent=1))
+
+
+def filed(c, ann):
+    """발표일(카드 'MM/DD HH:MM')이 최근 7일이면 그날 이후 결산단신이 목록에 있어야 시작한다."""
+    m = re.match(r"(\d+)/(\d+)", ann or "")
+    if not m:
+        return True
+    t = datetime.now(KST)
+    d = datetime(t.year, int(m.group(1)), int(m.group(2)), tzinfo=KST)
+    if d > t + timedelta(days=1):
+        d = d.replace(year=t.year - 1)
+    if (t - d).days > 7:
+        return True
+    try:
+        import build_xlsx
+        fs = build_xlsx.filings(c)
+    except BaseException:   # 목록을 못 받으면 다음 번에
+        return False
+    return bool(fs) and fs[0]["date"] >= d.strftime("%Y-%m-%d")
 
 
 def done(c, st, verdict, artifact=None):
