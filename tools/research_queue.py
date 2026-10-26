@@ -19,7 +19,7 @@ IDX = os.path.join(DATA, "research", "index.json")
 KST = timezone(timedelta(hours=9))
 NL = chr(10)
 SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
-MAX = 4      # 동시에 도는 리포트 최대 수(2026-10-25 사용자)
+MAX = 10     # 동시에 도는 리포트 최대 수(2026-10-26 사용자, 4→10)
 STALE = 90   # 분
 
 
