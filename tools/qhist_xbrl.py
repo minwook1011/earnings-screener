@@ -4,23 +4,31 @@
   이미 qhist 에 있는 회사(예약 작업이 jp_guidance 로 넣은 것)는 건드리지 않는다. 단위 백만엔.
 
   python tools/qhist_xbrl.py [코드 …]     코드를 안 주면 리서치룸 자료(room.json docs·watch) 중 qhist 에 없는 회사
+  python tools/qhist_xbrl.py fresh        2단계 이상·발표 8일 안 회사의 '이번 분기'를 공식 결산단신에서 채운다(2026-10-26).
+      jp_guidance(중계)는 발표 당일 늦거나 멈춰 표가 지난 분기에 멈추므로, qhist 맨 위보다 새 분기만 앞에 붙인다.
+      그날 결산단신을 잡으면 _fresh 에 적어 다시 안 봄. 못 잡으면 다음 동기화 때 또 본다.
 """
 import json
 import os
+import re
+from datetime import date
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import build_xlsx as bx
+import build_qyoy as bdq
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "tools", "qhist", "jp.json")
 N = 14
 
 
-def rows_of(code):
+def rows_of(code, info=None):
     data, used, fsm = bx.collect(code)
     if not used:
         return None
+    if info is not None:
+        info["date"] = used[0]["date"]
     PL = data["PL"]
     rev = bx.pick(PL, bx.PLMAP["revenue"])
     if not rev:
@@ -39,6 +47,45 @@ def rows_of(code):
     med = good[len(good) // 2] if good else 0
     out = [r for r in out if r[1] > 0 and r[1] >= med * 0.4]
     return out[::-1] or None
+
+
+def ann_date(ann, today):
+    m = re.match(r"(\d{1,2})/(\d{1,2})", ann or "")
+    if not m:
+        return None
+    d = date(today.year, int(m.group(1)), int(m.group(2)))
+    return d if d <= today else date(today.year - 1, d.month, d.day)
+
+
+def fresh():
+    src = json.load(open(SRC, encoding="utf-8"))
+    pipe = json.load(open(os.path.join(ROOT, "docs", "data", "jp", "pipeline.json"), encoding="utf-8"))["companies"]
+    done = src.get("_fresh", {})
+    today, add = date.today(), []
+    for c, v in pipe.items():
+        if v.get("stage", 1) < 2 or c not in src:
+            continue
+        card = v["cards"].get(str(v["stage"])) or v["cards"].get("2") or {}
+        d = ann_date(card.get("ann"), today)
+        if not d or (today - d).days > 8 or done.get(c, "") >= d.isoformat():
+            continue
+        info = {}
+        try:
+            r = rows_of(c, info)
+        except Exception as e:
+            print(" ", c, "실패", e)
+            continue
+        if not r or info.get("date", "") < d.isoformat():
+            continue                              # 공식 목록에 아직 없음 — 다음에 다시
+        top = bdq.key(src[c][0][0])
+        new = [x for x in r if bdq.key(x[0]) and top and bdq.key(x[0])[0::2] > top[0::2]]
+        if new:
+            src[c] = new + src[c]
+            add.append(f"{c} {new[0][0]}")
+        done[c] = info["date"]
+    src["_fresh"] = done
+    json.dump(src, open(SRC, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    print("이번 분기 채움:", ", ".join(add) if add else "없음")
 
 
 def main(codes):
@@ -66,4 +113,7 @@ def main(codes):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    if sys.argv[1:2] == ["fresh"]:
+        fresh()
+    else:
+        main(sys.argv[1:])
