@@ -114,6 +114,7 @@ def attach(c, st, html, verdict):
             src = NL.join(['<!doctype html>', '<meta charset="utf-8">',
                            '<meta name="viewport" content="width=device-width, initial-scale=1">', meta, src])
     src = light(src)
+    src = tanshin(c, src)
     try:   # 표준 재무제표 엑셀도 같이(파이썬만, 토큰 0) → 리포트 안에 'xlsx 다운로드' 버튼
         import build_xlsx
         build_xlsx.build(c)
@@ -129,6 +130,44 @@ def attach(c, st, html, verdict):
                                                "html": rel, "title": title, "verdict": verdict}
     save_idx(idx)
     print(f"{c} {st}단계 리서치 HTML 올림 → docs/{rel}")
+
+
+TBTN = ('<style>.es-tanshin-bar{margin:0 0 14px}.es-tanshin{display:inline-block;padding:7px 14px;border-radius:999px;'
+        'background:#c62828;color:#fff;font:600 13px/1 system-ui,"Malgun Gothic",sans-serif;text-decoration:none}'
+        '.es-tanshin:hover{background:#a31f1f}</style>'
+        '<div class="es-tanshin-bar"><a class="es-tanshin" href="tanshin.pdf" download="{name}">결산단신 PDF 다운로드</a></div>')
+
+
+def tanshin(c, src):
+    """실적 분석 바로 아래 '결산단신 PDF 다운로드'(2026-10-26 사용자). 배지 날짜의 결산단신을 사이트에 복사해 둔다
+    (거래소 공식 PDF 주소는 한 달 뒤 사라지고, JPX 보관본은 발표 당일엔 아직 없어서)."""
+    m = re.search(r'class="resd">[^<]*?(\d{2})\.(\d{1,2})\.(\d{1,2})', src)
+    if not m:
+        return src
+    day = f"20{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    out = os.path.join(DATA, "..", "..", "research", c, "tanshin.pdf")
+    try:
+        import build_xlsx
+        f = next((f for f in build_xlsx.filings(c) if f["date"] == day), None)
+        if not f:
+            print(f"{c} {day} 결산단신 못 찾음 — PDF 버튼 없음")
+            return src
+        tag = out + ".doc"   # 받아 둔 PDF 의 문서 번호
+        if not (os.path.exists(out) and os.path.exists(tag) and open(tag, encoding="utf-8").read() == f["doc"]):
+            b = build_xlsx.get(f"https://www.release.tdnet.info/inbs/{f['doc']}.pdf") or build_xlsx.get(build_xlsx.PDF.format(code=c, doc=f["doc"]))
+            if not b or b[:4] != b"%PDF":
+                print(f"{c} 결산단신 PDF 못 받음")
+                return src
+            os.makedirs(os.path.dirname(out), exist_ok=True)
+            open(out, "wb").write(b)
+            open(out + ".doc", "w", encoding="utf-8").write(f["doc"])
+    except Exception as e:
+        print(f"{c} 결산단신 PDF 실패: {e}")
+        return src
+    btn = TBTN.replace("{name}", f"{c} 결산단신 {day}.pdf")
+    if 'class="es-tanshin-bar"' in src:   # 빌더가 공식 주소로 단 버튼 → 사이트 사본으로
+        return re.sub(r'<div class="es-tanshin-bar">.*?</div>', lambda _: btn, src, count=1, flags=re.S)
+    return re.sub(r'(<details class="tg an res">.*?</summary>\s*<div class="tgb">)', lambda k: k.group(1) + btn, src, count=1, flags=re.S)
 
 
 def light(src):
