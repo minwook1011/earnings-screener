@@ -66,15 +66,22 @@ def get(url, tries=3):
 _PAGES = {}
 
 
-def official(code, days=2):
-    """TDnet 공식 당일 목록(오늘·어제) — 위 LIST 는 한 시간 넘게 늦어 발표 직후 결산단신이 빠진다(2026-10-26 신에츠폴리머)."""
+def official(code, days=8):
+    """TDnet 공식 날짜별 목록(최근 8일 — 발표 직후 1주는 공식 목록이 기준) — 위 LIST 는 한 시간 넘게 늦어 발표 직후 결산단신이 빠진다(2026-10-26 신에츠폴리머)."""
     out, today = [], datetime.now(KST).date()
     for k in range(days):
         ymd = (today - timedelta(days=k)).strftime("%Y%m%d")
         for page in range(1, 40):
             u = f"https://www.release.tdnet.info/inbs/I_list_{page:03d}_{ymd}.html"
+            f = os.path.join(CACHE, "_tdnet", f"{ymd}_{page:03d}.html")
             if u not in _PAGES:   # 한 번 실행 안에서 여러 회사가 같은 쪽을 다시 받지 않게
-                _PAGES[u] = get(u, tries=1)
+                if k >= 2 and os.path.exists(f):   # 지난 날 목록은 바뀌지 않으니 저장해 둔 것
+                    _PAGES[u] = open(f, "rb").read()
+                else:
+                    _PAGES[u] = get(u, tries=2)
+                    if k >= 2 and _PAGES[u]:
+                        os.makedirs(os.path.dirname(f), exist_ok=True)
+                        open(f, "wb").write(_PAGES[u])
             raw = _PAGES[u]
             if not raw:
                 break
