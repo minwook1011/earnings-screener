@@ -134,8 +134,9 @@ def attach(c, st, html, verdict):
 
 TBTN = ('<style>.es-tanshin-bar{margin:0 0 14px}.es-tanshin{display:inline-block;padding:7px 14px;border-radius:999px;'
         'background:#c62828;color:#fff;font:600 13px/1 system-ui,"Malgun Gothic",sans-serif;text-decoration:none}'
-        '.es-tanshin:hover{background:#a31f1f}</style>'
-        '<div class="es-tanshin-bar"><a class="es-tanshin" href="tanshin.pdf" download="{name}">결산단신 PDF 다운로드</a></div>')
+        '.es-tanshin:hover{background:#a31f1f}.es-call{display:inline-block;margin-left:10px;padding:6px 12px;border-radius:999px;'
+        'border:1.5px solid #c62828;color:#c62828;font:600 13px/1 system-ui,"Malgun Gothic",sans-serif;vertical-align:1px}</style>'
+        '<div class="es-tanshin-bar"><a class="es-tanshin" href="tanshin.pdf" download="{name}">결산단신 PDF 다운로드</a>{call}</div>')
 
 
 def tanshin(c, src):
@@ -164,10 +165,32 @@ def tanshin(c, src):
     except Exception as e:
         print(f"{c} 결산단신 PDF 실패: {e}")
         return src
-    btn = TBTN.replace("{name}", f"{c} 결산단신 {day}.pdf")
-    if 'class="es-tanshin-bar"' in src:   # 빌더가 공식 주소로 단 버튼 → 사이트 사본으로
-        return re.sub(r'<div class="es-tanshin-bar">.*?</div>', lambda _: btn, src, count=1, flags=re.S)
+    name = f"{c} 결산단신 {day}.pdf"
+    if 'class="es-tanshin-bar"' in src:   # 빌더가 공식 주소로 단 버튼 → 사이트 사본으로(옆의 콜 일정은 그대로)
+        src = re.sub(r'<a class="es-tanshin" href="[^"]*"[^>]*>',
+                     lambda _: f'<a class="es-tanshin" href="tanshin.pdf" download="{name}">', src, count=1)
+        if 'class="es-call"' not in src:   # 보고서에 콜 일정이 없으면 결산단신 칸으로
+            src = re.sub(r'(<div class="es-tanshin-bar">.*?)(</div>)', lambda k: k.group(1) + call_chip(out) + k.group(2),
+                         src, count=1, flags=re.S)
+        return src
+    btn = TBTN.replace("{name}", name).replace("{call}", call_chip(out))
     return re.sub(r'(<details class="tg an res">.*?</summary>\s*<div class="tgb">)', lambda k: k.group(1) + btn, src, count=1, flags=re.S)
+
+
+def call_chip(pdf):
+    """리포트에 콜 일정이 없을 때 — 결산단신 첫 쪽 '결산설명회 개최 유무' 칸만으로(날짜는 IR 사이트에만 있음)."""
+    try:
+        import pypdf
+        t = re.sub(r"\s+", "", pypdf.PdfReader(pdf).pages[0].extract_text())
+    except Exception:
+        return ""
+    m = re.search(r"決算説明会開催の有無[:：]?(有|無)[（(]?([^）)]{0,30})", t)
+    if not m:
+        return ""
+    if m.group(1) == "無":
+        return '<span class="es-call">결산설명회 없음</span>'
+    who = "·".join(k for j, k in (("機関投資家", "기관"), ("アナリスト", "애널리스트"), ("個人投資家", "개인")) if j in m.group(2))
+    return f'<span class="es-call">결산설명회 있음{f"({who} 대상)" if who else ""} · 날짜 미확인</span>'
 
 
 def light(src):
