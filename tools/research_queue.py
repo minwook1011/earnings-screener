@@ -115,6 +115,12 @@ def attach(c, st, html, verdict):
                            '<meta name="viewport" content="width=device-width, initial-scale=1">', meta, src])
     src = light(src)
     src = tanshin(c, src)
+    try:   # 실적 분석을 ① 실적 요약 ② 질의응답 탭으로(질의응답은 나중에 예약 작업이 채움)
+        import qa
+        if 'class="es-tabs"' not in src:   # 빌더가 이미 탭(질의응답 포함)을 만들었으면 그대로
+            src = qa.tabs(src, qa.none_html(c))
+    except Exception as e:
+        print(f"{c} 질의응답 탭 실패: {e}")
     try:   # 표준 재무제표 엑셀도 같이(파이썬만, 토큰 0) → 리포트 안에 'xlsx 다운로드' 버튼
         import build_xlsx
         build_xlsx.build(c)
