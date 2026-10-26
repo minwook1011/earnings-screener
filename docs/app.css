@@ -683,3 +683,9 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .spark.dn .sp-l b { color: var(--down, #2f63d0); }
 .rdoc .rd-q { display: flex; gap: 14px; align-items: flex-start; margin: 10px 0 4px; flex-wrap: wrap; }
 .rdoc .rd-q .qbox { flex: 1 1 520px; min-width: 0; overflow-x: auto; }
+/* 결산설명회(IR 콜) 칩 — 3단계로 버튼 밑(2026-10-26 사용자) */
+.irc { display: inline-flex; flex-direction: column; gap: 1px; margin: 0 0 8px; padding: 5px 9px; border-radius: 8px; border: 1px solid var(--line, #dde3ec); font-size: 11px; color: var(--ink-mid); line-height: 1.3; }
+.irc b { font-size: 13px; color: var(--ink, #1d2330); }
+.irc small { font-size: 10px; }
+.irc.on { border-color: #c62828; }
+.irc.on b { color: #c62828; }

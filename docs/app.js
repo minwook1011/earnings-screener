@@ -2,7 +2,7 @@
  *  1단계: 실적 발표 기업 이름·티커만 모아 둔 목록
  *  2~4단계: VANTAGE 스크리너 같은 표 + 기업마다 둘째 줄(최근 10개 분기 매출·영업이익 성장률)
  *  어느 기업이든 누르면 오른쪽 패널(주가 1년·분기 실적·텔레 카드·리서치)
- * 데이터: data/jp/stage1.json · pipeline.json · qyoy.json · ret.json(주가 수익률) · research/index.json · co/<코드>.json
+ * 데이터: data/jp/stage1.json · pipeline.json · qyoy.json · ret.json(주가 수익률) · ircall.json(IR 설명회) · research/index.json · co/<코드>.json
  * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #room/watch|res|pre · #us · #kr */
 (function () {
   "use strict";
@@ -177,6 +177,14 @@
     return '<div class="spark ' + cls + '" title="최근 1년 주가(주간) · ' + esc(md(r.d)) + " 종가 " + num(r.px, r.px < 100 ? 1 : 0) + '엔"><svg viewBox="0 0 ' + W + " " + H + '" width="' + W + '" height="' + H + '" aria-hidden="true"><polyline points="' + pts + '"/></svg>' +
       '<span class="sp-l">1년 <b>' + pctTxt(Math.round(ch * 10) / 10) + "</b></span></div>";
   }
+  /* 결산설명회(IR 콜) 일정 — 3단계로 버튼 밑 빈칸(2026-10-26 사용자, ircall.json · 평일 15:30·16:30·17:30 갱신) */
+  function irc(c) {
+    var x = ((S.irc || {}).items || {})[c], t = x && x.t;
+    if (!t) return "";
+    var d = /^\d{1,2}\/\d{1,2}/.test(t), p = t.split(" · ");
+    return '<div class="irc' + (d ? " on" : "") + '" title="결산설명회(IR 콜)' + (x.src && /^https?:/.test(x.src) ? " · " + esc(x.src) : "") + '"><span>IR 설명회</span><b>' +
+      esc(d ? p[0] : t === "없음" ? "없음" : "날짜 미확인") + "</b>" + (d && p[1] ? "<small>" + esc(p.slice(1).join(" · ")) + "</small>" : "") + "</div>";
+  }
   function qline(c) {
     var q = S.qy[c];
     if (!q || !q.length) return '<div class="ql-empty">분기 성장률 자료 없음 — 다음 갱신 때 채웁니다</div>';
@@ -252,7 +260,7 @@
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
         "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
         '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td class="sp-td">' + spark(o.c) + '</td><td colspan="9">' + '<div class="qwrap">' + qline(o.c) + "</div></td></tr>";
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td class="sp-td">' + irc(o.c) + spark(o.c) + '</td><td colspan="9">' + '<div class="qwrap">' + qline(o.c) + "</div></td></tr>";
     }
     var last = null, body = rows.map(function (o, i) {
       var sep = all && o.d !== last ? '<tr class="dsep"><td colspan="11">' + (o.d ? dlab(o.d) + " 발표" : "발표일 모름") + "</td></tr>" : "";
@@ -655,9 +663,10 @@
     getJSON("data/jp/monthly/index.json").catch(function () { return {}; }),
     getJSON("data/jp/xlsx/index.json").catch(function () { return {}; }),
     getJSON("data/room.json").catch(function () { return { watch: [], docs: [] }; }),
-    getJSON("data/jp/ret.json").catch(function () { return { items: {} }; })
+    getJSON("data/jp/ret.json").catch(function () { return { items: {} }; }),
+    getJSON("data/jp/ircall.json").catch(function () { return { items: {} }; })
   ]).then(function (r) {
-    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
+    S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.irc = r[10]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
     S.ready = true; S.stage = 0;
