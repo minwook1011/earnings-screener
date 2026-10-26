@@ -66,35 +66,62 @@ def get(url, tries=3):
 _PAGES = {}
 
 
+def day_rows(code, ymd, keep=False):
+    """TDnet 공식 날짜별 목록에서 그 회사의 그날 공시 전부 [{doc, date, title, xbrl}]. keep=True 면 목록을 저장해 두고 다시 씀(지난 날)."""
+    out = []
+    for page in range(1, 40):
+        u = f"https://www.release.tdnet.info/inbs/I_list_{page:03d}_{ymd}.html"
+        f = os.path.join(CACHE, "_tdnet", f"{ymd}_{page:03d}.html")
+        if u not in _PAGES:   # 한 번 실행 안에서 여러 회사가 같은 쪽을 다시 받지 않게
+            if keep and os.path.exists(f):   # 지난 날 목록은 바뀌지 않으니 저장해 둔 것
+                _PAGES[u] = open(f, "rb").read()
+            else:
+                _PAGES[u] = get(u, tries=2)
+                if keep and _PAGES[u]:
+                    os.makedirs(os.path.dirname(f), exist_ok=True)
+                    open(f, "wb").write(_PAGES[u])
+        raw = _PAGES[u]
+        if not raw:
+            break
+        rows = re.findall(r"<tr>(.*?)</tr>", raw.decode("utf-8", "ignore"), re.S)
+        if not any("kjCode" in r for r in rows):
+            break
+        for r in rows:
+            if f">{code}0</td>" not in r:
+                continue
+            t = re.search(r'kjTitle[^>]*><a href="(\d{18})\.pdf"[^>]*>([^<]*)</a>', r)
+            if t:
+                out.append({"doc": t.group(1), "date": f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}", "title": t.group(2).strip(), "xbrl": ".zip" in r})
+    return out
+
+
 def official(code, days=8):
     """TDnet 공식 날짜별 목록(최근 8일 — 발표 직후 1주는 공식 목록이 기준) — 위 LIST 는 한 시간 넘게 늦어 발표 직후 결산단신이 빠진다(2026-10-26 신에츠폴리머)."""
     out, today = [], datetime.now(KST).date()
     for k in range(days):
         ymd = (today - timedelta(days=k)).strftime("%Y%m%d")
-        for page in range(1, 40):
-            u = f"https://www.release.tdnet.info/inbs/I_list_{page:03d}_{ymd}.html"
-            f = os.path.join(CACHE, "_tdnet", f"{ymd}_{page:03d}.html")
-            if u not in _PAGES:   # 한 번 실행 안에서 여러 회사가 같은 쪽을 다시 받지 않게
-                if k >= 2 and os.path.exists(f):   # 지난 날 목록은 바뀌지 않으니 저장해 둔 것
-                    _PAGES[u] = open(f, "rb").read()
-                else:
-                    _PAGES[u] = get(u, tries=2)
-                    if k >= 2 and _PAGES[u]:
-                        os.makedirs(os.path.dirname(f), exist_ok=True)
-                        open(f, "wb").write(_PAGES[u])
-            raw = _PAGES[u]
-            if not raw:
-                break
-            s = raw.decode("utf-8", "ignore")
-            rows = re.findall(r"<tr>(.*?)</tr>", s, re.S)
-            if not any("kjCode" in r for r in rows):
-                break
-            for r in rows:
-                if f">{code}0</td>" not in r or "kjXbrl" not in r:
-                    continue
-                t = re.search(r'kjTitle[^>]*><a href="(\d{18})\.pdf"[^>]*>([^<]*)</a>', r)
-                if t and "決算短信" in t.group(2) and "訂正" not in t.group(2) and ".zip" in r:
-                    out.append({"doc": t.group(1), "date": f"{ymd[:4]}-{ymd[4:6]}-{ymd[6:]}", "title": t.group(2).strip()})
+        out += [{k2: f[k2] for k2 in ("doc", "date", "title")} for f in day_rows(code, ymd, keep=k >= 2)
+                if "決算短信" in f["title"] and "訂正" not in f["title"] and f["xbrl"]]
+    return out
+
+
+DECK = re.compile(r"説明(会)?資料|補足資料|決算説明|プレゼンテーション|ファクトブック|決算概要")
+
+
+def decks(code, day):
+    """그날(YYYY-MM-DD) 낸 결산 설명 자료(PPT) [{doc, date, title}] — 공식 목록(한 달치) → 없으면 중계 목록."""
+    ymd = day.replace("-", "")
+    old = (datetime.now(KST).date() - date.fromisoformat(day)).days
+    out = []
+    if old <= 30:
+        out = [f for f in day_rows(code, ymd, keep=old >= 2) if DECK.search(f["title"]) and "訂正" not in f["title"]]
+    if not out:
+        raw = get(LIST.format(code=code))
+        for it in (json.loads(raw).get("items", []) if raw else []):
+            t = it.get("Tdnet", it) if isinstance(it, dict) else {}
+            m = re.search(r"(\d{18})\.pdf", t.get("document_url", ""))
+            if m and t.get("pubdate", "")[:10] == day and DECK.search(t.get("title", "")) and "訂正" not in t.get("title", ""):
+                out.append({"doc": m.group(1), "date": day, "title": t.get("title", "")})
     return out
 
 

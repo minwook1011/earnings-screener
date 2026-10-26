@@ -172,9 +172,46 @@ def tanshin(c, src):
         if 'class="es-call"' not in src:   # 보고서에 콜 일정이 없으면 결산단신 칸으로
             src = re.sub(r'(<div class="es-tanshin-bar">.*?)(</div>)', lambda k: k.group(1) + call_chip(out) + k.group(2),
                          src, count=1, flags=re.S)
-        return src
+        return deck(c, day, src)
     btn = TBTN.replace("{name}", name).replace("{call}", call_chip(out))
-    return re.sub(r'(<details class="tg an res">.*?</summary>\s*<div class="tgb">)', lambda k: k.group(1) + btn, src, count=1, flags=re.S)
+    src = re.sub(r'(<details class="tg an res">.*?</summary>\s*<div class="tgb">)', lambda k: k.group(1) + btn, src, count=1, flags=re.S)
+    return deck(c, day, src)
+
+
+DCSS = ('<style>.es-deck{display:inline-block;margin-left:10px;padding:7px 14px;border-radius:999px;background:#1f4e9c;color:#fff;'
+        'font:600 13px/1 system-ui,"Malgun Gothic",sans-serif;text-decoration:none}.es-deck:hover{background:#163a75}</style>')
+
+
+def deck(c, day, src):
+    """결산단신 버튼 옆 '설명회 자료 PDF'(2026-10-26 사용자) — 같은 날 낸 결산 설명 자료(PPT)를 사이트에 복사. 안 냈으면 버튼 없음."""
+    if 'class="es-tanshin"' not in src:
+        return src
+    out = os.path.join(DATA, "..", "..", "research", c, "setsumei.pdf")
+    try:
+        import build_xlsx
+        ds = build_xlsx.decks(c, day)
+        if not ds:
+            return src
+        f = ds[0]
+        tag = out + ".doc"
+        if not (os.path.exists(out) and os.path.exists(tag) and open(tag, encoding="utf-8").read() == f["doc"]):
+            b = build_xlsx.get(f"https://www.release.tdnet.info/inbs/{f['doc']}.pdf") or build_xlsx.get(build_xlsx.PDF.format(code=c, doc=f["doc"]))
+            if not b or b[:4] != b"%PDF":
+                print(f"{c} 설명회 자료 PDF 못 받음")
+                return src
+            open(out, "wb").write(b)
+            open(tag, "w", encoding="utf-8").write(f["doc"])
+    except Exception as e:
+        print(f"{c} 설명회 자료 실패: {e}")
+        return src
+    a = f'<a class="es-deck" href="setsumei.pdf" download="{c} 설명회 자료 {day}.pdf">설명회 자료 PDF 다운로드</a>'
+    if 'class="es-deck"' in src:   # 빌더가 공식 주소로 단 버튼 → 사이트 사본으로
+        src = re.sub(r'<a class="es-deck"[^>]*>[^<]*</a>', lambda _: a, src, count=1)
+    else:
+        src = re.sub(r'(<a class="es-tanshin"[^>]*>[^<]*</a>)', lambda k: k.group(1) + a, src, count=1)
+    if ".es-deck{" not in src:
+        src = src.replace('<div class="es-tanshin-bar">', DCSS + '<div class="es-tanshin-bar">', 1)
+    return src
 
 
 def call_chip(pdf):
