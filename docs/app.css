@@ -716,3 +716,18 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .scr-t tr.qrow .sp-td { vertical-align: middle; }
 .scr-t tbody .cl { display: none; }
 @media (max-width: 760px) { .scr-t tbody .cl { display: block; } }
+/* 스크리닝 둘째 줄 다듬기(2026-10-26 사용자): 왼쪽 빈칸 = 큰 주가 차트, YoY 칸 크게·간격 좁게 */
+.scr-t tr.qrow td.sp-big { padding: 2px 14px 16px 6px; vertical-align: top; }
+.bsp { display: flex; flex-direction: column; gap: 4px; }
+.bsp svg { display: block; width: 100%; height: 84px; }
+.bsp polyline { fill: none; stroke-width: 1.8; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.bsp polygon { stroke: none; opacity: .10; }
+.bsp.up polyline { stroke: var(--up); } .bsp.up polygon { fill: var(--up); }
+.bsp.dn polyline { stroke: var(--down); } .bsp.dn polygon { fill: var(--down); }
+.bsp-l { font: 500 11px var(--mono); color: var(--ink-mute); }
+.bsp.up .bsp-l b { color: var(--tx-up); } .bsp.dn .bsp-l b { color: var(--tx-dn); }
+.qbox.sq { display: inline-block; max-width: none; padding: 8px 10px 10px; }
+.qbox.sq .ql { grid-template-columns: 54px repeat(10, 62px); gap: 4px 3px; }
+.qbox.sq .hc { font-size: 13.5px; padding: 6px 0; min-height: 30px; border-radius: 6px; }
+.qbox.sq .ql-p { font-size: 10.5px; }
+.qbox.sq .ql-l { font-size: 12px; }

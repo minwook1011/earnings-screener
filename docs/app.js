@@ -251,13 +251,23 @@
   }
   function scrQ(o) {
     var q = S.qy[o.c] || [], r = S.s1rows[o.c] || {}, cur = r.fy && r.p ? r.fy.slice(2, 4) + "." + r.p : null;
-    var pad = []; for (var i = q.length; i < 10; i++) pad.push(null);
-    var cells = pad.concat(q);
-    function row(lab, f) { return '<span class="ql-l">' + lab + "</span>" + cells.map(function (x) { return x ? f(x) : '<span class="hc na"></span>'; }).join(""); }
+    var cells = q.slice(-10);   // 빈 칸으로 채우지 않음(2026-10-26 사용자)
+    function row(lab, f) { return '<span class="ql-l">' + lab + "</span>" + cells.map(f).join(""); }
     if (!q.length) return '<div class="ql-empty">분기 자료 없음 — 다음 갱신 때 채웁니다</div>';
-    return '<div class="qbox sq"><div class="qcap">분기 YoY · %</div><div class="ql">' +
+    return '<div class="qbox sq"><div class="qcap">분기 YoY · %</div><div class="ql" style="grid-template-columns:54px repeat(' + cells.length + ',62px)">' +
       row("", function (x) { var on = x.p === cur; return '<span class="ql-p' + (on ? " now" : "") + '">' + (on && o.d ? '<i class="qd">' + esc(md(o.d)) + "</i>" : "") + esc(x.p) + (on ? " ✓" : "") + "</span>"; }) +
       row("매출액", function (x) { return heat(x.r, null, x.m); }) + row("영업이익", function (x) { return heat(x.o, x.ot, x.m); }) + "</div></div>";
+  }
+  /* 스크리닝 둘째 줄 왼쪽 — 별·순번·코드·종목 칸 밑을 꽉 채우는 1년 주가(2026-10-26 사용자) */
+  function bigSpark(c) {
+    var r = (S.ret.items || {})[c], p = r && r.sp;
+    if (!p || p.length < 2) return "";
+    var W = 300, H = 80, lo = Math.min.apply(null, p), hi = Math.max.apply(null, p), k = hi > lo ? hi - lo : 1;
+    var xy = p.map(function (v, i) { return [(i * W / (p.length - 1)).toFixed(1), (3 + (H - 6) * (1 - (v - lo) / k)).toFixed(1)]; });
+    var ch = (p[p.length - 1] / p[0] - 1) * 100;
+    return '<div class="bsp ' + (ch >= 0 ? "up" : "dn") + '" title="최근 1년 주가(주간) · ' + esc(md(r.d)) + " 종가 " + num(r.px, r.px < 100 ? 1 : 0) + '엔"><svg viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" aria-hidden="true">' +
+      '<polygon points="0,' + H + " " + xy.map(function (a) { return a.join(","); }).join(" ") + " " + W + "," + H + '"/><polyline points="' + xy.map(function (a) { return a.join(","); }).join(" ") + '"/></svg>' +
+      '<span class="bsp-l">1년 <b>' + pctTxt(Math.round(ch * 10) / 10) + "</b> · " + esc(md(r.d)) + " " + num(r.px, r.px < 100 ? 1 : 0) + "엔</span></div>";
   }
   function scrView() {
     var q = S.q.trim().toLowerCase(), sm = S.smart, minmc = S.minmc || 0;
@@ -303,7 +313,7 @@
         "<td>" + cl("PER") + (per == null ? "—" : per < 0 ? '<span class="na">적자</span>' : per.toFixed(1)) + "</td>" +
         "<td>" + cl("ROE") + (x.roe == null ? "—" : x.roe.toFixed(1)) + "</td><td>" + cl("OPM") + (x.opm == null ? "—" : x.opm.toFixed(1)) + "</td>" +
         '<td class="sd">' + cl("실적발표") + (o.d ? '<b class="ann">' + esc(md(o.d)) + "</b>" : "—") + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td colspan="3"></td><td class="sp-td">' + spark(o.c) + '</td><td colspan="9"><div class="qwrap">' + scrQ(o) + "</div></td></tr>";
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td colspan="4" class="sp-big">' + bigSpark(o.c) + '</td><td colspan="9"><div class="qwrap">' + scrQ(o) + "</div></td></tr>";
     }).join("");
     return head + '<div class="tblwrap"><table class="main-t scr-t"><thead>' + th + "</thead><tbody>" + body + "</tbody></table></div>";
   }
