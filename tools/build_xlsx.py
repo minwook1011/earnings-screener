@@ -48,7 +48,7 @@ PDF = "https://www2.jpx.co.jp/disc/{code}0/{doc}.pdf"
 NQ = 20      # 분기 칸 최대
 NF = 30      # 결산단신 최대 수(약 7년)
 STMTS = [("PL", "손익계산서"), ("CI", "포괄손익"), ("BS", "재무상태표"), ("CF", "현금흐름표"), ("SG", "부문")]
-KIND = {"bs": "BS", "pl": "PL", "pc": "PL", "ci": "CI", "cf": "CF", "sg": "SG"}
+KIND = {"bs": "BS", "fs": "BS", "pl": "PL", "pc": "PL", "ci": "CI", "cf": "CF", "sg": "SG"}
 
 
 # ---------- 받기 ----------
@@ -216,7 +216,7 @@ def parse_filing(path):
     jlab = labels_of(z)
     out, parts, ctx = [], [], {}
     for n in z.namelist():    # 문맥(기간·멤버)은 한 파일에만 정의돼 있기도 해서 먼저 다 모은다
-        m = re.search(r"/\d{7}-[a-z]{2}(bs|pl|pc|ci|cf|sg)\d+-.*-ixbrl\.htm$", n)
+        m = re.search(r"/\d{7}-[a-z]{2}(bs|fs|pl|pc|ci|cf|sg)\d+-.*-ixbrl\.htm$", n)
         if not m:
             continue
         p = IX()
@@ -324,7 +324,7 @@ def eng(name):
 def ko(jp, name, KO, miss):
     parts = [p for p in jp.split(" · ")]
     out = []
-    for p in parts:
+    for i, p in enumerate(parts):
         p = re.sub(r"、?報告セグメント|\s*\[メンバー\]|メンバー$", "", p).strip()
         if not p:
             continue
@@ -334,7 +334,8 @@ def ko(jp, name, KO, miss):
             out.append(hit)
         elif re.search(r"[぀-ヿ一-鿿]", p):
             miss.add(p)
-            out.append(eng(name) if p == parts[-1] else p.encode("ascii", "ignore").decode() or "부문")
+            out.append(eng(re.sub(r"(Reportable)?(Segment)?Member$", "", name)) if i == len(parts) - 1
+                       else p.encode("ascii", "ignore").decode() or "부문")
         else:
             out.append(p)
     return " · ".join(out) or eng(name)
@@ -621,7 +622,7 @@ def make_model(code, name, data, used, fsm, KO, miss):
     seen_mem = []
     for k in SG["rows"]:
         m = SG["seen"][k]
-        if not m["mem"] or local(m["name"]) not in ("RevenuesFromExternalCustomers", "RevenueFromExternalCustomersIFRS", "NetSales"):
+        if not m["mem"] or local(m["name"]) not in ("RevenuesFromExternalCustomers", "RevenueFromExternalCustomersIFRS", "SalesToExternalCustomersIFRS", "NetSales"):
             continue
         mem = local(m["mem"][-1])
         if mem in ("ReportableSegmentsMember", "ReconcilingItemsMember", "TotalOfReportableSegmentsAndOthersMember",

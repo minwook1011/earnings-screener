@@ -45,7 +45,7 @@ def forecast(path):
     """최근 결산단신 요약 XBRL 의 회사 예상(연간). 값은 엔 → 억 엔, EPS 는 엔."""
     want = {"NetSales": "매출", "OperatingIncome": "영업이익", "OrdinaryIncome": "경상이익",
             "ProfitAttributableToOwnersOfParent": "순이익", "NetIncomePerShare": "EPS",
-            "SalesIFRS": "매출", "RevenueIFRS": "매출", "OperatingIncomeIFRS": "영업이익", "OperatingProfitIFRS": "영업이익",
+            "SalesIFRS": "매출", "NetSalesIFRS": "매출", "RevenueIFRS": "매출", "OperatingIncomeIFRS": "영업이익", "OperatingProfitIFRS": "영업이익",
             "ProfitAttributableToOwnersOfParentIFRS": "순이익", "BasicEarningsPerShareIFRS": "EPS"}
     out = {}
     try:
