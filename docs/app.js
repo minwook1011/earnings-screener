@@ -669,7 +669,20 @@
     S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.irc = r[10]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
-    S.ready = true; S.stage = 0;
+    S.ready = true; S.stage = 0; S.s1 = r[0]; S.pipe = r[1];
     route();
+    /* 열어 둔 화면도 새 리포트·단계가 보이게 — 2분마다, 탭으로 돌아올 때 다시 받음(2026-10-26 사용자: 텔레 안 브라우저에서 '진행 중'이 남음) */
+    function refresh() {
+      if (document.hidden) return;
+      Promise.all([getJSON("data/jp/pipeline.json"), getJSON("data/jp/research/index.json"), getJSON("data/jp/ircall.json").catch(function () { return S.irc; })]).then(function (x) {
+        if (x[0].updated === S.pipe.updated && x[1].updated === S.res.updated && (x[2] || {}).updated === (S.irc || {}).updated) return;
+        S.pipe = x[0]; S.res = x[1]; S.irc = x[2]; S.upd2 = x[0].updated || "—";
+        S.cos = build(S.s1, S.pipe, S.res);
+        S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });
+        if (!panel.classList.contains("on")) { var y = window.scrollY; route(); window.scrollTo(0, y); }
+      }).catch(function () {});
+    }
+    setInterval(refresh, 120000);
+    document.addEventListener("visibilitychange", refresh);
   }).catch(function (e) { app.innerHTML = '<div class="empty">데이터를 못 불러왔습니다. (' + esc(e.message) + ")</div>"; });
 })();
