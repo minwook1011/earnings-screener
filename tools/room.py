@@ -94,7 +94,11 @@ def doc(c, kind, html, summary, name=None, ann=None):
     dst = os.path.join(ROOT, "docs", rel)
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     src = open(html, encoding="utf-8").read()
-    open(dst, "w", encoding="utf-8").write(noindex(src))
+    out = noindex(src)
+    if xlsx(c):   # 엑셀이 생기면 리포트 안에 'xlsx 다운로드' 버튼
+        import build_xlsx
+        out = build_xlsx.add_button(out, c)
+    open(dst, "w", encoding="utf-8").write(out)
     title = (re.search(r"<title>([^<]*)", src) or [None, ""])[1].strip()
     name = name or next((x.get("n") for x in d["watch"] if x["c"] == c), None) or lookup(c).get("n") or c
     d["docs"] = [x for x in d["docs"] if x.get("html") != rel]
@@ -104,17 +108,18 @@ def doc(c, kind, html, summary, name=None, ann=None):
     d["docs"].insert(0, row)
     save(d)
     print(f"{name}({c}) {kind} 올림 → docs/{rel}")
-    xlsx(c)
 
 
 def xlsx(c):
-    """표준 재무제표 엑셀도 같이(파이썬만, 토큰 0) — 사이트 리서치룸 'xlsx' 버튼."""
+    """표준 재무제표 엑셀도 같이(파이썬만, 토큰 0) — 사이트 리서치룸 'xlsx' 버튼. 성공하면 True."""
     try:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         import build_xlsx
         build_xlsx.build(c)
+        return True
     except Exception as e:
         print(f"{c} 엑셀 실패: {e}")
+        return False
 
 
 if __name__ == "__main__":

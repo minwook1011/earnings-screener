@@ -90,6 +90,12 @@ def attach(c, st, html, verdict):
         else:   # 아티팩트용 파일은 <head> 없이 시작한다
             src = NL.join(['<!doctype html>', '<meta charset="utf-8">',
                            '<meta name="viewport" content="width=device-width, initial-scale=1">', meta, src])
+    try:   # 표준 재무제표 엑셀도 같이(파이썬만, 토큰 0) → 리포트 안에 'xlsx 다운로드' 버튼
+        import build_xlsx
+        build_xlsx.build(c)
+        src = build_xlsx.add_button(src, c)
+    except Exception as e:
+        print(f"{c} 엑셀 실패: {e}")
     rel = f"research/{c}/stage{st}.html"
     os.makedirs(os.path.join(DATA, "..", "..", "research", c), exist_ok=True)
     open(os.path.join(DATA, "..", "..", rel), "w", encoding="utf-8").write(src)
@@ -99,11 +105,6 @@ def attach(c, st, html, verdict):
                                                "html": rel, "title": title, "verdict": verdict}
     save_idx(idx)
     print(f"{c} {st}단계 리서치 HTML 올림 → docs/{rel}")
-    try:   # 표준 재무제표 엑셀도 같이(파이썬만, 토큰 0)
-        import build_xlsx
-        build_xlsx.build(c)
-    except Exception as e:
-        print(f"{c} 엑셀 실패: {e}")
 
 
 def mark(c, st, status):

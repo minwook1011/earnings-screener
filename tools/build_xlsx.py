@@ -753,6 +753,19 @@ def stmt_rows(D, KO, miss, colmap, mode, with_mem=False):
     return rows
 
 
+
+def add_button(src, code):
+    """리포트 HTML 오른쪽 아래에 'xlsx 다운로드' 버튼(엑셀이 있을 때만). docs/research·docs/room 의 <코드>/ 폴더 기준 상대 경로."""
+    if 'id="es-xlsx"' in src or not os.path.exists(os.path.join(OUT, code + ".xlsx")):
+        return src
+    btn = ('<style>#es-xlsx{position:fixed;right:16px;bottom:16px;z-index:9999;padding:9px 14px;border-radius:999px;'
+           'background:#1d6f42;color:#fff;font:600 13px/1 system-ui,"Malgun Gothic",sans-serif;text-decoration:none;'
+           'box-shadow:0 2px 8px rgba(0,0,0,.25)}#es-xlsx:hover{background:#155a35}@media print{#es-xlsx{display:none}}</style>'
+           f'<a id="es-xlsx" href="../../data/jp/xlsx/{code}.xlsx" download="{code}.xlsx">xlsx 다운로드</a>')
+    if re.search(r"</body>", src, re.I):
+        return re.sub(r"(</body>)", lambda m: btn + m.group(1), src, count=1, flags=re.I)
+    return src + btn
+
 def build(code):
     data, used, fsm = collect(code)
     if not used:
