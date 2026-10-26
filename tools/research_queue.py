@@ -143,13 +143,15 @@ def tanshin(c, src):
     """실적 분석 바로 아래 '결산단신 PDF 다운로드'(2026-10-26 사용자). 배지 날짜의 결산단신을 사이트에 복사해 둔다
     (거래소 공식 PDF 주소는 한 달 뒤 사라지고, JPX 보관본은 발표 당일엔 아직 없어서)."""
     m = re.search(r'class="resd">[^<]*?(\d{2})\.(\d{1,2})\.(\d{1,2})', src)
-    if not m:
-        return src
-    day = f"20{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    day = f"20{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}" if m else None
     out = os.path.join(DATA, "..", "..", "research", c, "tanshin.pdf")
     try:
         import build_xlsx
-        f = next((f for f in build_xlsx.filings(c) if f["date"] == day), None)
+        fs = build_xlsx.filings(c)
+        if not day:   # 실적 분석 칸이 없는 옛 형식 — 리포트를 쓴 날까지 나온 최신 결산단신
+            w = (load_idx()["items"].get(c, {}).get("2") or {}).get("written") or now()
+            day = next((f["date"] for f in fs if f["date"] <= w[:10]), None)
+        f = next((f for f in fs if f["date"] == day), None)
         if not f:
             print(f"{c} {day} 결산단신 못 찾음 — PDF 버튼 없음")
             return src
@@ -174,6 +176,14 @@ def tanshin(c, src):
                          src, count=1, flags=re.S)
         return deck(c, day, src)
     btn = TBTN.replace("{name}", name).replace("{call}", call_chip(out))
+    if not m:   # 실적 분석 칸이 없으면 맨 위(xlsx 버튼 아래)에 발표일과 함께
+        btn = btn.replace('<div class="es-tanshin-bar">', '<div class="es-tanshin-bar" style="padding:8px 16px 0">', 1)
+        btn = btn.replace("결산단신 PDF 다운로드</a>", f"결산단신 PDF 다운로드 ({int(day[5:7])}/{int(day[8:])} 발표)</a>", 1)
+        if 'id="es-xlsx-bar"' in src:
+            src = re.sub(r'(<div id="es-xlsx-bar">.*?</div>)', lambda k: k.group(1) + btn, src, count=1, flags=re.S)
+        else:
+            src = re.sub(r"(<body[^>]*>)", lambda k: k.group(1) + btn, src, count=1, flags=re.I)
+        return deck(c, day, src)
     src = re.sub(r'(<details class="tg an res">.*?</summary>\s*<div class="tgb">)', lambda k: k.group(1) + btn, src, count=1, flags=re.S)
     return deck(c, day, src)
 
