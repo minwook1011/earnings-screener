@@ -110,9 +110,12 @@ def attach(c, st, html, verdict):
 
 def light(src):
     """리포트는 늘 밝은 화면 — 휴대폰 다크 모드에서 일부 칸 글자가 안 보여서(2026-10-26)."""
-    if re.search(r"<html[^>]*data-theme", src, re.I):
-        return src
-    return re.sub(r"<html", '<html data-theme="light"', src, count=1, flags=re.I)
+    if not re.search(r"<html[^>]*data-theme", src, re.I):
+        src = re.sub(r"<html", '<html data-theme="light"', src, count=1, flags=re.I)
+    if 'name="color-scheme"' not in src:   # 브라우저 강제 다크(크롬·삼성 인터넷)도 끔
+        src = re.sub(r"(<head[^>]*>)", r'<meta name="color-scheme" content="only light">'
+                     '<style>:root{color-scheme:only light}</style>', src, count=1, flags=re.I)
+    return src
 
 
 def mark(c, st, status):
