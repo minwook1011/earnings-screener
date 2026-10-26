@@ -122,6 +122,15 @@ def main(code, folder):
         res["company_forecast_src"] = used[0]["date"] + " 결산단신 요약"
     else:
         res["gap"] = "결산단신 XBRL 없음"
+    gaps = [res["gap"]] if res.get("gap") else []   # 빈 칸은 보고서 에이전트가 도구로 채운다
+    if res.get("quarterly") and not any(v is not None for v in res["quarterly"].get("revenue", [])):
+        gaps.append("분기 실적 없음(분기 결산단신을 안 내는 회사) — 분기는 도구로")
+    if res.get("quarterly") and not res.get("segments"):
+        gaps.append("부문 없음 — 부문은 도구로")
+    if res.get("company_forecast") is not None and "매출" not in res["company_forecast"]:
+        gaps.append("회사 예상 매출 없음 — 도구로")
+    if gaps:
+        res["gap"] = " · ".join(gaps)
     daily = chart(code + ".T", "2y", "1d")
     res["reactions"] = reactions(daily, [f["date"] for f in used[:8]])[::-1] if used else []
     wk = chart(code + ".T", "5y", "1wk")
