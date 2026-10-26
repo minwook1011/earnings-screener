@@ -113,7 +113,7 @@ def light(src):
     if not re.search(r"<html[^>]*data-theme", src, re.I):
         src = re.sub(r"<html", '<html data-theme="light"', src, count=1, flags=re.I)
     if 'name="color-scheme"' not in src:   # 브라우저 강제 다크(크롬·삼성 인터넷)도 끔
-        src = re.sub(r"(<head[^>]*>)", r'<meta name="color-scheme" content="only light">'
+        src = re.sub(r"(<head[^>]*>)", lambda m: m.group(1) + '<meta name="color-scheme" content="only light">'
                      '<style>:root{color-scheme:only light}</style>', src, count=1, flags=re.I)
     return src
 
