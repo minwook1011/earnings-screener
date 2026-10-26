@@ -714,8 +714,18 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .ql-p.now { color: var(--ink); font-weight: 700; position: relative; }
 .ql-p .qd { display: block; font: 700 9.5px var(--mono); font-style: normal; color: var(--ann); }
 .scr-t tr.qrow .sp-td { vertical-align: middle; }
-.scr-t tbody .cl { display: none; }
-@media (max-width: 760px) { .scr-t tbody .cl { display: block; } }
+/* 값 바로 위 빈칸에 열 이름(2026-10-27 사용자: 머리줄과 값이 어긋나 보임 — 2단계 표처럼) */
+/* 분기가 10개 미만인 회사 — 칸 수만큼 열(인라인 style은 CSP에 막혀 줄이 밀렸음, 2026-10-27) */
+.qbox.sq .ql.c1 { grid-template-columns: 54px repeat(1, 62px); } .qbox.sq .ql.c2 { grid-template-columns: 54px repeat(2, 62px); }
+.qbox.sq .ql.c3 { grid-template-columns: 54px repeat(3, 62px); } .qbox.sq .ql.c4 { grid-template-columns: 54px repeat(4, 62px); }
+.qbox.sq .ql.c5 { grid-template-columns: 54px repeat(5, 62px); } .qbox.sq .ql.c6 { grid-template-columns: 54px repeat(6, 62px); }
+.qbox.sq .ql.c7 { grid-template-columns: 54px repeat(7, 62px); } .qbox.sq .ql.c8 { grid-template-columns: 54px repeat(8, 62px); }
+.qbox.sq .ql.c9 { grid-template-columns: 54px repeat(9, 62px); }
+/* 실적발표 분기 노란 네모 — 칸마다 좌우 선, 위·아래 칸이 뚜껑, 줄 간격(4px)을 반씩 덮어 한 줄로 이어짐 */
+.qbox.sq .nw { position: relative; }
+.qbox.sq .nw::after { content: ""; position: absolute; left: -2px; right: -2px; top: -2px; bottom: -2px; border: 2px solid var(--ann); border-top: 0; border-bottom: 0; pointer-events: none; }
+.qbox.sq .nw-t::after { top: -4px; border-top: 2px solid var(--ann); border-radius: 7px 7px 0 0; }
+.qbox.sq .nw-b::after { bottom: -4px; border-bottom: 2px solid var(--ann); border-radius: 0 0 7px 7px; }
 /* 스크리닝 둘째 줄 다듬기(2026-10-26 사용자): 왼쪽 빈칸 = 큰 주가 차트, YoY 칸 크게·간격 좁게 */
 .scr-t tr.qrow td.sp-big { padding: 2px 14px 16px 6px; vertical-align: top; }
 .bsp { display: flex; flex-direction: column; gap: 4px; }
@@ -731,3 +741,9 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .qbox.sq .hc { font-size: 13.5px; padding: 6px 0; min-height: 30px; border-radius: 6px; }
 .qbox.sq .ql-p { font-size: 10.5px; }
 .qbox.sq .ql-l { font-size: 12px; }
+/* 10개 분기 머리줄 회색 띠(2026-10-27 사용자) — 칸 사이 틈 없이 이어지게 열 간격은 칸 여백으로 */
+.qbox:not(.sq) .ql { column-gap: 0; }
+.qbox:not(.sq) .ql > * { margin: 0 2px; }
+.qbox:not(.sq) .ql > .qh { margin: 0 0 4px; align-self: stretch; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 0; background: color-mix(in srgb, var(--ink) 8%, var(--surface)); color: var(--ink); font-weight: 700; font-size: 11px; }
+.qbox:not(.sq) .ql > .ql-l.qh { align-items: flex-start; padding-left: 8px; border-radius: 6px 0 0 6px; color: var(--ink-mid); }
+.qbox:not(.sq) .ql > .qh:nth-child(11) { border-radius: 0 6px 6px 0; }

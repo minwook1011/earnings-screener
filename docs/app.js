@@ -191,7 +191,9 @@
     var pad = []; for (var i = q.length; i < 10; i++) pad.push(null);
     var cells = pad.concat(q);
     function row(lab, f) { return "<span class=\"ql-l\">" + lab + "</span>" + cells.map(function (x) { return x ? f(x) : '<span class="hc na"></span>'; }).join(""); }
-    return '<div class="qbox"><div class="qcap">최근 10개 분기 · 억엔</div><div class="ql">' + row("", function (x) { return '<span class="ql-p">' + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + esc(x.p) + "</span>"; }) +
+    // 분기 머리줄 = 회색 띠(2026-10-27 사용자: 가독성)
+    var head = '<span class="ql-l qh">억엔</span>' + cells.map(function (x) { return '<span class="ql-p qh">' + (x ? (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + esc(x.p) : "") + "</span>"; }).join("");
+    return '<div class="qbox"><div class="qcap">최근 10개 분기</div><div class="ql">' + head +
       row("매출액", function (x) { return amt(x.s); }) + row("YoY", function (x) { return heat(x.r, null, x.m); }) +
       row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div></div>" +
       (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐</div>" : "");
@@ -254,9 +256,12 @@
     var cells = q.slice(-10);   // 빈 칸으로 채우지 않음(2026-10-26 사용자)
     function row(lab, f) { return '<span class="ql-l">' + lab + "</span>" + cells.map(f).join(""); }
     if (!q.length) return '<div class="ql-empty">분기 자료 없음 — 다음 갱신 때 채웁니다</div>';
-    return '<div class="qbox sq"><div class="qcap">분기 YoY · %</div><div class="ql" style="grid-template-columns:54px repeat(' + cells.length + ',62px)">' +
-      row("", function (x) { var on = x.p === cur; return '<span class="ql-p' + (on ? " now" : "") + '">' + (on && o.d ? '<i class="qd">' + esc(md(o.d)) + "</i>" : "") + esc(x.p) + (on ? " ✓" : "") + "</span>"; }) +
-      row("매출액", function (x) { return heat(x.r, null, x.m); }) + row("영업이익", function (x) { return heat(x.o, x.ot, x.m); }) + "</div></div>";
+    // 실적발표 분기 = 세로 한 줄을 노란 네모로 감쌈(2026-10-27 사용자: ✓ 대신)
+    function nw(h, x, k) { return x.p === cur ? h.replace('class="hc', 'class="hc nw ' + k) : h; }
+    return '<div class="qbox sq"><div class="qcap">분기 YoY · %</div><div class="ql c' + cells.length + '">' +   // CSP가 인라인 style을 막으므로 칸 수는 클래스로
+
+      row("", function (x) { var on = x.p === cur; return '<span class="ql-p' + (on ? " now nw nw-t" : "") + '">' + (on && o.d ? '<i class="qd">' + esc(md(o.d)) + "</i>" : "") + esc(x.p) + "</span>"; }) +
+      row("매출액", function (x) { return nw(heat(x.r, null, x.m), x, ""); }) + row("영업이익", function (x) { return nw(heat(x.o, x.ot, x.m), x, "nw-b"); }) + "</div></div>";
   }
   /* 스크리닝 둘째 줄 왼쪽 — 별·순번·코드·종목 칸 밑을 꽉 채우는 1년 주가(2026-10-26 사용자) */
   function bigSpark(c) {
@@ -295,7 +300,7 @@
       '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>개 종목</div></div>" +
       '<div class="smart"><div class="smart-in"><span class="smart-ic">⌕</span><input type="text" id="sq" placeholder="조건으로 검색 — 예: 시총 1000억 이상, 매출성장 10% 이상, 주가 상승률 30% 이상, 영업이익률 15% 이상 순" value="' + esc(S.sq || "") + '"><button id="sqgo">검색</button>' + (sm ? '<button id="sqclear">해제</button>' : "") + "</div>" +
       '<div class="smart-hint">' + (sm ? "적용: " + sm.conds.map(function (c) { var x = SC.filter(function (y) { return y.k === c.k; })[0]; return "<b>" + esc(x.t) + " " + c.v + (c.lo ? " 이하" : " 이상") + "</b>"; }).join(" · ") + (sm.sort ? " · " + esc(SC.filter(function (y) { return y.k === sm.sort; })[0].t) + " 순" : "") : "시총·매출·매출성장·주가 상승률(1년·YTD)·PER·ROE·영업이익률 조건을 알아듣습니다. “~순”을 붙이면 그 기준으로 정렬합니다.") + "</div></div>" +
-      '<p class="stage-note">텔레 2단계에 올라온 회사를 모두 쌓아 둔 스크리너입니다. 매출·이익은 최근 4개 분기 합(TTM), ROE = 최근 4개 분기 순이익 ÷ 분기말 자기자본. 둘째 줄은 1년 주가와 분기별 매출액·영업이익 YoY — ✓ 와 노란 날짜가 최근 실적발표 분기입니다. 회사를 누르면 리포트·재무제표·주가가 열립니다.</p>';
+      '<p class="stage-note">텔레 2단계에 올라온 회사를 모두 쌓아 둔 스크리너입니다. 매출·이익은 최근 4개 분기 합(TTM), ROE = 최근 4개 분기 순이익 ÷ 분기말 자기자본. 둘째 줄은 1년 주가와 분기별 매출액·영업이익 YoY — 노란 네모가 최근 실적발표 분기입니다. 회사를 누르면 리포트·재무제표·주가가 열립니다.</p>';
     if (!rows.length) return head + '<div class="empty">조건에 맞는 종목이 없습니다.</div>';
     var maxmc = Math.max.apply(null, rows.map(function (o) { return scv(o, "mc") || 0; })) || 1;
     var th = '<tr><th class="ns"></th><th class="l ns">#</th><th class="l ns">코드</th><th class="l ns">종목</th>' + SC.map(function (c) {
