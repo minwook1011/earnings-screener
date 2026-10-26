@@ -396,7 +396,7 @@
       return;
     }
     var link = r.html && /^research\/[0-9A-Z]{4}\/stage[23]\.html$/.test(r.html)
-      ? '<a class="art" href="' + esc(r.html) + '" target="_blank" rel="noopener">리서치 전문 열기 ↗</a>'
+      ? '<a class="art" href="' + esc(ver(r.html, r.written)) + '" target="_blank" rel="noopener">리서치 전문 열기 ↗</a>'
       : r.artifact && /^https:\/\/claude\.ai\//.test(r.artifact)
       ? '<a class="art" href="' + esc(r.artifact) + '" target="_blank" rel="noopener noreferrer">리서치 전문 보기 ↗</a>'
       : '<button class="art" data-md="' + esc(r.file) + '">리서치 전문 펼치기</button>';
@@ -574,7 +574,9 @@
     });
     return out.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
   }
-  function docLink(d) { return '<a class="rbtn" href="' + esc(d.html) + '" target="_blank" rel="noopener noreferrer">' + esc(d.kind) + " 열기</a>"; }
+  // 리포트 주소에 판 표시 — 휴대폰이 예전 판(다크 화면)을 캐시에서 다시 보여 주지 않게(2026-10-26)
+  function ver(u, w) { return u + "?v=" + String(w || "").replace(/\D/g, "") + "L2"; }
+  function docLink(d) { return '<a class="rbtn" href="' + esc(ver(d.html, d.date)) + '" target="_blank" rel="noopener noreferrer">' + esc(d.kind) + " 열기</a>"; }
   function docRow(d, ann, full) {
     return '<article class="rdoc' + (full ? " pre" : "") + '"><div class="rd-meta"><span class="tag tg">' + esc(d.kind) + '</span><span class="mono">' + esc((d.date || "").slice(0, 10)) + "</span>" +
       (ann ? '<span class="ann">' + esc(dlab(ann)) + " 발표</span>" : "") + "</div>" +
