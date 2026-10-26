@@ -97,7 +97,8 @@ def main(code, folder):
     os.makedirs(folder, exist_ok=True)
     data, used, fsm = bx.collect(code)
     res = {"code": code, "made": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "unit": "억 엔(주가·EPS 는 엔)",
-           "note": "prep_data.py 가 AI 없이 만든 자료. 분기 = 누계 차분(계산). 숫자는 결산단신 XBRL 그대로 — 다시 조회하지 않는다."}
+           "note": "prep_data.py 가 AI 없이 만든 자료. 분기 = 누계 차분(계산). 숫자는 결산단신 XBRL 그대로 — 다시 조회하지 않는다. "
+                   "gap 에 적힌 항목만 도구(jp_guidance·jp_financials 등)로 받아 채운다 — 보고서에 빈칸을 남기지 않는다."}
     if used:
         KO, miss = bx.ko_dict(), set()
         mk = bx.make_model(code, code, data, used, fsm, KO, miss)
@@ -123,12 +124,19 @@ def main(code, folder):
     else:
         res["gap"] = "결산단신 XBRL 없음"
     gaps = [res["gap"]] if res.get("gap") else []   # 빈 칸은 보고서 에이전트가 도구로 채운다
-    if res.get("quarterly") and not any(v is not None for v in res["quarterly"].get("revenue", [])):
-        gaps.append("분기 실적 없음(분기 결산단신을 안 내는 회사) — 분기는 도구로")
+    for blk, n, nm in (("quarterly", 8, "분기"), ("annual", 5, "연간")):
+        for k, kn in (("revenue", "매출"), ("op", "영업이익")):
+            v = (res.get(blk) or {}).get(k) or []
+            miss = [lb for lb, x in zip(res.get(blk, {}).get("labels", [])[-n:], v[-n:]) if x is None]
+            if res.get(blk) and miss:
+                gaps.append(f"{nm} {kn} 빈칸 {','.join(miss)} — 도구로")
     if res.get("quarterly") and not res.get("segments"):
-        gaps.append("부문 없음 — 부문은 도구로")
-    if res.get("company_forecast") is not None and "매출" not in res["company_forecast"]:
-        gaps.append("회사 예상 매출 없음 — 도구로")
+        gaps.append("부문 없음 — 부문은 도구로(단일 부문이면 그렇게 적음)")
+    fc = res.get("company_forecast")
+    if fc is not None:
+        for k in ("매출", "영업이익"):
+            if k not in fc:
+                gaps.append(f"회사 예상 {k} 없음 — 도구로(비공개면 그렇게 적음)")
     if gaps:
         res["gap"] = " · ".join(gaps)
     daily = chart(code + ".T", "2y", "1d")
