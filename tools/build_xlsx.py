@@ -765,8 +765,38 @@ def make_model(code, name, data, used, fsm, KO, miss):
     return model, qk, yk, bq, by
 
 
-def detail_block(ws, r, title, cols, last_col, rows, note):
-    """FPS 식 상세 표 — 회색 띠 + 열 머리(양식과 같은 칸) + 줄들. rows = [(라벨, {열: 값}, 굵게)]."""
+REV_N = re.compile(r"^(NetSales|Revenue|OperatingRevenue|NetSalesIFRS|RevenueIFRS|OperatingRevenueIFRS|NetSalesOfCompletedConstructionContracts)")
+OP_N = re.compile(r"^OperatingIncome|^OperatingProfit")
+SEG_REV = re.compile(r"^(RevenuesFromExternalCustomers|NetSales|Revenue|OperatingRevenue)")
+SEG_OP = re.compile(r"OperatingIncome|OperatingProfit|SegmentProfit|ProfitLoss")
+YOY_N = re.compile(r"^(OrdinaryIncome|ProfitLoss$|ProfitLossAttributableToOwnersOfParent|ProfitBeforeTax|GrossProfit)")
+
+
+def ratio_rows(meta, have_rev):
+    """이 줄 아래에 붙일 수식 줄 — [('YoY'|'OPM', 분모 키)]. 2026-10-26 사용자: 상세 표에도 YoY·OPM 수식."""
+    if not meta:
+        return []
+    n, mem = meta["name"], meta["mem"]
+    if mem in ("ReconcilingItemsMember", "EntityTotalMember"):
+        return []
+    if mem:  # 부문: 매출(외부 고객·계)과 부문 이익만 YoY, 이익은 같은 부문 매출(계 → 없으면 외부 고객)로 OPM
+        if SEG_REV.match(n):
+            return [("YoY", None)]
+        if SEG_OP.search(n):
+            return ([("OPM", ("rev", mem))] if ("rev", mem) in have_rev else []) + [("YoY", None)]
+        return []
+    if REV_N.match(n):
+        return [("YoY", None)]
+    if OP_N.match(n):
+        return ([("OPM", ("rev", None))] if ("rev", None) in have_rev else []) + [("YoY", None)]
+    if YOY_N.match(n):
+        return [("YoY", None)]
+    return []
+
+
+def detail_block(ws, r, title, cols, last_col, rows, note, ratios=False):
+    """FPS 식 상세 표 — 회색 띠 + 열 머리(양식과 같은 칸) + 줄들. rows = [(라벨, {열: 값}, 굵게[, meta])].
+    ratios=True 면 매출·영업이익·경상이익·순이익(부문은 모든 줄) 아래에 YoY·OPM 수식 줄(회색 글씨)."""
     for c in range(1, last_col + 1):
         cell = ws.cell(r, c, title if c == 1 else None)
         cell.fill, cell.font, cell.alignment = fmodel.fill(fmodel.GRAY_SEC), fmodel.font(True, "FFFFFF"), fmodel.CENTER
@@ -774,14 +804,20 @@ def detail_block(ws, r, title, cols, last_col, rows, note):
     r += 1
     ws.cell(r, 1, "항목")
     ws.cell(r, 2, "참고")
-    for c, kind, l in cols:
+    kind = {}
+    for c, k, l in cols:
         ws.cell(r, c, l)
+        kind[c] = k
     for c in range(1, last_col + 1):
         cell = ws.cell(r, c)
         cell.fill, cell.font, cell.alignment = fmodel.fill(fmodel.GRAY_HDR), fmodel.font(True, size=10), fmodel.CENTER
         cell.border = Border(top=fmodel.thin, bottom=fmodel.thin)
     r += 1
-    for lab, vals, bold in rows:
+    L = CL
+    have_rev = {}
+    for row in rows:
+        lab, vals, bold = row[:3]
+        meta = row[3] if len(row) > 3 else None
         ws.cell(r, 1, lab).font = fmodel.font(bold)
         ws.cell(r, 1).alignment = fmodel.CENTER
         for c, v in vals.items():
@@ -789,7 +825,37 @@ def detail_block(ws, r, title, cols, last_col, rows, note):
             cell.number_format = fmodel.NUM
             cell.font = fmodel.font(bold)
             cell.alignment = fmodel.CENTER
+        me = r
+        if meta and meta["mem"] and SEG_REV.match(meta["name"]):
+            if meta["name"].startswith(("NetSales", "Revenue", "OperatingRevenue")):
+                have_rev[("rev", meta["mem"])] = me          # 부문 매출 계(내부 포함)
+            else:
+                have_rev.setdefault(("rev", meta["mem"]), me)
+        elif meta and not meta["mem"] and REV_N.match(meta["name"]):
+            have_rev.setdefault(("rev", None), me)
         r += 1
+        if not ratios:
+            continue
+        for kind_r, den in ratio_rows(meta, have_rev):
+            ws.cell(r, 1, kind_r).font = fmodel.font(False, fmodel.GRAY_TXT)
+            ws.cell(r, 1).alignment = fmodel.CENTER
+            ws.cell(r, 2, "전년 같은 분기·전년 대비" if kind_r == "YoY" else "영업이익 ÷ 매출").font = fmodel.font(False, fmodel.GRAY_TXT, 9)
+            for c in vals:
+                x = f"{L(c)}{me}"
+                if kind_r == "YoY":
+                    pc = c - 4 if kind.get(c) == "q" else c - 1
+                    if kind.get(pc) != kind.get(c) or pc not in kind:
+                        continue
+                    p = f"{L(pc)}{me}"
+                    f = f'=IF(OR({x}="",{p}=""),"",IF({p}<=0,"",IFERROR({x}/{p}-1,"")))'
+                else:
+                    d = f"{L(c)}{have_rev[den]}"
+                    f = f'=IF(OR({x}="",{d}=""),"",IF({d}<=0,"",IFERROR({x}/{d},"")))'
+                cell = ws.cell(r, c, f)
+                cell.number_format = fmodel.PCT
+                cell.font = fmodel.font(False, fmodel.GRAY_TXT)
+                cell.alignment = fmodel.CENTER
+            r += 1
     return r + 1
 
 
@@ -814,7 +880,8 @@ def stmt_rows(D, KO, miss, colmap, mode, with_mem=False):
         if not vals:
             continue
         lab = ko(m["lab"], m["name"], KO, miss)
-        rows.append((lab, vals, bool(BOLD.match(local(m["name"]))) and not m["mem"]))
+        rows.append((lab, vals, bool(BOLD.match(local(m["name"]))) and not m["mem"],
+                     {"name": local(m["name"]), "mem": local(m["mem"][-1]) if m["mem"] else None}))
     return rows
 
 
@@ -871,14 +938,14 @@ def build(code):
         elif kind == "y":
             cmap[c] = (int(l), 4)
     r = A.r + 1
-    blocks = [("손익계산서 · 전 항목", data["PL"], "q", False, "분기 = 3개월 단독"),
-              ("포괄손익 · 전 항목", data["CI"], "q", False, "분기 = 3개월 단독"),
-              ("부문 · 전 항목", data["SG"], "q", True, "부문 · 항목"),
-              ("현금흐름표 · 전 항목", data["CF"], "cum", False, "분기 = 결산기 첫날부터 누계(공시 그대로)")]
-    for title, D, mode, mem, note in blocks:
+    blocks = [("손익계산서 · 전 항목", data["PL"], "q", False, "분기 = 3개월 단독", True),
+              ("포괄손익 · 전 항목", data["CI"], "q", False, "분기 = 3개월 단독", False),
+              ("부문 · 전 항목", data["SG"], "q", True, "부문 · 항목", True),
+              ("현금흐름표 · 전 항목", data["CF"], "cum", False, "분기 = 결산기 첫날부터 누계(공시 그대로)", False)]
+    for title, D, mode, mem, note, rat in blocks:
         rows = stmt_rows(D, KO, miss, cmap, mode, mem)
         if rows:
-            r = detail_block(ws, r, title, cols, last_col, rows, note)
+            r = detail_block(ws, r, title, cols, last_col, rows, note, rat)
     ws = wb["재무상태표"]
     bmap = {}
     for c, kind, l in bcols:

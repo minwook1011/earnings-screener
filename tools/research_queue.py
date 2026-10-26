@@ -7,6 +7,7 @@
   python tools/research_queue.py done 5018 2 "한 줄 결론" [아티팩트 링크]   리서치 파일을 다 쓴 뒤 완료 표시
   리서치 전문은 claude.ai 아티팩트로 게시하고(공유: 링크가 있는 사람 보기) 그 링크를 넘기면 사이트에 '리서치 전문 보기' 버튼이 생긴다
 """
+import html
 import json
 import os
 import re
@@ -206,12 +207,18 @@ def deck(c, day, src):
     try:
         import build_xlsx
         ds = build_xlsx.decks(c, day)
-        if not ds:
-            return src
-        f = ds[0]
+        if ds:
+            f = ds[0]
+            urls = [f"https://www.release.tdnet.info/inbs/{f['doc']}.pdf", build_xlsx.PDF.format(code=c, doc=f["doc"])]
+        else:   # 거래소에 안 내고 회사 IR 사이트에만 올린 자료(10/26 코에이테크모) — 빌더가 단 주소를 받음
+            m = re.search(r'<a class="es-deck" href="(https?://[^"]+)"', src)
+            if not m:
+                return src
+            u = html.unescape(m.group(1))
+            f, urls = {"doc": u}, [u]
         tag = out + ".doc"
         if not (os.path.exists(out) and os.path.exists(tag) and open(tag, encoding="utf-8").read() == f["doc"]):
-            b = build_xlsx.get(f"https://www.release.tdnet.info/inbs/{f['doc']}.pdf") or build_xlsx.get(build_xlsx.PDF.format(code=c, doc=f["doc"]))
+            b = next((x for x in map(build_xlsx.get, urls) if x), None)
             if not b or b[:4] != b"%PDF":
                 print(f"{c} 설명회 자료 PDF 못 받음")
                 return src
