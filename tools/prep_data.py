@@ -129,7 +129,7 @@ def main(code, folder):
             v = (res.get(blk) or {}).get(k) or []
             miss = [lb for lb, x in zip(res.get(blk, {}).get("labels", [])[-n:], v[-n:]) if x is None]
             if res.get(blk) and miss:
-                gaps.append(f"{nm} {kn} 빈칸 {','.join(miss)} — 도구로")
+                gaps.append(f"{nm} {kn} 빈칸 {','.join(map(str, miss))} — 도구로")
     if res.get("quarterly") and not res.get("segments"):
         gaps.append("부문 없음 — 부문은 도구로(단일 부문이면 그렇게 적음)")
     fc = res.get("company_forecast")
