@@ -71,10 +71,10 @@
       '<h1><span class="kanji">決</span>일본 리포트 아카이빙</h1>' +
       '<div class="sub">2단계에 올라온 회사의 실적 리포트를 쌓아 둡니다 &nbsp;|&nbsp; 실적 <span class="mono">' + esc(S.upd1) + "</span> · 텔레 <span class=\"mono\">" + esc(S.upd2) + "</span></div></div>" +
       '<div class="stats"><div class="stat"><b>' + n[2] + "</b><span>리포트</span></div></div></div></header>" +
-      // 2단계만 앞에, 1·3·4단계는 '다른 단계'로 접어 둠(2026-10-27 사용자: 사이트 = 일본 리포트 아카이빙)
-      '<nav class="rail"><div class="rail-in">' + cat(STAGES[1], n) +
-      '<button type="button" class="rail-more-b" id="rmore" aria-expanded="' + (S.stage !== 2) + '">다른 단계 ' + (S.stage !== 2 ? "▴" : "▾") + "</button>" +
-      '<span class="rail-more"' + (S.stage !== 2 ? "" : " hidden") + ">" + [0, 2, 3].map(function (i) { return cat(STAGES[i], n); }).join("") + "</span>" +
+      // 2→3→4단계는 그대로, 1단계 퀵만 접어 둠(2026-10-27 사용자: 사이트 = 일본 리포트 아카이빙)
+      '<nav class="rail"><div class="rail-in">' + [1, 2, 3].map(function (i, k) { return (k ? '<span class="rail-sep">›</span>' : "") + cat(STAGES[i], n); }).join("") +
+      '<button type="button" class="rail-more-b" id="rmore" aria-expanded="' + (S.stage === 1) + '">1단계 퀵 ' + (S.stage === 1 ? "▴" : "▾") + "</button>" +
+      '<span class="rail-more"' + (S.stage === 1 ? "" : " hidden") + ">" + cat(STAGES[0], n) + "</span>" +
       '<span class="rail-hint">' + esc(STAGES[S.stage - 1].hint) + "</span></div></nav>";
   }
   function cat(s, n) {
@@ -779,7 +779,7 @@
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("#rmore"), m = b && document.querySelector(".rail-more");
     if (!m) return;
-    m.hidden = !m.hidden; b.setAttribute("aria-expanded", !m.hidden); b.textContent = "다른 단계 " + (m.hidden ? "▾" : "▴");
+    m.hidden = !m.hidden; b.setAttribute("aria-expanded", !m.hidden); b.textContent = "1단계 퀵 " + (m.hidden ? "▾" : "▴");
   });
   window.addEventListener("hashchange", route);
   route();
