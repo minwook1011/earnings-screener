@@ -523,8 +523,8 @@ def sector_tables(code):
             if k in skip or not isinstance(v, list) or not v or not all(isinstance(x, dict) for x in v):
                 continue
             cols = [c for c in v[0].keys()]
-            if len(cols) < 2:
-                continue
+            if len(cols) < 2 or any(isinstance(y, (list, dict)) for x in v for y in x.values()):
+                continue   # 칸 안에 리스트가 든 표(부문 시계열 등)는 엑셀 칸에 못 넣어 뺌
             out.append((k, cols[1:], [(x.get(cols[0]), [x.get(c) for c in cols[1:]]) for x in v], ""))
     mp = os.path.join(MONTHLY, code + ".json")
     if os.path.exists(mp):
