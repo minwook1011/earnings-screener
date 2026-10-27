@@ -161,9 +161,24 @@ def load_prev(path=OUT):
         return {}
 
 
+def snap_stages():
+    """스냅숏(tg_snapshot.py)이 있는 단계 — 텔레에 지금 있는 게 전부인 단계."""
+    out = set()
+    for t, st in TOPIC_STAGE.items():
+        try:
+            if json.load(open(os.path.join(RAW, f"topic{t}.json"), encoding="utf-8")).get("snapshot"):
+                out.add(str(st))
+        except (OSError, ValueError):
+            pass
+    return out
+
+
 def keep(cos, prev):
     """한번 올라간 건 그대로 둔다(2026-10-22 사용자). 텔레에서 카드가 지워져도 전에 본 카드를 남기고 gone 표시.
-    '볼 후보 취소'로 내려간 단계는 새 카드에 cancelled 가 붙어 있으니 그대로 따른다."""
+    '볼 후보 취소'로 내려간 단계는 새 카드에 cancelled 가 붙어 있으니 그대로 따른다.
+    단, 스냅숏 단계(3·4)는 텔레에서 빠지면 2단계로 내린다(2026-10-27 사용자) — 2단계 카드가 없으면 그 카드를 2단계로 옮김."""
+    snap = snap_stages()
+    now = datetime.now(KST).strftime("%Y-%m-%d %H:%M")
     for c, old in prev.items():
         co = cos.get(c)
         if co is None:
@@ -171,7 +186,12 @@ def keep(cos, prev):
         for st, cd in old.get("cards", {}).items():
             if st in co["cards"] or cd.get("cancelled"):
                 continue
-            if old_high(st, cd.get("date")):
+            if st in snap:
+                co["hist"].append({"stage": int(st), "date": now, "ev": "텔레에서 빠짐 → 2단계"})
+                if "2" in co["cards"] or "2" in old.get("cards", {}):
+                    continue
+                st = "2"
+            elif old_high(st, cd.get("date")):
                 st = "2"
                 if st in co["cards"]:
                     continue
