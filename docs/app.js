@@ -1,4 +1,4 @@
-/* 실적발표스크리너 — 일본 탭.
+/* 일본 리포트 아카이빙(옛 실적발표스크리너) — 일본 탭.
  *  1단계: 실적 발표 기업 이름·티커만 모아 둔 목록
  *  2~4단계: VANTAGE 스크리너 같은 표 + 기업마다 둘째 줄(최근 10개 분기 매출·영업이익 성장률)
  *  어느 기업이든 누르면 오른쪽 패널(주가 1년·분기 실적·텔레 카드·리서치)
@@ -68,12 +68,17 @@
     var n = counts();
     return '<header class="jhd"><div class="hd"><div class="jbrand">' +
       '<div class="eyebrow">Tokyo Stock Exchange · Earnings</div>' +
-      '<h1><span class="kanji">決</span>일본 실적발표 스크리너</h1>' +
-      '<div class="sub">실적 발표 기업을 1→4단계로 거릅니다 &nbsp;|&nbsp; 실적 <span class="mono">' + esc(S.upd1) + "</span> · 텔레 <span class=\"mono\">" + esc(S.upd2) + "</span></div></div>" +
-      '<div class="stats">' + STAGES.map(function (s) { return '<div class="stat"><b>' + n[s.n] + "</b><span>" + s.n + "단계</span></div>"; }).join("") + "</div></div></header>" +
-      '<nav class="rail"><div class="rail-in">' + STAGES.map(function (s, i) {
-        return (i ? '<span class="rail-sep">›</span>' : "") + '<a class="cat s' + s.n + '" href="#jp/' + s.n + '" aria-pressed="' + (S.stage === s.n) + '"><i>' + s.n + "</i>" + esc(s.lab) + '<span class="n">' + n[s.n] + "</span></a>";
-      }).join("") + '<span class="rail-hint">' + esc(STAGES[S.stage - 1].hint) + "</span></div></nav>";
+      '<h1><span class="kanji">決</span>일본 리포트 아카이빙</h1>' +
+      '<div class="sub">2단계에 올라온 회사의 실적 리포트를 쌓아 둡니다 &nbsp;|&nbsp; 실적 <span class="mono">' + esc(S.upd1) + "</span> · 텔레 <span class=\"mono\">" + esc(S.upd2) + "</span></div></div>" +
+      '<div class="stats"><div class="stat"><b>' + n[2] + "</b><span>리포트</span></div></div></div></header>" +
+      // 2단계만 앞에, 1·3·4단계는 '다른 단계'로 접어 둠(2026-10-27 사용자: 사이트 = 일본 리포트 아카이빙)
+      '<nav class="rail"><div class="rail-in">' + cat(STAGES[1], n) +
+      '<button type="button" class="rail-more-b" id="rmore" aria-expanded="' + (S.stage !== 2) + '">다른 단계 ' + (S.stage !== 2 ? "▴" : "▾") + "</button>" +
+      '<span class="rail-more"' + (S.stage !== 2 ? "" : " hidden") + ">" + [0, 2, 3].map(function (i) { return cat(STAGES[i], n); }).join("") + "</span>" +
+      '<span class="rail-hint">' + esc(STAGES[S.stage - 1].hint) + "</span></div></nav>";
+  }
+  function cat(s, n) {
+    return '<a class="cat s' + s.n + '" href="#jp/' + s.n + '" aria-pressed="' + (S.stage === s.n) + '"><i>' + s.n + "</i>" + esc(s.lab) + '<span class="n">' + n[s.n] + "</span></a>";
   }
 
   /* ---------- 1단계: 주간 실적 캘린더(월~금, 주 단위로 넘기기) ---------- */
@@ -771,6 +776,11 @@
     if (st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "up") S.sort = "mc"; render(); }
   }
 
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("#rmore"), m = b && document.querySelector(".rail-more");
+    if (!m) return;
+    m.hidden = !m.hidden; b.setAttribute("aria-expanded", !m.hidden); b.textContent = "다른 단계 " + (m.hidden ? "▾" : "▴");
+  });
   window.addEventListener("hashchange", route);
   route();
   Promise.all([
