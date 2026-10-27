@@ -14,7 +14,7 @@
   ];
   var NOTE = {
     1: "텔레그램 1단계 카드에 올라온 회사를 이름과 티커만 모았습니다. 누르면 주가와 실적이 열립니다. 텔레그램 1단계 카드에서 [볼 후보]를 누르면 2단계로 올라갑니다.",
-    2: "텔레 2단계에 올라온 회사마다 실적 브리프를 바로 써서 붙입니다(3·4단계로 간 회사도 여기 남음). 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 분기 이름 위 '합병' = 그 분기부터 인수한 회사가 실적에 더해짐.",
+    2: "텔레 2단계에 올라온 회사마다 실적 브리프를 바로 써서 붙입니다(3·4단계로 간 회사도 여기 남음). 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 분기 이름 위 노란 '인수' = 그 분기부터 인수한 회사가 실적에 더해짐.",
     3: "텔레 3단계로 간 회사 기록입니다. 리포트는 2단계 실적 브리프를 봅니다.",
     4: "텔레 4단계로 간 회사 기록입니다. 다 같이 보고 살지 말지 정합니다."
   };
@@ -147,7 +147,7 @@
     if (!r) return '<span class="tag">없음</span>';
     return r.status === "완료" ? '<span class="tag ok">' + st + "단계 완료</span>" : '<span class="tag wait">' + st + "단계 " + esc(r.status) + "</span>";
   }
-  /* 성장률 칸 — 바탕만 파스텔, 글자는 진하게. 합병 분기는 숫자 그대로 + '합병' 표시 */
+  /* 성장률 칸 — 바탕만 파스텔, 글자는 진하게. 인수 분기는 숫자 그대로 + '인수' 표시 */
   function heat(v, t, m) {
     var mg = "", tip = "";
     if (t) return '<span class="hc ' + (t === "흑전" ? "p2" : "n2") + '"' + tip + ">" + t + mg + "</span>";
@@ -195,11 +195,11 @@
     var cells = pad.concat(q);
     function row(lab, f) { return "<span class=\"ql-l\">" + lab + "</span>" + cells.map(function (x) { return x ? f(x) : '<span class="hc na"></span>'; }).join(""); }
     // 분기 머리줄 = 회색 띠(2026-10-27 사용자: 가독성)
-    var head = '<span class="ql-l qh">억엔</span>' + cells.map(function (x) { return '<span class="ql-p qh">' + (x ? (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + esc(x.p) : "") + "</span>"; }).join("");
+    var head = '<span class="ql-l qh">억엔</span>' + cells.map(function (x) { return '<span class="ql-p qh">' + (x ? (x.m ? '<i class="mgh" title="' + esc(x.m) + '">인수</i>' : "") + esc(x.p) : "") + "</span>"; }).join("");
     return '<div class="qbox"><div class="qcap">최근 10개 분기</div><div class="ql">' + head +
       row("매출액", function (x) { return amt(x.s); }) + row("YoY", function (x) { return heat(x.r, null, x.m); }) +
       row("영업이익", function (x) { return amt(x.op); }) + row("YoY", function (x) { return heat(x.o, x.ot, x.m); }) + "</div></div>" +
-      (q.some(function (x) { return x.m; }) ? '<div class="ql-m">합병 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐</div>" : "");
+      (q.some(function (x) { return x.m; }) ? '<div class="ql-m">인수 = ' + esc(q.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐</div>" : "");
   }
   /* 오늘 날짜 — 한국 시각, 하루는 오전 6시에 바뀜(2026-10-22 사용자) */
   function todayKo() {
@@ -263,7 +263,7 @@
     function nw(h, x, k) { return x.p === cur ? h.replace('class="hc', 'class="hc nw ' + k) : h; }
     return '<div class="qbox sq"><div class="qcap">분기 YoY · %</div><div class="ql c' + cells.length + '">' +   // CSP가 인라인 style을 막으므로 칸 수는 클래스로
 
-      row("", function (x) { var on = x.p === cur; return '<span class="ql-p' + (on ? " now nw nw-t" : "") + '">' + (on && o.d ? '<i class="qd">' + esc(md(o.d)) + "</i>" : "") + esc(x.p) + "</span>"; }) +
+      row("", function (x) { var on = x.p === cur; return '<span class="ql-p' + (on ? " now nw nw-t" : "") + '">' + (on && o.d ? '<i class="qd">' + esc(md(o.d)) + "</i>" : "") + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">인수</i>' : "") + esc(x.p) + "</span>"; }) +
       row("매출액", function (x) { return nw(heat(x.r, null, x.m), x, ""); }) + row("영업이익", function (x) { return nw(heat(x.o, x.ot, x.m), x, "nw-b"); }) + "</div></div>";
   }
   /* 스크리닝 둘째 줄 왼쪽 — 별·순번·코드·종목 칸 밑을 꽉 채우는 1년 주가(2026-10-26 사용자) */
@@ -487,7 +487,7 @@
     var yl = function (v) { return T + (H - T - B) * (1 - (v - ymin) / (ymax - ymin)); };
     var bars = r.map(function (xq, i) {
       var v = vals[i] || 0, y0 = yb(0), y1 = yb(v);
-      return '<rect class="b' + (xq.m ? " m" : "") + (v < 0 ? " neg" : "") + '" x="' + (x(i) - bw * 0.32).toFixed(1) + '" y="' + Math.min(y0, y1).toFixed(1) + '" width="' + (bw * 0.64).toFixed(1) + '" height="' + Math.max(1, Math.abs(y1 - y0)).toFixed(1) + '"><title>' + esc(xq.p + " " + num(v, Math.abs(v) < 100 ? 1 : 0) + "억엔" + (xq.m ? " · 합병" : "")) + "</title></rect>" +
+      return '<rect class="b' + (xq.m ? " m" : "") + (v < 0 ? " neg" : "") + '" x="' + (x(i) - bw * 0.32).toFixed(1) + '" y="' + Math.min(y0, y1).toFixed(1) + '" width="' + (bw * 0.64).toFixed(1) + '" height="' + Math.max(1, Math.abs(y1 - y0)).toFixed(1) + '"><title>' + esc(xq.p + " " + num(v, Math.abs(v) < 100 ? 1 : 0) + "억엔" + (xq.m ? " · 인수" : "")) + "</title></rect>" +
         '<text class="bl" x="' + x(i).toFixed(1) + '" y="' + (H - 9) + '">' + esc(xq.p) + "</text>";
     }).join("");
     var pts = [], dots = "";
@@ -546,7 +546,7 @@
     if (!rows.length) return '<div class="box"><p class="na">분기 실적 자료가 아직 없습니다. 2단계로 올라가면 채워집니다.</p></div>';
     var names = ["매출", "영업이익", "순이익"];
     var head = '<tr><th class="l"></th>' + rows.map(function (x, i) {
-      return "<th>" + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">합병</i>' : "") + "<b>" + esc(x.p) + "</b>" + (i === rows.length - 1 ? '<span class="fs-now">최근</span>' : x.sub ? "<small>" + esc(x.sub) + "</small>" : "") + "</th>";
+      return "<th>" + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">인수</i>' : "") + "<b>" + esc(x.p) + "</b>" + (i === rows.length - 1 ? '<span class="fs-now">최근</span>' : x.sub ? "<small>" + esc(x.sub) + "</small>" : "") + "</th>";
     }).join("") + "</tr>";
     var body = names.map(function (nm, r) {
       return '<tr><th class="l">' + nm + "</th>" + rows.map(function (x) {
@@ -557,7 +557,7 @@
     }).join("");
     var mg = rows.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
     return '<div class="fswrap"><table class="fs"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>" +
-      '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신.' + (mg.length ? " 합병 = " + esc(mg.join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐." : "") + "</p>";
+      '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신.' + (mg.length ? " 인수 = " + esc(mg.join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐." : "") + "</p>";
   }
   function closePanel() { panel.classList.remove("on"); scrim.classList.remove("on"); document.body.style.overflow = ""; }
   scrim.onclick = function () { location.hash = "jp/" + S.stage; };
