@@ -276,6 +276,15 @@ def build_annual(wb, d):
             return blank_safe(f"{cur}/{prv}-1", cur, prv)
         return fn
 
+    def yoy_pos(key):  # 이익 줄 — 전년이 0 이하(적자)면 빈칸(2026-10-28 사용자: 손익 YoY 추가)
+        def fn(c, kind, l):
+            p = prev_col(c, kind)
+            if p is None:
+                return None
+            cur, prv = S.ref(key, c), S.ref(key, p)
+            return f'=IF(OR({cur}="",{prv}=""),"",IF({prv}<=0,"",IFERROR({cur}/{prv}-1,"")))'
+        return fn
+
     def ratio(num, den):
         def fn(c, kind, l):
             a, b = S.ref(num, c), S.ref(den, c)
@@ -339,6 +348,7 @@ def build_annual(wb, d):
     # ── 매출원가 ────────────────────────────────────────────────────────
     S.section("매출원가")
     S.row("cogs", "전체 매출원가", actual("", "cogs"), "detail", NUM)
+    S.row("cogs_yoy", "YoY", yoy_pos("cogs"), "ratio", PCT)
 
     # 제품별 매출원가 — 공시가 매출과 같은 분류로 원가를 나눠 줄 때만 행이 생긴다
     for i, sg in enumerate(segs):
@@ -368,10 +378,12 @@ def build_annual(wb, d):
         return blank_safe(f"{rv}-{cg}", rv, cg)
     S.row("gp", "매출총이익", gp_fn, "plain", NUM)
     S.row("gpm", "GPM", ratio("gp", "revenue"), "ratio", PCT)
+    S.row("gp_yoy", "YoY", yoy_pos("gp"), "ratio", PCT)
 
     # ── 판관비·영업이익 ──────────────────────────────────────────────────
     S.section("판매관리비", sub=True)
     S.row("sga", "전체 판관비", actual("", "sga"), "detail", NUM)
+    S.row("sga_yoy", "YoY", yoy_pos("sga"), "ratio", PCT)
     op_actual = actual("", "op")
     cs_op = cs_value("op")
     S.rows["opm"] = S.r + 1  # 영업이익 수식이 OPM 행을 참조
@@ -469,6 +481,7 @@ def build_annual(wb, d):
         o, oi, oe, fi, fe = refs
         return blank_safe(f"{o}+N({oi})-N({oe})+N({fi})-N({fe})", o)
     S.row("pbt", "법인세비용차감전순이익(손실)", pbt_fn, "key", NUM)
+    S.row("pbt_yoy", "YoY", yoy_pos("pbt"), "ratio", PCT)
     tax_actual = actual("", "tax")
     S.rows["tax_rate"] = S.r + 1
 
@@ -503,6 +516,7 @@ def build_annual(wb, d):
         p, t = S.ref("pbt", c), S.ref("tax", c)
         return blank_safe(f"{p}-{t}", p)
     S.row("ni", "당기순이익(손실)", ni_fn, "key", NUM)
+    S.row("ni_yoy", "YoY", yoy_pos("ni"), "ratio", PCT)
     own_actual = actual("", "ni_owner")
     cs_own = cs_value("ni_owner")
     S.rows["own_ratio"] = S.r + 1
@@ -523,6 +537,7 @@ def build_annual(wb, d):
         return blank_safe(f"{a}/{b}", a, b)
     S.row("own_ratio", "지배주주 순이익률", own_ratio_fn, "ratio", PCT,
           note="MW 기본 100%", input_kinds=("mw",))
+    S.row("ni_owner_yoy", "지배주주 순이익 YoY", yoy_pos("ni_owner"), "ratio", PCT)
 
     # ── 목표주가 산출 ────────────────────────────────────────────────────
     mk = d.get("market_data") or {}

@@ -769,7 +769,9 @@ REV_N = re.compile(r"^(NetSales|Revenue|OperatingRevenue|NetSalesIFRS|RevenueIFR
 OP_N = re.compile(r"^OperatingIncome|^OperatingProfit")
 SEG_REV = re.compile(r"^(RevenuesFromExternalCustomers|NetSales|Revenue|OperatingRevenue)")
 SEG_OP = re.compile(r"OperatingIncome|OperatingProfit|SegmentProfit|ProfitLoss")
-YOY_N = re.compile(r"^(OrdinaryIncome|ProfitLoss$|ProfitLossAttributableToOwnersOfParent|ProfitBeforeTax|GrossProfit)")
+YOY_N = re.compile(r"^(OrdinaryIncome|ProfitLoss$|ProfitLossAttributableToOwnersOfParent|ProfitBeforeTax|GrossProfit|IncomeBeforeIncomeTaxes$|ProfitLoss(IFRS|AttributableToOwnersOfParentIFRS)$)")
+# 비용·합계 줄도 YoY(2026-10-28 사용자) — 음수로 적힌 비용도 같은 부호끼리 견줌
+COST_N = re.compile(r"^(CostOfSales|SellingGeneralAndAdministrativeExpenses|NonOperatingIncome$|NonOperatingExpenses$|ExtraordinaryIncome$|ExtraordinaryLoss$|IncomeTaxes$|IncomeTaxExpenseIFRS$|FinanceIncomeIFRS$|FinanceCostsIFRS$)")
 
 
 def ratio_rows(meta, have_rev):
@@ -791,6 +793,8 @@ def ratio_rows(meta, have_rev):
         return ([("OPM", ("rev", None))] if ("rev", None) in have_rev else []) + [("YoY", None)]
     if YOY_N.match(n):
         return [("YoY", None)]
+    if COST_N.match(n):
+        return [("YoY", "cost")]
     return []
 
 
@@ -847,7 +851,8 @@ def detail_block(ws, r, title, cols, last_col, rows, note, ratios=False):
                     if kind.get(pc) != kind.get(c) or pc not in kind:
                         continue
                     p = f"{L(pc)}{me}"
-                    f = f'=IF(OR({x}="",{p}=""),"",IF({p}<=0,"",IFERROR({x}/{p}-1,"")))'
+                    f = (f'=IF(OR({x}="",{p}=""),"",IF({x}*{p}<=0,"",IFERROR({x}/{p}-1,"")))' if den == "cost"
+                         else f'=IF(OR({x}="",{p}=""),"",IF({p}<=0,"",IFERROR({x}/{p}-1,"")))')
                 else:
                     d = f"{L(c)}{have_rev[den]}"
                     f = f'=IF(OR({x}="",{d}=""),"",IF({d}<=0,"",IFERROR({x}/{d},"")))'
