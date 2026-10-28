@@ -22,6 +22,7 @@ KST = timezone(timedelta(hours=9))
 NL = chr(10)
 SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
 MAX = 10     # 동시에 도는 리포트 최대 수(2026-10-26 사용자, 4→10)
+MAX_BY = {"laptop": 15}   # 컴퓨터별로 다르게(2026-10-28 사용자, 노트북만 15). 없으면 MAX
 STALE = 90   # 분
 # 두 컴퓨터 분담(2026-10-28 사용자): 티커 끝자리 1·2·3 = 'home'(원래 컴퓨터), 나머지(0·4~9·영문) = 'laptop'.
 # 컴퓨터마다 tools/shard.txt(커밋 안 함)에 home 또는 laptop 한 단어. 없으면 전부 맡음(예전처럼).
@@ -91,7 +92,7 @@ def refresh():
         todo.append({"c": c, "n": co["n"], "stage": 2, "lv": co["stage"], "ann": ann, "since": co.get("since")})
     todo.sort(key=lambda x: x.get("since") or "", reverse=True)   # 막 올라온 회사부터(2026-10-28 사용자, 보자마자 생성)
     save_idx(idx)
-    print(json.dumps({"shard": sh or "전부", "running": running, "free": max(0, MAX - len(running)), "todo": todo, "wait": wait}, ensure_ascii=False, indent=1))
+    print(json.dumps({"shard": sh or "전부", "running": running, "free": max(0, MAX_BY.get(sh, MAX) - len(running)), "todo": todo, "wait": wait}, ensure_ascii=False, indent=1))
 
 
 def filed(c, ann):
