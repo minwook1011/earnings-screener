@@ -8,12 +8,20 @@
   - 밀리면 git fetch → git rebase origin/main. 충돌이 아래 JSON 파일에서만 나면 회사(키)별로 합친다:
     한쪽만 바꾼 키는 바꾼 쪽, 둘 다 바꾼 키는 내 것. 다른 파일에서 충돌하면 rebase --abort 하고 멈춤(사람이 봄).
   - 강제 푸시·reset·stash 는 쓰지 않는다.
+  - 한 컴퓨터에서 회차가 겹쳐도 git 작업은 한 번에 하나만(tools/gitlock.py 잠금, 2026-10-28).
+    시작할 때 남은 rebase(다른 작업이 죽으며 남긴 것)가 있으면 abort 로 치우고 시작한다.
 """
 import json
 import os
 import subprocess
 import sys
 import time
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import gitlock  # noqa: E402
+
+if hasattr(sys.stdout, "reconfigure"):   # cp949 창에서 '멈춤' 메시지 출력하다 죽던 것(2026-10-28)
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IDX = "docs/data/jp/research/index.json"
@@ -98,7 +106,25 @@ def rebase():
     return False
 
 
+def heal():
+    """잠금을 잡은 뒤라 지금 rebase 중인 다른 작업은 없다 — 남아 있는 rebase 는 죽은 작업의 흔적."""
+    for d in ("rebase-merge", "rebase-apply"):
+        p = os.path.join(ROOT, ".git", d)
+        if not os.path.isdir(p):
+            continue
+        git("rebase", "--abort", ok=True)
+        if os.path.isdir(p) and not os.listdir(p):   # 빈 폴더만 남으면 abort 도 못 함(10/28 실제로 있었음)
+            os.rmdir(p)
+        print(f"남은 rebase 치움({d})")
+
+
 def main():
+    with gitlock.held():
+        heal()
+        run()
+
+
+def run():
     if sys.argv[1:] == ["--pull"]:
         if git("status", "--porcelain", "--", IDX).stdout.strip():
             git("add", "--", IDX)

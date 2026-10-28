@@ -295,7 +295,7 @@ def mark(c, st, status):
     save_idx(idx)
 
 
-if __name__ == "__main__":
+def cli():
     if len(sys.argv) >= 5 and sys.argv[1] == "mark":   # mark <코드> <단계> 진행 중|대기|멈춤
         mark(sys.argv[2], sys.argv[3], " ".join(sys.argv[4:]))
     elif len(sys.argv) >= 6 and sys.argv[1] == "attach":
@@ -304,3 +304,12 @@ if __name__ == "__main__":
         done(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5] if len(sys.argv) > 5 else None)
     else:
         refresh()
+
+
+if __name__ == "__main__":
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import gitlock
+    with gitlock.held():   # gpush 의 rebase 와 겹쳐 쓰지 않게(2026-10-28)
+        cli()
