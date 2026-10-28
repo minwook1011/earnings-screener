@@ -22,6 +22,23 @@ NL = chr(10)
 SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
 MAX = 10     # 동시에 도는 리포트 최대 수(2026-10-26 사용자, 4→10)
 STALE = 90   # 분
+# 두 컴퓨터 분담(2026-10-28 사용자): 티커 끝자리 1·2·3 = 'home'(원래 컴퓨터), 나머지(0·4~9·영문) = 'laptop'.
+# 컴퓨터마다 tools/shard.txt(커밋 안 함)에 home 또는 laptop 한 단어. 없으면 전부 맡음(예전처럼).
+HOME_TAIL = "123"
+
+
+def shard():
+    try:
+        return open(os.path.join(ROOT, "tools", "shard.txt"), encoding="utf-8").read().strip() or None
+    except OSError:
+        return None
+
+
+def mine(c, sh=None):
+    sh = sh if sh is not None else shard()
+    if sh not in ("home", "laptop"):
+        return True
+    return (c[-1] in HOME_TAIL) == (sh == "home")
 
 
 def now():
@@ -35,6 +52,10 @@ def load_idx():
 
 
 def save_idx(idx):
+    if os.path.exists(IDX):   # 바뀐 게 없으면 안 씀(시각만 바뀌어 두 컴퓨터가 충돌하지 않게)
+        old = json.load(open(IDX, encoding="utf-8"))
+        if old.get("items") == idx.get("items"):
+            return
     idx["updated"] = now()
     os.makedirs(os.path.dirname(IDX), exist_ok=True)
     json.dump(idx, open(IDX, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
@@ -45,8 +66,9 @@ def refresh():
     idx = load_idx()
     cut = (datetime.now(KST) - timedelta(minutes=STALE)).strftime("%Y-%m-%d %H:%M")
     todo, running, wait = [], [], []
+    sh = shard()
     for c, co in pipe["companies"].items():
-        if co["stage"] < 2:
+        if co["stage"] < 2 or not mine(c, sh):   # 다른 컴퓨터 몫은 손대지 않음
             continue
         it = idx["items"].setdefault(c, {}).get("2")
         if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
@@ -68,7 +90,7 @@ def refresh():
                      "since": co.get("since")})
     todo.sort(key=lambda x: x.get("since") or "")   # 먼저 올라온 순
     save_idx(idx)
-    print(json.dumps({"running": running, "free": max(0, MAX - len(running)), "todo": todo, "wait": wait}, ensure_ascii=False, indent=1))
+    print(json.dumps({"shard": sh or "전부", "running": running, "free": max(0, MAX - len(running)), "todo": todo, "wait": wait}, ensure_ascii=False, indent=1))
 
 
 def filed(c, ann):
