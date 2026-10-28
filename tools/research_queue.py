@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""리서치 대기열 — 2단계 이상 회사에 2단계 실적 브리프가 없으면 '대기'로 올린다.
+"""리서치 대기열 — 1단계 이상 회사에(2026-10-28 사용자: 1단계도 바로 씀) 2단계 실적 브리프가 없으면 '대기'로 올린다.
   3·4단계는 텔레 기록만, 리서치 안 함(2026-10-25 사용자). 동시에 만드는 리포트는 최대 MAX 개.
 
   python tools/research_queue.py          대기열 갱신 + {"running":[…], "free":빈 자리, "todo":[…]} 출력(JSON)
@@ -68,7 +68,7 @@ def refresh():
     todo, running, wait = [], [], []
     sh = shard()
     for c, co in pipe["companies"].items():
-        if co["stage"] < 2 or not mine(c, sh):   # 다른 컴퓨터 몫은 손대지 않음
+        if co["stage"] < 1 or not mine(c, sh):   # 1단계부터 씀(2026-10-28 사용자). 다른 컴퓨터 몫은 손대지 않음
             continue
         it = idx["items"].setdefault(c, {}).get("2")
         if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
@@ -82,11 +82,11 @@ def refresh():
             continue
         if not it:
             idx["items"][c]["2"] = {"status": "대기", "queued": now(), "kind": SKILL[2]}
-        ann = (co["cards"].get("2") or {}).get("ann")
+        ann = (co["cards"].get("2") or co["cards"].get("1") or {}).get("ann")
         if not filed(c, ann):   # 이번 결산단신이 아직 안 잡히면 지난 분기로 쓰게 되니 기다린다(2026-10-26 신에츠폴리머)
             wait.append(c)
             continue
-        todo.append({"c": c, "n": co["n"], "stage": 2, "ann": (co["cards"].get("2") or {}).get("ann"),
+        todo.append({"c": c, "n": co["n"], "stage": 2, "ann": ann,
                      "since": co.get("since")})
     todo.sort(key=lambda x: x.get("since") or "")   # 먼저 올라온 순
     save_idx(idx)
