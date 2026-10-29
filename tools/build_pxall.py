@@ -30,7 +30,7 @@ OUT = os.path.join(ROOT, "docs", "data", "jp", "pxall")
 CACHE = os.path.join(ROOT, "tools", "pxall_cache")
 KST = timezone(timedelta(hours=9))
 UA = {"User-Agent": "Mozilla/5.0"}
-VANTAGE = [os.environ.get("VANTAGE_DIR", ""), r"C:\devantage-0910", os.path.join(os.path.expanduser("~"), "repos", "vantage-0910")]
+VANTAGE = [os.environ.get("VANTAGE_DIR", ""), r"C:\dev\vantage-0910", os.path.join(os.path.expanduser("~"), "repos", "vantage-0910")]
 RAWGH = "https://raw.githubusercontent.com/minwook1011/vantage-0910/main/"
 UP = 8.0
 
