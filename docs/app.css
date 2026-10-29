@@ -491,6 +491,7 @@ table.fs { min-width: 0; width: max-content; border-collapse: separate; border-s
 @media (min-width: 1000px) {
   .tblwrap { overflow: visible; }
   .main-t thead th { position: sticky; top: calc(var(--navh) + var(--railh)); z-index: 20; box-shadow: 0 1px 0 var(--line); }
+  .main-t.scr-t thead th { position: static; box-shadow: none; }   /* 스크리닝 표는 머리줄 고정 해제(2026-10-29 사용자) */
 }
 
 /* 2단계 표 — 머리줄 대신 숫자 위에 작은 이름(2026-10-22 사용자) */
@@ -755,9 +756,9 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .boards button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
 .boards button[aria-pressed="true"] span { color: color-mix(in srgb, var(--surface) 75%, transparent); }
 .pgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 8px; }
-.pcard { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 10px 12px 12px; cursor: pointer; display: flex; flex-direction: column; gap: 8px; aspect-ratio: 1 / 1; min-height: 0; transition: border-color .15s, box-shadow .15s; }
+.pcard { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 10px 12px 12px; cursor: pointer; display: flex; flex-direction: column; gap: 8px;  min-height: 0; transition: border-color .15s, box-shadow .15s; }
 .pcard:hover, .pcard:focus-visible { border-color: var(--s2, #2563eb); box-shadow: 0 4px 16px color-mix(in srgb, var(--ink) 10%, transparent); outline: 0; }
-.pc-ch { position: relative; flex: 1 1 auto; min-height: 180px; }
+.pc-ch { position: relative; flex: 0 0 auto; height: 190px; }   /* 카드 = 차트 190px + 이름·숫자 → 정사각형에 가깝게 */
 .pc-ch svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .pc-ch .pa { fill: color-mix(in srgb, var(--tx-up) 10%, transparent); }
 .pc-ch .dn .pa { fill: color-mix(in srgb, var(--tx-dn) 10%, transparent); }
@@ -808,6 +809,25 @@ html.pxm-open { overflow: hidden; }
 .pxm.drawing .pxm-ch { cursor: crosshair; }
 .pxm-ft { padding: 6px 14px 8px; font-size: 11.5px; color: var(--ink-mute); border-top: 1px solid var(--line); }
 .pxm-ft.on { color: #a86a00; font-weight: 700; }
-@media (max-width: 640px) { .pxm { padding: 0; } .pxm-in { border-radius: 0; } .pxm-tools kbd { display: none; } .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .pcard { aspect-ratio: auto; } .pc-ch { min-height: 110px; } }
+@media (max-width: 640px) { .pxm { padding: 0; } .pxm-in { border-radius: 0; } .pxm-tools kbd { display: none; } .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } .pc-ch { height: 130px; } }
 .pc-st i small { font: 500 9.5px var(--mono, monospace); margin-left: 3px; color: var(--ink-mute); }
 @media (min-width: 641px) and (max-width: 1000px) { .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* 즐겨찾기 목록 — 끌어서 옮기기(2026-10-29 사용자) */
+.pcard { position: relative; }
+.pc-star { position: absolute; right: 8px; top: 6px; z-index: 2; background: none; border: 0; font-size: 16px; line-height: 1; color: var(--ink-mute); cursor: pointer; padding: 2px; }
+.pc-star.on { color: #e0a100; }
+.fgwrap { display: flex; flex-direction: column; gap: 16px; margin-top: 6px; }
+.fg { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px 12px; background: color-mix(in srgb, var(--ink) 2%, var(--surface)); }
+.fg header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.fg-n { font: 700 15px var(--sans, inherit); color: var(--ink); background: transparent; border: 1px solid transparent; border-radius: 6px; padding: 4px 6px; min-width: 0; width: 16em; }
+.fg-n:hover, .fg-n:focus { border-color: var(--line); background: var(--surface); outline: 0; }
+.fg-k { font: 600 12px var(--mono, monospace); color: var(--ink-mute); }
+.fg-del { margin-left: auto; border: 1px solid var(--line); background: var(--surface); color: var(--ink-mid); border-radius: 6px; padding: 3px 9px; cursor: pointer; }
+.fg-list { margin-top: 0; min-height: 90px; }
+.fg-list .pcard { cursor: grab; }
+.fg-list .pcard.dragging { opacity: .35; }
+.fg-end { border: 1.5px dashed var(--line); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--ink-mute); font-size: 12px; min-height: 90px; }
+.drop-at { box-shadow: -4px 0 0 0 #e0a100; }
+.drop-at.after { box-shadow: 4px 0 0 0 #e0a100; }
+.fg-end.drop-at { border-color: #e0a100; color: #a86a00; box-shadow: none; }
+.fg-add { align-self: flex-start; border: 1.5px dashed var(--line); background: var(--surface); color: var(--ink-mid); border-radius: 10px; padding: 9px 16px; font-weight: 700; cursor: pointer; }

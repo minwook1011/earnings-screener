@@ -282,13 +282,73 @@
     { k: "tbl", t: "스크리닝 표" },
     { k: "new", t: "신고가", f: function (p) { return p && p.new; }, note: "최근 5거래일 안에 52주 신고가(고가 기준)를 새로 쓴 종목." },
     { k: "near", t: "신고가 근접", f: function (p) { return p && p.near; }, note: "52주 최고가에서 15% 이내까지 올라온 종목(신고가 종목 제외)." },
-    { k: "turn", t: "턴어라운드", f: function (p) { return p && p.turn; }, note: "최근 52주 안에 이동평균 20·60·120일이 역배열이었다가 지금 정배열로 바뀐 종목. 세로 점선이 바뀐 날." }
+    { k: "turn", t: "턴어라운드", f: function (p) { return p && p.turn; }, note: "최근 52주 안에 이동평균 20·60·120일이 역배열이었다가 지금 정배열로 바뀐 종목. 세로 점선이 바뀐 날." },
+    { k: "fav", t: "★ 즐겨찾기 목록" }
   ];
+  /* 즐겨찾기 목록 — ★ 종목을 내가 만든 목록에 나눠 담고 끌어서 옮김(2026-10-29 사용자). 이 브라우저에 저장(es-favg) */
+  var FG = (function () { try { var g = JSON.parse(localStorage.getItem("es-favg") || "null"); if (g && g.length) return g; } catch (e) {} return [{ id: "u", n: "미분류", c: [] }]; })();
+  function saveFG() { try { localStorage.setItem("es-favg", JSON.stringify(FG)); } catch (e) {} }
+  function syncFG() {   // ★ 와 맞춤: 새 ★ 는 첫 목록 끝에, ★ 뺀 종목은 지움
+    var seen = {};
+    FG.forEach(function (g) { g.c = g.c.filter(function (c) { if (!FAV[c] || seen[c]) return false; seen[c] = 1; return true; }); });
+    Object.keys(FAV).forEach(function (c) { if (!seen[c] && S.cos[c]) FG[0].c.push(c); });
+    saveFG();
+  }
+  function favView() {
+    syncFG();
+    var n = FG.reduce(function (a, g) { return a + g.c.length; }, 0);
+    return boardTabs() + '<p class="stage-note">★ 를 누른 종목이 여기 모입니다. 카드를 끌어 다른 목록으로 옮기거나 순서를 바꾸고, 목록 이름은 눌러서 고칩니다. 이 브라우저에 저장됩니다.</p>' +
+      (n ? "" : '<div class="empty">아직 즐겨찾기가 없습니다 — 표나 카드의 ☆ 를 누르세요.</div>') +
+      '<div class="fgwrap">' + FG.map(function (g, gi) {
+        return '<section class="fg" data-g="' + esc(g.id) + '"><header><input class="fg-n" data-gn="' + esc(g.id) + '" value="' + esc(g.n) + '" aria-label="목록 이름"><span class="fg-k">' + g.c.length + "</span>" +
+          (gi ? '<button type="button" class="fg-del" data-gdel="' + esc(g.id) + '" title="목록 지우기(종목은 첫 목록으로)">✕</button>' : "") + "</header>" +
+          '<div class="fg-list pgrid" data-drop="' + esc(g.id) + '">' + g.c.map(function (c) { return S.cos[c] ? pcard(S.cos[c]) : ""; }).join("") +
+          '<div class="fg-end">여기로 끌어 놓기</div></div></section>';
+      }).join("") + '<button type="button" class="fg-add" id="fgadd">+ 목록 추가</button></div>';
+  }
+  function bindFav() {
+    var drag = null;
+    app.querySelectorAll(".fg-list .pcard").forEach(function (el) {
+      el.setAttribute("draggable", "true");
+      el.ondragstart = function (e) { drag = el.dataset.px; el.classList.add("dragging"); e.dataTransfer.effectAllowed = "move"; try { e.dataTransfer.setData("text/plain", drag); } catch (er) {} };
+      el.ondragend = function () { el.classList.remove("dragging"); app.querySelectorAll(".drop-at").forEach(function (x) { x.classList.remove("drop-at", "after"); }); };
+    });
+    function spot(list, x, y) {   // 놓을 자리 = 커서에 가장 가까운 카드 앞(카드 오른쪽 절반이면 그 뒤)
+      var cards = [].filter.call(list.querySelectorAll(".pcard"), function (c) { return c.dataset.px !== drag; }), best = null, bd = 1e9, after = false;
+      cards.forEach(function (c) { var r = c.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, d = Math.hypot(x - cx, y - cy); if (d < bd) { bd = d; best = c; after = x > cx; } });
+      var end = list.querySelector(".fg-end").getBoundingClientRect();
+      if (best && Math.hypot(x - (end.left + end.width / 2), y - (end.top + end.height / 2)) < bd) best = null;
+      return { el: best, after: after };
+    }
+    app.querySelectorAll(".fg-list").forEach(function (list) {
+      list.ondragover = function (e) {
+        if (!drag) return; e.preventDefault();
+        app.querySelectorAll(".drop-at").forEach(function (x) { x.classList.remove("drop-at", "after"); });
+        var s = spot(list, e.clientX, e.clientY); (s.el || list.querySelector(".fg-end")).classList.add("drop-at"); if (s.el && s.after) s.el.classList.add("after");
+      };
+      list.ondrop = function (e) {
+        e.preventDefault(); if (!drag) return;
+        var s = spot(list, e.clientX, e.clientY), g = FG.filter(function (x) { return x.id === list.dataset.drop; })[0];
+        FG.forEach(function (x) { x.c = x.c.filter(function (c) { return c !== drag; }); });
+        var i = s.el ? g.c.indexOf(s.el.dataset.px) + (s.after ? 1 : 0) : g.c.length;
+        g.c.splice(i, 0, drag); drag = null; saveFG(); rerender();
+      };
+    });
+    app.querySelectorAll("[data-gn]").forEach(function (inp) {
+      inp.onchange = function () { var g = FG.filter(function (x) { return x.id === inp.dataset.gn; })[0]; g.n = inp.value.trim() || g.n; saveFG(); };
+      inp.onkeydown = function (e) { if (e.key === "Enter") inp.blur(); };
+    });
+    app.querySelectorAll("[data-gdel]").forEach(function (b) {
+      b.onclick = function () { var i = FG.map(function (x) { return x.id; }).indexOf(b.dataset.gdel); if (i < 1) return; FG[0].c = FG[0].c.concat(FG[i].c); FG.splice(i, 1); saveFG(); rerender(); };
+    });
+    var add = document.getElementById("fgadd");
+    if (add) add.onclick = function () { FG.push({ id: "g" + Date.now().toString(36), n: "새 목록 " + FG.length, c: [] }); saveFG(); rerender(); var ins = app.querySelectorAll("[data-gn]"); ins[ins.length - 1].focus(); ins[ins.length - 1].select(); };
+  }
   S.board = (function () { try { var b = localStorage.getItem("es-board"); return BOARDS.some(function (x) { return x.k === b; }) ? b : "tbl"; } catch (e) { return "tbl"; } })();
   function boardTabs() {
     var all = S.list.filter(inScr);
     return '<nav class="boards" id="boards">' + BOARDS.map(function (b) {
-      var n = b.f ? all.filter(function (o) { return b.f((S.px.items || {})[o.c]); }).length : all.length;
+      var n = b.k === "fav" ? all.filter(function (o) { return FAV[o.c]; }).length : b.f ? all.filter(function (o) { return b.f((S.px.items || {})[o.c]); }).length : all.length;
       return '<button data-board="' + b.k + '" aria-pressed="' + (S.board === b.k) + '">' + b.t + "<span>" + n + "</span></button>";
     }).join("") + "</nav>";
   }
@@ -314,7 +374,7 @@
   function pcard(o) {
     var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
     var tag = B === "turn" ? "정배열 전환 " + md(p.turn) : B === "new" ? "52주 신고가 " + md(p.hid) : "고점 대비 " + pctTxt(p.off);
-    return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button">' +
+    return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button"><button type="button" class="star pc-star' + (FAV[o.c] ? " on" : "") + '" data-fav="' + esc(o.c) + '" aria-pressed="' + !!FAV[o.c] + '" title="즐겨찾기">' + (FAV[o.c] ? "★" : "☆") + "</button>" +
       '<div class="pc-ch">' + pchart(p, B) + '<span class="pc-tag">' + esc(tag) + "</span></div>" +
       '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
@@ -323,6 +383,7 @@
   /* 스크리닝 대상 = 2단계 이상 + 2단계 리포트를 쓴 회사(1단계 포함, 2026-10-29 사용자) */
   function inScr(o) { var r = (o.res || {})["2"]; return o.stage >= 2 || !!(r && r.status === "완료" && r.html); }
   function scrView() {
+    if (S.board === "fav") return favView();
     var q = S.q.trim().toLowerCase(), sm = S.smart, minmc = S.minmc || 0;
     var rows = S.list.filter(function (o) {
       if (!inScr(o)) return false;
@@ -710,7 +771,9 @@
       b.onclick = function () { var k = [].map.call(app.querySelectorAll("[data-dd]"), function (x) { return x.dataset.dd; }); S.day = k[Math.max(0, Math.min(k.length - 1, k.indexOf(S.day) + +b.dataset.dstep))]; rerender(); };
     });
     var q = document.getElementById("q");
-    if (q) q.oninput = function () { S.q = q.value; rerender(); var n = document.getElementById("q"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+    // 한글 조합 중(ㄱ→가)엔 다시 그리지 않음 — 그리면 입력칸이 새로 생겨 'ㄱ교ㅅ세' 처럼 깨짐(2026-10-29 사용자)
+    function qgo() { S.q = q.value; rerender(); var n = document.getElementById("q"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+    if (q) { q.oninput = function (e) { if (e.isComposing) return; qgo(); }; q.addEventListener("compositionend", qgo); }
     var so = document.getElementById("sort");
     if (so) so.onchange = function () { S.sort = so.value; rerender(); };
     app.querySelectorAll("#dir button").forEach(function (b) { b.onclick = function () { S.dir = +b.dataset.v; rerender(); }; });
@@ -733,6 +796,7 @@
     app.querySelectorAll("th[data-sk]").forEach(function (th) {
       th.onclick = function () { var k = th.dataset.sk, cur = (S.smart && S.smart.sort) || S.ssort || "mc"; if (S.smart) S.smart.sort = null; if (cur === k) S.sdir = -(S.sdir || (k === "per" ? 1 : -1)); else { S.ssort = k; S.sdir = 0; } rerender(); };
     });
+    if (S.board === "fav" && S.mode === "jps") bindFav();
     app.querySelectorAll("#boards button").forEach(function (b) { b.onclick = function () { S.board = b.dataset.board; try { localStorage.setItem("es-board", S.board); } catch (e) {} rerender(); }; });
     app.querySelectorAll("[data-px]").forEach(function (el) {
       function go() { var o = S.cos[el.dataset.px] || {}; window.PXC && PXC.open(el.dataset.px, o.n || el.dataset.px, function () { location.hash = "jps/c/" + el.dataset.px; }); }
@@ -817,7 +881,8 @@
     app.innerHTML = roomView();
     app.querySelectorAll("[data-rk]").forEach(function (b) { b.onclick = function () { S.rk = b.dataset.rk; renderRoom(); }; });
     var q = document.getElementById("rq");
-    if (q) q.oninput = function () { S.rq = q.value; renderRoom(); var n = document.getElementById("rq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+    function rgo() { S.rq = q.value; renderRoom(); var n = document.getElementById("rq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+    if (q) { q.oninput = function (e) { if (e.isComposing) return; rgo(); }; q.addEventListener("compositionend", rgo); }   // 한글 조합 중엔 다시 그리지 않음
   }
   function soon(name) { return '<div class="soon"><h2>' + name + " 준비 중</h2><p>일본 탭과 같은 1~4단계 흐름으로 만들 예정입니다.</p></div>"; }
   function route() {
