@@ -3,7 +3,7 @@
  *  2~4단계: VANTAGE 스크리너 같은 표 + 기업마다 둘째 줄(최근 10개 분기 매출·영업이익 성장률)
  *  어느 기업이든 누르면 오른쪽 패널(주가 1년·분기 실적·텔레 카드·리서치)
  * 데이터: data/jp/stage1.json · pipeline.json · qyoy.json · ret.json(주가 수익률) · ircall.json(IR 설명회) · research/index.json · co/<코드>.json
- * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #room/watch|res|pre · #us · #kr */
+ * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #jps · #jps/c/<코드> · #room/watch|res|pre · #us · #kr */
 (function () {
   "use strict";
   var STAGES = [
@@ -225,7 +225,7 @@
   function dlab(d) { return md(d) + "(" + "일월화수목금토"[new Date(d + "T00:00:00").getDay()] + ")"; }
   /* 2단계 = 2단계 이상 전부(리포트 목록) — 날짜별(기본)·전체(발표순). 3·4단계 = 텔레 기록(2026-10-25 사용자) */
   function vselHtml() {
-    return '<div class="fld"><span>보기</span><div class="seg" id="vw">' + [["day", "날짜별"], ["all", "전체"], ["scr", "스크리닝"]].map(function (v) {
+    return '<div class="fld"><span>보기</span><div class="seg" id="vw">' + [["day", "날짜별"], ["all", "전체"]].map(function (v) {
       return '<button data-v="' + v[0] + '" aria-pressed="' + (S.view === v[0]) + '">' + v[1] + "</button>";
     }).join("") + "</div></div>";
   }
@@ -277,10 +277,12 @@
       '<polygon points="0,' + H + " " + xy.map(function (a) { return a.join(","); }).join(" ") + " " + W + "," + H + '"/><polyline points="' + xy.map(function (a) { return a.join(","); }).join(" ") + '"/></svg>' +
       '<span class="bsp-l">1년 <b>' + pctTxt(Math.round(ch * 10) / 10) + "</b> · " + esc(md(r.d)) + " " + num(r.px, r.px < 100 ? 1 : 0) + "엔</span></div>";
   }
+  /* 스크리닝 대상 = 2단계 이상 + 2단계 리포트를 쓴 회사(1단계 포함, 2026-10-29 사용자) */
+  function inScr(o) { var r = (o.res || {})["2"]; return o.stage >= 2 || !!(r && r.status === "완료" && r.html); }
   function scrView() {
     var q = S.q.trim().toLowerCase(), sm = S.smart, minmc = S.minmc || 0;
     var rows = S.list.filter(function (o) {
-      if (o.stage < 2) return false;
+      if (!inScr(o)) return false;
       if (q && [o.n, o.en, o.tn, o.c, o.cat, o.bm].join(" ").toLowerCase().indexOf(q) < 0) return false;
       if (minmc && !((scv(o, "mc") || 0) >= minmc)) return false;
       if (S.favonly && !FAV[o.c]) return false;
@@ -294,8 +296,8 @@
       if (k === "per") { if (x < 0) return 1; if (y < 0) return -1; }
       return dir * (x - y);
     });
-    var nF = Object.keys(FAV).filter(function (c) { return S.cos[c] && S.cos[c].stage >= 2; }).length;
-    var head = '<div class="ctl">' + vselHtml() +
+    var nF = Object.keys(FAV).filter(function (c) { return S.cos[c] && inScr(S.cos[c]); }).length;
+    var head = '<div class="ctl">' +
       '<div class="fld"><label for="ssort">정렬 기준</label><select id="ssort">' + SC.map(function (c) { return '<option value="' + c.k + '"' + (k === c.k ? " selected" : "") + ">" + c.s + "</option>"; }).join("") + "</select></div>" +
       '<div class="fld"><span>최소 시총</span><div class="seg" id="minmc">' + [[0, "전체"], [500, "500억엔↑"], [1000, "1천억엔↑"], [5000, "5천억엔↑"]].map(function (v) { return '<button data-v="' + v[0] + '" aria-pressed="' + (minmc === v[0]) + '">' + v[1] + "</button>"; }).join("") + "</div></div>" +
       '<div class="fld"><span>즐겨찾기</span><div class="seg" id="favflt"><button data-v="0" aria-pressed="' + !S.favonly + '">전체</button><button data-v="1" aria-pressed="' + !!S.favonly + '">★만 ' + nF + "</button></div></div>" +
@@ -303,7 +305,7 @@
       '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>개 종목</div></div>" +
       '<div class="smart"><div class="smart-in"><span class="smart-ic">⌕</span><input type="text" id="sq" placeholder="조건으로 검색 — 예: 시총 1000억 이상, 매출성장 10% 이상, 주가 상승률 30% 이상, 영업이익률 15% 이상 순" value="' + esc(S.sq || "") + '"><button id="sqgo">검색</button>' + (sm ? '<button id="sqclear">해제</button>' : "") + "</div>" +
       '<div class="smart-hint">' + (sm ? "적용: " + sm.conds.map(function (c) { var x = SC.filter(function (y) { return y.k === c.k; })[0]; return "<b>" + esc(x.t) + " " + c.v + (c.lo ? " 이하" : " 이상") + "</b>"; }).join(" · ") + (sm.sort ? " · " + esc(SC.filter(function (y) { return y.k === sm.sort; })[0].t) + " 순" : "") : "시총·매출·매출성장·주가 상승률(1년·YTD)·PER·ROE·영업이익률 조건을 알아듣습니다. “~순”을 붙이면 그 기준으로 정렬합니다.") + "</div></div>" +
-      '<p class="stage-note">텔레 2단계에 올라온 회사를 모두 쌓아 둔 스크리너입니다. 매출·이익은 최근 4개 분기 합(TTM), ROE = 최근 4개 분기 순이익 ÷ 분기말 자기자본. 둘째 줄은 1년 주가와 분기별 매출액·영업이익 YoY — 노란 네모가 최근 실적발표 분기입니다. 회사를 누르면 리포트·재무제표·주가가 열립니다.</p>';
+      '<p class="stage-note">텔레 2단계에 올라온 회사와 2단계 리포트를 쓴 회사를 모두 쌓아 둔 스크리너입니다. 매출·이익은 최근 4개 분기 합(TTM), ROE = 최근 4개 분기 순이익 ÷ 분기말 자기자본. 둘째 줄은 1년 주가와 분기별 매출액·영업이익 YoY — 노란 네모가 최근 실적발표 분기입니다. 회사를 누르면 리포트·재무제표·주가가 열립니다.</p>';
     if (!rows.length) return head + '<div class="empty">조건에 맞는 종목이 없습니다.</div>';
     var maxmc = Math.max.apply(null, rows.map(function (o) { return scv(o, "mc") || 0; })) || 1;
     var th = '<tr><th class="ns"></th><th class="l ns">#</th><th class="l ns">코드</th><th class="l ns">종목</th>' + SC.map(function (c) {
@@ -327,7 +329,6 @@
   }
 
   function stageN(st) {
-    if (st === 2 && S.view === "scr") return scrView();
     var q = S.q.trim().toLowerCase();
     var rows = S.list.filter(function (o) { return (st === 2 ? o.stage >= 2 : stOf(o) === st) && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); });
     var day = st === 2 && S.view === "day" && !q, all = st === 2 && !day, nav = "";
@@ -433,7 +434,7 @@
       '<div class="dsec">기본 정보</div><div class="kmini">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
       bmBlock(bm) +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
-    document.getElementById("px").onclick = function () { location.hash = "jp/" + S.stage; };
+    document.getElementById("px").onclick = function () { location.hash = back(); };
     pin.querySelectorAll("[data-pick]").forEach(function (b) {
       b.onclick = function () { togglePick(b.dataset.pc); drawPanel(o, d); if (app.querySelector("#view")) render(); };
     });
@@ -560,8 +561,9 @@
       '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신.' + (mg.length ? " 인수 = " + esc(mg.join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐." : "") + "</p>";
   }
   function closePanel() { panel.classList.remove("on"); scrim.classList.remove("on"); document.body.style.overflow = ""; }
-  scrim.onclick = function () { location.hash = "jp/" + S.stage; };
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("on")) location.hash = "jp/" + S.stage; });
+  function back() { return S.mode === "jps" ? "jps" : "jp/" + S.stage; }
+  scrim.onclick = function () { location.hash = back(); };
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("on")) location.hash = back(); });
 
   /* ---------- 주가 차트(SVG) ---------- */
   function dstr(day) { var t = new Date(day * 86400000); return t.getUTCFullYear() + "-" + ("0" + (t.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + t.getUTCDate()).slice(-2); }
@@ -637,15 +639,24 @@
   }
 
   /* ---------- 화면 ---------- */
+  function body() { return S.mode === "jps" ? scrView() : S.stage === 1 ? stage1() : stageN(S.stage); }
+  /* 일본 스크리닝 탭(2026-10-29 사용자: 2단계 '보기'에서 상단 탭으로 뺌) */
+  function scrHead() {
+    var n = S.list.filter(inScr).length;
+    return '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · Screening</div>' +
+      '<h1><span class="kanji">選</span>일본 스크리닝</h1>' +
+      '<div class="sub">2단계에 올라온 회사와 리포트를 쓴 회사를 한 표에 모읍니다 &nbsp;|&nbsp; 실적 <span class="mono">' + esc(S.upd1) + "</span> · 텔레 <span class=\"mono\">" + esc(S.upd2) + "</span></div></div>" +
+      '<div class="stats"><div class="stat"><b>' + n + "</b><span>종목</span></div></div></div></header>";
+  }
   function render() {
-    app.innerHTML = head() + '<div class="wrap" id="view">' + (S.stage === 1 ? stage1() : stageN(S.stage)) + "</div>";
+    app.innerHTML = (S.mode === "jps" ? scrHead() : head()) + '<div class="wrap" id="view">' + body() + "</div>";
     bindView();
   }
-  function rerender() { document.getElementById("view").innerHTML = S.stage === 1 ? stage1() : stageN(S.stage); bindView(); }
+  function rerender() { document.getElementById("view").innerHTML = body(); bindView(); }
   function bindView() {
     var rl = app.querySelector(".rail"); if (rl) document.documentElement.style.setProperty("--railh", rl.offsetHeight + "px");
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
-    app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = "jp/c/" + el.dataset.c; }; });
+    app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = (S.mode === "jps" ? "jps" : "jp") + "/c/" + el.dataset.c; }; });
     app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pc); render(); }; });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
     app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { S.day = b.dataset.dd; rerender(); }; });
@@ -764,14 +775,16 @@
     if (m === "us" || m === "kr") { closePanel(); app.innerHTML = soon(m === "us" ? "미국" : "한국"); return; }
     if (!S.ready) return;
     if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
+    var md0 = m === "jps" ? "jps" : "jp", sw = S.mode !== md0;
+    S.mode = md0;
     if (h[1] === "c") {
-      var o = S.cos[h[2]];
-      if (!app.querySelector("#view")) { S.stage = 2; render(); }
+      if (sw || !app.querySelector("#view")) { if (md0 === "jp") S.stage = 2; render(); }
       openCo(h[2]); return;
     }
     closePanel();
+    if (md0 === "jps") { if (sw || !app.querySelector("#view")) render(); return; }
     var st = Math.min(4, Math.max(2, +h[1] || 2));   // 1단계 퀵은 일단 뺌(2026-10-27 사용자) — #jp/1 은 2단계로
-    if (st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "up") S.sort = "mc"; render(); }
+    if (sw || st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "up") S.sort = "mc"; render(); }
   }
 
   window.addEventListener("hashchange", route);

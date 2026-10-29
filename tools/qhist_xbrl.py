@@ -58,12 +58,19 @@ def ann_date(ann, today):
 
 
 def fresh():
-    src = json.load(open(SRC, encoding="utf-8"))
     pipe = json.load(open(os.path.join(ROOT, "docs", "data", "jp", "pipeline.json"), encoding="utf-8"))["companies"]
+    # 2단계 리포트를 쓴 1단계 회사도 스크리닝 탭에 나오므로 qhist 에 없으면 결산단신으로 채움(2026-10-29)
+    it = json.load(open(os.path.join(ROOT, "docs", "data", "jp", "research", "index.json"), encoding="utf-8")).get("items", {})
+    rep = {c for c, v in it.items() if (v.get("2") or {}).get("status") == "완료"}
+    src = json.load(open(SRC, encoding="utf-8"))
+    miss = sorted(c for c in rep if c not in src)
+    if miss:
+        main(miss)
+        src = json.load(open(SRC, encoding="utf-8"))
     done = src.get("_fresh", {})
     today, add = date.today(), []
     for c, v in pipe.items():
-        if v.get("stage", 1) < 2 or c not in src:
+        if (v.get("stage", 1) < 2 and c not in rep) or c not in src:
             continue
         card = v["cards"].get(str(v["stage"])) or v["cards"].get("2") or {}
         d = ann_date(card.get("ann"), today)

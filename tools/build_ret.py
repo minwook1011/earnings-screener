@@ -63,6 +63,12 @@ def targets():
                 cs.add(c)
     except (OSError, ValueError, KeyError):
         pass
+    try:   # 2단계 리포트를 쓴 1단계 회사도(스크리닝 탭, 2026-10-29)
+        for c, v in json.load(open(os.path.join(JP, "research", "index.json"), encoding="utf-8"))["items"].items():
+            if (v.get("2") or {}).get("status") == "완료":
+                cs.add(c)
+    except (OSError, ValueError, KeyError):
+        pass
     try:
         room = json.load(open(os.path.join(ROOT, "docs", "data", "room.json"), encoding="utf-8"))
         for w in room.get("watch", []) + room.get("docs", []):

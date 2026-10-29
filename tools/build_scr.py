@@ -44,7 +44,14 @@ def roe_equity(code):
     return (te[k] - (nci.get(k) or 0) - (sub.get(k) or 0)) / 1e6
 
 
+def reported():
+    """2단계 리포트를 쓴 회사 — 1단계라도 스크리닝에 넣는다(2026-10-29 사용자)"""
+    it = rd(os.path.join(JP, "research", "index.json"), {}).get("items", {})
+    return {c for c, v in it.items() if (v.get("2") or {}).get("status") == "완료"}
+
+
 def main():
+    rep = reported()
     pipe = rd(os.path.join(JP, "pipeline.json"), {}).get("companies", {})
     s1 = {r["c"]: r for r in rd(os.path.join(JP, "stage1.json"), {}).get("rows", [])}
     qh = rd(os.path.join(ROOT, "tools", "qhist", "jp.json"), {})
@@ -52,7 +59,7 @@ def main():
     today = date.today()
     out = {}
     for c, t in pipe.items():
-        if t.get("stage", 1) < 2:
+        if t.get("stage", 1) < 2 and c not in rep:
             continue
         r, card = s1.get(c, {}), t["cards"].get(str(t["stage"])) or t["cards"].get("2") or {}
         o = {"mc": r.get("mc", card.get("mc")), "per": r.get("per", card.get("per")), "cat": r.get("cat")}
