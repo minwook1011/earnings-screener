@@ -277,6 +277,49 @@
       '<polygon points="0,' + H + " " + xy.map(function (a) { return a.join(","); }).join(" ") + " " + W + "," + H + '"/><polyline points="' + xy.map(function (a) { return a.join(","); }).join(" ") + '"/></svg>' +
       '<span class="bsp-l">1년 <b>' + pctTxt(Math.round(ch * 10) / 10) + "</b> · " + esc(md(r.d)) + " " + num(r.px, r.px < 100 ? 1 : 0) + "엔</span></div>";
   }
+  /* 스크리닝 판 4개 — 표 · 신고가 · 신고가 근접 · 턴어라운드(2026-10-29 사용자). 판정은 data/jp/px/index.json(build_px.py, 매일 10:00·15:30) */
+  var BOARDS = [
+    { k: "tbl", t: "스크리닝 표" },
+    { k: "new", t: "신고가", f: function (p) { return p && p.new; }, note: "최근 5거래일 안에 52주 신고가(고가 기준)를 새로 쓴 종목." },
+    { k: "near", t: "신고가 근접", f: function (p) { return p && p.near; }, note: "52주 최고가에서 15% 이내까지 올라온 종목(신고가 종목 제외)." },
+    { k: "turn", t: "턴어라운드", f: function (p) { return p && p.turn; }, note: "최근 52주 안에 이동평균 20·60·120일이 역배열이었다가 지금 정배열로 바뀐 종목. 세로 점선이 바뀐 날." }
+  ];
+  S.board = (function () { try { var b = localStorage.getItem("es-board"); return BOARDS.some(function (x) { return x.k === b; }) ? b : "tbl"; } catch (e) { return "tbl"; } })();
+  function boardTabs() {
+    var all = S.list.filter(inScr);
+    return '<nav class="boards" id="boards">' + BOARDS.map(function (b) {
+      var n = b.f ? all.filter(function (o) { return b.f((S.px.items || {})[o.c]); }).length : all.length;
+      return '<button data-board="' + b.k + '" aria-pressed="' + (S.board === b.k) + '">' + b.t + "<span>" + n + "</span></button>";
+    }).join("") + "</nav>";
+  }
+  /* 카드 차트 — 1년 종가(2거래일 간격). 신고가·근접 = 52주 고가 점선, 턴어라운드 = 60·120일선 + 바뀐 날 */
+  function pchart(p, B) {
+    var c = p.cl || [], W = 300, H = 150, all = c.slice();
+    if (B === "turn") all = all.concat((p.m60 || []).filter(Boolean), (p.m120 || []).filter(Boolean));
+    if (B !== "turn") all.push(p.hi);
+    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), k = hi > lo ? hi - lo : 1;
+    function X(i) { return (i * W / Math.max(1, c.length - 1)).toFixed(1); }
+    function Y(v) { return (6 + (H - 12) * (1 - (v - lo) / k)).toFixed(1); }
+    function line(a, cls) { var pts = []; a.forEach(function (v, i) { if (v != null) pts.push(X(i) + "," + Y(v)); }); return '<polyline class="' + cls + '" vector-effect="non-scaling-stroke" points="' + pts.join(" ") + '"/>'; }
+    var up = c[c.length - 1] >= c[0], g = "";
+    g += '<polygon class="pa" points="0,' + H + " " + c.map(function (v, i) { return X(i) + "," + Y(v); }).join(" ") + " " + W + "," + H + '"/>';
+    if (B !== "turn") g += '<line class="phi" vector-effect="non-scaling-stroke" x1="0" x2="' + W + '" y1="' + Y(p.hi) + '" y2="' + Y(p.hi) + '"/>';
+    if (B === "turn") {
+      g += line(p.m120 || [], "pm120") + line(p.m60 || [], "pm60");
+      if (p.tix != null) g += '<line class="ptx" vector-effect="non-scaling-stroke" x1="' + X(p.tix) + '" x2="' + X(p.tix) + '" y1="0" y2="' + H + '"/>';
+    }
+    g += line(c, "pl");
+    return '<svg class="' + (up ? "up" : "dn") + '" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" aria-hidden="true">' + g + "</svg>";
+  }
+  function pcard(o) {
+    var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
+    var tag = B === "turn" ? "정배열 전환 " + md(p.turn) : B === "new" ? "52주 신고가 " + md(p.hid) : "고점 대비 " + pctTxt(p.off);
+    return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button">' +
+      '<div class="pc-ch">' + pchart(p, B) + '<span class="pc-tag">' + esc(tag) + "</span></div>" +
+      '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
+      '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
+      "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div></div>";
+  }
   /* 스크리닝 대상 = 2단계 이상 + 2단계 리포트를 쓴 회사(1단계 포함, 2026-10-29 사용자) */
   function inScr(o) { var r = (o.res || {})["2"]; return o.stage >= 2 || !!(r && r.status === "완료" && r.html); }
   function scrView() {
@@ -297,7 +340,9 @@
       return dir * (x - y);
     });
     var nF = Object.keys(FAV).filter(function (c) { return S.cos[c] && inScr(S.cos[c]); }).length;
-    var head = '<div class="ctl">' +
+    var B = S.board, bd = BOARDS.filter(function (x) { return x.k === B; })[0];
+    if (bd.f) rows = rows.filter(function (o) { return bd.f((S.px.items || {})[o.c]); });
+    var head = boardTabs() + '<div class="ctl">' +
       '<div class="fld"><label for="ssort">정렬 기준</label><select id="ssort">' + SC.map(function (c) { return '<option value="' + c.k + '"' + (k === c.k ? " selected" : "") + ">" + c.s + "</option>"; }).join("") + "</select></div>" +
       '<div class="fld"><span>최소 시총</span><div class="seg" id="minmc">' + [[0, "전체"], [500, "500억엔↑"], [1000, "1천억엔↑"], [5000, "5천억엔↑"]].map(function (v) { return '<button data-v="' + v[0] + '" aria-pressed="' + (minmc === v[0]) + '">' + v[1] + "</button>"; }).join("") + "</div></div>" +
       '<div class="fld"><span>즐겨찾기</span><div class="seg" id="favflt"><button data-v="0" aria-pressed="' + !S.favonly + '">전체</button><button data-v="1" aria-pressed="' + !!S.favonly + '">★만 ' + nF + "</button></div></div>" +
@@ -305,8 +350,9 @@
       '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>개 종목</div></div>" +
       '<div class="smart"><div class="smart-in"><span class="smart-ic">⌕</span><input type="text" id="sq" placeholder="조건으로 검색 — 예: 시총 1000억 이상, 매출성장 10% 이상, 주가 상승률 30% 이상, 영업이익률 15% 이상 순" value="' + esc(S.sq || "") + '"><button id="sqgo">검색</button>' + (sm ? '<button id="sqclear">해제</button>' : "") + "</div>" +
       '<div class="smart-hint">' + (sm ? "적용: " + sm.conds.map(function (c) { var x = SC.filter(function (y) { return y.k === c.k; })[0]; return "<b>" + esc(x.t) + " " + c.v + (c.lo ? " 이하" : " 이상") + "</b>"; }).join(" · ") + (sm.sort ? " · " + esc(SC.filter(function (y) { return y.k === sm.sort; })[0].t) + " 순" : "") : "시총·매출·매출성장·주가 상승률(1년·YTD)·PER·ROE·영업이익률 조건을 알아듣습니다. “~순”을 붙이면 그 기준으로 정렬합니다.") + "</div></div>" +
-      '<p class="stage-note">텔레 2단계에 올라온 회사와 2단계 리포트를 쓴 회사를 모두 쌓아 둔 스크리너입니다. 매출·이익은 최근 4개 분기 합(TTM), ROE = 최근 4개 분기 순이익 ÷ 분기말 자기자본. 둘째 줄은 1년 주가와 분기별 매출액·영업이익 YoY — 노란 네모가 최근 실적발표 분기입니다. 회사를 누르면 리포트·재무제표·주가가 열립니다.</p>';
+      '<p class="stage-note">' + (bd.f ? bd.note + " 주가 " + esc(md(S.px.updated)) + " " + esc((S.px.updated || "").slice(11)) + " 기준 · 카드를 누르면 큰 차트가 열립니다(Alt+H 수평선 · Alt+T 추세선)." : '텔레 2단계에 올라온 회사와 2단계 리포트를 쓴 회사를 모두 쌓아 둔 스크리너입니다. 매출·이익은 최근 4개 분기 합(TTM), ROE = 최근 4개 분기 순이익 ÷ 분기말 자기자본. 둘째 줄은 1년 주가와 분기별 매출액·영업이익 YoY — 노란 네모가 최근 실적발표 분기입니다. 회사를 누르면 리포트·재무제표·주가가 열립니다.') + "</p>";
     if (!rows.length) return head + '<div class="empty">조건에 맞는 종목이 없습니다.</div>';
+    if (bd.f) return head + '<div class="pgrid">' + rows.map(pcard).join("") + "</div>";
     var maxmc = Math.max.apply(null, rows.map(function (o) { return scv(o, "mc") || 0; })) || 1;
     var th = '<tr><th class="ns"></th><th class="l ns">#</th><th class="l ns">코드</th><th class="l ns">종목</th>' + SC.map(function (c) {
       return '<th data-sk="' + c.k + '"' + (k === c.k ? ' class="on"' : "") + ">" + c.t + (k === c.k ? '<span class="ar">' + (dir < 0 ? "▼" : "▲") + "</span>" : "") + "</th>";
@@ -687,6 +733,11 @@
     app.querySelectorAll("th[data-sk]").forEach(function (th) {
       th.onclick = function () { var k = th.dataset.sk, cur = (S.smart && S.smart.sort) || S.ssort || "mc"; if (S.smart) S.smart.sort = null; if (cur === k) S.sdir = -(S.sdir || (k === "per" ? 1 : -1)); else { S.ssort = k; S.sdir = 0; } rerender(); };
     });
+    app.querySelectorAll("#boards button").forEach(function (b) { b.onclick = function () { S.board = b.dataset.board; try { localStorage.setItem("es-board", S.board); } catch (e) {} rerender(); }; });
+    app.querySelectorAll("[data-px]").forEach(function (el) {
+      function go() { var o = S.cos[el.dataset.px] || {}; window.PXC && PXC.open(el.dataset.px, o.n || el.dataset.px, function () { location.hash = "jps/c/" + el.dataset.px; }); }
+      el.onclick = go; el.onkeydown = function (e) { if (e.key === "Enter") go(); };
+    });
     app.querySelectorAll("#minmc button").forEach(function (b) { b.onclick = function () { S.minmc = +b.dataset.v; rerender(); }; });
     app.querySelectorAll("#favflt button").forEach(function (b) { b.onclick = function () { S.favonly = b.dataset.v === "1"; rerender(); }; });
     app.querySelectorAll("[data-fav]").forEach(function (b) {
@@ -801,9 +852,10 @@
     getJSON("data/room.json").catch(function () { return { watch: [], docs: [] }; }),
     getJSON("data/jp/ret.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/ircall.json").catch(function () { return { items: {} }; }),
-    getJSON("data/jp/scr.json").catch(function () { return { items: {} }; })
+    getJSON("data/jp/scr.json").catch(function () { return { items: {} }; }),
+    getJSON("data/jp/px/index.json").catch(function () { return { items: {} }; })
   ]).then(function (r) {
-    S.scr = r[11]; S.s1rows = {}; (r[0].rows || []).forEach(function (x) { S.s1rows[x.c] = x; });
+    S.scr = r[11]; S.px = r[12]; S.s1rows = {}; (r[0].rows || []).forEach(function (x) { S.s1rows[x.c] = x; });
     S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.irc = r[10]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });

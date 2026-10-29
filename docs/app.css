@@ -747,3 +747,65 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .qbox:not(.sq) .ql > .qh { margin: 0 0 4px; align-self: stretch; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 0; background: color-mix(in srgb, var(--ink) 8%, var(--surface)); color: var(--ink); font-weight: 700; font-size: 11px; }
 .qbox:not(.sq) .ql > .ql-l.qh { align-items: flex-start; padding-left: 8px; border-radius: 6px 0 0 6px; color: var(--ink-mid); }
 .qbox:not(.sq) .ql > .qh:nth-child(11) { border-radius: 0 6px 6px 0; }
+
+/* ---------- 일본 스크리닝 판 4개 · 카드 · 큰 차트(2026-10-29 사용자) ---------- */
+.boards { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 14px; }
+.boards button { font: 700 14px var(--sans, inherit); padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-mid); cursor: pointer; }
+.boards button span { margin-left: 6px; font: 600 12px var(--mono, monospace); color: var(--ink-mute); }
+.boards button[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.boards button[aria-pressed="true"] span { color: color-mix(in srgb, var(--surface) 75%, transparent); }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 14px; margin-top: 8px; }
+.pcard { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 10px 12px 12px; cursor: pointer; display: flex; flex-direction: column; gap: 8px; aspect-ratio: 5 / 4.4; min-height: 0; transition: border-color .15s, box-shadow .15s; }
+.pcard:hover, .pcard:focus-visible { border-color: var(--s2, #2563eb); box-shadow: 0 4px 16px color-mix(in srgb, var(--ink) 10%, transparent); outline: 0; }
+.pc-ch { position: relative; flex: 1 1 auto; min-height: 120px; }
+.pc-ch svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pc-ch .pa { fill: color-mix(in srgb, var(--tx-up) 10%, transparent); }
+.pc-ch .dn .pa { fill: color-mix(in srgb, var(--tx-dn) 10%, transparent); }
+.pc-ch .pl { fill: none; stroke: var(--tx-up); stroke-width: 1.6; }
+.pc-ch .dn .pl { stroke: var(--tx-dn); }
+.pc-ch .phi { stroke: #e0a100; stroke-width: 1.2; stroke-dasharray: 4 3; }
+.pc-ch .pm60 { fill: none; stroke: #2a9d5c; stroke-width: 1.1; }
+.pc-ch .pm120 { fill: none; stroke: #7a5cd6; stroke-width: 1.1; }
+.pc-ch .ptx { stroke: var(--ink-mid); stroke-width: 1; stroke-dasharray: 3 3; }
+.pc-tag { position: absolute; left: 0; top: 0; font: 700 11px var(--mono, monospace); color: #a86a00; background: color-mix(in srgb, var(--surface) 85%, transparent); padding: 1px 5px; border-radius: 4px; }
+.pc-nm { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+.pc-nm b { font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pc-nm span { font: 500 11.5px var(--mono, monospace); color: var(--ink-mute); white-space: nowrap; }
+.pc-st { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; border-top: 1px solid var(--line-soft, var(--line)); padding-top: 7px; }
+.pc-st span { display: flex; flex-direction: column; font: 700 13.5px var(--mono, monospace); }
+.pc-st i { font: 500 10.5px var(--sans, inherit); font-style: normal; color: var(--ink-mute); margin-bottom: 1px; white-space: nowrap; }
+
+html.pxm-open { overflow: hidden; }
+.pxm { position: fixed; inset: 0; z-index: 90; background: var(--scrim, rgba(0,0,0,.45)); display: none; padding: 2vh 2vw; }
+.pxm.on { display: block; }
+.pxm-in { height: 100%; background: var(--surface); border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.3); }
+.pxm-hd { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.pxm-tt { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.pxm-tt b { font-size: 18px; }
+#pxm-c { font: 600 13px var(--mono, monospace); color: var(--ink-mute); }
+#pxm-p { font: 600 13px var(--mono, monospace); }
+#pxm-p.up, .pxm-leg .up { color: var(--tx-up); }
+#pxm-p.dn, .pxm-leg .dn { color: var(--tx-dn); }
+.pxm-tools { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.pxm-tools > button { font-size: 12.5px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.pxm-tools > button[aria-pressed="true"] { background: #fff4d6; border-color: #e0a100; color: #8a5a00; }
+.pxm-tools kbd { font: 600 10px var(--mono, monospace); color: var(--ink-mute); margin-left: 3px; }
+.pxm-tools .pxm-co { border-color: var(--s2, #2563eb); color: var(--s2, #2563eb); }
+.pxm-tools .pxm-x { font-size: 15px; padding: 4px 10px; }
+.pxm-leg { padding: 6px 14px; font: 500 12px var(--mono, monospace); color: var(--ink-mid); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; min-height: 28px; }
+.pxm-leg b { color: var(--ink); font-weight: 600; }
+.pxm-leg .d { color: var(--ink); font-weight: 700; }
+.pxm-leg .ma { display: inline-flex; align-items: center; gap: 4px; }
+.pxm-leg .ma i { display: inline-block; width: 12px; height: 2px; }
+.pxm-leg .ma5 { background: #e0a100; } .pxm-leg .ma20 { background: #d23b8f; } .pxm-leg .ma60 { background: #2a9d5c; } .pxm-leg .ma120 { background: #7a5cd6; }
+.pxm-ch { position: relative; flex: 1 1 auto; min-height: 0; }
+.pxm-svg { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; overflow: visible; }
+.pxm-svg .tl { stroke: var(--ink); stroke-width: 1.6; }
+.pxm-svg .tl.on { stroke: #f2a900; stroke-width: 2.4; }
+.pxm-svg .tl.pv { stroke-dasharray: 5 4; }
+.pxm-svg .tp { fill: #f2a900; }
+.pxm.drawing .pxm-ch { cursor: crosshair; }
+.pxm-ft { padding: 6px 14px 8px; font-size: 11.5px; color: var(--ink-mute); border-top: 1px solid var(--line); }
+.pxm-ft.on { color: #a86a00; font-weight: 700; }
+@media (max-width: 640px) { .pxm { padding: 0; } .pxm-in { border-radius: 0; } .pxm-tools kbd { display: none; } .pgrid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; } .pcard { aspect-ratio: auto; } .pc-ch { min-height: 110px; } }
+.pc-st i small { font: 500 9.5px var(--mono, monospace); margin-left: 3px; color: var(--ink-mute); }
