@@ -292,10 +292,10 @@
       return '<button data-board="' + b.k + '" aria-pressed="' + (S.board === b.k) + '">' + b.t + "<span>" + n + "</span></button>";
     }).join("") + "</nav>";
   }
-  /* 카드 차트 — 1년 종가(2거래일 간격). 신고가·근접 = 52주 고가 점선, 턴어라운드 = 60·120일선 + 바뀐 날 */
+  /* 카드 차트 — 1년 종가(2거래일 간격). 신고가·근접 = 52주 고가 점선, 턴어라운드 = 20·60·120일선 + 바뀐 날 */
   function pchart(p, B) {
-    var c = p.cl || [], W = 300, H = 150, all = c.slice();
-    if (B === "turn") all = all.concat((p.m60 || []).filter(Boolean), (p.m120 || []).filter(Boolean));
+    var c = p.cl || [], W = 300, H = 200, all = c.slice();
+    if (B === "turn") all = all.concat((p.m20 || []).filter(Boolean), (p.m60 || []).filter(Boolean), (p.m120 || []).filter(Boolean));
     if (B !== "turn") all.push(p.hi);
     var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), k = hi > lo ? hi - lo : 1;
     function X(i) { return (i * W / Math.max(1, c.length - 1)).toFixed(1); }
@@ -305,7 +305,7 @@
     g += '<polygon class="pa" points="0,' + H + " " + c.map(function (v, i) { return X(i) + "," + Y(v); }).join(" ") + " " + W + "," + H + '"/>';
     if (B !== "turn") g += '<line class="phi" vector-effect="non-scaling-stroke" x1="0" x2="' + W + '" y1="' + Y(p.hi) + '" y2="' + Y(p.hi) + '"/>';
     if (B === "turn") {
-      g += line(p.m120 || [], "pm120") + line(p.m60 || [], "pm60");
+      g += line(p.m120 || [], "pm120") + line(p.m60 || [], "pm60") + line(p.m20 || [], "pm20");
       if (p.tix != null) g += '<line class="ptx" vector-effect="non-scaling-stroke" x1="' + X(p.tix) + '" x2="' + X(p.tix) + '" y1="0" y2="' + H + '"/>';
     }
     g += line(c, "pl");

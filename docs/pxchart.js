@@ -1,5 +1,5 @@
 /* 큰 차트(트레이딩뷰 느낌) — 일본 스크리닝 카드를 누르면 열림(2026-10-29 사용자).
- * 차트 = vendor/lightweight-charts(TradingView 오픈소스, CSP 때문에 사이트 안에 둠). 일봉 2년 data/jp/px/<코드>.json
+ * 차트 = vendor/lightweight-charts(TradingView 오픈소스, CSP 때문에 사이트 안에 둠). 일봉 5년 data/jp/px/<코드>.json
  * 선 긋기: Alt+H 수평선(커서 높이) · Alt+T 추세선(두 번 클릭) · 선 클릭 → Delete 로 지움 · 우클릭으로 바로 지움 · Esc 취소
  * 그린 선은 이 브라우저에 저장(localStorage "es-draw" — 종목별) */
 (function () {
@@ -24,7 +24,7 @@
     M = document.createElement("div");
     M.className = "pxm"; M.setAttribute("role", "dialog"); M.setAttribute("aria-modal", "true");
     M.innerHTML = '<div class="pxm-in"><div class="pxm-hd"><div class="pxm-tt"><b id="pxm-n"></b><span id="pxm-c"></span><span id="pxm-p"></span></div>' +
-      '<div class="pxm-tools"><div class="seg" id="pxm-rng">' + [["3M", 63], ["6M", 126], ["1Y", 250], ["2Y", 0]].map(function (r) { return '<button data-n="' + r[1] + '">' + r[0] + "</button>"; }).join("") + "</div>" +
+      '<div class="pxm-tools"><div class="seg" id="pxm-rng">' + [["3M", 63], ["6M", 126], ["1Y", 250], ["2Y", 500], ["5Y", 0]].map(function (r) { return '<button data-n="' + r[1] + '">' + r[0] + "</button>"; }).join("") + "</div>" +
       '<button data-tool="h" title="Alt+H — 커서 높이에 수평선">수평선 <kbd>Alt+H</kbd></button><button data-tool="t" title="Alt+T — 두 점을 클릭">추세선 <kbd>Alt+T</kbd></button>' +
       '<button data-tool="del" title="선을 클릭해 고른 뒤 Delete">선 지우기</button><button data-tool="clr">모두 지우기</button>' +
       '<button data-tool="co" class="pxm-co">리포트·재무</button><button class="pxm-x" data-tool="x" aria-label="닫기">✕</button></div></div>' +
