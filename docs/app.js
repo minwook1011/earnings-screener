@@ -380,6 +380,85 @@
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
       "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div></div>";
   }
+  /* ---------- 일본 주요 전 종목 — 100억 사이트 일본 종목 전부(2026-10-29 사용자). data/jp/pxall/index.json(build_pxall.py, 10:00·15:30 · 상한가는 19:00 카부탄도) ---------- */
+  var ABOARDS = [
+    { k: "new", t: "신고가", f: function (p) { return p.new; }, note: "최근 5거래일 안에 52주 신고가(고가 기준)를 새로 쓴 종목." },
+    { k: "near", t: "신고가 근접", f: function (p) { return p.near; }, note: "52주 최고가에서 15% 이내(신고가 종목 제외)." },
+    { k: "turn", t: "턴어라운드", f: function (p) { return p.turn; }, note: "최근 52주 안에 20·60·120일선이 역배열이었다가 지금 정배열. 세로 점선이 바뀐 날." },
+    { k: "up", t: "상한가 · +8%↑", f: function (p) { return p.up; }, note: "그날 +8% 이상 오른 종목(장중 종가 기준 + 시간외 PTS). 카부탄 상승률 순위로 확인, ‘상한가’ 표시는 카부탄 ストップ高." }
+  ];
+  S.aboard = (function () { try { var b = localStorage.getItem("es-aboard"); return ABOARDS.some(function (x) { return x.k === b; }) ? b : "new"; } catch (e) { return "new"; } })();
+  S.aq = ""; S.amin = 0; S.asort = "mc";
+  function renderAll() {
+    if (!S.pxa) { app.innerHTML = '<div class="loading">불러오는 중…</div>'; getJSON("data/jp/pxall/index.json").then(function (d) { S.pxa = d; if (S.mode === "jpa") renderAll(); }).catch(function (e) { app.innerHTML = '<div class="empty">전 종목 자료를 못 불러왔습니다(' + esc(e.message) + ")</div>"; }); return; }
+    var it = S.pxa.items || {}, all = Object.keys(it).map(function (c) { return Object.assign({ c: c }, it[c]); });
+    var bd = ABOARDS.filter(function (x) { return x.k === S.aboard; })[0], q = S.aq.trim().toLowerCase();
+    var rows = all.filter(function (o) { return bd.f(o) && (!S.amin || (o.mc || 0) >= S.amin) && (!q || [o.n, o.en, o.c, o.cat].join(" ").toLowerCase().indexOf(q) >= 0); });
+    var key = S.aboard === "up" && S.asort === "mc" ? "upv" : S.asort;
+    function upv(o) { return o.up ? Math.max(o.up.day || -99, o.up.pts || -99) : -99; }
+    rows.sort(function (a, b) { return key === "upv" ? upv(b) - upv(a) : key === "off" ? (b.off || -99) - (a.off || -99) : key === "turn" ? String(b.turn || "").localeCompare(String(a.turn || "")) : (b[key] || -1e9) - (a[key] || -1e9); });
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · All Majors</div>' +
+      '<h1><span class="kanji">全</span>일본 주요 전 종목</h1>' +
+      '<div class="sub">100억 사이트 일본 종목 ' + (S.pxa.n_universe || "—") + '개 전부 &nbsp;|&nbsp; 주가 <span class="mono">' + esc(S.pxa.updated || "") + '</span> · 카부탄 <span class="mono">' + esc(S.pxa.kabutan || "") + "</span></div></div>" +
+      '<div class="stats"><div class="stat"><b>' + all.length + "</b><span>판에 오른 종목</span></div></div></div></header>";
+    var tabs = '<nav class="boards" id="aboards">' + ABOARDS.map(function (b) { return '<button data-ab="' + b.k + '" aria-pressed="' + (S.aboard === b.k) + '">' + b.t + "<span>" + all.filter(b.f).length + "</span></button>"; }).join("") + "</nav>";
+    var sorts = [["mc", S.aboard === "up" ? "상승률" : "시가총액"], ["ytd", "YTD"], ["revg", "매출성장"], ["off", "고점과 가까운 순"]].concat(S.aboard === "turn" ? [["turn", "최근 전환 순"]] : []);
+    var ctl = '<div class="ctl"><div class="fld"><label for="asort">정렬 기준</label><select id="asort">' + sorts.map(function (s) { return '<option value="' + s[0] + '"' + (S.asort === s[0] ? " selected" : "") + ">" + s[1] + "</option>"; }).join("") + "</select></div>" +
+      '<div class="fld"><span>최소 시총</span><div class="seg" id="amin">' + [[0, "전체"], [1000, "1천억엔↑"], [5000, "5천억엔↑"], [10000, "1조엔↑"]].map(function (v) { return '<button data-v="' + v[0] + '" aria-pressed="' + (S.amin === v[0]) + '">' + v[1] + "</button>"; }).join("") + "</div></div>" +
+      '<div class="fld q"><label for="aq">검색</label><input type="search" id="aq" placeholder="종목명 · 코드 · 업종" value="' + esc(S.aq) + '"></div>' +
+      '<div class="count"><b>' + rows.length + "</b>개 종목</div></div>";
+    var note = '<p class="stage-note">' + bd.note + " 카드를 누르면 5년 큰 차트(Alt+H 수평선 · Alt+T 추세선).</p>";
+    app.innerHTML = '<div class="wrap" id="view">' + head + tabs + ctl + note + (rows.length ? '<div class="pgrid">' + rows.map(acard).join("") + "</div>" : '<div class="empty">조건에 맞는 종목이 없습니다.</div>') + "</div>";
+    app.querySelectorAll("#aboards button").forEach(function (b) { b.onclick = function () { S.aboard = b.dataset.ab; try { localStorage.setItem("es-aboard", S.aboard); } catch (e) {} renderAll(); }; });
+    app.querySelectorAll("#amin button").forEach(function (b) { b.onclick = function () { S.amin = +b.dataset.v; renderAll(); }; });
+    var so = document.getElementById("asort"); so.onchange = function () { S.asort = so.value; renderAll(); };
+    var aq = document.getElementById("aq");
+    function ago() { S.aq = aq.value; renderAll(); var n = document.getElementById("aq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+    aq.oninput = function (e) { if (e.isComposing) return; ago(); }; aq.addEventListener("compositionend", ago);
+    app.querySelectorAll("[data-pa]").forEach(function (el) {
+      function go() { var o = it[el.dataset.pa] || {}, inSite = S.cos[el.dataset.pa]; window.PXC && PXC.open(el.dataset.pa, o.n || el.dataset.pa, inSite ? function () { location.hash = "jp/c/" + el.dataset.pa; } : null, "data/jp/pxall/"); }
+      el.onclick = go; el.onkeydown = function (e) { if (e.key === "Enter") go(); };
+    });
+  }
+  /* ---------- 일본 소비재 — 소형주까지 소비하는 모든 업종을 분류해 훑어보는 칸(2026-10-30 사용자). data/jp/consumer_all.json ---------- */
+  S.ccat = ""; S.cq = "";
+  function renderCon() {
+    if (!S.con || !S.pxa) {
+      app.innerHTML = '<div class="loading">불러오는 중…</div>';
+      Promise.all([S.con || getJSON("data/jp/consumer_all.json"), S.pxa || getJSON("data/jp/pxall/index.json").catch(function () { return { items: {} }; })]).then(function (r) { S.con = r[0]; S.pxa = r[1]; if (S.mode === "jpc") renderCon(); })
+        .catch(function () { app.innerHTML = '<div class="empty">소비재 전 종목 분류를 아직 만드는 중입니다.</div>'; });
+      return;
+    }
+    var it = S.con.items || {}, pa = S.pxa.items || {}, all = Object.keys(it).map(function (c) { return Object.assign({ c: c }, it[c]); });
+    var cats = (S.con.cats || []).slice(); all.forEach(function (o) { if (cats.indexOf(o.cat) < 0) cats.push(o.cat); });
+    var q = S.cq.trim().toLowerCase();
+    var rows = all.filter(function (o) { return (!S.ccat || o.cat === S.ccat) && (!q || [o.n, o.jp, o.c, o.cat, o.note].join(" ").toLowerCase().indexOf(q) >= 0); })
+      .sort(function (a, b) { return (b.mc || 0) - (a.mc || 0); });
+    function cnt(k) { return all.filter(function (o) { return o.cat === k; }).length; }
+    function badges(c) { var p = pa[c]; if (!p) return ""; return (p.new ? '<i class="cb new">신고가</i>' : "") + (p.near ? '<i class="cb near">근접</i>' : "") + (p.turn ? '<i class="cb turn">턴</i>' : "") + (p.up ? '<i class="cb up">' + (p.up.stop ? "상한가" : "+8%") + "</i>" : ""); }
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · Consumer</div><h1><span class="kanji">消</span>일본 소비재</h1>' +
+      '<div class="sub">먹는 것·입는 것·장난감·뽑기·화장품·시계·백화점… 소비하는 모든 업종, 소형주 포함 &nbsp;|&nbsp; 분류 <span class="mono">' + esc(S.con.updated || "") + "</span></div></div>" +
+      '<div class="stats"><div class="stat"><b>' + all.length + "</b><span>종목</span></div></div></div></header>";
+    var chips = '<nav class="boards" id="ccats"><button data-cc="" aria-pressed="' + !S.ccat + '">전체<span>' + all.length + "</span></button>" + cats.map(function (k) { return '<button data-cc="' + esc(k) + '" aria-pressed="' + (S.ccat === k) + '">' + esc(k) + "<span>" + cnt(k) + "</span></button>"; }).join("") + "</nav>";
+    var ctl = '<div class="ctl"><div class="fld q"><label for="cq">검색</label><input type="search" id="cq" placeholder="종목명 · 코드 · 분류" value="' + esc(S.cq) + '"></div><div class="count"><b>' + rows.length + "</b>개 종목</div></div>";
+    var tb = '<div class="tbl-wrap"><table class="con-t"><thead><tr><th>종목</th><th>코드</th><th>분류</th><th class="r">시총(억엔)</th><th class="r">YTD</th><th>판</th><th>메모</th></tr></thead><tbody>' +
+      rows.map(function (o) { var p = pa[o.c]; return '<tr' + (p ? ' data-cp="' + esc(o.c) + '" class="hasch"' : "") + "><td><b>" + esc(o.n) + "</b>" + (o.jp && o.jp !== o.n ? '<span class="jp">' + esc(o.jp) + "</span>" : "") + '</td><td class="mono">' + esc(o.c) + "</td><td>" + esc(o.cat) + '</td><td class="r mono">' + num(o.mc) + '</td><td class="r">' + (p && p.ytd != null ? pct(p.ytd) : "—") + "</td><td>" + badges(o.c) + '</td><td class="nt">' + esc(o.note || "") + "</td></tr>"; }).join("") + "</tbody></table></div>";
+    app.innerHTML = '<div class="wrap" id="view">' + head + chips + ctl + '<p class="stage-note">판(신고가·근접·턴어라운드·상한가)에 걸린 종목은 줄을 누르면 5년 차트가 열립니다.</p>' + tb + "</div>";
+    app.querySelectorAll("#ccats button").forEach(function (b) { b.onclick = function () { S.ccat = b.dataset.cc; renderCon(); }; });
+    var cq = document.getElementById("cq");
+    function cgo() { S.cq = cq.value; renderCon(); var n = document.getElementById("cq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+    cq.oninput = function (e) { if (e.isComposing) return; cgo(); }; cq.addEventListener("compositionend", cgo);
+    app.querySelectorAll("[data-cp]").forEach(function (tr) { tr.onclick = function () { var c = tr.dataset.cp; window.PXC && PXC.open(c, (it[c] || {}).n || c, S.cos[c] ? function () { location.hash = "jp/c/" + c; } : null, "data/jp/pxall/"); }; });
+  }
+  function acard(o) {
+    var B = S.aboard, u = o.up || {};
+    var tag = B === "turn" ? "정배열 전환 " + md(o.turn) : B === "new" ? "52주 신고가 " + md(o.hid) : B === "up" ? (u.stop ? "상한가 " : "") + (u.day != null ? "장중 " + pctTxt(u.day) : "") + (u.pts != null ? (u.day != null ? " · " : "") + "PTS " + pctTxt(u.pts) : "") : "고점 대비 " + pctTxt(o.off);
+    return '<div class="pcard' + (B === "up" && u.stop ? " stop" : "") + '" data-pa="' + esc(o.c) + '" tabindex="0" role="button">' +
+      '<div class="pc-ch">' + pchart(o, B === "up" ? "near" : B) + '<span class="pc-tag">' + esc(tag) + "</span></div>" +
+      '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(o.px, o.px < 100 ? 1 : 0) + "엔</span></div>" +
+      '<div class="pc-st"><span><i>YTD</i>' + pct(o.ytd) + "</span><span><i>매출성장</i>" + pct(o.revg) + "</span>" +
+      "<span><i>PER</i>" + (o.per == null ? "—" : o.per < 0 ? '<b class="na">적자</b>' : (+o.per).toFixed(1)) + "</span></div></div>";
+  }
   /* 스크리닝 대상 = 2단계 이상 + 2단계 리포트를 쓴 회사(1단계 포함, 2026-10-29 사용자) */
   function inScr(o) { var r = (o.res || {})["2"]; return o.stage >= 2 || !!(r && r.status === "완료" && r.html); }
   function scrView() {
@@ -891,6 +970,8 @@
     if (m === "us" || m === "kr") { closePanel(); app.innerHTML = soon(m === "us" ? "미국" : "한국"); return; }
     if (!S.ready) return;
     if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
+    if (m === "jpa") { closePanel(); S.mode = "jpa"; renderAll(); return; }
+    if (m === "jpc") { closePanel(); S.mode = "jpc"; renderCon(); return; }
     var md0 = m === "jps" ? "jps" : "jp", sw = S.mode !== md0;
     S.mode = md0;
     if (h[1] === "c") {

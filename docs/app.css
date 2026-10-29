@@ -831,3 +831,20 @@ html.pxm-open { overflow: hidden; }
 .drop-at.after { box-shadow: 4px 0 0 0 #e0a100; }
 .fg-end.drop-at { border-color: #e0a100; color: #a86a00; box-shadow: none; }
 .fg-add { align-self: flex-start; border: 1.5px dashed var(--line); background: var(--surface); color: var(--ink-mid); border-radius: 10px; padding: 9px 16px; font-weight: 700; cursor: pointer; }
+/* 일본 주요 전 종목 — 상한가 카드(2026-10-29 사용자) */
+.pcard.stop { border-color: #d23b3b; box-shadow: inset 0 0 0 1px #d23b3b; }
+.pcard.stop .pc-tag { color: #fff; background: #d23b3b; }
+/* 일본 소비재 분류 칸(2026-10-30 사용자) */
+#ccats { flex-wrap: wrap; }
+.con-t { width: 100%; border-collapse: collapse; font-size: 13px; }
+.con-t th { text-align: left; font-weight: 600; color: var(--ink-mute); border-bottom: 1px solid var(--line); padding: 6px 8px; white-space: nowrap; }
+.con-t td { border-bottom: 1px solid var(--line); padding: 6px 8px; vertical-align: top; }
+.con-t .r { text-align: right; }
+.con-t .jp { display: block; font-size: 11px; color: var(--ink-mute); }
+.con-t .nt { font-size: 12px; color: var(--ink-mid); max-width: 22em; }
+.con-t tr.hasch { cursor: pointer; }
+.con-t tr.hasch:hover td { background: color-mix(in srgb, var(--ink) 4%, var(--surface)); }
+.cb { font-style: normal; font-size: 11px; font-weight: 700; padding: 1px 5px; border-radius: 4px; margin-right: 3px; white-space: nowrap; }
+.cb.new { background: #d23b3b; color: #fff; } .cb.near { background: #fde3e3; color: #a32020; }
+.cb.turn { background: #e4f3ea; color: #1f7a45; } .cb.up { background: #e0a100; color: #fff; }
+.tbl-wrap { overflow-x: auto; }

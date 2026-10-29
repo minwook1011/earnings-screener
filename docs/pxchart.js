@@ -126,12 +126,12 @@
     return (MAC[n] = out);
   }
 
-  function open(c, name, onCo) {
-    shell(); M._co = onCo; code = c; sel = null; pend = null; mode = null; hover = null; MAC = {};
+  function open(c, name, onCo, dir) {
+    shell(); M._co = onCo; M.querySelector(".pxm-co").hidden = !onCo; code = c; sel = null; pend = null; mode = null; hover = null; MAC = {};
     document.getElementById("pxm-n").textContent = name; document.getElementById("pxm-c").textContent = c;
     document.getElementById("pxm-p").textContent = ""; document.getElementById("pxm-leg").textContent = "불러오는 중…";
     M.classList.add("on"); document.documentElement.classList.add("pxm-open");
-    Promise.all([lib(), fetch("data/jp/px/" + c + ".json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })]).then(function (x) {
+    Promise.all([lib(), fetch((dir || "data/jp/px/") + c + ".json", { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })]).then(function (x) {
       if (code !== c) return;
       rows = x[1]; build();
     }).catch(function (e) { document.getElementById("pxm-leg").textContent = "차트를 못 불러왔습니다(" + e.message + ")"; });
