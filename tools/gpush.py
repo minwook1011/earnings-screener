@@ -5,11 +5,12 @@
   python tools/gpush.py --pull        받아 오기만(작업 시작 전). 리서치 상태가 바뀌어 있으면 먼저 커밋해 둔다
 
   - 리서치 상태 docs/data/jp/research/index.json 이 바뀌어 있으면 늘 같이 커밋한다(남아 있으면 rebase 가 막힘).
-  - 밀리면 git fetch → git rebase origin/main. 충돌이 아래 JSON 파일에서만 나면 회사(키)별로 합친다:
+  - 밀리면 git fetch → git rebase origin/main. 충돌이 JSON 파일에서만 나면(어느 JSON 이든, 2026-10-30) 회사(키)별로 합친다:
     한쪽만 바꾼 키는 바꾼 쪽, 둘 다 바꾼 키는 내 것. 다른 파일에서 충돌하면 rebase --abort 하고 멈춤(사람이 봄).
   - 강제 푸시·reset·stash 는 쓰지 않는다.
   - 한 컴퓨터에서 회차가 겹쳐도 git 작업은 한 번에 하나만(tools/gitlock.py 잠금, 2026-10-28).
     시작할 때 남은 rebase(다른 작업이 죽으며 남긴 것)가 있으면 abort 로 치우고 시작한다.
+  - 커밋 안 된 다른 변경이 1분 넘게 rebase 를 막으면 그 파일들을 '남은 변경 자동 커밋'으로 치우고 계속한다(2026-10-30).
 """
 import json
 import os
@@ -25,7 +26,6 @@ if hasattr(sys.stdout, "reconfigure"):   # cp949 창에서 '멈춤' 메시지 �
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IDX = "docs/data/jp/research/index.json"
-MERGE = {IDX, "docs/data/jp/xlsx/index.json", "tools/jp_labels_ko.json", "docs/data/jp/ircall.json"}   # ircall: 노트북 IR 감시와 이 컴퓨터 IR 작업이 같이 씀(2026-10-30)
 TAIL = "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
 
@@ -80,10 +80,13 @@ def merge(base, up, me):
 
 def rebase():
     git("fetch", "-q", "origin", "main")
-    for _ in range(9):   # 같은 폴더의 다른 작업(동기화)이 파일을 쓰는 중이면 rebase 가 안 됨 → 20초씩 기다림
+    for i in range(9):   # 같은 폴더의 다른 작업(동기화)이 파일을 쓰는 중이면 rebase 가 안 됨 → 20초씩 기다림
         r = git("rebase", "origin/main", ok=True)
         if r.returncode == 0 or "changes" not in (r.stderr or ""):
             break
+        if i >= 2:   # 1분 넘게 남아 있으면 주인 없는 변경(죽은 작업의 흔적) — 멀쩡한 파일만 커밋해 치움(2026-10-30, 14시부터 푸시가 막혔던 일)
+            sweep()
+            continue
         time.sleep(20)
     else:
         print("보류: 커밋 안 된 다른 변경이 있어 못 받아 옴 — 커밋은 남아 있고 다음 gpush 때 같이 올라감")
@@ -92,7 +95,7 @@ def rebase():
         if r.returncode == 0:
             return True
         bad = [f for f in git("diff", "--name-only", "--diff-filter=U").stdout.split() if f]
-        if not bad or any(f not in MERGE for f in bad):
+        if not bad or any(not f.endswith(".json") for f in bad):   # JSON 은 어느 파일이든 키별로 합침(2026-10-30) — 그 밖 파일 충돌만 사람이 봄
             git("rebase", "--abort", ok=True)
             print("멈춤: 합칠 수 없는 충돌 —", ", ".join(bad) or r.stderr.strip()[:200])
             return False
@@ -104,6 +107,26 @@ def rebase():
         r = git("rebase", "--continue", ok=True)
     git("rebase", "--abort", ok=True)
     return False
+
+
+def sweep():
+    """커밋 안 된 채 남은 변경(추적 중인 파일만)을 커밋한다. JSON 은 읽히는 것만(쓰는 도중 잘린 파일은 두고 다음에)."""
+    ok = []
+    for ln in git("status", "--porcelain", "--untracked-files=no").stdout.splitlines():
+        f = ln[3:].strip().strip('"')
+        if ln[:2].strip() not in ("M", "MM", "AM") or not os.path.isfile(os.path.join(ROOT, f)):
+            continue
+        if f.endswith(".json"):
+            try:
+                json.load(open(os.path.join(ROOT, f), encoding="utf-8"))
+            except (ValueError, OSError):
+                continue
+        ok.append(f)
+    if ok:
+        git("add", "--", *ok)
+        if git("commit", "-q", "-m", "data: 남은 변경 자동 커밋" + TAIL, ok=True).returncode == 0:
+            print("남은 변경 커밋:", len(ok), "개")
+    time.sleep(5)
 
 
 def heal():
