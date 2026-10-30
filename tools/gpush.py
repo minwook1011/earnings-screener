@@ -25,7 +25,7 @@ if hasattr(sys.stdout, "reconfigure"):   # cp949 창에서 '멈춤' 메시지 �
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IDX = "docs/data/jp/research/index.json"
-MERGE = {IDX, "docs/data/jp/xlsx/index.json", "tools/jp_labels_ko.json"}
+MERGE = {IDX, "docs/data/jp/xlsx/index.json", "tools/jp_labels_ko.json", "docs/data/jp/ircall.json"}   # ircall: 노트북 IR 감시와 이 컴퓨터 IR 작업이 같이 씀(2026-10-30)
 TAIL = "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
 
