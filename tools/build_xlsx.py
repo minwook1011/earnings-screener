@@ -992,6 +992,11 @@ def build(code):
         ws.cell(i, 3, PDF.format(code=code, doc=f["doc"]))
     for col, w in (("A", 12), ("B", 34), ("C", 60)):
         ws.column_dimensions[col].width = w
+    try:   # '재무제표 한눈에 보기' 시트(10년 분기 핵심 차트, 2026-10-30 사용자) — 실패해도 표준 엑셀은 그대로
+        import glance
+        glance.sheet(wb, glance.gather(code))
+    except Exception as e:
+        print(f"{code} 한눈에 보기 시트 실패: {e}")
     wb.calculation.fullCalcOnLoad = True
     os.makedirs(OUT, exist_ok=True)
     out = os.path.join(OUT, code + ".xlsx")

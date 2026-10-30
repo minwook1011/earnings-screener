@@ -204,6 +204,11 @@ def attach(c, st, html, verdict, rid=None):
         src = build_xlsx.add_button(src, c)
     except Exception as e:
         print(f"{c} 엑셀 실패: {e}")
+    try:   # 재무제표 표 바로 아래 '재무제표 한눈에 보기' 토글(10년 분기 핵심 차트, 2026-10-30 사용자)
+        import glance
+        src = glance.insert(c, src)
+    except Exception as e:
+        print(f"{c} 한눈에 보기 실패: {e}")
     rel = f"research/{c}/stage{st}.html"
     os.makedirs(os.path.join(DATA, "..", "..", "research", c), exist_ok=True)
     open(os.path.join(DATA, "..", "..", rel), "w", encoding="utf-8").write(src)
