@@ -69,6 +69,11 @@ def main():
     json.dump({"updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "n_universe": len(U), "days": days},
               open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print(f"JPX 엑셀 {ok}개 · 대상 {len(U)}종목 · 캘린더 {len(seen)}건 / {len(days)}일")
+    try:   # 오늘 발표한 회사의 최근 발표일·분기 실적(카부탄) — 2026-10-30 사용자
+        import build_ann
+        build_ann.main([])
+    except Exception as e:
+        print(f"최근 발표일 실패: {e}")
 
 
 if __name__ == "__main__":

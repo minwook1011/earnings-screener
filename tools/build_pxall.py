@@ -243,6 +243,11 @@ def main():
     now = datetime.now(KST).strftime("%Y-%m-%d %H:%M")
     out = {"updated": now if not only_kb else prev.get("updated", now), "kabutan": now, "n_universe": len(U), "items": keep}
     json.dump(out, open(idx_p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    try:   # 섹터별 전 종목(docs/data/jp/sectors.json) — 종목 목록이 바뀌어도 따라가게
+        import sector
+        sector.build(U)
+    except Exception as e:
+        print(f"섹터 실패: {e}")
     cnt = lambda f: sum(1 for j in keep.values() if j.get(f))
     print(f"전 종목 {len(U)}개" + ("" if only_kb else f" · 주가 {ok}개 받음 · 실패 {bad}") +
           f" · 신고가 {cnt('new')} · 근접 {cnt('near')} · 턴어라운드 {cnt('turn')} · 상한가(+8%) {cnt('up')} (카부탄 {len(kb)}곳 중 해당 {sum(1 for c in kb if c in U)})")

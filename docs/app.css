@@ -866,3 +866,30 @@ html.pxm-open { overflow: hidden; }
 .ce-rx .kbl:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
 .cf-act { margin-top: 14px; }
 .cf-act .rbtn:first-child { margin-left: 0; }
+/* 전 종목 섹터(2026-10-30 사용자) */
+.secs { display: flex; gap: 6px; flex-wrap: wrap; margin: -4px 0 14px; }
+.secs button { font-size: 12.5px; font-weight: 600; padding: 5px 11px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-mid); cursor: pointer; }
+.secs button span { margin-left: 5px; font: 500 11px var(--mono); color: var(--ink-mute); }
+.secs button:hover { border-color: var(--ink-mute); color: var(--ink); }
+.secs button[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); }
+.secs button[aria-pressed="true"] span { color: var(--accent-ink); }
+.all-t td.sc { white-space: nowrap; color: var(--ink-mid); }
+.all-t .kbl, .con-t .kbl { font-size: 10.5px; color: var(--ink-mute); text-decoration: none; border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; white-space: nowrap; }
+.all-t .kbl:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+.pc-sec { font-style: normal; color: var(--ink-mid); }
+.all-t td, .all-t th { text-align: left; } .all-t td.r, .all-t th.r { text-align: right; } .all-t td .jp { margin-top: 1px; }
+/* 최근·다음 실적 발표일(2026-10-30 사용자) — 카드 살짝 키움 */
+.pgrid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.pc-nm { flex-wrap: wrap; row-gap: 2px; }
+.pc-nm b { flex: 1 1 auto; min-width: 0; }
+.pc-an { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--surface-2); border-radius: 8px; padding: 6px 8px; }
+.pc-an span { display: flex; flex-direction: column; min-width: 0; }
+.pc-an i { font: 500 10.5px var(--sans, inherit); font-style: normal; color: var(--ink-mute); margin-bottom: 1px; }
+.pc-an b { font-size: 13px; color: var(--ink); }
+.pc-an small, .all-t td.an small { margin-left: 4px; font: 600 10px var(--mono); color: var(--ink-mute); }
+.an-t { font-style: normal; margin-left: 4px; font-size: 10px; font-weight: 700; color: var(--ann); }
+.all-t td.an { white-space: nowrap; font-size: 12.5px; }
+.all-t td.an b { font-weight: 600; }
+.all-t td.nx b { color: var(--ann); }
+@media (max-width: 640px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.all-t td.fv, .all-t th.fv { width: 22px; padding-right: 0; } .all-t .star { font-size: 16px; }
