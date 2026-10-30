@@ -288,6 +288,8 @@ def deck(c, day, src):
         if ds:
             f = ds[0]
             urls = [f"https://www.release.tdnet.info/inbs/{f['doc']}.pdf", build_xlsx.PDF.format(code=c, doc=f["doc"])]
+        elif "es-deck-prev" in src:   # 이번 자료가 아직 없어 빌더가 단 '직전 설명회 자료' 버튼은 그대로(2026-10-30)
+            return src
         else:   # 거래소에 안 내고 회사 IR 사이트에만 올린 자료(10/26 코에이테크모) — 빌더가 단 주소를 받음
             m = re.search(r'<a class="es-deck" href="(https?://[^"]+)"', src)
             if not m:
