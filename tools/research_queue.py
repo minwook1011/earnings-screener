@@ -95,6 +95,58 @@ def refresh():
     print(json.dumps({"shard": sh or "전부", "running": running, "free": max(0, MAX_BY.get(sh, MAX) - len(running)), "todo": todo, "wait": wait}, ensure_ascii=False, indent=1))
 
 
+def oku(v):   # 엔 → 억 엔
+    if isinstance(v, list):
+        return [oku(a) for a in v]
+    return round(v / 1e8, 1) if isinstance(v, (int, float)) else None
+
+
+def refresh_req():
+    """요청 목록 모드(2026-10-30 사용자) — 대상은 tools/req_raw.json(req_fetch.py 가 받음). 봇은 index.json 에서
+    요청 발표 시각(pub) 뒤에 쓴 '완료'를 보고 카드를 올린다. 그래서 그 뒤 '완료'가 없으면 할 일."""
+    try:
+        reqs = json.load(open(os.path.join(ROOT, "tools", "req_raw.json"), encoding="utf-8"))["items"]
+    except (OSError, ValueError, KeyError):
+        sys.exit("tools/req_raw.json 없음 — 먼저 python tools/req_fetch.py")
+    idx = load_idx()
+    cut = (datetime.now(KST) - timedelta(minutes=STALE)).strftime("%Y-%m-%d %H:%M")
+    todo, running, wait, seen = [], [], [], set()
+    sh = shard()
+    for r in sorted(reqs, key=lambda r: r.get("pub", ""), reverse=True):
+        c, pub = r["code"], r.get("pub", "")
+        if c in seen or not mine(c, sh):
+            continue
+        seen.add(c)
+        it = idx["items"].setdefault(c, {}).get("2")
+        if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
+            it["status"] = "대기"   # 죽은 작업
+        if it and it.get("status") == "완료" and (it.get("written") or "") >= pub:
+            continue
+        if it and it.get("status") == "진행 중":
+            running.append(c)
+            continue
+        if it and it.get("status") == "멈춤":
+            continue
+        if not it:
+            idx["items"][c]["2"] = {"status": "대기", "queued": now(), "kind": SKILL[2]}
+        ann = f"{int(pub[5:7])}/{int(pub[8:10])} {pub[11:16]}" if len(pub) >= 16 else None
+        if r.get("kind") != "preannounce" and not filed(c, ann):   # 이번 결산단신이 아직 안 잡힘
+            wait.append(c)
+            continue
+        t = {"c": c, "n": r.get("name", c), "stage": 2, "ann": ann, "pub": pub, "rid": r.get("rid"),
+             "q": r.get("period"), "kind": r.get("kind")}
+        if r.get("kind") == "preannounce":   # 실적 미리 발표 — 숫자는 억 엔(eps 는 엔)
+            for k in ("revised_cum", "previous_forecast_cum", "prior_year_cum", "fy_forecast"):
+                if isinstance(r.get(k), dict):
+                    t[k] = {n: (v if n == "eps" else oku(v)) for n, v in r[k].items()}
+            for k in ("revised_period", "revision_doc", "revision_pdf"):
+                t[k] = r.get(k)
+        todo.append(t)
+    save_idx(idx)
+    print(json.dumps({"shard": sh or "전부", "running": running, "free": max(0, MAX_BY.get(sh, MAX) - len(running)),
+                      "todo": todo, "wait": wait}, ensure_ascii=False, indent=1))
+
+
 def filed(c, ann):
     """발표일(카드 'MM/DD HH:MM')이 최근 7일이면 그날 이후 결산단신이 목록에 있어야 시작한다."""
     m = re.match(r"(\d+)/(\d+)", ann or "")
@@ -128,7 +180,7 @@ def done(c, st, verdict, artifact=None):
     print(f"{c} {st}단계 리서치 완료 표시")
 
 
-def attach(c, st, html, verdict):
+def attach(c, st, html, verdict, rid=None):
     """리서치 스킬이 만든 HTML 을 다시 쓰지 않고 사이트로 복사(토큰 0). 검색 노출 안 함 표시를 넣는다."""
     src = open(html, encoding="utf-8").read()
     if 'name="robots"' not in src:
@@ -159,6 +211,8 @@ def attach(c, st, html, verdict):
     idx = load_idx()
     idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": SKILL[int(st)],
                                                "html": rel, "title": title, "verdict": verdict}
+    if rid:   # 요청 목록의 요청 번호(봇이 카드와 맞춤)
+        idx["items"][c][str(st)]["rid"] = rid
     save_idx(idx)
     print(f"{c} {st}단계 리서치 HTML 올림 → docs/{rel}")
 
@@ -298,8 +352,11 @@ def mark(c, st, status):
 def cli():
     if len(sys.argv) >= 5 and sys.argv[1] == "mark":   # mark <코드> <단계> 진행 중|대기|멈춤
         mark(sys.argv[2], sys.argv[3], " ".join(sys.argv[4:]))
-    elif len(sys.argv) >= 6 and sys.argv[1] == "attach":
-        attach(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    elif len(sys.argv) >= 6 and sys.argv[1] == "attach":   # attach <코드> <단계> <HTML> "<결론>" [--rid <요청 번호>]
+        rid = sys.argv[sys.argv.index("--rid") + 1] if "--rid" in sys.argv[:-1] else None
+        attach(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], rid)
+    elif len(sys.argv) >= 2 and sys.argv[1] == "--req":
+        refresh_req()
     elif len(sys.argv) >= 5 and sys.argv[1] == "done":
         done(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5] if len(sys.argv) > 5 else None)
     else:
