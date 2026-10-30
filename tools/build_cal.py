@@ -2,7 +2,7 @@
 """일본 주요 전 종목 실적 발표 캘린더 — 2026-10-30 사용자
   종목  build_pxall.universe() 와 같음(100억 일본 종목 전부 + 일본 소비재 전 종목)
   날짜  도쿄증권거래소(JPX) 공식 「決算発表予定日」 엑셀(회사가 거래소에 알린 날짜)
-  결과  docs/data/jp/cal.json  {updated, n_universe, days: {"YYYY-MM-DD": [{c, n, cat, q, mc}]}}
+  결과  docs/data/jp/cal.json  {updated, n_universe, days: {"YYYY-MM-DD": [{c, n, cat, q, mc, sales, revg, opm, roe, per, ytd, py}]}}
         오늘 기준 5주 전 ~ 13주 뒤. 엑셀을 하나도 못 받으면 파일을 건드리지 않는다.
   python tools/build_cal.py
 """
@@ -18,6 +18,7 @@ from build_pxall import KST, ROOT, get, universe  # noqa: E402
 
 OUT = os.path.join(ROOT, "docs", "data", "jp", "cal.json")
 PAGE = "https://www.jpx.co.jp/listing/event-schedules/financial-announcement/index.html"
+FIN = ("mc", "sales", "revg", "opm", "roe", "per", "ytd", "py")   # 클릭하면 나오는 요약 재무(억엔·%·배)
 Q = {"第１四半期": "1Q", "第２四半期": "2Q", "第３四半期": "3Q", "本決算": "FY", "決算": "FY"}
 
 
@@ -60,7 +61,9 @@ def main():
             continue
         seen.add((code, d))
         u = U[code]
-        days.setdefault(d, []).append({"c": code, "n": u.get("n"), "cat": u.get("con") or u.get("cat"), "q": q, "mc": u.get("mc")})
+        o = {"c": code, "n": u.get("n"), "cat": u.get("con") or u.get("cat"), "q": q}
+        o.update({k: u[k] for k in FIN if u.get(k) is not None})
+        days.setdefault(d, []).append(o)
     for v in days.values():
         v.sort(key=lambda x: -(x["mc"] or 0))
     json.dump({"updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "n_universe": len(U), "days": days},

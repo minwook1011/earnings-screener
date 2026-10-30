@@ -58,7 +58,7 @@ def arr(text, name):
 
 
 def universe():
-    """{코드: {n, en, cat, mc, per, ytd, py, revg}} — RAW 열: 코드, 영문, 업종, 세부, 주가, 시총(억엔), 매출성장, 1Y, YTD, PER, ROE, OPM, 매출"""
+    """{코드: {n, en, cat, mc, per, ytd, py, revg, roe, opm, sales}} — RAW 열: 코드, 영문, 업종, 세부, 주가, 시총(억엔), 매출성장, 1Y, YTD, PER, ROE, OPM, 매출"""
     rows = arr(vfile(r"docs\data\jp\screener-data.js"), "RAW") + arr(vfile(r"docs\data\jp\consumer-extra.js"), "RAW_EXT")
     maj = arr(vfile(r"docs\data\jp\major-data.js"), "RAW_MAJ")
     try:
@@ -76,6 +76,8 @@ def universe():
             continue
         n = ta.get(c) or (ko.get(c) or "").split(" ")[0] or jp or r[1]
         out[c] = {"n": n, "en": r[1], "cat": r[2], "mc": r[5], "revg": r[6], "py": r[7], "ytd": r[8], "per": r[9]}
+        if len(r) > 12:   # 실적 캘린더 요약 재무용(build_cal.py)
+            out[c].update({"roe": r[10], "opm": r[11], "sales": r[12]})
     # 일본 소비재 전 종목(소형주 포함, 2026-10-30 사용자) — docs/data/jp/consumer_all.json. 100억에 없는 종목은 YTD 만 일봉으로 계산
     try:
         ca = json.load(open(os.path.join(ROOT, "docs", "data", "jp", "consumer_all.json"), encoding="utf-8")).get("items", {})

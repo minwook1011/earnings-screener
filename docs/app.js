@@ -450,46 +450,89 @@
     cq.oninput = function (e) { if (e.isComposing) return; cgo(); }; cq.addEventListener("compositionend", cgo);
     app.querySelectorAll("[data-cp]").forEach(function (tr) { tr.onclick = function () { var c = tr.dataset.cp; window.PXC && PXC.open(c, (it[c] || {}).n || c, S.cos[c] ? function () { location.hash = "jp/c/" + c; } : null, "data/jp/pxall/"); }; });
   }
-  /* ---------- 일본 주요 전 종목 실적 발표 캘린더 — JPX 決算発表予定日(2026-10-30 사용자). 한 주 = 한 줄(월~금), 주마다 아래로 ---------- */
-  S.calq = ""; S.calopen = {};
+  /* ---------- 일본 주요 전 종목 실적 발표 캘린더 — JPX 決算発表予定日(2026-10-30 사용자). 한 번에 한 주(월~금), 주 단위로 넘김 ----------
+   *  종목마다 실발 후 주가(발표 20분쯤 뒤 카부탄 등락, data/jp/rx.json · tools/rx.py) + 카부탄 링크, 누르면 요약 재무 */
+  var CAL_SHOW = 15;
+  S.calq = ""; S.calopen = {}; S.calweek = null;
+  function kb(c, path) { return "https://kabutan.jp/stock/" + (path || "") + "?code=" + encodeURIComponent(c); }
+  function rxOf(o, day) { var r = ((S.rx || {}).items || {})[o.c]; return r && r.v != null && (!r.d || r.d >= day) ? r : null; }
   function renderCal() {
-    if (!S.cal || !S.pxa) {
+    if (!S.cal || !S.pxa || !S.rx) {
       app.innerHTML = '<div class="loading">불러오는 중…</div>';
-      Promise.all([S.cal || getJSON("data/jp/cal.json"), S.pxa || getJSON("data/jp/pxall/index.json").catch(function () { return { items: {} }; })]).then(function (r) { S.cal = r[0]; S.pxa = r[1]; if (S.mode === "jpcal") renderCal(); })
+      Promise.all([S.cal || getJSON("data/jp/cal.json"), S.pxa || getJSON("data/jp/pxall/index.json").catch(function () { return { items: {} }; }), S.rx || getJSON("data/jp/rx.json").catch(function () { return { items: {} }; })])
+        .then(function (r) { S.cal = r[0]; S.pxa = r[1]; S.rx = r[2]; if (S.mode === "jpcal") renderCal(); })
         .catch(function (e) { app.innerHTML = '<div class="empty">캘린더를 못 불러왔습니다(' + esc(e.message) + ")</div>"; });
       return;
     }
-    var days = S.cal.days || {}, pa = S.pxa.items || {}, keys = Object.keys(days).sort(), q = S.calq.trim().toLowerCase();
-    var WD = ["일", "월", "화", "수", "목", "금", "토"], today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
-    function dt(s) { return new Date(s + "T00:00:00Z"); }
-    function iso(d) { return d.toISOString().slice(0, 10); }
+    var days = S.cal.days || {}, q = S.calq.trim().toLowerCase(), today = kstYmd();
     function hit(o) { return !q || [o.n, o.c, o.cat].join(" ").toLowerCase().indexOf(q) >= 0; }
-    var weeks = [];
-    if (keys.length) {
-      var d = dt(keys[0]); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
-      for (; iso(d) <= keys[keys.length - 1]; d.setUTCDate(d.getUTCDate() + 7)) weeks.push(iso(d));
+    var weeks = {};
+    Object.keys(days).forEach(function (d) { var n = days[d].filter(hit).length; if (n) { var w = monday(d); weeks[w] = (weeks[w] || 0) + n; } });
+    var keys = Object.keys(weeks).sort(), cur = monday(today);
+    if (!S.calweek || !weeks[S.calweek]) S.calweek = weeks[cur] ? cur : keys.filter(function (k) { return k >= cur; })[0] || keys[keys.length - 1];
+    var mon = S.calweek, wi = keys.indexOf(mon);
+    if (!keys.length) { app.innerHTML = '<div class="wrap" id="view"><div class="empty">' + (q ? "검색과 맞는 종목이 없습니다." : "캘린더 자료가 없습니다.") + "</div></div>"; return; }
+    var chips = keys.map(function (k) {
+      return '<button data-cw="' + k + '" aria-pressed="' + (k === mon) + '"' + (k === cur ? ' class="now"' : "") + "><b>" + weekName(k) + "</b><span>" + dot(k) + "~" + dot(addDays(k, 4)) + " · " + weeks[k] + "</span></button>";
+    }).join("");
+    function item(o, d) {
+      var r = rxOf(o, d), pre = d > today;
+      return '<li><button class="ce" data-cc="' + esc(o.c) + '" data-cd="' + d + '" title="' + esc(o.c + " · " + (o.cat || "") + " · 눌러서 재무 보기") + '">' +
+        '<span class="ce-n"><b>' + esc(o.n || o.c) + '</b><i class="mono">' + esc(o.c) + "</i>" + (o.q ? '<em class="ce-q">' + esc(o.q) + "</em>" : "") + "</span>" +
+        '<span class="ce-m">' + (o.mc != null ? "시총 " + mcap(o.mc) + "억엔" : "") + (o.cat ? " · " + esc(o.cat) : "") + "</span></button>" +
+        (pre ? "" : '<div class="ce-rx"><span>실발 후 주가:</span>' + (r ? '<b class="' + (r.v > 0 ? "up" : r.v < 0 ? "dn" : "na") + '" title="' + esc(md(r.d) + " " + (r.t || "") + " 카부탄 기준") + '">' + pctTxt(r.v) + "</b>" : '<b class="na">' + (d === today ? "대기" : "—") + "</b>") +
+          '<a class="kbl" href="' + kb(o.c) + '" target="_blank" rel="noopener noreferrer">카부탄↗</a></div>') + "</li>";
     }
-    function cell(s) {
-      var all = (days[s] || []).filter(hit), open = S.calopen[s] || q, show = open ? all : all.slice(0, 12), x = dt(s);
-      return '<div class="cal-d' + (s === today ? " today" : "") + (s < today ? " past" : "") + '"><div class="cal-h">' + (x.getUTCMonth() + 1) + "월 " + x.getUTCDate() + "일 (" + WD[x.getUTCDay()] + ")" + (all.length ? "<span>" + all.length + "</span>" : "") + "</div>" +
-        show.map(function (o) { var p = pa[o.c]; return '<div class="cal-c' + (p ? " hasch" : "") + '"' + (p ? ' data-cc="' + esc(o.c) + '"' : "") + ' title="' + esc(o.c + " · " + (o.cat || "")) + '"><b>' + esc(o.n) + "</b>" + (o.q ? "<i>" + esc(o.q) + "</i>" : "") + "</div>"; }).join("") +
-        (all.length > show.length ? '<button class="cal-more" data-more="' + s + '">+' + (all.length - show.length) + "곳 더</button>" : "") + "</div>";
-    }
-    var body = weeks.map(function (w) {
-      var ds = [0, 1, 2, 3, 4].map(function (i) { var x = dt(w); x.setUTCDate(x.getUTCDate() + i); return iso(x); });
-      var cur = ds[0] <= today && today <= iso(new Date(dt(w).getTime() + 6 * 864e5));
-      return '<section class="cal-w' + (cur ? " cur" : "") + '"' + (cur ? ' id="calnow"' : "") + ">" + ds.map(cell).join("") + "</section>";
+    var cols = [0, 1, 2, 3, 4].map(function (i) {
+      var d = addDays(mon, i), list = (days[d] || []).filter(hit), open = S.calopen[d] || q, shown = open ? list : list.slice(0, CAL_SHOW);
+      var nrx = list.filter(function (o) { return rxOf(o, d); }).length;
+      return '<section class="cal-col' + (d === today ? " today" : d < today ? " past" : "") + '"><header><b>' + dot(d) + "(" + WD[new Date(d + "T00:00:00").getDay()] + ")</b><span>" + list.length + "곳" + (nrx ? " · 반응 " + nrx : "") + "</span></header>" +
+        (list.length ? '<ul class="cal-list ce-list">' + shown.map(function (o) { return item(o, d); }).join("") + "</ul>" : '<p class="cal-empty">발표 없음</p>') +
+        (list.length > CAL_SHOW && !q ? '<button class="more" data-more="' + d + '">' + (open ? "접기" : "+" + (list.length - CAL_SHOW) + "곳 더 보기") + "</button>" : "") + "</section>";
     }).join("");
     var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · Earnings Calendar</div><h1><span class="kanji">暦</span>실적 발표 캘린더<a class="calbtn" href="#jpa">‹ 일본 주요 전 종목</a></h1>' +
-      '<div class="sub">일본 주요 전 종목 ' + (S.cal.n_universe || "—") + '개 · JPX 결산 발표 예정일 &nbsp;|&nbsp; <span class="mono">' + esc(S.cal.updated || "") + "</span></div></div></div></header>";
-    var ctl = '<div class="ctl"><div class="fld q"><label for="calq">검색</label><input type="search" id="calq" placeholder="종목명 · 코드 · 업종" value="' + esc(S.calq) + '"></div></div>';
-    app.innerHTML = '<div class="wrap" id="view">' + head + ctl + '<p class="stage-note">하루 칸은 시가총액 큰 순. 판(신고가·근접·턴어라운드·상한가)에 걸린 종목은 누르면 5년 차트.</p><div class="cal">' + body + "</div></div>";
-    app.querySelectorAll("[data-more]").forEach(function (b) { b.onclick = function () { S.calopen[b.dataset.more] = 1; renderCal(); }; });
-    app.querySelectorAll("[data-cc]").forEach(function (el) { el.onclick = function () { var c = el.dataset.cc; window.PXC && PXC.open(c, (pa[c] || {}).n || c, S.cos[c] ? function () { location.hash = "jp/c/" + c; } : null, "data/jp/pxall/"); }; });
+      '<div class="sub">일본 주요 전 종목 ' + (S.cal.n_universe || "—") + '개 · JPX 결산 발표 예정일 <span class="mono">' + esc(S.cal.updated || "") + "</span>" + (S.rx.updated ? ' &nbsp;|&nbsp; 실발 후 주가 <span class="mono">' + esc(S.rx.updated) + "</span>" : "") + "</div></div></div></header>";
+    var ctl = '<div class="ctl"><div class="fld q"><label for="calq">검색</label><input type="search" id="calq" placeholder="종목명 · 코드 · 업종" value="' + esc(S.calq) + '"></div>' +
+      '<div class="count"><span class="today">' + todayKo() + "</span> · 이 주 <b>" + (weeks[mon] || 0) + "</b>곳</div></div>";
+    app.innerHTML = '<div class="wrap" id="view">' + head + ctl +
+      '<p class="stage-note">하루 칸은 시가총액 큰 순. <b>실발 후 주가</b> = 실적 발표 20분쯤 뒤 카부탄에서 본 등락(보통 15:30 발표 → 15:50 확인). 종목을 누르면 요약 재무가 열립니다.</p>' +
+      '<div class="cal"><div class="weeks" id="weeks">' + chips + "</div>" +
+      '<div class="wnav"><button data-step="-1"' + (wi <= 0 ? " disabled" : "") + ">‹ 이전 주</button><b>" + weekName(mon) + "</b><span>" + dot(mon) + " ~ " + dot(addDays(mon, 4)) + "</span>" +
+      '<button data-step="0"' + (mon === cur ? " disabled" : "") + '>이번 주</button><button data-step="1"' + (wi >= keys.length - 1 ? " disabled" : "") + ">다음 주 ›</button></div>" +
+      '<div class="cal-grid">' + cols + "</div></div></div>";
+    app.querySelectorAll("[data-cw]").forEach(function (b) { b.onclick = function () { S.calweek = b.dataset.cw; renderCal(); }; });
+    app.querySelectorAll("[data-step]").forEach(function (b) {
+      b.onclick = function () { var st = +b.dataset.step; S.calweek = st ? keys[wi + st] : (weeks[cur] ? cur : S.calweek); renderCal(); };
+    });
+    var wk = document.getElementById("weeks"), on = wk && wk.querySelector('[aria-pressed="true"]'); if (on) wk.scrollLeft = on.offsetLeft - wk.clientWidth / 2 + on.clientWidth / 2;
+    app.querySelectorAll("[data-more]").forEach(function (b) { b.onclick = function () { S.calopen[b.dataset.more] = !S.calopen[b.dataset.more]; renderCal(); }; });
+    app.querySelectorAll("[data-cc]").forEach(function (el) {
+      el.onclick = function () { var d = el.dataset.cd, o = (days[d] || []).filter(function (x) { return x.c === el.dataset.cc; })[0]; if (o) calFin(o, d); };
+    });
     var cq = document.getElementById("calq");
     function go() { S.calq = cq.value; renderCal(); var n = document.getElementById("calq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
     cq.oninput = function (e) { if (e.isComposing) return; go(); }; cq.addEventListener("compositionend", go);
-    if (!S.calScrolled) { S.calScrolled = 1; var n = document.getElementById("calnow"); if (n) n.scrollIntoView({ block: "start" }); }
+  }
+  /* 캘린더 종목 요약 재무 — 오른쪽 패널. 100억 스크리너 숫자(시총·매출·성장·OPM·ROE·PER·YTD·1Y) + 분기 자료가 있으면 10개 분기 */
+  function calFin(o, d) {
+    var r = rxOf(o, d), p = (S.pxa.items || {})[o.c];
+    function f1(v, u) { return v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0) + (u || ""); }
+    var kv = [["시가총액", o.mc != null ? mcap(o.mc) + "억엔" : "—"], ["매출(연)", f1(o.sales, "억엔")], ["매출성장(TTM)", o.revg == null ? "—" : pct(o.revg)],
+      ["영업이익률", f1(o.opm, "%")], ["ROE", f1(o.roe, "%")], ["PER", o.per == null ? "—" : o.per < 0 ? "적자" : o.per.toFixed(1) + "배"],
+      ["YTD", o.ytd == null ? "—" : pct(o.ytd)], ["1년 주가", o.py == null ? "—" : pct(o.py)]];
+    if (o.sales && o.opm != null) kv.splice(3, 0, ["영업이익(연, 어림)", f1(o.sales * o.opm / 100, "억엔")]);
+    pin.innerHTML = '<div class="ptop"><div><div class="dtk">TSE : ' + esc(o.c) + "</div>" +
+      '<h2 class="dnm" id="d-title">' + esc(o.n || o.c) + "</h2>" +
+      '<div class="chips">' + (o.cat ? '<span class="chip k">' + esc(o.cat) + "</span>" : "") + '<span class="chip">' + esc(dlab(d)) + " 발표" + (o.q ? " · " + esc(o.q) : "") + "</span>" +
+      '<a class="chip" href="' + kb(o.c) + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a><a class="chip" href="' + kb(o.c, "finance") + '" target="_blank" rel="noopener noreferrer">카부탄 결산 ↗</a></div>' +
+      (d <= kstYmd() ? '<div class="react"><span class="rx ' + (r ? (r.v > 0 ? "up" : r.v < 0 ? "dn" : "") : "") + '">실발 후 주가: ' + (r ? pctTxt(r.v) + " · " + esc(md(r.d) + " " + (r.t || "")) : "아직 없음") + "</span></div>" : "") +
+      '</div><button class="x" id="px" aria-label="닫기">✕</button></div>' +
+      '<div class="dsec">요약 재무<span class="hint">100억 스크리너 · 억엔</span></div><div class="kmini">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
+      (S.qy[o.c] && S.qy[o.c].length ? '<div class="dsec">최근 10개 분기</div>' + qline(o.c) : '<p class="note">분기별 실적은 카부탄 결산 페이지에서 볼 수 있습니다.</p>') +
+      '<div class="cf-act">' + (p ? '<button class="rbtn" id="cf-ch">5년 차트</button>' : "") + (S.cos[o.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(o.c) + '">상세 패널</a>' : "") + "</div>";
+    panel.classList.add("on"); scrim.classList.add("on"); document.body.style.overflow = "hidden"; panel.focus();
+    document.getElementById("px").onclick = closePanel;
+    var ch = document.getElementById("cf-ch"); if (ch) ch.onclick = function () { window.PXC && PXC.open(o.c, o.n || o.c, null, "data/jp/pxall/"); };
   }
   function acard(o) {
     var B = S.aboard, u = o.up || {};
@@ -789,8 +832,9 @@
   }
   function closePanel() { panel.classList.remove("on"); scrim.classList.remove("on"); document.body.style.overflow = ""; }
   function back() { return S.mode === "jps" ? "jps" : "jp/" + S.stage; }
-  scrim.onclick = function () { location.hash = back(); };
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("on")) location.hash = back(); });
+  function shut() { if (S.mode === "jpcal") closePanel(); else location.hash = back(); }   // 캘린더 요약 재무는 주소 없이 열림
+  scrim.onclick = shut;
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("on")) shut(); });
 
   /* ---------- 주가 차트(SVG) ---------- */
   function dstr(day) { var t = new Date(day * 86400000); return t.getUTCFullYear() + "-" + ("0" + (t.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + t.getUTCDate()).slice(-2); }
@@ -1008,6 +1052,7 @@
   function route() {
     var h = (location.hash || "#jp").slice(1).split("/"), m = h[0] || "jp";
     document.querySelectorAll(".market a").forEach(function (a) { a.classList.toggle("on", a.dataset.m === m); });
+    if (m === "us" || m === "kr" || m === "room") S.mode = m;   // 늦게 온 전 종목·소비재·캘린더 자료가 이 화면을 덮어쓰지 않게
     if (m === "us" || m === "kr") { closePanel(); app.innerHTML = soon(m === "us" ? "미국" : "한국"); return; }
     if (!S.ready) return;
     if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
