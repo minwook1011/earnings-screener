@@ -317,6 +317,35 @@ def deck(c, day, src):
     return src
 
 
+def deck_url(c, url):
+    """IR 자료 감시(ir_watch.py)가 찾은 이번 분기 설명회 자료로 버튼을 바꾼다(2026-10-30 사용자) — 올린 리포트는 이 버튼만 고침.
+    '직전 설명회 자료'(es-deck-prev) → '설명회 자료 PDF 다운로드', 없으면 결산단신 버튼 옆에 단다."""
+    p = os.path.join(DATA, "..", "..", "research", c, "stage2.html")
+    if not os.path.exists(p):
+        return print(f"{c} 리포트 없음")
+    src = open(p, encoding="utf-8").read()
+    if 'class="es-tanshin"' not in src:
+        return print(f"{c} 결산단신 칸이 없어 설명회 자료를 못 붙임")
+    import build_xlsx
+    b = build_xlsx.get(url)
+    if not b or b[:4] != b"%PDF":
+        return print(f"{c} 설명회 자료 PDF 못 받음")
+    out = os.path.join(DATA, "..", "..", "research", c, "setsumei.pdf")
+    open(out, "wb").write(b)
+    open(out + ".doc", "w", encoding="utf-8").write(url)
+    m = re.search(r'class="resd">[^<]*?(\d{2})\.(\d{1,2})\.(\d{1,2})', src)
+    day = f"20{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}" if m else now()[:10]
+    a = f'<a class="es-deck" href="setsumei.pdf" download="{c} 설명회 자료 {day}.pdf">설명회 자료 PDF 다운로드</a>'
+    if re.search(r'<a class="es-deck[" ]', src):
+        src = re.sub(r'<a class="es-deck[^"]*"[^>]*>[^<]*</a>', lambda _: a, src, count=1)
+    else:
+        src = re.sub(r'(<a class="es-tanshin"[^>]*>[^<]*</a>)', lambda k: k.group(1) + a, src, count=1)
+    if ".es-deck{" not in src:
+        src = src.replace('<div class="es-tanshin-bar">', DCSS + '<div class="es-tanshin-bar">', 1)
+    open(p, "w", encoding="utf-8").write(src)
+    print(f"{c} 설명회 자료 버튼 바꿈")
+
+
 def call_chip(pdf):
     """리포트에 콜 일정이 없을 때 — 결산단신 첫 쪽 '결산설명회 개최 유무' 칸만으로(날짜는 IR 사이트에만 있음)."""
     try:
@@ -357,6 +386,8 @@ def cli():
     elif len(sys.argv) >= 6 and sys.argv[1] == "attach":   # attach <코드> <단계> <HTML> "<결론>" [--rid <요청 번호>]
         rid = sys.argv[sys.argv.index("--rid") + 1] if "--rid" in sys.argv[:-1] else None
         attach(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5], rid)
+    elif len(sys.argv) == 4 and sys.argv[1] == "deck":   # deck <코드> <설명회 자료 PDF 주소>(ir_watch.py 가 부름)
+        deck_url(sys.argv[2], sys.argv[3])
     elif len(sys.argv) >= 2 and sys.argv[1] == "--req":
         refresh_req()
     elif len(sys.argv) >= 5 and sys.argv[1] == "done":
