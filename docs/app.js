@@ -3,7 +3,7 @@
  *  2~4단계: VANTAGE 스크리너 같은 표 + 기업마다 둘째 줄(최근 10개 분기 매출·영업이익 성장률)
  *  어느 기업이든 누르면 오른쪽 패널(주가 1년·분기 실적·텔레 카드·리서치)
  * 데이터: data/jp/stage1.json · pipeline.json · qyoy.json · ret.json(주가 수익률) · ircall.json(IR 설명회) · research/index.json · co/<코드>.json
- * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #jps · #jps/c/<코드> · #room/watch|res|pre · #us · #kr */
+ * 주소: #jp/1 · #jp/2 · #jp/3 · #jp/4 · #jp/c/<코드> · #jps · #jps/c/<코드> · #room/watch|res|pre|mo · #us · #kr */
 (function () {
   "use strict";
   var STAGES = [
@@ -1057,7 +1057,7 @@
     });
   }
   /* ---------- 리서치룸 — 관심 기업 · 리서치 모음 · 실적 프리뷰(data/room.json, 목록은 Claude 가 tools/room.py 로 고침) ---------- */
-  var ROOM_T = [{ k: "watch", lab: "관심 기업" }, { k: "res", lab: "리서치 모음" }, { k: "pre", lab: "실적 프리뷰" }];
+  var ROOM_T = [{ k: "watch", lab: "관심 기업" }, { k: "res", lab: "리서치 모음" }, { k: "pre", lab: "실적 프리뷰" }, { k: "mo", lab: "월차 기업" }];
   function nextAnn(c) {
     var u = (S.upc || {})[c], o = S.cos[c];
     return u || (o && o.d && o.d >= ymd(new Date()) ? o.d : "");
@@ -1102,13 +1102,27 @@
       var list = docs.filter(function (d) { return (f === "전체" || d.kind === f) && hit(d); });
       body = '<div class="seg rk">' + kinds.map(function (k) { return '<button data-rk="' + esc(k) + '" aria-pressed="' + (k === f) + '">' + esc(k) + "</button>"; }).join("") + "</div>" +
         (list.length ? '<div class="rdocs">' + list.map(function (d) { return docRow(d, ""); }).join("") + "</div>" : '<div class="empty-stage"><b>자료가 없습니다</b></div>');
+    } else if (t === "mo") {   // 월차 내는 회사 전부 — 이 회사들이 2단계로 오면 리포트 재무제표 아래 12개월 월차 표가 붙음(2026-10-30 사용자)
+      var nm = {};
+      ((S.s1 && S.s1.upcoming) || []).concat((S.s1 && S.s1.rows) || []).forEach(function (u) { if (u.n) nm[u.c] = u.n; });
+      var mo = Object.keys(S.mo || {}).map(function (c) {
+        var o = { n: (S.cos[c] && S.cos[c].tn !== c && (S.cos[c].tn || S.cos[c].n)) || nm[c] }, r = S.res.items && S.res.items[c] && S.res.items[c]["2"];
+        return { c: c, n: o.tn || o.n || c, m: S.mo[c] || "", a: nextAnn(c), r: r && r.status === "완료" && r.html ? r : null };
+      }).filter(hit).sort(function (a, b) { return (a.a || "9") < (b.a || "9") ? -1 : (a.a || "9") > (b.a || "9") ? 1 : a.n < b.n ? -1 : 1; });
+      body = mo.length ? '<table class="room-t"><tbody>' + mo.map(function (x) {
+        return '<tr><td class="rn"><b>' + esc(x.n) + '</b><span class="mono">' + esc(x.c) + "</span></td>" +
+          '<td class="ra">' + (x.a ? '<span class="ann">' + esc(dlab(x.a)) + " 발표</span>" : '<span class="na">발표일 미정</span>') + "</td>" +
+          '<td class="rm">최근 월차 <b class="mono">' + esc(x.m) + "</b></td>" +
+          '<td class="rl">' + (x.r ? docLink({ html: x.r.html, date: x.r.written, kind: "2단계 리포트" }) : "") +
+          (S.cos[x.c] ? '<a class="rbtn ghost" href="#jp/c/' + esc(x.c) + '">재무·주가·월차</a>' : "") + "</td></tr>";
+      }).join("") + "</tbody></table>" : '<div class="empty-stage"><b>월차 기업이 없습니다</b></div>';
     } else {
       var pre = docs.filter(function (d) { return d.kind === "프리뷰" && hit(d); }).map(function (d) { return { d: d, a: nextAnn(d.c) || d.ann || "" }; })
         .sort(function (a, b) { return (a.a || "9") < (b.a || "9") ? -1 : (a.a || "9") > (b.a || "9") ? 1 : 0; });
       body = pre.length ? '<div class="rdocs">' + pre.map(function (x) { return docRow(x.d, x.a, true); }).join("") + "</div>" :
         '<div class="empty-stage"><b>실적 프리뷰가 없습니다</b>관심 기업의 발표 전 프리뷰를 써 두면 발표일 순으로 여기에 모입니다.</div>';
     }
-    var cnt = { watch: (S.room.watch || []).length, res: docs.length, pre: docs.filter(function (d) { return d.kind === "프리뷰"; }).length };
+    var cnt = { watch: (S.room.watch || []).length, res: docs.length, pre: docs.filter(function (d) { return d.kind === "프리뷰"; }).length, mo: Object.keys(S.mo || {}).length };
     return '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Research Room</div><h1>리서치룸</h1>' +
       '<div class="sub">분석하고 싶은 기업, 돌린 리서치 전부, 실적 프리뷰를 모아 둡니다 &nbsp;|&nbsp; 갱신 <span class="mono">' + esc(S.room.updated || "—") + "</span></div></div>" +
       '<div class="stats">' + ROOM_T.map(function (x) { return '<div class="stat"><b>' + cnt[x.k] + "</b><span>" + x.lab + "</span></div>"; }).join("") + "</div></div></header>" +
@@ -1140,7 +1154,7 @@
     if (m === "us" || m === "kr" || m === "room") S.mode = m;   // 늦게 온 전 종목·소비재·캘린더 자료가 이 화면을 덮어쓰지 않게
     if (m === "us" || m === "kr") { closePanel(); app.innerHTML = soon(m === "us" ? "미국" : "한국"); return; }
     if (!S.ready) return;
-    if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
+    if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre", "mo"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
     if (m === "jpa") { closePanel(); S.mode = "jpa"; renderAll(); return; }
     if (m === "jpc") { closePanel(); S.mode = "jpc"; renderCon(); return; }
     if (m === "jpcal") { closePanel(); S.mode = "jpcal"; renderCal(); return; }

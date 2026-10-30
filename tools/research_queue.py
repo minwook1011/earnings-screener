@@ -209,7 +209,12 @@ def attach(c, st, html, verdict, rid=None):
         src = glance.insert(c, src)
     except Exception as e:
         print(f"{c} 한눈에 보기 실패: {e}")
-    rel = f"research/{c}/stage{st}.html"
+    try:   # 월차 내는 회사면 재무제표 표 바로 아래 '월차' 12개월 표(한눈에 보기보다 위, 2026-10-30 사용자)
+        import monthly_tbl
+        src = monthly_tbl.insert(c, src)
+    except Exception as e:
+        print(f"{c} 월차 표 실패: {e}")
+    rel =f"research/{c}/stage{st}.html"
     os.makedirs(os.path.join(DATA, "..", "..", "research", c), exist_ok=True)
     open(os.path.join(DATA, "..", "..", rel), "w", encoding="utf-8").write(src)
     title = (re.search(r"<title>([^<]*)", src) or [None, ""])[1].strip()
