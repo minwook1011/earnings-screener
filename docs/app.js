@@ -463,7 +463,7 @@
     var so = document.getElementById("asort"); so.onchange = function () { S.asort = so.value; renderAll(); };
     var aq = document.getElementById("aq");
     function ago() { S.aq = aq.value; renderAll(); var n = document.getElementById("aq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
-    aq.oninput = function (e) { if (e.isComposing) return; ago(); }; aq.addEventListener("compositionend", ago);
+    typing(aq, ago);
     app.querySelectorAll("[data-pa]").forEach(function (el) {
       function go() { var o = it[el.dataset.pa] || {}, inSite = S.cos[el.dataset.pa]; window.PXC && PXC.open(el.dataset.pa, o.n || el.dataset.pa, inSite ? function () { location.hash = "jp/c/" + el.dataset.pa; } : null, "data/jp/pxall/"); }
       el.onclick = function (e) { if (e.target.closest("a,button")) return; go(); }; el.onkeydown = function (e) { if (e.key === "Enter") go(); };
@@ -499,7 +499,7 @@
     app.querySelectorAll("#ccats button").forEach(function (b) { b.onclick = function () { S.ccat = b.dataset.cc; renderCon(); }; });
     var cq = document.getElementById("cq");
     function cgo() { S.cq = cq.value; renderCon(); var n = document.getElementById("cq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
-    cq.oninput = function (e) { if (e.isComposing) return; cgo(); }; cq.addEventListener("compositionend", cgo);
+    typing(cq, cgo);
     app.querySelectorAll("[data-cp]").forEach(function (tr) { tr.onclick = function () { var c = tr.dataset.cp; window.PXC && PXC.open(c, (it[c] || {}).n || c, S.cos[c] ? function () { location.hash = "jp/c/" + c; } : null, "data/jp/pxall/"); }; });
   }
   /* ---------- 일본 주요 전 종목 실적 발표 캘린더 — JPX 決算発表予定日(2026-10-30 사용자). 한 번에 한 주(월~금), 주 단위로 넘김 ----------
@@ -563,7 +563,7 @@
     });
     var cq = document.getElementById("calq");
     function go() { S.calq = cq.value; renderCal(); var n = document.getElementById("calq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
-    cq.oninput = function (e) { if (e.isComposing) return; go(); }; cq.addEventListener("compositionend", go);
+    typing(cq, go);
   }
   /* 캘린더 종목 요약 재무 — 오른쪽 패널. 100억 스크리너 숫자(시총·매출·성장·OPM·ROE·PER·YTD·1Y) + 분기 자료가 있으면 10개 분기 */
   function calFin(o, d) {
@@ -1011,7 +1011,7 @@
     var q = document.getElementById("q");
     // 한글 조합 중(ㄱ→가)엔 다시 그리지 않음 — 그리면 입력칸이 새로 생겨 'ㄱ교ㅅ세' 처럼 깨짐(2026-10-29 사용자)
     function qgo() { S.q = q.value; rerender(); var n = document.getElementById("q"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
-    if (q) { q.oninput = function (e) { if (e.isComposing) return; qgo(); }; q.addEventListener("compositionend", qgo); }
+    if (q) typing(q, qgo);
     var so = document.getElementById("sort");
     if (so) so.onchange = function () { S.sort = so.value; rerender(); };
     app.querySelectorAll("#dir button").forEach(function (b) { b.onclick = function () { S.dir = +b.dataset.v; rerender(); }; });
@@ -1120,7 +1120,16 @@
     app.querySelectorAll("[data-rk]").forEach(function (b) { b.onclick = function () { S.rk = b.dataset.rk; renderRoom(); }; });
     var q = document.getElementById("rq");
     function rgo() { S.rq = q.value; renderRoom(); var n = document.getElementById("rq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
-    if (q) { q.oninput = function (e) { if (e.isComposing) return; rgo(); }; q.addEventListener("compositionend", rgo); }   // 한글 조합 중엔 다시 그리지 않음
+    if (q) typing(q, rgo);
+  }
+  /* 검색칸 — 타이핑이 멈추고(0.3초) 한글 조합도 끝났을 때만 화면을 다시 그림.
+     한 글자가 끝나는 compositionend 순간엔 다음 글자 조합이 이미 시작돼 있어, 그때 그리면 입력칸이 바뀌며 글자가 지워짐(2026-10-30 사용자) */
+  function typing(el, fn) {
+    var t = 0, comp = false;
+    function later() { clearTimeout(t); t = setTimeout(function () { if (comp) later(); else fn(); }, 300); }
+    el.addEventListener("compositionstart", function () { comp = true; });
+    el.addEventListener("compositionend", function () { comp = false; later(); });
+    el.addEventListener("input", later);
   }
   function soon(name) { return '<div class="soon"><h2>' + name + " 준비 중</h2><p>일본 탭과 같은 1~4단계 흐름으로 만들 예정입니다.</p></div>"; }
   function route() {
