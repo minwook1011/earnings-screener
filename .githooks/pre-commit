@@ -12,7 +12,7 @@ for f in $files; do
 done
 
 # 토큰 모양(텔레 봇 토큰·깃허브·클로드·구글 키), 텔레 API 설정, 개인 경로·이메일·텔레 그룹 번호
-pat='[0-9]{8,10}:[A-Za-z0-9_-]{35}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|sk-ant-[A-Za-z0-9_-]{20,}|AIza[0-9A-Za-z_-]{35}|api_hash|api_id"?[[:space:]]*[:=]|[Cc]:[\\/]+Users[\\/]|OneDrive|@gmail\.com|-100[0-9]{10}|.ts.net'
+pat='[0-9]{8,10}:[A-Za-z0-9_-]{35}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|sk-ant-[A-Za-z0-9_-]{20,}|AIza[0-9A-Za-z_-]{35}|api_hash|api_id"?[[:space:]]*[:=]|[Cc]:[\\/]+Users[\\/]|OneDrive|@gmail\.com|-100[0-9]{10}|\.ts\.net'
 hits=$(git diff --cached -U0 --diff-filter=ACMR -- . ':!.githooks/*' | grep '^+' | grep -v '^+++' | grep -E -n "$pat")
 if [ -n "$hits" ]; then
   echo "막음: 비밀·개인 정보로 보이는 줄"; echo "$hits" | cut -c1-160; fail=1
