@@ -848,3 +848,20 @@ html.pxm-open { overflow: hidden; }
 .cb.new { background: #d23b3b; color: #fff; } .cb.near { background: #fde3e3; color: #a32020; }
 .cb.turn { background: #e4f3ea; color: #1f7a45; } .cb.up { background: #e0a100; color: #fff; }
 .tbl-wrap { overflow-x: auto; }
+/* 실적 발표 캘린더(2026-10-30 사용자) */
+.calbtn { margin-left: 14px; font-size: 13px; font-weight: 700; vertical-align: middle; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-mid); background: var(--surface); text-decoration: none; letter-spacing: 0; }
+.calbtn:hover { border-color: var(--ink-mute); color: var(--ink); }
+.cal { display: flex; flex-direction: column; gap: 10px; }
+.cal-w { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; scroll-margin-top: 170px; }
+.cal-w.cur { outline: 2px solid #e0a100; outline-offset: 4px; border-radius: 10px; }
+.cal-d { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 6px 7px 8px; min-height: 64px; min-width: 0; }
+.cal-d.past { opacity: .6; }
+.cal-d.today { border-color: #e0a100; box-shadow: inset 0 0 0 1px #e0a100; }
+.cal-h { font-weight: 700; font-size: 13px; margin-bottom: 5px; display: flex; justify-content: space-between; }
+.cal-h span { font: 600 11px var(--mono, monospace); color: var(--ink-mute); }
+.cal-c { font-size: 12px; line-height: 1.5; display: flex; gap: 4px; align-items: baseline; white-space: nowrap; overflow: hidden; }
+.cal-c b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+.cal-c i { font-style: normal; font-size: 10px; color: var(--ink-mute); }
+.cal-c.hasch { cursor: pointer; } .cal-c.hasch b { color: #2f6bd8; }
+.cal-more { margin-top: 4px; border: 0; background: none; color: var(--ink-mid); font-size: 12px; cursor: pointer; padding: 0; }
+@media (max-width: 640px) { .cal-w { grid-template-columns: 1fr; } .cal-d.past { display: none; } }

@@ -398,7 +398,7 @@
     function upv(o) { return o.up ? Math.max(o.up.day || -99, o.up.pts || -99) : -99; }
     rows.sort(function (a, b) { return key === "upv" ? upv(b) - upv(a) : key === "off" ? (b.off || -99) - (a.off || -99) : key === "turn" ? String(b.turn || "").localeCompare(String(a.turn || "")) : (b[key] || -1e9) - (a[key] || -1e9); });
     var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · All Majors</div>' +
-      '<h1><span class="kanji">全</span>일본 주요 전 종목</h1>' +
+      '<h1><span class="kanji">全</span>일본 주요 전 종목<a class="calbtn" href="#jpcal">실적 발표 캘린더 ›</a></h1>' +
       '<div class="sub">100억 사이트 일본 종목 ' + (S.pxa.n_universe || "—") + '개 전부 &nbsp;|&nbsp; 주가 <span class="mono">' + esc(S.pxa.updated || "") + '</span> · 카부탄 <span class="mono">' + esc(S.pxa.kabutan || "") + "</span></div></div>" +
       '<div class="stats"><div class="stat"><b>' + all.length + "</b><span>판에 오른 종목</span></div></div></div></header>";
     var tabs = '<nav class="boards" id="aboards">' + ABOARDS.map(function (b) { return '<button data-ab="' + b.k + '" aria-pressed="' + (S.aboard === b.k) + '">' + b.t + "<span>" + all.filter(b.f).length + "</span></button>"; }).join("") + "</nav>";
@@ -449,6 +449,47 @@
     function cgo() { S.cq = cq.value; renderCon(); var n = document.getElementById("cq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
     cq.oninput = function (e) { if (e.isComposing) return; cgo(); }; cq.addEventListener("compositionend", cgo);
     app.querySelectorAll("[data-cp]").forEach(function (tr) { tr.onclick = function () { var c = tr.dataset.cp; window.PXC && PXC.open(c, (it[c] || {}).n || c, S.cos[c] ? function () { location.hash = "jp/c/" + c; } : null, "data/jp/pxall/"); }; });
+  }
+  /* ---------- 일본 주요 전 종목 실적 발표 캘린더 — JPX 決算発表予定日(2026-10-30 사용자). 한 주 = 한 줄(월~금), 주마다 아래로 ---------- */
+  S.calq = ""; S.calopen = {};
+  function renderCal() {
+    if (!S.cal || !S.pxa) {
+      app.innerHTML = '<div class="loading">불러오는 중…</div>';
+      Promise.all([S.cal || getJSON("data/jp/cal.json"), S.pxa || getJSON("data/jp/pxall/index.json").catch(function () { return { items: {} }; })]).then(function (r) { S.cal = r[0]; S.pxa = r[1]; if (S.mode === "jpcal") renderCal(); })
+        .catch(function (e) { app.innerHTML = '<div class="empty">캘린더를 못 불러왔습니다(' + esc(e.message) + ")</div>"; });
+      return;
+    }
+    var days = S.cal.days || {}, pa = S.pxa.items || {}, keys = Object.keys(days).sort(), q = S.calq.trim().toLowerCase();
+    var WD = ["일", "월", "화", "수", "목", "금", "토"], today = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+    function dt(s) { return new Date(s + "T00:00:00Z"); }
+    function iso(d) { return d.toISOString().slice(0, 10); }
+    function hit(o) { return !q || [o.n, o.c, o.cat].join(" ").toLowerCase().indexOf(q) >= 0; }
+    var weeks = [];
+    if (keys.length) {
+      var d = dt(keys[0]); d.setUTCDate(d.getUTCDate() - ((d.getUTCDay() + 6) % 7));
+      for (; iso(d) <= keys[keys.length - 1]; d.setUTCDate(d.getUTCDate() + 7)) weeks.push(iso(d));
+    }
+    function cell(s) {
+      var all = (days[s] || []).filter(hit), open = S.calopen[s] || q, show = open ? all : all.slice(0, 12), x = dt(s);
+      return '<div class="cal-d' + (s === today ? " today" : "") + (s < today ? " past" : "") + '"><div class="cal-h">' + (x.getUTCMonth() + 1) + "월 " + x.getUTCDate() + "일 (" + WD[x.getUTCDay()] + ")" + (all.length ? "<span>" + all.length + "</span>" : "") + "</div>" +
+        show.map(function (o) { var p = pa[o.c]; return '<div class="cal-c' + (p ? " hasch" : "") + '"' + (p ? ' data-cc="' + esc(o.c) + '"' : "") + ' title="' + esc(o.c + " · " + (o.cat || "")) + '"><b>' + esc(o.n) + "</b>" + (o.q ? "<i>" + esc(o.q) + "</i>" : "") + "</div>"; }).join("") +
+        (all.length > show.length ? '<button class="cal-more" data-more="' + s + '">+' + (all.length - show.length) + "곳 더</button>" : "") + "</div>";
+    }
+    var body = weeks.map(function (w) {
+      var ds = [0, 1, 2, 3, 4].map(function (i) { var x = dt(w); x.setUTCDate(x.getUTCDate() + i); return iso(x); });
+      var cur = ds[0] <= today && today <= iso(new Date(dt(w).getTime() + 6 * 864e5));
+      return '<section class="cal-w' + (cur ? " cur" : "") + '"' + (cur ? ' id="calnow"' : "") + ">" + ds.map(cell).join("") + "</section>";
+    }).join("");
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · Earnings Calendar</div><h1><span class="kanji">暦</span>실적 발표 캘린더<a class="calbtn" href="#jpa">‹ 일본 주요 전 종목</a></h1>' +
+      '<div class="sub">일본 주요 전 종목 ' + (S.cal.n_universe || "—") + '개 · JPX 결산 발표 예정일 &nbsp;|&nbsp; <span class="mono">' + esc(S.cal.updated || "") + "</span></div></div></div></header>";
+    var ctl = '<div class="ctl"><div class="fld q"><label for="calq">검색</label><input type="search" id="calq" placeholder="종목명 · 코드 · 업종" value="' + esc(S.calq) + '"></div></div>';
+    app.innerHTML = '<div class="wrap" id="view">' + head + ctl + '<p class="stage-note">하루 칸은 시가총액 큰 순. 판(신고가·근접·턴어라운드·상한가)에 걸린 종목은 누르면 5년 차트.</p><div class="cal">' + body + "</div></div>";
+    app.querySelectorAll("[data-more]").forEach(function (b) { b.onclick = function () { S.calopen[b.dataset.more] = 1; renderCal(); }; });
+    app.querySelectorAll("[data-cc]").forEach(function (el) { el.onclick = function () { var c = el.dataset.cc; window.PXC && PXC.open(c, (pa[c] || {}).n || c, S.cos[c] ? function () { location.hash = "jp/c/" + c; } : null, "data/jp/pxall/"); }; });
+    var cq = document.getElementById("calq");
+    function go() { S.calq = cq.value; renderCal(); var n = document.getElementById("calq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+    cq.oninput = function (e) { if (e.isComposing) return; go(); }; cq.addEventListener("compositionend", go);
+    if (!S.calScrolled) { S.calScrolled = 1; var n = document.getElementById("calnow"); if (n) n.scrollIntoView({ block: "start" }); }
   }
   function acard(o) {
     var B = S.aboard, u = o.up || {};
@@ -972,6 +1013,7 @@
     if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
     if (m === "jpa") { closePanel(); S.mode = "jpa"; renderAll(); return; }
     if (m === "jpc") { closePanel(); S.mode = "jpc"; renderCon(); return; }
+    if (m === "jpcal") { closePanel(); S.mode = "jpcal"; renderCal(); return; }
     var md0 = m === "jps" ? "jps" : "jp", sw = S.mode !== md0;
     S.mode = md0;
     if (h[1] === "c") {
