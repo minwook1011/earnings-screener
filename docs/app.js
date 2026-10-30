@@ -465,7 +465,9 @@
     function ago() { S.aq = aq.value; renderAll(); var n = document.getElementById("aq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
     typing(aq, ago);
     app.querySelectorAll("[data-pa]").forEach(function (el) {
-      function go() { var o = it[el.dataset.pa] || {}, inSite = S.cos[el.dataset.pa]; window.PXC && PXC.open(el.dataset.pa, o.n || el.dataset.pa, inSite ? function () { location.hash = "jp/c/" + el.dataset.pa; } : null, "data/jp/pxall/"); }
+      // 텔레 단계 밖이라도 2단계 리포트만 쓴 회사는 '리포트·재무'가 리포트를 바로 연다(2026-10-30 사용자: 마스그룹)
+      function go() { var c = el.dataset.pa, o = it[c] || {}, inSite = S.cos[c], r = ((S.res.items || {})[c] || {})["2"], rep = r && r.status === "완료" && r.html;
+        window.PXC && PXC.open(c, o.n || c, inSite ? function () { location.hash = "jp/c/" + c; } : rep ? function () { window.open(ver(r.html, r.written), "_blank", "noopener"); } : null, "data/jp/pxall/"); }
       el.onclick = function (e) { if (e.target.closest("a,button")) return; go(); }; el.onkeydown = function (e) { if (e.key === "Enter") go(); };
     });
     app.querySelectorAll("[data-afav]").forEach(function (b) {
