@@ -58,6 +58,19 @@
       o.vr = card.vr; o.tags = card.tags; o.lens = card.lens;
       o.bm = section(card, "비즈니스 모델")[0] || "";
     });
+    /* 2단계 리포트가 완료된 회사는 텔레 단계 목록에 없거나 1단계로 남아 있어도 2단계로 보인다 — 요청 목록으로 쓴 리포트,
+       회사 컴퓨터가 꺼져 텔레 동기화가 멈춘 동안 쓴 리포트(2026-11-01 사용자) */
+    Object.keys(res.items || {}).forEach(function (c) {
+      var r = res.items[c]["2"];
+      if (!r || r.status !== "완료" || !r.html) return;
+      var o = cos[c];
+      if (!o) {
+        var v = vt[c] || {};
+        o = cos[c] = Object.assign({}, v, { c: c, n: v.n || (r.title || c).replace(/\s*기업분석$/, ""), d: v.d || r.ann || (r.written || "").slice(0, 10) || null, stage: 2, card: {}, pre: false });
+        o.tn = o.n;
+      }
+      if (o.stage < 2) o.stage = 2;
+    });
     Object.keys(cos).forEach(function (c) { var o = cos[c]; o.res = (res.items || {})[c] || {}; o.up = o.lens ? o.lens.up : null; });
     return cos;
   }

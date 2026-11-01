@@ -221,6 +221,9 @@ def attach(c, st, html, verdict, rid=None):
     idx = load_idx()
     idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": SKILL[int(st)],
                                                "html": rel, "title": title, "verdict": verdict}
+    m = re.search(r'class="resd">[^<]*?(\d{2})\.(\d{1,2})\.(\d{1,2})', src)
+    if m:   # 실적 발표일(리포트 배지) — 텔레 카드가 없는 회사도 사이트가 발표일로 묶게(2026-11-01 사용자)
+        idx["items"][c][str(st)]["ann"] = f"20{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
     if rid:   # 요청 목록의 요청 번호(봇이 카드와 맞춤)
         idx["items"][c][str(st)]["rid"] = rid
     save_idx(idx)
