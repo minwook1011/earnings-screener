@@ -151,7 +151,7 @@ def gather(code):
          "유동자산": ca, "유동부채": cl, "부채총계": tl, "자기자본": eq,
          "유동비율": div(ca, cl), "부채비율": div(tl, eq),
          "순차입금/자기자본": [None if e is None or c is None else round((d - c) / e * 100, 1) for d, c, e in zip(debt, cash, eq)],
-         "재고자산": inv, "재고자산 회전일수": [None if i is None or not c else round(i / c * 91, 0) for i, c in zip(inv, cogs)],
+         "재고자산": inv, "재고자산 YoY": yoy(inv), "재고자산 회전일수": [None if i is None or not c else round(i / c * 91, 0) for i, c in zip(inv, cogs)],
          "매출채권 회전일수": [None if r is None or not s else round(r / s * 91, 0) for r, s in zip(rec, rev)],
          "매입채무 회전일수": [None if r is None or not s else round(r / s * 91, 0) for r, s in zip(pay, cogs)]}
     T["현금전환주기(CCC)"] = [None if None in t else t[0] + t[1] - t[2] for t in zip(T["재고자산 회전일수"], T["매출채권 회전일수"], T["매입채무 회전일수"])]
@@ -247,7 +247,7 @@ def trade_series(code, labs):
 
 # ---------- 차트 목록(엑셀·HTML 같이 씀) ----------
 def charts(G):
-    """사용자 지정(2026-10-29): 매출 · 매출 YoY+영업이익 YoY · 부문별 · 지역별 · 수주+수주 YoY · 영업이익+OPM · 수출입 · 재무 안정성.
+    """사용자 지정(2026-10-29): 매출 · 매출 YoY+영업이익 YoY · 부문별 · 지역별 · 수주+수주 YoY · 영업이익+OPM · 재고자산+YoY(2026-11-01) · 수출입 · 재무 안정성.
     시리즈 이름 = 표의 행 이름(엑셀이 그 행을 가리킴)."""
     T, SRC, C = G["T"], G["SRC"], []
     pick = lambda pre: {k: v for k, v in T.items() if k.startswith(pre + " · ") and not k.endswith("· 합계")}
@@ -265,6 +265,10 @@ def charts(G):
         C.append({"t": "수주 (억 엔) · 수주 YoY (%)", "stack": d, "line2": {"수주 YoY": T["수주 YoY"]}, "src": src(d), "x0": first(d)})
     C.append({"t": "영업이익 (억 엔) · OPM·YoY (%)", "bar": {"영업이익": T["영업이익"]},
               "line2": {"영업이익률": T["영업이익률"]}, "line3": {"영업이익 YoY": T["영업이익 YoY"]}})   # YoY 는 범위가 커서 축 따로
+    # 재고자산(분기 말 잔액) + YoY(작년 같은 분기 말 대비) — 결산단신 XBRL 이 있는 분기부터(2026-11-01 사용자)
+    if any(x is not None for x in T["재고자산"]):
+        C.append({"t": "재고자산 (억 엔) · YoY (%)", "bar": {"재고자산": T["재고자산"]}, "line2": {"재고자산 YoY": T["재고자산 YoY"]},
+                  "x0": first({"재고자산": T["재고자산"]})})
     d = pick("수출")
     if d:
         C.append({"t": "관련 수출 (억 엔) · YoY (%)", "bar": d, "line2": pick("수출 YoY"), "src": src(d), "x0": first(d)})
