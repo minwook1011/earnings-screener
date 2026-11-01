@@ -148,6 +148,7 @@ def gather(code):
             for t, e in zip(zip(*[stock(g) for g in IBD]), eq)]   # 재무상태표가 없는 분기는 빈칸(차입금 없는 회사만 0)
     div = lambda a, b, m=100: [None if x is None or not y else round(x / y * m, 1) for x, y in zip(a, b)]
     T = {"매출액": rev, "매출액 YoY": yoy(rev), "영업이익": op, "영업이익률": div(op, rev), "영업이익 YoY": yoy(op),
+         "영업이익 전년 대비 증감": [None if i < 4 or op[i] is None or op[i - 4] is None else round(op[i] - op[i - 4], 1) for i in range(len(op))],
          "유동자산": ca, "유동부채": cl, "부채총계": tl, "자기자본": eq,
          "유동비율": div(ca, cl), "부채비율": div(tl, eq),
          "순차입금/자기자본": [None if e is None or c is None else round((d - c) / e * 100, 1) for d, c, e in zip(debt, cash, eq)],
@@ -263,8 +264,16 @@ def charts(G):
     d = pick("수주")
     if d:
         C.append({"t": "수주 (억 엔) · 수주 YoY (%)", "stack": d, "line2": {"수주 YoY": T["수주 YoY"]}, "src": src(d), "x0": first(d)})
-    C.append({"t": "영업이익 (억 엔) · OPM·YoY (%)", "bar": {"영업이익": T["영업이익"]},
-              "line2": {"영업이익률": T["영업이익률"]}, "line3": {"영업이익 YoY": T["영업이익 YoY"]}})   # YoY 는 범위가 커서 축 따로
+    # 적자·흑자 전환이 잦으면 YoY(%)는 계산이 안 돼 거의 빈다 → 그때는 전년 같은 분기 대비 증감액(억 엔)을 대신 그린다(2026-11-01 사용자)
+    op = T["영업이익"]
+    can = sum(x is not None and op[i - 4] is not None for i, x in enumerate(op) if i >= 4)
+    if can and sum(x is not None for x in T["영업이익 YoY"]) < can * 0.7:
+        C.append({"t": "영업이익 (억 엔) · OPM (%) · 전년 대비 증감 (억 엔)", "bar": {"영업이익": op},
+                  "line2": {"영업이익률": T["영업이익률"]}, "line3": {"영업이익 전년 대비 증감": T["영업이익 전년 대비 증감"]}, "u3": "억",
+                  "src": "적자 분기가 많아 YoY(%) 대신 전년 같은 분기 대비 증감액(억 엔)을 그림"})
+    else:
+        C.append({"t": "영업이익 (억 엔) · OPM·YoY (%)", "bar": {"영업이익": op},
+                  "line2": {"영업이익률": T["영업이익률"]}, "line3": {"영업이익 YoY": T["영업이익 YoY"]}})   # YoY 는 범위가 커서 축 따로
     # 재고자산(분기 말 잔액) + YoY(작년 같은 분기 말 대비) — 결산단신 XBRL 이 있는 분기부터(2026-11-01 사용자)
     if any(x is not None for x in T["재고자산"]):
         C.append({"t": "재고자산 (억 엔) · YoY (%)", "bar": {"재고자산": T["재고자산"]}, "line2": {"재고자산 YoY": T["재고자산 YoY"]},
@@ -273,8 +282,11 @@ def charts(G):
     if d:
         C.append({"t": "관련 수출 (억 엔) · YoY (%)", "bar": d, "line2": pick("수출 YoY"), "src": src(d), "x0": first(d)})
     nodebt = not any(T["총 차입금"])   # 차입금·사채·리스부채가 하나도 없는 회사(화낙 등) — 막대가 안 보이는 이유를 적어 둠
+    zero = sum(x == 0 for x in T["총 차입금"]) >= sum(x is not None for x in T["총 차입금"]) / 2   # 대부분 무차입인 회사
     C.append({"t": "재무 안정성 — 총 차입금·현금 (억 엔) · 부채비율 (%)", "bar": {"총 차입금": T["총 차입금"], "현금": T["현금"]},
-              "line2": {"부채비율": T["부채비율"]}, "src": "총 차입금 0 — 차입금·사채·리스부채 없음" if nodebt else ""})
+              "line2": {"부채비율": T["부채비율"]}, "x0": first({"현금": T["현금"]}),
+              "src": "총 차입금 0 — 차입금·사채·리스부채 없음" if nodebt else
+                     "총 차입금 막대가 없는 분기 = 차입금·사채·리스부채 0(무차입)" if zero else ""})
     return C
 
 
@@ -309,10 +321,11 @@ def sheet(wb, G):
     for nm, arr in G["T"].items():
         ws.cell(r, 1, nm).font = F
         pct = re.search(r"YoY|비율|이익률|자기자본$", nm)
+        small = max((abs(v) for v in arr if v is not None), default=0) < 10   # 작은 회사는 소수 첫째 자리(2026-11-01 사용자)
         for j, v in enumerate(arr):
             c = ws.cell(r, 2 + j, v)
             c.font = F
-            c.number_format = '0.0"%"' if pct else '#,##0'
+            c.number_format = '0.0"%"' if pct else ('#,##0.0' if small else '#,##0')
         if G["SRC"].get(nm):
             ws.cell(r, 2 + n, G["SRC"][nm]).font = Font(name="맑은 고딕", size=8, color="666666")
         rows[nm] = r
@@ -342,7 +355,7 @@ def sheet(wb, G):
                 add(main, k, x0)
         if ch.get("line2"):
             l2 = LineChart()
-            for k in list(ch["line2"]) + list(ch.get("line3") or {}):
+            for k in list(ch["line2"]) + ([] if ch.get("u3") else list(ch.get("line3") or {})):
                 add(l2, k, x0)
             l2.y_axis.axId, l2.y_axis.crosses = 200, "max"
             l2.y_axis.title = "%" if "회전" not in ch["t"] else "일"
@@ -378,7 +391,8 @@ def sheet(wb, G):
             main.dataLabels.showVal = True
             main.dataLabels.showSerName = main.dataLabels.showCatName = main.dataLabels.showLegendKey = False
             main.dataLabels.position = "outEnd" if isinstance(main, BarChart) else "t"
-            main.dataLabels.numFmt = '0"%"' if ch.get("pct") else '#,##0'
+            small = max((abs(v) for k in (ch.get("bar") or ch.get("line") or {}) for v in G["T"][k] if v is not None), default=0) < 10
+            main.dataLabels.numFmt = '0"%"' if ch.get("pct") else ('0.0' if small else '#,##0')
         main.varyColors = False
         if len(main.series) == 1 and not ch.get("line2"):
             main.legend = None
@@ -413,8 +427,8 @@ const PAL=["#4472C4","#ED7D31","#A5A5A5","#FFC000","#70AD47","#264478","#9E480E"
 const dark=matchMedia("(prefers-color-scheme: dark)").matches, ink=dark?"#e5e7eb":"#1f2937", grid=dark?"#1f2937":"#eef0f3";
 Chart.defaults.font.family='"Pretendard","Malgun Gothic",sans-serif';Chart.defaults.color=ink;Chart.defaults.font.size=10;
 const lab={{id:"lab",afterDatasetsDraw(c){{const x=c.ctx;x.save();x.font="bold 11px sans-serif";x.textAlign="center";
- c.data.datasets.forEach((d,i)=>{{if(!d.lab)return;const m=c.getDatasetMeta(i);if(m.hidden)return;x.fillStyle=d.borderColor;
- m.data.forEach((p,j)=>{{const v=d.data[j];if(v==null||j%d.lab)return;x.fillText((d.pct?Math.round(v)+"%":Math.round(v).toLocaleString()),p.x,p.y-6)}})}});x.restore()}}}};
+ c.data.datasets.forEach((d,i)=>{{if(!d.lab)return;d.sm=Math.max(0,...d.data.filter(v=>v!=null).map(Math.abs))<10;const m=c.getDatasetMeta(i);if(m.hidden)return;x.fillStyle=d.borderColor;
+ m.data.forEach((p,j)=>{{const v=d.data[j];if(v==null||j%d.lab)return;x.fillText((d.pct?Math.round(v)+"%":(d.sm?v.toFixed(1):Math.round(v).toLocaleString())),p.x,p.y-6)}})}});x.restore()}}}};
 C.forEach((ch,i)=>{{const x0=ch.x0||0,LL=L.slice(x0);const el=document.createElement("div");el.className="c";el.innerHTML="<h3>"+ch.t+"</h3><div class='cv'><canvas></canvas></div>"+(ch.src?"<div class='s'>출처: "+ch.src+"</div>":"");
  document.getElementById("g").appendChild(el);const ds=[];let k=0;
  const step=Math.max(1,Math.ceil(LL.length/16));
@@ -422,7 +436,7 @@ C.forEach((ch,i)=>{{const x0=ch.x0||0,LL=L.slice(x0);const el=document.createEle
   ds.push(Object.assign({{label:(n.indexOf("수출 YoY")==0?n.split(" · ").pop()+" YoY":n.split(" · ").pop()),data:a.slice(x0),type,yAxisID:axis,backgroundColor:c,borderColor:c,borderWidth:type=="line"?2:0,pointRadius:type=="line"?3:0,spanGaps:true,lab:(Object.keys(o).length==1||axis=="y2")?step:0,pct:axis!="y"&&!/회전/.test(ch.t)||ch.pct}},extra||{{}}))}});
  add(ch.bar,"bar","y");add(ch.stack,"bar","y",{{stack:"s"}});add(ch.line,"line","y");add(ch.line2,"line","y2",{{order:-1}});add(ch.line3,"line","y3",{{order:-2,borderDash:[4,3]}});
  const sc={{x:{{grid:{{display:false}},stacked:!!ch.stack,ticks:{{maxRotation:90,minRotation:90,autoSkip:false}}}},y:{{grid:{{color:grid}},stacked:!!ch.stack,ticks:{{callback:v=>ch.pct?v+"%":v.toLocaleString()}}}}}};
- if(ch.line2)sc.y2={{position:"right",grid:{{display:false}},ticks:{{callback:v=>/회전/.test(ch.t)?v+"일":v+"%"}}}};if(ch.line3)sc.y3={{position:"right",grid:{{display:false}},ticks:{{callback:v=>v+"%"}}}};
+ if(ch.line2)sc.y2={{position:"right",grid:{{display:false}},ticks:{{callback:v=>/회전/.test(ch.t)?v+"일":v+"%"}}}};if(ch.line3)sc.y3={{position:"right",grid:{{display:false}},ticks:{{callback:v=>v+(ch.u3||"%")}}}};
  new Chart(el.querySelector("canvas"),{{type:"bar",data:{{labels:LL,datasets:ds}},plugins:[lab],options:{{maintainAspectRatio:false,interaction:{{mode:"index",intersect:false}},plugins:{{legend:{{position:"bottom",labels:{{boxWidth:10}}}}}},scales:sc}}}})}});
 </script></body></html>"""
 
@@ -434,25 +448,38 @@ def html(G, path):
 
 # ---------- 2단계 리포트 안 토글(2026-10-30 사용자 — 스킬에 추가) ----------
 FRAG = """<details class="tg gl" id="es-glance"><summary><b>재무제표 한눈에 보기 — 최근 {n}개 분기 핵심 차트</b></summary><div class="tgb">
-<style>#es-glance .glx-sub{{color:#6b7280;font-size:12px;margin:0 0 10px}}#es-glance .glx-g{{display:grid;grid-template-columns:1fr;gap:16px}}#es-glance .glx-c{{min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:10px 10px 4px}}
-#es-glance .glx-c h4{{font-size:15px;margin:0 0 6px}}#es-glance .glx-s{{font-size:11px;color:#6b7280;margin-top:4px}}#es-glance .glx-v{{position:relative;height:420px}}
-@media (max-width:760px){{#es-glance .glx-v{{height:320px}}}}</style>
-<p class="glx-sub">달력 분기(3Q26 = 26.7~9) · 억 엔 · {src} · 부문·지역·수주·수출은 있을 때만 · 엑셀 '재무제표 한눈에 보기' 시트에 같은 표·차트</p>
+<!-- 엑셀 느낌을 걷어 낸 리포트용 모양(2026-11-01 사용자): 연도만 가로 눈금 · 숫자는 1년 간격 · 작은 값은 소수 첫째 자리 · 적자 막대는 옅게 -->
+<style>#es-glance .glx-sub{{color:#6b7280;font-size:12px;margin:0 0 12px}}#es-glance .glx-g{{display:grid;grid-template-columns:1fr;gap:18px}}
+#es-glance .glx-c{{min-width:0;background:#fff;border:1px solid #eceef2;border-radius:12px;padding:14px 16px 8px;box-shadow:0 1px 2px rgba(16,24,40,.04)}}
+#es-glance .glx-c h4{{font-size:15px;font-weight:700;color:#111827;margin:0 0 8px}}#es-glance .glx-s{{font-size:11px;color:#6b7280;margin-top:6px}}
+#es-glance .glx-v{{position:relative;height:400px}}@media (max-width:760px){{#es-glance .glx-v{{height:300px}}#es-glance .glx-c{{padding:12px 10px 6px}}}}</style>
+<p class="glx-sub">달력 분기(3Q26 = 26.7~9) · 억 엔 · {src} · 부문·지역·수주·수출은 있을 때만 · 막대 위 숫자는 최신 분기와 같은 분기(1년 간격) · 마우스를 올리면 분기별 값 · 엑셀 '재무제표 한눈에 보기' 시트에 같은 표·차트</p>
 <div class="glx-g"></div></div></details>
 <script>(function(){{const L={labs},C={charts};const box=document.getElementById("es-glance");let done=false;
-function draw(){{if(done)return;done=true;const PAL=["#4472C4","#ED7D31","#A5A5A5","#FFC000","#70AD47","#264478","#9E480E","#636363"];
-Chart.defaults.font.family='"Pretendard","Malgun Gothic",sans-serif';
-const lab={{id:"glab",afterDatasetsDraw(c){{const x=c.ctx;x.save();x.font="bold 11px sans-serif";x.textAlign="center";
- c.data.datasets.forEach((d,i)=>{{if(!d.lab)return;const m=c.getDatasetMeta(i);if(m.hidden)return;x.fillStyle=d.borderColor;
- m.data.forEach((p,j)=>{{const v=d.data[j];if(v==null||j%d.lab)return;x.fillText((d.pct?Math.round(v)+"%":Math.round(v).toLocaleString()),p.x,p.y-6)}})}});x.restore()}}}};
-C.forEach(ch=>{{const x0=ch.x0||0,LL=L.slice(x0);const el=document.createElement("div");el.className="glx-c";el.innerHTML="<h4>"+ch.t+"</h4><div class='glx-v'><canvas></canvas></div>"+(ch.src?"<div class='glx-s'>"+(/^총 차입금/.test(ch.src)?"":"출처: ")+ch.src+"</div>":"");
- box.querySelector(".glx-g").appendChild(el);const ds=[];let k=0;const step=Math.max(1,Math.ceil(LL.length/20));
- const add=(o,type,axis,extra)=>Object.entries(o||{{}}).forEach(([n,a])=>{{const c=PAL[k++%PAL.length];
-  ds.push(Object.assign({{label:(n.indexOf("수출 YoY")==0?n.split(" · ").pop()+" YoY":n.split(" · ").pop()),data:a.slice(x0),type,yAxisID:axis,backgroundColor:c,borderColor:c,borderWidth:type=="line"?2:0,pointRadius:type=="line"?2.5:0,spanGaps:true,lab:(Object.keys(o).length==1&&axis=="y")?step:0,pct:axis!="y"||ch.pct}},extra||{{}}))}});
- add(ch.bar,"bar","y");add(ch.stack,"bar","y",{{stack:"s"}});add(ch.line,"line","y");add(ch.line2,"line","y2",{{order:-1}});add(ch.line3,"line","y3",{{order:-2,borderDash:[4,3]}});
- const sc={{x:{{grid:{{display:false}},stacked:!!ch.stack,ticks:{{maxRotation:90,minRotation:90,autoSkip:false,font:{{size:11}}}}}},y:{{grid:{{color:"#eef0f3"}},stacked:!!ch.stack,ticks:{{callback:v=>ch.pct?v+"%":v.toLocaleString()}}}}}};
- if(ch.line2)sc.y2={{position:"right",grid:{{display:false}},ticks:{{callback:v=>v+"%"}}}};if(ch.line3)sc.y3={{position:"right",grid:{{display:false}},ticks:{{callback:v=>v+"%"}}}};
- new Chart(el.querySelector("canvas"),{{type:"bar",data:{{labels:LL,datasets:ds}},plugins:[lab],options:{{maintainAspectRatio:false,interaction:{{mode:"index",intersect:false}},plugins:{{legend:{{position:"bottom",labels:{{boxWidth:12,font:{{size:12}}}}}}}},scales:sc}}}})}})}}
+function draw(){{if(done)return;done=true;const PAL=["#3E63DD","#F76B15","#8B8D98","#E2A336","#30A46C","#8E4EC6","#E5484D","#0090FF"];
+Chart.defaults.font.family='"Pretendard","Malgun Gothic",sans-serif';Chart.defaults.color="#6b7280";
+const r1=v=>Math.round(v*10)/10,tf=v=>v.toLocaleString(undefined,{{maximumFractionDigits:1}});
+const fmt=(v,pct,sm)=>pct?Math.round(v)+"%":(sm?v.toFixed(1):Math.round(v).toLocaleString());
+const lab={{id:"glab",afterDatasetsDraw(c){{const x=c.ctx;x.save();x.font="600 11px sans-serif";x.textAlign="center";
+ c.data.datasets.forEach((d,i)=>{{if(!d.lab)return;const m=c.getDatasetMeta(i);if(m.hidden)return;const n=d.data.length;
+  m.data.forEach((p,j)=>{{const v=d.data[j];if(v==null||(n-1-j)%4)return;const neg=v<0&&d.type!="line";
+   x.fillStyle=d.type=="line"?d.borderColor:"#374151";x.textBaseline=neg?"top":"bottom";x.fillText(fmt(v,d.pct,d.sm),p.x,neg?p.y+4:p.y-4)}})}});x.restore()}}}};
+C.forEach(ch=>{{const x0=ch.x0||0,LL=L.slice(x0);const el=document.createElement("div");el.className="glx-c";el.innerHTML="<h4>"+ch.t+"</h4><div class='glx-v'><canvas></canvas></div>"+(ch.src?"<div class='glx-s'>"+(/^총 차입금|^적자/.test(ch.src)?"":"출처: ")+ch.src+"</div>":"");
+ box.querySelector(".glx-g").appendChild(el);const ds=[];let k=0;
+ const add=(o,type,axis,extra)=>Object.entries(o||{{}}).forEach(([n,a])=>{{const c=PAL[k++%PAL.length],data=a.slice(x0),one=Object.keys(o).length==1&&axis=="y";
+  const sm=Math.max(0,...data.filter(v=>v!=null).map(Math.abs))<10,pct=axis=="y"?!!ch.pct:!(axis=="y3"&&ch.u3);
+  ds.push(Object.assign({{label:(n.indexOf("수출 YoY")==0?n.split(" · ").pop()+" YoY":n.split(" · ").pop()),data,type,yAxisID:axis,
+   backgroundColor:type=="bar"&&one?data.map(v=>v<0?c+"80":c):c,borderColor:c,borderWidth:type=="line"?2:0,borderRadius:type=="bar"?3:0,
+   pointRadius:type=="line"?(axis=="y"?2.5:1.5):0,pointHoverRadius:5,tension:.25,spanGaps:true,lab:one,sm,pct,categoryPercentage:.82,barPercentage:.9}},extra||{{}}))}});
+ add(ch.bar,"bar","y");add(ch.stack,"bar","y",{{stack:"s"}});add(ch.line,"line","y");add(ch.line2,"line","y2",{{order:-1}});add(ch.line3,"line","y3",{{order:-2,borderDash:[5,4],borderWidth:1.5}});
+ const tick=(v,i)=>LL.length<=12?LL[i]:(/^1Q/.test(LL[i])?"20"+LL[i].slice(2):"");
+ const sc={{x:{{grid:{{display:false}},border:{{color:"#d1d5db"}},stacked:!!ch.stack,ticks:{{autoSkip:false,maxRotation:0,font:{{size:11}},callback:tick}}}},
+  y:{{grid:{{color:"#f1f2f5"}},border:{{display:false}},stacked:!!ch.stack,ticks:{{font:{{size:11}},callback:v=>ch.pct?r1(v)+"%":r1(v).toLocaleString()}}}}}};
+ if(ch.line2)sc.y2={{position:"right",grid:{{display:false}},border:{{display:false}},ticks:{{font:{{size:11}},callback:v=>r1(v)+"%"}}}};
+ if(ch.line3)sc.y3={{position:"right",grid:{{display:false}},border:{{display:false}},ticks:{{font:{{size:11}},callback:v=>r1(v)+(ch.u3||"%")}}}};
+ new Chart(el.querySelector("canvas"),{{type:"bar",data:{{labels:LL,datasets:ds}},plugins:[lab],options:{{maintainAspectRatio:false,interaction:{{mode:"index",intersect:false}},layout:{{padding:{{top:14}}}},
+  plugins:{{legend:{{position:"top",align:"end",labels:{{usePointStyle:true,pointStyle:"rectRounded",boxWidth:9,boxHeight:9,padding:14,font:{{size:12}}}}}},
+   tooltip:{{backgroundColor:"rgba(17,24,39,.92)",padding:10,callbacks:{{label:t=>" "+t.dataset.label+": "+(t.raw==null?"-":tf(t.raw)+(t.dataset.pct?"%":" 억 엔"))}}}}}},scales:sc}}}})}})}}
 function go(){{if(window.Chart)return draw();const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js";sc.onload=draw;document.head.appendChild(sc)}}
 box.addEventListener("toggle",()=>{{if(box.open)go()}});if(box.open)go()}})();</script>"""
 
