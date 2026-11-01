@@ -53,6 +53,60 @@ def cal(k, fsm):
     return f"{(m - 1) // 3 + 1}Q{y % 100:02d}"
 
 
+JP = re.compile(r"[぀-ヿ一-鿿]")
+
+
+def deep_segments(code):
+    """리서치 폴더 <코드>_deep.json 의 재무제표 부문(한국어 이름) → {이름: [분기 매출…]}"""
+    out = {}
+    for f in glob.glob(os.path.join(bx.RESEARCH, code + " *", code + "_deep.json")):
+        try:
+            d = json.load(open(f, encoding="utf-8"))
+        except ValueError:
+            continue
+        for part in d.get("parts") or []:
+            for sec in part.get("sections") or []:
+                for b in sec.get("blocks") or []:
+                    for sg in (b.get("segments") or []) if b.get("type") == "fs" else []:
+                        vals = [v.get("rev") for v in (sg.get("q") or {}).values() if isinstance(v, dict) and v.get("rev") is not None]
+                        if sg.get("name") and vals:
+                            out[sg["name"]] = vals
+    return out
+
+
+def seg_ko(code, seg, KO):
+    """부문 이름을 한국어로(2026-11-01 사용자 — 일본어로 뜨던 것).
+    ① tools/jp_labels_ko.json(일본어·영어 → 한국어) ② 없으면 그 회사 2단계 리포트(deep.json)의 한국어 부문 중
+    최근 분기 매출이 같은 것 ③ 그래도 없으면 '、報告セグメント [メンバー]'만 떼고 tools/jp_labels_missing.json 에 적는다.
+    전사·소거·조정 같은 조정 항목은 뺀다."""
+    import unicodedata
+    deep, miss, out = None, set(), {}
+    for name, row in seg.items():
+        n = unicodedata.normalize("NFKC", name)
+        n = re.sub(r"\s*[、,]?\s*報告セグメント|\s*\[?\s*メンバー\s*\]?", "", n).strip()
+        if JP.search(n) and re.search(r"消去|全社|調整", n):
+            continue
+        ko = KO.get(n) or KO.get(name) or KO.get(re.sub(r"事業$", "", n)) or (KO.get(n + "事業") if not n.endswith("事業") else None)
+        if not ko and JP.search(n):
+            if deep is None:
+                deep = deep_segments(code)
+            recent = [v for v in row if v is not None][-4:]
+            best = max(((sum(any(abs(v - w) <= max(0.15, abs(v) * 0.01) for w in vals) for v in recent), k) for k, vals in deep.items()), default=(0, None))
+            if recent and best[0] >= max(2, len(recent) - 1):
+                ko = best[1]
+        if not ko and JP.search(n):
+            miss.add(n)
+        ko = ko or n
+        out[ko] = [a if a is not None else b for a, b in zip(out[ko], row)] if ko in out else row
+    if miss:
+        try:
+            old = json.load(open(bx.MISSING, encoding="utf-8"))
+        except (OSError, ValueError):
+            old = []
+        json.dump(sorted(set(old) | miss), open(bx.MISSING, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    return out
+
+
 def research_data(code):
     f = glob.glob(os.path.join(bx.RESEARCH, code + " *", code + "_data.json"))
     try:
@@ -180,6 +234,7 @@ def gather(code):
                     seg[hit] = [a if a is not None else b for a, b in zip(seg[hit], row)]
                 else:
                     seg[lab] = row
+    seg = seg_ko(code, seg, KO)
     if seg:
         segsrc = "결산단신 부문 정보(외부 고객 매출)"
     rd = research_data(code)
