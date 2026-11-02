@@ -24,6 +24,7 @@ SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
 MAX = 4      # 동시에 도는 리포트 최대 수(2026-10-26 사용자 4→10, 2026-10-30 사용자 10→5, 2026-11-01 사용자 5→4 — 돌던 것은 끝까지)
 MAX_BY = {"laptop": 4, "laptop-all": 4, "laptop-x12": 4}   # 컴퓨터별로 다르게(2026-10-28 사용자, 노트북만 15 → 2026-10-30 5: 10곳 동시면 한 곳에 90분, 1~3곳이면 25분). 없으면 MAX
 STALE = 90   # 분
+REQ_DAYS = 4   # 요청 발표일이 이보다 오래되면 건너뜀(금요일 발표를 월요일에 쓸 수 있게 4일)
 # 두 컴퓨터 분담(2026-10-28 사용자, 2026-11-02 123→12): 티커 끝자리 1·2 = 'home'(원래 컴퓨터), 나머지(0·3~9·영문) = 'laptop'.
 # 컴퓨터마다 tools/shard.txt(커밋 안 함)에 home·laptop·laptop-all 한 단어. 없으면 전부 맡음(예전처럼).
 HOME_TAIL = "12"
@@ -112,6 +113,7 @@ def refresh_req():
         sys.exit("tools/req_raw.json 없음 — 먼저 python tools/req_fetch.py")
     idx = load_idx()
     cut = (datetime.now(KST) - timedelta(minutes=STALE)).strftime("%Y-%m-%d %H:%M")
+    fresh = (datetime.now(KST) - timedelta(days=REQ_DAYS)).strftime("%Y-%m-%d")
     todo, running, wait, seen = [], [], [], set()
     sh = shard()
     for r in sorted(reqs, key=lambda r: r.get("pub", ""), reverse=True):
@@ -119,6 +121,8 @@ def refresh_req():
         if c in seen or not mine(c, sh):
             continue
         seen.add(c)
+        if pub[:10] < fresh:   # 발표한 지 오래된 요청은 쓰지 않는다(2026-11-02 사용자: 실적 발표 나온 곳만)
+            continue
         it = idx["items"].setdefault(c, {}).get("2")
         if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
             it["status"] = "대기"   # 죽은 작업
