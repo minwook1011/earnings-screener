@@ -549,7 +549,7 @@ def insert(code, src):
     G = gather(code)
     fr = fragment(G)
     src = re.sub(r'<details class="tg gl" id="es-glance">.*?</details>\s*<script>\(function\(\)\{const L=.*?</script>', "", src, flags=re.S)
-    m = re.search(r'<details class="tg (?!prof|mo)', src)   # 월차 토글(tg mo)도 건너뛴다 — 재무제표 아래로
+    m = re.search(r'<details class="tg (?!prof|mo\b)', src)   # 월차 토글(tg mo)도 건너뛴다 — 재무제표 아래로
     if not m:
         return src
     return src[:m.start()] + fr + src[m.start():]
