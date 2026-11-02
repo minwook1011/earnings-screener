@@ -20,7 +20,7 @@ DATA = os.path.join(ROOT, "docs", "data", "jp")
 IDX = os.path.join(DATA, "research", "index.json")
 KST = timezone(timedelta(hours=9))
 NL = chr(10)
-SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
+SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트", "m": "월차 리포트"}   # m = 월차(요청 kind=monthly, 2026-11-02 사용자)
 MAX = 4      # 동시에 도는 리포트 최대 수(2026-10-26 사용자 4→10, 2026-10-30 사용자 10→5, 2026-11-01 사용자 5→4 — 돌던 것은 끝까지)
 MAX_BY = {"laptop": 4, "laptop-all": 4, "laptop-x12": 4}   # 컴퓨터별로 다르게(2026-10-28 사용자, 노트북만 15 → 2026-10-30 5: 10곳 동시면 한 곳에 90분, 1~3곳이면 25분). 없으면 MAX
 STALE = 90   # 분
@@ -44,6 +44,16 @@ def mine(c, sh=None):
     if sh not in ("home", "laptop", "laptop-all"):   # laptop-all 도 2026-11-02 부터 끝자리 1·2 는 home 몫
         return True
     return (c[-1] in HOME_TAIL) == (sh == "home")
+
+
+def sk(st):
+    return SKILL["m"] if str(st) == "m" else SKILL[int(st)]
+
+
+def mine_mo(sh=None):
+    """월차 요청은 전부 노트북(2026-11-02 사용자 — 회사 컴퓨터는 끝자리 1·2 실적만)."""
+    sh = sh if sh is not None else shard()
+    return sh != "home"
 
 
 def now():
@@ -116,12 +126,34 @@ def refresh_req():
     fresh = (datetime.now(KST) - timedelta(days=REQ_DAYS)).strftime("%Y-%m-%d")
     todo, running, wait, seen = [], [], [], set()
     sh = shard()
-    for r in sorted(reqs, key=lambda r: r.get("pub", ""), reverse=True):
+    for r in sorted(reqs, key=lambda r: r.get("requested" if r.get("kind") == "monthly" else "pub", ""), reverse=True):
         c, pub = r["code"], r.get("pub", "")
+        if r.get("kind") == "monthly":   # 월차 — 월차 스킬, 노트북만, 요청 시각 기준(pub 은 지난 결산 날짜라 쓰지 않는다, 2026-11-02 사용자)
+            if ("m", c) in seen or not mine_mo(sh):
+                continue
+            seen.add(("m", c))
+            rq = r.get("requested", "")
+            if rq[:10] < fresh:
+                continue
+            it = idx["items"].setdefault(c, {}).get("m")
+            if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
+                it["status"] = "대기"   # 죽은 작업
+            if it and it.get("status") == "완료" and (it.get("written") or "") >= rq:
+                continue
+            if it and it.get("status") == "진행 중":
+                running.append(c)
+                continue
+            if it and it.get("status") == "멈춤":
+                continue
+            if not it:
+                idx["items"][c]["m"] = {"status": "대기", "queued": now(), "kind": SKILL["m"]}
+            todo.append({"c": c, "n": r.get("name", c), "stage": "m", "kind": "monthly", "rid": r.get("rid"),
+                         "requested": rq, "q": r.get("period")})
+            continue
         if c in seen or not mine(c, sh):
             continue
         seen.add(c)
-        if pub[:10] < fresh or r.get("kind") == "monthly":   # 실적 발표 나온 곳만 — 오래된 요청·월차 요청은 쓰지 않는다(2026-11-02 사용자)
+        if pub[:10] < fresh:   # 실적 발표 나온 곳만 — 오래된 요청은 쓰지 않는다(2026-11-02 사용자)
             continue
         it = idx["items"].setdefault(c, {}).get("2")
         if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
@@ -178,7 +210,7 @@ def done(c, st, verdict, artifact=None):
     if not os.path.exists(path):
         sys.exit(f"리서치 파일이 없습니다: {path}")
     title = open(path, encoding="utf-8").readline().lstrip("# ").strip()
-    idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": SKILL[int(st)],
+    idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": sk(st),
                                                "file": f"research/{c}/stage{st}.md", "title": title, "verdict": verdict}
     if artifact and artifact.startswith("https://claude.ai/"):
         idx["items"][c][str(st)]["artifact"] = artifact
@@ -216,8 +248,8 @@ def attach(c, st, html, verdict, rid=None):
     except Exception as e:
         print(f"{c} 한눈에 보기 실패: {e}")
     try:   # 월차 내는 회사면 재무제표 표 바로 아래 '월차' 12개월 표(한눈에 보기보다 위, 2026-10-30 사용자)
-        import monthly_tbl
-        src = monthly_tbl.insert(c, src)
+        import monthly_tbl   # 월차 리포트(m)는 맨 위 '월차 데이터 발표' 토글에 이미 있어 붙이지 않는다
+        src = src if str(st) == "m" else monthly_tbl.insert(c, src)
     except Exception as e:
         print(f"{c} 월차 표 실패: {e}")
     rel =f"research/{c}/stage{st}.html"
@@ -225,7 +257,7 @@ def attach(c, st, html, verdict, rid=None):
     open(os.path.join(DATA, "..", "..", rel), "w", encoding="utf-8").write(src)
     title = (re.search(r"<title>([^<]*)", src) or [None, ""])[1].strip()
     idx = load_idx()
-    idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": SKILL[int(st)],
+    idx["items"].setdefault(c, {})[str(st)] = {"status": "완료", "written": now(), "kind": sk(st),
                                                "html": rel, "title": title, "verdict": verdict}
     m = re.search(r'class="resd">[^<]*?(\d{2})\.(\d{1,2})\.(\d{1,2})', src)
     if m:   # 실적 발표일(리포트 배지) — 텔레 카드가 없는 회사도 사이트가 발표일로 묶게(2026-11-01 사용자)
@@ -393,7 +425,7 @@ def light(src):
 
 def mark(c, st, status):
     idx = load_idx()
-    it = idx["items"].setdefault(c, {}).setdefault(str(st), {"kind": SKILL[int(st)]})
+    it = idx["items"].setdefault(c, {}).setdefault(str(st), {"kind": sk(st)})
     it["status"] = status
     it["since"] = now()
     save_idx(idx)
