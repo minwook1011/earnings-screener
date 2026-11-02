@@ -121,7 +121,7 @@ def refresh_req():
         if c in seen or not mine(c, sh):
             continue
         seen.add(c)
-        if pub[:10] < fresh:   # 발표한 지 오래된 요청은 쓰지 않는다(2026-11-02 사용자: 실적 발표 나온 곳만)
+        if pub[:10] < fresh or r.get("kind") == "monthly":   # 실적 발표 나온 곳만 — 오래된 요청·월차 요청은 쓰지 않는다(2026-11-02 사용자)
             continue
         it = idx["items"].setdefault(c, {}).get("2")
         if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
