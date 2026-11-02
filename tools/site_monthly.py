@@ -42,7 +42,9 @@ def main():
         if i == key:
             r["key"] = True
         out_rows.append(r)
-    out_rows.insert(0, out_rows.pop(key))   # 핵심 줄(기존점 매출)을 맨 위로
+    out_rows.insert(0, out_rows.pop(key))   # 핵심 줄(기존점 매출)을 맨 위로, 같은 묶음(기존점 객수·객단가)이 바로 아래
+    g0 = out_rows[0]["label"].replace("매출", "").strip()
+    out_rows[1:] = sorted(out_rows[1:], key=lambda r: 0 if g0 and r["label"].startswith(g0) else 1)
     # 발표일 — 이번 달만 알면 실제, 나머지는 같은 '다음 달 n일'로 추정
     day = int(pub[8:10]) if pub else 5
     pd = {}
