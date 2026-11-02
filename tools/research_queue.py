@@ -24,9 +24,9 @@ SKILL = {2: "2단계 실적 분석", 3: "3단계 딥 리포트"}
 MAX = 4      # 동시에 도는 리포트 최대 수(2026-10-26 사용자 4→10, 2026-10-30 사용자 10→5, 2026-11-01 사용자 5→4 — 돌던 것은 끝까지)
 MAX_BY = {"laptop": 4, "laptop-all": 4}   # 컴퓨터별로 다르게(2026-10-28 사용자, 노트북만 15 → 2026-10-30 5: 10곳 동시면 한 곳에 90분, 1~3곳이면 25분). 없으면 MAX
 STALE = 90   # 분
-# 두 컴퓨터 분담(2026-10-28 사용자): 티커 끝자리 1·2·3 = 'home'(원래 컴퓨터), 나머지(0·4~9·영문) = 'laptop'.
-# 컴퓨터마다 tools/shard.txt(커밋 안 함)에 home 또는 laptop 한 단어. 없으면 전부 맡음(예전처럼).
-HOME_TAIL = "123"
+# 두 컴퓨터 분담(2026-10-28 사용자, 2026-11-02 123→12): 티커 끝자리 1·2 = 'home'(원래 컴퓨터), 나머지(0·3~9·영문) = 'laptop'.
+# 컴퓨터마다 tools/shard.txt(커밋 안 함)에 home·laptop·laptop-all 한 단어. 없으면 전부 맡음(예전처럼).
+HOME_TAIL = "12"
 
 
 def shard():
@@ -38,7 +38,7 @@ def shard():
 
 def mine(c, sh=None):
     sh = sh if sh is not None else shard()
-    if sh not in ("home", "laptop"):   # laptop-all = 노트북이 끝자리 상관없이 전부(2026-11-01 사용자)
+    if sh not in ("home", "laptop", "laptop-all"):   # laptop-all 도 2026-11-02 부터 끝자리 1·2 는 home 몫
         return True
     return (c[-1] in HOME_TAIL) == (sh == "home")
 
