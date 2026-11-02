@@ -10,8 +10,16 @@
     { n: 1, lab: "1단계 · 퀵", hint: "실적 발표 기업 전체" },
     { n: 2, lab: "2단계 · 리포트", hint: "볼 후보 — 실적 브리프" },
     { n: 3, lab: "3단계", hint: "텔레 3단계 기록" },
-    { n: 4, lab: "4단계", hint: "텔레 4단계 기록" }
+    { n: 4, lab: "4단계", hint: "텔레 4단계 기록" },
+    { n: "m", lab: "월차", hint: "월차 리포트 — 12개월 월차·주가 겹쳐 보기 + 2단계 본문" }   // 2026-11-02 사용자
   ];
+  function stg(n) { return STAGES.filter(function (s) { return s.n === n; })[0] || STAGES[1]; }
+  function moDocs() {   // 월차 리포트(research/index.json 의 "m") — 최신 먼저
+    return Object.keys((S.res && S.res.items) || {}).map(function (c) {
+      var r = S.res.items[c].m;
+      return r && r.status === "완료" && r.html ? { c: c, n: (S.cos[c] && (S.cos[c].tn || S.cos[c].n)) || c, kind: "월차 리포트", date: r.written || "", title: r.title || "", sum: r.verdict || "", html: r.html } : null;
+    }).filter(Boolean).sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+  }
   var NOTE = {
     1: "텔레그램 1단계 카드에 올라온 회사를 이름과 티커만 모았습니다. 누르면 주가와 실적이 열립니다. 텔레그램 1단계 카드에서 [볼 후보]를 누르면 2단계로 올라갑니다.",
     2: "텔레 2단계에 올라온 회사마다 실적 브리프를 바로 써서 붙입니다(3·4단계로 간 회사도 여기 남음). 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 분기 이름 위 노란 '인수' = 그 분기부터 인수한 회사가 실적에 더해짐.",
@@ -76,7 +84,7 @@
   }
 
   /* ---------- 머리·레일 ---------- */
-  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (stOf(o) >= 3) n[stOf(o)]++; }); return n; }
+  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0, m: S.res ? moDocs().length : 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (stOf(o) >= 3) n[stOf(o)]++; }); return n; }
   function head() {
     var n = counts();
     return '<header class="jhd"><div class="hd"><div class="jbrand">' +
@@ -86,10 +94,11 @@
       '<div class="stats"><div class="stat"><b>' + n[2] + "</b><span>리포트</span></div></div></div></header>" +
       // 2→3→4단계만, 1단계 퀵은 일단 뺌(2026-10-27 사용자: 사이트 = 일본 리포트 아카이빙)
       '<nav class="rail"><div class="rail-in">' + [1, 2, 3].map(function (i, k) { return (k ? '<span class="rail-sep">›</span>' : "") + cat(STAGES[i], n); }).join("") +
-      '<span class="rail-hint">' + esc(STAGES[S.stage - 1].hint) + "</span></div></nav>";
+      '<span class="rail-sep mo">|</span>' + cat(STAGES[4], n) +
+      '<span class="rail-hint">' + esc(stg(S.stage).hint) + "</span></div></nav>";
   }
   function cat(s, n) {
-    return '<a class="cat s' + s.n + '" href="#jp/' + s.n + '" aria-pressed="' + (S.stage === s.n) + '"><i>' + s.n + "</i>" + esc(s.lab) + '<span class="n">' + n[s.n] + "</span></a>";
+    return '<a class="cat s' + s.n + '" href="#jp/' + s.n + '" aria-pressed="' + (S.stage === s.n) + '"><i>' + (s.n === "m" ? "月" : s.n) + "</i>" + esc(s.lab) + '<span class="n">' + n[s.n] + "</span></a>";
   }
 
   /* ---------- 1단계: 주간 실적 캘린더(월~금, 주 단위로 넘기기) ---------- */
@@ -999,7 +1008,12 @@
   }
 
   /* ---------- 화면 ---------- */
-  function body() { return S.mode === "jps" ? scrView() : S.stage === 1 ? stage1() : stageN(S.stage); }
+  function moView() {   // 월차 탭 — 월차 리포트 카드(2026-11-02 사용자)
+    var d = moDocs();
+    return '<p class="stage-note">월차 요청이 온 회사의 월차 리포트입니다. 맨 위 「월차 데이터 발표」에서 최근 12개월 월차와 주가를 겹쳐 보고, 아래는 2단계 리포트 본문입니다.</p>' +
+      (d.length ? '<div class="rdocs">' + d.map(function (x) { return docRow(x, ""); }).join("") + "</div>" : '<div class="empty-stage"><b>월차 리포트가 아직 없습니다</b></div>');
+  }
+  function body() { return S.mode === "jps" ? scrView() : S.stage === 1 ? stage1() : S.stage === "m" ? moView() : stageN(S.stage); }
   /* 일본 스크리닝 탭(2026-10-29 사용자: 2단계 '보기'에서 상단 탭으로 뺌) */
   function scrHead() {
     var n = S.list.filter(inScr).length;
@@ -1082,6 +1096,7 @@
       if (!r || r.status !== "완료" || !r.html) return;
       out.push({ c: c, n: (S.cos[c] && (S.cos[c].tn || S.cos[c].n)) || c, kind: "2단계 리포트", date: r.written || "", title: r.title || "", sum: r.verdict || "", html: r.html });
     });
+    out = out.concat(moDocs());
     return out.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
   }
   // 리포트 주소에 판 표시 — 휴대폰이 예전 판(다크 화면)을 캐시에서 다시 보여 주지 않게(2026-10-26)
@@ -1179,7 +1194,7 @@
     }
     closePanel();
     if (md0 === "jps") { if (sw || !app.querySelector("#view")) render(); return; }
-    var st = Math.min(4, Math.max(2, +h[1] || 2));   // 1단계 퀵은 일단 뺌(2026-10-27 사용자) — #jp/1 은 2단계로
+    var st = h[1] === "m" ? "m" : Math.min(4, Math.max(2, +h[1] || 2));   // 1단계 퀵은 일단 뺌(2026-10-27 사용자) — #jp/1 은 2단계로
     if (sw || st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "up") S.sort = "mc"; render(); }
   }
 
