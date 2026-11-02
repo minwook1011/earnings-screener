@@ -38,13 +38,9 @@ def shard():
 
 def mine(c, sh=None):
     sh = sh if sh is not None else shard()
-<<<<<<< HEAD
-    if sh not in ("home", "laptop", "laptop-all"):   # laptop-all 도 2026-11-02 부터 끝자리 1·2 는 home 몫
-=======
     if sh == "laptop-x12":   # 노트북이 끝자리 1·2 만 빼고 전부(2026-11-02 사용자)
         return c[-1] not in "12"
-    if sh not in ("home", "laptop"):   # laptop-all = 노트북이 끝자리 상관없이 전부(2026-11-01 사용자)
->>>>>>> 737b3db1 (data: 남은 변경 자동 커밋)
+    if sh not in ("home", "laptop", "laptop-all"):   # laptop-all 도 2026-11-02 부터 끝자리 1·2 는 home 몫
         return True
     return (c[-1] in HOME_TAIL) == (sh == "home")
 
