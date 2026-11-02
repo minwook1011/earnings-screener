@@ -10,6 +10,7 @@
 import json
 import os
 import sys
+import time
 from datetime import date, timedelta
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -50,9 +51,32 @@ def reported():
     return {c for c, v in it.items() if (v.get("2") or {}).get("status") == "완료"}
 
 
+def co_px(c, today):
+    """텔레 단계 밖 회사 일봉 — co 파일이 없거나 3일 넘게 묵었으면 야후로 받는다(2026-11-02 사용자: 리포트 쓴 회사는 숫자도 다 채움)."""
+    p = os.path.join(JP, "co", c + ".json")
+    d = rd(p, {}) or {}
+    px = d.get("px") or []
+    if not px or (today - date(1970, 1, 1)).days - px[-1][0] > 3:
+        import build_stage1 as b1
+        new = b1.yahoo_px(c)[-b1.PX_DAYS:]
+        time.sleep(0.3)
+        if new:
+            px = new
+            json.dump({**d, "c": c, "px": px}, open(p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    return px
+
+
+def shares(c):
+    """결산단신의 기말 발행주식수. 못 구하면 None."""
+    import build_xlsx as bx
+    data, used, fsm = bx.collect(c)
+    return bx.shares_of(bx.zip_of(c, used[0]["doc"])) if used else None
+
+
 def main():
     rep = reported()
-    pipe = rd(os.path.join(JP, "pipeline.json"), {}).get("companies", {})
+    tg = rd(os.path.join(JP, "pipeline.json"), {}).get("companies", {})
+    pipe = {**{c: {"stage": 2, "cards": {}} for c in rep}, **tg}   # 리포트만 쓰고 텔레 단계에 없는 회사도 넣는다
     s1 = {r["c"]: r for r in rd(os.path.join(JP, "stage1.json"), {}).get("rows", [])}
     qh = rd(os.path.join(ROOT, "tools", "qhist", "jp.json"), {})
     old = rd(OUT, {}).get("items", {})
@@ -63,6 +87,19 @@ def main():
             continue
         r, card = s1.get(c, {}), t["cards"].get(str(t["stage"])) or t["cards"].get("2") or {}
         o = {"mc": r.get("mc", card.get("mc")), "per": r.get("per", card.get("per")), "cat": r.get("cat")}
+        if c not in tg:
+            co_px(c, today)
+        if o["mc"] is None:   # 시총 자료가 없으면 종가 × 발행주식수(주식수는 이전 값 재사용)
+            px0 = (rd(os.path.join(JP, "co", c + ".json"), {}) or {}).get("px") or []
+            sh = old.get(c, {}).get("sh")
+            if px0 and not sh:
+                try:
+                    sh = shares(c)
+                except Exception as e:
+                    print(" ", c, "주식수 실패", e)
+            if px0 and sh:
+                o["sh"] = sh
+                o["mc"] = round(px0[-1][1] * sh / 1e8, 1)
         q = qh.get(c) or []
         if len(q) >= 4:
             rev, op, ni = (sum(x[i] for x in q[:4]) for i in (1, 2, 3))

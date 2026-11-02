@@ -65,8 +65,8 @@
       if (!r || r.status !== "완료" || !r.html) return;
       var o = cos[c];
       if (!o) {
-        var v = vt[c] || {};
-        o = cos[c] = Object.assign({}, v, { c: c, n: v.n || (r.title || c).replace(/\s*기업분석$/, ""), d: v.d || r.ann || (r.written || "").slice(0, 10) || null, stage: 2, card: {}, pre: false });
+        var v = vt[c] || {}, x = ((S.scr || {}).items || {})[c] || {};
+        o = cos[c] = Object.assign({}, v, { c: c, n: v.n || (r.title || c).replace(/\s*기업분석$/, ""), d: v.d || r.ann || (r.written || "").slice(0, 10) || null, stage: 2, card: {}, pre: false, mc: v.mc != null ? v.mc : x.mc, per: v.per != null ? v.per : x.per });
         o.tn = o.n;
       }
       if (o.stage < 2) o.stage = 2;
