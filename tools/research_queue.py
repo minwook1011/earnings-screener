@@ -229,6 +229,8 @@ def attach(c, st, html, verdict, rid=None):
             src = NL.join(['<!doctype html>', '<meta charset="utf-8">',
                            '<meta name="viewport" content="width=device-width, initial-scale=1">', meta, src])
     src = light(src)
+    if str(st) == "3":   # 3단계 심층은 그대로 올린다 — 재무제표 부가물(단신·질의응답·엑셀·한눈에·월차 표)은 2단계 쪽에만(2026-11-03 사용자)
+        return put(c, st, src, verdict, rid)
     src = tanshin(c, src)
     try:   # 실적 분석을 ① 실적 요약 ② 질의응답 탭으로(질의응답은 나중에 예약 작업이 채움)
         import qa
@@ -252,6 +254,10 @@ def attach(c, st, html, verdict, rid=None):
         src = src if str(st) == "m" else monthly_tbl.insert(c, src)
     except Exception as e:
         print(f"{c} 월차 표 실패: {e}")
+    put(c, st, src, verdict, rid)
+
+
+def put(c, st, src, verdict, rid=None):
     rel =f"research/{c}/stage{st}.html"
     os.makedirs(os.path.join(DATA, "..", "..", "research", c), exist_ok=True)
     open(os.path.join(DATA, "..", "..", rel), "w", encoding="utf-8").write(src)
