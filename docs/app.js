@@ -17,7 +17,7 @@
   function moDocs() {   // 월차 리포트(research/index.json 의 "m") — 최신 먼저
     return Object.keys((S.res && S.res.items) || {}).map(function (c) {
       var r = S.res.items[c].m;
-      return r && r.status === "완료" && r.html ? { c: c, n: (S.cos[c] && (S.cos[c].tn || S.cos[c].n)) || c, kind: "월차 리포트", date: r.written || "", title: r.title || "", sum: r.verdict || "", html: r.html } : null;
+      return r && r.status === "완료" && r.html ? { c: c, n: (S.cos[c] && (S.cos[c].tn || S.cos[c].n)) || String(r.title || "").replace(/\s*(월차|기업분석|실적 브리프).*$/, "") || c, kind: "월차 리포트", date: r.written || "", title: r.title || "", sum: r.verdict || "", html: r.html } : null;
     }).filter(Boolean).sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
   }
   var NOTE = {
@@ -1008,10 +1008,67 @@
   }
 
   /* ---------- 화면 ---------- */
-  function moView() {   // 월차 탭 — 월차 리포트 카드(2026-11-02 사용자)
-    var d = moDocs();
-    return '<p class="stage-note">월차 요청이 온 회사의 월차 리포트입니다. 맨 위 「월차 데이터 발표」에서 최근 12개월 월차와 주가를 겹쳐 보고, 아래는 2단계 리포트 본문입니다.</p>' +
-      (d.length ? '<div class="rdocs">' + d.map(function (x) { return docRow(x, ""); }).join("") + "</div>" : '<div class="empty-stage"><b>월차 리포트가 아직 없습니다</b></div>');
+  /* 월차 탭 — 월차 리포트 쓴 회사(또는 월차 기업 전체)의 최근 12개월 월차를 빨강·파랑 그라데이션으로(2026-11-03 사용자) */
+  var MOD = {};
+  function moLoad(cs) {
+    var need = cs.filter(function (c) { return !MOD[c]; });
+    if (!need.length) return;
+    need.forEach(function (c) { MOD[c] = { loading: 1 }; });
+    Promise.all(need.map(function (c) { return getJSON("data/jp/monthly/" + c + ".json").then(function (d) { MOD[c] = d; }).catch(function () { MOD[c] = { rows: [] }; }); }))
+      .then(function () { if (S.stage === "m" && S.mode === "jp") rerender(); });
+  }
+  function moSeries(d) {   // 기존점 매출 → 같은 묶음 객수·객단가 순, 증감률(%)로
+    var cols = d.cols || [], rt = d.ratio || [], lab = cols.map(function (x) { return String(x).replace(/\s*전년\s*대비.*$/, "").replace(/ 계 /, " ").trim(); });
+    var ix = lab.map(function (l, i) { return i; }).filter(function (i) { return rt[i] !== false && (d.rows || []).some(function (r) { return r[i + 1] != null; }); });
+    var k = ix.filter(function (i) { return /기존점/.test(lab[i]) && /매출/.test(lab[i]); })[0];
+    if (k == null) k = ix.filter(function (i) { return /매출/.test(lab[i]); })[0];
+    if (k == null) k = ix[0];
+    if (k == null) return [];
+    var g = lab[k].replace("매출", "").trim(), pick = [k];
+    ["객수", "객단가"].forEach(function (w) { var j = ix.filter(function (i) { return lab[i] === (g + " " + w).trim(); })[0]; if (j != null) pick.push(j); });
+    ix.forEach(function (i) { if (pick.length < 3 && pick.indexOf(i) < 0 && /매출/.test(lab[i])) pick.push(i); });
+    var rows = (d.rows || []).slice().sort(function (a, b) { return a[0] < b[0] ? -1 : 1; }).slice(-12);
+    return pick.map(function (i) { return { lab: lab[i], m: rows.map(function (r) { return r[0]; }), v: rows.map(function (r) { return r[i + 1] == null ? null : +(r[i + 1] - 100).toFixed(1); }) }; });
+  }
+  function gcell(v) {   // 값이 클수록 진하게 — 1.5%마다 한 단계, 15% 이상이 가장 진함(10단계). 인라인 style 은 CSP 가 막아 클래스로
+    if (v == null) return '<span class="gc na">—</span>';
+    var lv = Math.max(1, Math.min(10, Math.ceil(Math.abs(v) / 1.5)));
+    return '<span class="gc ' + (v > 0 ? "gp" : v < 0 ? "gn" : "g0") + (v ? lv : "") + '">' + (v > 0 ? "+" : "") + v.toFixed(1).replace("-", "−") + "</span>";
+  }
+  function moView() {
+    var docs = {}; moDocs().forEach(function (d) { docs[d.c] = d; });
+    var nm = {}; ((S.s1 && S.s1.upcoming) || []).concat((S.s1 && S.s1.rows) || []).forEach(function (u) { if (u.n) nm[u.c] = u.n; });
+    var all = !!S.moAll, q = (S.q || "").trim().toLowerCase();
+    var cs = all ? Object.keys(S.mo || {}) : Object.keys(docs);
+    moLoad(cs);
+    var list = cs.map(function (c) {
+      var d = MOD[c] || {}, ser = d.rows ? moSeries(d) : null, k = ser && ser[0];
+      var last = k ? k.v[k.v.length - 1] : null, l3 = k ? k.v.slice(-3).filter(function (v) { return v != null; }) : [];
+      return { c: c, n: (docs[c] && docs[c].n) || (S.cos[c] && (S.cos[c].tn || S.cos[c].n)) || nm[c] || c, ser: ser, last: last,
+        avg3: l3.length ? l3.reduce(function (a, b) { return a + b; }, 0) / l3.length : null, mon: k ? k.m[k.m.length - 1] : (S.mo || {})[c] || "", doc: docs[c], loading: !d.rows };
+    }).filter(function (x) { return !q || (x.n + " " + x.c).toLowerCase().indexOf(q) >= 0; });
+    var key = S.moSort || "last";
+    list.sort(function (a, b) {
+      if (key === "doc") return ((b.doc && b.doc.date) || "") < ((a.doc && a.doc.date) || "") ? -1 : 1;
+      var x = a[key], y = b[key]; return (y == null ? -1e9 : y) - (x == null ? -1e9 : x);
+    });
+    var ctl = '<div class="ctl"><div class="fld"><span>보기</span><div class="seg" id="moall"><button data-v="0" aria-pressed="' + !all + '">월차 리포트 ' + Object.keys(docs).length +
+      '</button><button data-v="1" aria-pressed="' + all + '">월차 기업 전체 ' + Object.keys(S.mo || {}).length + "</button></div></div>" +
+      '<div class="fld"><span>정렬</span><div class="seg" id="mosort">' + [["last", "최근 달 기존점 매출"], ["avg3", "최근 3개월 평균"], ["doc", "리포트 최신"]].map(function (o) {
+        return '<button data-v="' + o[0] + '" aria-pressed="' + (key === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div></div>" +
+      '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커" value="' + esc(S.q) + '"></div>' +
+      '<div class="count"><b>' + list.length + "</b>개 기업</div></div>" +
+      '<p class="stage-note">최근 12개월 월차를 전년 같은 달 대비 %로 보여 줍니다. 빨강 = 증가, 파랑 = 감소, 값이 클수록(15% 가까이) 진합니다. 이름을 누르면 재무·주가, 「월차 리포트 열기」는 월차 토글이 붙은 리포트입니다.</p>';
+    if (!list.length) return ctl + '<div class="empty-stage"><b>' + (q ? "검색과 맞는 기업이 없습니다" : "월차 리포트가 아직 없습니다") + "</b></div>";
+    return ctl + '<div class="mlist">' + list.map(function (x, i) {
+      var grid = x.loading ? '<div class="ql-empty">월차 불러오는 중…</div>' : !x.ser.length ? '<div class="ql-empty">월차 자료 없음</div>' :
+        '<div class="mgrid-w"><div class="mgrid"><span class="ql-l qh">전년 대비 %</span>' +
+        x.ser[0].m.map(function (m) { return '<span class="ql-p qh">' + esc(m.slice(2, 4) + "." + m.slice(5, 7)) + "</span>"; }).join("") +
+        x.ser.map(function (s) { return '<span class="ql-l">' + esc(s.lab) + "</span>" + s.v.map(gcell).join(""); }).join("") + "</div></div>";
+      return '<article class="mcard"><div class="mhd"><span class="rk">' + (i + 1) + '</span><a class="mnm" data-c="' + esc(x.c) + '">' + esc(x.n) + ' <span class="mono">' + esc(x.c) + "</span></a>" +
+        '<span class="mlast">' + esc(x.mon ? x.mon.slice(2, 4) + "." + x.mon.slice(5, 7) + " 월차" : "") + (x.last != null ? " " + gcell(x.last).replace('class="gc ', 'class="gc big ') : "") + "</span>" +
+        (x.doc ? docLink(x.doc) : "") + "</div>" + (x.doc && x.doc.sum ? '<p class="msum">' + esc(x.doc.sum) + "</p>" : "") + grid + "</article>";
+    }).join("") + "</div>";
   }
   function body() { return S.mode === "jps" ? scrView() : S.stage === 1 ? stage1() : S.stage === "m" ? moView() : stageN(S.stage); }
   /* 일본 스크리닝 탭(2026-10-29 사용자: 2단계 '보기'에서 상단 탭으로 뺌) */
@@ -1044,6 +1101,8 @@
     var so = document.getElementById("sort");
     if (so) so.onchange = function () { S.sort = so.value; rerender(); };
     app.querySelectorAll("#dir button").forEach(function (b) { b.onclick = function () { S.dir = +b.dataset.v; rerender(); }; });
+    app.querySelectorAll("#moall button").forEach(function (b) { b.onclick = function () { S.moAll = b.dataset.v === "1"; rerender(); }; });
+    app.querySelectorAll("#mosort button").forEach(function (b) { b.onclick = function () { S.moSort = b.dataset.v; rerender(); }; });
     app.querySelectorAll("[data-week]").forEach(function (b) { b.onclick = function () { S.week = b.dataset.week; S.openDay = null; rerender(); }; });
     app.querySelectorAll("[data-step]").forEach(function (b) {
       b.onclick = function () {

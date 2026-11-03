@@ -893,3 +893,19 @@ html.pxm-open { overflow: hidden; }
 .all-t td.nx b { color: var(--ann); }
 @media (max-width: 640px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .all-t td.fv, .all-t th.fv { width: 22px; padding-right: 0; } .all-t .star { font-size: 16px; }
+
+/* 월차 탭 — 카드 + 12개월 그라데이션 칸(2026-11-03) */
+.mlist { display: flex; flex-direction: column; gap: 12px; margin: 16px 0 30px; }
+.mcard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px 12px; }
+.mhd { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-bottom: 8px; }
+.mhd .rk { font: 500 11px var(--mono); color: var(--ink-mute); min-width: 16px; }
+.mnm { font: 700 15.5px var(--jsans); color: var(--ink); cursor: pointer; text-decoration: none; }
+.mnm:hover { text-decoration: underline; } .mnm .mono { font-size: 11.5px; color: var(--ink-mute); font-weight: 500; }
+.mlast { display: inline-flex; align-items: center; gap: 6px; font: 600 12px var(--jsans); color: var(--ink-mid); margin-right: auto; }
+.msum { margin: 0 0 8px; font-size: 13px; color: var(--ink-mid); }
+.mgrid-w { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.mgrid { display: grid; grid-template-columns: 104px repeat(12, minmax(42px, 1fr)); gap: 3px 4px; align-items: center; min-width: 620px; max-width: 920px; }
+.gc { display: block; font: 600 11px var(--mono); text-align: center; padding: 4px 0; border-radius: 5px; min-height: 22px; letter-spacing: -.02em; }
+.gc.na { background: var(--h0-bg); color: var(--ink-mute); font-weight: 400; }
+.gc.big { display: inline-block; padding: 3px 9px; font-size: 12.5px; min-height: 0; }
+.gc.g0{background:var(--h0-bg);color:var(--ink-mid)}.gc.gp1{background:rgba(214,47,47,0.15);color:#b3261e}.gc.gp2{background:rgba(214,47,47,0.24);color:#b3261e}.gc.gp3{background:rgba(214,47,47,0.32);color:#b3261e}.gc.gp4{background:rgba(214,47,47,0.40);color:#b3261e}.gc.gp5{background:rgba(214,47,47,0.49);color:#b3261e}.gc.gp6{background:rgba(214,47,47,0.57);color:#fff}.gc.gp7{background:rgba(214,47,47,0.65);color:#fff}.gc.gp8{background:rgba(214,47,47,0.73);color:#fff}.gc.gp9{background:rgba(214,47,47,0.82);color:#fff}.gc.gp10{background:rgba(214,47,47,0.90);color:#fff}.gc.gn1{background:rgba(31,95,191,0.15);color:#1f4f9f}.gc.gn2{background:rgba(31,95,191,0.24);color:#1f4f9f}.gc.gn3{background:rgba(31,95,191,0.32);color:#1f4f9f}.gc.gn4{background:rgba(31,95,191,0.40);color:#1f4f9f}.gc.gn5{background:rgba(31,95,191,0.49);color:#1f4f9f}.gc.gn6{background:rgba(31,95,191,0.57);color:#fff}.gc.gn7{background:rgba(31,95,191,0.65);color:#fff}.gc.gn8{background:rgba(31,95,191,0.73);color:#fff}.gc.gn9{background:rgba(31,95,191,0.82);color:#fff}.gc.gn10{background:rgba(31,95,191,0.90);color:#fff}
