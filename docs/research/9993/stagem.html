@@ -297,7 +297,7 @@ details#mopub .tgx{margin-right:14px;background:transparent;color:var(--fg);bord
 .mchip i{width:8px;height:8px;border-radius:50%;background:#3a3e46;transition:background .15s}
 .mchip:hover{border-color:#5a5f69;color:#e9ebef}
 .mchip.on{color:#fff;border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,#111317)}.mchip.on i{background:var(--c);box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 30%,transparent)}
-.mchip.px{cursor:default}.mchip.px.on{--c:#e9ebef}
+.mchip.px.on{--c:#e9ebef}
 .mcv{height:380px;position:relative;margin-top:6px}
 .mcv svg{display:block;overflow:visible}
 .mcv .ax text{font:10.5px var(--mono);fill:#6f7480}.mcv .ax path,.mcv .ax line{stroke:none}.mcv .gr line{stroke:#1b1e24}.mcv .gr path{display:none}
@@ -428,7 +428,7 @@ const px=(M.px||[]).map(d=>({d:P(d[0]),v:d[1]}));
 const root=document.getElementById('mopub');
 const cv=document.getElementById('mcv'),chips=root.querySelector('.mchips');
 const tip=document.createElement('div');tip.className='mtip';cv.appendChild(tip);
-let T=0,SEL=[];
+let T=0,SEL=[],PXON=true;
 const sv=(v,f)=>v==null?'–':f==='yoy'?(v>0?'+':'')+v.toFixed(1).replace('-','−')+'%':f==='pct'?v.toFixed(1)+'%':Math.abs(v)>=100?Math.round(v).toLocaleString('ko-KR'):String(+v.toFixed(1));
 const cls=v=>v>0?'up':v<0?'dn':'';
 const col=i=>PAL[SEL.indexOf(i)%PAL.length];
@@ -439,7 +439,7 @@ function toggle(i){const t=M.tabs[T],f=t.rows[i].fmt;
  else{SEL=SEL.filter(x=>t.rows[x].fmt===f);/* 단위가 다른 지표(점포 수 등)는 같이 못 겹친다 */SEL.push(i);if(SEL.length>4)SEL.shift();}
  render();}
 function buildChips(){const t=M.tabs[T];chips.innerHTML='';
- const p=document.createElement('span');p.className='mchip px on';p.innerHTML='<i></i>주가';chips.appendChild(p);
+ const p=document.createElement('button');p.type='button';p.className='mchip px'+(PXON?' on':'');p.title='주가 선 켜고 끄기';p.innerHTML='<i></i>주가';p.onclick=()=>{PXON=!PXON;p.classList.toggle('on',PXON);render();};chips.appendChild(p);
  t.rows.forEach((r,i)=>{const b=document.createElement('button');b.type='button';b.className='mchip';b.dataset.i=i;b.innerHTML='<i></i>'+r.name;b.onclick=()=>toggle(i);chips.appendChild(b);});}
 function marks(){const t=M.tabs[T];
  chips.querySelectorAll('.mchip[data-i]').forEach(b=>{const i=+b.dataset.i,on=SEL.includes(i);b.classList.toggle('on',on);if(on)b.style.setProperty('--c',col(i));});
@@ -463,13 +463,13 @@ function draw(anim){
  const y2=d3.scaleLinear().domain(pv.length?d3.extent(pv,p=>p.v):[0,1]).nice().range([H-m.b,m.t]);
  svg.append('g').attr('class','gr').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W-m.l-m.r)).tickFormat(''));
  svg.append('g').attr('class','ax').attr('transform',`translate(${m.l-4},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(v=>sv(v,fmt)));
- svg.append('g').attr('class','ax').attr('transform',`translate(${W-m.r+4},0)`).call(d3.axisRight(y2).ticks(5).tickFormat(v=>v>=10000?Math.round(v/1000)+'k':Math.round(v).toLocaleString('ko-KR')));
+ if(PXON)svg.append('g').attr('class','ax').attr('transform',`translate(${W-m.r+4},0)`).call(d3.axisRight(y2).ticks(5).tickFormat(v=>v>=10000?Math.round(v/1000)+'k':Math.round(v).toLocaleString('ko-KR')));
  svg.append('g').attr('class','ax').attr('transform',`translate(0,${H-m.b+6})`).call(d3.axisBottom(x).ticks(Math.max(3,Math.min(12,Math.floor((W-m.l-m.r)/70)))).tickFormat(d3.timeFormat('%y.%m')));
  if(fmt==='yoy')svg.append('line').attr('class','zero').attr('x1',m.l).attr('x2',W-m.r).attr('y1',y(0)).attr('y2',y(0));
  const dur=anim?900:0;
  const reveal=(path)=>{if(!dur)return;const L=path.node().getTotalLength();path.attr('stroke-dasharray',L+' '+L).attr('stroke-dashoffset',L).transition().duration(dur).ease(d3.easeCubicOut).attr('stroke-dashoffset',0).on('end',()=>path.attr('stroke-dasharray',null));};
- /* 주가 — 면 + 선 */
- if(pv.length){
+ /* 주가 — 면 + 선(주가 칩으로 끄고 켬) */
+ if(PXON&&pv.length){
   const ar=svg.append('path').datum(pv).attr('fill','url(#mpg)').attr('d',d3.area().x(p=>x(p.d)).y0(H-m.b).y1(p=>y2(p.v)).curve(d3.curveMonotoneX));
   if(dur)ar.attr('opacity',0).transition().duration(dur).attr('opacity',1);
   reveal(svg.append('path').datum(pv).attr('fill','none').attr('stroke','#e9ebef').attr('stroke-width',1.5).attr('stroke-opacity',.85).attr('d',d3.line().x(p=>x(p.d)).y(p=>y2(p.v)).curve(d3.curveMonotoneX)));
@@ -490,10 +490,10 @@ function draw(anim){
  const bis=d3.bisector(p=>p.d).center,p0=pv.length?pv[0].v:null;
  svg.append('rect').attr('x',m.l).attr('y',m.t).attr('width',W-m.l-m.r).attr('height',H-m.t-m.b).attr('fill','transparent').style('cursor','crosshair')
   .on('mousemove touchmove',e=>{const [mx]=d3.pointer(e.touches?e.touches[0]:e,svg.node());const d=x.invert(mx);if(!pv.length)return;const p=pv[bis(pv,d)];
-   hv.style('display',null);const X=x(p.d),Y=y2(p.v);vl.attr('x1',X).attr('x2',X);hl.attr('y1',Y).attr('y2',Y);dot.attr('cx',X).attr('cy',Y);
+   hv.style('display',null);dot.style('display',PXON?null:'none');pl.style('display',PXON?null:'none');hl.style('display',PXON?null:'none');const X=x(p.d),Y=y2(p.v);vl.attr('x1',X).attr('x2',X);hl.attr('y1',Y).attr('y2',Y);dot.attr('cx',X).attr('cy',Y);
    pl.attr('transform',`translate(${W-m.r+2},${Y-9})`);plt.text(p.v>=10000?Math.round(p.v).toLocaleString('ko-KR'):p.v.toFixed(0));
    const ch=(p.v/p0-1)*100;
-   let h=`<div class="td">${F(p.d)}</div><div class="tp">${Math.round(p.v).toLocaleString('ko-KR')}${M.unit} <small class="${cls(ch)}" style="font-size:11.5px">${sv(ch,'yoy')}</small></div><hr>`;
+   let h=`<div class="td">${F(p.d)}</div>`+(PXON?`<div class="tp">${Math.round(p.v).toLocaleString('ko-KR')}${M.unit} <small class="${cls(ch)}" style="font-size:11.5px">${sv(ch,'yoy')}</small></div>`:'')+'<hr>';
    S.forEach(s=>{const q=[...s.pts].reverse().find(z=>z.d<=p.d);h+=`<div class="tr"><span><i style="background:${s.c}"></i>${s.r.name}</span><b class="${fmt==='yoy'?cls(q&&q.v):''}">${q?sv(q.v,fmt):'–'}</b></div>`+(q?`<div class="tr" style="font-size:10.5px"><span style="padding-left:13px">${q.mo.slice(2,4)}.${q.mo.slice(5,7)} 월차 · ${F(q.d).slice(5)} 발표${q.est?'(추정)':''}</span></div>`:'');});
    tip.innerHTML=h;tip.style.display='block';const tw=tip.offsetWidth;let tx=X+16;if(tx+tw>W-4)tx=X-tw-16;tip.style.left=tx+'px';tip.style.top=Math.max(4,Math.min(H-tip.offsetHeight-4,Y-40))+'px';})
   .on('mouseleave touchend',()=>{hv.style('display','none');tip.style.display='none'});
