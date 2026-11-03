@@ -164,9 +164,12 @@ def run():
         paths.append(IDX)
     git("add", "--", *paths)
     if git("diff", "--cached", "--quiet", ok=True).returncode == 0:
-        print("올릴 것 없음")
-        return
-    git("commit", "-q", "-m", msg + TAIL)
+        git("fetch", "-q", "origin", ok=True)   # 다른 회차가 커밋만 하고 못 올린 것(자동 커밋 등)이 남아 있으면 그것만 올린다(2026-11-03)
+        if git("rev-list", "--count", "origin/main..HEAD", ok=True).stdout.strip() in ("", "0"):
+            print("올릴 것 없음")
+            return
+    else:
+        git("commit", "-q", "-m", msg + TAIL)
     for _ in range(4):
         if git("push", "-q", "origin", "main", ok=True).returncode == 0:
             print("올림:", git("log", "--oneline", "-1").stdout.strip())
