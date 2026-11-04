@@ -156,6 +156,14 @@ td.earn .dd { font-size: 10.5px; color: var(--ink-mute); margin-left: 3px; }
 .empty-stage b { display: block; color: var(--ink); font-size: 15px; margin-bottom: 4px; }
 .soon { max-width: 1360px; margin: 40px auto; padding: 56px 24px; text-align: center; }
 .soon h2 { margin: 0 0 6px; } .soon p { color: var(--ink-mute); margin: 0; }
+.us-wrap { max-width: 960px; margin: 28px auto; padding: 0 16px; display: grid; gap: 12px; }
+.us-wrap h2 { margin: 0; } .us-note { color: var(--ink-mute); margin: 0 0 6px; font-size: 13px; }
+.us-card { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: inherit; text-decoration: none; }
+.us-card:hover { border-color: var(--ink-mute); }
+.us-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; } .us-top b { font-size: 17px; }
+.us-tk { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink-mute); }
+.us-st { margin-left: auto; font-size: 12px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); }
+.us-sub { font-size: 12px; color: var(--ink-mute); margin-top: 4px; } .us-v { margin-top: 8px; font-size: 14px; line-height: 1.55; }
 
 /* 상세 패널 */
 .scrim { position: fixed; inset: 0; background: var(--scrim); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 180; }

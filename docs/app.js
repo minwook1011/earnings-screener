@@ -1235,11 +1235,27 @@
     el.addEventListener("input", later);
   }
   function soon(name) { return '<div class="soon"><h2>' + name + " 준비 중</h2><p>일본 탭과 같은 1~4단계 흐름으로 만들 예정입니다.</p></div>"; }
+  function renderUS() {   // 미국 탭 — 미국 상장사 리포트 목록(2026-11-04 사용자: 일본과 따로)
+    app.innerHTML = '<div class="soon"><p>불러오는 중…</p></div>';
+    fetch("data/us/research.json?t=" + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+      if (S.mode !== "us") return;
+      var e = function (s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+      var rows = (d.items || []).slice().sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); }).map(function (it) {
+        return '<a class="us-card" href="' + e(it.html) + '" target="_blank" rel="noopener">' +
+          '<div class="us-top"><b>' + e(it.name) + '</b><span class="us-tk">' + e(it.exchange) + ": " + e(it.ticker) + '</span><span class="us-st">' + e(it.stage) + "단계</span></div>" +
+          '<div class="us-sub">' + e(it.sector) + " · 실적 " + e(it.period) + " · 발표 " + e(it.ann) + " · 작성 " + e(it.date) + "</div>" +
+          '<div class="us-v">' + e(it.verdict) + "</div></a>";
+      }).join("");
+      app.innerHTML = '<div class="us-wrap"><h2>미국 리포트</h2><p class="us-note">미국 상장사 2단계 기업분석 — SEC 공시(8-K 실적 발표·10-K·10-Q)·어닝콜 기준, 단위 백만 달러</p>' +
+        (rows || '<p class="us-note">아직 리포트가 없습니다.</p>') + "</div>";
+    }).catch(function () { if (S.mode === "us") app.innerHTML = soon("미국"); });
+  }
   function route() {
     var h = (location.hash || "#jp").slice(1).split("/"), m = h[0] || "jp";
     document.querySelectorAll(".market a").forEach(function (a) { a.classList.toggle("on", a.dataset.m === m); });
     if (m === "us" || m === "kr" || m === "room") S.mode = m;   // 늦게 온 전 종목·소비재·캘린더 자료가 이 화면을 덮어쓰지 않게
-    if (m === "us" || m === "kr") { closePanel(); app.innerHTML = soon(m === "us" ? "미국" : "한국"); return; }
+    if (m === "us") { closePanel(); renderUS(); return; }
+    if (m === "kr") { closePanel(); app.innerHTML = soon("한국"); return; }
     if (!S.ready) return;
     if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre", "mo"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
     if (m === "jpa") { closePanel(); S.mode = "jpa"; renderAll(); return; }
