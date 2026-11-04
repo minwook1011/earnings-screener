@@ -983,101 +983,58 @@ function prepChart(){
   if(view.range[1]-view.range[0]<2) view.range=[0, n-1];
 }
 
+/* 종목 상세 차트 = 검정 차트(usre-tv.js, 2026-11-04 사용자) — 휠 확대·끌어서 이동·선 그리기(수평·추세·수직)·고르고 지우기 */
+const MACLR={5:"#f2c14e",10:"#e45bb3",20:"#2fd3a0",120:"#9b87f5"};
+const TVD={g:null,sig:"",ma:{},times:[]};
 function drawChart(){
-  const cv=document.getElementById("cv"), cvv=document.getElementById("cvv");
-  if(!cv) return;
-  const dpr=window.devicePixelRatio||1;
-  const W=cv.clientWidth, H=340, HV=90;
-  cv.width=W*dpr; cv.height=H*dpr; cv.style.height=H+"px";
-  cvv.width=W*dpr; cvv.height=HV*dpr; cvv.style.height=HV+"px";
-  const g=cv.getContext("2d"), gv=cvv.getContext("2d");
-  g.setTransform(dpr,0,0,dpr,0,0); gv.setTransform(dpr,0,0,dpr,0,0);
-  g.clearRect(0,0,W,H); gv.clearRect(0,0,W,HV);
-
-  const [i0,i1]=view.range, bars=CH.bars.slice(i0,i1+1);
-  if(!bars.length) return;
-  const PL=8, PR=62, PT=14, PB=20;
-  const cw=W-PL-PR, chh=H-PT-PB;
-  let lo=Infinity, hi=-Infinity;
-  bars.forEach(b=>{ lo=Math.min(lo,b.c); hi=Math.max(hi,b.c); });
-  MAS.forEach(n=>{ if(!view.ma[n])return; for(let i=i0;i<=i1;i++){ const v=CH.mas[n][i]; if(v!=null){lo=Math.min(lo,v);hi=Math.max(hi,v);} } });
-  const pad=(hi-lo)*0.08||1; lo=Math.max(0,lo-pad); hi+=pad;   // 주가는 음수가 될 수 없다
-  const X = i => PL + (bars.length===1?cw/2:(i/(bars.length-1))*cw);
-  const Y = v => PT + (1-(v-lo)/(hi-lo))*chh;
-  CH.geo={PL,PR,PT,PB,cw,chh,W,H,HV,lo,hi,i0,i1,X,Y,n:bars.length};
-
-  const line=cssv("--line-soft"), mute=cssv("--ink-mute"), ink=cssv("--ink");
-
-  // 급등 밴드
-  const sp=cssv("--spike");
-  CH.spikes.forEach(s=>{ if(s.x<i0||s.x>i1) return;
-    const x=X(s.x-i0), w=Math.max(3,cw/bars.length);
-    g.fillStyle=sp; g.fillRect(x-w/2,PT,w,chh);
-    gv.fillStyle=sp; gv.fillRect(x-w/2,0,w,HV);
-    g.fillStyle=cssv("--spike-line"); g.beginPath();
-    g.moveTo(x,PT+1); g.lineTo(x-4,PT-5); g.lineTo(x+4,PT-5); g.closePath(); g.fill();
-  });
-
-  // 가로 그리드 + 우측 축
-  g.strokeStyle=line; g.lineWidth=1; g.font='10px "IBM Plex Mono",monospace'; g.fillStyle=mute; g.textAlign="left";
-  for(let k=0;k<=4;k++){
-    const v=lo+(hi-lo)*k/4, y=Math.round(Y(v))+.5;
-    g.beginPath(); g.moveTo(PL,y); g.lineTo(PL+cw,y); g.stroke();
-    g.fillText(Math.round(v).toLocaleString("ko-KR"), PL+cw+7, y+3);
-  }
-  // 날짜 축 (양 끝 레이블이 잘리지 않게 정렬을 바꾼다)
-  const step=Math.max(1,Math.floor(bars.length/6));
-  for(let i=0;i<bars.length;i+=step){
-    const s=dstr(bars[i].d), txt=view.tf==="M"?s.slice(0,7):s;
-    const last=i+step>=bars.length;
-    g.textAlign = i===0 ? "left" : (last ? "right" : "center");
-    g.fillText(txt, i===0 ? PL : (last ? Math.min(X(i),PL+cw) : X(i)), H-6);
-  }
-  g.textAlign="center";
-
-  // 이평선
-  MAS.forEach(n=>{
-    if(!view.ma[n]) return;
-    g.strokeStyle=cssv(MACOL[n]); g.lineWidth=1.2; g.beginPath(); let started=false;
-    for(let i=i0;i<=i1;i++){ const v=CH.mas[n][i]; if(v==null){started=false;continue;}
-      const x=X(i-i0), y=Y(v); if(!started){g.moveTo(x,y);started=true;} else g.lineTo(x,y); }
-    g.stroke();
-  });
-  // 주가
-  g.strokeStyle=ink; g.lineWidth=1.7; g.beginPath();
-  bars.forEach((b,i)=>{ const x=X(i), y=Y(b.c); i?g.lineTo(x,y):g.moveTo(x,y); });
-  g.stroke();
-
-  // 거래량
-  let vmax=0; bars.forEach(b=>vmax=Math.max(vmax,b.v)); vmax=vmax||1;
-  const bw=Math.max(1,cw/bars.length*0.72);
-  bars.forEach((b,i)=>{
-    const h=(b.v/vmax)*(HV-14), x=X(i);
-    const isSp=CH.spikes.some(s=>s.x===i+i0);
-    gv.fillStyle = isSp ? cssv("--spike-line") : cssv("--vol");
-    gv.fillRect(x-bw/2, HV-4-h, bw, h);
-  });
-  gv.strokeStyle=line; gv.beginPath(); gv.moveTo(PL,HV-3.5); gv.lineTo(PL+cw,HV-3.5); gv.stroke();
+  const box=document.getElementById("tvd"); if(!box||!window.TV) return;
+  const b=BY[view.code]; if(!b) return;
+  const sig=view.code+"|"+view.tf;
+  if(TVD.g && TVD.sig===sig && TVD.g.alive()){ MAS.forEach(n=>{ if(TVD.ma[n]) TVD.ma[n].applyOptions({visible:!!view.ma[n]}); }); return; }
+  if(TVD.g){ TVD.g.destroy(); TVD.g=null; }
+  if(!window.LightweightCharts){ TV.lib().then(()=>{ if(BY[view.code]) drawChart(); }); return; }
+  TVD.sig=sig; TVD.ma={};
+  const bars=CH.bars, times=bars.map(x=>dstr(x.d)); TVD.times=times;
+  const n=bars.length; if(!n) return;
+  const tfL=view.tf==="D"?"일봉":view.tf==="W"?"주봉":"월봉";
+  const usd=v=>v==null?"—":"$"+(+v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const vol=v=>v>=1e6?(v/1e6).toFixed(1)+"M":v>=1e3?(v/1e3).toFixed(0)+"K":String(v);
+  const g=TV.group(document.getElementById("tvbar"));
+  const P=g.pane(box,{key:"d:"+view.code,times,height:430,margins:{top:.1,bottom:.24},
+    legend:i=>{ const x=bars[i], pv=i?bars[i-1].c:x.c, ch=(x.c/pv-1)*100, cls=ch>=0?"up":"dn";
+      return `<b>${esc(view.code)}</b><span class="d">${times[i]} · ${tfL}</span><span>종가 <b class="${cls}">${usd(x.c)}</b> <em class="${cls}">${ch>=0?"+":""}${ch.toFixed(2)}%</em></span><span>거래량 <b>${vol(x.v)}</b></span>`+
+        MAS.filter(m=>view.ma[m]).map(m=>{ const v=CH.mas[m][i]; return v==null?"":`<span><i class="tv-sw" style="background:${MACLR[m]}"></i>MA${m} <b>${usd(v)}</b></span>`; }).join(""); }});
+  const s=P.add("area",{lineColor:"#4c8dff",topColor:"rgba(76,141,255,.26)",bottomColor:"rgba(76,141,255,0)",lineWidth:2,priceFormat:{type:"price",precision:2,minMove:0.01}},bars.map(x=>x.c));
+  P.add("hist",{priceScaleId:"vol",priceFormat:{type:"volume"},lastValueVisible:false,notMain:true},
+    bars.map((x,i)=>({value:x.v,color:CH.spikes.some(sp=>sp.x===i)?"rgba(245,180,0,.75)":(i&&x.c<bars[i-1].c?"rgba(91,155,255,.33)":"rgba(255,107,107,.33)")})));
+  P.chart.priceScale("vol").applyOptions({scaleMargins:{top:.8,bottom:0}});
+  MAS.forEach(m=>{ TVD.ma[m]=P.add("line",{color:MACLR[m],lineWidth:1,lastValueVisible:false,crosshairMarkerVisible:false,visible:!!view.ma[m],notMain:true},CH.mas[m]); });
+  const mk=CH.spikes.filter(sp=>sp.x>=0&&sp.x<n).sort((a,b)=>a.x-b.x).map(sp=>({time:times[sp.x],position:"aboveBar",color:"#f5b400",shape:"arrowDown",text:sp.m+"배"}));
+  s.setMarkers(mk.filter((m,i)=>!i||m.time!==mk[i-1].time));
+  const w=bars.slice(-Math.min(n,view.tf==="D"?250:view.tf==="W"?52:12)), hi=Math.max(...w.map(x=>x.c));
+  s.createPriceLine({price:hi,color:"rgba(245,180,0,.7)",lineWidth:1,lineStyle:2,axisLabelVisible:true,title:"52주 고가"});
+  P.legend(null);
+  const show=view.tf==="D"?Math.min(n,250):n;
+  P.chart.timeScale().setVisibleLogicalRange({from:n-show-1,to:n+4});
+  TVD.g=g;
 }
 
 function chartHTML(b){
-  const legend = MAS.map(n=>`<button class="lgi" data-ma="${n}" aria-pressed="${view.ma[n]}"><i style="background:var(${MACOL[n]})"></i>${n}</button>`).join("");
+  const legend = MAS.map(n=>`<button class="lgi" data-ma="${n}" aria-pressed="${view.ma[n]}"><i style="background:${MACLR[n]}"></i>MA${n}</button>`).join("");
   const spikes = (b.sp||[]).slice().sort((x,y)=>x.dy-y.dy).map(s=>
     `<button class="spk" data-sp="${s.i}"><b>${dstr(s.dy)}</b> · ${s.m}배 · ${s.d1>0?"+":""}${s.d1}%</button>`).join("");
   return `
   <div class="dsec">주가
-    <span class="hint">${b.iv==="w"?"주봉 단위 수록(10년) · ":""}드래그로 좌우 이동 · 휠로 확대·축소 · 더블클릭 전체 보기 · 마우스 올리면 그날 값</span></div>
-  <div class="seg" id="tf" style="margin-bottom:10px">
-    ${b.iv==="w"?"":`<button data-v="D" aria-pressed="${view.tf==="D"}">일봉</button>`}
-    <button data-v="W" aria-pressed="${view.tf==="W"}">주봉</button>
-    <button data-v="M" aria-pressed="${view.tf==="M"}">월봉</button>
+    <span class="hint">${b.iv==="w"?"주봉 단위 수록(10년) · ":""}휠 확대·축소 · 끌어서 이동 · 노란 화살표 = 거래량 급증(평소 5배↑)</span></div>
+  <div class="tvd-top">
+    <div class="seg" id="tf">
+      ${b.iv==="w"?"":`<button data-v="D" aria-pressed="${view.tf==="D"}">일봉</button>`}
+      <button data-v="W" aria-pressed="${view.tf==="W"}">주봉</button>
+      <button data-v="M" aria-pressed="${view.tf==="M"}">월봉</button>
+    </div>
+    <div class="tvd-ma">${legend}</div>
   </div>
-  <div class="chartbox">
-    <div class="legend"><span style="color:var(--ink);font-weight:600">종가</span>${legend}
-      <span style="margin-left:auto;color:var(--ink-mute)">노란 띠 = 거래량 급증(평소 5배↑)</span></div>
-    <canvas id="cv"></canvas><canvas id="cvv"></canvas>
-    <div class="tip" id="tip"></div>
-  </div>
+  <div class="mcard tvcard tvd-card"><div id="tvbar"></div><div class="tvstack"><div id="tvd"></div></div></div>
   ${spikes ? `<div class="spikelist">${spikes}</div>` : ""}
   <div id="evt"></div>`;
 }
@@ -1536,6 +1493,7 @@ function showEvent(i){
   const b=BY[view.code]; if(!b) return;
   const s=(b.sp||[]).find(x=>x.i===i); if(!s) return;
   view.spike=i;
+  if(TVD.g&&TVD.g.alive()){ const k=CH.spikes.find(x=>x.i===i); if(k){ const ts=TVD.g.panes[0].chart.timeScale(), r=ts.getVisibleLogicalRange(), w=r?Math.max(40,r.to-r.from):120; ts.setVisibleLogicalRange({from:k.x-w/2,to:k.x+w/2}); } }
   document.querySelectorAll(".spk").forEach(el=>el.setAttribute("aria-pressed", el.dataset.sp===String(i)));
   const key=`${view.code}:${s.i}`, note=NEWS[key];
   const day=dstr(s.dy);
@@ -1573,83 +1531,7 @@ function wireDetail(b){
   if((b.sp||[]).length) showEvent(b.sp[0].i);
 }
 
-function wireCanvas(){
-  const cv=document.getElementById("cv"), tip=document.getElementById("tip");
-  const MINW=8;                       // 최소 표시 봉 수(=window+1)
-  let pan=null, moved=false;          // 패닝 상태 / 실제로 끌렸는지(클릭과 구분)
-  const idxAt = ev => {
-    const rc=cv.getBoundingClientRect(), G=CH.geo; if(!G) return null;
-    const x=ev.clientX-rc.left;
-    const t=(x-G.PL)/G.cw;
-    return Math.max(0, Math.min(G.n-1, Math.round(t*(G.n-1))));
-  };
-  // 절대 인덱스 [i0,i1]로 표시 구간을 설정(범위·최소폭 클램프). TradingView식 이동/확대의 공통 경로.
-  const setRange = (i0,i1) => {
-    const N=CH.bars.length;
-    let w=Math.round(i1-i0);
-    w=Math.max(MINW, Math.min(N-1, w));
-    i0=Math.round(i0); if(i0<0) i0=0;
-    i1=i0+w;
-    if(i1>N-1){ i1=N-1; i0=Math.max(0,i1-w); }
-    view.range=[i0,i1];
-  };
-  cv.onmousemove = ev => {
-    const G=CH.geo; if(!G) return;
-    if(pan){                          // 드래그 중 → 좌우 패닝
-      const dxpx = ev.clientX - pan.mx;
-      const span = pan.r0[1]-pan.r0[0];
-      const dBars = Math.round(dxpx * span / G.cw);
-      if(dBars!==0) moved=true;
-      setRange(pan.r0[0]-dBars, pan.r0[1]-dBars);   // 오른쪽으로 끌면 과거로 이동
-      tip.classList.remove("on");
-      drawChart();
-      return;
-    }
-    const k=idxAt(ev); if(k===null) return;
-    const b=CH.bars[G.i0+k]; if(!b) return;
-    const rows=[`<div class="tr"><span>종가</span><b>${b.c.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}</b></div>`,
-      `<div class="tr"><span>거래량</span><b>${Math.round(b.v/1000).toLocaleString("ko-KR")}K</b></div>`];
-    MAS.forEach(n=>{ if(!view.ma[n])return; const v=CH.mas[n][G.i0+k];
-      if(v!=null) rows.push(`<div class="tr"><span style="color:var(${MACOL[n]})">MA${n}</span><b>${Math.round(v).toLocaleString("ko-KR")}</b></div>`); });
-    tip.innerHTML=`<div class="td">${dstr(b.d)}</div>${rows.join("")}`;
-    tip.classList.add("on");
-    const px=G.X(k), rc=cv.getBoundingClientRect();
-    tip.style.left = Math.min(rc.width-160, Math.max(4, px+12))+"px";
-    tip.style.top  = "44px";
-    drawChart();
-    const g=cv.getContext("2d");
-    g.strokeStyle=cssv("--ink-mute"); g.lineWidth=1; g.setLineDash([3,3]);
-    g.beginPath(); g.moveTo(px,G.PT); g.lineTo(px,G.PT+G.chh); g.stroke(); g.setLineDash([]);
-    g.fillStyle=cssv("--ink"); g.beginPath(); g.arc(px,G.Y(b.c),3,0,7); g.fill();
-  };
-  cv.onmouseleave = ()=>{ tip.classList.remove("on"); pan=null; cv.style.cursor="grab"; drawChart(); };
-  cv.onmousedown = ev => { pan={mx:ev.clientX, r0:[...view.range]}; moved=false; cv.style.cursor="grabbing"; };
-  cv.onmouseup = ev => {
-    cv.style.cursor="grab";
-    if(pan && !moved){                // 끌지 않았으면 클릭 → 근처 급등 이벤트 선택
-      const k=idxAt(ev), G=CH.geo;
-      if(k!==null && G){
-        const abs=G.i0+k; let best=null, bd=1e9;
-        CH.spikes.forEach(s=>{ const d=Math.abs(s.x-abs); if(d<bd){bd=d;best=s;} });
-        if(best && bd<=Math.max(2, Math.round(G.n/120))) showEvent(best.i);
-      }
-    }
-    pan=null;
-  };
-  cv.ondblclick = ()=>{ view.range=[0,CH.bars.length-1]; drawChart(); };
-  // 휠 = 커서 위치를 기준으로 확대/축소
-  cv.onwheel = ev => {
-    const G=CH.geo; if(!G) return;
-    ev.preventDefault();
-    const k=idxAt(ev); if(k===null) return;
-    const anchor=G.i0+k, i0=view.range[0], w=view.range[1]-view.range[0];
-    const nw=Math.max(MINW, Math.min(CH.bars.length-1, Math.round(w*(ev.deltaY>0?1.18:0.84))));
-    const rel = w ? (anchor-i0)/w : .5;               // 커서 아래 봉을 제자리에 고정
-    setRange(anchor-rel*nw, anchor-rel*nw+nw);
-    drawChart();
-  };
-  cv.style.cursor="grab";
-}
+function wireCanvas(){ /* 검정 차트(lightweight-charts)가 휠·끌기를 직접 처리 */ }
 
 /* ================= 이벤트 ================= */
 document.getElementById("tb").addEventListener("click",e=>{const tr=e.target.closest("tr"); if(tr) openDetail(tr.dataset.c);});

@@ -58,3 +58,45 @@
 .mdet th{color:var(--ink2);font-weight:600;position:sticky;top:0;background:var(--surface)}
 @media (max-width:900px){.mtiles{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:560px){.mtiles{grid-template-columns:repeat(2,1fr)}}
+
+/* ===== 검정 차트(usre-tv.js) — 2026-11-04 사용자: 나쁜양파처럼 검정, 선 그리기·고르기·지우기 ===== */
+.tvcard{background:#0d1016;border-color:#1c212b;color:#d5dae3;padding:14px 14px 12px;box-shadow:0 10px 30px rgba(5,8,14,.25)}
+.tvcard .ml{color:#7d8698}
+.tvcard .seg{border-color:#262c38;background:#121620}
+.tvcard .seg button{color:#9aa3b4;border-right-color:#262c38}
+.tvcard .seg button:hover{color:#e9edf5;background:#1a1f2b}
+.tvcard .seg button[aria-pressed="true"]{background:#2962ff;color:#fff}
+.tvcard .mchk{color:#9aa3b4} .tvcard .mchk input{accent-color:#2962ff}
+.tvcard .mgnote{color:#7d8698}
+.tvcard .mlegend{color:#9aa3b4} .tvcard .mlegend .src{color:#6b7385}
+.tvstack{display:flex;flex-direction:column;gap:2px;background:#1a1f29;border:1px solid #1c212b;border-radius:8px;overflow:hidden}
+.tvp{position:relative;background:#0d1016}
+.tvp.drawing{cursor:crosshair}
+.tv-lg{position:absolute;left:10px;top:7px;z-index:5;pointer-events:none;display:flex;flex-wrap:wrap;gap:3px 14px;align-items:center;
+  font:500 12px "Pretendard Variable",Pretendard,sans-serif;color:#a9b1c0;max-width:calc(100% - 100px);text-shadow:0 1px 2px #0d1016}
+.tv-lg b{color:#eef1f6;font-weight:700;font-variant-numeric:tabular-nums}
+.tv-lg > b:first-child{font-size:12.5px;margin-right:2px}
+.tv-lg .d{color:#7d8698;font:500 11.5px "IBM Plex Mono",monospace}
+.tv-lg em{font-style:normal;color:#7d8698;font-variant-numeric:tabular-nums}
+.tv-lg span{display:inline-flex;align-items:center;gap:5px}
+.tv-sw{display:inline-block;width:12px;height:3px;border-radius:2px}
+.tv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:4px 0 8px}
+.tv-bar button{font:600 12px "Pretendard Variable",Pretendard,sans-serif;padding:6px 10px;border:1px solid #2a303c;border-radius:6px;background:#151a24;color:#cfd5df;cursor:pointer}
+.tv-bar button:hover{background:#1d2330;color:#fff}
+.tv-bar button[aria-pressed="true"]{background:#3a2f0b;border-color:#f5b400;color:#ffd75e}
+.tv-bar kbd{font:600 10px "IBM Plex Mono",monospace;color:#6f788a;margin-left:5px}
+.tv-bar .tv-sep{width:1px;height:20px;background:#2a303c;margin:0 2px}
+.tv-hint{font-size:11.5px;color:#6f788a;margin-left:6px}
+.tv-hint.on{color:#ffd75e;font-weight:700}
+.m-info{min-height:22px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;font-size:12.5px;color:#c6ccd7;margin:8px 2px 6px}
+.m-info b{color:#fff;font-family:"IBM Plex Mono",monospace;font-size:12px}
+.m-info .mute{color:#6f788a} .m-info .rec{color:#c9ced8;font-weight:600}
+.m-info .up{color:#ff6b6b;font-weight:600} .m-info .dn{color:#5b9bff;font-weight:600}
+@media (max-width:640px){.tv-bar kbd,.tv-hint{display:none}.tv-lg{max-width:calc(100% - 80px);font-size:11px}}
+/* 종목 상세 검정 차트 */
+.tvd-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.tvd-top .seg{margin:0}
+.tvd-ma{display:flex;flex-wrap:wrap;gap:4px}
+.tvd-card{padding:8px 10px 10px;margin:0 0 12px;border-radius:12px}
+.tvd-card .tv-bar{margin-top:0}
+.tv-lg .up,.tv-lg b.up{color:#ff6b6b}.tv-lg .dn,.tv-lg b.dn{color:#5b9bff}
