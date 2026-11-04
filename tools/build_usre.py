@@ -9,7 +9,11 @@
   실적  : SEC EDGAR XBRL companyfacts(10-Q·10-K). 4분기는 연간 − 1~3분기.
   매크로: FRED — MORTGAGE30US(프레디맥 30년 모기지), DGS10(10년물), DFEDTAR·DFEDTARU(기준금리),
           UNRATE(실업률), PPIFIS(최종수요 PPI, 2010-11~), WPUFD49207(완제품 PPI, 그 이전).
-출력: docs/data/usre/screener-con.js (RAW·BUNDLE·CATS), docs/data/usre/macro.js (REM), docs/data/usre/screener-meta.json
+  판매·매물·집값: FRED — HSN1F(신규주택 판매), MSACSR(신규주택 재고 개월수), ACTLISCOUUS(Realtor.com 활성 매물),
+          CSUSHPINSA(케이스-실러), CPIAUCSL, MEHOINUSA646N(중위가구소득), TTLHH(가구 수)
+          + Zillow Research 공개 CSV(미국 전체 판매 건수·매물·신규 매물).
+출력: docs/data/usre/screener-con.js (RAW·BUNDLE·CATS), docs/data/usre/macro.js (REM), docs/data/usre/demand.js (RED),
+      docs/data/usre/screener-meta.json
 단위: 시총·매출·이익 = 억달러, 주가 = 달러(묶음 px 는 ×100 정수, vo 는 ÷100), 날짜 = 1970-01-01 부터 일수
 """
 import csv
@@ -30,6 +34,7 @@ socket.getaddrinfo = lambda h, p, f=0, *a, **k: _gai(h, p, socket.AF_INET, *a, *
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "data" / "usre"
 F_SCR, F_MAC, META = OUT / "screener-con.js", OUT / "macro.js", OUT / "screener-meta.json"
+F_DEM = OUT / "demand.js"
 KST = timezone(timedelta(hours=9))
 EPOCH = date(1970, 1, 1)
 UA_WEB = {"User-Agent": "Mozilla/5.0"}
@@ -451,14 +456,203 @@ def build_macro():
     return {"weeks": len(dates), "last": last, "ur_last": urs[-1], "ppi_last": pps[-1]}
 
 
+# ── 판매·매물·집값 탭(2026-11-04 사용자: "신규 판매·기존 매물·기존 판매가 금리 오를 때와 내릴 때 어떻게 다른지,
+#    평균 수요가 고금리 때만 잠깐 둔화되는지, 집값이 얼마나 올랐는지") ──
+ZILLOW = {"zs": "sales_count_now/Metro_sales_count_now_uc_sfrcondo_month.csv",
+          "zi": "invt_fs/Metro_invt_fs_uc_sfrcondo_sm_month.csv",
+          "zn": "new_listings/Metro_new_listings_uc_sfrcondo_sm_month.csv"}
+
+
+def zillow_us(path):
+    """Zillow Research 공개 CSV 에서 'United States' 줄 → {YYYY-MM: 값}."""
+    txt = get("https://files.zillowstatic.com/research/public_csvs/" + path).decode("utf-8", "replace")
+    rd = csv.reader(io.StringIO(txt)); h = next(rd)
+    for r in rd:
+        if len(r) > 2 and r[2] == "United States":
+            return {h[i][:7]: float(r[i]) for i in range(5, min(len(h), len(r))) if r[i] not in ("", ".")}
+    return {}
+
+
+def build_demand():
+    ym = lambda d: d[:7]
+
+    def ymadd(k, m):
+        t = int(k[:4]) * 12 + int(k[5:7]) - 1 + m
+        return f"{t // 12}-{t % 12 + 1:02d}"
+
+    def monthly(sid, avg=False):
+        o = {}
+        for d, v in fred(sid):
+            o.setdefault(ym(d), []).append(v)
+        return {k: (sum(v) / len(v) if avg else v[-1]) for k, v in o.items()}
+
+    mort = monthly("MORTGAGE30US", avg=True)
+    nhs, msa = monthly("HSN1F"), monthly("MSACSR")
+    cs, cpi = monthly("CSUSHPINSA"), monthly("CPIAUCSL")
+    rl = monthly("ACTLISCOUUS")
+    inc = {d[:4]: v for d, v in fred("MEHOINUSA646N")}
+    hh = {d[:4]: v for d, v in fred("TTLHH")}
+    Z = {}
+    for k, p in ZILLOW.items():
+        try:
+            Z[k] = zillow_us(p)
+        except Exception as e:  # Zillow 주소가 바뀌어도 나머지는 만든다
+            print("Zillow", k, "실패", e); Z[k] = {}
+    zs, zi, zn = Z["zs"], Z["zi"], Z["zn"]
+
+    def roll12(s):
+        out = {}
+        for k in s:
+            ks = [ymadd(k, -i) for i in range(12)]
+            if all(x in s for x in ks):
+                out[k] = sum(s[x] for x in ks)
+        return out
+
+    zs12, zn12 = roll12(zs), roll12(zn)
+
+    def yoy(s, k):
+        p = ymadd(k, -12)
+        return (s[k] / s[p] - 1) * 100 if k in s and p in s and s[p] else None
+
+    def d12(s, k):
+        p = ymadd(k, -12)
+        return s[k] - s[p] if k in s and p in s else None
+
+    real = {k: cs[k] / cpi[k] for k in cs if k in cpi}
+    r0 = real["2000-01"]
+    cs_y = {}
+    for k, v in cs.items():
+        cs_y.setdefault(k[:4], []).append(v)
+    pti0 = statistics.mean(cs_y["2000"]) / inc["2000"]
+    pti = {y: round(statistics.mean(v) / inc[y] / pti0 * 100, 1) for y, v in cs_y.items() if y in inc and y >= "2000"}
+    last = max(list(nhs) + list(zs) + list(cs))
+    months, k = [], "2000-01"
+    while k <= last:
+        months.append(k); k = ymadd(k, 1)
+    r = lambda v, n=1: None if v is None else round(v, n)
+    th = lambda v: None if v is None else round(v / 1000, 1)
+    ser = {
+        "mort": [r(mort.get(m), 2) for m in months],
+        "nhs": [nhs.get(m) for m in months],
+        "msa": [msa.get(m) for m in months],
+        "zs12": [th(zs12.get(m)) for m in months],
+        "zn12": [th(zn12.get(m)) for m in months],
+        "zi": [th(zi.get(m)) for m in months],
+        "rl": [th(rl.get(m)) for m in months],
+        "csy": [r(yoy(cs, m)) for m in months],
+        "real": [r(real[m] / r0 * 100) if m in real else None for m in months],
+        "pti": [pti.get(m[:4]) for m in months],
+        "dr": [r(d12(mort, m), 2) for m in months],
+    }
+    # 연도 표
+    yrs = []
+    for y in range(2000, int(last[:4]) + 1):
+        ys = str(y)
+        mm = [m for m in months if m[:4] == ys]
+
+        def avg(s):
+            v = [s[m] for m in mm if m in s]
+            return statistics.mean(v) if v else None
+
+        zm = [zs[m] for m in mm if m in zs]
+        znm = [zn[m] for m in mm if m in zn]
+        dec = max([m for m in mm if m in cs], default=None)
+        rv = [real[m] for m in mm if m in real]
+        yrs.append({"y": ys, "mort": r(avg(mort), 2), "nhs": r(avg(nhs), 0),
+                    "zs": r(sum(zm) * 12 / len(zm) / 1000, 0) if zm else None, "zsn": len(zm),
+                    "zi": r(avg(zi) / 1000, 0) if avg(zi) else None,
+                    "zn": r(sum(znm) * 12 / len(znm) / 1000, 0) if znm else None,
+                    "rl": r(avg(rl) / 1000, 0) if avg(rl) else None, "msa": r(avg(msa), 1),
+                    "csy": r(yoy(cs, dec)) if dec else None, "real": r(statistics.mean(rv) / r0 * 100) if rv else None,
+                    "pti": pti.get(ys), "hh": hh.get(ys)})
+
+    # 금리 상승기/하락기 비교(모기지 12개월 변화의 부호) + 시차별 상관
+    def regime(s, start, name):
+        up, dn, pr = [], [], []
+        for k in sorted(s):
+            if k < start:
+                continue
+            dr, g = d12(mort, k), yoy(s, k)
+            if dr is None or g is None:
+                continue
+            pr.append((dr, g)); (up if dr > 0 else dn).append(g)
+        if len(pr) < 24:
+            return None
+        lags = []
+        for lag in (0, 3, 6, 9, 12):
+            xs, ys2 = [], []
+            for k in sorted(s):
+                if k < start:
+                    continue
+                dr, g = d12(mort, ymadd(k, -lag)), yoy(s, k)
+                if dr is not None and g is not None:
+                    xs.append(dr); ys2.append(g)
+            lags.append(round(statistics.correlation(xs, ys2), 2))
+        xs, ys2 = zip(*pr)
+        return {"name": name, "from": start[:4], "up": r(statistics.median(up)), "nu": len(up), "dn": r(statistics.median(dn)),
+                "nd": len(dn), "corr": round(statistics.correlation(xs, ys2), 2), "lags": lags}
+
+    reg = [x for x in [regime(nhs, "1972-01", "신규주택 판매"), regime(nhs, "2009-01", "신규주택 판매"),
+                       regime(zs, "2009-01", "전체 판매(Zillow)"), regime(zn, "2019-01", "신규 매물(Zillow)"),
+                       regime(zi, "2019-01", "매물 재고(Zillow)"), regime(cs, "1988-01", "집값(케이스-실러)")] if x]
+    # 금리 급등(모기지가 1년 새 +1%p 이상) 구간의 신규주택 판매
+    ks = sorted(k for k in nhs if k >= "1972-01")
+    eps, inep = [], False
+    for k in ks:
+        dr = d12(mort, k)
+        if dr is None:
+            continue
+        if dr >= 1.0 and not inep:
+            eps.append([k, k]); inep = True
+        elif dr >= 1.0:
+            eps[-1][1] = k
+        elif inep:
+            inep = False
+    mon = lambda a, b: (int(b[:4]) * 12 + int(b[5:7])) - (int(a[:4]) * 12 + int(a[5:7]))
+    epi = []
+    for a, b in eps:
+        pre = [nhs[ymadd(a, -i)] for i in range(1, 13) if ymadd(a, -i) in nhs]
+        if not pre:
+            continue
+        base = statistics.mean(pre)
+        win = [k for k in ks if a <= k <= ymadd(b, 12)]
+        tk = min(win, key=lambda k: nhs[k])
+        rec = next((k for k in ks if k > tk and nhs[k] >= base), None)
+        epi.append({"a": a, "b": b, "m0": r(mort.get(ymadd(a, -12)), 1),
+                    "m1": r(max(mort[k] for k in ks if a <= k <= b and k in mort), 1),
+                    "base": round(base), "low": nhs[tk], "lowAt": tk, "chg": round((nhs[tk] / base - 1) * 100),
+                    "rec": rec, "recM": mon(tk, rec) if rec else None})
+    # 평균 수요 대비 부족분(2016~19 평균 기준, Zillow 전체 판매)
+    basey = [x for x in yrs if x["zs"] and x["zsn"] == 12 and "2016" <= x["y"] <= "2019"]
+    base = statistics.mean(x["zs"] for x in basey) if basey else None
+    gap = [{"y": x["y"], "zs": x["zs"], "gap": round(x["zs"] - base), "part": x["zsn"] < 12}
+           for x in yrs if x["zs"] and x["y"] >= "2020"] if base else []
+    # 집값
+    lk = max(real)
+    pk = max((k for k in real if "2022-01" <= k <= "2023-12"), key=lambda k: real[k])
+    price = {"last": lk, "nom19": r((cs[lk] / cs["2019-12"] - 1) * 100, 0), "real19": r((real[lk] / real["2019-12"] - 1) * 100, 0),
+             "peak": pk, "nomPk": r((cs[lk] / cs[pk] - 1) * 100), "realPk": r((real[lk] / real[pk] - 1) * 100),
+             "real06": r((real[lk] / real["2006-07"] - 1) * 100, 0)}
+    data = {"months": [m + "-01" for m in months], "s": ser, "years": yrs, "regime": reg, "episodes": epi,
+            "base": r(base, 0), "gap": gap, "price": price}
+    with open(F_DEM, "w", encoding="utf-8", newline="\n") as f:
+        f.write(f"/* 미국 부동산 · 판매·매물·집값 데이터 — build_usre.py ({datetime.now(KST):%Y-%m-%d %H:%M} KST) */\n")
+        f.write(f"const RED = {json.dumps(data, ensure_ascii=False, separators=(',', ':'))};\n")
+    return {"months": len(months), "last": last, "zillow": {k: len(v) for k, v in Z.items()}}
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    try:
+        d = build_demand(); print("판매·매물·집값", d)
+    except Exception as e:   # 이 탭이 실패해도 나머지는 만든다
+        d = {"error": str(e)[:200]}; print("판매·매물·집값 실패", e)
     m = build_macro(); print("차트", m)
     s = build_screener(); print("스크리너", s)
-    meta = {"updated": datetime.now(KST).isoformat(timespec="minutes"), "screener": s, "macro": m}
+    meta = {"updated": datetime.now(KST).isoformat(timespec="minutes"), "screener": s, "macro": m, "demand": d}
     json.dump(meta, open(META, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump({"updated": meta["updated"], "bars": {}}, open(OUT / "px_recent.json", "w", encoding="utf-8"))   # 화면이 찾는 파일(매일 이어 붙이기는 아직 없음)
-    for p in (F_SCR, F_MAC):
+    for p in (F_SCR, F_MAC, F_DEM):
         print(p.name, round(p.stat().st_size / 1e6, 2), "MB")
 
 

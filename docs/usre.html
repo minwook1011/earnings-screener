@@ -11,7 +11,7 @@
 <script src="usre-boot.js?v=1"></script>
 <link rel="stylesheet" href="usre-theme.css?v=1">
 <link rel="stylesheet" href="usre-screener.css?v=1">
-<link rel="stylesheet" href="usre.css?v=3">
+<link rel="stylesheet" href="usre.css?v=4">
 <link rel="stylesheet" href="usre-nav.css?v=1">
 </head>
 <body>
@@ -39,6 +39,7 @@
       <div class="useg" id="retab" role="group" aria-label="화면">
         <button data-tab="scr" aria-pressed="true"><b>스크리너</b><span>주거 · 상업 · 건설 26개 BM</span></button>
         <button data-tab="mac" aria-pressed="false"><b>주가 × 금리 × 경기</b><span>대장주 · 모기지 · 실업률 · PPI</span></button>
+        <button data-tab="dem" aria-pressed="false"><b>판매 · 매물 · 집값</b><span>금리 오를 때 vs 내릴 때 · 미뤄진 수요</span></button>
       </div>
     </div>
     <div class="stats">
@@ -172,12 +173,41 @@
   </div>
 </div>
 
+<div id="v-dem" class="mac" hidden>
+  <div class="mac-in">
+  <p class="msub">기존·신규 주택 판매, 매물, 집값이 <b>모기지 금리가 오를 때와 내릴 때</b> 어떻게 달랐는지, 평균 수요가 고금리 때만 잠깐 눌렸는지를 봅니다.
+  빨간 띠는 30년 모기지 금리가 <b>1년 전보다 높은</b> 달, 파란 띠는 <b>낮은</b> 달입니다. 월간 데이터, <span id="d-asof"></span> 기준.</p>
+  <div class="mtiles" id="d-tiles"></div>
+  <ul class="dkey" id="d-key"></ul>
+  <div class="mcard tvcard">
+    <div class="mctl"><span class="ml">기간</span><div class="seg" id="d-rng"></div>
+      <span class="ml">표시</span><label class="mchk"><input type="checkbox" id="d-band" checked> 금리 상승·하락 띠</label></div>
+    <div id="d-bar"></div>
+    <div class="tvstack"><div id="d-p1"></div><div id="d-p2"></div><div id="d-p3"></div><div id="d-p4"></div></div>
+  </div>
+  <div class="mnotes">
+    <b>읽는 법.</b> ① 칸은 모두 1년 동안의 건수입니다. 전체 판매·신규 매물은 Zillow 월간 건수의 최근 12개월 합(계절성 제거), 신규주택 판매는 인구조사국의 계절조정 연율입니다.
+    전체 판매와 신규 매물은 사는 사람과 파는 사람의 흐름을 대신 보여줍니다. ② 칸은 그 달에 걸려 있는 매물 수입니다. ④ 칸의 소득 대비 집값은 케이스-실러 연평균 ÷ 중위가구소득(명목)을 2000년 = 100으로 맞춘 연간 값입니다.
+    아래 표의 금리 상승기·하락기는 모기지 월평균이 1년 전보다 높았는지 낮았는지로 나눈 뒤, 그 달 지표의 전년 대비 증감률 중앙값을 비교한 것입니다. 시차는 금리 변화가 그 개월 수만큼 앞섰을 때의 상관계수입니다(음수가 클수록 금리가 오르면 줄어든다).<br>
+    <b>출처.</b> 신규주택 판매·재고 개월수: 미 인구조사국(FRED HSN1F·MSACSR) · 전체 판매·매물·신규 매물: Zillow Research(미국 전체 단독+콘도, 판매 건수 나우캐스트·매물 재고·신규 매물) ·
+    활성 매물: Realtor.com(FRED ACTLISCOUUS) · 집값: S&amp;P 케이스-실러 전국지수(FRED CSUSHPINSA) ÷ 소비자물가(CPIAUCSL) · 소득: 중위가구소득(FRED MEHOINUSA646N) · 가구 수: FRED TTLHH · 모기지: 프레디맥 PMMS.
+    Zillow 판매 건수는 NAR 기존주택 판매보다 다소 낮게 나옵니다(NAR 장기 시계열은 공개 자료가 없어 대신 씀).
+  </div>
+  <details class="mdet" open><summary>금리 상승기 vs 하락기: 지표별 전년 대비 증감률</summary><div class="mtw"><table id="d-regTbl"></table></div></details>
+  <details class="mdet" open><summary>모기지가 1년 새 1%p 넘게 뛴 구간의 신규주택 판매 (1972년~)</summary><div class="mtw"><table id="d-epTbl"></table></div></details>
+  <details class="mdet" open><summary>평균 수요(2016~19년) 대비 판매와 가구 수</summary><div class="mtw"><table id="d-gapTbl"></table></div></details>
+  <details class="mdet"><summary>표로 보기: 연도별 판매·매물·집값 (* 는 그해 일부 달만 있어 연율 환산)</summary><div class="mtw"><table id="d-yrTbl"></table></div></details>
+  </div>
+</div>
+
 <div class="scrim" id="scrim"></div>
 <aside class="panel" id="panel" role="dialog" aria-modal="true" tabindex="-1"><div class="pin" id="pin"></div></aside>
 <script src="data/usre/screener-con.js?v=1"></script>
 <script src="usre-tv.js?v=6"></script>
 <script src="usre-screener.js?v=2"></script>
+<script src="data/usre/demand.js?v=1"></script>
+<script src="usre-demand.js?v=1"></script>
 <script src="data/usre/macro.js?v=1"></script>
-<script src="usre-macro.js?v=4"></script>
+<script src="usre-macro.js?v=5"></script>
 </body>
 </html>

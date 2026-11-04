@@ -5,7 +5,7 @@
 (function(){
 "use strict";
 /* ---------- 탭 ---------- */
-const TABS=["scr","mac"];
+const TABS=["scr","mac","dem"];
 function showTab(t){
   if(!TABS.includes(t)) t="scr";
   document.querySelectorAll("#retab button[data-tab]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.tab===t));
@@ -13,6 +13,7 @@ function showTab(t){
   try{ localStorage.setItem("usre_tab",t); }catch(e){}
   try{ const u=new URL(location.href); if(t==="scr") u.searchParams.delete("tab"); else u.searchParams.set("tab",t); history.replaceState(null,"",u.pathname+u.search+u.hash); }catch(e){}
   if(t==="mac" && window.__remDraw) window.__remDraw();
+  if(t==="dem" && window.__demDraw) window.__demDraw();   // 판매·매물·집값 탭(usre-demand.js)
   window.dispatchEvent(new Event("resize"));
 }
 document.querySelectorAll("#retab button[data-tab]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
