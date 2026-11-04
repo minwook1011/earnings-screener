@@ -460,7 +460,29 @@ def build_macro():
 #    평균 수요가 고금리 때만 잠깐 둔화되는지, 집값이 얼마나 올랐는지") ──
 ZILLOW = {"zs": "sales_count_now/Metro_sales_count_now_uc_sfrcondo_month.csv",
           "zi": "invt_fs/Metro_invt_fs_uc_sfrcondo_sm_month.csv",
-          "zn": "new_listings/Metro_new_listings_uc_sfrcondo_sm_month.csv"}
+          "zn": "new_listings/Metro_new_listings_uc_sfrcondo_sm_month.csv",
+          # 수급(2026-11-04 사용자: "그런 데이터들도 아래서 다 볼 수 있게") — 사는 쪽·파는 쪽·시장 온도
+          "zp": "new_pending/Metro_new_pending_uc_sfrcondo_sm_month.csv",
+          "cut": "perc_listings_price_cut/Metro_perc_listings_price_cut_uc_sfrcondo_sm_month.csv",
+          "above": "pct_sold_above_list/Metro_pct_sold_above_list_uc_sfrcondo_sm_month.csv",
+          "stl": "mean_sale_to_list/Metro_mean_sale_to_list_uc_sfrcondo_sm_month.csv",
+          "doz": "med_doz_pending/Metro_med_doz_pending_uc_sfrcondo_sm_month.csv",
+          "heat": "market_temp_index/Metro_market_temp_index_uc_sfrcondo_month.csv"}
+FHFA_OUT = "https://www.fhfa.gov/document/d/nmdb/nmdb-outstanding-mortgage-statistics-national-census-areas-quarterly.zip"
+
+
+def fhfa_lock():
+    """FHFA 전국 모기지 DB(NMDB) — 남아 있는 모기지 전체의 평균 금리·금리대별 비중(분기). {YYYY-MM(분기 말): {...}}"""
+    import zipfile
+    z = zipfile.ZipFile(io.BytesIO(get(FHFA_OUT, timeout=120)))
+    txt = z.read(z.namelist()[0]).decode("utf-8", "replace")
+    out = {}
+    for r in csv.DictReader(io.StringIO(txt)):
+        if r["GEOLEVEL"] != "National" or r["MARKET"] != "All Mortgages" or r["VALUE1"] in ("", "."):
+            continue
+        k = f"{r['YEAR']}-{int(r['MONTH']):02d}"
+        out.setdefault(k, {})[r["SERIESID"]] = float(r["VALUE1"])
+    return out
 
 
 def zillow_us(path):
@@ -499,6 +521,11 @@ def build_demand():
         except Exception as e:  # Zillow 주소가 바뀌어도 나머지는 만든다
             print("Zillow", k, "실패", e); Z[k] = {}
     zs, zi, zn = Z["zs"], Z["zi"], Z["zn"]
+    rnl, rpl, rcut, rdom = monthly("NEWLISCOUUS"), monthly("PENLISCOUUS"), monthly("PRIREDCOUUS"), monthly("MEDDAYONMARUS")
+    try:
+        LK = fhfa_lock()
+    except Exception as e:
+        print("FHFA 실패", e); LK = {}
 
     def roll12(s):
         out = {}
@@ -544,6 +571,38 @@ def build_demand():
         "pti": [pti.get(m[:4]) for m in months],
         "dr": [r(d12(mort, m), 2) for m in months],
     }
+    # ── 수급: 파는 사람(신규 매물) vs 사는 사람(신규 계약), 시장 온도, 잠금 효과 ──
+    zp = Z["zp"]
+    lkq = sorted(LK)
+    def lkv(m, f):   # 분기 값을 그 분기 3개월에 채움(계단선)
+        q = next((k for k in lkq if k >= m and ymadd(k, -2) <= m), None)
+        return f(LK[q]) if q else None
+    lt4 = lambda d: round(d.get("PCT_INTRATE_LT_3", 0) + d.get("PCT_INTRATE_3_4", 0), 1)
+    pct = lambda a, b: round(a / b * 100, 1) if a is not None and b else None
+    ser.update({
+        "znm": [th(zn.get(m)) for m in months],
+        "zp": [th(zp.get(m)) for m in months],
+        "abs": [pct(zp.get(m), zn.get(m)) for m in months],
+        "mos": [r(zi[m] / zp[m], 1) if m in zi and zp.get(m) else None for m in months],
+        "rnl": [th(rnl.get(m)) for m in months],
+        "rpl": [th(rpl.get(m)) for m in months],
+        "cut": [r(Z["cut"][m] * 100) if m in Z["cut"] else None for m in months],
+        "rcut": [pct(rcut.get(m), rl.get(m)) for m in months],
+        "above": [r(Z["above"][m] * 100) if m in Z["above"] else None for m in months],
+        "stl": [r(Z["stl"][m] * 100, 2) if m in Z["stl"] else None for m in months],
+        "doz": [r(Z["doz"].get(m), 0) for m in months],
+        "rdom": [rdom.get(m) for m in months],
+        "heat": [r(Z["heat"].get(m), 0) for m in months],
+        "lka": [lkv(m, lambda d: d.get("AVE_INTRATE")) for m in months],
+        "lt4": [lkv(m, lt4) for m in months],
+        "ge6": [lkv(m, lambda d: d.get("PCT_INTRATE_GE_6")) for m in months],
+    })
+    lock = [{"q": f"{k[:4]}Q{(int(k[5:7]) - 1) // 3 + 1}", "m": k, "ave": d.get("AVE_INTRATE"), "lt3": d.get("PCT_INTRATE_LT_3"),
+             "r34": d.get("PCT_INTRATE_3_4"), "r45": d.get("PCT_INTRATE_4_5"), "r56": d.get("PCT_INTRATE_5_6"),
+             "ge6": d.get("PCT_INTRATE_GE_6"), "loans": d.get("TOT_LOANS"), "ten11": d.get("PCT_TENURE_11PL"),
+             "ltv": d.get("AVE_MTMLTV"),
+             "mkt": r(statistics.mean([mort[x] for x in (ymadd(k, -2), ymadd(k, -1), k) if x in mort]), 2)}
+            for k, d in sorted(LK.items())]
     # 연도 표
     yrs = []
     for y in range(2000, int(last[:4]) + 1):
@@ -627,6 +686,17 @@ def build_demand():
     base = statistics.mean(x["zs"] for x in basey) if basey else None
     gap = [{"y": x["y"], "zs": x["zs"], "gap": round(x["zs"] - base), "part": x["zsn"] < 12}
            for x in yrs if x["zs"] and x["y"] >= "2020"] if base else []
+    # 수급 연도 표(월 평균, 마지막 해는 있는 달까지)
+    flow_years = []
+    for y in range(2017, int(last[:4]) + 1):   # Realtor.com 은 2016-07부터라 2017년부터
+        mm = [m for m in months if m[:4] == str(y)]
+        def av(key, nd=1):
+            v = [ser[key][months.index(m)] for m in mm if ser[key][months.index(m)] is not None]
+            return round(statistics.mean(v), nd) if v else None
+        flow_years.append({"y": str(y), "n": len([m for m in mm if m in zp]), "znm": av("znm"), "zp": av("zp"), "abs": av("abs"),
+                           "mos": av("mos"), "cut": av("cut"), "above": av("above"), "stl": av("stl", 2), "doz": av("doz", 0),
+                           "rdom": av("rdom", 0), "heat": av("heat", 0),
+                           "rnl": av("rnl"), "rpl": av("rpl"), "rcut": av("rcut")})
     # 집값
     lk = max(real)
     pk = max((k for k in real if "2022-01" <= k <= "2023-12"), key=lambda k: real[k])
@@ -634,7 +704,8 @@ def build_demand():
              "peak": pk, "nomPk": r((cs[lk] / cs[pk] - 1) * 100), "realPk": r((real[lk] / real[pk] - 1) * 100),
              "real06": r((real[lk] / real["2006-07"] - 1) * 100, 0)}
     data = {"months": [m + "-01" for m in months], "s": ser, "years": yrs, "regime": reg, "episodes": epi,
-            "base": r(base, 0), "gap": gap, "price": price}
+            "base": r(base, 0), "gap": gap, "price": price,
+            "lock": lock, "flowYears": flow_years}
     with open(F_DEM, "w", encoding="utf-8", newline="\n") as f:
         f.write(f"/* 미국 부동산 · 판매·매물·집값 데이터 — build_usre.py ({datetime.now(KST):%Y-%m-%d %H:%M} KST) */\n")
         f.write(f"const RED = {json.dumps(data, ensure_ascii=False, separators=(',', ':'))};\n")

@@ -11,7 +11,7 @@
 <script src="usre-boot.js?v=1"></script>
 <link rel="stylesheet" href="usre-theme.css?v=1">
 <link rel="stylesheet" href="usre-screener.css?v=1">
-<link rel="stylesheet" href="usre.css?v=4">
+<link rel="stylesheet" href="usre.css?v=5">
 <link rel="stylesheet" href="usre-nav.css?v=1">
 </head>
 <body>
@@ -197,6 +197,26 @@
   <details class="mdet" open><summary>모기지가 1년 새 1%p 넘게 뛴 구간의 신규주택 판매 (1972년~)</summary><div class="mtw"><table id="d-epTbl"></table></div></details>
   <details class="mdet" open><summary>평균 수요(2016~19년) 대비 판매와 가구 수</summary><div class="mtw"><table id="d-gapTbl"></table></div></details>
   <details class="mdet"><summary>표로 보기: 연도별 판매·매물·집값 (* 는 그해 일부 달만 있어 연율 환산)</summary><div class="mtw"><table id="d-yrTbl"></table></div></details>
+  <h3 class="dsub">수급: 파는 쪽 vs 사는 쪽 · 잠금 효과</h3>
+  <p class="msub">새로 나온 매물(파는 쪽)과 새로 맺은 계약(사는 쪽), 재고가 팔리는 속도, 가격을 깎는 매물 비율, 그리고 이미 받은 싼 대출 때문에 집을 안 내놓는 <b>잠금 효과</b>를 봅니다. 띠 색은 위 차트와 같습니다.</p>
+  <ul class="dkey" id="f-key"></ul>
+  <div class="mcard tvcard">
+    <div class="mctl"><span class="ml">기간</span><div class="seg" id="f-rng"></div>
+      <span class="ml">표시</span><label class="mchk"><input type="checkbox" id="f-band" checked> 금리 상승·하락 띠</label></div>
+    <div id="f-bar"></div>
+    <div class="tvstack"><div id="f-p1"></div><div id="f-p2"></div><div id="f-p3"></div><div id="f-p4"></div><div id="f-p5"></div><div id="f-p6"></div><div id="f-p7"></div></div>
+  </div>
+  <div class="mnotes">
+    <b>읽는 법.</b> ⑤ 실선은 Zillow(미국 전체 단독+콘도, 계절 평활), 점선은 Realtor.com입니다. Zillow 신규 계약은 그 달 새로 계약(pending)된 매물 수, Realtor.com 계약 진행 중 매물은 그 달 계약 상태로 걸려 있는 매물 수라 서로 개념이 조금 다릅니다.
+    Zillow 건수는 Zillow에 올라온 매물만 세기 때문에 해마다 수준을 직접 비교하기보다 ⑥⑦⑧처럼 <b>비율</b>로 보는 편이 안전합니다. ⑦ 기존 매물 소진 개월수 = Zillow 매물 재고 ÷ 그 달 신규 계약.
+    ⑩⑪ FHFA 자료는 분기 값이라 계단 모양입니다. 남아 있는 대출의 평균 금리가 신규 금리보다 많이 낮을수록 집을 팔고 새로 사면 이자가 크게 늘어 매물이 덜 나옵니다.
+    Redfin의 「매도자 vs 매수자」 원자료는 자동 내려받기가 막혀 있어 같은 성격의 Zillow·Realtor.com 지표로 대신했습니다.<br>
+    <b>출처.</b> Zillow Research(신규 매물·신규 계약·매물 재고·가격 인하 비율·호가 이상 판매 비율·판매가÷호가·계약까지 일수·시장 온도 지수) ·
+    Realtor.com(FRED NEWLISCOUUS·PENLISCOUUS·PRIREDCOUUS·ACTLISCOUUS·MEDDAYONMARUS) · 신규주택 재고 개월수: 미 인구조사국(FRED MSACSR) ·
+    남아 있는 모기지 금리·금리대 비중·보유 기간·담보인정비율: FHFA 전국 모기지 데이터베이스(NMDB, 전국·전체 모기지, 분기) · 신규 모기지: 프레디맥 PMMS(분기 표는 분기 평균).
+  </div>
+  <details class="mdet" open><summary>연도별 수급 지표 (월 평균)</summary><div class="mtw"><table id="f-yrTbl"></table></div></details>
+  <details class="mdet" open><summary>잠금 효과: 남아 있는 모기지의 금리 분포 (FHFA, 각 해 4분기 + 최근 4개 분기)</summary><div class="mtw"><table id="f-lockTbl"></table></div></details>
   </div>
 </div>
 
@@ -205,8 +225,8 @@
 <script src="data/usre/screener-con.js?v=1"></script>
 <script src="usre-tv.js?v=6"></script>
 <script src="usre-screener.js?v=2"></script>
-<script src="data/usre/demand.js?v=1"></script>
-<script src="usre-demand.js?v=1"></script>
+<script src="data/usre/demand.js?v=2"></script>
+<script src="usre-demand.js?v=2"></script>
 <script src="data/usre/macro.js?v=1"></script>
 <script src="usre-macro.js?v=5"></script>
 </body>

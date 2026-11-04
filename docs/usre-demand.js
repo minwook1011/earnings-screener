@@ -3,7 +3,9 @@
          평균 수요가 고금리 때만 잠깐 둔화되는가, 집값은 얼마나 올랐나.
    자료: data/usre/demand.js 의 RED(build_usre.py build_demand). 월간.
    ① 거래 흐름(연간 페이스) ② 매물 재고 ③ 모기지 금리 ④ 집값(2000-01 = 100)
-   빨강/파랑 띠 = 모기지 금리가 1년 전보다 높은/낮은 달. */
+   빨강/파랑 띠 = 모기지 금리가 1년 전보다 높은/낮은 달.
+   아래 「수급」 카드(2026-11-04 사용자: "그런 데이터들도 아래서 다 볼 수 있게"): 파는 쪽 vs 사는 쪽, 소진 개월수,
+   가격 인하·호가 이상, 팔리는 속도, 잠금 효과(FHFA 기존 대출 금리). 별도 동기화 묶음. */
 (function(){
 "use strict";
 if(typeof RED==="undefined") return;
@@ -66,6 +68,9 @@ let showBand=true;
 document.getElementById("d-band").addEventListener("change",e=>{showBand=e.target.checked;rebuild();});
 function bands(){
   if(!showBand) return [];
+  return bandList();
+}
+function bandList(){
   const out=[]; let run=null;
   for(let i=0;i<N;i++){
     const d=S.dr[i], dir=d==null?0:(d>0?1:-1);
@@ -117,7 +122,7 @@ let built=false;
 window.__demDraw=function(){
   if(document.getElementById("v-dem").hidden||built) return;
   built=true;
-  TV.lib().then(()=>rebuild(true)).catch(()=>{ document.getElementById("d-key").insertAdjacentHTML("beforeend","<li>차트 라이브러리를 불러오지 못했습니다.</li>"); });
+  TV.lib().then(()=>{ rebuild(true); rebuildF(true); }).catch(()=>{ document.getElementById("d-key").insertAdjacentHTML("beforeend","<li>차트 라이브러리를 불러오지 못했습니다.</li>"); });
 };
 
 /* ---------- 표 ---------- */
@@ -132,5 +137,90 @@ window.__demDraw=function(){
     D.gap.slice().reverse().map(x=>{ const h=hh(x.y); return `<tr><td>${x.y}${x.part?" (연율 환산)":""}</td><td>${fmt(x.zs)}천</td><td class="${x.gap<0?"dn":"up"}">${sgn(x.gap,0)}천</td><td>${h?fmt(h/1000,1)+"백만":"–"}</td><td>${h?(x.zs/h*100).toFixed(1)+"%":"–"}</td></tr>`; }).join("")+`</tbody>`;
   document.getElementById("d-yrTbl").innerHTML=`<thead><tr><th>연도</th><th>모기지</th><th>신규주택 판매</th><th>전체 판매</th><th>신규 매물</th><th>매물(Zillow)</th><th>매물(Realtor)</th><th>신규주택 재고</th><th>명목 집값 YoY</th><th>실질 집값</th><th>소득 대비 집값</th></tr></thead><tbody>`+
     D.years.slice().reverse().map(y=>`<tr><td>${y.y}${y.zsn&&y.zsn<12?" *":""}</td><td>${fmt(y.mort,2)}%</td><td>${fmt(y.nhs)}</td><td>${fmt(y.zs)}</td><td>${fmt(y.zn)}</td><td>${fmt(y.zi)}</td><td>${fmt(y.rl)}</td><td>${y.msa==null?"–":fmt(y.msa,1)+"개월"}</td><td>${sgn(y.csy)}%</td><td>${fmt(y.real,1)}</td><td>${fmt(y.pti,1)}</td></tr>`).join("")+`</tbody>`;
+})();
+
+/* ---------- 수급(파는 쪽·사는 쪽·잠금 효과) ---------- */
+const FC={znm:"#ff7a45",zp:"#4c8dff",rnl:"#ffb38a",rpl:"#9cc0ff",abs:"#2fd3a0",mos:"#f2c14e",msa:"#e45bb3",cut:"#ef4444",rcut:"#fca5a5",above:"#22d3ee",doz:"#a78bfa",rdom:"#c4b5fd",mort:"#e8ecf3",lka:"#f2c14e",lt4:"#2fd3a0",ge6:"#ef4444"};
+const FR=[
+  {id:"f13",label:"2013~ (FHFA)",start:"2013-01-01"},
+  {id:"f16",label:"2016~ (Realtor)",start:"2016-07-01"},
+  {id:"f18",label:"2018~ (Zillow)",start:"2018-01-01"},
+  {id:"f21",label:"2021~",start:"2021-01-01"},
+];
+let fcur="f18";
+const FY=D.flowYears||[], LK=D.lock||[];
+const lt4=x=>x.lt3==null?null:Math.round((x.lt3+x.r34)*10)/10;
+(function(){
+  const y=k=>FY.find(x=>x.y===k)||{}, a=y("2019"), b=FY.filter(x=>x.zp!=null).slice(-1)[0]||{}, c=y("2021");
+  const ch=(n,o)=>n==null||o==null?"–":sgn((n/o-1)*100,0)+"%";
+  const L=LK[LK.length-1]||{};
+  const pk=LK.reduce((m,x)=>lt4(x)!=null&&(!m||lt4(x)>lt4(m))?x:m,null)||{};
+  const mos=lastOf(S.mos), cut=lastOf(S.cut);
+  const bl=b.y+(b.n&&b.n<12?`년(1~${b.n}월)`:"년");
+  const items=[
+    `<b>파는 쪽이 더 줄었다</b> — 2019년 대비 ${bl} 월평균 신규 매물은 Zillow ${ch(b.znm,a.znm)}·Realtor.com ${ch(b.rnl,a.rnl)}, 사는 쪽은 Zillow 신규 계약 ${ch(b.zp,a.zp)}·Realtor.com 계약 진행 매물 ${ch(b.rpl,a.rpl)}(건수에는 사이트 집계 범위가 넓어진 영향이 섞여 있어 위 전체 판매 감소와 직접 맞지 않습니다). 비율로 보면 새로 나온 매물 대비 신규 계약은 2019년 ${fmt(a.abs,0)}% → 2021년 ${fmt(c.abs,0)}% → ${bl} ${fmt(b.abs,0)}%.`,
+    `<b>재고 소진 개월수</b> — 걸려 있는 매물을 지금 계약 속도로 다 팔려면 ${fmt(mos&&mos.v,1)}개월(${mos?mos.m:""}). 2021년 ${fmt(c.mos,1)}개월에서 늘었지만 2019년(${fmt(a.mos,1)}개월)보다는 아직 짧습니다.`,
+    `<b>값을 깎는 매물</b> — Zillow 매물 중 가격을 내린 비율 ${fmt(cut&&cut.v,1)}%(${cut?cut.m:""}). 2021년 평균 ${fmt(c.cut,1)}%, 2019년 ${fmt(a.cut,1)}%. 호가보다 비싸게 팔린 비율은 2021년 ${fmt(c.above,1)}% → ${bl} ${fmt(b.above,1)}%. 협상력이 사는 사람 쪽으로 넘어가 있습니다.`,
+    `<b>잠금 효과</b> — 남아 있는 모기지 평균 금리 ${fmt(L.ave,1)}% vs 신규 ${fmt(L.mkt,2)}%(${L.q||""}). 금리 4% 미만 대출 비중은 ${pk.q||""} ${fmt(lt4(pk),1)}%에서 ${fmt(lt4(L),1)}%로 줄고, 6% 이상은 ${fmt(L.ge6,1)}%로 늘었습니다. 싼 대출이 조금씩 줄면서 파는 사람이 돌아오는 중입니다.`,
+  ];
+  document.getElementById("f-key").innerHTML=items.map(t=>`<li>${t}</li>`).join("");
+})();
+const frb=document.getElementById("f-rng");
+frb.innerHTML=FR.map(r=>`<button data-id="${r.id}" aria-pressed="${r.id===fcur}">${r.label}</button>`).join("");
+frb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;fcur=b.dataset.id;frb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.id===fcur));rebuildF(true);});
+let fBand=true;
+document.getElementById("f-band").addEventListener("change",e=>{fBand=e.target.checked;rebuildF();});
+let G2=null;
+function rebuildF(reset){
+  if(!window.LightweightCharts) return;
+  let keep=null;
+  if(G2&&!reset){ try{ keep=G2.panes[0].chart.timeScale().getVisibleLogicalRange(); }catch(e){} }
+  if(G2) G2.destroy();
+  const R=FR.find(r=>r.id===fcur); let i0=M.findIndex(m=>m>=R.start); if(i0<0) i0=0;
+  G2=TV.group(document.getElementById("f-bar"),{sync:true});
+  const B=fBand?bandList():[], mo=i=>M[i].slice(0,7);
+  const lg=(t,i,rows)=>`<b>${t}</b><span class="d">${mo(i)}</span>`+rows.filter(Boolean).join("");
+  const row=(c,name,v,u)=>v==null||v==="–"||v==="–%"?"":`<span>${sw(c)}${esc(name)} <b>${v}</b>${u||""}</span>`;
+  const note=t=>`<span class="d">${t}</span>`;
+  const pf0={type:"price",precision:0,minMove:1}, pf1={type:"price",precision:1,minMove:0.1}, pf2={type:"price",precision:2,minMove:0.01};
+  const dot={lineStyle:2,lineWidth:1.4};
+  const mk=(id,key,h,title,rows,last)=>G2.pane(document.getElementById(id),{key,times:M,height:h,timeVisible:!!last,bandLabels:id==="f-p1",margins:{top:.16,bottom:.07},legend:i=>lg(title,i,rows(i))});
+  const P1=mk("f-p1","fl1",260,"⑤ 파는 쪽 vs 사는 쪽 (천 건/월)",i=>[row(FC.znm,"신규 매물(Zillow)",fmt(S.znm[i])),row(FC.zp,"신규 계약(Zillow)",fmt(S.zp[i])),row(FC.rnl,"신규 매물(Realtor.com)",S.rnl[i]==null?null:fmt(S.rnl[i])),row(FC.rpl,"계약 진행 중 매물(Realtor.com)",S.rpl[i]==null?null:fmt(S.rpl[i]))]);
+  P1.add("line",{color:FC.znm,lineWidth:2.2,priceFormat:pf0},S.znm);
+  P1.add("line",{color:FC.zp,lineWidth:2.2,priceFormat:pf0},S.zp);
+  P1.add("line",Object.assign({color:FC.rnl,priceFormat:pf0},dot),S.rnl);
+  P1.add("line",Object.assign({color:FC.rpl,priceFormat:pf0},dot),S.rpl);
+  P1.bands(B);
+  const P2=mk("f-p2","fl2",170,"⑥ 신규 매물 대비 신규 계약 (%, Zillow)",i=>[row(FC.abs,"신규 계약 ÷ 신규 매물",S.abs[i]==null?null:fmt(S.abs[i],1)+"%"),note("100%보다 낮으면 새로 나온 매물이 계약보다 많아 재고가 쌓이는 쪽")]);
+  P2.add("line",{color:FC.abs,lineWidth:2,priceFormat:pf1},S.abs); P2.bands(B);
+  const P3=mk("f-p3","fl3",170,"⑦ 재고 소진 개월수 (개월)",i=>[row(FC.mos,"기존 매물: Zillow 재고 ÷ 월 신규 계약",S.mos[i]==null?null:fmt(S.mos[i],1)),row(FC.msa,"신규주택(인구조사국)",S.msa[i]==null?null:fmt(S.msa[i],1))]);
+  P3.add("line",{color:FC.mos,lineWidth:2,priceFormat:pf1},S.mos);
+  P3.add("line",{color:FC.msa,lineWidth:1.6,priceFormat:pf1},S.msa); P3.bands(B);
+  const pc=v=>v==null?null:fmt(v,1)+"%";
+  const P4=mk("f-p4","fl4",190,"⑧ 가격 협상력 (%)",i=>[row(FC.cut,"가격 인하 매물 비율(Zillow)",pc(S.cut[i])),row(FC.rcut,"가격 인하 매물 비율(Realtor.com)",pc(S.rcut[i])),row(FC.above,"호가보다 비싸게 팔린 비율(Zillow)",pc(S.above[i])),S.stl[i]!=null?note(`판매가 ÷ 호가 ${fmt(S.stl[i],2)}%`):""]);
+  P4.add("line",{color:FC.cut,lineWidth:2,priceFormat:pf1},S.cut);
+  P4.add("line",Object.assign({color:FC.rcut,priceFormat:pf1},dot),S.rcut);
+  P4.add("line",{color:FC.above,lineWidth:1.8,priceFormat:pf1},S.above); P4.bands(B);
+  const P5=mk("f-p5","fl5",170,"⑨ 팔리는 속도 (일)",i=>[row(FC.doz,"올린 뒤 계약까지(Zillow 중위)",S.doz[i]==null?null:fmt(S.doz[i])),row(FC.rdom,"시장에 머문 일수(Realtor.com 중위)",S.rdom[i]==null?null:fmt(S.rdom[i])),S.heat[i]!=null?note(`Zillow 시장 온도 ${fmt(S.heat[i])} (50 넘으면 파는 사람 우위)`):""]);
+  P5.add("line",{color:FC.doz,lineWidth:2,priceFormat:pf0},S.doz);
+  P5.add("line",Object.assign({color:FC.rdom,priceFormat:pf0},dot),S.rdom); P5.bands(B);
+  const P6=mk("f-p6","fl6",190,"⑩ 잠금 효과: 새 대출 금리 vs 이미 받은 대출 금리 (%)",i=>[row(FC.mort,"신규 30년 모기지(월평균)",S.mort[i]==null?null:fmt(S.mort[i],2)+"%"),row(FC.lka,"남아 있는 모기지 평균(FHFA, 분기)",pc(S.lka[i])),S.mort[i]!=null&&S.lka[i]!=null?note(`차이 ${sgn(S.mort[i]-S.lka[i],2)}%p — 클수록 팔고 새로 사기가 비쌈`):""]);
+  P6.add("line",{color:FC.mort,lineWidth:2,priceFormat:pf2},S.mort);
+  P6.add("line",{color:FC.lka,lineWidth:2,lineType:1,priceFormat:pf1},S.lka); P6.bands(B);
+  const P7=mk("f-p7","fl7",180,"⑪ 남아 있는 모기지의 금리대별 비중 (%, FHFA)",i=>[row(FC.lt4,"4% 미만",pc(S.lt4[i])),row(FC.ge6,"6% 이상",pc(S.ge6[i]))],true);
+  P7.add("line",{color:FC.lt4,lineWidth:2,lineType:1,priceFormat:pf1},S.lt4);
+  P7.add("line",{color:FC.ge6,lineWidth:2,lineType:1,priceFormat:pf1},S.ge6); P7.bands(B);
+  G2.panes.forEach(P=>P.legend(null));
+  const rng=keep||{from:i0-1,to:N-1+3};
+  const setR=()=>G2.panes.forEach(P=>P.chart.timeScale().setVisibleLogicalRange(rng));
+  setR(); setTimeout(setR,0);
+}
+(function(){
+  const pc=v=>v==null?"–":fmt(v,1)+"%", th=v=>v==null?"–":fmt(v)+"천", dd=v=>v==null?"–":fmt(v)+"일";
+  document.getElementById("f-yrTbl").innerHTML=`<thead><tr><th>연도</th><th>신규 매물(Zillow)</th><th>신규 계약(Zillow)</th><th>계약÷매물</th><th>신규 매물(Realtor)</th><th>계약 진행(Realtor)</th><th>소진 개월수</th><th>가격 인하(Zillow)</th><th>가격 인하(Realtor)</th><th>호가 이상 판매</th><th>판매가÷호가</th><th>계약까지 일수</th><th>시장 일수(Realtor)</th><th>시장 온도</th></tr></thead><tbody>`+
+    FY.slice().reverse().map(y=>`<tr><td>${y.y}${y.n&&y.n<12?` (${y.n}개월)`:""}</td><td>${th(y.znm)}</td><td>${th(y.zp)}</td><td>${pc(y.abs)}</td><td>${th(y.rnl)}</td><td>${th(y.rpl)}</td><td>${y.mos==null?"–":fmt(y.mos,1)+"개월"}</td><td>${pc(y.cut)}</td><td>${pc(y.rcut)}</td><td>${pc(y.above)}</td><td>${y.stl==null?"–":fmt(y.stl,2)+"%"}</td><td>${dd(y.doz)}</td><td>${dd(y.rdom)}</td><td>${fmt(y.heat)}</td></tr>`).join("")+`</tbody>`;
+  const rows=LK.filter((x,i)=>x.q.endsWith("Q4")||i>=LK.length-4).reverse();
+  document.getElementById("f-lockTbl").innerHTML=`<thead><tr><th>분기</th><th>신규 모기지</th><th>남은 대출 평균</th><th>차이</th><th>4% 미만</th><th>3% 미만</th><th>3~4%</th><th>4~5%</th><th>5~6%</th><th>6% 이상</th><th>11년 넘게 보유</th><th>담보인정비율(시가)</th><th>대출 수</th></tr></thead><tbody>`+
+    rows.map(x=>`<tr><td>${x.q}</td><td>${fmt(x.mkt,2)}%</td><td>${fmt(x.ave,1)}%</td><td class="${x.mkt-x.ave>0?"up":"dn"}">${sgn(x.mkt-x.ave,1)}%p</td><td>${pc(lt4(x))}</td><td>${pc(x.lt3)}</td><td>${pc(x.r34)}</td><td>${pc(x.r45)}</td><td>${pc(x.r56)}</td><td>${pc(x.ge6)}</td><td>${pc(x.ten11)}</td><td>${pc(x.ltv)}</td><td>${x.loans==null?"–":fmt(x.loans/1000,1)+"백만"}</td></tr>`).join("")+`</tbody>`;
 })();
 })();
