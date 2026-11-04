@@ -1,6 +1,6 @@
 /* us-re.css — 미국 부동산 화면 전용(스크리너는 jp-screener.css 그대로, 여기는 탭·주가×금리×경기 차트) */
 .fld:has(#onlych){display:none!important}
-#v-scr[hidden],#v-mac[hidden]{display:none!important}
+#v-scr[hidden],#v-mac[hidden],#v-dem[hidden],#v-cyc[hidden]{display:none!important}
 .mac{
   --surface:#ffffff; --ink:#172033; --ink2:#4f5b70; --ink3:#7f8aa0;
   --grid:#e8edf4; --axis:#b9c2d0;
@@ -140,3 +140,29 @@
 .mpick button:hover{border-color:#3a4356}
 .mpick button.q{color:#9aa3b4;background:transparent;border-style:dashed}
 .mpick .gap{width:8px}
+
+/* 금리 사이클 탭 */
+.tvcard select{background:#121620;border:1px solid #2a303c;color:#e3e7ee;border-radius:6px;padding:5px 8px;font:500 12.5px "Pretendard Variable",Pretendard,sans-serif;color-scheme:dark;max-width:320px}
+.cmeta{font-size:11.5px;color:#7d8698}
+.cperw{align-items:flex-start}
+.cper{display:flex;flex-wrap:wrap;gap:5px;flex:1}
+.cper button{background:#141924;border:1px solid #2a303c;border-left-width:3px;color:#c6ccd7;border-radius:6px;padding:4px 8px;font:500 11.5px "Pretendard Variable",Pretendard,sans-serif;cursor:pointer;white-space:nowrap}
+.cper button:hover{background:#1d2330;color:#fff}
+.mac .cper button.up{border-left-color:#ef4444;color:#f0c4c4}
+.mac .cper button.dn{border-left-color:#3b82f6;color:#c4d6f5}
+.mac .cper button.hold{border-left-color:#5b6375;color:#aab2c0}
+.mac .cper button.all{border-left-color:#e8ecf3}
+.mac .cper button[aria-pressed="true"]{background:#3a2f0b;border-color:#f5b400;color:#ffd75e}
+.c-qbtn{background:#2962ff;border:0;color:#fff;font:600 11.5px "Pretendard Variable",Pretendard,sans-serif;padding:4px 10px;border-radius:6px;cursor:pointer}
+.c-qbtn:hover{background:#3d72ff}
+.m-rsum .mute{color:#7d8698}
+#c-p2[hidden]{display:none}
+.ctbl tbody tr{cursor:pointer}
+.ctbl tbody tr:hover td{background:#f4f7fc}
+.ctbl tbody tr.sel td{background:#fff6d6}
+.ctbl .ck{display:inline-block;padding:1px 7px;border-radius:4px;font-weight:700;font-size:11.5px}
+.ctbl .ck.up{background:rgba(208,59,59,.12);color:#c02626}
+.ctbl .ck.dn{background:rgba(42,120,214,.12);color:#1d5fb8}
+.ctbl .ck.hold{background:#eef1f5;color:#5d6470}
+.ctbl em{font-style:normal;color:#b45309;font-size:11px}
+#c-qTbl tr.pre td{color:#8a93a3}

@@ -13,6 +13,7 @@
           CSUSHPINSA(케이스-실러), CPIAUCSL, MEHOINUSA646N(중위가구소득), TTLHH(가구 수)
           + Zillow Research 공개 CSV(미국 전체 판매 건수·매물·신규 매물).
 출력: docs/data/usre/screener-con.js (RAW·BUNDLE·CATS), docs/data/usre/macro.js (REM), docs/data/usre/demand.js (RED),
+      docs/data/usre/cycle.js (CYC — 금리 사이클) + docs/data/usre/cyc/<티커>.js (주간 수정주가 1999~·분기 매출·영업이익),
       docs/data/usre/screener-meta.json
 단위: 시총·매출·이익 = 억달러, 주가 = 달러(묶음 px 는 ×100 정수, vo 는 ÷100), 날짜 = 1970-01-01 부터 일수
 """
@@ -35,6 +36,8 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "docs" / "data" / "usre"
 F_SCR, F_MAC, META = OUT / "screener-con.js", OUT / "macro.js", OUT / "screener-meta.json"
 F_DEM = OUT / "demand.js"
+F_CYC, CYC_DIR = OUT / "cycle.js", OUT / "cyc"          # 금리 사이클 탭(2026-11-05 사용자) — 종목별 파일은 고를 때만 읽는다
+CYC_START = date(1999, 1, 2)                             # 1999-06 인상기부터 보이도록. 토요일 → 2000-01-01 과 같은 주 격자
 KST = timezone(timedelta(hours=9))
 EPOCH = date(1970, 1, 1)
 UA_WEB = {"User-Agent": "Mozilla/5.0"}
@@ -161,6 +164,28 @@ def spikes(rows):
         f = lambda n: round((c[min(i + n, len(c) - 1)] / c[i] - 1) * 100, 1) if i + n < len(c) else None
         out.append({"i": i, "dy": eday(rows[i][0]), "m": round(v[i] / med, 1), "d1": round(d1, 1), "f5": f(5), "f20": f(20)})
     return out
+
+
+def week_grid():
+    out, d = [], CYC_START
+    while d <= date.today():
+        out.append(d.isoformat()); d += timedelta(days=7)
+    return out
+
+
+def wsamp(dates, ser, stale=10):
+    """주 시작일 격자 → 그 주(시작일+6일) 안의 마지막 관측치. 관측치가 stale 일보다 오래되면 비운다"""
+    out, j, lv = [], 0, None
+    for ds in dates:
+        a = (D(ds) + timedelta(days=6)).isoformat()
+        while j < len(ser) and ser[j][0] <= a:
+            lv = ser[j]; j += 1
+        out.append(lv[1] if lv is not None and (D(a) - D(lv[0])).days <= stale else None)
+    return out
+
+
+def sig4(v):
+    return None if v is None else float(f"{v:.4g}")
 
 
 def pack(rows):
@@ -298,18 +323,28 @@ def fin_of(t, cik):
                if f.get("form", "").startswith("10")]
         if dil:
             shares = max(dil, key=lambda f: (f["end"], f.get("filed", "")))["val"]
-    return {"q": qd, "a": ad, "fm": fm, "rev": rev_ttm, "revg": revg, "opm": opm, "ni": ni_ttm, "roe": roe,
+    oq_all = dict(oq)
+    if oik == "세전이익":   # 세전이익 태그는 시기마다 이름이 달라 빈 분기를 다른 세전이익 태그로 채운다(같은 뜻이라 섞어도 된다)
+        for tg in OI_TAGS[1:]:
+            for k, v in periods(facts, [tg])[0].items():
+                oq_all.setdefault(k, v)
+    qall = [[e, round(rq[e] / 1e6, 1), (round(oq_all[e] / 1e6, 1) if e in oq_all else None)] for e in rq]   # 백만달러, 전 기간(금리 사이클 탭)
+    return {"qall": qall, "q": qd, "a": ad, "fm": fm, "rev": rev_ttm, "revg": revg, "opm": opm, "ni": ni_ttm, "roe": roe,
             "shares": shares, "oik": oik, "lastq": ends[0] if ends else None}
 
 
 SHARES_FIX = {"VMRK": 7.72e8}   # 합병(2026-08-18) 뒤 첫 10-Q 전 — AvalonBay 1주 = Equity Residential 2.793주로 환산한 추정
 
 
-def one_stock(t, grp, cat, desc, cik):
-    rows, meta = yahoo_daily(t, date.today() - timedelta(days=365 * YEARS + 10))
-    rows = [(d, c, v) for d, c, _, v in rows]
+def one_stock(t, grp, cat, desc, cik, grid):
+    try:
+        rows_all, meta = yahoo_daily(t, CYC_START)
+    except Exception:   # 상장이 늦은 종목은 1999년부터 물으면 빈 응답이 오기도 한다
+        rows_all, meta = yahoo_daily(t, date.today() - timedelta(days=365 * YEARS + 10))
+    cut = (date.today() - timedelta(days=365 * YEARS + 10)).isoformat()
+    rows = [(d, c, v) for d, c, _, v in rows_all if d >= cut]
     if len(rows) < 40:
-        return None, None, None
+        return None, None, None, None
     fin = None
     try:
         fin = fin_of(t, cik) if cik else None
@@ -340,30 +375,40 @@ def one_stock(t, grp, cat, desc, cik):
     for k in ("q", "a"):
         if fin.get(k):
             b[k] = fin[k]
-    return raw, b, last
+    wk = wsamp(grid, [(d, a) for d, _, a, _ in rows_all if a])
+    s0 = next((i for i, v in enumerate(wk) if v is not None), len(wk))
+    cyc = {"s": s0, "p": [sig4(v) for v in wk[s0:]], "q": fin.get("qall"), "fm": fin["fm"], "oik": fin.get("oik") or "영업이익"}
+    return raw, b, last, cyc
 
 
 def build_screener():
     tick = json.loads(get("https://www.sec.gov/files/company_tickers.json", UA_SEC))
     cik = {v["ticker"].upper(): v["cik_str"] for v in tick.values()}
     jobs = [(t, g, f"{g}: {n}", de) for g, n, de, ts in SEG for t in ts]
+    grid = week_grid()
 
     def run(j):
         t, g, cat, de = j
         for i in range(3):
             try:
-                return one_stock(t, g, cat, de, cik.get(t))
+                return one_stock(t, g, cat, de, cik.get(t), grid)
             except Exception as e:
                 if i == 2:
                     print("  실패", t, e)
                 time.sleep(1 + i)
-        return None, None, None
+        return None, None, None, None
 
     with ThreadPoolExecutor(6) as ex:
         res = list(ex.map(run, jobs))
-    raw = [r for r, _, _ in res if r]; bun = [b for _, b, _ in res if b]
+    raw = [r for r, _, _, _ in res if r]; bun = [b for _, b, _, _ in res if b]
+    CYC_DIR.mkdir(parents=True, exist_ok=True)
+    for j, (_, _, _, cy) in zip(jobs, res):
+        if cy:
+            with open(CYC_DIR / f"{j[0]}.js", "w", encoding="utf-8", newline="\n") as f:
+                f.write(f"/* {j[0]} 주간 수정주가(1999~)·분기 매출·{cy['oik']}(백만달러) — build_usre.py */\n")
+                f.write(f"(window.CYCT=window.CYCT||{{}})[{json.dumps(j[0])}]={json.dumps(cy, ensure_ascii=False, separators=(',', ':'))};\n")
     raw.sort(key=lambda r: -(r[5] or 0))
-    asof = max((l for *_, l in res if l), default=None)
+    asof = max((l for _, _, l, _ in res if l), default=None)
     bm = {f"{g}: {n}": de for g, n, de, _ in SEG}
     with open(F_SCR, "w", encoding="utf-8", newline="\n") as f:
         f.write(f"/* 미국 부동산 스크리너 데이터 — build_us_re.py 가 만든다({datetime.now(KST):%Y-%m-%d %H:%M} KST) */\n")
@@ -372,7 +417,7 @@ def build_screener():
         f.write(f"const CATS = {json.dumps(CATS, ensure_ascii=False)};\n")
         f.write(f"const CAT_DESC = {json.dumps(bm, ensure_ascii=False)};\n")
         f.write("const KPI = {};\nconst NEWS = {};\nconst BM = {};\n")
-    fails = [j[0] for j, (r, _, _) in zip(jobs, res) if not r]
+    fails = [j[0] for j, (r, _, _, _) in zip(jobs, res) if not r]
     return {"n": len(raw), "asof": asof, "fails": fails}
 
 
@@ -454,6 +499,87 @@ def build_macro():
         f.write(f"/* 미국 부동산 · 주가×금리×경기 차트 데이터 — build_us_re.py ({datetime.now(KST):%Y-%m-%d %H:%M} KST) */\n")
         f.write(f"const REM = {json.dumps(data, separators=(',', ':'))};\n")
     return {"weeks": len(dates), "last": last, "ur_last": urs[-1], "ppi_last": pps[-1]}
+
+
+# ── 금리 사이클 탭(2026-11-05 사용자: "인상·인하·동결 구간을 2000년부터, 그 사이 기준금리·모기지가 몇 bp 움직였는지,
+#    기업을 골라 주가를 겹치고, 구간을 고르면 확대, 그 구간 매출·영업이익과 전년 대비") ──
+CYC_GAP = 400                 # 같은 방향 결정이 이 일수 안에 다시 나오면 한 사이클(중간 쉼 포함) — 2001~03 인하, 2015~18 인상, 2024~ 인하를 하나로
+CYC_SPLIT = {"2020-03-03"}    # 코로나 긴급 인하는 2019년 예방적 인하와 따로 본다
+
+
+def build_cycles():
+    grid = week_grid()
+    today = date.today().isoformat()
+    tar = [(d, v) for d, v in fred("DFEDTAR") if d < "2008-12-16"] + [(d, v) for d, v in fred("DFEDTARU") if d >= "2008-12-16"]
+    tar = [x for x in tar if x[0] >= "1998-12-01"]
+    ev, cur = [], None
+    for d, v in tar:
+        if cur is not None and abs(v - cur) > 1e-9:
+            ev.append([d, cur, v])
+        cur = v
+    mort = [(d, v) for d, v in fred("MORTGAGE30US") if d >= "1998-01-01"]
+    t10 = [(d, v) for d, v in fred("DGS10") if d >= "1998-01-01"]
+    cyc = []
+    for d, a, b in ev:
+        dr = 1 if b > a else -1
+        c = cyc[-1] if cyc else None
+        if c and c["dir"] == dr and d not in CYC_SPLIT and (D(d) - D(c["b"])).days <= CYC_GAP:
+            gap = (D(d) - D(c["b"])).days
+            if gap >= 120:
+                c["pause"].append([c["b"], d])
+            c["b"] = d; c["f1"] = b; c["n"] += 1
+        else:
+            cyc.append({"dir": dr, "a": d, "b": d, "f0": a, "f1": b, "n": 1, "pause": []})
+    per = []
+    for i, c in enumerate(cyc):
+        per.append({"k": "up" if c["dir"] > 0 else "dn", "a": c["a"], "b": c["b"], "f0": c["f0"], "f1": c["f1"], "n": c["n"], "pause": c["pause"]})
+        nxt = cyc[i + 1]["a"] if i + 1 < len(cyc) else None
+        if nxt is None and (D(today) - D(c["b"])).days < 120:   # 마지막 결정이 4개월 안이면 그 사이클이 진행 중
+            per[-1]["b"] = today; per[-1]["open"] = True
+            continue
+        end = nxt or today
+        if (D(end) - D(c["b"])).days >= 30:
+            per.append({"k": "hold", "a": c["b"], "b": end, "f0": c["f1"], "f1": c["f1"], "n": 0, "pause": [], "open": nxt is None})
+
+    def at(ser, iso):
+        r = None
+        for d, v in ser:
+            if d <= iso:
+                r = (d, v)
+            else:
+                break
+        return r
+
+    def stat(ser, a, b):
+        s0, s1 = at(ser, a), at(ser, b)
+        ins = [(d, v) for d, v in ser if a <= d <= b]
+        if s0:
+            ins = [s0] + ins
+        hi = max(ins, key=lambda x: x[1]) if ins else None
+        lo = min(ins, key=lambda x: x[1]) if ins else None
+        pre = at(ser, (D(a) - timedelta(days=182)).isoformat())
+        return {"s": s0, "e": s1, "hi": hi, "lo": lo, "pre": pre}
+
+    for p in per:
+        p["m"] = stat(mort, p["a"], p["b"])
+        p["t"] = stat(t10, p["a"], p["b"])
+    fedw = []
+    j, lv = 0, tar[0][1]
+    for ds in grid:
+        a = (D(ds) + timedelta(days=6)).isoformat()
+        while j < len(tar) and tar[j][0] <= a:
+            lv = tar[j][1]; j += 1
+        fedw.append(lv)
+    mw = [sig4(v) for v in wsamp(grid, mort)]
+    tw = wsamp(grid, t10)
+    tick = [[t, NAME_KO.get(t, t), f"{g}: {n}"] for g, n, _, ts in SEG for t in ts]
+    data = {"dates": grid, "fed": fedw, "mort": mw, "t10": [None if v is None else round(v, 2) for v in tw],
+            "ev": ev, "per": per, "tick": tick, "rangeEra": "2008-12-16",
+            "last": {"fed": tar[-1], "mort": mort[-1], "t10": t10[-1]}}
+    with open(F_CYC, "w", encoding="utf-8", newline="\n") as f:
+        f.write(f"/* 미국 부동산 · 금리 사이클 탭 데이터 — build_usre.py ({datetime.now(KST):%Y-%m-%d %H:%M} KST) */\n")
+        f.write(f"const CYC = {json.dumps(data, ensure_ascii=False, separators=(',', ':'))};\n")
+    return {"periods": len(per), "weeks": len(grid), "last_fed": tar[-1]}
 
 
 # ── 판매·매물·집값 탭(2026-11-04 사용자: "신규 판매·기존 매물·기존 판매가 금리 오를 때와 내릴 때 어떻게 다른지,
@@ -719,11 +845,15 @@ def main():
     except Exception as e:   # 이 탭이 실패해도 나머지는 만든다
         d = {"error": str(e)[:200]}; print("판매·매물·집값 실패", e)
     m = build_macro(); print("차트", m)
+    try:
+        c = build_cycles(); print("금리 사이클", c)
+    except Exception as e:
+        c = {"error": str(e)[:200]}; print("금리 사이클 실패", e)
     s = build_screener(); print("스크리너", s)
-    meta = {"updated": datetime.now(KST).isoformat(timespec="minutes"), "screener": s, "macro": m, "demand": d}
+    meta = {"updated": datetime.now(KST).isoformat(timespec="minutes"), "screener": s, "macro": m, "demand": d, "cycle": c}
     json.dump(meta, open(META, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     json.dump({"updated": meta["updated"], "bars": {}}, open(OUT / "px_recent.json", "w", encoding="utf-8"))   # 화면이 찾는 파일(매일 이어 붙이기는 아직 없음)
-    for p in (F_SCR, F_MAC, F_DEM):
+    for p in (F_SCR, F_MAC, F_DEM, F_CYC):
         print(p.name, round(p.stat().st_size / 1e6, 2), "MB")
 
 

@@ -11,7 +11,7 @@
 <script src="usre-boot.js?v=1"></script>
 <link rel="stylesheet" href="usre-theme.css?v=1">
 <link rel="stylesheet" href="usre-screener.css?v=1">
-<link rel="stylesheet" href="usre.css?v=7">
+<link rel="stylesheet" href="usre.css?v=8">
 <link rel="stylesheet" href="usre-nav.css?v=1">
 </head>
 <body>
@@ -40,6 +40,7 @@
         <button data-tab="scr" aria-pressed="true"><b>스크리너</b><span>주거 · 상업 · 건설 26개 BM</span></button>
         <button data-tab="mac" aria-pressed="false"><b>주가 × 금리 × 경기</b><span>대장주 · 모기지 · 실업률 · PPI</span></button>
         <button data-tab="dem" aria-pressed="false"><b>판매 · 매물 · 집값</b><span>금리 오를 때 vs 내릴 때 · 미뤄진 수요</span></button>
+        <button data-tab="cyc" aria-pressed="false"><b>금리 사이클</b><span>인상 · 인하 · 동결 구간 × 기업 주가 · 실적</span></button>
       </div>
     </div>
     <div class="stats">
@@ -222,13 +223,43 @@
   </div>
 </div>
 
+<div id="v-cyc" class="mac" hidden>
+  <div class="mac-in">
+  <p class="msub">1999년부터 연준이 금리를 <b>올리던</b>(빨강)·<b>내리던</b>(파랑)·<b>멈춘</b>(띠 없음) 구간을 나누고, 그 사이 기준금리와 30년 모기지가 몇 bp 움직였는지 봅니다.
+  기업을 고르면 그 회사 주가가 금리선과 겹쳐 나오고, 구간을 고르면 그 구간만 확대해 주가·금리·분기 매출과 영업이익을 보여 줍니다. <span id="c-asof"></span> 기준.</p>
+  <div class="mcard tvcard" id="c-card">
+    <div class="mctl"><span class="ml">기업</span><select id="c-tk" aria-label="기업"></select><span class="cmeta" id="c-meta"></span></div>
+    <div class="mctl cperw"><span class="ml">구간</span><div class="cper" id="c-per"></div></div>
+    <div class="mctl"><span class="ml">아래 칸</span><div class="seg" id="c-fin"><button data-f="rev">분기 매출액</button><button data-f="oi">분기 영업이익</button><button data-f="off">끄기</button></div>
+      <span class="ml">주가 눈금</span><div class="seg" id="c-scale"><button data-s="log">로그</button><button data-s="lin">일반</button></div></div>
+    <div class="m-rsum" id="c-sum"></div>
+    <div id="c-bar"></div>
+    <div class="tvstack"><div id="c-p1"></div><div id="c-p2"></div></div>
+    <div class="m-info" id="c-info"></div>
+    <div class="mlegend" id="c-src"></div>
+  </div>
+  <details class="mdet" id="c-qdet"><summary>분기별 매출액·영업이익과 전년 대비 — <span id="c-qh"></span></summary><div class="mtw"><table id="c-qTbl"></table></div></details>
+  <details class="mdet" open><summary>1999년 이후 금리 구간 전체: 기준금리·모기지 변화와 <span id="c-tblh"></span> (행을 누르면 그 구간으로)</summary><div class="mtw"><table id="c-tbl" class="ctbl"></table></div></details>
+  <div class="mnotes">
+    <b>구간 나누기.</b> 기준금리를 같은 방향으로 움직인 결정들이 400일 안에 이어지면 한 사이클로 묶었습니다. 그래서 2001~03년 인하, 2015~18년 인상, 2024~25년 인하는 중간에 쉰 기간(차트에 어둡게, 4개월 이상)이 있어도 한 구간입니다.
+    단, 2020년 3월 코로나 긴급 인하는 2019년 예방적 인하와 따로 봤습니다. 동결 구간은 한 사이클의 마지막 결정일부터 다음 사이클의 첫 결정일까지입니다. 마지막 결정이 4개월 안이면 그 사이클을 진행 중으로 봅니다.<br>
+    <b>숫자 읽기.</b> 기준금리는 2008년 12월 이전엔 단일 목표치, 이후엔 목표 범위 상단입니다. 모기지 변화는 구간 첫날 직전 주간 고시 → 마지막 날 직전 주간 고시의 차이입니다. 「시작 전 6개월」은 첫 결정 6개월 전부터 첫 결정까지 모기지가 먼저 움직인 폭입니다(시장 금리가 연준보다 앞서는 정도).
+    주가는 배당·분할을 반영한 주간 수정주가, 수익률은 구간 첫 주 → 마지막 주입니다. 실적은 SEC 10-Q·10-K(XBRL, 대개 2009년~)의 분기 값이고 4분기는 연간 − 1~3분기입니다. 구간 실적 변화는 구간 시작일까지 나온 최근 4분기 합 → 구간 끝날까지 나온 최근 4분기 합입니다(실제 발표일과는 1~2달 차이).
+    영업이익을 따로 공시하지 않는 회사(대부분의 홈빌더·리츠)는 세전이익을 썼고 표 머리에 표시합니다. 차트 도구(선 긋기·구간 보기)는 다른 탭과 같습니다.<br>
+    <b>출처.</b> 기준금리: FRED DFEDTAR·DFEDTARU · 30년 모기지: 프레디맥 PMMS(FRED MORTGAGE30US) · 10년물: FRED DGS10 · 주가: 야후 파이낸스 수정주가 · 실적: SEC EDGAR XBRL companyfacts.
+  </div>
+  </div>
+</div>
+
 <div class="scrim" id="scrim"></div>
 <aside class="panel" id="panel" role="dialog" aria-modal="true" tabindex="-1"><div class="pin" id="pin"></div></aside>
 <script src="data/usre/screener-con.js?v=1"></script>
-<script src="usre-tv.js?v=8"></script>
+<script src="usre-tv.js?v=9"></script>
 <script src="usre-screener.js?v=4"></script>
 <script src="data/usre/demand.js?v=2"></script>
 <script src="usre-demand.js?v=2"></script>
+<script src="data/usre/cycle.js?v=1"></script>
+<script src="usre-cycle.js?v=1"></script>
 <script src="data/usre/macro.js?v=1"></script>
 <script src="usre-macro.js?v=8"></script>
 </body>

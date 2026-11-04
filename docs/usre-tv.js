@@ -131,7 +131,11 @@
         var x0 = P.x(P.idx(b.a) - 0.5), x1 = P.x(P.idx(b.b) + 0.5);
         if (x0 == null || x1 == null || x1 < 0 || x0 > W) return;
         ctx.fillStyle = b.color; ctx.fillRect(x0, 0, Math.max(1, x1 - x0), H);
-        if (b.label && P.o.bandLabels !== false) { ctx.fillStyle = b.lc || "rgba(255,255,255,.55)"; ctx.font = "600 11px Pretendard Variable, Pretendard, sans-serif"; ctx.fillText(b.label, Math.max(x0, 0) + 4, H - 36); }
+        if (b.label && P.o.bandLabels !== false) {
+          ctx.font = "600 11px Pretendard Variable, Pretendard, sans-serif";
+          var lx = Math.max(x0, 0) + 4;
+          if (Math.min(x1, W) - lx >= ctx.measureText(b.label).width + 2) { ctx.fillStyle = b.lc || "rgba(255,255,255,.55)"; ctx.fillText(b.label, lx, H - 36); }   // 띠가 좁으면 글자를 넣지 않는다
+        }
       });
       P._vl.forEach(function (v, k) {
         var x = P.x(P.idx(v.d)); if (x == null || x < 0 || x > W) return;
