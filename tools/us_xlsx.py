@@ -28,6 +28,7 @@ COS = {
             "extra": {"2026-09-30": {"rev": 9371.3, "pretax": 1014.6, "ni": 741.8,
                                       "_src": "FY26 4Q 실적 보도자료(8-K EX-99.1, 2026-10-29) — 10-K 제출 전"}}},
     "LEN": {"cik": "0000920760", "name": "레나", "fye": 11, "extra": {}},
+    "Z": {"cik": "0001617640", "name": "질로우", "fye": 12, "extra": {}},
 }
 
 # (키, 한국어 항목, 태그 후보, 종류: d=기간·i=시점, 굵게)
@@ -36,7 +37,9 @@ ITEMS = [
     ("rev", "매출", ["Revenues", "RevenueFromContractWithCustomerExcludingAssessedTax", "SalesRevenueNet"], "d", True),
     ("cogs", "매출원가", ["CostOfRevenue", "CostOfGoodsAndServicesSold", "CostOfRealEstateRevenue", "HomeBuildingCosts"], "d", False),
     ("gp", "매출총이익", ["GrossProfit"], "d", False),
-    ("sga", "판매관리비", ["SellingGeneralAndAdministrativeExpense", "GeneralAndAdministrativeExpense"], "d", False),
+    ("sga", "판매관리비(일반관리비)", ["SellingGeneralAndAdministrativeExpense", "GeneralAndAdministrativeExpense"], "d", False),
+    ("mkt", "마케팅비", ["SellingAndMarketingExpense", "MarketingAndAdvertisingExpense"], "d", False),
+    ("rnd", "기술·개발비", ["ResearchAndDevelopmentExpense"], "d", False),
     ("costs", "총비용(원가+판관비 등)", ["CostsAndExpenses"], "d", False),
     ("op", "영업이익", ["OperatingIncomeLoss"], "d", True),
     ("pretax", "세전이익", ["IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest",
