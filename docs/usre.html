@@ -11,7 +11,7 @@
 <script src="usre-boot.js?v=1"></script>
 <link rel="stylesheet" href="usre-theme.css?v=1">
 <link rel="stylesheet" href="usre-screener.css?v=1">
-<link rel="stylesheet" href="usre.css?v=6">
+<link rel="stylesheet" href="usre.css?v=7">
 <link rel="stylesheet" href="usre-nav.css?v=1">
 </head>
 <body>
@@ -149,8 +149,8 @@
     <div class="mctl"><span class="ml">기간</span><div class="seg" id="m-rng"></div>
       <span class="mdate"><span class="ml">직접</span><input type="date" id="m-from" aria-label="시작일"><span class="tl">~</span><input type="date" id="m-to" aria-label="끝날"><button id="m-go" type="button">보기</button></span>
       <span class="ml">눈금</span><div class="seg" id="m-scale"><button data-s="log" aria-pressed="true">로그</button><button data-s="idx" aria-pressed="false">보이는 첫 주 = 100</button></div></div>
+    <div class="mctl"><span class="ml">종목</span><div class="mpick" id="m-pick"></div></div>
     <div class="mctl"><span class="ml">표시</span>
-      <label class="mchk"><input type="checkbox" id="m-avg"> 평균만</label>
       <label class="mchk"><input type="checkbox" id="m-rec" checked> 침체·위기 구간</label>
       <label class="mchk"><input type="checkbox" id="m-fedb" checked> 연준 인상·인하 띠</label>
       <label class="mchk"><input type="checkbox" id="m-ur" checked> 실업률</label>
@@ -164,7 +164,7 @@
   </div>
   <div class="mnotes">
     <b>읽는 법.</b> ① 칸은 로그 눈금이라 같은 높이 차이가 같은 상승률입니다. 기간 버튼을 누르면 그 시작 주를 100으로 다시 맞춥니다.
-    그룹 평균은 같은 비중이며, 늦게 상장한 종목은 상장한 주부터 평균에 들어갑니다(그 종목 선도 그 주의 평균에서 시작).
+    <b>종목 고르기</b>: 「종목」 줄의 이름을 누르면 그 선을 켜고 끕니다. 두 번 빠르게 누르면 그 종목만 남기고, 「모두」·「평균만」으로 한 번에 바꿉니다. 그룹 평균선은 고른 종목과 상관없이 그룹 전체 평균입니다. 그룹 평균은 같은 비중이며, 늦게 상장한 종목은 상장한 주부터 평균에 들어갑니다(그 종목 선도 그 주의 평균에서 시작).
     ② 칸의 기준금리는 2008년 12월 이전엔 단일 목표치, 이후엔 목표 범위 상단입니다. ③ 칸의 실업률은 <b>1년 전보다 몇 %p 올랐나</b>(예: 4.2% → +0.3%p), PPI는 전년 같은 달 대비 상승률입니다.
     실업률 전년 차가 +0.5%p를 넘은 시점은 2001·2007~08·2020 침체 초입과 겹쳤지만, 2024년(최고 +0.5%p)에는 침체로 이어지지 않았습니다. 마우스를 올리면 세 칸이 같은 주를 가리키고, 칸마다 왼쪽 위에 그 주의 값이 나옵니다. 휠로 확대, 끌어서 이동합니다. <b>구간 직접 지정</b>: 날짜 두 칸에 시작일·끝날을 넣고 「보기」, 또는 「↔ 구간 보기」(Alt+R)를 누르고 차트에서 시작일·끝날을 차례로 클릭합니다. 시작일이 100으로 다시 맞춰지고, 위 요약 줄에 그 구간의 주가 수익률과 금리·실업률·PPI 변화가 나옵니다. 「전체 보기」로 되돌립니다. <b>선 긋기</b>: 수평선(Alt+H)·추세선(Alt+T)·수직선(Alt+V), 선을 클릭해 고른 뒤 Delete 또는 우클릭으로 지웁니다. 그린 선은 이 브라우저에 저장됩니다.<br>
     <b>출처.</b> 주가: 야후 파이낸스 주간 수정주가 · 30년 모기지: 프레디맥 PMMS(FRED MORTGAGE30US) · 10년물: FRED DGS10 · 기준금리: FRED DFEDTAR·DFEDTARU ·
@@ -230,6 +230,6 @@
 <script src="data/usre/demand.js?v=2"></script>
 <script src="usre-demand.js?v=2"></script>
 <script src="data/usre/macro.js?v=1"></script>
-<script src="usre-macro.js?v=7"></script>
+<script src="usre-macro.js?v=8"></script>
 </body>
 </html>

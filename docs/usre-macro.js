@@ -70,7 +70,7 @@ const fmt=(v,d=2)=>v==null?"–":(+v).toFixed(d);
 const sgn=(v,d=1)=>v==null?"–":(v>0?"+":"")+(+v).toFixed(d);
 const ymd=t=>new Date(t).toISOString().slice(0,10);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-let cur="all", grp="hb", avgOnly=false, showRec=true, showUR=true, showPPI=true;
+let cur="all", grp="hb", showRec=true, showUR=true, showPPI=true;
 
 /* 그룹 지수: 시작 주 = 100. 상장 전 종목은 빼고 주간 수익률을 같은 비중으로 이어 붙인다(체인 연결).
    늦게 상장한 종목의 선은 상장 주의 그룹 평균에서 시작한다. */
@@ -111,7 +111,7 @@ function groupSeries(g,i0){
 let scaleMode="log", showFedB=true, custom=null;   // custom = [시작 위치, 끝 위치] — 사용자가 직접 정한 구간
 const gb=document.getElementById("m-grp");
 gb.innerHTML=GROUPS.map(g=>`<button data-g="${g.id}" aria-pressed="${g.id===grp}">${g.label}</button>`).join("")+`<button data-g="cmp" aria-pressed="false">4그룹 평균 비교</button>`;
-gb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;grp=b.dataset.g;gb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.g===grp));rebuild();yearTable();});
+gb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;grp=b.dataset.g;gb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.g===grp));picker();rebuild();yearTable();});
 const rb=document.getElementById("m-rng");
 rb.innerHTML=RANGES.map(r=>`<button data-id="${r.id}" aria-pressed="${r.id===cur}">${r.label}</button>`).join("");
 function pressPreset(id){ cur=id; rb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.id===id)); }
@@ -133,7 +133,7 @@ document.getElementById("m-go").addEventListener("click",applyDates);
 const sb=document.getElementById("m-scale");
 sb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;scaleMode=b.dataset.s;sb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.s===scaleMode));rebuild();});
 const chk=(id,fn)=>document.getElementById(id).addEventListener("change",e=>{fn(e.target.checked);rebuild();});
-chk("m-avg",v=>avgOnly=v); chk("m-rec",v=>showRec=v); chk("m-fedb",v=>showFedB=v); chk("m-ur",v=>showUR=v); chk("m-ppi",v=>showPPI=v);
+chk("m-rec",v=>showRec=v); chk("m-fedb",v=>showFedB=v); chk("m-ur",v=>showUR=v); chk("m-ppi",v=>showPPI=v);
 
 /* ---------- 검정 차트 3칸(① 주가 ② 금리 ③ 경기·물가) — 시간축·십자선이 같이 움직인다 ---------- */
 const PAL=["#4c8dff","#ff7a45","#2fd3a0","#f2c14e","#e45bb3"];
@@ -158,14 +158,41 @@ function seriesList(i0){
   const reb=(arr,base)=>arr.map(v=>v==null||!base?null:v*100/base);
   const baseOf=A=>{ for(let i=i0;i<N;i++) if(A[i]!=null) return A[i]; return null; };
   if(grp==="cmp"){
-    GROUPS.forEach(g=>{ const s=groupSeries(g,0); out.push({name:g.label+" 평균",c:GCOL[g.id],v:reb(s.A,baseOf(s.A)),avg:1}); });
+    GROUPS.forEach(g=>{ const s=groupSeries(g,0); out.push({id:g.id,name:g.label+" 평균",c:GCOL[g.id],v:reb(s.A,baseOf(s.A)),avg:1}); });
   }else{
     const g=GROUPS.find(x=>x.id===grp), s=groupSeries(g,0), base=baseOf(s.A);
-    if(!avgOnly) g.stocks.forEach((st,j)=>out.push({k:st[0],name:`${st[1]} (${st[0]})`,c:PAL[j],v:reb(s.idx[st[0]],base)}));
-    out.push({name:`${g.label} 평균`,c:COL.avg,v:reb(s.A,base),avg:1,bold:1});
+    g.stocks.forEach((st,j)=>out.push({id:st[0],k:st[0],name:`${st[1]} (${st[0]})`,c:PAL[j],v:reb(s.idx[st[0]],base)}));
+    out.push({id:"avg",name:`${g.label} 평균`,c:COL.avg,v:reb(s.A,base),avg:1,bold:1});
   }
-  return out;
+  return out.filter(x=>!isOff(x.id));
 }
+/* 종목 고르기(2026-11-05 사용자: "기업 하나하나로 보게 선택해서 볼 수 있게") — 업종마다 따로 기억한다 */
+const OFF={};
+const isOff=id=>!!(OFF[grp]&&OFF[grp].has(id));
+function pickItems(){
+  if(grp==="cmp") return GROUPS.map(g=>({id:g.id,name:g.label+" 평균",c:GCOL[g.id]}));
+  const g=GROUPS.find(x=>x.id===grp);
+  return g.stocks.map((st,j)=>({id:st[0],name:`${st[1]} (${st[0]})`,c:PAL[j]})).concat([{id:"avg",name:`${g.label} 평균`,c:COL.avg}]);
+}
+const pk=document.getElementById("m-pick");
+function picker(){
+  const it=pickItems(), off=OFF[grp]||new Set();
+  pk.innerHTML=it.map(x=>`<button type="button" data-id="${x.id}" aria-pressed="${!off.has(x.id)}" title="누르면 켜고 끄기, 두 번 누르면 이것만">${sw(x.c)}${esc(x.name)}</button>`).join("")+
+    `<span class="gap"></span><button type="button" class="q" data-q="all">모두</button>`+(grp==="cmp"?"":`<button type="button" class="q" data-q="avg">평균만</button>`);
+}
+let pkTimer=null, pkLast=null;
+pk.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  const ids=pickItems().map(x=>x.id);
+  if(b.dataset.q==="all") OFF[grp]=new Set();
+  else if(b.dataset.q==="avg") OFF[grp]=new Set(ids.filter(x=>x!=="avg"));
+  else{
+    const id=b.dataset.id, off=OFF[grp]||(OFF[grp]=new Set());
+    if(pkLast===id && pkTimer){ clearTimeout(pkTimer); pkTimer=null; pkLast=null; OFF[grp]=new Set(ids.filter(x=>x!==id)); }   // 두 번 누름 = 이것만
+    else{ off.has(id)?off.delete(id):off.add(id); pkLast=id; clearTimeout(pkTimer); pkTimer=setTimeout(()=>{pkTimer=null;pkLast=null;},350); }
+  }
+  picker(); rebuild();
+});
 function legendsSrc(){
   const G0=GROUPS.find(g=>g.id===grp);
   document.getElementById("m-gnote").textContent = grp==="cmp" ? "4개 그룹의 같은 비중 평균을 겹쳤습니다. 늦게 상장한 종목은 상장 주부터 평균에 들어갑니다. "+GROUPS.filter(g=>g.note).map(g=>g.note).join(" ") : (G0&&G0.note)||"";
@@ -204,6 +231,7 @@ function rebuild(resetRange){
       curSeries.map(s=>{ const v=s.v[i]; if(v==null) return ""; const raw=s.k&&D.px[s.k]&&D.px[s.k][i]!=null?` <em>$${D.px[s.k][i].toLocaleString(undefined,{maximumFractionDigits:2})}</em>`:"";
         return `<span>${sw(s.c)}${esc(s.name)} <b>${Math.round(v).toLocaleString()}</b>${raw}</span>`; }).join("")});
   const ordered=curSeries.slice().sort((a,b)=>(b.avg||0)-(a.avg||0));   // 평균선을 기준 시리즈로(선 긋기 기준)
+  if(!ordered.length) P1.add("line",{color:"rgba(0,0,0,0)",lastValueVisible:false,crosshairMarkerVisible:false},new Array(N).fill(100));
   ordered.forEach(s=>P1.add("line",{color:s.c,lineWidth:s.bold?3:(s.avg?2.4:1.6),title:"",lastValueVisible:true,priceFormat:{type:"price",precision:0,minMove:1}},s.v.map(r2)));
   if(scaleMode==="idx") P1.chart.priceScale("right").applyOptions({mode:3});
   P1.bands(bands); P1.vlines(evl);
@@ -282,6 +310,7 @@ function yearTable(){
   }
   document.getElementById("m-yrTbl").innerHTML=`<thead><tr><th>연말</th>${tks.map(s=>`<th>${s[0]} ($)</th>`).join("")}<th>모기지</th><th>10년물</th><th>기준(상단)</th><th>실업률</th><th>PPI YoY</th></tr></thead><tbody>${yrs.reverse().join("")}</tbody>`;
 }
+picker();
 yearTable();
 showTab(t0||"scr");
 })();

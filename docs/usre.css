@@ -130,3 +130,13 @@
 
 /* 판매·매물·집값 탭 — 수급 소제목 */
 .mac h3.dsub{margin:34px 0 6px;font-size:18px;font-weight:700;letter-spacing:-.01em}
+
+/* 주가×금리 차트 — 종목 고르기 칩 */
+.mpick{display:inline-flex;flex-wrap:wrap;gap:6px}
+.mpick button{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:12.5px;padding:5px 10px;border-radius:999px;cursor:pointer;border:1px solid #262c38;background:#121620;color:#e9edf5}
+.mpick button .tv-sw{width:14px;height:4px}
+.mpick button[aria-pressed="false"]{color:#5d6576;background:transparent}
+.mpick button[aria-pressed="false"] .tv-sw{opacity:.25}
+.mpick button:hover{border-color:#3a4356}
+.mpick button.q{color:#9aa3b4;background:transparent;border-style:dashed}
+.mpick .gap{width:8px}
