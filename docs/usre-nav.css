@@ -1,0 +1,13 @@
+/* 미국 부동산 화면 위 내비(실적발표 스크리너 app.css 의 #topnav 와 같은 모양) */
+#topnav{position:sticky;top:0;z-index:40;height:52px;background:rgba(243,246,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid #dde4ef;
+  font-family:"Pretendard Variable","Pretendard","Malgun Gothic",system-ui,sans-serif}
+#topnav a{text-decoration:none}
+.nav-in{max-width:1360px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;gap:18px}
+.brand { font-weight: 800; font-size: 15px; color: #172033; letter-spacing: -.3px; white-space: nowrap; }
+.brand span { color: #2563eb; }
+.market { display: flex; gap: 2px; }
+.market a { padding: 6px 13px; border-radius: 8px; color: #5b6780; font-weight: 600; font-size: 13.5px; }
+.market a:hover { background: #ffffff; color: #172033; }
+.market a.on { color: #172033; background: #ffffff; box-shadow: inset 0 -2px 0 #2563eb; }
+.market a{white-space:nowrap}
+@media (max-width:760px){.nav-in{gap:8px;padding:0 12px}.market{overflow-x:auto;scrollbar-width:none}.market a{padding:6px 9px;font-size:13px}}
