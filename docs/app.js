@@ -1246,7 +1246,7 @@
           '<div class="us-sub">' + e(it.sector) + " · 실적 " + e(it.period) + " · 발표 " + e(it.ann) + " · 작성 " + e(it.date) + "</div>" +
           '<div class="us-v">' + e(it.verdict) + "</div></a>";
       }).join("");
-      app.innerHTML = '<div class="us-wrap"><h2>미국 리포트</h2><p class="us-note">미국 상장사 2단계 기업분석 — SEC 공시(8-K 실적 발표·10-K·10-Q)·어닝콜 기준, 단위 백만 달러</p>' +
+      app.innerHTML = '<div class="us-wrap"><h2>미국 리포트</h2><p class="us-note">미국 상장사 2·3단계 리포트 — SEC 공시(8-K 실적 발표·10-K·10-Q)·어닝콜 기준, 단위 백만 달러</p>' +
         (rows || '<p class="us-note">아직 리포트가 없습니다.</p>') + "</div>";
     }).catch(function () { if (S.mode === "us") app.innerHTML = soon("미국"); });
   }
