@@ -108,13 +108,28 @@ function groupSeries(g,i0){
   document.getElementById("m-tiles").innerHTML=tiles.map(x=>`<div class="mt"><div class="k">${x.k}</div><div class="v">${x.v}</div><div class="d">${x.d}</div></div>`).join("");
   document.getElementById("m-asof").textContent=ymd(endT);
 })();
-let scaleMode="log", showFedB=true;
+let scaleMode="log", showFedB=true, custom=null;   // custom = [시작 위치, 끝 위치] — 사용자가 직접 정한 구간
 const gb=document.getElementById("m-grp");
 gb.innerHTML=GROUPS.map(g=>`<button data-g="${g.id}" aria-pressed="${g.id===grp}">${g.label}</button>`).join("")+`<button data-g="cmp" aria-pressed="false">4그룹 평균 비교</button>`;
 gb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;grp=b.dataset.g;gb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.g===grp));rebuild();yearTable();});
 const rb=document.getElementById("m-rng");
 rb.innerHTML=RANGES.map(r=>`<button data-id="${r.id}" aria-pressed="${r.id===cur}">${r.label}</button>`).join("");
-rb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;cur=b.dataset.id;rb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.id===cur));rebuild(true);});
+function pressPreset(id){ cur=id; rb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.id===id)); }
+rb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;custom=null;pressPreset(b.dataset.id);rebuild(true);});
+/* 날짜로 직접 지정(2026-11-04 사용자) — 시작일 = 100 으로 다시 맞추고 그 구간만 보여 준다 */
+const fIn=document.getElementById("m-from"), tIn=document.getElementById("m-to");
+fIn.min=tIn.min=dates[0]; fIn.max=tIn.max=dates[N-1];
+function setCustom(a,b){
+  a=Math.max(0,Math.min(N-1,a)); b=Math.max(0,Math.min(N-1,b)); if(a>b){const t=a;a=b;b=t;}
+  if(b-a<2){ document.getElementById("m-rsum").innerHTML='<span class="warn">구간이 너무 짧습니다. 2주 이상으로 지정하세요.</span>'; return; }
+  custom=[a,b]; pressPreset(null); rebuild(true);
+}
+function applyDates(){
+  if(!fIn.value||!tIn.value){ document.getElementById("m-rsum").innerHTML='<span class="warn">시작일과 끝날을 모두 넣으세요.</span>'; return; }
+  setCustom(weekOf(T(fIn.value)), weekOf(T(tIn.value)));
+}
+document.getElementById("m-go").addEventListener("click",applyDates);
+[fIn,tIn].forEach(x=>x.addEventListener("keydown",e=>{ if(e.key==="Enter") applyDates(); }));
 const sb=document.getElementById("m-scale");
 sb.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;scaleMode=b.dataset.s;sb.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.s===scaleMode));rebuild();});
 const chk=(id,fn)=>document.getElementById(id).addEventListener("change",e=>{fn(e.target.checked);rebuild();});
@@ -174,8 +189,13 @@ function rebuild(resetRange){
   let keep=null;
   if(G && !resetRange){ try{ keep=G.panes[0].chart.timeScale().getVisibleLogicalRange(); }catch(e){} }
   if(G) G.destroy();
-  const R=RANGES.find(r=>r.id===cur); let i0=dT.findIndex(t=>t>=T(R.start)); if(i0<0) i0=0;
-  G=TV.group(document.getElementById("m-bar"),{sync:true,onHover:info});
+  let i0, i1=N-1;
+  if(custom){ i0=custom[0]; i1=custom[1]; }
+  else { const R=RANGES.find(r=>r.id===cur)||RANGES[0]; i0=dT.findIndex(t=>t>=T(R.start)); if(i0<0) i0=0; }
+  fIn.value=dates[i0]; tIn.value=dates[i1];
+  G=TV.group(document.getElementById("m-bar"),{sync:true,onHover:info,
+    onRange:(a,b)=>setCustom(a,b),
+    onFit:()=>{ custom=null; pressPreset("all"); rebuild(true); }});
   const bands=bandsList(), evl=EVENTS.map(e=>({d:e.d,label:e.t}));
   curSeries=seriesList(i0);
   // ① 주가
@@ -209,11 +229,32 @@ function rebuild(resetRange){
   if(!s3) s3=P3.add("line",{color:"rgba(0,0,0,0)",lastValueVisible:false,crosshairMarkerVisible:false},W_UR);
   s3.createPriceLine({price:0,color:"rgba(255,255,255,.3)",lineWidth:1,lineStyle:0,axisLabelVisible:false,title:""});
   P3.bands(bands); P3.vlines(EVENTS.map(e=>({d:e.d})));
-  G.panes.forEach(P=>P.legend(null));
-  const rng=keep||{from:i0-1,to:N-1+6};
+  G.panes.forEach(P=>{ P.defI=i1; P.legend(null); });
+  const rng=keep||(custom?{from:i0-0.5,to:i1+0.5}:{from:i0-1,to:N-1+6});
   const setR=()=>G.panes.forEach(P=>P.chart.timeScale().setVisibleLogicalRange(rng));
   setR(); setTimeout(setR,0);   // 칸을 만들 때 기본 범위가 서로 덮어써서 한 번 더 맞춘다
-  legendsSrc(); info(null);
+  legendsSrc(); info(null); rsum(i0,i1);
+}
+/* 구간 요약: 시작 주 → 끝 주 변화 */
+function rsum(i0,i1){
+  const pct=(a,b)=>a==null||b==null?null:(b/a-1)*100;
+  const cl=v=>v==null?"":v>=0?"up":"dn";
+  const yrs=((dT[i1]-dT[i0])/(365.25*DAY)).toFixed(1);
+  const st=curSeries.map(s=>{
+    let a=i0; while(a<=i1&&s.v[a]==null) a++;
+    if(a>i1||s.v[i1]==null) return "";
+    const r=pct(s.v[a],s.v[i1]);
+    return `<span>${sw(s.c)}${esc(s.name.replace(" 평균"," 평균"))} <b class="${cl(r)}">${sgn(r)}%</b>${a>i0?` <em>(${dates[a]}부터)</em>`:""}</span>`;
+  }).join("");
+  const d=(arr,lab,unit,dig)=>{ const a=arr[i0], b=arr[i1]; if(a==null||b==null) return ""; const x=b-a;
+    return `<span>${lab} <b>${fmt(a,dig)}${unit} → ${fmt(b,dig)}${unit}</b> <em class="${x>0?"up":x<0?"dn":""}">${x>0?"+":""}${fmt(x,dig)}%p</em></span>`; };
+  const el=document.getElementById("m-rsum");
+  el.innerHTML=(
+    `<div class="rh"><b>${dates[i0]} ~ ${dates[i1]}</b><em>${yrs}년 · ${i1-i0}주${custom?" · 직접 지정":""}</em></div>`+
+    `<div class="rr"><i>주가</i>${st}</div>`+
+    `<div class="rr"><i>금리</i>${d(W_MORT,"30년 모기지","%",2)}${d(W_T10,"10년물","%",2)}${d(W_FED,"기준금리(상단)","%",2)}</div>`+
+    `<div class="rr"><i>경기·물가</i>${d(urRaw,"실업률","%",1)}${d(W_PPI,"PPI 전년 대비","%",1)}</div>`).replace(/style="background:([^"]+)"/g,'data-bg="$1"');
+  el.querySelectorAll("[data-bg]").forEach(x=>x.style.background=x.dataset.bg);
 }
 let built=false;
 function ensure(){

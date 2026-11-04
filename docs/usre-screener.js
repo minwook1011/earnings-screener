@@ -999,7 +999,7 @@ function drawChart(){
   const tfL=view.tf==="D"?"일봉":view.tf==="W"?"주봉":"월봉";
   const usd=v=>v==null?"—":"$"+(+v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
   const vol=v=>v>=1e6?(v/1e6).toFixed(1)+"M":v>=1e3?(v/1e3).toFixed(0)+"K":String(v);
-  const g=TV.group(document.getElementById("tvbar"));
+  const g=TV.group(document.getElementById("tvbar"),{onRange:(a,b)=>dRange(a,b),onFit:()=>dRange(0,n-1,true)});
   const P=g.pane(box,{key:"d:"+view.code,times,height:430,margins:{top:.1,bottom:.24},
     legend:i=>{ const x=bars[i], pv=i?bars[i-1].c:x.c, ch=(x.c/pv-1)*100, cls=ch>=0?"up":"dn";
       return `<b>${esc(view.code)}</b><span class="d">${times[i]} · ${tfL}</span><span>종가 <b class="${cls}">${usd(x.c)}</b> <em class="${cls}">${ch>=0?"+":""}${ch.toFixed(2)}%</em></span><span>거래량 <b>${vol(x.v)}</b></span>`+
@@ -1015,8 +1015,40 @@ function drawChart(){
   s.createPriceLine({price:hi,color:"rgba(245,180,0,.7)",lineWidth:1,lineStyle:2,axisLabelVisible:true,title:"52주 고가"});
   P.legend(null);
   const show=view.tf==="D"?Math.min(n,250):n;
-  P.chart.timeScale().setVisibleLogicalRange({from:n-show-1,to:n+4});
   TVD.g=g;
+  const fi=document.getElementById("tvd-from"), ti=document.getElementById("tvd-to");
+  if(fi&&ti){ fi.min=ti.min=times[0]; fi.max=ti.max=times[n-1];
+    const go=()=>{ if(!fi.value||!ti.value) return; dRange(tIdx(fi.value),tIdx(ti.value)); };
+    document.getElementById("tvd-go").onclick=go; [fi,ti].forEach(x=>x.onkeydown=e=>{ if(e.key==="Enter") go(); }); }
+  dRange(n-show,n-1,true);
+}
+/* 구간 직접 지정(2026-11-04 사용자): 날짜 두 칸 또는 「↔ 구간 보기」 두 번 클릭 → 그 구간만 보이고 아래에 구간 요약 */
+function tIdx(d){ const t=TVD.times; let lo=0,hi=t.length-1; if(d<=t[0]) return 0; if(d>=t[hi]) return hi; while(lo<hi){ const m=(lo+hi+1)>>1; if(t[m]<=d) lo=m; else hi=m-1; } return lo; }
+function dRange(a,b,pad){
+  if(!TVD.g||!TVD.g.alive()) return;
+  const bars=CH.bars, n=bars.length;
+  a=Math.max(0,Math.min(n-1,a)); b=Math.max(0,Math.min(n-1,b)); if(a>b){ const t=a; a=b; b=t; }
+  if(b-a<2){ TVD.g.hint("구간이 너무 짧습니다. 다시 지정하세요"); return; }
+  TVD.g.panes[0].chart.timeScale().setVisibleLogicalRange({from:a-0.5,to:b+(pad?4:0.5)});
+  const fi=document.getElementById("tvd-from"), ti=document.getElementById("tvd-to");
+  if(fi) fi.value=TVD.times[a]; if(ti) ti.value=TVD.times[b];
+  { const P=TVD.g.panes[0]; P.defI=b; P.legend(null); }
+  const el=document.getElementById("tvd-rsum"); if(!el) return;
+  const usd=v=>"$"+(+v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  let hi=a, lo=a; for(let i=a;i<=b;i++){ if(bars[i].c>bars[hi].c) hi=i; if(bars[i].c<bars[lo].c) lo=i; }
+  const r=(bars[b].c/bars[a].c-1)*100, fromHi=(bars[b].c/bars[hi].c-1)*100, fromLo=(bars[b].c/bars[lo].c-1)*100;
+  // 구간 안 최대 낙폭(고점 대비 가장 많이 빠진 폭)
+  let pk=bars[a].c, mdd=0; for(let i=a;i<=b;i++){ pk=Math.max(pk,bars[i].c); mdd=Math.min(mdd,(bars[i].c/pk-1)*100); }
+  const sp=CH.spikes.filter(x=>x.x>=a&&x.x<=b).length;
+  const yrs=((bars[b].d-bars[a].d)/365.25);
+  const cagr=yrs>=1?(Math.pow(bars[b].c/bars[a].c,1/yrs)-1)*100:null;
+  const c=v=>v>=0?"up":"dn", sg=v=>(v>=0?"+":"")+v.toFixed(1)+"%";
+  el.innerHTML=`<div class="rh"><b>${TVD.times[a]} ~ ${TVD.times[b]}</b><em>${yrs.toFixed(1)}년 · ${b-a}봉</em></div>
+    <div class="rr"><span>수익률 <b class="${c(r)}">${sg(r)}</b> <em>${usd(bars[a].c)} → ${usd(bars[b].c)}</em></span>
+    ${cagr!=null?`<span>연평균 <b class="${c(cagr)}">${sg(cagr)}</b></span>`:""}
+    <span>최고 <b>${usd(bars[hi].c)}</b> <em>${TVD.times[hi]} · 끝날은 ${sg(fromHi)}</em></span>
+    <span>최저 <b>${usd(bars[lo].c)}</b> <em>${TVD.times[lo]} · 끝날은 ${sg(fromLo)}</em></span>
+    <span>최대 낙폭 <b class="dn">${mdd.toFixed(1)}%</b></span>${sp?`<span>거래량 급증 <b>${sp}번</b></span>`:""}</div>`;
 }
 
 function chartHTML(b){
@@ -1034,7 +1066,10 @@ function chartHTML(b){
     </div>
     <div class="tvd-ma">${legend}</div>
   </div>
-  <div class="mcard tvcard tvd-card"><div id="tvbar"></div><div class="tvstack"><div id="tvd"></div></div></div>
+  <div class="mcard tvcard tvd-card">
+    <div class="tvd-dates"><span class="ml">구간</span><input type="date" id="tvd-from" aria-label="시작일"><span class="tl">~</span><input type="date" id="tvd-to" aria-label="끝날"><button class="tvd-go" id="tvd-go" type="button">보기</button><em>날짜를 넣거나 「↔ 구간 보기」를 누르고 차트에서 시작·끝을 클릭</em></div>
+    <div class="m-rsum" id="tvd-rsum"></div>
+    <div id="tvbar"></div><div class="tvstack"><div id="tvd"></div></div></div>
   ${spikes ? `<div class="spikelist">${spikes}</div>` : ""}
   <div id="evt"></div>`;
 }
