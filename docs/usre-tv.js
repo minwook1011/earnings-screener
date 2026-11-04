@@ -20,7 +20,7 @@
   }
   var DR = (function () { try { return JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { return {}; } })();
   function save() { try { localStorage.setItem(KEY, JSON.stringify(DR)); } catch (e) {} }
-  var HINT0 = "Alt+H 수평선 · Alt+T 추세선(두 점 클릭) · Alt+V 수직선 · 선을 클릭해 고른 뒤 Delete, 또는 우클릭으로 지우기 · Esc 취소 · 휠 확대 · 끌어서 이동";
+  var HINT0 = "Alt+R 구간 보기(시작·끝 클릭) · Alt+H 수평선 · Alt+T 추세선 · Alt+V 수직선 · 선을 클릭해 고른 뒤 Delete, 또는 우클릭으로 지우기 · Esc 취소 · 휠 확대 · 끌어서 이동";
 
   /* ---------- 그리기 층(배경 띠·사건선 = 아래, 사용자 선 = 위) ---------- */
   function Prim(P) {
@@ -161,7 +161,16 @@
         seg(x, 0, x, H, on);
         ctx.fillStyle = on ? C.sel : "rgba(233,237,245,.8)"; ctx.font = "600 10.5px IBM Plex Mono, monospace"; ctx.fillText(v.d, x + 4, 12);
       });
-      if (g.pend && g.pend.pane === P && g.hover && g.hover.pane === P) {
+      if (g.pend && g.pend.r && g.hover) {
+        var rx0 = P.x(g.pend.l), rx1 = P.x(g.hover.l);
+        if (rx0 != null && rx1 != null) {
+          var lx = Math.min(rx0, rx1), wx = Math.abs(rx1 - rx0);
+          ctx.fillStyle = "rgba(41,98,255,.16)"; ctx.fillRect(lx, 0, wx, H);
+          ctx.strokeStyle = "rgba(90,140,255,.9)"; ctx.lineWidth = 1; ctx.setLineDash([]);
+          [rx0, rx1].forEach(function (xx) { ctx.beginPath(); ctx.moveTo(Math.round(xx) + 0.5, 0); ctx.lineTo(Math.round(xx) + 0.5, H); ctx.stroke(); });
+        }
+      }
+      if (g.pend && g.pend.pt && g.pend.pane === P && g.hover && g.hover.pane === P) {
         var ax2 = P.x(P.lgOf(g.pend.pt)), ay2 = P.y(g.pend.pt.p), bx2 = P.x(g.hover.l), by2 = P.y(g.hover.p);
         if ([ax2, ay2, bx2, by2].indexOf(null) < 0) seg(ax2, ay2, bx2, by2, false, true);
       }
@@ -169,7 +178,7 @@
   };
   Pane.prototype.legend = function (i) {
     if (!this.o.legend) return;
-    var n = this.times.length - 1; if (i == null || i < 0 || i > n) i = n;
+    var n = this.times.length - 1; if (i == null || i < 0 || i > n) i = this.defI != null ? Math.min(n, this.defI) : n;   // 마우스가 없으면 보고 있는 구간의 끝 주
     // 사이트 CSP 가 style="…" 을 막으므로 색은 data-bg 로 받아 CSSOM 으로 칠한다(마우스를 움직일 때마다 경고가 쌓이지 않게)
     this.lg.innerHTML = this.o.legend(i).replace(/style="background:([^"]+)"/g, 'data-bg="$1"');
     var a = this.lg.querySelectorAll("[data-bg]");
@@ -181,7 +190,7 @@
   var TVG = { all: [], cur: null };
   function Group(bar, o) {
     o = o || {};
-    this.bar = bar; this.panes = []; this.sync = !!o.sync; this.mode = null; this.pend = null; this.sel = null; this.hover = null; this.onHover = o.onHover; this._lock = false;
+    this.bar = bar; this.panes = []; this.sync = !!o.sync; this.mode = null; this.pend = null; this.sel = null; this.hover = null; this.onHover = o.onHover; this.onRange = o.onRange; this.onFit = o.onFit; this._lock = false;
     var G = this;
     if (bar) {
       bar.classList.add("tv-bar");
@@ -189,12 +198,15 @@
         '<button data-t="h" title="커서 높이에 수평선(Alt+H)">— 수평선<kbd>Alt+H</kbd></button>' +
         '<button data-t="t" title="두 점을 클릭(Alt+T)">╱ 추세선<kbd>Alt+T</kbd></button>' +
         '<button data-t="v" title="커서 위치에 수직선(Alt+V)">│ 수직선<kbd>Alt+V</kbd></button>' +
+        '<i class="tv-sep"></i><button data-t="r" title="시작일과 끝날을 차례로 클릭하면 그 구간만 크게 봅니다(Alt+R)">↔ 구간 보기<kbd>Alt+R</kbd></button>' +
+        '<button data-t="fit" title="처음부터 끝까지 전부 보기">전체 보기</button>' +
         '<i class="tv-sep"></i><button data-t="del" title="고른 선 지우기(Delete)">고른 선 지우기<kbd>Del</kbd></button>' +
         '<button data-t="clr">모두 지우기</button><span class="tv-hint">' + HINT0 + "</span>";
       bar.querySelectorAll("button[data-t]").forEach(function (b) {
         b.onclick = function () {
           var t = b.dataset.t; TVG.cur = G;
-          if (t === "h" || t === "t" || t === "v") G.setMode(G.mode === t ? null : t);
+          if (t === "h" || t === "t" || t === "v" || t === "r") G.setMode(G.mode === t ? null : t);
+          else if (t === "fit") G.fit();
           else if (t === "del") { if (G.sel) G.remove(); else G.hint("지울 선을 먼저 클릭하세요"); }
           else if (t === "clr") {
             if (!confirm("이 차트에 그린 선을 모두 지울까요?")) return;
@@ -216,6 +228,7 @@
     if (m === "t") this.hint("추세선: 시작점을 클릭하세요");
     if (m === "h") this.hint("수평선: 그을 높이를 클릭하세요");
     if (m === "v") this.hint("수직선: 그을 날짜를 클릭하세요");
+    if (m === "r") this.hint("구간 보기: 시작일을 클릭하세요");
   };
   Group.prototype.pane = function (box, o) {
     var P = new Pane(this, box, o), G = this;
@@ -252,7 +265,7 @@
       G._xlock = false;
     } else P.legend(i);
     if (G.onHover) G.onHover(i);
-    if (G.pend) P.upd();
+    if (G.pend) (G.pend.r ? G.panes : [P]).forEach(function (Q) { Q.upd(); });
   };
   Group.prototype._click = function (P, e) {
     var G = this; TVG.cur = G;
@@ -261,6 +274,13 @@
     if (l == null) return;
     if (G.mode === "h" && pr != null) { G.addH(P, pr); return; }
     if (G.mode === "v") { G.addV(P, l); return; }
+    if (G.mode === "r") {
+      var li = Math.max(0, Math.min(P.times.length - 1, Math.round(l)));
+      if (!G.pend || !G.pend.r) { G.pend = { pane: P, l: li, r: true }; G.hint("구간 보기: 끝날을 클릭하세요 · " + P.times[li] + " ~"); return; }
+      var a = Math.min(G.pend.l, li), b = Math.max(G.pend.l, li); G.setMode(null);
+      if (b - a < 2) { G.hint("구간이 너무 짧습니다. 다시 지정하세요"); return; }
+      G.range(a, b); return;
+    }
     if (G.mode === "t" && pr != null) {
       if (!G.pend || G.pend.pane !== P) { G.pend = { pane: P, pt: P.pt(l, pr) }; G.hint("추세선: 끝점을 클릭하세요"); return; }
       P.W().t.push({ a: G.pend.pt, b: P.pt(l, pr) }); save(); G.setMode(null); return;
@@ -270,6 +290,16 @@
     if (old && old.pane !== P) old.pane.drawH();
     P.drawH();
     if (h) G.hint("고른 선: Delete 키 또는 '고른 선 지우기'로 지웁니다");
+  };
+  Group.prototype.range = function (a, b) {   // 위치 a~b 만 보기(동기화 묶음은 한 칸만 바꾸면 나머지도 따라온다)
+    if (this.onRange) { this.onRange(a, b); return; }
+    var r = { from: a - 0.5, to: b + 0.5 };
+    (this.sync ? this.panes.slice(0, 1) : this.panes).forEach(function (P) { P.chart.timeScale().setVisibleLogicalRange(r); });
+  };
+  Group.prototype.fit = function () {
+    if (this.onFit) { this.onFit(); return; }
+    var n = this.panes.length ? this.panes[0].times.length : 0;
+    (this.sync ? this.panes.slice(0, 1) : this.panes).forEach(function (P) { P.chart.timeScale().setVisibleLogicalRange({ from: -1, to: n + 4 }); });
   };
   Group.prototype.addH = function (P, p) { var d = P.W(); d.h.push({ p: +(+p).toPrecision(6) }); save(); this.setMode(null); P.drawH(); };
   Group.prototype.addV = function (P, l) { var d = P.W(), pt = P.pt(l, 0); d.v.push({ d: pt.d, k: 0 }); save(); this.setMode(null); P.upd(); };
@@ -293,6 +323,7 @@
     if (e.altKey && k === "KeyH") { e.preventDefault(); if (G.hover && G.hover.p != null) G.addH(G.hover.pane, G.hover.p); else G.setMode("h"); return; }
     if (e.altKey && k === "KeyV") { e.preventDefault(); if (G.hover) G.addV(G.hover.pane, G.hover.l); else G.setMode("v"); return; }
     if (e.altKey && k === "KeyT") { e.preventDefault(); G.setMode(G.mode === "t" ? null : "t"); return; }
+    if (e.altKey && k === "KeyR") { e.preventDefault(); G.setMode(G.mode === "r" ? null : "r"); return; }
     if ((e.key === "Delete" || e.key === "Backspace") && G.sel) { e.preventDefault(); e.stopPropagation(); G.remove(); return; }
     if (e.key === "Escape" && (G.mode || G.pend || G.sel)) {
       e.preventDefault(); e.stopPropagation();
