@@ -361,4 +361,7 @@ document.querySelectorAll('.segbtn:not(.segx)').forEach(bt=>{const tr=bt.closest
 addFold();
 const openHash=()=>{const t=location.hash&&document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t&&t.tagName==='DETAILS'&&!t.open){t.open=true;t.scrollIntoView()}};
 addEventListener('hashchange',openHash);openHash();
-let t;addEventListener('resize',()=>{clearTimeout(t);t=setTi
+let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(all,150)});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',all);else all();
+})();
+</script></body></html>
