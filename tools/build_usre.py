@@ -37,7 +37,8 @@ OUT = ROOT / "docs" / "data" / "usre"
 F_SCR, F_MAC, META = OUT / "screener-con.js", OUT / "macro.js", OUT / "screener-meta.json"
 F_DEM = OUT / "demand.js"
 F_CYC, CYC_DIR = OUT / "cycle.js", OUT / "cyc"          # 금리 사이클 탭(2026-11-05 사용자) — 종목별 파일은 고를 때만 읽는다
-CYC_START = date(1999, 1, 2)                             # 1999-06 인상기부터 보이도록. 토요일 → 2000-01-01 과 같은 주 격자
+CYC_START = date(1999, 1, 2)
+F_HIST = ROOT / "tools" / "usre_hist.json"   # XBRL(2009~) 이전 분기 실적 — 10-K 원문에서 손으로 옮긴 홈빌더 5사(2026-11-05 사용자)                             # 1999-06 인상기부터 보이도록. 토요일 → 2000-01-01 과 같은 주 격자
 KST = timezone(timedelta(hours=9))
 EPOCH = date(1970, 1, 1)
 UA_WEB = {"User-Agent": "Mozilla/5.0"}
@@ -336,6 +337,25 @@ def fin_of(t, cik):
 SHARES_FIX = {"VMRK": 7.72e8}   # 합병(2026-08-18) 뒤 첫 10-Q 전 — AvalonBay 1주 = Equity Residential 2.793주로 환산한 추정
 
 
+def merge_hist(t, qall):
+    """10-K 원문 분기표에서 옮긴 분기 매출·세전이익(1999~2012)을 넣는다. 그 기간은 원문 값이 우선, 이후는 XBRL"""
+    try:
+        H = json.load(open(F_HIST, encoding="utf-8")).get(t)
+    except FileNotFoundError:
+        return qall
+    if not H:
+        return qall
+    rows = {r[0]: list(r) for r in (qall or [])}
+    for e, rv, oi in H["rows"]:
+        k = next((x for x in rows if abs((D(x) - D(e)).days) <= 6), None)
+        if k is None:
+            rows[e] = [e, rv, oi]
+        else:   # 원문 10-K 분기표가 있는 기간(~2012)은 그 값으로 통일 — XBRL 은 태그가 분기마다 달라 세전이익 정의가 들쭉날쭉하다
+            rows[k][1] = rv if rv is not None else rows[k][1]
+            rows[k][2] = oi if oi is not None else rows[k][2]
+    return [rows[k] for k in sorted(rows)]
+
+
 def one_stock(t, grp, cat, desc, cik, grid):
     try:
         rows_all, meta = yahoo_daily(t, CYC_START)
@@ -377,7 +397,7 @@ def one_stock(t, grp, cat, desc, cik, grid):
             b[k] = fin[k]
     wk = wsamp(grid, [(d, a) for d, _, a, _ in rows_all if a])
     s0 = next((i for i, v in enumerate(wk) if v is not None), len(wk))
-    cyc = {"s": s0, "p": [sig4(v) for v in wk[s0:]], "q": fin.get("qall"), "fm": fin["fm"], "oik": fin.get("oik") or "영업이익"}
+    cyc = {"s": s0, "p": [sig4(v) for v in wk[s0:]], "q": merge_hist(t, fin.get("qall")), "fm": fin["fm"], "oik": fin.get("oik") or "영업이익"}
     return raw, b, last, cyc
 
 

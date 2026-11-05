@@ -74,7 +74,7 @@ function load(){
   loadTk(tk).then(d=>{
     TK=d; PX=new Array(N).fill(null); d.p.forEach((v,k)=>{ if(d.s+k<N) PX[d.s+k]=v; });
     Q=(d.q||[]).slice().sort((a,b)=>a[0]<b[0]?-1:1);
-    $("c-meta").textContent=`${PX[d.s]!=null?dates[d.s].slice(0,7)+"부터 주가":""}${Q.length?` · 실적 ${Q[0][0].slice(0,7)}~${Q[Q.length-1][0].slice(0,7)} (SEC XBRL)`:" · SEC 실적 없음"}`;
+    $("c-meta").textContent=`${PX[d.s]!=null?dates[d.s].slice(0,7)+"부터 주가":""}${Q.length?` · 실적 ${Q[0][0].slice(0,7)}~${Q[Q.length-1][0].slice(0,7)} (${Q[0][0]<"2008"?"2012년까지 10-K 원문·이후 SEC XBRL":"SEC XBRL"})`:" · SEC 실적 없음"}`;
     draw(false); table(); if($("c-qdet").open) qTable();
   }).catch(()=>{ $("c-meta").textContent="이 종목 자료를 불러오지 못했습니다."; });
 }
@@ -198,7 +198,7 @@ function draw(keepRange){
       legend:i=>{ let k=F.QI[i];
         if(!Q.length) return `<b>${nm}</b><span class="d">SEC XBRL 실적이 없는 종목입니다.</span>`;
         if(k<0){ const t=dT[i]+6*DAY; for(let j=Q.length-1;j>=0;j--){ if(T(Q[j][0])<=t){ if(t-T(Q[j][0])<200*DAY) k=j; break; } } }   // 최근 분기 이후 주는 마지막 분기를 보여 준다
-        if(k<0) return `<b>${nm}</b><span class="d">${dates[i]} 주 · 이 시기 분기 실적 없음 (SEC XBRL은 대개 2009년부터)</span>`;
+        if(k<0) return `<b>${nm}</b><span class="d">${dates[i]} 주 · 이 시기 분기 실적 없음 (이 종목 실적은 ${Q[0][0].slice(0,7)}부터)</span>`;
         const q=Q[k], y=yoy(k,F.ix);
         return `<b>${nm}</b><span class="d">${qLabel(q[0])} · ${q[0]} 종료 분기</span><span>${sw("rgba(255,107,107,.7)")}<b>${eok(q[F.ix])}억달러</b></span>`+
           `<span>${sw(COL.yoy)}전년 대비 <b class="${y&&y.v!=null?cls(y.v):""}">${y==null?"–":y.t||sg(y.v)+"%"}</b></span>`; }});
@@ -279,7 +279,7 @@ function summary(){
   const ra=ttmS(a,b,1), rb=ttm(b,1), oa=ttmS(a,b,2), ob=ttm(b,2), nm=TK.oik||"영업이익";
   let fin;
   if(!Q.length) fin=`<span class="mute">SEC XBRL 실적이 없는 종목입니다.</span>`;
-  else if(!rb||T(b)<T(Q[0][0])) fin=`<span class="mute">이 구간은 SEC XBRL 실적(${Q[0][0].slice(0,4)}년~) 이전이라 실적이 없습니다.</span>`;
+  else if(!rb||T(b)<T(Q[0][0])) fin=`<span class="mute">이 구간은 실적 자료(${Q[0][0].slice(0,4)}년~) 이전이라 실적이 없습니다.</span>`;
   else fin=`<span>매출액(최근 4분기 합) <b>${ra?eok(ra.v):"–"} → ${eok(rb.v)}억달러</b> <b class="${cls(chg(ra,rb)&&chg(ra,rb).v)}">${chgTxt(chg(ra,rb))}</b></span>`+
     (oa||ob?`<span>${esc(nm)} <b>${oa?eok(oa.v):"–"} → ${ob?eok(ob.v):"–"}억달러</b> <b class="${cls(chg(oa,ob)&&chg(oa,ob).v)}">${chgTxt(chg(oa,ob))}</b></span>`:`<span>${esc(nm)} <span class="mute">이 구간 자료 없음</span></span>`)+
     `<span><em>${ra?qLabel(ra.end):"?"} → ${qLabel(rb.end)} 기준${ra&&ra.late?" (구간이 실적 공시 전에 시작해 첫 4분기부터)":""}</em></span><button type="button" class="c-qbtn" id="c-qbtn">분기별 매출·영업이익 보기 ▾</button>`;
@@ -301,7 +301,7 @@ function table(){
       `<td class="${s?cls(s.r):""}">${s?sg(s.r)+"%":"–"}${s&&s.late?' <span class="mute">상장 후</span>':""}</td><td class="${rv&&rv.v!=null?cls(rv.v):""}">${chgTxt(rv)}${rv?lt(r0):""}</td><td class="${oi&&oi.v!=null?cls(oi.v):""}">${chgTxt(oi)}${oi?lt(o0):""}</td></tr>`;
   }).reverse().join("");
   $("c-tbl").innerHTML=`<thead><tr><th>구분</th><th>기간</th><th>길이</th><th>기준금리(상단)</th><th>변화</th><th>30년 모기지</th><th>변화</th><th>모기지 최고</th><th>모기지 최저</th><th>시작 전 6개월 모기지</th><th>${esc(tk)} 주가</th><th>매출(4분기 합)</th><th>${esc(nm)}(4분기 합)</th></tr></thead><tbody>${rows}</tbody>`;
-  $("c-tblh").textContent=`${NAME[tk]} (${tk}) · * = 구간이 실적 공시(XBRL) 전에 시작해 첫 4분기부터 잰 값`;
+  $("c-tblh").textContent=`${NAME[tk]} (${tk}) · * = 구간이 실적 자료 시작 전에 시작해 첫 4분기부터 잰 값`;
 }
 $("c-tbl").addEventListener("click",e=>{ const tr=e.target.closest("tr[data-p]"); if(!tr) return; pick(+tr.dataset.p); $("c-card").scrollIntoView({behavior:"smooth",block:"start"}); });
 function markRow(){ $("c-tbl").querySelectorAll("tr[data-p]").forEach(r=>r.classList.toggle("sel",!custom&&+r.dataset.p===sel)); }
@@ -314,7 +314,7 @@ function qTable(){
   const [a,b]=span(), ta=T(a)-92*DAY, tb=T(b)+(sel!=null&&PER[sel]&&PER[sel].open?0:0);
   const ks=[]; Q.forEach((q,k)=>{ const e=T(q[0]); if(e>ta&&e<=tb+DAY) ks.push(k); });
   $("c-qh").textContent=`${NAME[tk]} (${tk}) · ${a} ~ ${b}`;
-  if(!ks.length){ el.innerHTML=`<tbody><tr><td>이 구간에는 SEC XBRL 분기 실적이 없습니다(이 종목은 ${Q[0][0].slice(0,7)}부터).</td></tr></tbody>`; return; }
+  if(!ks.length){ el.innerHTML=`<tbody><tr><td>이 구간에는 분기 실적이 없습니다(이 종목은 ${Q[0][0].slice(0,7)}부터).</td></tr></tbody>`; return; }
   const yc=y=>y==null?"<td>–</td>":y.t?`<td class="${y.t==="흑자 전환"?"up":"dn"}">${y.t}</td>`:`<td class="${cls(y.v)}">${sg(y.v)}%</td>`;
   const rows=ks.slice().reverse().map(k=>{ const q=Q[k], om=q[2]!=null&&q[1]>0?q[2]/q[1]*100:null;
     return `<tr${T(q[0])<T(a)?' class="pre"':""}><td>${qLabel(q[0])}${T(q[0])<T(a)?' <span class="mute">구간 직전</span>':""}</td><td>${q[0]}</td><td>${eok(q[1])}</td>${yc(yoy(k,1))}<td>${eok(q[2])}</td>${yc(yoy(k,2))}<td>${om==null?"–":om.toFixed(1)+"%"}</td></tr>`; }).join("");
