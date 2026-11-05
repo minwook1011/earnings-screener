@@ -36,7 +36,7 @@ const PER=C.per.map((p,i)=>{
 const curPer=PER.length-1;
 
 /* ---------- 상태 ---------- */
-let tk=null, sel=null, custom=null, finMode="off", ovRev=false, ovOi=false, scale="log", G=null, TK=null, PX=null, Q=[];
+let tk=null, sel=null, custom=null, finMode="off", ovRev=false, ovOi=false, ovT10=true, scale="log", G=null, TK=null, PX=null, Q=[];
 try{ tk=localStorage.getItem("usre_cyc_tk"); }catch(e){}
 if(!tk||!C.tick.some(x=>x[0]===tk)) tk="DHI";
 try{ const s=localStorage.getItem("usre_cyc_sel"); if(s!=null&&s!=="all"&&PER[+s]) sel=+s; }catch(e){}
@@ -54,7 +54,7 @@ const $=id=>document.getElementById(id);
   pb.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; pick(b.dataset.p==="all"?null:+b.dataset.p); });
   $("c-fin").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; finMode=b.dataset.f; pressSeg("c-fin","f",finMode); draw(true); });
   $("c-ov").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return;   // 켰다 끄면 주가 차트에 꺾은선으로 겹친다
-    if(b.dataset.o==="rev") ovRev=!ovRev; else ovOi=!ovOi; ovPress(); draw(true); });
+    if(b.dataset.o==="rev") ovRev=!ovRev; else if(b.dataset.o==="t10") ovT10=!ovT10; else ovOi=!ovOi; ovPress(); draw(true); });
   $("c-scale").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; scale=b.dataset.s; pressSeg("c-scale","s",scale); draw(true); });
   $("c-qdet").addEventListener("toggle",()=>{ if($("c-qdet").open) qTable(); });
 })();
@@ -163,6 +163,7 @@ function legend1(i){
     `<span>${sw(COL.px)}주가 <b>${usd(PX[i])}</b>${rel}</span>`+
     `<span>${sw(COL.fed)}기준금리 <b>${fedTxt(C.fed[i],dates[i])}</b></span>`+
     `<span>${sw(COL.mort)}30년 모기지 <b>${f2(C.mort[i])}%</b></span>`+
+    (ovT10?`<span>${sw(COL.t10)}10년물 <b>${f2(C.t10[i])}%</b>${C.mort[i]!=null&&C.t10[i]!=null?` <em>모기지와 차이 ${f2(C.mort[i]-C.t10[i])}%p</em>`:""}</span>`:"")+
     ((ovRev||ovOi)&&Q.length?(()=>{ const k=qAt(i); if(k<0) return `<span class="d">분기 실적 없음</span>`;
       const q=Q[k], yc=y=>y==null?"":` <em class="${y.v!=null?cls(y.v):""}">${y.t||"전년 대비 "+sg(y.v)+"%"}</em>`;
       return `<span class="d">${qLabel(q[0])}</span>`+
@@ -181,6 +182,7 @@ function draw(keepRange){
   P1.chart.applyOptions({leftPriceScale:{visible:true,borderColor:"#232833",minimumWidth:52,scaleMargins:{top:.08,bottom:.06}}});
   P1.add("area",{lineColor:COL.px,topColor:"rgba(76,141,255,.07)",bottomColor:"rgba(76,141,255,0)",lineWidth:1.5,priceFormat:{type:"price",precision:2,minMove:0.01}},PX);
   P1.add("line",{color:"rgba(167,139,250,.85)",lineWidth:1,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.mort);
+  if(ovT10) P1.add("line",{color:"rgba(52,211,153,.8)",lineWidth:1,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.t10);
   const fs=P1.add("line",{color:"rgba(232,236,243,.7)",lineWidth:1,lineType:1,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.fed);
   const mk={}; C.ev.forEach(e=>{ const w=wIdx(e[0]); mk[w]=(mk[w]||0)+(e[2]-e[1]); });
   fs.setMarkers(Object.keys(mk).map(Number).sort((a,b)=>a-b).map(w=>{ const up=mk[w]>0; return {time:dates[w],position:up?"aboveBar":"belowBar",color:up?"rgba(239,68,68,.55)":"rgba(59,130,246,.6)",shape:up?"arrowUp":"arrowDown",size:0.3}; }));
@@ -223,7 +225,7 @@ function info(i){
 }
 function srcLine(){
   setH($("c-src"),`<span class="it">${sw("rgba(239,68,68,.55)")}인상 구간</span><span class="it">${sw("rgba(59,130,246,.6)")}인하 구간</span><span class="it">${sw("rgba(255,255,255,.25)")}고른 동결 구간</span><span class="it">${sw("rgba(13,16,22,.9)")}사이클 안의 쉼(4개월↑)</span>`+
-    `<span class="it">${sw(COL.px)}주가(오른쪽 눈금)</span><span class="it">${sw(COL.fed)}기준금리 · ${sw(COL.mort)}30년 모기지(왼쪽 눈금, %)</span>`+
+    `<span class="it">${sw(COL.px)}주가(오른쪽 눈금)</span><span class="it">${sw(COL.fed)}기준금리 · ${sw(COL.mort)}30년 모기지 · ${sw(COL.t10)}10년물 국채(왼쪽 눈금, %)</span>`+
     `<span class="it">${sw(COL.rev)}분기 매출액 · ${sw(COL.oi)}분기 ${esc((TK&&TK.oik)||"영업이익")} 꺾은선(각자 높이에 맞춘 눈금, 값은 왼쪽 위 범례)</span>`+
     (finMode!=="off"?`<span class="it">아래 칸 막대: 분기 ${finMode==="oi"?"영업이익":"매출액"}(억달러, 빨강 = 전년보다 증가·파랑 = 감소) · ${sw(COL.yoy)}전년 대비(%, 왼쪽 눈금)</span>`:""));
 }
@@ -326,6 +328,6 @@ function ensure(){
   TV.lib().then(load).catch(()=>{ $("c-info").textContent="차트 라이브러리를 불러오지 못했습니다."; });
 }
 window.__cycDraw=ensure;
-function ovPress(){ $("c-ov").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.o==="rev"?ovRev:ovOi)); }
+function ovPress(){ $("c-ov").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.o==="rev"?ovRev:b.dataset.o==="t10"?ovT10:ovOi)); }
 pressSeg("c-fin","f",finMode); pressSeg("c-scale","s",scale); ovPress();
 })();
