@@ -11,9 +11,9 @@ const C=CYC, dates=C.dates, N=dates.length, dT=dates.map(T);
 const VER=dates[N-1];
 const ERA=C.rangeEra;
 const COL={px:"#4c8dff",fed:"#e8ecf3",mort:"#a78bfa",t10:"#34d399",yoy:"#f2c14e"};
-const KIND={up:{t:"인상",c:"up",band:"rgba(239,68,68,.11)",bandOn:"rgba(239,68,68,.24)",lc:"rgba(255,140,140,.9)"},
-            dn:{t:"인하",c:"dn",band:"rgba(59,130,246,.12)",bandOn:"rgba(59,130,246,.26)",lc:"rgba(140,180,255,.95)"},
-            hold:{t:"동결",c:"hold",band:"rgba(255,255,255,0)",bandOn:"rgba(255,255,255,.09)",lc:"rgba(220,226,236,.75)"}};
+const KIND={up:{t:"인상",c:"up",band:"rgba(239,68,68,.055)",bandOn:"rgba(239,68,68,.12)",lc:"rgba(255,150,150,.6)"},
+            dn:{t:"인하",c:"dn",band:"rgba(59,130,246,.06)",bandOn:"rgba(59,130,246,.13)",lc:"rgba(150,185,255,.65)"},
+            hold:{t:"동결",c:"hold",band:"rgba(255,255,255,0)",bandOn:"rgba(255,255,255,.05)",lc:"rgba(220,226,236,.5)"}};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const f2=(v,d=2)=>v==null?"–":(+v).toFixed(d);
 const sg=(v,d=1)=>v==null?"–":(v>0?"+":"")+(+v).toFixed(d);
@@ -122,7 +122,7 @@ function bands(){
   PER.forEach(p=>{
     const on=sel===p.i&&!custom;
     if(p.k!=="hold"||on) out.push({a:p.a,b:p.b,color:on?p.K.bandOn:p.K.band,label:p.k==="hold"?"동결":bp(p.f1-p.f0),lc:p.K.lc});
-    (p.pause||[]).forEach(q=>out.push({a:q[0],b:q[1],color:"rgba(13,16,22,.5)"}));   // 사이클 안의 쉼(4개월 이상)은 띠를 옅게
+    (p.pause||[]).forEach(q=>out.push({a:q[0],b:q[1],color:"rgba(13,16,22,.35)"}));   // 사이클 안의 쉼(4개월 이상)은 띠를 옅게
   });
   return out;
 }
@@ -131,10 +131,10 @@ function finSeries(){
   Q.forEach((q,k)=>{
     if(q[ix]==null) return;
     const e=T(q[0]), s=k>0&&(e-T(Q[k-1][0]))/DAY<120?T(Q[k-1][0]):e-91*DAY;
-    const y=yoy(k,ix), c=y==null?"rgba(139,147,163,.5)":y.t?(y.t==="흑자 전환"?"rgba(255,107,107,.75)":"rgba(91,155,255,.75)"):y.v>=0?"rgba(255,107,107,.55)":"rgba(91,155,255,.55)";
+    const y=yoy(k,ix), c=y==null?"rgba(139,147,163,.25)":y.t?(y.t==="흑자 전환"?"rgba(255,107,107,.42)":"rgba(91,155,255,.42)"):y.v>=0?"rgba(255,107,107,.3)":"rgba(91,155,255,.3)";
     for(let i=wIdx(new Date(s+DAY).toISOString().slice(0,10));i<N&&dT[i]+3*DAY<=e;i++){
       if(dT[i]+3*DAY<=s) continue;
-      V[i]={value:q[ix]/100,color:k%2?c:c.replace(/[\d.]+\)$/,m=>Math.min(1,parseFloat(m)+0.12)+")")};
+      V[i]={value:q[ix]/100,color:k%2?c:c.replace(/[\d.]+\)$/,m=>Math.min(1,parseFloat(m)+0.07)+")")};
       Y[i]=y&&y.v!=null?Math.max(-150,Math.min(300,Math.round(y.v*10)/10)):null; QI[i]=k;
     }
   });
@@ -160,11 +160,11 @@ function draw(keepRange){
   G=TV.group($("c-bar"),{sync:true,onHover:info,onRange:(a,b)=>pickCustom(a,b),onFit:()=>pick(null)});
   const P1=G.pane(b1,{key:"cyc1:"+tk,times:dates,height:430,log:scale==="log",margins:{top:.08,bottom:.06},legend:legend1});
   P1.chart.applyOptions({leftPriceScale:{visible:true,borderColor:"#232833",minimumWidth:52,scaleMargins:{top:.08,bottom:.06}}});
-  P1.add("area",{lineColor:COL.px,topColor:"rgba(76,141,255,.22)",bottomColor:"rgba(76,141,255,0)",lineWidth:2,priceFormat:{type:"price",precision:2,minMove:0.01}},PX);
-  P1.add("line",{color:COL.mort,lineWidth:2,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.mort);
-  const fs=P1.add("line",{color:COL.fed,lineWidth:2,lineType:1,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.fed);
+  P1.add("area",{lineColor:COL.px,topColor:"rgba(76,141,255,.07)",bottomColor:"rgba(76,141,255,0)",lineWidth:1.5,priceFormat:{type:"price",precision:2,minMove:0.01}},PX);
+  P1.add("line",{color:"rgba(167,139,250,.85)",lineWidth:1,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.mort);
+  const fs=P1.add("line",{color:"rgba(232,236,243,.7)",lineWidth:1,lineType:1,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.fed);
   const mk={}; C.ev.forEach(e=>{ const w=wIdx(e[0]); mk[w]=(mk[w]||0)+(e[2]-e[1]); });
-  fs.setMarkers(Object.keys(mk).map(Number).sort((a,b)=>a-b).map(w=>{ const up=mk[w]>0; return {time:dates[w],position:up?"aboveBar":"belowBar",color:up?"#ef4444":"#3b82f6",shape:up?"arrowUp":"arrowDown",size:0.6}; }));
+  fs.setMarkers(Object.keys(mk).map(Number).sort((a,b)=>a-b).map(w=>{ const up=mk[w]>0; return {time:dates[w],position:up?"aboveBar":"belowBar",color:up?"rgba(239,68,68,.55)":"rgba(59,130,246,.6)",shape:up?"arrowUp":"arrowDown",size:0.3}; }));
   const bd=bands(); P1.bands(bd);
   b2.hidden=finMode==="off";
   if(finMode!=="off"){
@@ -179,8 +179,8 @@ function draw(keepRange){
           `<span>${sw(COL.yoy)}전년 대비 <b class="${y&&y.v!=null?cls(y.v):""}">${y==null?"–":y.t||sg(y.v)+"%"}</b></span>`; }});
     P2.chart.applyOptions({leftPriceScale:{visible:true,borderColor:"#232833",minimumWidth:52,scaleMargins:{top:.16,bottom:.02}}});
     P2.add("hist",{priceFormat:{type:"price",precision:1,minMove:0.1},lastValueVisible:false},F.V);
-    const ys=P2.add("line",{color:COL.yoy,lineWidth:1.6,lineType:1,priceScaleId:"left",lastValueVisible:false,crosshairMarkerVisible:false,priceFormat:{type:"price",precision:0,minMove:1}},F.Y);
-    ys.createPriceLine({price:0,color:"rgba(242,193,78,.45)",lineWidth:1,lineStyle:2,axisLabelVisible:false,title:""});
+    const ys=P2.add("line",{color:"rgba(242,193,78,.8)",lineWidth:1,lineType:1,priceScaleId:"left",lastValueVisible:false,crosshairMarkerVisible:false,priceFormat:{type:"price",precision:0,minMove:1}},F.Y);
+    ys.createPriceLine({price:0,color:"rgba(242,193,78,.25)",lineWidth:1,lineStyle:2,axisLabelVisible:false,title:""});
     P2.bands(bd.map(x=>Object.assign({},x,{label:null})));
   }
   const r=custom?[custom[0],custom[1]]:sel!=null?[PER[sel].ia,PER[sel].ib]:null;
