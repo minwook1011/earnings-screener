@@ -166,3 +166,10 @@
 .ctbl .ck.hold{background:#eef1f5;color:#5d6470}
 .ctbl em{font-style:normal;color:#b45309;font-size:11px}
 #c-qTbl tr.pre td{color:#8a93a3}
+.cov{display:inline-flex;gap:6px}
+.cov button{display:inline-flex;align-items:center;gap:6px;font:500 12.5px "Pretendard Variable",Pretendard,sans-serif;padding:5px 11px;border-radius:999px;cursor:pointer;border:1px dashed #3a4356;background:transparent;color:#8b93a3}
+.cov button i{width:14px;height:3px;border-radius:2px;opacity:.35}
+.cov button.rev i{background:#2fd3a0}.cov button.oi i{background:#ff9f43}
+.cov button[aria-pressed="true"]{border-style:solid;background:#121620;color:#e9edf5}
+.cov button[aria-pressed="true"].rev{border-color:#2fd3a0}.cov button[aria-pressed="true"].oi{border-color:#ff9f43}
+.cov button[aria-pressed="true"] i{opacity:1}

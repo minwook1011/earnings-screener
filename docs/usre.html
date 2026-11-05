@@ -11,7 +11,7 @@
 <script src="usre-boot.js?v=1"></script>
 <link rel="stylesheet" href="usre-theme.css?v=1">
 <link rel="stylesheet" href="usre-screener.css?v=1">
-<link rel="stylesheet" href="usre.css?v=8">
+<link rel="stylesheet" href="usre.css?v=9">
 <link rel="stylesheet" href="usre-nav.css?v=1">
 </head>
 <body>
@@ -230,9 +230,9 @@
   <div class="mcard tvcard" id="c-card">
     <div class="mctl"><span class="ml">기업</span><select id="c-tk" aria-label="기업"></select><span class="cmeta" id="c-meta"></span></div>
     <div class="mctl cperw"><span class="ml">구간</span><div class="cper" id="c-per"></div></div>
-    <div class="mctl"><span class="ml">아래 칸</span><div class="seg" id="c-fin"><button data-f="rev">분기 매출액</button><button data-f="oi">분기 영업이익</button><button data-f="off">끄기</button></div>
+    <div class="mctl"><span class="ml">겹쳐 보기</span><div class="cov" id="c-ov"><button type="button" data-o="rev" class="rev"><i></i>분기 매출액</button><button type="button" data-o="oi" class="oi"><i></i>분기 영업이익</button></div>
+      <span class="ml">아래 칸</span><div class="seg" id="c-fin"><button data-f="rev">매출액 막대</button><button data-f="oi">영업이익 막대</button><button data-f="off">끄기</button></div>
       <span class="ml">주가 눈금</span><div class="seg" id="c-scale"><button data-s="log">로그</button><button data-s="lin">일반</button></div></div>
-    <div class="m-rsum" id="c-sum"></div>
     <div id="c-bar"></div>
     <div class="tvstack"><div id="c-p1"></div><div id="c-p2"></div></div>
     <div class="m-info" id="c-info"></div>
@@ -259,7 +259,7 @@
 <script src="data/usre/demand.js?v=2"></script>
 <script src="usre-demand.js?v=2"></script>
 <script src="data/usre/cycle.js?v=1"></script>
-<script src="usre-cycle.js?v=2"></script>
+<script src="usre-cycle.js?v=3"></script>
 <script src="data/usre/macro.js?v=1"></script>
 <script src="usre-macro.js?v=9"></script>
 </body>

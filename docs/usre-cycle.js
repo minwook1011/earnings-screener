@@ -10,7 +10,7 @@ const DAY=864e5, T=s=>Date.parse(s+"T00:00:00Z");
 const C=CYC, dates=C.dates, N=dates.length, dT=dates.map(T);
 const VER=dates[N-1];
 const ERA=C.rangeEra;
-const COL={px:"#4c8dff",fed:"#e8ecf3",mort:"#a78bfa",t10:"#34d399",yoy:"#f2c14e"};
+const COL={px:"#4c8dff",fed:"#e8ecf3",mort:"#a78bfa",t10:"#34d399",yoy:"#f2c14e",rev:"#2fd3a0",oi:"#ff9f43"};
 const KIND={up:{t:"인상",c:"up",band:"rgba(239,68,68,.055)",bandOn:"rgba(239,68,68,.12)",lc:"rgba(255,150,150,.6)"},
             dn:{t:"인하",c:"dn",band:"rgba(59,130,246,.06)",bandOn:"rgba(59,130,246,.13)",lc:"rgba(150,185,255,.65)"},
             hold:{t:"동결",c:"hold",band:"rgba(255,255,255,0)",bandOn:"rgba(255,255,255,.05)",lc:"rgba(220,226,236,.5)"}};
@@ -36,7 +36,7 @@ const PER=C.per.map((p,i)=>{
 const curPer=PER.length-1;
 
 /* ---------- 상태 ---------- */
-let tk=null, sel=null, custom=null, finMode="rev", scale="log", G=null, TK=null, PX=null, Q=[];
+let tk=null, sel=null, custom=null, finMode="off", ovRev=false, ovOi=false, scale="log", G=null, TK=null, PX=null, Q=[];
 try{ tk=localStorage.getItem("usre_cyc_tk"); }catch(e){}
 if(!tk||!C.tick.some(x=>x[0]===tk)) tk="DHI";
 try{ const s=localStorage.getItem("usre_cyc_sel"); if(s!=null&&s!=="all"&&PER[+s]) sel=+s; }catch(e){}
@@ -53,6 +53,8 @@ const $=id=>document.getElementById(id);
   pb.innerHTML=`<button data-p="all" class="all">전체 1999~</button>`+PER.map(p=>`<button data-p="${p.i}" class="${p.K.c}">${esc(p.lab)}</button>`).join("");
   pb.addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; pick(b.dataset.p==="all"?null:+b.dataset.p); });
   $("c-fin").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; finMode=b.dataset.f; pressSeg("c-fin","f",finMode); draw(true); });
+  $("c-ov").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return;   // 켰다 끄면 주가 차트에 꺾은선으로 겹친다
+    if(b.dataset.o==="rev") ovRev=!ovRev; else ovOi=!ovOi; ovPress(); draw(true); });
   $("c-scale").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; scale=b.dataset.s; pressSeg("c-scale","s",scale); draw(true); });
   $("c-qdet").addEventListener("toggle",()=>{ if($("c-qdet").open) qTable(); });
 })();
@@ -68,13 +70,13 @@ function loadTk(t){
   });
 }
 function load(){
-  $("c-sum").innerHTML='<span class="mute">불러오는 중…</span>';
+  $("c-meta").textContent="불러오는 중…";
   loadTk(tk).then(d=>{
     TK=d; PX=new Array(N).fill(null); d.p.forEach((v,k)=>{ if(d.s+k<N) PX[d.s+k]=v; });
     Q=(d.q||[]).slice().sort((a,b)=>a[0]<b[0]?-1:1);
     $("c-meta").textContent=`${PX[d.s]!=null?dates[d.s].slice(0,7)+"부터 주가":""}${Q.length?` · 실적 ${Q[0][0].slice(0,7)}~${Q[Q.length-1][0].slice(0,7)} (SEC XBRL)`:" · SEC 실적 없음"}`;
     draw(false); table(); if($("c-qdet").open) qTable();
-  }).catch(()=>{ $("c-sum").innerHTML='<span class="warn">이 종목 자료를 불러오지 못했습니다.</span>'; });
+  }).catch(()=>{ $("c-meta").textContent="이 종목 자료를 불러오지 못했습니다."; });
 }
 
 /* ---------- 실적 계산 ---------- */
@@ -140,6 +142,18 @@ function finSeries(){
   });
   return {V,Y,QI,ix};
 }
+/* 분기 매출·영업이익 꺾은선 — 분기 끝 주에 점을 찍고 사이를 잇는다(120일 넘게 비면 끊음). 눈금은 숨기고 값은 범례에 */
+function finLine(ix){
+  const V=new Array(N).fill(null); let prev=null;
+  Q.forEach(q=>{
+    if(q[ix]==null){ prev=null; return; }
+    const w=wIdx(q[0]), v=q[ix]/100;
+    if(prev&&(T(q[0])-T(prev.d))/DAY<120&&w>prev.w){ for(let i=prev.w+1;i<w;i++) V[i]=prev.v+(v-prev.v)*(i-prev.w)/(w-prev.w); }
+    V[w]=v; prev={w,v,d:q[0]};
+  });
+  return V;
+}
+function qAt(i){ const t=dT[i]+6*DAY; for(let j=Q.length-1;j>=0;j--){ if(T(Q[j][0])<=t) return t-T(Q[j][0])<200*DAY?j:-1; } return -1; }
 function legend1(i){
   const p=PER.find(x=>i>=x.ia&&i<=x.ib&&!(x.k==="hold"&&false)), r=sel!=null&&!custom?PER[sel]:null;
   const base=r?r.ia:custom?custom[0]:null;
@@ -149,6 +163,11 @@ function legend1(i){
     `<span>${sw(COL.px)}주가 <b>${usd(PX[i])}</b>${rel}</span>`+
     `<span>${sw(COL.fed)}기준금리 <b>${fedTxt(C.fed[i],dates[i])}</b></span>`+
     `<span>${sw(COL.mort)}30년 모기지 <b>${f2(C.mort[i])}%</b></span>`+
+    ((ovRev||ovOi)&&Q.length?(()=>{ const k=qAt(i); if(k<0) return `<span class="d">분기 실적 없음</span>`;
+      const q=Q[k], yc=y=>y==null?"":` <em class="${y.v!=null?cls(y.v):""}">${y.t||"전년 대비 "+sg(y.v)+"%"}</em>`;
+      return `<span class="d">${qLabel(q[0])}</span>`+
+        (ovRev?`<span>${sw(COL.rev)}매출액 <b>${eok(q[1])}억달러</b>${yc(yoy(k,1))}</span>`:"")+
+        (ovOi?`<span>${sw(COL.oi)}${esc(TK.oik||"영업이익")} <b>${eok(q[2])}억달러</b>${yc(yoy(k,2))}</span>`:""); })():"")+
     (p?`<span class="d">${p.K.t} 구간</span>`:"");
 }
 function draw(keepRange){
@@ -165,6 +184,10 @@ function draw(keepRange){
   const fs=P1.add("line",{color:"rgba(232,236,243,.7)",lineWidth:1,lineType:1,priceScaleId:"left",priceFormat:{type:"price",precision:2,minMove:0.01}},C.fed);
   const mk={}; C.ev.forEach(e=>{ const w=wIdx(e[0]); mk[w]=(mk[w]||0)+(e[2]-e[1]); });
   fs.setMarkers(Object.keys(mk).map(Number).sort((a,b)=>a-b).map(w=>{ const up=mk[w]>0; return {time:dates[w],position:up?"aboveBar":"belowBar",color:up?"rgba(239,68,68,.55)":"rgba(59,130,246,.6)",shape:up?"arrowUp":"arrowDown",size:0.3}; }));
+  [[ovRev,1,COL.rev],[ovOi,2,COL.oi]].forEach(([on,ix,c])=>{ if(!on||!Q.length) return;
+    P1.add("line",{color:c,lineWidth:1.3,priceScaleId:"q"+ix,lastValueVisible:false,priceLineVisible:false,crosshairMarkerRadius:2,priceFormat:{type:"price",precision:1,minMove:0.1}},finLine(ix));
+    P1.chart.priceScale("q"+ix).applyOptions({scaleMargins:{top:.12,bottom:.1}});
+  });
   const bd=bands(); P1.bands(bd);
   b2.hidden=finMode==="off";
   if(finMode!=="off"){
@@ -189,7 +212,7 @@ function draw(keepRange){
   if(!rng){ if(r){ const pad=Math.max(3,Math.round((r[1]-r[0])*0.04)); rng={from:r[0]-pad,to:r[1]+pad}; } else rng={from:-2,to:N+4}; }
   const setR=()=>G.panes.forEach(P=>P.chart.timeScale().setVisibleLogicalRange(rng));
   setR(); setTimeout(setR,0);
-  info(null); summary(); pressPer(); srcLine();
+  info(null); pressPer(); srcLine();
 }
 function info(i){
   const el=$("c-info");
@@ -201,7 +224,8 @@ function info(i){
 function srcLine(){
   setH($("c-src"),`<span class="it">${sw("rgba(239,68,68,.55)")}인상 구간</span><span class="it">${sw("rgba(59,130,246,.6)")}인하 구간</span><span class="it">${sw("rgba(255,255,255,.25)")}고른 동결 구간</span><span class="it">${sw("rgba(13,16,22,.9)")}사이클 안의 쉼(4개월↑)</span>`+
     `<span class="it">${sw(COL.px)}주가(오른쪽 눈금)</span><span class="it">${sw(COL.fed)}기준금리 · ${sw(COL.mort)}30년 모기지(왼쪽 눈금, %)</span>`+
-    `<span class="it">아래 칸 막대: 분기 ${finMode==="oi"?"영업이익":"매출액"}(억달러, 빨강 = 전년보다 증가·파랑 = 감소) · ${sw(COL.yoy)}전년 대비(%, 왼쪽 눈금)</span>`);
+    `<span class="it">${sw(COL.rev)}분기 매출액 · ${sw(COL.oi)}분기 ${esc((TK&&TK.oik)||"영업이익")} 꺾은선(각자 높이에 맞춘 눈금, 값은 왼쪽 위 범례)</span>`+
+    (finMode!=="off"?`<span class="it">아래 칸 막대: 분기 ${finMode==="oi"?"영업이익":"매출액"}(억달러, 빨강 = 전년보다 증가·파랑 = 감소) · ${sw(COL.yoy)}전년 대비(%, 왼쪽 눈금)</span>`:""));
 }
 function setH(el,html){ el.innerHTML=html.replace(/style="background:([^"]+)"/g,'data-bg="$1"'); el.querySelectorAll("[data-bg]").forEach(x=>x.style.background=x.dataset.bg); }   // 사이트 CSP 가 style="…" 을 막는다
 
@@ -302,5 +326,6 @@ function ensure(){
   TV.lib().then(load).catch(()=>{ $("c-info").textContent="차트 라이브러리를 불러오지 못했습니다."; });
 }
 window.__cycDraw=ensure;
-pressSeg("c-fin","f",finMode); pressSeg("c-scale","s",scale);
+function ovPress(){ $("c-ov").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.o==="rev"?ovRev:ovOi)); }
+pressSeg("c-fin","f",finMode); pressSeg("c-scale","s",scale); ovPress();
 })();
