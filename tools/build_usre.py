@@ -246,7 +246,7 @@ def periods_oi(facts):
     """영업이익 태그가 없거나 최근이 비면 세전이익으로(빌더·리츠는 영업이익을 따로 안 쓰는 곳이 많다)"""
     for tg in OI_TAGS:
         q, a = periods(facts, [tg])
-        if len(q) >= 8:
+        if len(q) >= 8 and (date.today() - D(max(q))).days <= 400:   # 태그를 끊은 회사(레나 2022-02 영업이익 중단)는 다음 태그로
             return q, a, ("영업이익" if tg == "OperatingIncomeLoss" else "세전이익")
     return {}, {}, "영업이익"
 
