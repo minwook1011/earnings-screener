@@ -5,8 +5,9 @@
   python tools/gpush.py --pull        받아 오기만(작업 시작 전). 리서치 상태가 바뀌어 있으면 먼저 커밋해 둔다
 
   - 리서치 상태 docs/data/jp/research/index.json 이 바뀌어 있으면 늘 같이 커밋한다(남아 있으면 rebase 가 막힘).
-  - 밀리면 git fetch → git rebase origin/main. 충돌이 JSON 파일에서만 나면(어느 JSON 이든, 2026-10-30) 회사(키)별로 합친다:
-    한쪽만 바꾼 키는 바꾼 쪽, 둘 다 바꾼 키는 내 것. 다른 파일에서 충돌하면 rebase --abort 하고 멈춤(사람이 봄).
+  - 밀리면 git fetch → git merge origin/main(2026-11-05까지는 rebase — 빈 rebase-merge 폴더가 남아 막혀서 바꿈).
+    충돌이 JSON 파일에서만 나면(어느 JSON 이든, 2026-10-30) 회사(키)별로 합친다:
+    한쪽만 바꾼 키는 바꾼 쪽, 둘 다 바꾼 키는 내 것. 다른 파일에서 충돌하면 merge --abort 하고 멈춤(사람이 봄).
   - 강제 푸시·reset·stash 는 쓰지 않는다.
   - 한 컴퓨터에서 회차가 겹쳐도 git 작업은 한 번에 하나만(tools/gitlock.py 잠금, 2026-10-28).
     시작할 때 남은 rebase(다른 작업이 죽으며 남긴 것)가 있으면 abort 로 치우고 시작한다.
@@ -79,10 +80,12 @@ def merge(base, up, me):
 
 
 def rebase():
+    """받아 와 합친다. 2026-11-05부터 rebase 대신 merge — rebase 가 .git/rebase-merge 빈 폴더를 남기고
+    샌드박스에서는 그 폴더를 못 지워 푸시가 몇 시간씩 막혔음(11/4·11/5). merge 는 .git 안에 폴더를 만들지 않는다."""
     git("fetch", "-q", "origin", "main")
-    for i in range(9):   # 같은 폴더의 다른 작업(동기화)이 파일을 쓰는 중이면 rebase 가 안 됨 → 20초씩 기다림
-        r = git("rebase", "origin/main", ok=True)
-        if r.returncode == 0 or "changes" not in (r.stderr or ""):
+    for i in range(9):   # 같은 폴더의 다른 작업(동기화)이 파일을 쓰는 중이면 merge 가 안 됨 → 20초씩 기다림
+        r = git("merge", "-q", "--no-edit", "-m", "merge: origin/main" + TAIL, "origin/main", ok=True)
+        if r.returncode == 0 or "would be overwritten" not in (r.stderr or ""):
             break
         if i >= 2:   # 1분 넘게 남아 있으면 주인 없는 변경(죽은 작업의 흔적) — 멀쩡한 파일만 커밋해 치움(2026-10-30, 14시부터 푸시가 막혔던 일)
             sweep()
@@ -91,21 +94,21 @@ def rebase():
     else:
         print("보류: 커밋 안 된 다른 변경이 있어 못 받아 옴 — 커밋은 남아 있고 다음 gpush 때 같이 올라감")
         return False
-    for _ in range(50):
-        if r.returncode == 0:
-            return True
-        bad = [f for f in git("diff", "--name-only", "--diff-filter=U").stdout.split() if f]
-        if not bad or any(not f.endswith(".json") for f in bad):   # JSON 은 어느 파일이든 키별로 합침(2026-10-30) — 그 밖 파일 충돌만 사람이 봄
-            git("rebase", "--abort", ok=True)
-            print("멈춤: 합칠 수 없는 충돌 —", ", ".join(bad) or r.stderr.strip()[:200])
-            return False
-        for f in bad:   # rebase 중에는 :2 = 받아 온 쪽(HEAD), :3 = 내 커밋
-            m = merge(show(1, f), show(2, f), show(3, f))
-            json.dump(m, open(os.path.join(ROOT, f), "w", encoding="utf-8"), ensure_ascii=False,
-                      indent=1 if f == IDX else None)
-            git("add", f)
-        r = git("rebase", "--continue", ok=True)
-    git("rebase", "--abort", ok=True)
+    if r.returncode == 0:
+        return True
+    bad = [f for f in git("diff", "--name-only", "--diff-filter=U").stdout.split() if f]
+    if not bad or any(not f.endswith(".json") for f in bad):   # JSON 은 어느 파일이든 키별로 합침(2026-10-30) — 그 밖 파일 충돌만 사람이 봄
+        git("merge", "--abort", ok=True)
+        print("멈춤: 합칠 수 없는 충돌 —", ", ".join(bad) or ((r.stderr or "") + (r.stdout or "")).strip()[:200])
+        return False
+    for f in bad:   # merge 중에는 :2 = 내 쪽(HEAD), :3 = 받아 온 쪽
+        m = merge(show(1, f), show(3, f), show(2, f))
+        json.dump(m, open(os.path.join(ROOT, f), "w", encoding="utf-8"), ensure_ascii=False,
+                  indent=1 if f == IDX else None)
+        git("add", f)
+    if git("commit", "-q", "--no-edit", ok=True).returncode == 0:
+        return True
+    git("merge", "--abort", ok=True)
     return False
 
 
@@ -130,14 +133,21 @@ def sweep():
 
 
 def heal():
-    """잠금을 잡은 뒤라 지금 rebase 중인 다른 작업은 없다 — 남아 있는 rebase 는 죽은 작업의 흔적."""
+    """잠금을 잡은 뒤라 지금 rebase·merge 중인 다른 작업은 없다 — 남아 있는 것은 죽은 작업의 흔적."""
+    if os.path.isfile(os.path.join(ROOT, ".git", "MERGE_HEAD")):
+        git("merge", "--abort", ok=True)
+        print("남은 merge 치움")
     for d in ("rebase-merge", "rebase-apply"):
         p = os.path.join(ROOT, ".git", d)
         if not os.path.isdir(p):
             continue
         git("rebase", "--abort", ok=True)
         if os.path.isdir(p) and not os.listdir(p):   # 빈 폴더만 남으면 abort 도 못 함(10/28 실제로 있었음)
-            os.rmdir(p)
+            try:
+                os.rmdir(p)
+            except OSError:   # 샌드박스에서는 못 지우는 때가 있음(11/4·11/5) — 사람이 지워야 함
+                print(f"멈춤: .git/{d} 빈 폴더를 못 지움(권한) — 사람이 지워야 함")
+                sys.exit(1)
         print(f"남은 rebase 치움({d})")
 
 
