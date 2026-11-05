@@ -27,8 +27,8 @@ STALE = 90   # 분
 REQ_DAYS = 4   # 요청 발표일이 이보다 오래되면 건너뜀(금요일 발표를 월요일에 쓸 수 있게 4일)
 # 두 컴퓨터 분담(2026-10-28 사용자, 2026-11-02 123→12): 티커 끝자리 1·2 = 'home'(원래 컴퓨터), 나머지(0·3~9·영문) = 'laptop'.
 # 컴퓨터마다 tools/shard.txt(커밋 안 함)에 home·laptop·laptop-all 한 단어. 없으면 전부 맡음(예전처럼).
-HOME_TAIL = "12"
-X12_ALL = False   # True 면 노트북(laptop-x12)이 끝자리 1·2 까지 전부 맡는다(11/5 낮 잠깐 True → 같은 날 사용자 "1, 2 제외한 거 다 써"로 되돌림)
+HOME_TAIL = "12345"   # 2026-11-05 사용자 12→12345: 회사 컴퓨터가 끝자리 1~5, 노트북이 0·6~9·영문(돌던 것은 끝까지)
+X12_ALL = False   # True 면 노트북(laptop-x12)이 끝자리 HOME_TAIL 까지 전부 맡는다(11/5 낮 잠깐 True → 같은 날 되돌림)
 
 
 def shard():
@@ -40,8 +40,8 @@ def shard():
 
 def mine(c, sh=None):
     sh = sh if sh is not None else shard()
-    if sh == "laptop-x12":   # 노트북이 끝자리 1·2 만 빼고 전부(2026-11-02 사용자)
-        return X12_ALL or c[-1] not in "12"
+    if sh == "laptop-x12":   # 노트북이 회사 컴퓨터 몫(HOME_TAIL)만 빼고 전부(2026-11-02 사용자, 11/5 1·2 → 1~5)
+        return X12_ALL or c[-1] not in HOME_TAIL
     if sh not in ("home", "laptop", "laptop-all"):   # laptop-all 도 2026-11-02 부터 끝자리 1·2 는 home 몫
         return True
     return (c[-1] in HOME_TAIL) == (sh == "home")
