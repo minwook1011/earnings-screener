@@ -1067,7 +1067,7 @@ function chartHTML(b){
     <div class="tvd-ma">${legend}</div>
   </div>
   <div class="mcard tvcard tvd-card">
-    <div class="tvd-dates"><span class="ml">구간</span><input type="date" id="tvd-from" aria-label="시작일"><span class="tl">~</span><input type="date" id="tvd-to" aria-label="끝날"><button class="tvd-go" id="tvd-go" type="button">보기</button><em>날짜를 넣거나 「↔ 구간 보기」를 누르고 차트에서 시작·끝을 클릭</em></div>
+    <div class="tvd-dates"><span class="ml">구간</span><input type="date" id="tvd-from" aria-label="시작일"><span class="tl">~</span><input type="date" id="tvd-to" aria-label="끝날"><button class="tvd-go" id="tvd-go" type="button">보기</button><em>날짜를 넣고 「보기」</em></div>
     <div class="m-rsum" id="tvd-rsum"></div>
     <div id="tvbar"></div><div class="tvstack"><div id="tvd"></div></div></div>
   ${spikes ? `<div class="spikelist">${spikes}</div>` : ""}

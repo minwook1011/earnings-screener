@@ -216,7 +216,7 @@ function draw(keepRange){
 }
 function info(i){
   const el=$("c-info");
-  if(i==null){ el.innerHTML='<span class="mute">차트에 마우스를 올리면 그 주가 어느 구간인지와 그 주의 금리 결정이 나옵니다. 위 구간 버튼이나 아래 표의 행을 누르면 그 구간만 확대합니다.</span>'; return; }
+  if(i==null){ el.innerHTML=""; return; }
   const p=PER.find(x=>i>=x.ia&&i<=x.ib), t0=dT[i], t1=t0+6*DAY;
   const evs=C.ev.filter(e=>T(e[0])>=t0&&T(e[0])<=t1).map(e=>`<span class="${e[2]>e[1]?"up":"dn"}">${e[2]>e[1]?"▲ 인상":"▼ 인하"} ${Math.abs(Math.round((e[2]-e[1])*100))}bp · ${e[0]} (${f2(e[1])}→${f2(e[2])}%)</span>`);
   el.innerHTML=`<b>${dates[i]} 주</b>`+(p?`<span class="${p.K.c==="hold"?"":p.K.c}">${p.K.t} 구간 ${p.a} ~ ${p.open?"현재":p.b}</span>`:"")+evs.join("");

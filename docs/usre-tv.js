@@ -196,6 +196,8 @@
     o = o || {};
     this.bar = bar; this.panes = []; this.sync = !!o.sync; this.mode = null; this.pend = null; this.sel = null; this.hover = null; this.onHover = o.onHover; this.onRange = o.onRange; this.onFit = o.onFit; this._lock = false;
     var G = this;
+    this.tools = !!o.tools;   // 선 긋기·구간 보기 도구 줄(2026-11-05 사용자: "불필요하다, 다 지워") — 켜야 나온다
+    if (bar && !this.tools) { bar.innerHTML = ""; bar.hidden = true; bar = this.bar = null; }
     if (bar) {
       bar.classList.add("tv-bar");
       bar.innerHTML =
@@ -324,6 +326,7 @@
     var tg = e.target, typing = tg && (tg.tagName === "INPUT" || tg.tagName === "TEXTAREA" || tg.isContentEditable);
     if (typing) return;
     var k = e.code;
+    if (!G.tools && e.altKey) return;
     if (e.altKey && k === "KeyH") { e.preventDefault(); if (G.hover && G.hover.p != null) G.addH(G.hover.pane, G.hover.p); else G.setMode("h"); return; }
     if (e.altKey && k === "KeyV") { e.preventDefault(); if (G.hover) G.addV(G.hover.pane, G.hover.l); else G.setMode("v"); return; }
     if (e.altKey && k === "KeyT") { e.preventDefault(); G.setMode(G.mode === "t" ? null : "t"); return; }

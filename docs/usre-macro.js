@@ -203,7 +203,7 @@ function legendsSrc(){
 }
 function info(i){
   const el=document.getElementById("m-info");
-  if(i==null){ el.innerHTML='<span class="mute">차트에 마우스를 올리면 그 주의 침체·사건·금리 결정이 여기 나옵니다.</span>'; return; }
+  if(i==null){ el.innerHTML=""; return; }
   const ti=dT[i], tt=ti+6*DAY, out=[];
   const rec=RECS.find(r=>T(r.a)<=tt&&ti<=T(r.b));
   if(rec) out.push(`<span class="rec">■ ${esc(rec.t)} (${rec.a.slice(0,7)}~${rec.b.slice(0,7)})</span>`);
