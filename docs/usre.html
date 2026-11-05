@@ -173,6 +173,28 @@
   </div>
   <details class="mdet"><summary>표로 보기: 연말 기준 주가·금리·실업률·PPI (선택한 업종)</summary><div class="mtw"><table id="m-yrTbl"></table></div></details>
   <details class="mdet"><summary>표로 보기: 2000년 이후 기준금리 변경 전체</summary><div class="mtw"><table id="m-fedTbl"></table></div></details>
+  <h3 class="dsub">10년물 분해: 실질금리 · 기대인플레이션 · 기간프리미엄</h3>
+  <p class="msub">10년물 금리를 두 가지 방법으로 쪼개 봅니다. <b>①</b> 10년물 = 실질금리(물가연동국채 TIPS 금리) + 기대인플레이션(BEI, 일반 국채와 TIPS 금리 차) — 시장 가격이라 정확히 맞아떨어집니다.
+  <b>②</b> 10년물 = 앞으로 10년 단기금리 기대 경로 + 기간프리미엄(장기채를 들고 있는 데 대한 웃돈, 연준 Kim-Wright 모델 추정). 두 방법은 서로 겹치므로 셋을 그냥 더하면 안 됩니다. 띠 색은 위 차트와 같습니다(빨강 인상기·파랑 인하기).</p>
+  <ul class="dkey" id="r-key"></ul>
+  <div class="mcard tvcard">
+    <div class="mctl"><span class="ml">기간</span><div class="seg" id="r-rng"></div>
+      <span class="ml">표시</span><label class="mchk"><input type="checkbox" id="r-band" checked> 연준 인상·인하 띠</label></div>
+    <div id="r-bar"></div>
+    <div class="tvstack"><div id="r-p1"></div><div id="r-p2"></div></div>
+  </div>
+  <div class="mcard tvcard">
+    <div class="mctl"><span class="ml">연도별</span><span class="tl">한 해 평균값을 이은 선입니다. 점에 마우스를 올리면 그해 값이 나옵니다(올해는 지금까지 평균).</span></div>
+    <div id="r-ybar"></div>
+    <div class="tvstack"><div id="r-yp"></div></div>
+  </div>
+  <div class="mnotes">
+    <b>읽는 법.</b> 실질금리가 오르면 물가를 빼고도 돈값이 비싸진 것(경기·재정·정책 요인), 기대인플레이션이 오르면 시장이 장기 물가를 더 높게 보는 것입니다. 「5년 뒤 5년」은 지금부터 5년 뒤 시작하는 5년간의 기대 물가로, 당장의 유가·관세 충격을 걸러낸 장기 물가 신뢰도입니다.
+    기간프리미엄이 오르면 같은 정책금리 전망에서도 장기금리가 더 높아집니다(재정적자·국채 공급·물가 불확실성). 「단기금리 기대 경로」는 10년물에서 기간프리미엄을 뺀 값으로, 시장이 앞으로 10년 평균 정책금리를 얼마로 보는지에 가깝습니다.
+    실질금리·기대인플레이션은 2003년부터 있습니다. 기간프리미엄은 모델마다 다르며(뉴욕연준 ACM 모델은 이 화면에 없음) 방향을 보는 용도로 쓰는 게 좋습니다.<br>
+    <b>출처.</b> 10년물 FRED DGS10 · 2년물 DGS2 · 실질금리 DFII10 · 기대인플레이션 T10YIE · 5년 뒤 5년 T5YIFR · 기간프리미엄 THREEFYTP10(연준 이사회 Kim-Wright) · 기준금리 DFEDTAR·DFEDTARU(상단). 일간 값을 주 단위로 맞췄고, 연도별 값은 그해 월평균의 평균·마지막 주 값입니다.
+  </div>
+  <details class="mdet" open><summary>표로 보기: 연도별 10년물 분해 (연평균·연말)</summary><div class="mtw"><table id="r-yTbl"></table></div></details>
   </div>
 </div>
 
@@ -262,5 +284,7 @@
 <script src="usre-cycle.js?v=6"></script>
 <script src="data/usre/macro.js?v=1"></script>
 <script src="usre-macro.js?v=10"></script>
+<script src="data/usre/rates.js?v=1"></script>
+<script src="usre-rates.js?v=1"></script>
 </body>
 </html>

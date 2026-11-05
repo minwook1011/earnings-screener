@@ -521,6 +521,41 @@ def build_macro():
     return {"weeks": len(dates), "last": last, "ur_last": urs[-1], "ppi_last": pps[-1]}
 
 
+
+# ── 10년물 분해(2026-11-05 사용자: "기대인플레이션이랑 실질금리, 기간 프리미엄 따로 볼 수 있게, 연도별로 모아서 표랑 차트로") ──
+#    10년물 = 실질금리(TIPS) + 기대인플레이션(BEI) — 시장 가격으로 정확히 맞아떨어진다.
+#    10년물 = 앞으로의 단기금리 기대 평균 + 기간프리미엄 — 기간프리미엄은 연준 Kim-Wright 모델 추정치(두 칼질은 서로 겹친다).
+F_RTS = OUT / "rates.js"
+RTS_SER = {"t10": "DGS10", "t2": "DGS2", "re": "DFII10", "be": "T10YIE", "f5": "T5YIFR", "tp": "THREEFYTP10"}
+
+
+def build_rates():
+    start = date(2000, 1, 3)                       # 월요일
+    grid, d = [], start
+    while d <= date.today():
+        grid.append(d.isoformat()); d += timedelta(days=7)
+    raw = {k: [(dd, v) for dd, v in fred(sid) if dd >= "1999-12-01"] for k, sid in RTS_SER.items()}
+    tar = [(dd, v) for dd, v in fred("DFEDTAR") if dd < "2008-12-16"] + [(dd, v) for dd, v in fred("DFEDTARU") if dd >= "2008-12-16"]
+    raw["fed"] = [(dd, v) for dd, v in tar if dd >= "1999-12-01"]
+    wk = {k: [None if v is None else round(v, 2) for v in wsamp(grid, ser, stale=(400 if k == "fed" else 10))] for k, ser in raw.items()}
+    # 끝 주가 빈 칸이면(그 주 자료 없음) 맨 끝 관측치로 채운다 — 차트 끝이 끊기지 않게
+    last = {k: (ser[-1] if ser else None) for k, ser in raw.items()}
+    years = []
+    for y in range(2000, date.today().year + 1):
+        ys = str(y); row = {"y": ys}
+        for k, ser in raw.items():
+            vals = [v for dd, v in ser if dd.startswith(ys)]
+            row[k] = round(sum(vals) / len(vals), 2) if vals and k != "fed" else None
+            row[k + "E"] = round(vals[-1], 2) if vals else None
+        n = len({dd[:7] for dd, _ in raw["t10"] if dd.startswith(ys)})
+        row["n"] = n
+        years.append(row)
+    data = {"dates": grid, "w": wk, "last": last, "years": years}
+    with open(F_RTS, "w", encoding="utf-8", newline="\n") as f:
+        f.write(f"/* 미국 부동산 · 10년물 분해(실질금리·기대인플레이션·기간프리미엄) — build_usre.py ({datetime.now(KST):%Y-%m-%d %H:%M} KST) */\n")
+        f.write(f"const RTS = {json.dumps(data, ensure_ascii=False, separators=(',', ':'))};\n")
+    return {"weeks": len(grid), "last": {k: v for k, v in last.items()}}
+
 # ── 금리 사이클 탭(2026-11-05 사용자: "인상·인하·동결 구간을 2000년부터, 그 사이 기준금리·모기지가 몇 bp 움직였는지,
 #    기업을 골라 주가를 겹치고, 구간을 고르면 확대, 그 구간 매출·영업이익과 전년 대비") ──
 CYC_GAP = 400                 # 같은 방향 결정이 이 일수 안에 다시 나오면 한 사이클(중간 쉼 포함) — 2001~03 인하, 2015~18 인상, 2024~ 인하를 하나로
@@ -865,6 +900,10 @@ def main():
     except Exception as e:   # 이 탭이 실패해도 나머지는 만든다
         d = {"error": str(e)[:200]}; print("판매·매물·집값 실패", e)
     m = build_macro(); print("차트", m)
+    try:
+        print("10년물 분해", build_rates())
+    except Exception as e:
+        print("10년물 분해 실패:", e)
     try:
         c = build_cycles(); print("금리 사이클", c)
     except Exception as e:
