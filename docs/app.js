@@ -1289,7 +1289,7 @@
     });
     var nf = Object.keys(UFAV).filter(function (t) { return S.uidx[t]; }).length;
     var ix = A.idx || {};
-    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · All Stocks</div><h1>미국 전체 종목<a class="calbtn" href="#uscal">실적 캘린더 ›</a></h1>' +
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · All Stocks</div><h1>미국 전체 종목</h1>' +
       '<div class="sub">' + (ix.v ? "<b>" + esc(ix.n) + "</b> " + num(ix.v, 2) + " " + pct(ix.c) + " &nbsp;|&nbsp; " : "") + '기준 <span class="mono">' + esc(A.as_of) + "</span> · " + A.stocks.length + '종목 · 업데이트 <span class="mono">' + esc(A.updated) + "</span></div></div></div></header>";
     var ctl = '<div class="ctl"><div class="fld"><label for="usec">업종</label><select id="usec"><option value="">업종 전체 (' + A.stocks.length + ")</option>" +
       '<option value="★"' + (S.usec === "★" ? " selected" : "") + ">★ 즐겨찾기 (" + nf + ")</option>" +
@@ -1353,7 +1353,7 @@
         (list.length ? '<ul class="cal-list ce-list uc-list">' + shown.map(function (o) { return ucalItem(o, d, today); }).join("") + "</ul>" : '<p class="cal-empty">예정 없음</p>') +
         (list.length > CAL_SHOW && !q ? '<button class="more" data-ucm="' + d + '">' + (open ? "접기" : "+" + (list.length - CAL_SHOW) + "곳 더 보기") + "</button>" : "") + "</section>";
     }).join("");
-    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · Earnings Calendar</div><h1>미국 실적 캘린더<a class="calbtn" href="#usa">‹ 미국 전체 종목</a></h1>' +
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · Earnings Calendar</div><h1>미국 실적 캘린더</h1>' +
       '<div class="sub">' + (S.ucal.n_universe || "—") + '종목 · 나스닥·야후 교차 발표일 <span class="mono">' + esc(S.ucal.src || "") + '</span> · 업데이트 <span class="mono">' + esc(S.ucal.updated || "") + "</span></div></div></div></header>";
     var ctl = '<div class="ctl"><div class="fld q"><label for="ucq">검색</label><input type="search" id="ucq" placeholder="티커 · 종목명 · 업종" value="' + esc(S.ucq) + '"></div>' +
       '<div class="count"><span class="today">' + todayKo() + "</span> · 이 주 <b>" + (weeks[mon] || 0) + "</b>곳</div></div>";
