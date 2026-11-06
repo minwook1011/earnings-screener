@@ -1250,11 +1250,160 @@
         (rows || '<p class="us-note">아직 리포트가 없습니다.</p>') + "</div>";
     }).catch(function () { if (S.mode === "us") app.innerHTML = soon("미국"); });
   }
+  /* ── 미국 전체 종목(#usa) · 미국 실적 캘린더(#uscal) — 2026-11-06 사용자
+     100억 「글로벌 메가캡 · 미국」 전 종목 + 「미국 실적」 기업 전부. 자료 data/us/all.json · cal.json (tools/build_us.py) */
+  S.ua = null; S.ucal = null; S.uq = ""; S.usec = ""; S.usort = "mcap"; S.udir = -1; S.un = 150; S.ucq = ""; S.ucweek = null; S.ucopen = {};
+  var UFAV = {}; try { UFAV = JSON.parse(localStorage.getItem("us-fav") || "{}"); } catch (e) {}
+  function usLoad(mode, fn) {
+    if (S.ua && S.ucal) return fn();
+    app.innerHTML = '<div class="loading">불러오는 중…</div>';
+    Promise.all([S.ua || getJSON("data/us/all.json"), S.ucal || getJSON("data/us/cal.json").catch(function () { return { days: {} }; })])
+      .then(function (r) { S.ua = r[0]; S.ucal = r[1]; S.uidx = {}; (S.ua.stocks || []).forEach(function (s) { S.uidx[s.tk] = s; }); if (S.mode === mode) fn(); })
+      .catch(function (e) { if (S.mode === mode) app.innerHTML = '<div class="empty">미국 자료를 못 불러왔습니다(' + esc(e.message) + ")</div>"; });
+  }
+  function ucap(v) { return v == null ? "—" : v >= 10000 ? (v / 10000).toFixed(2) + "조$" : num(v) + "억$"; }
+  function uheat(v) { if (v == null) return ""; var a = Math.abs(v), k = a < 2 ? 0 : a < 8 ? 1 : a < 20 ? 2 : 3; return k ? " h" + (v > 0 ? "p" : "n") + k : ""; }
+  function uspark(c, w, h) {
+    c = (c || []).filter(function (x) { return x != null; }); if (c.length < 2) return "";
+    w = w || 90; h = h || 24; var lo = Math.min.apply(null, c), hi = Math.max.apply(null, c), sp = hi - lo || 1;
+    return '<svg class="usp" viewBox="0 0 ' + w + " " + h + '" preserveAspectRatio="none"><path class="' + (c[c.length - 1] >= c[0] ? "up" : "dn") + '" d="' + c.map(function (x, i) { return (i ? "L" : "M") + (i / (c.length - 1) * w).toFixed(1) + " " + (h - 1 - (x - lo) / sp * (h - 2)).toFixed(1); }).join(" ") + '"/></svg>';
+  }
+  var UTM = { pre: "장 전", after: "장 후" };
+  function utm(x) { return UTM[x] || "시간 미정"; }
+  var UCOL = [["name", "종목", 0], ["sector", "업종", 0], ["mcap", "시가총액", 1], ["price", "가격", 1], ["chg1d", "1일", 1], ["chg5d", "5일", 1], ["chg1m", "1개월", 1], ["r3", "3개월", 1], ["r6", "6개월", 1], ["r12", "12개월", 1], ["from_hi", "52주 고점 대비", 1], ["vr", "거래량 배수", 1], ["rs", "RS", 1], ["nx", "다음 실적", 1], ["c", "6개월 추이", 2]];
+  function renderUSA() {
+    if (!S.ua) return usLoad("usa", renderUSA);
+    var A = S.ua, q = S.uq.trim().toLowerCase(), secs = {};
+    A.stocks.forEach(function (s) { secs[s.sector || "기타"] = (secs[s.sector || "기타"] || 0) + 1; });
+    var rows = A.stocks.filter(function (s) {
+      if (S.usec === "★") { if (!UFAV[s.tk]) return false; } else if (S.usec && (s.sector || "기타") !== S.usec) return false;
+      return !q || [s.tk, s.name, s.en, s.sector, s.ai].join(" ").toLowerCase().indexOf(q) >= 0;
+    });
+    var k = S.usort, dir = S.udir, today = kstYmd();
+    rows.sort(function (a, b) {
+      var x = a[k], y = b[k];
+      if (k === "nx") { x = x && x >= addDays(today, -1) ? x : null; y = y && y >= addDays(today, -1) ? y : null; }
+      if (x == null) return y == null ? (b.mcap || 0) - (a.mcap || 0) : 1; if (y == null) return -1;
+      if (typeof x === "string") return dir * x.localeCompare(y) || (b.mcap || 0) - (a.mcap || 0);
+      return dir * (x - y);
+    });
+    var nf = Object.keys(UFAV).filter(function (t) { return S.uidx[t]; }).length;
+    var ix = A.idx || {};
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · All Stocks</div><h1>미국 전체 종목<a class="calbtn" href="#uscal">실적 캘린더 ›</a></h1>' +
+      '<div class="sub">' + (ix.v ? "<b>" + esc(ix.n) + "</b> " + num(ix.v, 2) + " " + pct(ix.c) + " &nbsp;|&nbsp; " : "") + '기준 <span class="mono">' + esc(A.as_of) + "</span> · " + A.stocks.length + '종목 · 업데이트 <span class="mono">' + esc(A.updated) + "</span></div></div></div></header>";
+    var ctl = '<div class="ctl"><div class="fld"><label for="usec">업종</label><select id="usec"><option value="">업종 전체 (' + A.stocks.length + ")</option>" +
+      '<option value="★"' + (S.usec === "★" ? " selected" : "") + ">★ 즐겨찾기 (" + nf + ")</option>" +
+      Object.keys(secs).sort(function (a, b) { return secs[b] - secs[a]; }).map(function (s) { return '<option value="' + esc(s) + '"' + (S.usec === s ? " selected" : "") + ">" + esc(s) + " (" + secs[s] + ")</option>"; }).join("") + "</select></div>" +
+      '<div class="fld q"><label for="uq">검색</label><input type="search" id="uq" placeholder="이름 · 티커 검색" value="' + esc(S.uq) + '"></div>' +
+      '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>종목 · 머리글을 누르면 정렬</div></div>";
+    var th = "<tr><th class=\"ns\"></th>" + UCOL.map(function (c) {
+      return '<th class="' + (c[2] === 0 ? "l" : "") + (c[2] === 2 ? " ns" : "") + (k === c[0] ? " on" : "") + '"' + (c[2] === 2 ? "" : ' data-uk="' + c[0] + '"') + ">" + c[1] + (k === c[0] ? '<span class="ar">' + (dir < 0 ? "▼" : "▲") + "</span>" : "") + "</th>";
+    }).join("") + "</tr>";
+    var body = rows.slice(0, S.un).map(function (s) {
+      var nx = s.nx && s.nx >= addDays(today, -1) ? '<b class="ann">' + md(s.nx) + "</b>" + (UTM[s.nxt] ? "<small>" + UTM[s.nxt] + "</small>" : "") : '<span class="na">—</span>';
+      return '<tr data-ut="' + esc(s.tk) + '"><td class="fv"><button type="button" class="star' + (UFAV[s.tk] ? " on" : "") + '" data-ufav="' + esc(s.tk) + '" title="즐겨찾기">' + (UFAV[s.tk] ? "★" : "☆") + "</button></td>" +
+        '<td class="l nmc"><span class="nm">' + esc(s.name) + (s.en && s.en !== s.name ? " <small>" + esc(s.en) + "</small>" : "") + '</span><span class="tkc">' + esc(s.tk) + "</span></td>" +
+        '<td class="l sec">' + esc(s.sector || "") + "</td><td>" + ucap(s.mcap) + "</td><td>$" + num(s.price, 2) + "</td>" +
+        ["chg1d", "chg5d", "chg1m", "r3", "r6", "r12"].map(function (f) { return '<td class="uh' + uheat(s[f]) + '">' + pctTxt(s[f]) + "</td>"; }).join("") +
+        "<td>" + pct(s.from_hi) + '</td><td class="' + (s.vr >= 2 ? "vrh" : "") + '">' + (s.vr == null ? "—" : s.vr.toFixed(1) + "배") + "</td><td>" + (s.rs == null ? "—" : s.rs) + '</td><td class="nxc">' + nx + "</td><td>" + uspark(s.c) + "</td></tr>";
+    }).join("");
+    app.innerHTML = '<div class="wrap" id="view">' + head + ctl +
+      '<p class="stage-note">100억 사이트 「글로벌 메가캡 · 미국」 전 종목과 「미국 실적」 기업을 합친 표입니다. 등락은 야후 종가 기준(미 동부 날짜), RS = 3·6·9·12개월 가중 수익률 백분위(1~99), 거래량 배수 = 그날 ÷ 50일 평균. 종목을 누르면 요약이 열립니다.</p>' +
+      (rows.length ? '<div class="tblwrap"><table class="ua-t"><thead>' + th + "</thead><tbody>" + body + "</tbody></table></div>" : '<div class="empty">맞는 종목이 없습니다.</div>') +
+      (rows.length > S.un ? '<button class="btn more ua-more" id="umore">' + (rows.length - S.un) + "종목 더 보기</button>" : "") + "</div>";
+    app.querySelectorAll("[data-uk]").forEach(function (h) {
+      h.onclick = function () { var nk = h.dataset.uk; if (nk === S.usort) S.udir = -S.udir; else { S.usort = nk; S.udir = nk === "name" || nk === "sector" || nk === "nx" ? 1 : -1; } renderUSA(); };
+    });
+    document.getElementById("usec").onchange = function () { S.usec = this.value; S.un = 150; renderUSA(); };
+    var mb = document.getElementById("umore"); if (mb) mb.onclick = function () { S.un += 200; renderUSA(); };
+    app.querySelectorAll("[data-ufav]").forEach(function (b) {
+      b.onclick = function (ev) { ev.stopPropagation(); var t = b.dataset.ufav; if (UFAV[t]) delete UFAV[t]; else UFAV[t] = 1; try { localStorage.setItem("us-fav", JSON.stringify(UFAV)); } catch (e) {} renderUSA(); };
+    });
+    app.querySelectorAll("tr[data-ut]").forEach(function (tr) { tr.onclick = function () { usFin(tr.dataset.ut); }; });
+    var qi = document.getElementById("uq");
+    typing(qi, function () { S.uq = qi.value; S.un = 150; renderUSA(); var n = document.getElementById("uq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); });
+  }
+  function ucalItem(o, d, today) {
+    var past = d <= today, s = S.uidx[o.t] || {};
+    var chips = '<span class="uc-c tm">' + utm(o.tm) + "</span>" + (o.fq ? '<span class="uc-c">' + esc(o.fq.replace(/^(\w{3})\/(\d{4})$/, "$2.$1")) + "</span>" : "") + (o.est ? '<span class="uc-c est">예상일</span>' : "");
+    var rx = "";
+    if (past) {
+      if (o.sp != null) rx += '<span class="uc-b ' + (o.sp >= 0 ? "up" : "dn") + '">' + (o.sp >= 0 ? "서프" : "쇼크") + " <b>" + pctTxt(o.sp) + "</b><small>(EPS 컨센 대비)</small></span>";
+      rx += o.rx != null ? '<span class="uc-b ' + (o.rx > 0 ? "up" : o.rx < 0 ? "dn" : "") + '">발표 후 <b>' + pctTxt(o.rx) + "</b><small>" + md(o.rxd) + " 종가</small></span>" : '<span class="uc-b na">발표 후 <b>' + (d >= addDays(today, -1) ? "대기" : "—") + "</b></span>";
+    } else if (o.eps) rx = '<span class="uc-b pre">EPS 예상 <b>' + esc(o.eps) + "</b></span>";
+    return '<li><button class="ce" data-uct="' + esc(o.t) + '" data-ucd="' + d + '">' +
+      '<span class="ce-n"><i class="mono uc-tk">' + esc(o.t) + "</i><b>" + esc(o.n || o.t) + "</b></span>" +
+      '<span class="ce-m">' + ucap(o.mc) + (o.sec ? " · " + esc(o.sec) : "") + "</span></button>" +
+      '<div class="uc-row">' + chips + "</div>" + (rx ? '<div class="uc-row">' + rx + "</div>" : "") + "</li>";
+  }
+  function renderUSCal() {
+    if (!S.ucal) return usLoad("uscal", renderUSCal);
+    var days = S.ucal.days || {}, q = S.ucq.trim().toLowerCase(), today = kstYmd();
+    function hit(o) { return !q || [o.t, o.n, o.en, o.sec].join(" ").toLowerCase().indexOf(q) >= 0; }
+    var weeks = {};
+    Object.keys(days).forEach(function (d) { var n = days[d].filter(hit).length; if (n) { var w = monday(d); weeks[w] = (weeks[w] || 0) + n; } });
+    var keys = Object.keys(weeks).sort(), cur = monday(today);
+    if (!keys.length) { app.innerHTML = '<div class="wrap" id="view"><div class="empty">' + (q ? "검색과 맞는 종목이 없습니다." : "캘린더 자료가 없습니다.") + "</div></div>"; return; }
+    if (!S.ucweek || !weeks[S.ucweek]) S.ucweek = weeks[cur] ? cur : keys.filter(function (k) { return k >= cur; })[0] || keys[keys.length - 1];
+    var mon = S.ucweek, wi = keys.indexOf(mon);
+    var chips = keys.map(function (k) { return '<button data-ucw="' + k + '" aria-pressed="' + (k === mon) + '"' + (k === cur ? ' class="now"' : "") + "><b>" + weekName(k) + "</b><span>" + dot(k) + "~" + dot(addDays(k, 4)) + " · " + weeks[k] + "</span></button>"; }).join("");
+    var cols = [0, 1, 2, 3, 4].map(function (i) {
+      var d = addDays(mon, i), list = (days[d] || []).filter(hit), open = S.ucopen[d] || q, shown = open ? list : list.slice(0, CAL_SHOW);
+      return '<section class="cal-col' + (d === today ? " today" : d < today ? " past" : "") + '"><header><b>' + dot(d) + "(" + WD[new Date(d + "T00:00:00").getDay()] + ")</b><span>" + (d === today ? "오늘 · " : "") + list.length + "곳</span></header>" +
+        (list.length ? '<ul class="cal-list ce-list uc-list">' + shown.map(function (o) { return ucalItem(o, d, today); }).join("") + "</ul>" : '<p class="cal-empty">예정 없음</p>') +
+        (list.length > CAL_SHOW && !q ? '<button class="more" data-ucm="' + d + '">' + (open ? "접기" : "+" + (list.length - CAL_SHOW) + "곳 더 보기") + "</button>" : "") + "</section>";
+    }).join("");
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · Earnings Calendar</div><h1>미국 실적 캘린더<a class="calbtn" href="#usa">‹ 미국 전체 종목</a></h1>' +
+      '<div class="sub">' + (S.ucal.n_universe || "—") + '종목 · 나스닥·야후 교차 발표일 <span class="mono">' + esc(S.ucal.src || "") + '</span> · 업데이트 <span class="mono">' + esc(S.ucal.updated || "") + "</span></div></div></div></header>";
+    var ctl = '<div class="ctl"><div class="fld q"><label for="ucq">검색</label><input type="search" id="ucq" placeholder="티커 · 종목명 · 업종" value="' + esc(S.ucq) + '"></div>' +
+      '<div class="count"><span class="today">' + todayKo() + "</span> · 이 주 <b>" + (weeks[mon] || 0) + "</b>곳</div></div>";
+    app.innerHTML = '<div class="wrap" id="view">' + head + ctl +
+      '<p class="stage-note">날짜는 미 동부 기준, 하루 칸은 <b>시가총액 큰 순</b>. 장 전 = 한국 밤~새벽, 장 후 = 한국 새벽~아침. <b>발표 후</b> = 장 전 발표는 그날, 장 후·시간 미정은 다음 거래일 종가 등락. <b>예상일</b> = 회사 확정 전 야후 추정. 종목을 누르면 요약이 열립니다.</p>' +
+      '<div class="cal"><div class="weeks" id="ucweeks">' + chips + "</div>" +
+      '<div class="wnav"><button data-ucs="-1"' + (wi <= 0 ? " disabled" : "") + ">‹ 이전 주</button><b>" + weekName(mon) + "</b><span>" + dot(mon) + " ~ " + dot(addDays(mon, 4)) + "</span>" +
+      '<button data-ucs="0"' + (mon === cur ? " disabled" : "") + '>이번 주</button><button data-ucs="1"' + (wi >= keys.length - 1 ? " disabled" : "") + ">다음 주 ›</button></div>" +
+      '<div class="cal-grid">' + cols + "</div></div></div>";
+    app.querySelectorAll("[data-ucw]").forEach(function (b) { b.onclick = function () { S.ucweek = b.dataset.ucw; renderUSCal(); }; });
+    app.querySelectorAll("[data-ucs]").forEach(function (b) { b.onclick = function () { var st = +b.dataset.ucs; S.ucweek = st ? keys[wi + st] : (weeks[cur] ? cur : S.ucweek); renderUSCal(); }; });
+    var wk = document.getElementById("ucweeks"), on = wk && wk.querySelector('[aria-pressed="true"]'); if (on) wk.scrollLeft = on.offsetLeft - wk.clientWidth / 2 + on.clientWidth / 2;
+    app.querySelectorAll("[data-ucm]").forEach(function (b) { b.onclick = function () { S.ucopen[b.dataset.ucm] = !S.ucopen[b.dataset.ucm]; renderUSCal(); }; });
+    app.querySelectorAll("[data-uct]").forEach(function (el) { el.onclick = function () { usFin(el.dataset.uct, el.dataset.ucd); }; });
+    var cq = document.getElementById("ucq");
+    typing(cq, function () { S.ucq = cq.value; renderUSCal(); var n = document.getElementById("ucq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); });
+  }
+  /* 미국 종목 요약 — 오른쪽 패널(실적 자료는 나중에 붙임) */
+  function usFin(t, d) {
+    var s = S.uidx[t] || { tk: t }, o = d ? ((S.ucal.days || {})[d] || []).filter(function (x) { return x.t === t; })[0] : null, today = kstYmd();
+    var ev = [];
+    Object.keys(S.ucal.days || {}).forEach(function (k) { (S.ucal.days[k] || []).forEach(function (x) { if (x.t === t) ev.push([k, x]); }); });
+    ev.sort(function (a, b) { return a[0] < b[0] ? -1 : 1; });
+    var kv = [["시가총액", ucap(s.mcap || (o && o.mc))], ["가격", s.price != null ? "$" + num(s.price, 2) : "—"], ["1일", pct(s.chg1d)], ["5일", pct(s.chg5d)], ["1개월", pct(s.chg1m)],
+      ["3개월", pct(s.r3)], ["6개월", pct(s.r6)], ["12개월", pct(s.r12)], ["52주 고점 대비", pct(s.from_hi)], ["거래량 배수", s.vr == null ? "—" : s.vr.toFixed(1) + "배"], ["RS", s.rs == null ? "—" : s.rs],
+      ["PER", s.per == null ? "—" : s.per < 0 ? "적자" : (+s.per).toFixed(1) + "배"]];
+    var evh = ev.length ? '<div class="dsec">실적 발표<span class="hint">미 동부 날짜</span></div><div class="uc-ev">' + ev.map(function (e) {
+      var x = e[1], p = e[0] <= today;
+      return '<div class="' + (e[0] === d ? "on" : "") + '"><b>' + dlab(e[0]) + "</b><span>" + utm(x.tm) + (x.fq ? " · " + esc(x.fq) : "") + (x.est ? " · 예상일" : "") + "</span>" +
+        "<span>" + (p ? (x.sp != null ? "EPS 서프 " + pct(x.sp) + " · " : "") + "발표 후 " + (x.rx != null ? pct(x.rx) : "—") : x.eps ? "EPS 예상 " + esc(x.eps) : "") + "</span></div>";
+    }).join("") + "</div>" : "";
+    pin.innerHTML = '<div class="ptop"><div><div class="dtk">' + esc(t) + "</div>" +
+      '<h2 class="dnm" id="d-title">' + esc(s.name || (o && o.n) || t) + (s.en && s.en !== s.name ? "<small>" + esc(s.en) + "</small>" : "") + "</h2>" +
+      '<div class="chips">' + (s.sector ? '<span class="chip k">' + esc(s.sector) + "</span>" : "") + (s.ai ? '<span class="chip">' + esc(s.ai) + "</span>" : "") +
+      '<a class="chip" href="https://finance.yahoo.com/quote/' + encodeURIComponent(t.replace(".", "-")) + '" target="_blank" rel="noopener noreferrer">야후 ↗</a>' +
+      '<a class="chip" href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;type=8-K&amp;CIK=' + encodeURIComponent(t) + '" target="_blank" rel="noopener noreferrer">SEC 8-K ↗</a></div>' +
+      (s.about ? '<p class="note">' + esc(s.about) + "</p>" : "") +
+      '</div><button class="x" id="px" aria-label="닫기">✕</button></div>' +
+      (s.c ? '<div class="dsec">6개월 주가<span class="hint">' + esc(S.ua.as_of) + " 종가</span></div>" + '<div class="uc-big">' + uspark(s.c, 600, 120) + "</div>" : "") +
+      '<div class="dsec">요약<span class="hint">야후 일봉 · 억달러</span></div><div class="kmini">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" + evh +
+      '<p class="note">실적 숫자(매출·EPS·가이던스)는 다음에 붙입니다.</p>';
+    panel.classList.add("on"); scrim.classList.add("on"); document.body.style.overflow = "hidden"; panel.focus();
+    document.getElementById("px").onclick = closePanel;
+  }
   function route() {
     var h = (location.hash || "#jp").slice(1).split("/"), m = h[0] || "jp";
     document.querySelectorAll(".market a").forEach(function (a) { a.classList.toggle("on", a.dataset.m === m); });
     if (m === "us" || m === "kr" || m === "room") S.mode = m;   // 늦게 온 전 종목·소비재·캘린더 자료가 이 화면을 덮어쓰지 않게
     if (m === "us") { closePanel(); renderUS(); return; }
+    if (m === "usa" || m === "uscal") { closePanel(); S.mode = m; if (m === "usa") renderUSA(); else renderUSCal(); return; }
     if (m === "kr") { closePanel(); app.innerHTML = soon("한국"); return; }
     if (!S.ready) return;
     if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre", "mo"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
