@@ -954,3 +954,7 @@ html.pxm-open { overflow: hidden; }
 .uc-ev > div { display: grid; grid-template-columns: 90px 1fr auto; gap: 10px; background: var(--surface); padding: 8px 12px; font-size: 12.5px; align-items: baseline; }
 .uc-ev > div.on { background: var(--s2-soft); } .uc-ev span { color: var(--ink-mid); }
 @media (max-width: 760px) { .ua-t .nmc .nm { max-width: 150px; } }
+.utabs { display: flex; gap: 6px; margin: 16px 0 2px; border-bottom: 1px solid var(--line); }
+.utabs a { padding: 9px 16px; font-weight: 700; font-size: 14px; color: var(--ink-mute); text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.utabs a:hover { color: var(--ink); }
+.utabs a[aria-current="page"] { color: var(--accent-ink); border-bottom-color: var(--accent); }

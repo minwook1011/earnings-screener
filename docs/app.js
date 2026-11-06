@@ -1261,6 +1261,9 @@
       .then(function (r) { S.ua = r[0]; S.ucal = r[1]; S.uidx = {}; (S.ua.stocks || []).forEach(function (s) { S.uidx[s.tk] = s; }); if (S.mode === mode) fn(); })
       .catch(function (e) { if (S.mode === mode) app.innerHTML = '<div class="empty">미국 자료를 못 불러왔습니다(' + esc(e.message) + ")</div>"; });
   }
+  function utabs(on) {   // 미국 전체 종목 머리 밑 하위 탭(2026-11-06 사용자: 실적 캘린더는 여기서 눌러 들어감)
+    return '<nav class="utabs" aria-label="미국 보기"><a href="#usa"' + (on === "usa" ? ' aria-current="page"' : "") + '>전체 종목</a><a href="#uscal"' + (on === "uscal" ? ' aria-current="page"' : "") + ">실적 캘린더</a></nav>";
+  }
   function ucap(v) { return v == null ? "—" : v >= 10000 ? (v / 10000).toFixed(2) + "조$" : num(v) + "억$"; }
   function uheat(v) { if (v == null) return ""; var a = Math.abs(v), k = a < 2 ? 0 : a < 8 ? 1 : a < 20 ? 2 : 3; return k ? " h" + (v > 0 ? "p" : "n") + k : ""; }
   function uspark(c, w, h) {
@@ -1307,7 +1310,7 @@
         ["chg1d", "chg5d", "chg1m", "r3", "r6", "r12"].map(function (f) { return '<td class="uh' + uheat(s[f]) + '">' + pctTxt(s[f]) + "</td>"; }).join("") +
         "<td>" + pct(s.from_hi) + '</td><td class="' + (s.vr >= 2 ? "vrh" : "") + '">' + (s.vr == null ? "—" : s.vr.toFixed(1) + "배") + "</td><td>" + (s.rs == null ? "—" : s.rs) + '</td><td class="nxc">' + nx + "</td><td>" + uspark(s.c) + "</td></tr>";
     }).join("");
-    app.innerHTML = '<div class="wrap" id="view">' + head + ctl +
+    app.innerHTML = '<div class="wrap" id="view">' + head + utabs("usa") + ctl +
       '<p class="stage-note">100억 사이트 「글로벌 메가캡 · 미국」 전 종목과 「미국 실적」 기업을 합친 표입니다. 등락은 야후 종가 기준(미 동부 날짜), RS = 3·6·9·12개월 가중 수익률 백분위(1~99), 거래량 배수 = 그날 ÷ 50일 평균. 종목을 누르면 요약이 열립니다.</p>' +
       (rows.length ? '<div class="tblwrap"><table class="ua-t"><thead>' + th + "</thead><tbody>" + body + "</tbody></table></div>" : '<div class="empty">맞는 종목이 없습니다.</div>') +
       (rows.length > S.un ? '<button class="btn more ua-more" id="umore">' + (rows.length - S.un) + "종목 더 보기</button>" : "") + "</div>";
@@ -1353,11 +1356,11 @@
         (list.length ? '<ul class="cal-list ce-list uc-list">' + shown.map(function (o) { return ucalItem(o, d, today); }).join("") + "</ul>" : '<p class="cal-empty">예정 없음</p>') +
         (list.length > CAL_SHOW && !q ? '<button class="more" data-ucm="' + d + '">' + (open ? "접기" : "+" + (list.length - CAL_SHOW) + "곳 더 보기") + "</button>" : "") + "</section>";
     }).join("");
-    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · Earnings Calendar</div><h1>미국 실적 캘린더</h1>' +
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">NYSE · NASDAQ · Earnings Calendar</div><h1>미국 전체 종목</h1>' +
       '<div class="sub">' + (S.ucal.n_universe || "—") + '종목 · 나스닥·야후 교차 발표일 <span class="mono">' + esc(S.ucal.src || "") + '</span> · 업데이트 <span class="mono">' + esc(S.ucal.updated || "") + "</span></div></div></div></header>";
     var ctl = '<div class="ctl"><div class="fld q"><label for="ucq">검색</label><input type="search" id="ucq" placeholder="티커 · 종목명 · 업종" value="' + esc(S.ucq) + '"></div>' +
       '<div class="count"><span class="today">' + todayKo() + "</span> · 이 주 <b>" + (weeks[mon] || 0) + "</b>곳</div></div>";
-    app.innerHTML = '<div class="wrap" id="view">' + head + ctl +
+    app.innerHTML = '<div class="wrap" id="view">' + head + utabs("uscal") + ctl +
       '<p class="stage-note">날짜는 미 동부 기준, 하루 칸은 <b>시가총액 큰 순</b>. 장 전 = 한국 밤~새벽, 장 후 = 한국 새벽~아침. <b>발표 후</b> = 장 전 발표는 그날, 장 후·시간 미정은 다음 거래일 종가 등락. <b>예상일</b> = 회사 확정 전 야후 추정. 종목을 누르면 요약이 열립니다.</p>' +
       '<div class="cal"><div class="weeks" id="ucweeks">' + chips + "</div>" +
       '<div class="wnav"><button data-ucs="-1"' + (wi <= 0 ? " disabled" : "") + ">‹ 이전 주</button><b>" + weekName(mon) + "</b><span>" + dot(mon) + " ~ " + dot(addDays(mon, 4)) + "</span>" +
@@ -1400,7 +1403,7 @@
   }
   function route() {
     var h = (location.hash || "#jp").slice(1).split("/"), m = h[0] || "jp";
-    document.querySelectorAll(".market a").forEach(function (a) { a.classList.toggle("on", a.dataset.m === m); });
+    document.querySelectorAll(".market a").forEach(function (a) { a.classList.toggle("on", a.dataset.m === (m === "uscal" ? "usa" : m)); });
     if (m === "us" || m === "kr" || m === "room") S.mode = m;   // 늦게 온 전 종목·소비재·캘린더 자료가 이 화면을 덮어쓰지 않게
     if (m === "us") { closePanel(); renderUS(); return; }
     if (m === "usa" || m === "uscal") { closePanel(); S.mode = m; if (m === "usa") renderUSA(); else renderUSCal(); return; }
