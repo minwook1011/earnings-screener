@@ -30,6 +30,9 @@ COS = {
     "LEN": {"cik": "0000920760", "name": "레나", "fye": 11, "extra": {}},
     "Z": {"cik": "0001617640", "name": "질로우", "fye": 12, "extra": {}},
     "GDYN": {"cik": "0001743725", "name": "그리드다이나믹스", "fye": 12, "extra": {}},
+    "EPAM": {"cik": "0001352010", "name": "이팸시스템즈", "fye": 12, "extra": {}},
+    "KD": {"cik": "0001867072", "name": "킨드릴", "fye": 3, "extra": {}},
+    "FCN": {"cik": "0000887936", "name": "FTI컨설팅", "fye": 12, "extra": {}},
 }
 
 # (키, 한국어 항목, 태그 후보, 종류: d=기간·i=시점, 굵게)
@@ -47,7 +50,7 @@ ITEMS = [
                          "IncomeLossFromContinuingOperationsBeforeIncomeTaxesMinorityInterestAndIncomeLossFromEquityMethodInvestments",
                          "IncomeLossFromContinuingOperationsBeforeIncomeTaxesDomestic"], "d", True),
     ("tax", "법인세", ["IncomeTaxExpenseBenefit"], "d", False),
-    ("ni", "순이익(지배)", ["NetIncomeLoss"], "d", True),
+    ("ni", "순이익(지배)", ["NetIncomeLoss", "ProfitLoss"], "d", True),
     ("eps", "희석 EPS(달러)", ["EarningsPerShareDiluted"], "d", False),
     ("shs", "희석 주식수(백만 주)", ["WeightedAverageNumberOfDilutedSharesOutstanding"], "d", False),
     ("BS", None, None, None, None),
@@ -96,7 +99,7 @@ def series(G, tags, unit):
 
 
 def qends(G):
-    ni, _ = series(G, ["NetIncomeLoss"], "USD")
+    ni, _ = series(G, ["NetIncomeLoss", "ProfitLoss"], "USD")  # 킨드릴처럼 ProfitLoss 만 쓰는 회사
     ends = sorted({e for (s, e) in ni if s and 80 <= (d(e) - d(s)).days <= 100})
     fy = sorted({e for (s, e) in ni if s and 350 <= (d(e) - d(s)).days <= 380})
     return sorted(set(ends) | set(fy))
@@ -164,7 +167,7 @@ def build(tk):
         if data.get(("gp", e)) is None and data.get(("rev", e)) is not None and data.get(("cogs", e)) is not None:
             data[("gp", e)], how[("gp", e)] = data[("rev", e)] - data[("cogs", e)], "누계 차감(계산) — 매출 − 매출원가"
     # 연간 10개년
-    ni, _ = series(G, ["NetIncomeLoss"], "USD")
+    ni, _ = series(G, ["NetIncomeLoss", "ProfitLoss"], "USD")  # 킨드릴처럼 ProfitLoss 만 쓰는 회사
     fys = sorted({e for (s, e) in ni if s and 350 <= (d(e) - d(s)).days <= 380})[-10:]
 
     wb = openpyxl.Workbook()
