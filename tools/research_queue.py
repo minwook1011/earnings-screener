@@ -185,6 +185,7 @@ def refresh_req():
              "q": r.get("period"), "kind": r.get("kind")}
         if adhoc:
             t["origin"] = "adhoc"
+            t["requested"] = r.get("requested", "")
         if r.get("kind") == "preannounce":   # 실적 미리 발표 — 숫자는 억 엔(eps 는 엔)
             for k in ("revised_cum", "previous_forecast_cum", "prior_year_cum", "fy_forecast"):
                 if isinstance(r.get(k), dict):
