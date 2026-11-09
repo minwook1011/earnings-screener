@@ -127,7 +127,8 @@ def refresh_req():
     fresh = (datetime.now(KST) - timedelta(days=REQ_DAYS)).strftime("%Y-%m-%d")
     todo, running, wait, seen = [], [], [], set()
     sh = shard()
-    for r in sorted(reqs, key=lambda r: r.get("requested" if r.get("kind") == "monthly" else "pub", ""), reverse=True):
+    reqs = sorted(reqs, key=lambda r: r.get("requested" if r.get("kind") == "monthly" else "pub", ""), reverse=True)
+    for r in sorted(reqs, key=lambda r: r.get("origin") == "adhoc"):   # adhoc 은 알림 카드·월차 뒤로(2026-11-09)
         c, pub = r["code"], r.get("pub", "")
         if r.get("kind") == "monthly":   # 월차 — 월차 스킬, 노트북만, 요청 시각 기준(pub 은 지난 결산 날짜라 쓰지 않는다, 2026-11-02 사용자)
             if ("m", c) in seen or not mine_mo(sh):
@@ -151,11 +152,19 @@ def refresh_req():
             todo.append({"c": c, "n": r.get("name", c), "stage": "m", "kind": "monthly", "rid": r.get("rid"),
                          "requested": rq, "q": r.get("period")})
             continue
-        if c in seen or not mine(c, sh):
-            continue
-        seen.add(c)
-        if pub[:10] < fresh:   # 실적 발표 나온 곳만 — 오래된 요청은 쓰지 않는다(2026-11-02 사용자)
-            continue
+        adhoc = r.get("origin") == "adhoc"
+        if adhoc:   # 알림 기준 밖 요청 — 발표가 오래됐어도 쓰므로 요청 시각으로 따진다. 같은 회사 카드가 잡혀 있으면 따로 안 만든다
+            if ("a", c) in seen or not mine(c, sh) or c in running or c in wait or any(t["c"] == c for t in todo):
+                continue
+            seen.add(("a", c))
+            if r.get("requested", "")[:10] < fresh:
+                continue
+        else:
+            if c in seen or not mine(c, sh):
+                continue
+            seen.add(c)
+            if pub[:10] < fresh:   # 실적 발표 나온 곳만 — 오래된 요청은 쓰지 않는다(2026-11-02 사용자)
+                continue
         it = idx["items"].setdefault(c, {}).get("2")
         if it and it.get("status") == "진행 중" and (it.get("since") or "") < cut:
             it["status"] = "대기"   # 죽은 작업
@@ -174,6 +183,8 @@ def refresh_req():
             continue
         t = {"c": c, "n": r.get("name", c), "stage": 2, "ann": ann, "pub": pub, "rid": r.get("rid"),
              "q": r.get("period"), "kind": r.get("kind")}
+        if adhoc:
+            t["origin"] = "adhoc"
         if r.get("kind") == "preannounce":   # 실적 미리 발표 — 숫자는 억 엔(eps 는 엔)
             for k in ("revised_cum", "previous_forecast_cum", "prior_year_cum", "fy_forecast"):
                 if isinstance(r.get(k), dict):

@@ -18,7 +18,7 @@ OUT = os.path.join(TOOLS, "req_raw.json")
 CODE = re.compile(r"^[0-9]{3}[0-9A-Z]$")
 NUM = ("sales", "op", "ordinary", "ni", "eps")
 KEEP = ("rid", "code", "name", "fy_end", "quarter", "period", "tanshin_doc", "pub", "requested", "kind",
-        "revision_doc", "revision_pdf", "revised_period")
+        "revision_doc", "revision_pdf", "revised_period", "origin")
 
 
 def num(v):
@@ -28,6 +28,8 @@ def num(v):
 def clean(x):
     """쓰는 칸만, 모양이 맞는 값만 남긴다."""
     if not isinstance(x, dict) or not CODE.match(str(x.get("code", ""))):
+        return None
+    if x.get("origin") not in (None, "adhoc"):   # 알림 기준 밖 요청은 "adhoc", 그 밖의 값은 건너뜀(2026-11-09)
         return None
     it = {k: str(x[k])[:200] for k in KEEP if x.get(k) is not None}
     if it.get("revision_pdf") and not it["revision_pdf"].startswith("https://www.release.tdnet.info/"):
