@@ -4,7 +4,7 @@
 python tools/prep_data.py <코드> <작업 폴더>
 → <작업 폴더>/<코드>_prep.json
   분기 12·연간 10(결산단신 XBRL, build_xlsx 재사용) · 부문 · 재무상태표·현금흐름 요약 · 회사 예상(최근 결산단신 요약)
-  · 결산단신 발표일과 다음 날 주가 반응 · 주간 주가 5년 · 환율. 단위 억 엔(소수 1자리), 주가 엔.
+  · 결산단신 발표일과 다음 날 주가 반응 · 주간 주가 5년 · 환율. 단위 억 엔(소수 2자리 = 백만 엔), 주가 엔.
 컨센·경쟁사·설명회 발췌·유가증권보고서·웹은 여기 없다 — 보고서 에이전트가 도구로 받는다.
 """
 import json
@@ -22,7 +22,9 @@ CHART = "https://query1.finance.yahoo.com/v8/finance/chart/{s}?range={r}&interva
 
 
 def oku(v):
-    return None if v is None else round(v / 1e8, 1)
+    """엔 → 억 엔, 소수 2자리(= 백만 엔 단위). 1자리로 줄이면 작은 회사(분기 매출 10억 엔대)는 10백만 엔 단위로 뭉개져
+    매출 8.60·영업이익 0.80 처럼 틀린 표가 된다(2026-11-11 사용자, 9256 사쿠시드)."""
+    return None if v is None else round(v / 1e8, 2)
 
 
 def series(blk, keys):
