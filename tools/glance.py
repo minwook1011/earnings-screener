@@ -503,12 +503,12 @@ def html(G, path):
 
 # ---------- 2단계 리포트 안 토글(2026-10-30 사용자 — 스킬에 추가) ----------
 FRAG = """<details class="tg gl" id="es-glance"><summary><b>재무제표 한눈에 보기 — 최근 {n}개 분기 핵심 차트</b></summary><div class="tgb">
-<!-- 엑셀 느낌을 걷어 낸 리포트용 모양(2026-11-01 사용자): 연도만 가로 눈금 · 숫자는 1년 간격 · 작은 값은 소수 첫째 자리 · 적자 막대는 옅게 -->
+<!-- 엑셀 느낌을 걷어 낸 리포트용 모양(2026-11-01 사용자): 가로 눈금은 최신 분기부터 1년 간격의 분기 끝 달 · 숫자도 같은 간격 · 작은 값은 소수 첫째 자리 · 적자 막대는 옅게 -->
 <style>#es-glance .glx-sub{{color:#6b7280;font-size:12px;margin:0 0 12px}}#es-glance .glx-g{{display:grid;grid-template-columns:1fr;gap:18px}}
 #es-glance .glx-c{{min-width:0;background:#fff;border:1px solid #eceef2;border-radius:12px;padding:14px 16px 8px;box-shadow:0 1px 2px rgba(16,24,40,.04)}}
 #es-glance .glx-c h4{{font-size:15px;font-weight:700;color:#111827;margin:0 0 8px}}#es-glance .glx-s{{font-size:11px;color:#6b7280;margin-top:6px}}
 #es-glance .glx-v{{position:relative;height:400px}}@media (max-width:760px){{#es-glance .glx-v{{height:300px}}#es-glance .glx-c{{padding:12px 10px 6px}}}}</style>
-<p class="glx-sub">달력 분기(3Q26 = 26.7~9) · 억 엔 · {src} · 부문·지역·수주·수출은 있을 때만 · 막대 위 숫자는 최신 분기와 같은 분기(1년 간격) · 마우스를 올리면 분기별 값 · 엑셀 '재무제표 한눈에 보기' 시트에 같은 표·차트</p>
+<p class="glx-sub">가로축 = 분기 끝 달(26.9 = 2026년 7~9월) · 억 엔 · {src} · 부문·지역·수주·수출은 있을 때만 · 막대 위 숫자는 최신 분기와 같은 분기(1년 간격) · 마우스를 올리면 분기별 값 · 엑셀 '재무제표 한눈에 보기' 시트에 같은 표·차트</p>
 <div class="glx-g"></div></div></details>
 <script>(function(){{const L={labs},C={charts};const box=document.getElementById("es-glance");let done=false;
 function draw(){{if(done)return;done=true;const PAL=["#3E63DD","#F76B15","#8B8D98","#E2A336","#30A46C","#8E4EC6","#E5484D","#0090FF"];
@@ -527,14 +527,15 @@ C.forEach(ch=>{{const x0=ch.x0||0,LL=L.slice(x0);const el=document.createElement
    backgroundColor:type=="bar"&&one?data.map(v=>v<0?c+"80":c):c,borderColor:c,borderWidth:type=="line"?2:0,borderRadius:type=="bar"?3:0,
    pointRadius:type=="line"?(axis=="y"?2.5:1.5):0,pointHoverRadius:5,tension:.25,spanGaps:true,lab:one,sm,pct,categoryPercentage:.82,barPercentage:.9}},extra||{{}}))}});
  add(ch.bar,"bar","y");add(ch.stack,"bar","y",{{stack:"s"}});add(ch.line,"line","y");add(ch.line2,"line","y2",{{order:-1}});add(ch.line3,"line","y3",{{order:-2,borderDash:[5,4],borderWidth:1.5}});
- const tick=(v,i)=>LL.length<=12?LL[i]:(/^1Q/.test(LL[i])?"20"+LL[i].slice(2):"");
+ const ql=s=>{{const m=/^([1-4])Q([0-9][0-9])$/.exec(s);return m?m[2]+"."+m[1]*3:s}},qm=s=>{{const m=/^([1-4])Q([0-9][0-9])$/.exec(s);return m?"20"+m[2]+"년 "+(m[1]*3-2)+"~"+m[1]*3+"월":s}};
+ const tick=(v,i)=>LL.length<=12||(LL.length-1-i)%4==0?ql(LL[i]):"";   /* 분기 끝 달(26.9 = 26년 7~9월), 최신 분기부터 1년 간격(2026-11-12 사용자 — '2026' 눈금을 회계연도로 읽어 4Q가 빠진 줄 앎) */
  const sc={{x:{{grid:{{display:false}},border:{{color:"#d1d5db"}},stacked:!!ch.stack,ticks:{{autoSkip:false,maxRotation:0,font:{{size:11}},callback:tick}}}},
   y:{{grid:{{color:"#f1f2f5"}},border:{{display:false}},stacked:!!ch.stack,ticks:{{font:{{size:11}},callback:v=>ch.pct?r1(v)+"%":r1(v).toLocaleString()}}}}}};
  if(ch.line2)sc.y2={{position:"right",grid:{{display:false}},border:{{display:false}},ticks:{{font:{{size:11}},callback:v=>r1(v)+"%"}}}};
  if(ch.line3)sc.y3={{position:"right",grid:{{display:false}},border:{{display:false}},ticks:{{font:{{size:11}},callback:v=>r1(v)+(ch.u3||"%")}}}};
  new Chart(el.querySelector("canvas"),{{type:"bar",data:{{labels:LL,datasets:ds}},plugins:[lab],options:{{maintainAspectRatio:false,interaction:{{mode:"index",intersect:false}},layout:{{padding:{{top:14}}}},
   plugins:{{legend:{{position:"top",align:"end",labels:{{usePointStyle:true,pointStyle:"rectRounded",boxWidth:9,boxHeight:9,padding:14,font:{{size:12}}}}}},
-   tooltip:{{backgroundColor:"rgba(17,24,39,.92)",padding:10,callbacks:{{label:t=>" "+t.dataset.label+": "+(t.raw==null?"-":tf(t.raw)+(t.dataset.pct?"%":" 억 엔"))}}}}}},scales:sc}}}})}})}}
+   tooltip:{{backgroundColor:"rgba(17,24,39,.92)",padding:10,callbacks:{{title:t=>qm(t[0].label),label:t=>" "+t.dataset.label+": "+(t.raw==null?"-":tf(t.raw)+(t.dataset.pct?"%":" 억 엔"))}}}}}},scales:sc}}}})}})}}
 function go(){{if(window.Chart)return draw();const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js";sc.onload=draw;document.head.appendChild(sc)}}
 box.addEventListener("toggle",()=>{{if(box.open)go()}});if(box.open)go()}})();</script>"""
 
