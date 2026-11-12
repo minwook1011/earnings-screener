@@ -155,8 +155,10 @@
     return rows.slice().sort(function (a, b) {
       var x = a[k], y = b[k];
       if (k === "n" || k === "c" || k === "d" || k === "by") { x = x || ""; y = y || ""; return dir * String(x).localeCompare(String(y)); }
+      /* 값이 없는 회사는 맨 아래 코드 순 — 둘 다 없을 때 1을 돌려 순서가 새로고침마다 흔들리던 것(2026-11-12 사용자) */
+      if (x == null && y == null) return String(a.c).localeCompare(String(b.c));
       if (x == null) return 1; if (y == null) return -1;
-      return dir * (x - y);
+      return dir * (x - y) || String(a.c).localeCompare(String(b.c));
     });
   }
   function votes(L) {
