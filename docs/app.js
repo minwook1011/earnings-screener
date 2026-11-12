@@ -244,6 +244,10 @@
       return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 " + n + " 분류를 지웁니다" : n + "로 분류 — 목록에서 1·2·3 순서로 올라갑니다") + '">' + n + "</button>";
     }).join("") + "</span>";
   }
+  /* 메모 — 2단계 목록 시총·PER 아래 작은 글씨 메모 칸, 이 브라우저에 저장(es-memo, 2026-11-12 사용자) */
+  var MEMO = load("es-memo");
+  function memoBox(c) { return '<textarea class="memo" data-memo="' + esc(c) + '" rows="1" placeholder="메모" aria-label="메모">' + esc(MEMO[c] || "") + "</textarea>"; }
+  function fitMemo(t) { t.style.height = "auto"; t.style.height = t.scrollHeight + 2 + "px"; }
   function togglePick(c, n) {
     n = +n;
     if (GRADE[c] === n) delete GRADE[c]; else GRADE[c] = n;
@@ -744,7 +748,9 @@
         "<td>" + cl("매출 YoY") + pct(o.rev) + "</td><td>" + cl("영업이익 YoY") + pct(o.op) + "</td><td>" + cl("다음 날") + pct(o.d1) + "</td>" +
         "<td>" + cl("거래량") + (o.vr ? o.vr.toFixed(1) + "배" : "—") + "</td>" +
         '<td class="l by">' + cl("올린 사람") + (o.by ? esc(o.by) : '<span class="na" title="봇이 [볼 후보]를 누른 사람을 아직 기록하지 않습니다">—</span>') + '</td><td class="l">' + cl("리서치") + resTag(o) + "</td></tr>" +
-        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td class="sp-td">' + irc(o.c) + spark(o.c) + '</td><td colspan="9">' + '<div class="qwrap">' + qline(o.c) + "</div></td></tr>";
+        '<tr class="qrow" data-c="' + esc(o.c) + '"><td></td><td class="sp-td">' + irc(o.c) + spark(o.c) + "</td>" +
+        (S.qy[o.c] && S.qy[o.c].length ? '<td colspan="9"><div class="qwrap">' + qline(o.c) + '<div class="memo-side">' + memoBox(o.c) + "</div></div></td></tr>"
+          : '<td class="ql-td">' + qline(o.c) + '</td><td colspan="8" class="memo-td">' + memoBox(o.c) + "</td></tr>");
     }
     var last = null, body = rows.map(function (o, i) {
       var sep = all && o.d !== last ? '<tr class="dsep"><td colspan="11">' + (o.d ? dlab(o.d) + " 발표" : "발표일 모름") + "</td></tr>" : "";
@@ -1096,6 +1102,16 @@
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = (S.mode === "jps" ? "jps" : "jp") + "/c/" + el.dataset.c; }; });
     app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pc, b.dataset.pick); render(); }; });
+    app.querySelectorAll("textarea[data-memo]").forEach(function (t) {
+      fitMemo(t);
+      t.onclick = function (e) { e.stopPropagation(); };
+      t.onkeydown = function (e) { e.stopPropagation(); };
+      t.oninput = function () {
+        var v = t.value.trim(); if (v) MEMO[t.dataset.memo] = t.value; else delete MEMO[t.dataset.memo];
+        try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
+        fitMemo(t);
+      };
+    });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
     app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { S.day = b.dataset.dd; rerender(); }; });
     app.querySelectorAll("[data-dstep]").forEach(function (b) {

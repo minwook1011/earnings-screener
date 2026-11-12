@@ -966,3 +966,12 @@ html.pxm-open { overflow: hidden; }
 .utabs a { padding: 9px 16px; font-weight: 700; font-size: 14px; color: var(--ink-mute); text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px; }
 .utabs a:hover { color: var(--ink); }
 .utabs a[aria-current="page"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+
+/* 메모 칸 — 시총·PER 아래, 작은 글씨(2026-11-12 사용자) */
+.main-t tbody tr.qrow td.memo-td { vertical-align: top; padding-top: 0; }
+.main-t tbody tr.qrow td.ql-td { vertical-align: top; }
+.memo-side { flex: 1 1 240px; min-width: 200px; max-width: 520px; }
+textarea.memo { display: block; width: 100%; max-width: 560px; box-sizing: border-box; resize: none; overflow: hidden; min-height: 26px; font: 400 11.5px/1.5 var(--jsans); color: var(--ink-mid); background: transparent; border: 1px dashed color-mix(in srgb, var(--ink) 18%, transparent); border-radius: 6px; padding: 4px 8px; }
+textarea.memo::placeholder { color: var(--ink-mute); opacity: .7; }
+textarea.memo:hover { border-color: color-mix(in srgb, var(--ink) 32%, transparent); }
+textarea.memo:focus { outline: none; border-style: solid; border-color: var(--accent-ink, #2563eb); background: var(--surface); }
