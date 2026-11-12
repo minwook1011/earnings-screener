@@ -586,6 +586,14 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .dnm .picks { margin-left: 10px; }
 .dnm .picks .meh { margin-left: 0; }
 .dnm .good { font-size: 13px; padding: 6px 11px; font-family: inherit; }
+/* 1·2·3 분류 버튼 — 1 파랑 · 2 초록 · 3 빨강(2026-11-12 사용자) */
+.gr { --c: #2563eb; flex: none; font: inherit; font-size: 12px; font-weight: 800; line-height: 1; width: 26px; height: 24px; padding: 0; border-radius: 6px; border: 1.5px solid var(--c); background: transparent; color: var(--c); cursor: pointer; opacity: .55; }
+.gr.g2 { --c: #16a34a; } .gr.g3 { --c: #dc2626; }
+.gr:hover { opacity: 1; }
+.gr.on { background: var(--c); color: #fff; opacity: 1; }
+.gr:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+.main-t td.tk .picks.grades { gap: 4px; }
+.dnm .gr { width: 30px; height: 28px; font-size: 13px; vertical-align: middle; }
 /* 보류 — 보라. 칸은 별로임 위, 머리줄 버튼으로 줄이기·펼치기 */
 :root { --hold-bg: #efe6ff; --hold-bd: #8b5cf6; --hold-tx: #5b21b6; --hold-on: #7c3aed; --hold-on-tx: #ffffff; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --hold-bg: rgba(139, 92, 246, .18); --hold-bd: #a78bfa; --hold-tx: #d6c6ff; --hold-on: #8b5cf6; --hold-on-tx: #ffffff; } }
