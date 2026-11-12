@@ -231,18 +231,23 @@
     return (t.getUTCMonth() + 1) + "월 " + t.getUTCDate() + "일 (" + "일월화수목금토"[t.getUTCDay()] + ")";
   }
   function cl(t) { return '<span class="cl">' + t + "</span>"; }
-  /* 3단계로 — 그 브라우저의 3단계 탭에도 올림(텔레·리서치와 무관, 2단계 목록에는 그대로 남음). 2026-10-25 사용자: 버튼 유지 */
+  /* 1·2·3 분류 — 2단계 목록에서 회사마다 1(파랑)·2(초록)·3(빨강)을 매기면 그 순서(1→2→3→없음)로 정렬되고 이 브라우저에 저장(es-grade). 같은 번호를 다시 누르면 지움. 옛 「3단계로」 버튼은 없앰(2026-11-12 사용자) */
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
-  var GOOD = load("es-good");
-  function stOf(o) { return o.stage === 2 && GOOD[o.c] ? 3 : o.stage; }
+  var GRADE = load("es-grade");
+  function stOf(o) { return o.stage; }
+  function grOf(c) { return GRADE[c] || 9; }
+  function byGrade(rows) { return rows.map(function (o, i) { return [o, i]; }).sort(function (a, b) { return grOf(a[0].c) - grOf(b[0].c) || a[1] - b[1]; }).map(function (x) { return x[0]; }); }
   function mehBtn(c) {
-    var o = S.cos[c] || {}, g = !!GOOD[c];
-    if (o.stage !== 2) return "";
-    return '<span class="picks"><button type="button" class="good' + (g ? " on" : "") + '" data-pick="good" data-pc="' + esc(c) + '" aria-pressed="' + g + '" title="' + (g ? "누르면 3단계 탭에서 뺍니다" : "누르면 이 브라우저의 3단계 탭에도 올립니다") + '">' + (g ? "3단계 ✓" : "3단계로") + "</button></span>";
+    var o = S.cos[c] || {}, g = GRADE[c] || 0;
+    if (!(o.stage >= 2)) return "";
+    return '<span class="picks grades">' + [1, 2, 3].map(function (n) {
+      return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 " + n + " 분류를 지웁니다" : n + "로 분류 — 목록에서 1·2·3 순서로 올라갑니다") + '">' + n + "</button>";
+    }).join("") + "</span>";
   }
-  function togglePick(c) {
-    if (GOOD[c]) delete GOOD[c]; else GOOD[c] = 1;
-    try { localStorage.setItem("es-good", JSON.stringify(GOOD)); } catch (e) {}
+  function togglePick(c, n) {
+    n = +n;
+    if (GRADE[c] === n) delete GRADE[c]; else GRADE[c] = n;
+    try { localStorage.setItem("es-grade", JSON.stringify(GRADE)); } catch (e) {}
   }
   /* 오늘(한국 시각, 오전 6시에 바뀜) — YYYY-MM-DD */
   function kstYmd() { var t = new Date(Date.now() + 3 * 3600000); return t.toISOString().slice(0, 10); }
@@ -708,13 +713,13 @@
       if (!S.day || !dates[S.day]) { var td = kstYmd(); S.day = keys.filter(function (k) { return k <= td; }).pop() || keys[keys.length - 1] || null; }
       var di = keys.indexOf(S.day);
       if (day) {
-        rows = sorted(rows.filter(function (o) { return o.d === S.day; }));
+        rows = byGrade(sorted(rows.filter(function (o) { return o.d === S.day; })));
         nav = '<div class="cal"><div class="weeks" id="weeks">' + keys.map(function (k) {
           return '<button data-dd="' + k + '" aria-pressed="' + (k === S.day) + '"' + (k === kstYmd() ? ' class="now"' : "") + "><b>" + dlab(k) + "</b><span>" + dates[k] + "개</span></button>";
         }).join("") + "</div>" +
           '<div class="wnav"><button data-dstep="-1"' + (di <= 0 ? " disabled" : "") + ">‹ 이전 날</button><b>" + (S.day ? dlab(S.day) + " 발표" : "발표일 없음") + "</b><span>" + rows.length + '개</span><button data-dstep="1"' + (di >= keys.length - 1 ? " disabled" : "") + ">다음 날 ›</button></div></div>";
       } else {
-        rows = rows.slice().sort(function (a, b) { return S.dir * String(a.d || "0").localeCompare(String(b.d || "0")) || (b.mc || 0) - (a.mc || 0); });
+        rows = rows.slice().sort(function (a, b) { return S.dir * String(a.d || "0").localeCompare(String(b.d || "0")) || grOf(a.c) - grOf(b.c) || (b.mc || 0) - (a.mc || 0); });
       }
     } else rows = sorted(rows);
     var vsel = st === 2 ? vselHtml() : "";
@@ -806,7 +811,7 @@
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
     document.getElementById("px").onclick = function () { location.hash = back(); };
     pin.querySelectorAll("[data-pick]").forEach(function (b) {
-      b.onclick = function () { togglePick(b.dataset.pc); drawPanel(o, d); if (app.querySelector("#view")) render(); };
+      b.onclick = function () { togglePick(b.dataset.pc, b.dataset.pick); drawPanel(o, d); if (app.querySelector("#view")) render(); };
     });
     pin.querySelectorAll(".bm-bar i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "%"; });
     bindChart(pin);
@@ -1090,7 +1095,7 @@
     var rl = app.querySelector(".rail"); if (rl) document.documentElement.style.setProperty("--railh", rl.offsetHeight + "px");
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = (S.mode === "jps" ? "jps" : "jp") + "/c/" + el.dataset.c; }; });
-    app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pc); render(); }; });
+    app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pc, b.dataset.pick); render(); }; });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
     app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { S.day = b.dataset.dd; rerender(); }; });
     app.querySelectorAll("[data-dstep]").forEach(function (b) {
