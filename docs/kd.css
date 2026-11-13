@@ -96,3 +96,12 @@ table.ft { border-collapse: separate; border-spacing: 0; width: max-content; min
 .ft td.now.end { box-shadow: inset 2px 0 0 var(--kl3), inset -2px 0 0 var(--kl3), inset 0 -2px 0 var(--kl3); }
 .ft tr.d th.l, .ft tr.d td { font-size: 10.5px; color: var(--ink-mid); padding-top: 1px; padding-bottom: 2px; }
 .ft tr.d th.l { padding-left: 22px; font-weight: 400; }
+/* 매출원가·판관비 세부 — 눌러서 펼치기(기본 접힘) */
+.ft tr.tg { cursor: pointer; }
+.ft tr.tg:hover th.l { color: var(--ink); }
+.ft tr.tg .car { display: inline-block; width: 0; height: 0; margin: 0 6px 1px -2px; border-left: 4.5px solid var(--ink-mute); border-top: 3.5px solid transparent; border-bottom: 3.5px solid transparent; transition: transform .15s; vertical-align: middle; }
+.ft tr.gk { display: none; }
+.ft.o-cogs tr.g-cogs, .ft.o-sga tr.g-sga { display: table-row; }
+.ft.o-cogs tr[data-g="cogs"] .car, .ft.o-sga tr[data-g="sga"] .car { transform: rotate(90deg); }
+.ft tr.ds th.l, .ft tr.ds td { font-size: 9.5px; color: var(--ink-mute); padding-top: 0; padding-bottom: 3px; }
+.ft tr.ds th.l { padding-left: 32px; font-weight: 400; }

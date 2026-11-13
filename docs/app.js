@@ -956,17 +956,19 @@
     var pc = function (v, sign) { return v == null || !isFinite(v) ? "—" : (sign && v > 0 ? "+" : "") + (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString("ko-KR") : v.toFixed(1)) + "%"; };
     // 세부 항목(opt.det = {cogs:[[키, 이름]], sga:[[키, 이름]]}, 값은 c.d[키]) — 공시가 있는 기간에만 숫자, 나머지는 —
     var det = opt.det || {}, dv = function (k) { return function (c) { return amt(c.d ? c.d[k] : null); }; };
-    var items = function (list) { return (list || []).filter(function (it) { return cols.some(function (c) { return c.d && c.d[it[0]] != null; }); }).map(function (it) { return ["· " + it[1], "d", dv(it[0])]; }); };
+    var items = function (list) { return (list || []).filter(function (it) { return cols.some(function (c) { return c.d && c.d[it[0]] != null; }); }).map(function (it) { return [["· " + it[1], "d", dv(it[0])], ["of sales", "ds", function (c) { return pc(rat(c.d ? c.d[it[0]] : null, c.s)); }]]; }); };
+    var kids = function (list, g) { return [].concat.apply([], list).map(function (r) { return r.concat([null, null, g]); }); };   // r[3]·r[4] 비움, r[5] = 접히는 묶음
     var cogsI = items(det.cogs), sgaI = items(det.sga);
     var R = [
       ["매출액", "b", function (c) { return amt(c.s); }],
       ["YoY", "r", function (c) { return pc(c.sy, 1); }, function (c) { return c.sy; }]]
-      .concat(cogsI.length ? [["매출원가", "", function (c) { return amt(c.d ? c.d.cogs : null); }]].concat(cogsI) : [])
+      .concat(cogsI.length ? [["매출원가", "tg", function (c) { return amt(c.d ? c.d.cogs : null); }, null, "cogs"],
+        ["원가율", "r", function (c) { return pc(rat(c.d ? c.d.cogs : null, c.s)); }]].concat(kids(cogsI, "cogs")) : [])
       .concat([
       has("g") && ["매출총이익", "b", function (c) { return amt(c.g); }],
       has("g") && ["GPM", "r", function (c) { return pc(rat(c.g, c.s)); }],
-      has("sg") && ["판매관리비", "", function (c) { return amt(c.sg); }],
-      has("sg") && ["판관비율", "r", function (c) { return pc(rat(c.sg, c.s)); }]]).concat(sgaI).concat([
+      has("sg") && ["판매관리비", sgaI.length ? "tg" : "", function (c) { return amt(c.sg); }, null, sgaI.length ? "sga" : null],
+      has("sg") && ["판관비율", "r", function (c) { return pc(rat(c.sg, c.s)); }]]).concat(kids(sgaI, "sga")).concat([
       ["영업이익", "", function (c) { return amt(c.op); }],
       ["OPM", "r", function (c) { return pc(rat(c.op, c.s)); }],
       ["YoY", "r", function (c) { return pc(c.oy, 1); }, function (c) { return c.oy; }],
@@ -979,7 +981,8 @@
     }).join("") + "</tr>";
     var body = R.map(function (r, ri) {
       var last = ri === R.length - 1;
-      return '<tr class="' + r[1] + '"><th class="l">' + r[0] + "</th>" + cols.map(function (c) {
+      var tg = r[4] ? ' data-g="' + r[4] + '" title="눌러서 세부 항목 펼치기·접기"' : "";   // 누르면 펼침(아래 문서 클릭 핸들러)
+      return '<tr class="' + r[1] + (r[5] ? " gk g-" + r[5] : "") + '"' + tg + '><th class="l">' + (r[4] ? '<i class="car"></i>' : "") + r[0] + "</th>" + cols.map(function (c) {
         var tv = r[3] ? r[3](c) : null, tone = tv == null ? "" : tv > 0 ? " up" : tv < 0 ? " dn" : "";
         return '<td class="' + cl(c, last) + tone + '">' + r[2](c) + "</td>";
       }).join("") + "</tr>";
@@ -987,6 +990,10 @@
     return '<div class="fswrap ftw"><table class="ft"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>";
   }
   window.FTABLE = ftable;
+  document.addEventListener("click", function (e) {   // 재무제표 매출원가·판관비 줄 → 세부 항목 펼치기·접기
+    var tr = e.target.closest && e.target.closest("table.ft tr.tg");
+    if (tr) tr.closest("table").classList.toggle("o-" + tr.getAttribute("data-g"));
+  });
   function fsGrid(o, d) {
     var rows = fsRows(o, d);
     if (!rows.length) return '<div class="box"><p class="na">분기 실적 자료가 아직 없습니다. 2단계로 올라가면 채워집니다.</p></div>';
