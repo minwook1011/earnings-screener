@@ -822,12 +822,13 @@
     pin.innerHTML = head0 +
       (sum ? '<div class="dsec">기업 개요</div><div class="box"><p>' + esc(sum) + "</p></div>" : "") +
       (o.stage >= 2 || o.res["2"] ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
+      '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d) +   // 순서: 주가 → 재무제표 → 데이터(2026-11-13 사용자)
       '<div class="dsec"><span>분기 재무제표' + (S.xl[o.c] ? ' <a class="xl" href="data/jp/xlsx/' + esc(o.c) + '.xlsx?v=' + encodeURIComponent(S.xl[o.c]) + '" download>xlsx 다운로드</a>' : '') + '</span><span class="hint">억엔 · 칸 색 = YoY · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
       (fr.length > 1 ? '<div class="charts">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
+      '<div class="charts" id="kd-key"></div><div id="kd-main"></div>' +   // 기업 데이터 차트(kd.js · data/jp/kd/<코드>.json) — 자료 있는 회사만 채워짐
       (S.mo[o.c] ? '<details class="mo" id="mo"><summary><b>월차</b><span id="mo-sum">' + esc(S.mo[o.c]) + ' 까지 · 눌러서 펼치기</span></summary><div id="mo-body" class="mo-body"><p class="na">불러오는 중…</p></div></details>' : "") +
       '<div class="dsec">기본 정보</div><div class="kmini">' + kv.map(function (k) { return "<div><span>" + k[0] + "</span><b>" + k[1] + "</b></div>"; }).join("") + "</div>" +
-      bmBlock(bm) +
-      '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
+      bmBlock(bm);
     document.getElementById("px").onclick = function () { location.hash = back(); };
     pin.querySelectorAll("[data-tr]").forEach(function (b) {   // 번역본 없음 → 요청 문구 복사(번역은 사용자가 따로 요청, 2026-11-13)
       b.onclick = function () {
@@ -842,6 +843,7 @@
     });
     pin.querySelectorAll(".bm-bar i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "%"; });
     bindChart(pin);
+    if (window.KD) KD.mount(o.c, document.getElementById("kd-key"), document.getElementById("kd-main"));
     var fw = pin.querySelector(".fswrap"); if (fw) fw.scrollLeft = fw.scrollWidth;
     if (o.stage >= 2 || o.res["2"]) research(o, 2, document.getElementById("r2"));
     if (S.mo[o.c]) monthly(o.c);

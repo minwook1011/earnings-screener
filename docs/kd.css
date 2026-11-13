@@ -1,0 +1,55 @@
+/* 기업 데이터 차트(kd.js) — 색 순서는 사용자 지정(2026-11-13): 막대 민트·보라·하늘·살구·분홍·버터·회청, 꺾은선 노랑·초록·파랑·빨강·보라·청록·회색 */
+:root {
+  --kb0: #4FD1B5; --kb1: #B794F6; --kb2: #7CC4F5; --kb3: #FFB088; --kb4: #F4A6C6; --kb5: #F3D26B; --kb6: #A9B6C9;
+  --kl0: #F5A524; --kl1: #2F9E44; --kl2: #2B6CB0; --kl3: #E03131; --kl4: #7048E8; --kl5: #0C8599; --kl6: #6B7280;
+}
+.kd-sec { margin: 18px 0 8px; font-size: 12.5px; font-weight: 700; color: var(--ink-mid); padding-left: 8px; border-left: 3px solid var(--kb0); }
+.kd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px; }
+.kd-fig { margin: 0; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 10px 6px; min-width: 0; }
+.kd-fig figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; font-size: 12px; padding: 0 4px; }
+.kd-fig figcaption b { color: var(--ink); }
+.kd-fig figcaption span { color: var(--ink-mute); font-size: 10.5px; display: flex; flex-wrap: wrap; align-items: center; gap: 3px 4px; justify-content: flex-end; }
+.kd-sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-left: 6px; }
+.kd-sw.ln { width: 12px; height: 2.5px; }
+.kd-sw.m { opacity: .4; }
+.kd-def { margin: 3px 4px 0; font-size: 10.5px; color: var(--ink-mute); line-height: 1.45; }
+.kd-fig svg { width: 100%; height: auto; display: block; }
+.kd-src { margin: 3px 4px 0; font-size: 10px; color: var(--ink-mute); }
+.kd-ax, .kd-xl { font: 9.5px var(--mono); fill: var(--ink-mute); }
+.kd-xl { text-anchor: middle; }
+.kd-gl { stroke: var(--line-soft); stroke-dasharray: 2 3; }
+.kd-z { stroke: var(--line); }
+.kd-b.m { opacity: .4; }
+.kd-l { fill: none; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.kd-d { stroke: var(--surface); stroke-width: 1.5; }
+.kd-lt, .kd-vl { font: 800 10px var(--mono); text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.kd-vl { fill: var(--ink); }
+.kd-hit { fill: transparent; }
+.kd-hit:hover { fill: var(--ink); fill-opacity: .04; }
+.c0.kd-b, .kd-sw.c0:not(.ln) { fill: var(--kb0); background: var(--kb0); } .c1.kd-b, .kd-sw.c1:not(.ln) { fill: var(--kb1); background: var(--kb1); }
+.c2.kd-b, .kd-sw.c2:not(.ln) { fill: var(--kb2); background: var(--kb2); } .c3.kd-b, .kd-sw.c3:not(.ln) { fill: var(--kb3); background: var(--kb3); }
+.c4.kd-b, .kd-sw.c4:not(.ln) { fill: var(--kb4); background: var(--kb4); } .c5.kd-b, .kd-sw.c5:not(.ln) { fill: var(--kb5); background: var(--kb5); }
+.c6.kd-b, .kd-sw.c6:not(.ln) { fill: var(--kb6); background: var(--kb6); }
+.kd-l.c0 { stroke: var(--kl0); } .kd-d.c0, .kd-lt.c0 { fill: var(--kl0); } .kd-sw.ln.c0 { background: var(--kl0); }
+.kd-l.c1 { stroke: var(--kl1); } .kd-d.c1, .kd-lt.c1 { fill: var(--kl1); } .kd-sw.ln.c1 { background: var(--kl1); }
+.kd-l.c2 { stroke: var(--kl2); } .kd-d.c2, .kd-lt.c2 { fill: var(--kl2); } .kd-sw.ln.c2 { background: var(--kl2); }
+.kd-l.c3 { stroke: var(--kl3); } .kd-d.c3, .kd-lt.c3 { fill: var(--kl3); } .kd-sw.ln.c3 { background: var(--kl3); }
+.kd-tw { overflow-x: auto; border: 1px solid var(--line-soft); border-radius: 8px; background: var(--surface); }
+.kd-t { border-collapse: collapse; width: 100%; font: 11.5px var(--mono); font-variant-numeric: tabular-nums; }
+.kd-t th, .kd-t td { padding: 6px 9px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line-soft); }
+.kd-t thead th { color: var(--ink-mute); font-weight: 600; }
+.kd-t th.l { text-align: left; position: sticky; left: 0; background: var(--surface); color: var(--ink); font-family: inherit; }
+.kd-t tr.sub th.l { font-weight: 400; color: var(--ink-mute); padding-left: 18px; }
+.kd-t tr.sub td { color: var(--ink-mute); }
+.kd-t td.neg { color: var(--tx-dn, #2b6cb0); }
+.kd-t .pl { background: color-mix(in srgb, var(--kb0) 10%, transparent); }
+.kd-rule { margin: 12px 0 0; font-size: 11px; color: var(--ink-mute); }
+.kd-rule summary { cursor: pointer; }
+/* 기존 매출액·영업이익 막대+YoY 차트도 같은 색으로(민트 막대 · 노란 YoY) */
+.bl-chart .b { fill: var(--kb0); }
+.bl-chart .kb { background: var(--kb0); }
+.bl-chart .kl { background: var(--kl0); }
+.bl-chart .yl { stroke: var(--kl0); }
+.bl-chart .yd { fill: var(--kl0); }
+.bl-chart .yt.u, .bl-chart .yt.d { fill: #C98200; }
+.charts .kd-fig { padding: 10px 10px 4px; }
