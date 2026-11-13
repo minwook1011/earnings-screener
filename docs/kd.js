@@ -1,7 +1,7 @@
 /* 기업 데이터 차트(2026-11-13 사용자) — 상세 패널 아래에 실적 자료의 핵심 숫자를 차트로.
  * 데이터: data/jp/kd/<코드>.json (실적 발표 때마다 Claude 가 결산단신·설명회 자료에서 갱신)
  *   tables: { q: 분기 행, a: 연간 행, ... }  각 행의 x = 가로축 이름
- *   charts: [{ sec, t(제목), def(정의), d(표 이름), x(가로축 열, 기본 x), bars:[{k,l,u,c}], lines:[{k,l,u,c,yoy,r}], stack, max, muted, noplan, src }]
+ *   charts: [{ sec, t(제목), def(정의), d(표 이름), x(가로축 열, 기본 x), bars:[{k,l,u,c,f(옅게 40%)}], lines:[{k,l,u,c,yoy,r}], stack, max, muted, noplan, src }]
  * 차트 원칙: 절댓값 = 막대, 비율·성장률·비교 = 꺾은선.
  *   막대 색 순서 민트 → 보라 → 하늘 → 살구 → 분홍 → 버터 → 회청(계열은 최신 값이 큰 것부터 c=0,1,…)
  *   꺾은선 색 순서 노랑 → 초록 → 파랑 → 빨강 → 보라 → 청록 → 회색. YoY 는 노란 꺾은선 + 오른쪽 축 + 점마다 값. */
@@ -58,7 +58,7 @@
         var y0, y1, xx;
         if (ch.stack) { y0 = yl(acc); y1 = yl(acc + v); acc += v; xx = x(i) - gw / 2; }
         else { y0 = yl(0); y1 = yl(v); xx = x(i) - gw / 2 + sub * j; }
-        g += '<rect class="kd-b c' + b.c + mut + '" x="' + (xx + (ch.stack ? 0 : 0.6)).toFixed(1) + '" y="' + Math.min(y0, y1).toFixed(1) + '" width="' + Math.max(1, sub - (ch.stack ? 0 : 1.2)).toFixed(1) + '" height="' + Math.max(0.8, Math.abs(y1 - y0)).toFixed(1) + '" rx="1.5"/>';
+        g += '<rect class="kd-b c' + b.c + (b.f ? " m" : mut) + '" x="' + (xx + (ch.stack ? 0 : 0.6)).toFixed(1) + '" y="' + Math.min(y0, y1).toFixed(1) + '" width="' + Math.max(1, sub - (ch.stack ? 0 : 1.2)).toFixed(1) + '" height="' + Math.max(0.8, Math.abs(y1 - y0)).toFixed(1) + '" rx="1.5"/>';
       });
       var lab = String(r[xk]) + (ch.xs || "");
       if ((nn - 1 - i) % step === 0) g += '<text class="kd-xl" x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '">' + esc(lab.length > 7 && ch.x ? lab.slice(0, 7) : lab) + "</text>";
@@ -81,7 +81,7 @@
       var t = String(r[xk]) + (ch.xs || "") + bars.concat(lines).map(function (s) { var v = n(r[s.k]); return v == null ? "" : "\n" + s.l + " " + (s.yoy ? yoyTxt(v) : fmt(v, s.u) + (s.u ? " " + s.u : "")); }).join("");
       g += '<rect class="kd-hit" x="' + (L + bw * i).toFixed(1) + '" y="' + T + '" width="' + bw.toFixed(1) + '" height="' + (H - T - B) + '"><title>' + esc(t) + "</title></rect>";
     });
-    var leg = bars.map(function (b) { return '<i class="kd-sw c' + b.c + '"></i>' + esc(b.l) + (b.u ? "(" + esc(b.u) + ")" : ""); })
+    var leg = bars.map(function (b) { return '<i class="kd-sw c' + b.c + (b.f ? " m" : "") + '"></i>' + esc(b.l) + (b.u ? "(" + esc(b.u) + ")" : ""); })
       .concat(lines.map(function (s) { return '<i class="kd-sw ln c' + s.c + '"></i>' + esc(s.l) + (s.u && !s.yoy ? "(" + esc(s.u) + ")" : s.yoy ? "(%)" : ""); }));
     if (ch.muted) leg.push('<i class="kd-sw c0 m"></i>회사 계획');
     return '<figure class="kd-fig"><figcaption><b>' + esc(ch.t) + "</b><span>" + leg.join(" ") + "</span></figcaption>" +
@@ -90,20 +90,17 @@
       '<p class="kd-src">출처: ' + esc(ch.src || "") + "</p></figure>";
   }
 
-  function annualTable(doc) {
-    var a = (doc.tables || {}).a || [], rows = doc.annual_rows || [];
-    if (!a.length) return "";
-    var f = { pct: function (v) { return (v > 0 ? "+" : "") + v.toFixed(1) + "%"; }, pct0: function (v) { return v.toFixed(1) + "%"; }, int: function (v) { return Math.round(v).toLocaleString("ko-KR"); } };
-    var head = '<tr><th class="l">억엔</th>' + a.map(function (r) { return "<th" + (r.plan ? ' class="pl"' : "") + ">" + esc(r.x) + "</th>"; }).join("") + "</tr>";
-    var body = rows.map(function (rw) {
-      var sub = rw[2] === "pct" || rw[2] === "pct0";
-      return '<tr' + (sub ? ' class="sub"' : "") + '><th class="l">' + esc(rw[1]) + "</th>" + a.map(function (r) {
-        var v = n(r[rw[0]]); if (v == null) return "<td" + (r.plan ? ' class="pl"' : "") + "></td>";
-        return '<td class="' + (v < 0 ? "neg " : "") + (r.plan ? "pl" : "") + '">' + esc(rw[2] ? f[rw[2]](v) : fmt(v, "억엔")) + "</td>";
-      }).join("") + "</tr>";
-    }).join("");
-    return '<div class="dsec"><span>연간 재무제표</span><span class="hint">억엔 · 칸 색 옅은 열 = 회사 계획</span></div>' +
-      '<div class="kd-tw"><table class="kd-t"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>" +
+  function annualTable(doc) {   // 분기 표와 같은 항목·틀(app.js FTABLE)
+    var a = (doc.tables || {}).a || [];
+    if (!a.length || !window.FTABLE) return "";
+    var lastAct = -1; a.forEach(function (r, i) { if (!r.plan) lastAct = i; });
+    var cols = a.map(function (r, i) {
+      var p = a[i - 1], op = n(r.op), pop = p ? n(p.op) : null, gp = n(r.gp);
+      return { p: r.x, plan: !!r.plan, now: i === lastAct, s: n(r.sales), g: gp, op: op, ni: n(r.net),
+        sg: n(r.sga) != null ? n(r.sga) : gp != null && op != null ? gp - op : null,
+        sy: n(r.sales_yoy), oy: n(r.op_yoy) != null ? n(r.op_yoy) : op != null && pop > 0 ? (op / pop - 1) * 100 : null };
+    });
+    return '<div class="dsec"><span>연간 재무제표</span><span class="hint">억엔 · 옅은 열 = 회사 계획</span></div>' + window.FTABLE(cols, { unit: "억엔" }) +
       '<p class="kd-src">출처: ' + esc(doc.annual_src || "") + "</p>";
   }
 
@@ -120,7 +117,7 @@
         return '<div class="kd-sec">' + esc(s) + '</div><div class="kd-grid">' + charts.filter(function (c) { return c.sec === s; }).map(function (c) { return chart(c, rows(c)); }).join("") + "</div>";
       }).join("") +
       '<details class="kd-rule"><summary>차트 원칙</summary><p>절댓값은 막대, 비율·성장률·비교는 꺾은선. 막대 색은 민트 → 보라 → 하늘 → 살구 → 분홍 → 버터 → 회청 순서로, 최신 값이 큰 계열부터. 꺾은선은 노랑 → 초록 → 파랑 → 빨강 → 보라 → 청록 → 회색. YoY 는 노란 선과 오른쪽 축.</p></details>';
-    var tw = mainEl.querySelector(".kd-tw"); if (tw) tw.scrollLeft = tw.scrollWidth;
+    var tw = mainEl.querySelector(".ftw"); if (tw) tw.scrollLeft = tw.scrollWidth;
   }
 
   window.KD = {

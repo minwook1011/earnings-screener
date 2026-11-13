@@ -14,6 +14,8 @@ import re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "tools", "qhist", "jp.json")
 EVT = os.path.join(ROOT, "tools", "qhist", "events.json")   # 합병·인수로 부풀려진 분기
+GP = os.path.join(ROOT, "tools", "qhist", "gp.json")         # 분기 매출총이익·판관비(qhist_gp.py)
+EXTRA = os.path.join(ROOT, "tools", "qhist", "extra.json")   # 결산단신에 없는 분기(상장 전 등) — 설명자료에서 손으로 보탬
 OUT = os.path.join(ROOT, "docs", "data", "jp", "qyoy.json")
 N = 10
 FS_N = 12
@@ -48,9 +50,23 @@ def lkey(lab):
 def main():
     src = json.load(open(SRC, encoding="utf-8"))
     evt = json.load(open(EVT, encoding="utf-8")) if os.path.exists(EVT) else {}
+    extra = json.load(open(EXTRA, encoding="utf-8")) if os.path.exists(EXTRA) else {}
+    gpd = json.load(open(GP, encoding="utf-8")) if os.path.exists(GP) else {}
+    xsrc = {}
+    for c, rows in extra.items():                      # 결산단신 분기가 우선, 빈 분기만 채움
+        if c.startswith("_") or c not in src:
+            continue
+        have = {r[0] for r in src[c]}
+        add = [r for r in rows if r[0] not in have]
+        src[c] = src[c] + add
+        xsrc[c] = {r[0] for r in add}
+        g = gpd.setdefault(c, {})
+        for r in rows:
+            if len(r) >= 6 and r[0] not in g:
+                g[r[0]] = r[4:6]
     out = {"_about": "최근 10개 분기 성장률(전년 같은 분기 대비 %, 오래된 것부터). r=매출 o=영업이익 ot=글자(흑전·적전·적지) m=그 분기에 합병·인수한 회사가 처음 연결됨(화면: 분기 이름 위 '합병')",
            "_src": src.get("_fetched")}
-    fsout = {"_about": "분기 재무제표(억엔) v=[매출,영업이익,순이익] qoq·yoy=같은 순서 %, m=합병 효과"}
+    fsout = {"_about": "분기 재무제표(억엔) v=[매출,영업이익,순이익] qoq·yoy=같은 순서 %, g=매출총이익 sg=판관비, m=합병 효과, x=결산설명자료로 보탠 분기"}
     for c, rows in src.items():
         if c.startswith("_"):
             continue
@@ -61,12 +77,19 @@ def main():
             y, mo, q = key(r[0])
             pq = by.get((y, mo, q - 1) if q > 1 else (y - 1, mo, 4))
             py = by.get((y - 1, mo, q))
-            it = {"p": label(r[0]), "v": [round(x / 100, 1) for x in r[1:]],
+            it = {"p": label(r[0]), "v": [round(x / 100, 1) for x in r[1:4]],
                   "qoq": [growth(r[i], pq[i - 1])[0] if pq else None for i in (1, 2, 3)],
                   "yoy": [growth(r[i], py[i - 1])[0] if py else None for i in (1, 2, 3)]}
             for e in evt.get(c, []):
                 if e.get("at") == it["p"]:
                     it["m"] = e["note"]
+            gs = (gpd.get(c) or {}).get(r[0])
+            if gs and gs[0] is not None:
+                it["g"] = round(gs[0] / 100, 2)            # 매출총이익(억엔)
+                if gs[1] is not None:
+                    it["sg"] = round(gs[1] / 100, 2)       # 판관비(억엔)
+            if r[0] in xsrc.get(c, ()):
+                it["x"] = 1                            # 화면 주석: 결산설명자료에서 보탠 분기
             fs.append(it)
         fsout[c] = fs
         seq = []

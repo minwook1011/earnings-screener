@@ -823,7 +823,7 @@
       (sum ? '<div class="dsec">기업 개요</div><div class="box"><p>' + esc(sum) + "</p></div>" : "") +
       (o.stage >= 2 || o.res["2"] ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d) +   // 순서: 주가 → 재무제표 → 데이터(2026-11-13 사용자)
-      '<div class="dsec"><span>분기 재무제표' + (S.xl[o.c] ? ' <a class="xl" href="data/jp/xlsx/' + esc(o.c) + '.xlsx?v=' + encodeURIComponent(S.xl[o.c]) + '" download>xlsx 다운로드</a>' : '') + '</span><span class="hint">억엔 · 칸 색 = YoY · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
+      '<div class="dsec"><span>분기 재무제표' + (S.xl[o.c] ? ' <a class="xl" href="data/jp/xlsx/' + esc(o.c) + '.xlsx?v=' + encodeURIComponent(S.xl[o.c]) + '" download>xlsx 다운로드</a>' : '') + '</span><span class="hint">억엔 · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
       (fr.length > 1 ? '<div class="charts">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
       '<div class="charts" id="kd-key"></div><div id="kd-main"></div>' +   // 기업 데이터 차트(kd.js · data/jp/kd/<코드>.json) — 자료 있는 회사만 채워짐
       (S.mo[o.c] ? '<details class="mo" id="mo"><summary><b>월차</b><span id="mo-sum">' + esc(S.mo[o.c]) + ' 까지 · 눌러서 펼치기</span></summary><div id="mo-body" class="mo-body"><p class="na">불러오는 중…</p></div></details>' : "") +
@@ -946,23 +946,52 @@
     return v >= 30 ? "p3" : v >= 10 ? "p2" : v > 0 ? "p1" : v > -10 ? "n1" : v > -30 ? "n2" : "n3";
   }
   function sg(lab, v) { return '<span class="fs-g"><i>' + lab + '</i><em class="' + (v > 0 ? "up" : v < 0 ? "dn" : "na") + '">' + (v == null ? "—" : (v > 0 ? "+" : "") + Math.round(v) + "%") + "</em></span>"; }
+  /* 재무제표 표 — 항목·순서는 사용자 지정(2026-11-13): 매출액·YoY·매출총이익·GPM·판관비·판관비율·영업이익·OPM·YoY·순이익.
+     매출액·매출총이익·순이익은 굵게, YoY·비율은 작게, 가장 최근 열은 빨간 테두리. 칸 배경색은 쓰지 않음. 연간 표(kd.js)도 같은 틀 */
+  function ftable(cols, opt) {
+    // cols: [{p, now, plan, m, s, g, sg, op, ni, sy, oy}] — 금액 억엔, sy·oy = 매출·영업이익 YoY(%)
+    var has = function (k) { return cols.some(function (c) { return c[k] != null; }); };
+    var amt = function (v) { return v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0); };
+    var rat = function (a, b) { return a == null || !b ? null : a / b * 100; };
+    var pc = function (v, sign) { return v == null || !isFinite(v) ? "—" : (sign && v > 0 ? "+" : "") + (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString("ko-KR") : v.toFixed(1)) + "%"; };
+    var R = [
+      ["매출액", "b", function (c) { return amt(c.s); }],
+      ["YoY", "r", function (c) { return pc(c.sy, 1); }, function (c) { return c.sy; }],
+      has("g") && ["매출총이익", "b", function (c) { return amt(c.g); }],
+      has("g") && ["GPM", "r", function (c) { return pc(rat(c.g, c.s)); }],
+      has("sg") && ["판매관리비", "", function (c) { return amt(c.sg); }],
+      has("sg") && ["판관비율", "r", function (c) { return pc(rat(c.sg, c.s)); }],
+      ["영업이익", "", function (c) { return amt(c.op); }],
+      ["OPM", "r", function (c) { return pc(rat(c.op, c.s)); }],
+      ["YoY", "r", function (c) { return pc(c.oy, 1); }, function (c) { return c.oy; }],
+      ["순이익", "b", function (c) { return amt(c.ni); }]
+    ].filter(Boolean);
+    var cl = function (c, last) { return (c.now ? " now" : "") + (c.plan ? " plan" : "") + (last ? " end" : ""); };
+    var head = '<tr><th class="l">' + esc(opt.unit || "억엔") + "</th>" + cols.map(function (c) {
+      return '<th class="' + cl(c) + '">' + (c.m ? '<i class="mgh" title="' + esc(c.m) + '">인수</i>' : "") + "<b>" + esc(c.p) + "</b>" +
+        (c.now ? '<span class="ft-now">✓ 최근</span>' : c.plan ? '<span class="ft-sub">회사 계획</span>' : "") + "</th>";
+    }).join("") + "</tr>";
+    var body = R.map(function (r, ri) {
+      var last = ri === R.length - 1;
+      return '<tr class="' + r[1] + '"><th class="l">' + r[0] + "</th>" + cols.map(function (c) {
+        var tv = r[3] ? r[3](c) : null, tone = tv == null ? "" : tv > 0 ? " up" : tv < 0 ? " dn" : "";
+        return '<td class="' + cl(c, last) + tone + '">' + r[2](c) + "</td>";
+      }).join("") + "</tr>";
+    }).join("");
+    return '<div class="fswrap ftw"><table class="ft"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>";
+  }
+  window.FTABLE = ftable;
   function fsGrid(o, d) {
     var rows = fsRows(o, d);
     if (!rows.length) return '<div class="box"><p class="na">분기 실적 자료가 아직 없습니다. 2단계로 올라가면 채워집니다.</p></div>';
-    var names = ["매출", "영업이익", "순이익"];
-    var head = '<tr><th class="l"></th>' + rows.map(function (x, i) {
-      return "<th>" + (x.m ? '<i class="mgh" title="' + esc(x.m) + '">인수</i>' : "") + "<b>" + esc(x.p) + "</b>" + (i === rows.length - 1 ? '<span class="fs-now">최근</span>' : x.sub ? "<small>" + esc(x.sub) + "</small>" : "") + "</th>";
-    }).join("") + "</tr>";
-    var body = names.map(function (nm, r) {
-      return '<tr><th class="l">' + nm + "</th>" + rows.map(function (x) {
-        var v = x.v[r];
-        var opm = r === 1 && x.v[0] ? '<span class="fs-g"><i>OPM</i><em>' + (x.v[1] / x.v[0] * 100).toFixed(1) + "%</em></span>" : "";
-        return '<td class="fs-c ' + tone(x.yoy[r]) + '"><b>' + (v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0)) + "</b>" + opm + sg("QoQ", x.qoq[r]) + sg("YoY", x.yoy[r]) + "</td>";
-      }).join("") + "</tr>";
-    }).join("");
+    var cols = rows.map(function (x, i) {
+      return { p: x.p, m: x.m, now: i === rows.length - 1, s: x.v[0], op: x.v[1], ni: x.v[2], g: x.g,
+        sg: x.sg != null ? x.sg : x.g != null && x.v[1] != null ? +(x.g - x.v[1]).toFixed(2) : null, sy: x.yoy[0], oy: x.yoy[1] };
+    });
     var mg = rows.filter(function (x) { return x.m; }).map(function (x) { return x.m; }).filter(function (v, i, a) { return a.indexOf(v) === i; });
-    return '<div class="fswrap"><table class="fs"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>" +
-      '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신.' + (mg.length ? " 인수 = " + esc(mg.join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐." : "") + "</p>";
+    var xs = rows.filter(function (x) { return x.x; }).map(function (x) { return x.p; });
+    return ftable(cols, { unit: "억엔" }) +
+      '<p class="note">분기는 결산기 기준(27.2Q = 2027년 결산기 2분기). 원천: 결산단신' + (xs.length ? "(" + esc(xs[0]) + "~" + esc(xs[xs.length - 1]) + "는 결산설명자료 분기 추이)" : "") + "." + (mg.length ? " 인수 = " + esc(mg.join(" · ")) + " — 그 분기부터 인수한 회사가 실적에 더해짐." : "") + "</p>";
   }
   function closePanel() { panel.classList.remove("on"); scrim.classList.remove("on"); document.body.style.overflow = ""; }
   function back() { return S.mode === "jps" ? "jps" : "jp/" + S.stage; }
@@ -972,32 +1001,45 @@
 
   /* ---------- 주가 차트(SVG) ---------- */
   function dstr(day) { var t = new Date(day * 86400000); return t.getUTCFullYear() + "-" + ("0" + (t.getUTCMonth() + 1)).slice(-2) + "-" + ("0" + t.getUTCDate()).slice(-2); }
+  var PXG = { W: 900, H: 230, L: 10, R: 62, T: 26, B: 24 };   // 주가 차트 틀(그리기·마우스 같이 씀)
   function chart(px, ann) {
-    if (!px || px.length < 5) return '<div class="chartbox"><p class="note" style="padding:14px">주가 자료가 없습니다.</p></div>'.replace(' style="padding:14px"', "");
-    var W = 900, H = 240, L = 8, R = 56, T = 14, B = 24;
-    var lo = Infinity, hi = -Infinity; px.forEach(function (p) { lo = Math.min(lo, p[1]); hi = Math.max(hi, p[1]); });
-    var pad = (hi - lo) * 0.08 || 1; lo -= pad; hi += pad;
+    var trimmed = false;
+    if (px) {   // 상장 전 구간 빼기 — 값이 없거나, 같은 값이 10거래일 넘게 그대로인 앞부분(거래 없던 시장의 묵은 가격)
+      var k0 = 0; while (k0 < px.length && !(px[k0][1] > 0)) k0++;
+      var k1 = k0; while (k1 + 1 < px.length && px[k1 + 1][1] === px[k0][1]) k1++;
+      if (k1 - k0 >= 10) k0 = k1 + 1;
+      if (k0) { px = px.slice(k0); trimmed = true; }
+    }
+    if (!px || px.length < 5) return '<div class="chartbox"><p class="note">주가 자료가 없습니다.</p></div>';
+    var W = PXG.W, H = PXG.H, L = PXG.L, R = PXG.R, T = PXG.T, B = PXG.B;
+    var lo = Infinity, hi = -Infinity, hiI = 0; px.forEach(function (p, i) { lo = Math.min(lo, p[1]); if (p[1] > hi) { hi = p[1]; hiI = i; } });
+    var vhi = hi, pad = (hi - lo) * 0.08 || 1; lo = Math.max(0, lo - pad); hi += pad;
     var x = function (i) { return L + (W - L - R) * i / (px.length - 1); }, y = function (v) { return T + (H - T - B) * (1 - (v - lo) / (hi - lo)); };
     var pts = px.map(function (p, i) { return x(i).toFixed(1) + "," + y(p[1]).toFixed(1); }).join(" ");
     var grid = "", lab = "";
-    for (var g = 0; g <= 3; g++) { var v = lo + (hi - lo) * g / 3, yy = y(v); grid += '<line class="gl" x1="' + L + '" x2="' + (W - R) + '" y1="' + yy + '" y2="' + yy + '"/>'; lab += '<text class="ax" x="' + (W - R + 6) + '" y="' + (yy + 3) + '">' + num(v) + "</text>"; }
+    for (var g = 0; g <= 3; g++) { var v = lo + (hi - lo) * g / 3, yy = y(v).toFixed(1); grid += '<line class="gl' + (g ? "" : " z") + '" x1="' + L + '" x2="' + (W - R) + '" y1="' + yy + '" y2="' + yy + '"/>'; lab += '<text class="ax" x="' + (W - R + 6) + '" y="' + (+yy + 3) + '">' + num(v) + "</text>"; }
     var lastM = "";
-    px.forEach(function (p, i) { var m = dstr(p[0]).slice(0, 7); if (m !== lastM && i > 3) { lab += '<text class="ax" x="' + x(i) + '" y="' + (H - 6) + '">' + (+m.slice(5)) + "월</text>"; } lastM = m; });
+    px.forEach(function (p, i) { var m = dstr(p[0]).slice(0, 7); if (m !== lastM && i > 3 && i < px.length - 4) { lab += '<text class="ax xm" x="' + x(i).toFixed(1) + '" y="' + (H - 6) + '">' + (+m.slice(5)) + "월</text>"; } lastM = m; });
     var ev = "";
-    if (ann) { var ai = px.findIndex(function (p) { return dstr(p[0]) >= ann; }); if (ai > 0) ev = '<line class="ev" x1="' + x(ai) + '" x2="' + x(ai) + '" y1="' + T + '" y2="' + (H - B) + '"/><text class="evt" x="' + (x(ai) + 4) + '" y="' + (T + 10) + '">발표</text>'; }
-    var first = px[0][1], lastv = px[px.length - 1][1], chg = (lastv / first - 1) * 100;
-    return '<div class="chartbox" data-px="' + esc(JSON.stringify(px.map(function (p) { return p[1]; }))) + '" data-d0="' + px[0][0] + '" data-days="' + esc(JSON.stringify(px.map(function (p) { return p[0]; }))) + '">' +
-      '<svg viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" role="img" aria-label="1년 주가">' + grid +
-      '<polygon class="ar" points="' + x(0) + "," + (H - B) + " " + pts + " " + x(px.length - 1) + "," + (H - B) + '"/>' +
-      '<polyline class="ln" points="' + pts + '"/>' + ev + lab +
+    if (ann) { var ai = px.findIndex(function (p) { return dstr(p[0]) >= ann; }); if (ai > 0) ev = '<line class="ev" x1="' + x(ai).toFixed(1) + '" x2="' + x(ai).toFixed(1) + '" y1="' + (T - 6) + '" y2="' + (H - B) + '"/><text class="evt" x="' + (x(ai) - 4).toFixed(1) + '" y="' + (T - 9) + '" text-anchor="end">' + md(ann) + " 발표</text>"; }
+    var first = px[0][1], n1 = px.length - 1, lastv = px[n1][1], chg = (lastv / first - 1) * 100;
+    var dp = lastv < 100 ? 1 : 0;
+    var marks = '<circle class="pd" cx="' + x(n1).toFixed(1) + '" cy="' + y(lastv).toFixed(1) + '" r="3.6"/>' +
+      '<text class="pv" x="' + (x(n1) - 6).toFixed(1) + '" y="' + (y(lastv) - 8).toFixed(1) + '" text-anchor="end">' + num(lastv, dp) + "</text>" +
+      (hiI < n1 - 8 ? '<text class="ph" x="' + x(hiI).toFixed(1) + '" y="' + (y(vhi) - 7).toFixed(1) + '" text-anchor="middle">고점 ' + num(vhi, dp) + "</text>" : "");
+    return '<div class="chartbox kdpx" data-px="' + esc(JSON.stringify(px.map(function (p) { return p[1]; }))) + '" data-d0="' + px[0][0] + '" data-days="' + esc(JSON.stringify(px.map(function (p) { return p[0]; }))) + '">' +
+      '<div class="pxcap"><b>주가</b><span><i class="kd-sw ln c0"></i>종가(엔)' + (ev ? '<i class="evk"></i>실적 발표일' : "") + "</span></div>" +
+      '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="주가">' + grid +
+      '<polygon class="ar" points="' + x(0) + "," + (H - B) + " " + pts + " " + x(n1) + "," + (H - B) + '"/>' +
+      '<polyline class="ln" points="' + pts + '"/>' + ev + lab + marks +
       '<line class="cross" x1="0" x2="0" y1="' + T + '" y2="' + (H - B) + '" visibility="hidden"/><circle class="dot" r="4" cx="0" cy="0" visibility="hidden"/></svg>' +
-      '<div class="tip"></div><div class="chart-note">1년 ' + pct(chg) + " · " + dstr(px[0][0]) + " ~ " + dstr(px[px.length - 1][0]) + "</div></div>";
+      '<div class="tip"></div><div class="chart-note">' + (trimmed ? "상장 후 " : "1년 ") + pct(chg) + " · " + dstr(px[0][0]) + " ~ " + dstr(px[n1][0]) + " · 출처: 일별 종가</div></div>";
   }
   function bindChart(root) {
     var box = root.querySelector(".chartbox[data-px]"); if (!box) return;
     var vals = JSON.parse(box.dataset.px), days = JSON.parse(box.dataset.days), svg = box.querySelector("svg");
     var cross = svg.querySelector(".cross"), dot = svg.querySelector(".dot"), tip = box.querySelector(".tip");
-    var W = 900, H = 240, L = 8, R = 56, T = 14, B = 24, lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), pad = (hi - lo) * 0.08 || 1; lo -= pad; hi += pad;
+    var W = PXG.W, H = PXG.H, L = PXG.L, R = PXG.R, T = PXG.T, B = PXG.B, lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals), pad = (hi - lo) * 0.08 || 1; lo = Math.max(0, lo - pad); hi += pad;
     svg.addEventListener("mousemove", function (e) {
       var r = svg.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width * W;
       var i = Math.round((fx - L) / (W - L - R) * (vals.length - 1)); i = Math.max(0, Math.min(vals.length - 1, i));

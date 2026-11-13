@@ -92,6 +92,11 @@ def fresh():
         done[c] = info["date"]
     src["_fresh"] = done
     json.dump(src, open(SRC, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    try:                                              # 새 분기가 붙은 회사는 매출총이익·판관비도(qhist_gp)
+        import qhist_gp
+        qhist_gp.update([x.split()[0] for x in add])
+    except Exception as e:
+        print("  매출총이익 갱신 실패", e)
     print("이번 분기 채움:", ", ".join(add) if add else "없음")
 
 
