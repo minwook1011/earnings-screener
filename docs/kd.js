@@ -15,6 +15,12 @@
     if (u === "억엔" && a < 100) d = 2;
     return v.toLocaleString("ko-KR", { minimumFractionDigits: d, maximumFractionDigits: d });
   }
+  function blab(v) {   // 막대 데이터 라벨 — 짧게(1.2만 이상 k, 100 미만 소수 1자리)
+    var a = Math.abs(v);
+    if (a >= 10000) return (v / 1000).toFixed(1).replace(/\.0$/, "") + "k";
+    if (a >= 100 || v % 1 === 0) return Math.round(v).toLocaleString("ko-KR");
+    return v.toFixed(1);
+  }
   function yoyTxt(v) { return (v > 0 ? "+" : v < 0 ? "−" : "") + (Math.abs(v) >= 1000 ? (Math.round(Math.abs(v) / 100) / 10) + "k" : Math.round(Math.abs(v))) + "%"; }
   function nice(max) {
     if (max <= 0) return 1;
@@ -36,17 +42,19 @@
       else bars.forEach(function (b) { var v = n(r[b.k]); if (v != null) lv.push(v); });
       left.forEach(function (s) { var v = n(r[s.k]); if (v != null) lv.push(v); });
     });
-    var lmin = Math.min(0, Math.min.apply(null, lv)), lmax = ch.max || nice(Math.max.apply(null, lv) * 1.05);
+    var split = bars.length && right.length && !ch.max;   // 막대 + 오른쪽 꺾은선: 막대는 아래, 선은 위
+    var lmin = Math.min(0, Math.min.apply(null, lv)), lmax = ch.max || nice(Math.max.apply(null, lv) * (split ? 1.55 : 1.12));
     if (lmin < 0) lmin = -nice(-lmin);
     var rv = []; rows.forEach(function (r) { right.forEach(function (s) { var v = n(r[s.k]); if (v != null) rv.push(Math.min(v, 300)); }); });
     var rmin = Math.min(0, Math.min.apply(null, rv.concat([0]))), rmax = Math.max.apply(null, rv.concat([10])); var pad = (rmax - rmin) * 0.15; rmax += pad; if (rmin < 0) rmin -= pad;
+    if (split) rmin -= (rmax - rmin) * 0.9;   // 선을 위쪽 절반에
     var bw = (W - L - R) / nn, x = function (i) { return L + bw * i + bw / 2; };
     var yl = function (v) { return T + (H - T - B) * (1 - (v - lmin) / (lmax - lmin)); };
     var yr = function (v) { return T + (H - T - B) * (1 - (Math.min(v, 300) - rmin) / (rmax - rmin)); };
     var unitL = (bars[0] || left[0] || {}).u || "";
     var g = "";
     [0.5, 1].forEach(function (f) { var v = lmin + (lmax - lmin) * f, y = yl(v); g += '<line class="kd-gl" x1="' + L + '" x2="' + (W - R) + '" y1="' + y.toFixed(1) + '" y2="' + y.toFixed(1) + '"/><text class="kd-ax" x="' + (L - 4) + '" y="' + (y + 3).toFixed(1) + '" text-anchor="end">' + esc(axisTxt(v, unitL)) + "</text>"; });
-    if (right.length) [0.5, 1].forEach(function (f) { var v = rmin + (rmax - rmin) * f; g += '<text class="kd-ax" x="' + (W - R + 4) + '" y="' + (yr(v) + 3).toFixed(1) + '">' + Math.round(v) + "%</text>"; });
+    if (right.length) (split ? [1] : [0.5, 1]).forEach(function (f) {   // 선을 위로 올린 차트는 오른쪽 축 맨 위 값만 var v = rmin + (rmax - rmin) * f; g += '<text class="kd-ax" x="' + (W - R + 4) + '" y="' + (yr(v) + 3).toFixed(1) + '">' + Math.round(v) + "%</text>"; });
     var z = yl(Math.max(0, lmin));
     g += '<line class="kd-z" x1="' + L + '" x2="' + (W - R) + '" y1="' + z.toFixed(1) + '" y2="' + z.toFixed(1) + '"/>';
     var step = Math.max(1, Math.ceil((nn * 34) / (W - L - R)));
@@ -63,9 +71,15 @@
       var lab = String(r[xk]) + (ch.xs || "");
       if ((nn - 1 - i) % step === 0) g += '<text class="kd-xl" x="' + x(i).toFixed(1) + '" y="' + (H - 8) + '">' + esc(lab.length > 7 && ch.x ? lab.slice(0, 7) : lab) + "</text>";
     });
-    if (bars.length && !lines.length) {   // 막대만 있으면 마지막 값 표시
-      var lr = rows[nn - 1], b0 = bars[0], v0 = n(lr[b0.k]);
-      if (v0 != null && !ch.stack) g += '<text class="kd-vl" x="' + (x(nn - 1) - gw / 2 + sub / 2).toFixed(1) + '" y="' + (yl(Math.max(0, v0)) - 5).toFixed(1) + '">' + esc(fmt(v0, b0.u)) + "</text>";
+    if (bars.length && !ch.stack) {   // 막대 데이터 라벨 — 칸이 좁으면 첫 계열(민트)만, 옅은 막대는 빼고
+      var wide = sub >= 19;
+      rows.forEach(function (r, i) {
+        bars.forEach(function (b, j) {
+          var v = n(r[b.k]); if (v == null || b.f || (!wide && j > 0)) return;
+          var cx = wide ? x(i) - gw / 2 + sub * j + sub / 2 : x(i) - gw / 2 + sub / 2;
+          g += '<text class="kd-bl' + (wide || bars.length === 1 ? "" : " sm") + '" x="' + cx.toFixed(1) + '" y="' + (yl(Math.max(0, v)) - 3.5).toFixed(1) + '">' + esc(blab(v)) + "</text>";
+        });
+      });
     }
     var labelAll = bw >= 26;
     lines.forEach(function (s) {

@@ -105,3 +105,5 @@ table.ft { border-collapse: separate; border-spacing: 0; width: max-content; min
 .ft.o-cogs tr[data-g="cogs"] .car, .ft.o-sga tr[data-g="sga"] .car { transform: rotate(90deg); }
 .ft tr.ds th.l, .ft tr.ds td { font-size: 9.5px; color: var(--ink-mute); padding-top: 0; padding-bottom: 3px; }
 .ft tr.ds th.l { padding-left: 32px; font-weight: 400; }
+.kd-bl { font: 600 8.5px var(--mono); fill: var(--ink-mid); text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 2.5px; }
+.kd-bl.sm { font-size: 8px; }
