@@ -54,7 +54,8 @@
     var unitL = (bars[0] || left[0] || {}).u || "";
     var g = "";
     [0.5, 1].forEach(function (f) { var v = lmin + (lmax - lmin) * f, y = yl(v); g += '<line class="kd-gl" x1="' + L + '" x2="' + (W - R) + '" y1="' + y.toFixed(1) + '" y2="' + y.toFixed(1) + '"/><text class="kd-ax" x="' + (L - 4) + '" y="' + (y + 3).toFixed(1) + '" text-anchor="end">' + esc(axisTxt(v, unitL)) + "</text>"; });
-    if (right.length) (split ? [1] : [0.5, 1]).forEach(function (f) {   // 선을 위로 올린 차트는 오른쪽 축 맨 위 값만 var v = rmin + (rmax - rmin) * f; g += '<text class="kd-ax" x="' + (W - R + 4) + '" y="' + (yr(v) + 3).toFixed(1) + '">' + Math.round(v) + "%</text>"; });
+    // 선을 위로 올린 차트는 오른쪽 축 맨 위 값만
+    if (right.length) (split ? [1] : [0.5, 1]).forEach(function (f) { var v = rmin + (rmax - rmin) * f; g += '<text class="kd-ax" x="' + (W - R + 4) + '" y="' + (yr(v) + 3).toFixed(1) + '">' + Math.round(v) + "%</text>"; });
     var z = yl(Math.max(0, lmin));
     g += '<line class="kd-z" x1="' + L + '" x2="' + (W - R) + '" y1="' + z.toFixed(1) + '" y2="' + z.toFixed(1) + '"/>';
     var step = Math.max(1, Math.ceil((nn * 34) / (W - L - R)));
