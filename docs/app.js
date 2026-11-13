@@ -32,7 +32,7 @@
     4: "텔레 4단계로 간 회사가 이곳에 기록됩니다."
   };
   var GRADE_UP = { "서프라이즈": 1, "양호": 1, "호조": 1 }, GRADE_DN = { "부진": 1, "쇼크": 1, "미달": 1 };
-  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, xl: {}, ret: { items: {} }, room: { watch: [], docs: [] }, roomTab: "watch", stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
+  var S = { cos: {}, list: [], qy: {}, fs: {}, bm: {}, mo: {}, res: { items: {} }, pdf: { items: {} }, xl: {}, ret: { items: {} }, room: { watch: [], docs: [] }, roomTab: "watch", stage: 1, q: "", sort: "mc", dir: -1, view: "day", day: null };
   var app = document.getElementById("app");
 
   /* ---------- 도우미 ---------- */
@@ -769,6 +769,19 @@
     panel.classList.add("on"); scrim.classList.add("on"); document.body.style.overflow = "hidden";
     (CO[c] ? Promise.resolve(CO[c]) : getJSON("data/jp/co/" + c + ".json").catch(function () { return {}; })).then(function (d) { CO[c] = d; drawPanel(o, d); panel.focus(); });
   }
+  /* 카드 맨 위 링크 줄(2026-11-13 사용자): 트레이딩뷰 · 카부탄 · (M/D) 결산단신 PDF · 한글 번역 — PDF 목록은 data/jp/pdf.json(tools/pdf_index.py) */
+  function docChips(c) {
+    var ce = encodeURIComponent(c), p = (S.pdf.items || {})[c], h = "";
+    h += '<a class="chip" href="https://www.tradingview.com/chart/?symbol=TSE%3A' + ce + '" target="_blank" rel="noopener noreferrer">트레이딩뷰 ↗</a>';
+    h += '<a class="chip" href="https://kabutan.jp/stock/?code=' + ce + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a>';
+    if (p) {
+      var base = "research/" + ce + "/";
+      h += '<a class="chip" href="' + base + 'tanshin.pdf" target="_blank" rel="noopener">' + (p.t ? "(" + md(p.t) + ") " : "") + "결산단신 PDF</a>";
+      h += p.ko ? '<a class="chip k" href="' + base + 'tanshin_ko.pdf" target="_blank" rel="noopener">한글 번역</a>'
+        : '<button type="button" class="chip off" data-tr="' + esc(c) + '" title="번역본이 아직 없습니다. 누르면 Claude에 붙여 넣을 번역 요청 문구가 복사됩니다(자동 번역 안 함)">한글 번역 요청</button>';
+    }
+    return h;
+  }
   function drawPanel(o, d) {
     var rec = d.rec || {}, card = o.card || {};
     var rx = [];
@@ -793,7 +806,7 @@
       (o.d ? '<span class="chip">' + md(o.d) + (o.pre ? " 발표 " + (o.est ? "예상" : "예정") : " 발표") + (o.p || o.q ? " · " + esc(o.p || o.q) : "") + "</span>" : "") +
       (o.by ? '<span class="chip">올린 사람 · ' + esc(o.by) + "</span>" : "") +
       (o.card && o.card.memo ? '<span class="chip k">메모 · ' + esc(o.card.memo) + "</span>" : "") +
-      '<a class="chip" href="https://kabutan.jp/stock/?code=' + encodeURIComponent(o.c) + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a></div>' +
+      docChips(o.c) + "</div>" +
       (rx.length ? '<div class="react">' + rx.map(function (r) { return '<span class="rx ' + (r[1] > 0 ? "up" : r[1] < 0 ? "dn" : "") + '">' + esc(r[0]) + "</span>"; }).join("") + "</div>" : "") +
       (d.note && d.note.headline ? '<p class="headline">' + esc(d.note.headline) + "</p>" : "") +
       '</div><button class="x" id="px" aria-label="닫기">✕</button></div>' +
@@ -816,6 +829,14 @@
       bmBlock(bm) +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d);
     document.getElementById("px").onclick = function () { location.hash = back(); };
+    pin.querySelectorAll("[data-tr]").forEach(function (b) {   // 번역본 없음 → 요청 문구 복사(번역은 사용자가 따로 요청, 2026-11-13)
+      b.onclick = function () {
+        var c = b.dataset.tr, t = (o.n || c) + "(" + c + ") 결산단신 한글 번역해줘 — 실적 스크리너 docs/research/" + c + "/tanshin.pdf → tanshin_ko.pdf";
+        var ok = function () { b.textContent = "요청 문구 복사됨"; setTimeout(function () { b.textContent = "한글 번역 요청"; }, 2000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, function () { window.prompt("복사해서 Claude에 붙여 넣으세요", t); });
+        else window.prompt("복사해서 Claude에 붙여 넣으세요", t);
+      };
+    });
     pin.querySelectorAll("[data-pick]").forEach(function (b) {
       b.onclick = function () { togglePick(b.dataset.pc, b.dataset.pick); drawPanel(o, d); if (app.querySelector("#view")) render(); };
     });
@@ -1463,9 +1484,10 @@
     getJSON("data/jp/ret.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/ircall.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/scr.json").catch(function () { return { items: {} }; }),
-    getJSON("data/jp/px/index.json").catch(function () { return { items: {} }; })
+    getJSON("data/jp/px/index.json").catch(function () { return { items: {} }; }),
+    getJSON("data/jp/pdf.json").catch(function () { return { items: {} }; })
   ]).then(function (r) {
-    S.scr = r[11]; S.px = r[12]; S.s1rows = {}; (r[0].rows || []).forEach(function (x) { S.s1rows[x.c] = x; });
+    S.scr = r[11]; S.px = r[12]; S.pdf = r[13]; S.s1rows = {}; (r[0].rows || []).forEach(function (x) { S.s1rows[x.c] = x; });
     S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.irc = r[10]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
     S.list = Object.keys(S.cos).map(function (c) { return S.cos[c]; });

@@ -27,6 +27,7 @@ if hasattr(sys.stdout, "reconfigure"):   # cp949 창에서 '멈춤' 메시지 �
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IDX = "docs/data/jp/research/index.json"
+PDFJ = "docs/data/jp/pdf.json"
 TAIL = "\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 
 
@@ -172,6 +173,8 @@ def run():
     msg, paths = sys.argv[1], sys.argv[2:]
     if git("status", "--porcelain", "--", IDX).stdout.strip():
         paths.append(IDX)
+    if git("status", "--porcelain", "--", PDFJ).stdout.strip():   # 결산단신 PDF 목록(research_queue 가 단신을 받으면 갱신, 2026-11-13)
+        paths.append(PDFJ)
     git("add", "--", *paths)
     if git("diff", "--cached", "--quiet", ok=True).returncode == 0:
         git("fetch", "-q", "origin", ok=True)   # 다른 회차가 커밋만 하고 못 올린 것(자동 커밋 등)이 남아 있으면 그것만 올린다(2026-11-03)

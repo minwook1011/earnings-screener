@@ -46,3 +46,12 @@
   새로 내려받은 곳에서는 `git config core.hooksPath .githooks` 를 한 번 실행한다.
 - **커밋 작성자 이메일은 깃허브 비공개 주소**(`minwook1011@users.noreply.github.com`)를 쓴다.
 - 페이지에 화면 표시용 숫자 외 개인 정보(팀원 이름·누가 눌렀나)를 싣지 않는다.
+
+## 결산단신 한글 번역(요청할 때만, 2026-11-13 사용자)
+
+카드 맨 위 칩: 트레이딩뷰 · 카부탄 · (M/D) 결산단신 PDF · 한글 번역. 결산단신 사본(`docs/research/<코드>/tanshin.pdf`)은 2단계 리포트를 올릴 때 `research_queue.py` 가 받고, `tools/pdf_index.py` 가 `docs/data/jp/pdf.json` 을 갱신한다(gpush 가 같이 커밋).
+
+- **자동 번역은 하지 않는다**(토큰). 번역본이 없으면 칩이 「한글 번역 요청」이고, 누르면 요청 문구가 복사된다.
+- 요청을 받으면: jp-ir-collector 번역 단계로 `tanshin.pdf` → `docs/research/<코드>/tanshin_ko.pdf`(레이아웃 그대로, 내용만 한국어)
+  → 원본 문서 번호를 `tanshin_ko.pdf.doc` 에 복사(`tanshin.pdf.doc` 과 같아야 칩이 켜짐) → `python tools/pdf_index.py`
+  → `python tools/gpush.py "research: <코드> 결산단신 번역" docs/research/<코드>/tanshin_ko.pdf docs/research/<코드>/tanshin_ko.pdf.doc docs/data/jp/pdf.json`
