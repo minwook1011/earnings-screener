@@ -245,6 +245,11 @@ def attach(c, st, html, verdict, rid=None):
     if str(st) == "3":   # 3단계 심층은 그대로 올린다 — 재무제표 부가물(단신·질의응답·엑셀·한눈에·월차 표)은 2단계 쪽에만(2026-11-03 사용자)
         return put(c, st, src, verdict, rid)
     src = tanshin(c, src)
+    try:   # 카드 맨 위 「결산단신 PDF」 칩 목록(2026-11-13) — gpush 가 같이 커밋
+        import pdf_index
+        pdf_index.build()
+    except Exception as e:
+        print(f"PDF 목록 갱신 실패: {e}")
     try:   # 실적 분석을 ① 실적 요약 ② 질의응답 탭으로(질의응답은 나중에 예약 작업이 채움)
         import qa
         if 'class="es-tabs"' not in src:   # 빌더가 이미 탭(질의응답 포함)을 만들었으면 그대로

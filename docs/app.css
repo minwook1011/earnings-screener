@@ -184,6 +184,9 @@ td.earn .dd { font-size: 10.5px; color: var(--ink-mute); margin-left: 3px; }
 .chip.st { background: var(--cs); color: var(--c); border-color: transparent; font-weight: 600; }
 .chip.gu { background: var(--up-soft); color: var(--up); border-color: transparent; font-weight: 600; }
 .chip.gd { background: var(--down-soft); color: var(--down); border-color: transparent; font-weight: 600; }
+button.chip { font-family: inherit; cursor: pointer; }
+.chip.off { border-style: dashed; }
+.chip.off:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
 .react { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
 .rx { font: 600 11px var(--mono); padding: 2px 7px; border: 1px dashed var(--line); border-radius: 3px; color: var(--ink-mid); background: var(--surface); }
 .rx.up { color: var(--hp2-tx); border-color: color-mix(in srgb, var(--up) 35%, transparent); background: var(--hp1-bg); }
