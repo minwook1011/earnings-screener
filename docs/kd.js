@@ -96,11 +96,11 @@
     var lastAct = -1; a.forEach(function (r, i) { if (!r.plan) lastAct = i; });
     var cols = a.map(function (r, i) {
       var p = a[i - 1], op = n(r.op), pop = p ? n(p.op) : null, gp = n(r.gp);
-      return { p: r.x, plan: !!r.plan, now: i === lastAct, s: n(r.sales), g: gp, op: op, ni: n(r.net),
+      return { p: r.x, plan: !!r.plan, now: i === lastAct, d: r, s: n(r.sales), g: gp, op: op, ni: n(r.net),
         sg: n(r.sga) != null ? n(r.sga) : gp != null && op != null ? gp - op : null,
         sy: n(r.sales_yoy), oy: n(r.op_yoy) != null ? n(r.op_yoy) : op != null && pop > 0 ? (op / pop - 1) * 100 : null };
     });
-    return '<div class="dsec"><span>연간 재무제표</span><span class="hint">억엔 · 옅은 열 = 회사 계획</span></div>' + window.FTABLE(cols, { unit: "억엔" }) +
+    return '<div class="dsec"><span>연간 재무제표</span><span class="hint">억엔 · 옅은 열 = 회사 계획</span></div>' + window.FTABLE(cols, { unit: "억엔", det: doc.annual_detail }) +
       '<p class="kd-src">출처: ' + esc(doc.annual_src || "") + "</p>";
   }
 

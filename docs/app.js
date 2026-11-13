@@ -954,18 +954,24 @@
     var amt = function (v) { return v == null ? "—" : num(v, Math.abs(v) < 100 ? 1 : 0); };
     var rat = function (a, b) { return a == null || !b ? null : a / b * 100; };
     var pc = function (v, sign) { return v == null || !isFinite(v) ? "—" : (sign && v > 0 ? "+" : "") + (Math.abs(v) >= 1000 ? Math.round(v).toLocaleString("ko-KR") : v.toFixed(1)) + "%"; };
+    // 세부 항목(opt.det = {cogs:[[키, 이름]], sga:[[키, 이름]]}, 값은 c.d[키]) — 공시가 있는 기간에만 숫자, 나머지는 —
+    var det = opt.det || {}, dv = function (k) { return function (c) { return amt(c.d ? c.d[k] : null); }; };
+    var items = function (list) { return (list || []).filter(function (it) { return cols.some(function (c) { return c.d && c.d[it[0]] != null; }); }).map(function (it) { return ["· " + it[1], "d", dv(it[0])]; }); };
+    var cogsI = items(det.cogs), sgaI = items(det.sga);
     var R = [
       ["매출액", "b", function (c) { return amt(c.s); }],
-      ["YoY", "r", function (c) { return pc(c.sy, 1); }, function (c) { return c.sy; }],
+      ["YoY", "r", function (c) { return pc(c.sy, 1); }, function (c) { return c.sy; }]]
+      .concat(cogsI.length ? [["매출원가", "", function (c) { return amt(c.d ? c.d.cogs : null); }]].concat(cogsI) : [])
+      .concat([
       has("g") && ["매출총이익", "b", function (c) { return amt(c.g); }],
       has("g") && ["GPM", "r", function (c) { return pc(rat(c.g, c.s)); }],
       has("sg") && ["판매관리비", "", function (c) { return amt(c.sg); }],
-      has("sg") && ["판관비율", "r", function (c) { return pc(rat(c.sg, c.s)); }],
+      has("sg") && ["판관비율", "r", function (c) { return pc(rat(c.sg, c.s)); }]]).concat(sgaI).concat([
       ["영업이익", "", function (c) { return amt(c.op); }],
       ["OPM", "r", function (c) { return pc(rat(c.op, c.s)); }],
       ["YoY", "r", function (c) { return pc(c.oy, 1); }, function (c) { return c.oy; }],
       ["순이익", "b", function (c) { return amt(c.ni); }]
-    ].filter(Boolean);
+    ]).filter(Boolean);
     var cl = function (c, last) { return (c.now ? " now" : "") + (c.plan ? " plan" : "") + (last ? " end" : ""); };
     var head = '<tr><th class="l">' + esc(opt.unit || "억엔") + "</th>" + cols.map(function (c) {
       return '<th class="' + cl(c) + '">' + (c.m ? '<i class="mgh" title="' + esc(c.m) + '">인수</i>' : "") + "<b>" + esc(c.p) + "</b>" +
