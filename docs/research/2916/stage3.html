@@ -1,0 +1,356 @@
+<!doctype html><html data-theme="light" lang="ko"><head><meta name="color-scheme" content="only light"><style>:root{color-scheme:only light}</style>
+<meta name="robots" content="noindex, nofollow, noarchive"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>센바당화공업 3단계 리포트</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"><style>
+:root{--bg:#f9fbfe;--paper:#ffffff;--ink:#16181d;--fg:#23262d;--muted:#6c6f77;--faint:#9a9ca3;--rule:#d6dfe9;--rule2:#e6edf4;
+--pa:#e8590c;--pb:#1c6dd0;--pc:#2b8a3e;--pd:#9c36b5;--pe:#c2255c;--resi:#2f4f7f;--resi2:#7f9cc4;--cni:#c06a12;--oth:#a7a49b;--grn:#2f7a4c;--pos:#b0352a;--neg:#2f5f9f;--band:rgba(47,79,127,.09);
+--tipbg:#16181d;--tipfg:#f9fbfe;--kbg:#eff4fa;
+--serif:"Noto Serif KR","Nanum Myeongjo",Georgia,serif;--sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121418;--paper:#181b20;--ink:#eceae4;--fg:#d9d7d1;--muted:#9a9ca4;--faint:#6e717a;--rule:#2e323a;--rule2:#24272e;
+--pa:#ff8a3d;--pb:#5c9cf5;--pc:#51cf66;--pd:#cc5de8;--pe:#f06595;--resi:#7fa3d9;--resi2:#4f6d99;--cni:#e8973f;--oth:#6f7480;--grn:#5fbf86;--pos:#ef7a6c;--neg:#7fa3d9;--band:rgba(127,163,217,.12);--tipbg:#eceae4;--tipfg:#121418;--kbg:#1d2026;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121418;--paper:#181b20;--ink:#eceae4;--fg:#d9d7d1;--muted:#9a9ca4;--faint:#6e717a;--rule:#2e323a;--rule2:#24272e;
+--pa:#ff8a3d;--pb:#5c9cf5;--pc:#51cf66;--pd:#cc5de8;--pe:#f06595;--resi:#7fa3d9;--resi2:#4f6d99;--cni:#e8973f;--oth:#6f7480;--grn:#5fbf86;--pos:#ef7a6c;--neg:#7fa3d9;--band:rgba(127,163,217,.12);--tipbg:#eceae4;--tipfg:#121418;--kbg:#1d2026;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15.5px/1.7 var(--sans);-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:anywhere}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--resi)} a.xr{text-decoration:none;border-bottom:1px dotted var(--resi);font-size:.92em}
+.mast{border-bottom:3px double var(--ink);background:var(--paper)}.mast .wrap{padding-block:40px 26px}
+.kick{font:600 12px/1 var(--sans);letter-spacing:.14em;color:var(--cni);margin:0 0 14px}
+h1{font:900 clamp(34px,6.5vw,60px)/1.05 var(--serif);color:var(--ink);margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1 span{display:block;font:500 clamp(16px,2.4vw,22px)/1.4 var(--serif);color:var(--muted);margin-top:8px}
+.tick{font:600 14px var(--mono);color:var(--ink);margin:12px 0 22px}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:14px 18px;margin:0;border-top:1px solid var(--rule);padding-top:16px}
+.meta div{min-width:0}.meta dt{font-size:11.5px;color:var(--muted);letter-spacing:.06em}.meta dd{margin:2px 0 0;font:600 17px/1.3 var(--mono);color:var(--ink)}
+.meta small{display:block;font:400 11.5px/1.4 var(--sans);color:var(--muted)}.meta.inbody{border-top:0;margin:8px 0 14px}
+main{padding-block:28px 60px}
+.summary{background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--ink);padding:22px 26px;margin:0 0 22px}
+.summary h2{font:800 22px var(--serif);margin:0 0 10px;color:var(--ink)}.summary p{margin:0 0 9px;max-width:72ch}.summary b{color:var(--ink)}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:22px}
+.kpi{background:var(--paper);padding:14px 14px 13px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.kl{font-size:11.5px;color:var(--muted);letter-spacing:.04em}.kv{font:600 20px/1.25 var(--mono);color:var(--ink)}.ks{font-size:12px;color:var(--muted);line-height:1.45}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.toc{border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding:10px 0;margin-bottom:14px}
+.toc summary{cursor:pointer;font:700 15px var(--serif);color:var(--ink)}
+.tocg{columns:2 300px;column-gap:30px;font-size:13.5px;padding-top:8px}.tocg ol{margin:0 0 10px;padding-left:28px}.tocg li{break-inside:avoid;margin:2px 0}
+.tocg a{color:var(--fg);text-decoration:none}.tocg a:hover{color:var(--resi)}.tp{margin:6px 0 2px;font-weight:700;break-after:avoid}
+.legendbar{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--muted);padding:10px 0 4px}
+.part{margin:56px 0 8px;border-top:3px solid var(--ink);padding-top:14px;display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:baseline}
+.part span{font:900 46px/1 var(--serif);color:var(--cni);grid-row:span 2}.part h2{font:800 26px var(--serif);margin:0;color:var(--ink)}.part p{margin:2px 0 0;color:var(--muted)}
+.sec{padding-top:30px;border-bottom:1px solid var(--rule2);padding-bottom:12px;scroll-margin-top:12px}
+.sh{display:flex;gap:12px;align-items:baseline;margin-bottom:6px}.sn{font:600 13px var(--mono);color:var(--cni);flex:none;padding-top:4px}
+h3{font:800 clamp(19px,2.6vw,24px)/1.35 var(--serif);color:var(--ink);margin:0;text-wrap:balance}
+.lead1{font:500 15px/1.6 var(--serif);color:var(--muted);margin:0 0 10px}
+h4{font:700 16.5px/1.4 var(--serif);color:var(--ink);margin:2px 0}
+h5{font:700 14.5px var(--sans);color:var(--ink);margin:18px 0 6px}h5.g{color:var(--grn)}h5.r{color:var(--pos)}
+.pp{max-width:78ch;margin:6px 0 10px}
+ul.b{margin:6px 0 12px;padding-left:18px;max-width:80ch}ul.b li{margin:3px 0}ul.b li::marker{color:var(--faint)}
+.tag{font:500 11px var(--mono);color:var(--muted);white-space:nowrap;margin-left:2px}.ej{font-size:12px;color:var(--cni);white-space:nowrap}
+.pos{color:var(--pos)}.neg{color:var(--neg)}
+.note{font-size:13px;color:var(--muted);margin:6px 0 10px;max-width:80ch}
+.pat{font-size:13.5px;margin:6px 0 16px;border-left:2px solid var(--cni);padding-left:10px;max-width:80ch}.pat b{color:var(--cni)}
+.fig{margin:22px 0 26px;padding:16px 0 4px;border-top:1px solid var(--ink);min-width:0}
+.fn{font:600 11px var(--mono);color:var(--cni);letter-spacing:.06em}.sub{margin:0;font-size:12.5px;color:var(--muted)}.src{font-size:11.5px;color:var(--muted);margin:4px 0 6px}
+.chart{width:100%;position:relative}.chart svg{display:block;overflow:visible}
+.lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin:6px 0}
+.lg i{display:inline-block;width:12px;height:10px;margin-right:5px;vertical-align:-1px;border-radius:1px}
+.lg i.dash{height:2px;vertical-align:3px}.lg i.est{background:var(--resi);opacity:.3;outline:1px dashed var(--resi)}
+.lg i.mk-c{width:10px;height:10px;background:var(--cni);transform:rotate(45deg)}.lg i.mk-e{width:10px;height:10px;border-radius:50%;border:1.3px solid var(--ink);background:var(--paper)}
+.ax text{fill:var(--muted);font:11.5px var(--sans);font-variant-numeric:tabular-nums}.ax .domain{stroke:var(--rule)}.ax line{stroke:var(--rule)}
+.grid line{stroke:var(--rule2)}.zero{stroke:var(--faint)}.alab{fill:var(--muted);font:11px var(--sans)}
+.ln{fill:none;stroke-width:2;stroke-linejoin:round}.xh{stroke:var(--faint);stroke-dasharray:2 2}
+.fit{stroke:var(--cni);stroke-width:1.6;stroke-dasharray:5 3}.dl{font:600 11px var(--sans)}
+.evo{fill:var(--paper);stroke:var(--ink);stroke-width:1.3}.evc{fill:var(--cni)}.evn{font:600 8.5px var(--mono);fill:var(--ink);pointer-events:none}.evn.c{fill:var(--paper)}
+#tip{position:fixed;z-index:50;max-width:300px;background:var(--tipbg);color:var(--tipfg);font:12.5px/1.5 var(--sans);padding:8px 10px;border-radius:3px;pointer-events:none;box-shadow:0 4px 18px rgba(0,0,0,.18);display:none}
+#tip .tn{opacity:.8;font-size:11.5px}
+details.raw{margin:2px 0 6px}details.raw summary{cursor:pointer;font-size:12px;color:var(--resi);list-style:none}details.raw summary::before{content:"▸ "}details.raw[open] summary::before{content:"▾ "}
+.tw{overflow-x:auto;margin:8px 0 4px;max-width:100%}table{border-collapse:collapse;width:100%;font-size:13px}
+table.mini{font-size:12px;width:auto}
+th{font:600 11.5px var(--sans);color:var(--muted);text-align:left;border-bottom:1.5px solid var(--ink);padding:6px 8px;white-space:nowrap}
+td{border-bottom:1px solid var(--rule2);padding:6px 8px;vertical-align:top}td.n{font-family:var(--mono);font-size:12.5px;text-align:right;white-space:nowrap}
+tbody tr:hover{background:var(--kbg)}
+ol.ev{list-style:none;padding:0;margin:8px 0;display:grid;gap:7px;font-size:14px}
+ol.ev li{display:grid;grid-template-columns:30px 1fr;gap:8px;align-items:start}
+.en{font:700 11px/22px var(--mono);text-align:center;width:24px;height:24px;border:1.3px solid var(--ink);border-radius:50%;color:var(--ink)}
+ol.ev li.call .en{border:none;width:26px;height:26px;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);background:var(--cni);color:var(--paper);display:flex;align-items:center;justify-content:center}
+.cn{font-size:12.5px;color:var(--muted);margin-top:2px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}@media (max-width:760px){.two{grid-template-columns:1fr}}
+.photo{margin:8px 0 14px}.photo img{width:100%;height:auto;display:block;filter:saturate(.92)}
+.photo figcaption{font-size:12px;margin-top:5px;line-height:1.45}.cr{display:block;color:var(--muted);font-size:11px}
+.photos3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.photos3 img{aspect-ratio:4/3;object-fit:cover}@media (max-width:640px){.photos3{grid-template-columns:1fr}}
+.qa details{border-top:1px solid var(--rule);padding:10px 0}.qa summary{cursor:pointer;font:700 15px/1.5 var(--serif);color:var(--ink)}
+.concl{background:var(--paper);border:1px solid var(--ink);padding:14px 18px;margin:18px 0}.concl>b{font:800 16px var(--serif);color:var(--ink)}.concl p{margin:6px 0 0}
+.concl.risk{border-color:var(--pos)}.concl.note{border-color:var(--rule)}
+.leads{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:10px 0}@media (max-width:860px){.leads{grid-template-columns:1fr}}
+.lead{background:var(--paper);border:1px solid var(--rule);border-top:3px solid var(--cni);padding:12px 14px;min-width:0;font-size:13.5px}.lead p{margin:4px 0}
+.lk{font:700 12px var(--mono);color:var(--cni)}
+.nref{margin:2px 0 0;text-align:right;font:600 11px var(--sans)}.nref a{color:var(--faint);text-decoration:none;margin-left:10px}.nref a:hover{color:var(--resi);text-decoration:underline}
+.endnotes{margin-top:50px;border-top:3px double var(--ink);padding-top:12px;font-size:13px;color:var(--muted)}.endnotes h2{font:800 20px var(--serif);color:var(--ink)}.endnotes ol{padding-left:22px;display:grid;gap:7px}.endnotes li b{display:block;color:var(--ink);font-size:12.5px}.endnotes li:target{background:#fff8e6}
+table.pqc td{vertical-align:top;padding:8px 8px;border-bottom:1px solid var(--rule)}table.pqc td.pk{white-space:nowrap;width:1%}table.pqc td.pk b{font:800 14px var(--mono);color:var(--ink)}table.pqc td.pk small{display:block;font-size:11px;color:var(--muted)}
+table.pqc td.pd{width:1%;font-size:12px}table.pqc td.pt{line-height:1.55}table.pqc td.pu{width:1%;white-space:nowrap}table.pqc td.pu span{font:700 11px var(--sans);padding:2px 7px;border-radius:9px}table.pqc .keep{background:#e7f4ea;color:#2f7a3c}table.pqc .once{background:#f2f2f2;color:#777}
+.sources{margin-top:50px;border-top:3px double var(--ink);padding-top:12px;font-size:13px}.sources h2{font:800 20px var(--serif);color:var(--ink)}
+.disc{margin-top:14px;padding:10px 12px;background:var(--kbg);font-weight:600;color:var(--ink)}
+.fixlog{font-size:12.5px;color:var(--muted)}
+table.fin th.n{text-align:right}table.fin tr.mj td{font-weight:700;color:var(--ink)}table.fin tr.mj td:first-child{font-family:var(--sans)}table.fin td:first-child{white-space:nowrap}
+details.segd{margin:4px 0 12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}details.segd>summary{cursor:pointer;list-style:none;padding:9px 0;font:700 14px var(--sans);color:var(--resi)}details.segd>summary::-webkit-details-marker{display:none}details.segd>summary::before{content:'▸ ';color:var(--muted)}details.segd[open]>summary::before{content:'▾ '}details.segd>summary small{font-weight:500;color:var(--muted);margin-left:6px}table.seg tr.segh td{border-top:1.5px solid var(--faint)}
+.apxh span{color:var(--muted)}
+.phs{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:10px 0 6px}
+.ph{background:var(--paper);border:1px solid var(--rule);border-top:3px solid var(--oth);padding:10px 12px;font-size:13.5px;min-width:0}
+.ph.rise{border-top-color:var(--pos)}.ph.fall{border-top-color:var(--neg)}.ph b{font:700 14.5px var(--serif);color:var(--ink);display:block}
+.pper{display:block;font:500 11.5px var(--mono);color:var(--muted);margin:2px 0 4px}.ph p{margin:0;line-height:1.55}
+.phl{font:700 11px var(--sans)}
+.gaps{font-size:12.5px;color:var(--muted)}
+details.apx{border-bottom:1px solid var(--rule2);padding:14px 0 10px;scroll-margin-top:12px}
+details.apx>summary{cursor:pointer;list-style:none;display:flex;gap:12px;align-items:baseline}
+details.apx>summary::-webkit-details-marker{display:none}
+details.apx>summary h3{font-size:clamp(17px,2.2vw,20px)}
+details.apx>summary::after{content:"펼치기 ▾";margin-left:auto;flex:none;font:600 12px var(--sans);color:var(--resi)}
+details.apx[open]>summary::after{content:"접기 ▴"}
+details.apx[open]>summary{margin-bottom:8px}
+.rt{font:600 12.5px var(--sans);color:var(--muted);margin:-12px 0 18px}
+.mast{border-bottom:0;background:transparent}.mast .wrap{padding-block:36px 0}
+.mast h1{font:900 clamp(30px,5.5vw,46px)/1.15 var(--sans);color:var(--ink);margin:0}.mast h1 .tk{display:inline;font:600 .55em var(--mono);color:var(--muted);margin:0 0 0 8px}
+.tagline{font:500 16px/1.6 var(--sans);color:var(--sub,var(--muted));margin:8px 0 0;max-width:80ch}
+.hdrrule{border:0;border-top:2px solid var(--ink);margin:18px 0 0}
+.band{margin:46px 0 16px;padding:11px 16px;background:#dde7f3;border-left:6px solid var(--resi);font:800 18px var(--sans);color:var(--ink);scroll-margin-top:10px}
+.band .bn{font:700 13px var(--mono);color:var(--resi);margin-right:10px}
+.sec{border-bottom:0;padding-top:0}
+h3.st{font:800 clamp(17px,2.2vw,20px)/1.4 var(--sans);margin:4px 0 6px}
+h4.subh{font:800 16px/1.45 var(--sans);color:var(--ink);margin:22px 0 6px;padding-top:6px;border-top:1px solid var(--rule2)}
+.fsinfo{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:6px 0 10px}
+.fsinfo div{background:var(--paper);padding:10px 12px;min-width:0}.fsinfo dt{font-size:11.5px;color:var(--muted)}.fsinfo dd{margin:2px 0 0;font:700 16px var(--sans);color:var(--ink)}.fsinfo small{display:block;font-size:11.5px;color:var(--muted)}
+.fsunit{font-size:12px;color:var(--muted);text-align:right;margin:4px 0 0}
+.tgh{font:700 12.5px var(--sans);color:var(--resi);margin:12px 0 2px}
+details.tg.res>summary>b::before{content:'★ ';color:#d62f2f}details.tg.res>summary{border-left:3px solid #d62f2f}
+.resd{display:inline-block;margin:0 8px 0 2px;padding:1px 8px;border:1.5px solid #d62f2f;border-radius:10px;color:#d62f2f;font:700 12px var(--sans);vertical-align:1px}
+details.tg.xpl>summary>b::before{content:'◧ ';color:var(--pb)}.xgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:18px 28px;margin:6px 0 4px}.xp svg{width:100%;height:auto;display:block}.xp h6{font:700 13.5px var(--sans);margin:0 0 6px}.xph{font:700 13.5px var(--sans);fill:var(--ink)}.xp svg text,svg.vc text{stroke:none}.xt{font:600 12px var(--sans);fill:var(--ink)}.xt.b{font-weight:800}.xs{font:500 10.5px var(--sans);fill:var(--muted)}.xn{font:500 11px var(--sans);fill:var(--muted)}.xb{stroke-width:1}.xb.xm{stroke:var(--pos)!important;stroke-width:2.6}.xa{stroke:var(--muted);stroke-width:1.6;fill:none}.xah{fill:var(--muted)}.xb.c0{fill:#cfe0f7;stroke:#7fa3d9}.xb.c1{fill:#f7d9b8;stroke:#d9a066}.xb.c2{fill:#cdebd6;stroke:#6fb486}.xb.c3{fill:#e2d6f3;stroke:#a68bd1}.xb.c4{fill:#c9e8ea;stroke:#6db3b8}.xb.c5{fill:#e6e8eb;stroke:#a9adb3}@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .xb.c0{fill:#22344f}:root:not([data-theme=light]) .xb.c1{fill:#4a3420}:root:not([data-theme=light]) .xb.c2{fill:#1f3d2a}:root:not([data-theme=light]) .xb.c3{fill:#352a4a}:root:not([data-theme=light]) .xb.c4{fill:#1d3b3e}:root:not([data-theme=light]) .xb.c5{fill:#2a2d33}}:root[data-theme=dark] .xb.c0{fill:#22344f}:root[data-theme=dark] .xb.c1{fill:#4a3420}:root[data-theme=dark] .xb.c2{fill:#1f3d2a}:root[data-theme=dark] .xb.c3{fill:#352a4a}:root[data-theme=dark] .xb.c4{fill:#1d3b3e}:root[data-theme=dark] .xb.c5{fill:#2a2d33}.xbul{margin-top:10px}
+.vc{width:100%;height:auto;display:block}.vcs{fill:var(--paper);stroke:var(--rule);stroke-width:1.2}.vch{font:800 13.5px var(--sans);fill:var(--ink)}.vcp{fill:var(--rule2);stroke:var(--rule);stroke-width:1}.vcb{fill:var(--rule2);stroke:var(--faint);stroke-width:1}.vcb.mine{fill:#fbe3dd;stroke:var(--pos);stroke-width:2.2}.vcn{font:600 13px var(--sans);fill:var(--fg)}.vcn.b{font-weight:800;fill:var(--ink)}.vcl{stroke:var(--rule);stroke-dasharray:3 3}:root[data-theme=dark] .vcb.mine{fill:#4a2622}@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .vcb.mine{fill:#4a2622}}
+.tgh.fsq,.tgh.fsy{font-size:15px;padding-left:9px;border-left:4px solid var(--resi);margin:14px 0 8px}
+.tgh.fsy{margin-top:44px;padding-top:0;position:relative}.tgh.fsy::before{content:'';position:absolute;left:-4px;right:0;top:-22px;border-top:2px solid var(--line, #d5dbe3)}
+table.fst{font-size:13px;background:var(--paper)}table.fst th{background:#e7ebf0;color:var(--ink);text-align:right;font:700 12.5px var(--sans);border-bottom:0;padding:7px 8px}
+table.fst th:first-child,table.fst td:first-child{text-align:left;white-space:nowrap}
+table.fst tr.cy th{background:transparent;font:500 10.5px var(--mono);color:var(--muted);padding:2px 8px 0}
+table.fst th small{display:block;font:500 10px var(--sans);opacity:.85}table.fst th small.qs{font:700 11px var(--mono);color:#d4a106;opacity:1;margin-top:2px}table.fst th small.qp{font:500 10px var(--mono);color:var(--muted);opacity:1}
+table.fst tr.curl th{background:transparent;padding:0 8px 3px;border:0}table.fst th.curt{color:#e03131;font:800 12px var(--sans);text-align:center;white-space:nowrap}
+table.fst .cur{box-shadow:inset 2.5px 0 #e03131,inset -2.5px 0 #e03131}table.fst tr.cy th.cur,table.fst thead tr:first-child+tr th.cur{box-shadow:inset 2.5px 0 #e03131,inset -2.5px 0 #e03131,inset 0 2.5px #e03131}
+table.fst tbody tr:not([hidden]):last-child td.cur{box-shadow:inset 2.5px 0 #e03131,inset -2.5px 0 #e03131,inset 0 -2.5px #e03131}
+td.hl span{display:inline-block;border:2px solid #e03131;border-radius:999px;padding:0 6px;margin:-2px -8px -2px 0}
+table.fst th.kc{background:#4472c4;color:#fff}table.fst th.kg{background:#fff2cc;color:#5a4a12}
+table.fst tr.cy th.kc,table.fst tr.cy th.kg{background:transparent;color:var(--muted)}
+table.fst td{border-bottom:0;padding:6px 8px}table.fst td.kc{background:#eef3fb;font-weight:700}table.fst td.kg{background:#fffaeb;font-weight:700}
+table.fst tr.mj td{font-weight:700;color:var(--ink);font-size:13.5px}table.fst tr.mj td:first-child{font-size:14px}
+table.fst tr.g td{color:var(--muted)}table.fst tr.g td:first-child{padding-left:22px;font-weight:400}
+table.fst tr.sep td{border-top:1px dotted var(--faint)}
+table.fst.sub th{background:#eef1f5}table.fst.mini{font-size:11.5px}table.fst.mini td,table.fst.mini th{padding:3px 6px}
+.peers text.dl{font-size:10.5px;font-weight:600}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin-top:6px}.pq h6{font:700 13.5px var(--sans);color:var(--ink);margin:6px 0 0}.pq h6 small{font-weight:500;color:var(--muted)}
+@media (max-width:760px){.pgrid{grid-template-columns:1fr}}
+.plg span{font-weight:600}.plg i{width:14px;height:10px;border-radius:2px}
+table.peer{font-size:13px}table.peer th{background:#eef1f5;color:var(--ink);font-weight:700;text-align:right}table.peer th:nth-child(-n+2){text-align:left}
+table.peer tr.pfirst td{border-top:2.5px solid var(--ink)}table.peer tbody tr:first-child td{border-top:0}
+table.peer td.pco{font:700 13.5px var(--sans);color:var(--ink);vertical-align:top;white-space:nowrap;border-right:1px solid var(--rule)}table.peer td.pco i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}table.peer td.pco small{display:block;font:500 11px var(--mono);color:var(--muted);margin:2px 0 0 16px}
+table.peer .pma{display:block;font:800 10.5px var(--sans);color:#d9a400;letter-spacing:.02em;margin-bottom:1px;cursor:help}p.note .pma{display:inline;font:800 11.5px var(--sans);color:#d9a400}
+table.pxt th.pxd{white-space:nowrap}table.pxt .pxd select{appearance:none;-webkit-appearance:none;border:0;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%236b7280'/%3E%3C/svg%3E") no-repeat right 0 center;padding:0 14px 0 0;font:inherit;font-weight:700;color:inherit;text-align:right;cursor:pointer}table.pxt .pxd select:focus{outline:1px dotted var(--muted)}table.pxt tr.self td{background:#fff8ec}table.pxt td.pco small{display:inline;margin-left:6px}
+table.peer td.pk{color:var(--muted);white-space:nowrap}table.peer tr.pmain td.pk{color:var(--ink);font-weight:700}table.peer tr.pyoy td{background:#f7f8fa;font-size:12.5px}table.peer td.pper2{color:var(--faint);font-size:11.5px}
+h6.lh{font:700 13px var(--sans);color:var(--resi);margin:12px 0 2px}details.tg.ld .fig{margin:10px 0}
+table.est{font-size:13px}table.est th{font-weight:700;text-align:right;white-space:nowrap}table.est thead tr.eg th{text-align:center;font-size:12px;padding:5px 6px}
+table.est th.ga,table.est th.ha{background:#e9ecef;color:var(--ink)}table.est th.gg,table.est th.hg{background:#fff2cc;color:#7a5b00}table.est td.cg{background:#fffaeb}
+table.est th.gbear,table.est th.hbear{background:#f8d7da;color:#8a1c24}table.est td.cbear{background:#fdf1f2}
+table.est th.gbase,table.est th.hbase{background:#dbe6f6;color:#1d4f91}table.est td.cbase{background:#f1f6fd}
+table.est th.gbull,table.est th.hbull{background:#d6eedb;color:#1f6a35}table.est td.cbull{background:#f0f9f2}
+table.est td.ek{color:var(--muted);white-space:nowrap;text-align:left}table.est tr.em td{font-weight:700;color:var(--ink)}table.est tr.em td.ek{color:var(--ink)}table.est tr.er td{font-size:12.5px;color:var(--muted)}
+table.est tr.em:not(:first-child) td{border-top:1px dotted var(--faint)}table.est th.hbear,table.est td.cbear:first-of-type{border-left:2px solid var(--paper)}
+table.est tr.ea td{font-size:12px;line-height:1.5;text-align:left;vertical-align:top;color:var(--fg);white-space:normal}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) table.est td.cg,:root:not([data-theme="light"]) table.est td.cbear,:root:not([data-theme="light"]) table.est td.cbase,:root:not([data-theme="light"]) table.est td.cbull{background:transparent}}
+details.tg{margin:12px 0;border:1px solid var(--rule);background:var(--paper)}
+details.tg>summary{cursor:pointer;list-style:none;padding:11px 14px;display:flex;gap:10px;align-items:baseline;background:#f1f5fa}
+details.tg>summary::-webkit-details-marker{display:none}
+details.tg>summary::before{content:'▸';color:var(--resi);font-weight:700}details.tg[open]>summary::before{content:'▾'}
+details.tg>summary b{font:800 15px var(--sans);color:var(--ink)}details.tg>summary small{color:var(--muted);font-size:12px}
+.tgb{padding:6px 14px 12px}
+.foldx{display:block;margin:10px 0 4px auto;font:700 12.5px var(--sans);color:var(--resi);background:#f1f5fa;border:1px solid var(--rule);padding:5px 12px;cursor:pointer}tr.segend .segbtn{color:var(--muted)}
+.tgx{display:block;margin:14px 0 2px auto;font:700 12.5px var(--sans);color:var(--resi);background:#f1f5fa;border:1px solid var(--rule);padding:6px 12px;cursor:pointer}
+.pin{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:2px solid var(--resi);padding:6px 0 4px;margin:0 -14px 10px;padding-inline:14px;max-height:46vh;overflow:auto}
+.pinh{font:700 11.5px var(--sans);color:var(--resi);margin:0 0 2px}
+@media (max-width:700px){.pin{position:static;max-height:none}}
+.phx{margin:0;border-top:1px solid var(--rule);padding:4px 0}.phx:last-child{border-bottom:1px solid var(--rule)}.phx>summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:8px 0}.phx>summary::-webkit-details-marker{display:none}.phx>summary::before{content:'▸';color:var(--muted);font-size:13px}.phx[open]>summary::before{content:'▾'}.phx>summary:hover h4{text-decoration:underline}.phxs{margin-top:14px}.phx h4{font:800 16.5px/1.45 var(--sans);margin:0}.phx .pper{display:inline;font:500 12px var(--mono);color:var(--muted);margin:0}
+.phx.rise h4{color:var(--pos)}.phx.fall h4{color:var(--neg)}.phx p{margin:4px 0 8px;max-width:80ch}
+tr.segtog td{padding:0!important;background:#f7f8fa;border-top:1px dotted var(--faint)}.segbtn{all:unset;cursor:pointer;display:block;padding:6px 8px;font:700 12.5px var(--sans);color:var(--resi)}.segbtn small{font-weight:500;color:var(--muted);margin-left:6px}
+table.fst tr.segr td{background:#fff!important;font-size:12.5px;color:#4c5463;border-bottom:1px dashed #e3e7ec;font-weight:400}
+table.fst tr.segr td:first-child{box-shadow:inset 3px 0 0 #9aa5b4;padding-left:16px;white-space:normal;min-width:7em;max-width:13em;line-height:1.35}/* 펼친 줄 이름이 길어도 표가 옆으로 넘치지 않게 줄바꿈(2026-10-23 사용자) */
+table.fst tr.segr.segh td{font-weight:700;color:var(--ink);border-top:1px solid #c9d0da}
+/* 펼침 묶음마다 다른 색(2026-10-23 사용자): BM별 = 파랑(사업마다 두 톤 번갈아), 판관비 = 초록, 영업외 = 보라 */
+table.fst tr.segr.gseg.bi0 td{background:#eaf2fc!important}table.fst tr.segr.gseg.bi1 td{background:#f5f9fe!important}table.fst tr.segr.gseg td:first-child{box-shadow:inset 4px 0 0 #3b7dd8}
+table.fst tr.segr.gsga td{background:#f1f8ee!important}table.fst tr.segr.gsga.segh td{background:#e1f0da!important}table.fst tr.segr.gsga td:first-child{box-shadow:inset 4px 0 0 #3f9b4b}
+table.fst tr.segr.gno td{background:#f6f2fb!important}table.fst tr.segr.gno.segh td,table.fst tr.segr.gno.segs td{background:#ece4f7!important}table.fst tr.segr.gno td:first-child{box-shadow:inset 4px 0 0 #8358c4}
+table.fst tr.segr.segs td{font-weight:600;color:var(--ink)}table.fst tr.segr.segd td{font-size:12px;color:#5a6270}table.fst tr.segr.segv td{font-size:13px;color:var(--ink);font-weight:600;border-top:1px solid #d7e8cf}table.fst tr.segr.segp td{font-size:11.5px;color:#7a828e;padding-top:0}
+table.fst tr.segr.segend td{background:#fff!important}
+table.fst .segbtn[data-g=gseg]{color:#2f6cc0}table.fst .segbtn[data-g=gsga]{color:#2f8a3c}table.fst .segbtn[data-g=gno]{color:#7046b3}
+.mkl{font:600 10.5px var(--sans);fill:var(--cni)}
+.pr{display:grid;grid-template-columns:minmax(0,74ch) minmax(0,1fr);column-gap:28px;align-items:start}.pr>p,.pr>ul{margin-top:6px}
+.pr .pp{max-width:none}.pr ul.b{max-width:none}
+sup.cn{font:600 9.5px var(--mono);color:var(--resi);margin-left:1px;vertical-align:super;line-height:0}
+aside.sn{font-size:11.5px;line-height:1.5;color:var(--muted);border-left:1px solid var(--rule);padding:6px 0 6px 10px;margin-top:6px;display:grid;gap:4px;min-width:0;overflow-wrap:anywhere}
+aside.sn b{font:700 10px var(--mono);color:var(--resi);margin-right:5px}aside.sn a{color:var(--muted);text-decoration:underline dotted}
+@media (max-width:900px){.pr{grid-template-columns:1fr}aside.sn{border-left:0;border-top:1px dashed var(--rule);padding:4px 0 0;margin:0 0 10px}}
+.mkleg{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:12px;color:var(--muted);margin:2px 0 6px}.mkleg b{color:var(--cni);margin-right:2px}
+details.tg.prof{margin:14px 0 0}
+h4.subh{font:800 17.5px/1.45 var(--sans);margin:34px 0 10px;padding-top:12px;border-top:2px solid var(--resi)}
+h4.subh .hn{font:800 16px var(--mono);color:var(--resi);margin-right:10px}
+h5.subh2{font:800 15px/1.45 var(--sans);color:var(--ink);margin:18px 0 4px;padding-left:9px;border-left:3px solid var(--resi2)}
+.pie .piew{display:flex;gap:26px;align-items:center;flex-wrap:wrap}.pie svg{width:190px;height:190px;flex:none}.pie .pc{font:700 12px var(--sans);fill:var(--ink)}
+.pie ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px}.pie li{display:grid;grid-template-columns:14px auto auto;gap:4px 8px;align-items:center}.pie li i{width:12px;height:12px}.pie li b{font-variant-numeric:tabular-nums}.pie li small{grid-column:2/4;color:var(--muted);font-size:12px}.mkt{stroke:var(--cni);stroke-width:1.2}
+@media (max-width:560px){.summary{padding:16px}.part span{font-size:36px}body{font-size:15px}}
+
+.s3kick{display:inline-flex;gap:8px;align-items:center;font:700 12px/1 var(--sans);letter-spacing:.08em;color:#fff;background:var(--cni);padding:6px 10px;border-radius:999px;margin:0 0 14px}
+.s3back{font:600 13px var(--sans);margin-left:10px;color:var(--resi);text-decoration:none;border-bottom:1px dotted var(--resi)}
+.s3lead{padding-top:6px}.s3lead>p{max-width:76ch}
+.s3lead>h2{font:800 22px var(--serif);margin:6px 0 4px;color:var(--ink)}.s3lead>.s3ls{color:var(--muted);margin:0 0 14px;font-size:14px}
+.s3prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:8px 0 4px}
+.s3prod{margin:0;border:1px solid var(--rule);border-radius:8px;background:var(--paper);overflow:hidden;display:flex;flex-direction:column}
+.s3prod img,.s3noimg{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;display:block}.s3noimg{display:grid;place-items:center;color:var(--faint);font-size:12px}
+.s3prod figcaption{padding:8px 10px 10px;font-size:13px;line-height:1.5;display:flex;flex-direction:column;gap:3px}.s3prod b{font-size:14px;color:var(--ink)}
+.s3why{color:var(--resi);font-weight:700;font-size:12.5px}
+.s3pw{color:var(--fg)}.s3pm{color:var(--muted);font-size:12px}.s3pcr{font:500 11.5px var(--sans);color:var(--faint);margin:2px 0 16px}
+.s3basis{font:600 13px/1.6 var(--sans);color:var(--muted);margin:2px 0 10px;max-width:80ch}
+.s3src{font:500 11.5px/1.5 var(--sans);color:var(--faint);white-space:normal}.s3srcp{margin:-6px 0 14px;max-width:76ch}
+.s3terms{margin:-4px 0 16px;padding:10px 14px;background:var(--paper);border:1px dashed var(--rule);border-radius:6px;font-size:13.5px;line-height:1.6;max-width:76ch}
+.s3terms .s3th{margin:0 0 4px;font:700 11.5px var(--sans);letter-spacing:.06em;color:var(--muted)}
+.s3terms div{display:flex;gap:10px;margin:2px 0}.s3terms dt{font-weight:700;min-width:7em;flex:none;color:var(--ink)}.s3terms dd{margin:0}
+@media (max-width:700px){
+ .s3card{overflow:visible}.s3card table,.s3card tbody,.s3card tr,.s3card td{display:block;width:auto}
+ .s3card thead{display:none}
+ .s3card tr{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;margin:0 0 10px;background:var(--paper)}
+ .s3card td{border:0;padding:3px 0;text-align:left!important;white-space:normal}
+ .s3card td:first-child{font-weight:800;font-size:15px;padding-bottom:6px;margin-bottom:4px;border-bottom:1px dotted var(--rule)}
+ .s3card td:not(:first-child)::before{content:attr(data-l);display:block;font:600 11.5px var(--sans);color:var(--muted);margin-top:4px}
+ .s3prods{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.s3prod figcaption{padding:6px 8px 8px;font-size:12.5px}
+ .s3terms div{display:block}.s3terms dt{min-width:0}
+}
+</style></head><body>
+<header class="mast"><div class="wrap"><p class="s3kick">3단계 리포트</p><a class="s3back" href="../../../earnings-screener/docs/research/2916/stage2.html">← 2단계 리포트</a><p class="s3basis">기준: 이번 실적 CY3Q26(26.7~9, FY3/27 2Q, 26.11.13 발표) · 연간은 CY1Q26(FY3/26)까지</p><h1>센바당화공업<span class="tk">(2916)</span></h1>
+<p class="tagline">분말차·카라멜 색소로 버티고 냉동 참마·보충제 수탁으로 크는 식품 소재 공장</p><hr class="hdrrule"></div></header>
+<main class="wrap"><section class="s3lead"><figure class="fig pie"><h4>사업별 매출 비중</h4><p class="sub">CY1Q26(FY3/26) 연간 매출 194억 엔 · 제품 종류별(단일 부문)</p><div class="piew"><svg viewBox="0 0 180 180" role="img" aria-label="BM별 매출 비중"><path d="M90.0,20.0 A70,70 0 0 1 141.5,137.4" fill="none" stroke="var(--resi)" stroke-width="34"><title>건조 제품류 37%</title></path><path d="M141.5,137.4 A70,70 0 0 1 49.0,146.7" fill="none" stroke="var(--cni)" stroke-width="34"><title>카라멜 제품 23%</title></path><path d="M49.0,146.7 A70,70 0 0 1 21.3,76.5" fill="none" stroke="var(--grn)" stroke-width="34"><title>조립 제품류 18%</title></path><path d="M21.3,76.5 A70,70 0 0 1 62.2,25.8" fill="none" stroke="var(--resi2)" stroke-width="34"><title>냉동 제품 15%</title></path><path d="M62.2,25.8 A70,70 0 0 1 90.0,20.0" fill="none" stroke="var(--oth)" stroke-width="34"><title>기타 7%</title></path><text x="90" y="95" text-anchor="middle" class="pc">매출 비중</text></svg><ul><li><i style="background:var(--resi)"></i><span>건조 제품류</span><b>37%</b></li><li><i style="background:var(--cni)"></i><span>카라멜 제품</span><b>23%</b></li><li><i style="background:var(--grn)"></i><span>조립 제품류</span><b>18%</b></li><li><i style="background:var(--resi2)"></i><span>냉동 제품</span><b>15%</b></li><li><i style="background:var(--oth)"></i><span>기타</span><b>7%</b></li></ul></div></figure><figure class="fig"><figcaption><span class="fn">그림 1</span><h4>사업별 매출 성장률</h4><p class="sub">CY3Q26까지 · 매출 YoY(%), 연간 3년 + 이번 반기 누계(26.4~9) · 괄호 = FY3/26 매출 · 냉동·조립이 반등 선두</p></figcaption><div class="lg"><span><i class="" style="background:var(--resi)"></i>건조 (71억 엔)</span><span><i class="" style="background:var(--resi2)"></i>카라멜 (45억 엔)</span><span><i class="" style="background:var(--grn)"></i>조립 (35억 엔)</span><span><i class="" style="background:var(--cni)"></i>냉동 (30억 엔)</span><span><i class="" style="background:var(--oth)"></i>기타 (13억 엔)</span></div><div class="chart" id="c1" style="height:300px"></div><p class="src">출처: <span class="tag">[공시 결산단신]</span> 제품 종류별 매출</p></figure><figure class="fig"><figcaption><span class="fn">그림 2</span><h4>해외 매출 비중</h4><p class="sub">CY3Q26까지 · 해외 매출 ÷ 전체(%) · 지역별 공시 없음 · 중국 정리 뒤 베트남 위주로 회복</p></figcaption><div class="lg"><span><i class="" style="background:var(--resi)"></i>해외 (FY3/27 1Q 1.5억 엔)</span></div><div class="chart" id="c2" style="height:300px"></div><p class="src">출처: <span class="tag">[설명회]</span> 결산 보충 자료</p></figure><figure class="fig"><figcaption><span class="fn">그림 3</span><h4>제품군별 분기 매출 성장률</h4><p class="sub">CY3Q26까지 · 분기 매출 YoY(%) · 냉동은 다섯 분기 연속 증가</p></figcaption><div class="lg"><span><i class="" style="background:var(--cni)"></i>냉동</span><span><i class="" style="background:var(--grn)"></i>조립</span><span><i class="" style="background:var(--resi2)"></i>카라멜</span><span><i class="" style="background:var(--resi)"></i>건조</span></div><div class="chart" id="c3" style="height:300px"></div><p class="src">출처: <span class="tag">[공시 결산단신]</span> 분기는 누계 차분(계산)</p></figure></section>
+<section class="sec" id="s1"><div class="band"><span class="bn">01</span>성장</div><h3 class="st">냉동 참마와 보충제 수탁이 끌었다</h3><p class=lead1>반기 매출 증가 6.5억 엔 가운데 70%가 냉동·조립에서 나왔다</p><figure class="fig"><figcaption><span class="fn">그림 4</span><h4>반기 매출 증가 기여</h4><p class="sub">CY3Q26 누계(26.4~9) · 전년 반기 대비 증가액(억 엔) · 합계 +6.5억 엔</p></figcaption><div class="lg"><span><i class="" style="background:var(--pos)"></i>증가액</span></div><div class="chart" id="c4" style="height:300px"></div><p class="src">출처: <span class="tag">[공시 결산단신]</span> 전년 반기는 증감률에서 역산(계산)</p></figure><div class="pr"><p class="pp">이번 반기(26.4~9) 매출은 102.5억 엔으로 6.8% 늘었다. 증가분 6.5억 엔 중 <b>냉동 제품</b> 2.75억, <b>조립 제품류</b> 1.85억으로 두 제품군이 70%를 만들었다. 반대로 매출 비중이 가장 큰 건조 제품류는 0.7% 느는 데 그쳤다. 회사 성장의 무게중심이 분말 본업에서 냉동·수탁 쪽으로 옮겨 온 반기다. <span class="s3src">참고: 계산 · 공시 결산단신</span></p></div><div class="pr"><p class="pp">냉동은 갈아서 얼린 <b>참마</b>가 중심이다. 편의점 덮밥·소바 체인의 토핑으로 쓰이는데, 참마는 껍질을 벗기고 갈면 손이 가렵고 금방 갈변해 매장에서 직접 손질하기 어렵다. 그래서 공장에서 갈아 소포장으로 얼린 제품을 받아 해동만 하는 방식이 퍼졌다. 냉동은 FY3/25에 중국 냉동 자회사가 지분법으로 빠지며 −24.5%까지 줄었지만, 국내 참마 확판으로 CY3Q25부터 다섯 분기 연속 전년을 넘었다. <span class="s3src">참고: 공시 결산단신 · 편집 판단</span></p></div><div class="pr"><p class="pp">조립은 가루를 섞어 과립·정제로 만드는 공정이다. 이 공정으로 스포츠 보충제(프로틴) 회사의 제품을 대신 만들어 주는 <b>수탁가공</b>이 FY3/25 −13.9%에서 회복했다. 거래처의 재고 조정이 끝나고 주문이 돌아온 영향으로 보인다. 다만 프로틴 원료 수입 단가가 2025년 28% 올라 물량이 늘어도 마진은 넉넉하지 않다. <span class="s3src">참고: 편집 판단 · 설명회</span></p></div><div class="pr"><p class="pp">카라멜은 <b>베트남</b>·중국 자회사 판매가 늘며 +5.2%로 돌아섰다. 해외 매출 비중은 중국 사업 정리로 3.8%에서 2.1%까지 줄었다가 FY3/27 1Q 3.0%로 다시 오르는 중이다. 해외는 아직 작아 회사 전체 성장을 바꿀 <b>크기</b>는 아니다. <span class="s3src">참고: 설명회 · 편집 판단</span></p></div><dl class="s3terms"><p class="s3th">용어 풀이</p><div><dt>수탁가공</dt><dd>고객이 원료나 처방을 주면 가공만 해 주고 가공비를 받는 일. 자사 상품보다 단가는 낮지만 재고 부담이 적다</dd></div><div><dt>지분법</dt><dd>지분 50% 이하 회사의 매출은 합치지 않고 이익 중 내 몫만 영업외로 잡는 회계 방식</dd></div></dl></section><section class="sec" id="s2"><div class="band"><span class="bn">02</span>BM</div><h3 class="st">식품 회사 처방 속에 들어가는 소재</h3><p class=lead1>완제품 원가에서 작은 몫이라 한번 채택되면 오래 납품한다</p><h5>대표 제품</h5><div class="s3prods"><figure class="s3prod"><div class="s3noimg">사진 없음</div><figcaption><b>분말차</b><span class="s3why">건조 제품류 71.4억 엔(FY3/26, +2.7%) · 급차기용 5개월 연속 두 자릿수 증가</span><span class="s3pw">녹차·말차를 가루로 만든 것. 사무실·외식점 급차기에 넣어 물만 부으면 차가 된다</span><span class=s3pm>건조 제품류</span></figcaption></figure><figure class="s3prod"><div class="s3noimg">사진 없음</div><figcaption><b>카라멜 색소</b><span class="s3why">카라멜 제품 44.9억 엔 중 착색용이 분기 7.3억 엔(FY3/27 1Q)</span><span class="s3pw">당을 가열해 만든 갈색 색소. 콜라·간장·카레 색을 맞춘다</span><span class=s3pm>착색용</span></figcaption></figure><figure class="s3prod"><div class="s3noimg">사진 없음</div><figcaption><b>냉동 참마</b><span class="s3why">반기 19.4억 엔, +16.5%로 가장 빠름</span><span class="s3pw">갈아서 소포장으로 얼린 참마. 덮밥·소바 토핑용</span><span class=s3pm>냉동 제품</span></figcaption></figure><figure class="s3prod"><div class="s3noimg">사진 없음</div><figcaption><b>스포츠 보충제 수탁</b><span class="s3why">반기 18.1억 엔, +11.4%</span><span class="s3pw">프로틴 가루를 배합해 과립·정제로 만들어 주는 가공</span><span class=s3pm>조립 제품류</span></figcaption></figure></div><p class="s3pcr">사진: 회사 공식 사진은 확인하지 못해 싣지 않음(홈페이지 주소 미확인)</p><div class="pr"><p class="pp">나머지 제품은 규모가 작다. 건조 제품류에는 분말차 말고도 <b>분말 간장·된장</b>, 동결 건조 야채가 있어 즉석면 수프나 컵 된장국에 들어간다. 카라멜 제품 중 일반 식품용(분기 4.2억 엔)은 푸딩·아이스크림에 쓰는 소스·과립이다. 냉동에는 도라야키 같은 <b>냉동 화과자</b>도 있고, 기타는 자회사 수탁가공이다. <span class="s3src">참고: 설명회 · 공시 결산단신</span></p></div><div class="pr"><p class="pp">식품 회사가 이걸 사는 이유부터 보자. 컵라면 회사는 수프에 간장 맛을 넣어야 하는데 액체 간장은 무겁고 상하기 쉬워 컵에 넣을 수 없다. 그래서 가루가 필요하고, 가루로 만들려면 <b>분무 건조</b> 설비와 맛이 날아가지 않게 하는 노하우가 있어야 한다. 이 설비를 직접 갖추기엔 물량이 작으니 전문 공장에 맡긴다. 결국 고객이 사는 것은 가루 자체보다 <b>유통기한·무게·맛 유지</b>를 동시에 해결하는 가공 능력이다. </p></div><dl class="s3terms"><p class="s3th">용어 풀이</p><div><dt>분무 건조</dt><dd>액체를 뜨거운 바람 속에 안개처럼 뿌려 순식간에 가루로 만드는 방법</dd></div><div><dt>급차기</dt><dd>사무실·식당에 두고 가루차와 물을 섞어 차를 내주는 기계</dd></div></dl><h5>카라멜 색소가 콜라에 들어가기까지</h5><div class="tw s3card"><table><thead><tr><th>단계</th><th>하는 일</th><th>왜 필요</th></tr></thead><tbody><tr><td data-l="단계" class="">① 처방</td><td data-l="하는 일" class="">음료 회사가 원하는 색 농도를 정함</td><td data-l="왜 필요" class="">색이 제품마다 다르면 소비자가 이상하게 느낌</td></tr><tr><td data-l="단계" class="">② 시험</td><td data-l="하는 일" class="">회사가 시료를 만들어 색·안정성을 맞춤</td><td data-l="왜 필요" class="">산성 음료에서 색이 침전되면 안 됨</td></tr><tr><td data-l="단계" class="">③ 채택</td><td data-l="하는 일" class="">고객 처방서에 품번이 고정됨</td><td data-l="왜 필요" class="">바꾸려면 다시 시험·승인 필요</td></tr><tr><td data-l="단계" class="">④ 반복 납품</td><td data-l="하는 일" class="">몇 년씩 같은 제품을 정기 공급</td><td data-l="왜 필요" class="">완제품 원가에서 비중이 작아 굳이 안 바꿈</td></tr></tbody></table></div><p class="pat"><b>패턴:</b> 한번 처방에 들어가면 바꾸는 비용이 커서 매출이 반복된다<span class="ej">(편집 판단)</span></p><div class="pr"><p class="pp">돈의 흐름은 단순하다. 자사 상품(매출의 72%)은 kg당 단가로 팔고, <b>수탁 상품</b>(28%)은 가공비를 받는다. 원가는 찻잎·참마·당류·우유 단백질 같은 농산 원료와 건조기 연료비가 대부분이라, 원료가 오르면 고객과 협상해 납품가를 고친다. 그 협상이 한두 분기 늦어 FY3/23 영업이익이 2.7억 엔까지 떨어졌고, 이후 <b>가격 전가</b>로 매출총이익률이 19.1%에서 22.4%로 돌아왔다. <span class="s3src">참고: 설명회 · 공시 결산단신 · 편집 판단</span></p></div><dl class="s3terms"><p class="s3th">용어 풀이</p><div><dt>가격 전가</dt><dd>원가가 오른 만큼 납품가를 올려 고객에게 넘기는 것</dd></div><div><dt>4-MEI</dt><dd>카라멜 색소를 만들 때 생기는 부산물. 미국 캘리포니아주가 발암 의심 물질로 지정해 적게 나오는 제품 경쟁이 붙었다</dd></div></dl></section><section class="sec" id="s3"><div class="band"><span class="bn">03</span>산업</div><h3 class="st">원료 인플레이션 속 값 올리기 싸움</h3><p class=lead1>수요는 순하지만 원가가 이익을 흔드는 성숙 산업</p><div class="pr"><p class="pp">식품 소재는 고성장 산업이 아니다. 일본 가공식품 시장은 인구 감소로 물량이 늘지 않고, 회사 매출도 7년째 <b>184억~207억 엔</b> 사이에 머물렀다. 그래도 수요 쪽에서 두 가지 순풍이 있다. 하나는 맞벌이·1인 가구가 늘며 편의점 덮밥이나 냉동 반찬처럼 <b>조리를 줄인 식품</b>이 커지는 흐름이고, 다른 하나는 해외 말차 붐이다. <span class="s3src">참고: 공시 결산단신 · 편집 판단</span></p></div><div class="pr"><p class="pp">말차는 수요에는 순풍, 원가에는 역풍이다. 일본 녹차 수출은 2025년도 847억 엔으로 두 배 넘게 늘었고 물량의 약 70%가 가루차였다. 그 바람에 말차 원료인 <b>텐차</b> 출하 단가는 kg당 8,562엔으로 두 배 넘게 뛰었다. 분말차를 파는 회사로서는 판매는 늘어도 <b>원료 확보</b> 경쟁이 붙는 셈이다. <span class="s3src">참고: 언론</span></p></div><dl class="s3terms"><p class="s3th">용어 풀이</p><div><dt>텐차</dt><dd>그늘에서 키운 찻잎을 비비지 않고 말린 것. 이것을 맷돌로 갈면 말차가 된다</dd></div></dl><figure class="fig"><figcaption><span class="fn">그림 5</span><h4>매출총이익률과 영업이익률</h4><p class="sub">CY3Q26 누계까지 · 연간(%) · 가격 전가로 FY3/23 바닥에서 회복</p></figcaption><div class="lg"><span><i class="" style="background:var(--resi)"></i>매출총이익률</span><span><i class="" style="background:var(--cni)"></i>영업이익률</span></div><div class="chart" id="c5" style="height:300px"></div><p class="src">출처: <span class="tag">[공시 결산단신]</span></p></figure><div class="pr"><p class="pp">사이클로 보면 원가 급등 국면(FY3/23)을 지나 <b>전가가 끝난 회복기</b>에 있다. 판관비가 분기 8.3억~8.9억 엔으로 3년째 거의 고정이라, 매출이 조금만 늘어도 <b>영업이익률</b>이 오른다. 다음 변수는 찻잎·프로틴 원료가 한 번 더 뛰느냐다. <span class="s3src">참고: 공시 결산단신 · 편집 판단</span></p></div></section><section class="sec" id="s4"><div class="band"><span class="bn">04</span>경쟁</div><h3 class="st">작지만 성장은 피어 수준</h3><p class=lead1>규모는 피어의 10분의 1 이하, 이번 분기 성장률은 중간</p><h5>경쟁사 비교</h5><div class="tw s3card"><table><thead><tr><th>회사</th><th>나라</th><th>주력</th><th>다른 점</th><th>CY3Q26 매출 YoY</th><th>영업이익률</th></tr></thead><tbody><tr><td data-l="회사" class="">센바당화공업</td><td data-l="나라" class="">일본</td><td data-l="주력" class="">분말차·카라멜 색소·냉동 참마</td><td data-l="다른 점" class="">제품군 다섯 개, 매출 200억 엔 규모</td><td data-l="CY3Q26 매출 YoY" class="n pos">+6.5%</td><td data-l="영업이익률" class="n">5.3%</td></tr><tr><td data-l="회사" class="">리켄비타민</td><td data-l="나라" class="">일본</td><td data-l="주력" class="">식품 개량제·해조 소재</td><td data-l="다른 점" class="">규모 약 10배, 개량제 중심</td><td data-l="CY3Q26 매출 YoY" class="n pos">+4.4%</td><td data-l="영업이익률" class="n">5.5%</td></tr><tr><td data-l="회사" class="">하세가와향료</td><td data-l="나라" class="">일본</td><td data-l="주력" class="">향료·조미 소재</td><td data-l="다른 점" class="">향 설계 기술로 단가 높음</td><td data-l="CY3Q26 매출 YoY" class="n pos">+7.3%</td><td data-l="영업이익률" class="n">8.8%</td></tr><tr><td data-l="회사" class="">다카사고향료</td><td data-l="나라" class="">일본</td><td data-l="주력" class="">향료(식품·향수)</td><td data-l="다른 점" class="">해외 비중 큼</td><td data-l="CY3Q26 매출 YoY" class="n pos">+11.9%</td><td data-l="영업이익률" class="n">3.6%</td></tr><tr><td data-l="회사" class="">쇼와산업</td><td data-l="나라" class="">일본</td><td data-l="주력" class="">전분·당화·제분</td><td data-l="다른 점" class="">원료 대량 가공</td><td data-l="CY3Q26 매출 YoY" class="n pos">+4.1%</td><td data-l="영업이익률" class="n">2.0%</td></tr><tr><td data-l="회사" class="">이케다당화</td><td data-l="나라" class="">일본(비상장)</td><td data-l="주력" class="">카라멜 색소</td><td data-l="다른 점" class="">색소 직접 경쟁</td><td data-l="CY3Q26 매출 YoY" class="">미공시</td><td data-l="영업이익률" class="">미공시</td></tr></tbody></table></div><p class="pat"><b>패턴:</b> 성장률은 피어 중간, 이익률도 중간이다. 규모 차이에 비해 수익성은 밀리지 않는다<span class="ej">(편집 판단)</span></p><p class="nref"><a href="#en1">메모 1 ↓</a></p><p class="s3srcp"><span class="s3src">참고: 계산</span></p><figure class="fig"><figcaption><span class="fn">그림 6</span><h4>성장률과 영업이익률</h4><p class="sub">CY3Q26 분기 · x = 매출 YoY(%), y = 영업이익률(%)</p></figcaption><div class="lg"></div><div class="chart" id="c6" style="height:300px"></div><p class="src">출처: <span class="tag">[공시 결산단신]</span> 각 사 분기 단독(계산)</p></figure><div class="pr"><p class="pp">이 업계는 <b>기술과 고객 기반</b>으로 갈린다. 향료 회사는 향을 설계하는 기술로 단가를 올려 이익률이 높고, 쇼와산업처럼 전분을 대량 가공하는 회사는 규모로 버티지만 이익률이 낮다. 센바당화는 그 사이에서 분말화·카라멜화라는 좁은 공정 노하우로 <b>틈새</b>를 지킨다. <span class="s3src">참고: 공시 결산단신 · 편집 판단</span></p></div><div class="pr"><p class="pp">지금은 다 같이 가는 국면이다. 이번 분기 피어 다섯 곳 모두 매출이 4~12% 늘었고, <b>원가 전가</b>가 업계 전체에서 이뤄졌다. 센바당화만의 특별한 점은 <b>냉동 참마</b>처럼 피어가 하지 않는 품목에서 두 자릿수 성장이 나온다는 것이다. <span class="s3src">참고: 편집 판단</span></p></div></section><section class="sec" id="s5"><div class="band"><span class="bn">05</span>투자</div><h3 class="st">조리를 줄이는 소비가 냉동을 키운다</h3><h5 class="subh2">핵심 포인트: 조리 생략 수요</h5><div class="pr"><p class="pp">지금 잘 팔리는 이유는 <b>조리를 줄이는 소비</b>다. 매장 인력이 부족한 외식·편의점은 손이 많이 가는 참마 손질을 매장에서 할 수 없고, 맞벌이 가구는 덮밥·소바를 사서 먹는다. 그래서 공장에서 미리 갈아 얼린 참마처럼 <b>해동만</b> 하면 되는 소재 수요가 커진다. <span class="s3src">참고: 편집 판단</span></p></div><div class="pr"><p class="pp">근거는 숫자로 보인다. <b>냉동 제품</b>은 CY3Q25부터 다섯 분기 연속 늘었고 이번 반기 +16.5%로 증가분의 42%를 만들었다. 급차기용 <b>분말차</b>도 5개월 연속 두 자릿수 증가다. 두 품목 모두 사람 손을 줄이려는 수요를 받는다. <span class="s3src">참고: 공시 결산단신 · 설명회</span></p></div><div class="pr"><p class="pp">이 흐름이 이어지면 하반기 함의 영업이익 4.3억 엔(전년 하반기 4.8억)은 낮아 보이고, 2단계의 <b>가이던스 PER</b> 11.9배에도 여유가 생긴다. 확인할 숫자는 <b>3분기 결산(2027년 2월 중순)</b>의 냉동 제품 YoY와 매출총이익률 24% 유지 여부다. <span class="s3src">참고: 편집 판단</span></p></div><h5 class="subh2">리스크: 원료값 재급등</h5><div class="pr"><p class="pp">가장 큰 위협은 <b>원료값 재급등</b>이다. 매출원가율이 78%라 원가가 2%만 더 올라도 영업이익 9.5억 엔의 3분의 1이 사라질 수 있다. 찻잎은 말차 붐으로 두 배, 프로틴 원료는 28% 올랐고, <b>납품가 협상</b>은 한두 분기 늦다. <span class="s3src">참고: 계산 · 설명회</span></p></div><div class="pr"><p class="pp">신호는 이미 있다. FY3/27 1Q 원가율이 78.3%로 0.6%p 올랐고 값 올리기 효과 1.31억 엔이 원·연료비 증가 2.35억 엔을 다 메우지 못했다. 조기 경보는 <b>분기 매출총이익률</b>, 무역통계 녹차·유청 단백질 수입 단가(매월 말 +4주), 엔화 환율이다. <span class="s3src">참고: 설명회</span></p></div></section>
+<section class="endnotes"><h2>자료·계산 메모</h2><ol><li id="en1"><b>경쟁</b>영업이익률은 해당 분기 단독</li></ol></section><section class="sources"><h2>출처</h2><ol><li>2027년 3월기 2분기 결산단신(26.11.13) https://www.release.tdnet.info/inbs/140120261113577988.pdf</li><li>2027년 3월기 1분기 결산 보충 설명 자료(26.8.7) https://www2.jpx.co.jp/disc/29160/140120260807514076.pdf</li><li>2026년 3월기 결산단신(26.5.15) https://www2.jpx.co.jp/disc/29160/140120260515536185.pdf</li><li>Nation Thailand 녹차 수출 기사 https://www.nationthailand.com/blogs/news/world/40065730</li><li>Adnkronos 말차 원료값 기사 https://english.adnkronos.com/?p=27578</li><li>캘리포니아 OEHHA 4-MEI https://oehha.ca.gov/proposition-65/chemicals/4-methylimidazole</li><li>2단계 리포트(26.11.13) 피어 결산단신</li></ol><h5>확인하지 못한 것</h5><ul class=gaps><li>지역별 매출 공시 없음 — 해외 비중만 사용</li><li>제품별 이익 미공시</li><li>회사 공식 제품 사진 확보 실패(홈페이지 주소 확인 불가)</li><li>냉동 참마·분말차 단독 매출 미공시 — 제품군 숫자로 대신</li><li>냉동 소재·분말차 국내 시장 규모 통계 미확인</li></ul><p class="disc">추정·결론은 편집 판단이며 투자 권유가 아닙니다.</p></section></main>
+<div id="tip"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script><script>window.__CH=[{"kind": "line", "labels": ["FY3/24", "FY3/25", "FY3/26", "CY3Q26 누계"], "series": [{"name": "건조 (71억 엔)", "data": [4.5, 12.4, 2.7, 0.7], "color": "resi"}, {"name": "카라멜 (45억 엔)", "data": [5.2, 6.7, -0.5, 5.2], "color": "resi2"}, {"name": "조립 (35억 엔)", "data": [-5.7, -13.9, 8.8, 11.4], "color": "grn"}, {"name": "냉동 (30억 엔)", "data": [7.2, -24.5, 4.9, 16.5], "color": "cni"}, {"name": "기타 (13억 엔)", "data": [1.2, -3.5, 12.0, 9.4], "color": "oth"}], "unit": "%", "y2_unit": null, "events": null, "log": null, "zero": null, "points": null, "reg": null, "x_title": null, "y_title": null, "stacked": null, "end_labels": null, "height": null, "bands": null, "phases": null, "marks": null, "id": "c1"}, {"kind": "line", "labels": ["FY3/25 1~3Q", "FY3/26 1~3Q", "FY3/27 1Q"], "series": [{"name": "해외 (FY3/27 1Q 1.5억 엔)", "data": [3.8, 2.1, 3.0], "color": "resi"}], "unit": "%", "y2_unit": null, "events": null, "log": null, "zero": null, "points": null, "reg": null, "x_title": null, "y_title": null, "stacked": null, "end_labels": null, "height": null, "bands": null, "phases": null, "marks": null, "id": "c2"}, {"kind": "line", "labels": ["CY4Q24", "CY1Q25", "CY2Q25", "CY3Q25", "CY4Q25", "CY1Q26", "CY2Q26", "CY3Q26"], "series": [{"name": "냉동", "data": [-24.9, -31.0, -9.6, 15.2, 8.5, 9.1, 17.5, 15.7], "color": "cni"}, {"name": "조립", "data": [-7.5, -13.9, 8.8, 6.6, 11.0, 8.0, 11.4, 11.6], "color": "grn"}, {"name": "카라멜", "data": [8.6, 1.9, -0.6, -1.4, -1.5, 1.9, 6.0, 4.3], "color": "resi2"}, {"name": "건조", "data": [11.4, 7.4, 8.2, 0.3, -0.6, 3.5, -0.3, 1.8], "color": "resi"}], "unit": "%", "y2_unit": null, "events": null, "log": null, "zero": null, "points": null, "reg": null, "x_title": null, "y_title": null, "stacked": null, "end_labels": null, "height": null, "bands": null, "phases": null, "marks": null, "id": "c3"}, {"kind": "bar", "labels": ["냉동", "조립", "카라멜", "기타", "건조"], "series": [{"name": "증가액", "data": [2.75, 1.85, 1.14, 0.56, 0.25], "color": "pos"}], "unit": "억 엔", "y2_unit": null, "events": null, "log": null, "zero": null, "points": null, "reg": null, "x_title": null, "y_title": null, "stacked": null, "end_labels": null, "height": null, "bands": null, "phases": null, "marks": null, "id": "c4"}, {"kind": "line", "labels": ["FY3/23", "FY3/24", "FY3/25", "FY3/26", "CY3Q26 누계"], "series": [{"name": "매출총이익률", "data": [19.1, 21.9, 22.2, 22.4, 22.0], "color": "resi"}, {"name": "영업이익률", "data": [1.4, 3.6, 4.0, 4.6, 5.1], "color": "cni"}], "unit": "%", "y2_unit": null, "events": null, "log": null, "zero": null, "points": null, "reg": null, "x_title": null, "y_title": null, "stacked": null, "end_labels": null, "height": null, "bands": null, "phases": null, "marks": null, "id": "c5"}, {"kind": "scatter", "labels": null, "series": null, "unit": null, "y2_unit": null, "events": null, "log": null, "zero": null, "points": [{"label": "센바당화", "x": 6.5, "y": 5.3}, {"label": "리켄비타민", "x": 4.4, "y": 5.5}, {"label": "하세가와", "x": 7.3, "y": 8.8}, {"label": "다카사고", "x": 11.9, "y": 3.6}, {"label": "쇼와산업", "x": 4.1, "y": 2.0}], "reg": null, "x_title": "매출 YoY(%)", "y_title": "영업이익률(%)", "stacked": null, "end_labels": null, "height": null, "bands": null, "phases": null, "marks": null, "id": "c6"}];</script><script>
+(function(){
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const tip=document.getElementById('tip');
+const fmt=(v,u)=>{if(v==null||isNaN(v))return '–';const a=Math.abs(v);let s=a>=100?Math.round(v).toLocaleString('ko-KR'):a>=10?v.toFixed(1):v.toFixed(2);if(s.includes('.'))s=s.replace(/0+$/,'').replace(/\.$/,'');return s.replace('-','−')+(u||'')};
+const show=(e,h)=>{tip.innerHTML=h;tip.style.display='block';const w=tip.offsetWidth;let x=e.clientX+14;if(x+w>innerWidth-8)x=e.clientX-w-14;tip.style.left=x+'px';tip.style.top=(e.clientY+14)+'px'};
+const hide=()=>{tip.style.display='none'};
+function draw(s){
+ const el=document.getElementById(s.id);if(!el||!window.d3)return;el.innerHTML='';
+ const W=el.clientWidth,H=el.clientHeight;const ser=s.series||[];const hasY2=ser.some(d=>d.axis==='y2');
+ const m={t:(s.phases&&s.phases.length?34:14),r:(hasY2?54:16)+(s.end_labels?120:0),b:30+((s.marks&&s.marks.length)?(s.marks.length>5?80:52):0),l:56+(ser.some(d=>d.axis!=='y2'&&(d.data||[]).some(v=>v!=null&&Math.abs(v)>=1000))?14:0)};/* 1,000 이상 축 숫자 잘림 방지 */
+ const svg=d3.select(el).append('svg').attr('width',W).attr('height',H);
+ const col=c=>css('--'+(c||'resi'))||c;
+ if(s.kind==='scatter'){
+  const P=s.points||[];const x=d3.scaleLinear().domain(d3.extent(P,d=>d.x)).nice().range([m.l,W-m.r]);
+  const y=d3.scaleLinear().domain(d3.extent(P,d=>d.y)).nice().range([H-m.b,m.t]);
+  svg.append('g').attr('class','grid').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W-m.l-m.r)).tickFormat('')).select('.domain').remove();
+  svg.append('g').attr('class','ax').attr('transform',`translate(0,${H-m.b})`).call(d3.axisBottom(x).ticks(6).tickFormat(v=>fmt(v,s.x_unit||'')));
+  svg.append('g').attr('class','ax').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(v=>fmt(v,s.unit||'')));
+  if(s.x_title)svg.append('text').attr('class','alab').attr('x',W-m.r).attr('y',H-4).attr('text-anchor','end').text(s.x_title);
+  if(s.y_title)svg.append('text').attr('class','alab').attr('x',m.l).attr('y',m.t-2).text(s.y_title);
+  if(s.reg){const [x0,x1]=x.domain();svg.append('line').attr('class','fit').attr('x1',x(x0)).attr('x2',x(x1)).attr('y1',y(s.reg.a+s.reg.b*x0)).attr('y2',y(s.reg.a+s.reg.b*x1));}
+  P.forEach(p=>{const g=svg.append('g');g.append('circle').attr('cx',x(p.x)).attr('cy',y(p.y)).attr('r',p.now?6:4.5).attr('fill',p.now?col('cni'):p.est?'none':col('resi')).attr('stroke',col(p.now?'cni':'resi')).attr('stroke-width',1.5);
+   g.append('text').attr('class','dl').attr('x',x(p.x)+7).attr('y',y(p.y)-6).attr('fill',col(p.now?'cni':'muted')).text(p.label||'');
+   g.on('mousemove',e=>show(e,`<b>${p.label||''}</b><br>${s.x_title||'x'}: ${fmt(p.x,s.x_unit||'')}<br>${s.y_title||'y'}: ${fmt(p.y,s.unit||'')}${p.note?'<div class=tn>'+p.note+'</div>':''}`)).on('mouseleave',hide);});
+  return;}
+ const L=s.labels||[];const n=L.length;const bars=ser.filter(d=>(d.type||(s.kind==='bar'||s.kind==='stacked'||(s.kind==='combo'&&d.axis!=='y2')?'bar':'line'))==='bar');
+ const isBar=d=>(d.type||(s.kind==='bar'||s.kind==='stacked'||(s.kind==='combo'&&d.axis!=='y2')?'bar':'line'))==='bar';
+ const x=d3.scaleBand().domain(d3.range(n)).range([m.l,W-m.r]).padding(bars.length?0.22:0);const cx=i=>x(i)+x.bandwidth()/2;
+ const y1s=ser.filter(d=>d.axis!=='y2');let vals=[];
+ if(s.stacked){for(let i=0;i<n;i++){let p=0,q=0;y1s.forEach(d=>{const v=d.data[i]||0;v>=0?p+=v:q+=v});vals.push(p,q)}}else y1s.forEach(d=>d.data.forEach(v=>v!=null&&vals.push(v)));
+ (s.bands||[]).forEach(b=>b.data.forEach(v=>v!=null&&vals.push(v)));
+ let ext=d3.extent(vals);if(s.zero!==false&&!s.log){ext=[Math.min(0,ext[0]),Math.max(0,ext[1])]}
+ const y=(s.log?d3.scaleLog().domain([Math.max(ext[0]*0.9,1e-6),ext[1]*1.08]):d3.scaleLinear().domain(ext).nice()).range([H-m.b,m.t]);
+ let y2=null;if(hasY2){const v2=[];ser.filter(d=>d.axis==='y2').forEach(d=>d.data.forEach(v=>v!=null&&v2.push(v)));let e2=d3.extent(v2);y2=d3.scaleLinear().domain(e2).nice().range([H-m.b,m.t]);}
+ svg.append('g').attr('class','grid').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W-m.l-m.r)).tickFormat('')).select('.domain').remove();
+ if(!s.log&&y.domain()[0]<0)svg.append('line').attr('class','zero').attr('x1',m.l).attr('x2',W-m.r).attr('y1',y(0)).attr('y2',y(0));
+ const step=Math.max(1,Math.ceil(n/(W<560?6:11)));
+ svg.append('g').attr('class','ax').attr('transform',`translate(0,${H-m.b})`).call(d3.axisBottom(x).tickValues(d3.range(0,n,step)).tickFormat(i=>L[i]));
+ svg.append('g').attr('class','ax').attr('transform',`translate(${m.l},0)`).call(s.log?d3.axisLeft(y).tickValues(y.domain()[1]/y.domain()[0]<10?(()=>{const [d0,d1]=y.domain(),C=[1,1.2,1.5,2,2.5,3,4,5,6,7,8,9],T=[];for(let e=Math.floor(Math.log10(d0));e<=Math.ceil(Math.log10(d1));e++)C.forEach(c=>{const v=c*Math.pow(10,e);if(v>=d0&&v<=d1)T.push(v)});return T.length>9?T.filter((v,i)=>i%2===0):T})():y.ticks(6).filter(v=>{const k=Math.round(v/Math.pow(10,Math.floor(Math.log10(v))));return k===1||k===2||k===5})).tickFormat(v=>fmt(v,s.unit||'')):d3.axisLeft(y).ticks(5).tickFormat(v=>fmt(v,s.unit||'')));
+ if(y2)svg.append('g').attr('class','ax').attr('transform',`translate(${W-m.r},0)`).call(d3.axisRight(y2).ticks(5).tickFormat(v=>fmt(v,s.y2_unit||'')));
+ if(s.y_title)svg.append('text').attr('class','alab').attr('x',m.l).attr('y',m.t-3).text(s.y_title);
+ (s.bands||[]).forEach(b=>{svg.append('path').attr('class','ln').attr('stroke',col(b.color||'oth')).attr('stroke-dasharray','4 3').attr('stroke-width',1.2)
+   .attr('d',d3.line().defined(v=>v!=null).x((v,i)=>cx(i)).y(v=>y(v)).curve(d3.curveStepAfter)(b.data));});
+ (s.phases||[]).forEach((p,pi)=>{const x0=x(p.from),x1=x(Math.min(p.to,n-1))+x.bandwidth();const c=p.kind==='rise'?col('pos'):p.kind==='fall'?col('neg'):col('oth');
+   svg.append('rect').attr('x',x0).attr('width',Math.max(1,x1-x0)).attr('y',m.t).attr('height',H-m.t-m.b).attr('fill',c).attr('opacity',.07);
+   const full=p.label||'';const num=(full.match(/^[①-⑩\d]+/)||[String(pi+1)])[0];const wd=x1-x0;const est=full.length*11;
+   svg.append('text').attr('class','phl').attr('x',x0+4).attr('y',m.t-20+(pi%2)*13).attr('fill',c).text(est<wd-6?full:num);});
+ if(s.marks&&s.marks.length){const R=s.marks.length>5?4:2;const spans=Array.from({length:R},()=>[]);const lines=[];const plan=[];let ok=true;
+  const wd=t=>[...(t||'')].reduce((a,ch)=>a+(ch.charCodeAt(0)>12000?11:6.5),0)+14;
+  const hit=(a0,a1,sp)=>sp.some(([b0,b1])=>a0<b1&&b0<a1);
+  const MK=s.marks.filter(mk=>mk.i!=null&&mk.i<n).slice().sort((a,b)=>a.i-b.i);
+  MK.forEach(mk=>{const X=cx(mk.i),w=wd(mk.text),a0=X-w/2,a1=X+w/2;let r=-1;
+   for(let k=0;k<R;k++){if(hit(a0,a1,spans[k]))continue;if(spans.slice(0,k).some(sp=>hit(X-2,X+2,sp)))continue;if(lines.some(l=>l.r>k&&l.x>a0&&l.x<a1))continue;r=k;break;}
+   if(r<0){ok=false;return;}spans[r].push([a0,a1]);lines.push({x:X,r});plan.push({X,r,t:mk.text||''});});
+  if(ok){plan.forEach(q=>{svg.append('line').attr('class','mkt').attr('x1',q.X).attr('x2',q.X).attr('y1',H-m.b+20).attr('y2',H-m.b+30+q.r*13);
+    svg.append('text').attr('class','mkl').attr('x',q.X).attr('y',H-m.b+41+q.r*13).attr('text-anchor','middle').text(q.t);});}
+  else{ // 너무 몰려 있으면 축 아래엔 번호만, 이름은 차트 아래 목록으로
+   let last=[-1e9,-1e9];const nums='①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮';const items=[];
+   MK.forEach((mk,k)=>{const X=cx(mk.i);let r=X-last[0]>=16?0:1;last[r]=X;
+    svg.append('line').attr('class','mkt').attr('x1',X).attr('x2',X).attr('y1',H-m.b+20).attr('y2',H-m.b+28+r*14);
+    svg.append('text').attr('class','mkl').attr('x',X).attr('y',H-m.b+40+r*14).attr('text-anchor','middle').text(nums[k]||String(k+1));
+    items.push(`<span><b>${nums[k]||k+1}</b> ${L[mk.i]||''} ${mk.text||''}</span>`);});
+   let lg=el.parentNode.querySelector('.mkleg');if(!lg){lg=document.createElement('div');lg.className='mkleg';el.after(lg);}lg.innerHTML=items.join('');}
+ }
+ // 막대
+ const bw=s.stacked?x.bandwidth():x.bandwidth()/Math.max(1,bars.length);
+ const base=d3.range(n).map(()=>[0,0]);
+ bars.forEach((d,k)=>{d.data.forEach((v,i)=>{if(v==null)return;const est=d.est_from!=null&&i>=d.est_from;let y0,y1;
+   const yy=d.axis==='y2'?y2:y;const yb=Math.max(0,yy.domain()[0]);
+   if(s.stacked){const b=base[i];if(v>=0){y0=b[0];y1=b[0]+v;b[0]=y1}else{y0=b[1];y1=b[1]+v;b[1]=y1}}else{y0=yb;y1=v}const xx=s.stacked?x(i):x(i)+k*bw;
+   svg.append('rect').attr('x',xx).attr('width',Math.max(1,bw-1)).attr('y',yy(Math.max(y0,y1))).attr('height',Math.abs(yy(y0)-yy(y1))).attr('fill',col(d.color)).attr('opacity',est?.32:1)
+    .attr('stroke',est?col(d.color):'none').attr('stroke-dasharray',est?'3 2':null);});});
+ // 선
+ ser.filter(d=>!isBar(d)).forEach(d=>{const yy=d.axis==='y2'?y2:y;const e=d.est_from;const pts=d.data.map((v,i)=>[i,v]);
+   const line=d3.line().defined(p=>p[1]!=null).x(p=>cx(p[0])).y(p=>yy(p[1]));
+   const act=e!=null?pts.slice(0,e):pts;svg.append('path').attr('class','ln').attr('stroke',col(d.color)).attr('stroke-width',d.width||(d.thin?1.3:2)).attr('stroke-dasharray',d.dash?'5 4':null).attr('d',line(act));
+   if(e!=null){svg.append('path').attr('class','ln').attr('stroke',col(d.color)).attr('stroke-dasharray','5 4').attr('opacity',.7).attr('d',line(pts.slice(Math.max(0,e-1))));}
+   if(s.kind!=='price'&&n<=40)pts.forEach(p=>{if(p[1]==null)return;svg.append('circle').attr('cx',cx(p[0])).attr('cy',yy(p[1])).attr('r',2.6).attr('fill',e!=null&&p[0]>=e?css('--paper'):col(d.color)).attr('stroke',col(d.color))});});
+ // 선 끝 이름표
+ if(s.end_labels){const E=[];ser.filter(d=>!isBar(d)).forEach(d=>{let k=d.data.length-1;while(k>=0&&d.data[k]==null)k--;if(k<0)return;const yy=d.axis==='y2'?y2:y;E.push({y:yy(d.data[k]),x:cx(k),c:col(d.color),t:d.name+' '+fmt(d.data[k],d.unit||s.unit||'')})});
+   (s.bands||[]).forEach(b=>{let k=b.data.length-1;while(k>=0&&b.data[k]==null)k--;if(k<0)return;E.push({y:y(b.data[k]),x:cx(k),c:col(b.color||'oth'),t:b.name+' '+fmt(b.data[k],s.unit||'')})});
+   E.sort((a,b)=>a.y-b.y);for(let i=1;i<E.length;i++)if(E[i].y-E[i-1].y<14)E[i].y=E[i-1].y+14;E.forEach(l=>svg.append('text').attr('class','dl').attr('x',l.x+8).attr('y',l.y+4).attr('fill',l.c).text(l.t));}
+ // 이벤트
+ const evAt={};(s.events||[]).forEach(e=>{evAt[e.i]=(evAt[e.i]||[]).concat(e)});
+ if(s.events&&ser[0]){const d=ser[0];(s.events||[]).forEach(e=>{const v=d.data[e.i];if(v==null)return;const X=cx(e.i),Y=y(v);const g=svg.append('g');
+   if(e.kind==='call'){g.append('path').attr('class','evc').attr('d',d3.symbol(d3.symbolDiamond,150)()).attr('transform',`translate(${X},${Y-12})`);g.append('text').attr('class','evn c').attr('x',X).attr('y',Y-9).attr('text-anchor','middle').text(e.n)}
+   else{g.append('circle').attr('class','evo').attr('cx',X).attr('cy',Y-12).attr('r',7);g.append('text').attr('class','evn').attr('x',X).attr('y',Y-9).attr('text-anchor','middle').text(e.n)}});}
+ // 마우스: 세로선 + 툴팁
+ const xh=svg.append('line').attr('class','xh').attr('y1',m.t).attr('y2',H-m.b).style('display','none');
+ svg.append('rect').attr('x',m.l).attr('y',m.t).attr('width',W-m.l-m.r).attr('height',H-m.t-m.b).attr('fill','transparent')
+  .on('mousemove',ev=>{const [mx]=d3.pointer(ev);let i=Math.round((mx-m.l)/((W-m.l-m.r)/n)-0.5);i=Math.max(0,Math.min(n-1,i));xh.attr('x1',cx(i)).attr('x2',cx(i)).style('display',null);
+   let h=`<b>${L[i]}</b>`;ser.forEach(d=>{const v=d.data[i];if(v!=null)h+=`<br>${d.name}: ${fmt(v,d.unit||(d.axis==='y2'?s.y2_unit:s.unit)||'')}${d.est_from!=null&&i>=d.est_from?' ('+(d.est_tag||'추정')+')':''}`});
+   (s.bands||[]).forEach(b=>{const v=b.data[i];if(v!=null)h+=`<br><span class=tn>${b.name}: ${fmt(v,s.unit||'')}</span>`});
+   (s.phases||[]).forEach(p=>{if(i>=p.from&&i<=p.to)h+=`<div class=tn>${p.label||''}${p.chg?' · '+p.chg:''}</div>`});
+   (evAt[i]||[]).forEach(e=>{h+=`<div class=tn>${e.kind==='call'?'◆':'●'} ${e.n} · ${e.tip||''}</div>`});show(ev,h)})
+  .on('mouseleave',()=>{hide();xh.style('display','none')});
+}
+const all=()=>(window.__CH||[]).forEach(draw);
+/* 재무제표 펼침 줄 — 묶음(data-g)마다 따로: BM별·판관비·영업외(2026-10-23 사용자) */
+const segRows=bt=>bt.closest('tbody').querySelectorAll('tr.segr.'+(bt.dataset.g||'gseg'));
+document.querySelectorAll('.segbtn:not(.segx)').forEach(bt=>bt.addEventListener('click',()=>{const rs=segRows(bt);const op=rs.length&&rs[0].hidden;rs.forEach(r=>r.hidden=!op);const l=bt.dataset.l||'BM별 매출·이익';bt.firstChild.textContent=(op?'▾ '+l+' 접기 ':'▸ '+l+' 보기 ');}));
+document.querySelectorAll('table.pxt .pxd select').forEach(sl=>sl.addEventListener('change',()=>{const t=sl.closest('table'),d=+sl.value;
+ t.querySelectorAll('td[data-r]').forEach(td=>{const r=JSON.parse(td.dataset.r)[d-1];td.textContent=r==null?'–':((r>0?'+':'')+r.toFixed(1)+'%').replace('-','−');td.className='n '+(r>0?'pos':r<0?'neg':'');});}));
+document.querySelectorAll('details.tg').forEach(dt=>{dt.addEventListener('toggle',()=>{if(dt.open)dt.querySelectorAll('.chart').forEach(c=>{const s=(window.__CH||[]).find(z=>z.id===c.id);if(s)draw(s)})});
+ const b=dt.querySelector(':scope > .tgb > .tgx');if(b)b.addEventListener('click',()=>{dt.open=false;dt.scrollIntoView({block:'start'})});});
+document.querySelectorAll('details.apx').forEach(dt=>dt.addEventListener('toggle',()=>{if(dt.open)dt.querySelectorAll('.chart').forEach(c=>{const s=(window.__CH||[]).find(z=>z.id===c.id);if(s)draw(s)})}));
+function addFold(){/* 모든 토글 맨 아래에도 접기 버튼(2026-10-23 사용자) */
+document.querySelectorAll('details').forEach(dt=>{if(dt.querySelector(':scope > .tgb > .tgx, :scope > .foldx'))return;
+ const s=dt.querySelector(':scope > summary');let t='';if(s){const c=s.cloneNode(true);c.querySelectorAll('small,.pper').forEach(x=>x.remove());t=c.textContent.replace(/^[▸▾]\s*/,'').trim().slice(0,28);}
+ const b=document.createElement('button');b.type='button';b.className='foldx';b.textContent='▴ 접기'+(t?' — '+t:'');dt.appendChild(b);
+ b.addEventListener('click',()=>{dt.open=false;dt.scrollIntoView({block:'start'})});});
+document.querySelectorAll('.segbtn:not(.segx)').forEach(bt=>{const tr=bt.closest('tr'),tb=bt.closest('tbody'),g=bt.dataset.g||'gseg';const rs=segRows(bt);if(!rs.length||tb.querySelector('tr.segend.'+g))return;
+ const e=tr.cloneNode(true);e.classList.add('segr','segend',g);e.hidden=true;const x=e.querySelector('.segbtn');x.className='segbtn segx';
+ x.textContent='▴ '+(bt.dataset.l||'BM별 매출·이익')+' 접기';rs[rs.length-1].after(e);
+ x.addEventListener('click',()=>{bt.click();tr.scrollIntoView({block:'center'})});});}
+addFold();
+const openHash=()=>{const t=location.hash&&document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t&&t.tagName==='DETAILS'&&!t.open){t.open=true;t.scrollIntoView()}};
+addEventListener('hashchange',openHash);openHash();
+let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(all,150)});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',all);else all();
+})();
+</script></body></html>
