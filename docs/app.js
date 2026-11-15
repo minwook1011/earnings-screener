@@ -246,8 +246,34 @@
   }
   /* 메모 — 2단계 목록 시총·PER 아래 작은 글씨 메모 칸, 이 브라우저에 저장(es-memo, 2026-11-12 사용자) */
   var MEMO = load("es-memo");
-  function memoBox(c) { return '<textarea class="memo" data-memo="' + esc(c) + '" rows="1" placeholder="메모" aria-label="메모">' + esc(MEMO[c] || "") + "</textarea>"; }
-  function fitMemo(t) { t.style.height = "auto"; t.style.height = t.scrollHeight + 2 + "px"; }
+  (function memoBackup() {   // 메모 날짜별 사본(es-memo-bak-YYYY-MM-DD, 최근 14일) — 사라져도 되살릴 수 있게(2026-11-15 사용자)
+    try {
+      var raw = localStorage.getItem("es-memo"); if (!raw || raw === "{}") return;
+      var t = new Date(), d = t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
+      if (!localStorage.getItem("es-memo-bak-" + d)) localStorage.setItem("es-memo-bak-" + d, raw);
+      var ks = []; for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (/^es-memo-bak-/.test(k)) ks.push(k); }
+      ks.sort().slice(0, Math.max(0, ks.length - 14)).forEach(function (k) { localStorage.removeItem(k); });
+    } catch (e) {}
+  })();
+  /* Ctrl+B 굵게(2026-11-15 사용자) — 칸을 글자 서식이 되는 편집 칸으로. 저장은 <b>·<br> 만 남긴 HTML(예전 글자 메모도 그대로 읽힘) */
+  function memoHtml(v) { v = String(v || ""); return v.indexOf("<") < 0 ? esc(v).replace(/\n/g, "<br>") : v; }
+  function memoClean(el) {   // 굵게·줄바꿈만 남기고 나머지 태그·속성은 버린다(붙여 넣은 서식 포함)
+    var out = "";
+    (function walk(n) {
+      n.childNodes.forEach(function (k) {
+        if (k.nodeType === 3) { out += esc(k.nodeValue); return; }
+        if (k.nodeType !== 1) return;
+        var t = k.tagName, fw = k.style && k.style.fontWeight, bold = t === "B" || t === "STRONG" || fw === "bold" || +fw >= 600;
+        if (t === "BR") { out += "<br>"; return; }
+        var blk = t === "DIV" || t === "P";
+        if (blk && out && !/<br>$/.test(out)) out += "<br>";
+        if (bold) out += "<b>"; walk(k); if (bold) out += "</b>";
+      });
+    })(el);
+    return out.replace(/<b><\/b>/g, "").replace(/(<br>)+$/, "");
+  }
+  function memoBox(c) { return '<div class="memo" contenteditable="true" role="textbox" aria-multiline="true" data-memo="' + esc(c) + '" data-ph="메모 (Ctrl+B 굵게)" aria-label="메모">' + memoHtml(MEMO[c]) + "</div>"; }
+  function fitMemo() {}
   function togglePick(c, n) {
     n = +n;
     if (GRADE[c] === n) delete GRADE[c]; else GRADE[c] = n;
@@ -1180,14 +1206,18 @@
     app.querySelectorAll("td.mc i[data-w]").forEach(function (i) { i.style.width = i.dataset.w + "px"; });
     app.querySelectorAll("[data-c]").forEach(function (el) { el.onclick = function () { location.hash = (S.mode === "jps" ? "jps" : "jp") + "/c/" + el.dataset.c; }; });
     app.querySelectorAll("[data-pick]").forEach(function (b) { b.onclick = function (e) { e.stopPropagation(); togglePick(b.dataset.pc, b.dataset.pick); render(); }; });
-    app.querySelectorAll("textarea[data-memo]").forEach(function (t) {
-      fitMemo(t);
+    app.querySelectorAll("[data-memo]").forEach(function (t) {
       t.onclick = function (e) { e.stopPropagation(); };
-      t.onkeydown = function (e) { e.stopPropagation(); };
+      t.onkeydown = function (e) {
+        e.stopPropagation();
+        if ((e.ctrlKey || e.metaKey) && !e.altKey && (e.key === "b" || e.key === "B" || e.code === "KeyB")) { e.preventDefault(); document.execCommand("bold"); t.oninput(); }
+      };
+      t.onpaste = function (e) {   // 붙여 넣기는 글자만(다른 사이트 서식·그림이 끼지 않게)
+        e.preventDefault(); var x = (e.clipboardData || window.clipboardData).getData("text"); document.execCommand("insertText", false, x);
+      };
       t.oninput = function () {
-        var v = t.value.trim(); if (v) MEMO[t.dataset.memo] = t.value; else delete MEMO[t.dataset.memo];
+        var v = memoClean(t); if (v.replace(/<[^>]+>/g, "").trim()) MEMO[t.dataset.memo] = v; else { delete MEMO[t.dataset.memo]; if (!t.textContent.trim()) t.innerHTML = ""; }
         try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
-        fitMemo(t);
       };
     });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
