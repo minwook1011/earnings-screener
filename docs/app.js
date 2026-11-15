@@ -272,7 +272,29 @@
     })(el);
     return out.replace(/<b><\/b>/g, "").replace(/(<br>)+$/, "");
   }
-  function memoBox(c) { return '<div class="memo" contenteditable="true" role="textbox" aria-multiline="true" data-memo="' + esc(c) + '" data-ph="메모 (Ctrl+B 굵게)" aria-label="메모">' + memoHtml(MEMO[c]) + "</div>"; }
+  function memoIndent(out) {   // 커서가 있는 줄(<br>·줄 칸 사이) 맨 앞에 탭을 넣거나 뺀다 — 여러 줄을 고르면 고른 줄 모두
+    var sel = window.getSelection(); if (!sel.rangeCount) return;
+    var rg = sel.getRangeAt(0), root = rg.commonAncestorContainer;
+    while (root && !(root.nodeType === 1 && root.hasAttribute("data-memo"))) root = root.parentNode;
+    if (!root) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT), n, starts = [], fresh = true;
+    while ((n = w.nextNode())) {   // 줄마다 첫 글자 칸(줄의 시작 위치)을 모은다
+      if (n.nodeType === 1) { if (n.tagName === "BR" || ((n.tagName === "DIV" || n.tagName === "P") && n !== root)) fresh = true; continue; }
+      if (fresh) { starts.push(n); fresh = false; }
+    }
+    var lines = starts.filter(function (x) { return rg.intersectsNode(x) || x === rg.startContainer; });
+    if (!lines.length) {   // 빈 줄·글자 칸 밖 — 커서 자리에 탭만
+      if (!out) document.execCommand("insertText", false, "\t"); return;
+    }
+    var sc = rg.startContainer, so = rg.startOffset, ec = rg.endContainer, eo = rg.endOffset;
+    lines.forEach(function (x) {
+      if (out) {
+        if (x.nodeValue.charAt(0) === "\t") { x.nodeValue = x.nodeValue.slice(1); if (x === sc) so = Math.max(0, so - 1); if (x === ec) eo = Math.max(0, eo - 1); }
+      } else { x.nodeValue = "\t" + x.nodeValue; if (x === sc) so++; if (x === ec) eo++; }
+    });
+    try { var r2 = document.createRange(); r2.setStart(sc, Math.min(so, sc.nodeType === 3 ? sc.nodeValue.length : so)); r2.setEnd(ec, Math.min(eo, ec.nodeType === 3 ? ec.nodeValue.length : eo)); sel.removeAllRanges(); sel.addRange(r2); } catch (er) {}
+  }
+  function memoBox(c) { return '<div class="memo" contenteditable="true" role="textbox" aria-multiline="true" data-memo="' + esc(c) + '" data-ph="메모 (Ctrl+B 굵게 · Tab 들여쓰기)" aria-label="메모">' + memoHtml(MEMO[c]) + "</div>"; }
   function fitMemo() {}
   function togglePick(c, n) {
     n = +n;
@@ -795,16 +817,18 @@
     panel.classList.add("on"); scrim.classList.add("on"); document.body.style.overflow = "hidden";
     (CO[c] ? Promise.resolve(CO[c]) : getJSON("data/jp/co/" + c + ".json").catch(function () { return {}; })).then(function (d) { CO[c] = d; drawPanel(o, d); panel.focus(); });
   }
-  /* 카드 맨 위 링크 줄(2026-11-13 사용자): 트레이딩뷰 · 카부탄 · (M/D) 결산단신 PDF · 한글 번역 — PDF 목록은 data/jp/pdf.json(tools/pdf_index.py) */
+  /* 카드 맨 위 링크 줄(2026-11-13 사용자): 트레이딩뷰 · 카부탄 · (M/D) 실적설명회 PDF · 한글 번역 — PDF 목록은 data/jp/pdf.json(tools/pdf_index.py) */
   function docChips(c) {
     var ce = encodeURIComponent(c), p = (S.pdf.items || {})[c], h = "";
     h += '<a class="chip" href="https://www.tradingview.com/chart/?symbol=TSE%3A' + ce + '" target="_blank" rel="noopener noreferrer">트레이딩뷰 ↗</a>';
     h += '<a class="chip" href="https://kabutan.jp/stock/?code=' + ce + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a>';
-    if (p) {
+    if (p && p.s) {   // 실적설명회 자료(2026-11-15 사용자 — 결산단신 말고 이것, 번역도 이것)
       var base = "research/" + ce + "/";
-      h += '<a class="chip" href="' + base + 'tanshin.pdf" target="_blank" rel="noopener">' + (p.t ? "(" + md(p.t) + ") " : "") + "결산단신 PDF</a>";
-      h += p.ko ? '<a class="chip k" href="' + base + 'tanshin_ko.pdf" target="_blank" rel="noopener">한글 번역</a>'
+      h += '<a class="chip" href="' + base + 'setsumei.pdf" target="_blank" rel="noopener">(' + md(p.s) + ") 실적설명회 PDF</a>";
+      h += p.sko ? '<a class="chip k" href="' + base + 'setsumei_ko.pdf" target="_blank" rel="noopener">한글 번역</a>'
         : '<button type="button" class="chip off" data-tr="' + esc(c) + '" title="번역본이 아직 없습니다. 누르면 Claude에 붙여 넣을 번역 요청 문구가 복사됩니다(자동 번역 안 함)">한글 번역 요청</button>';
+    } else if (p && p.t) {
+      h += '<span class="chip off" title="이 회사는 아직 실적설명회 자료를 받지 못했습니다(안 냈거나 아직 안 올라옴)">실적설명회 PDF 없음</span>';
     }
     return h;
   }
@@ -858,7 +882,7 @@
     document.getElementById("px").onclick = function () { location.hash = back(); };
     pin.querySelectorAll("[data-tr]").forEach(function (b) {   // 번역본 없음 → 요청 문구 복사(번역은 사용자가 따로 요청, 2026-11-13)
       b.onclick = function () {
-        var c = b.dataset.tr, t = (o.n || c) + "(" + c + ") 결산단신 한글 번역해줘 — 실적 스크리너 docs/research/" + c + "/tanshin.pdf → tanshin_ko.pdf";
+        var c = b.dataset.tr, t = (o.n || c) + "(" + c + ") 실적설명회 자료 한글 번역해줘 — 실적 스크리너 docs/research/" + c + "/setsumei.pdf → setsumei_ko.pdf";
         var ok = function () { b.textContent = "요청 문구 복사됨"; setTimeout(function () { b.textContent = "한글 번역 요청"; }, 2000); };
         if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, function () { window.prompt("복사해서 Claude에 붙여 넣으세요", t); });
         else window.prompt("복사해서 Claude에 붙여 넣으세요", t);
@@ -1211,12 +1235,15 @@
       t.onkeydown = function (e) {
         e.stopPropagation();
         if ((e.ctrlKey || e.metaKey) && !e.altKey && (e.key === "b" || e.key === "B" || e.code === "KeyB")) { e.preventDefault(); document.execCommand("bold"); t.oninput(); }
+        if (e.key === "Tab" && !e.ctrlKey && !e.metaKey && !e.altKey) {   // 옵시디언처럼 Tab = 그 줄 들여쓰기, Shift+Tab = 내어쓰기(2026-11-15 사용자)
+          e.preventDefault(); memoIndent(e.shiftKey); t.oninput();
+        }
       };
       t.onpaste = function (e) {   // 붙여 넣기는 글자만(다른 사이트 서식·그림이 끼지 않게)
         e.preventDefault(); var x = (e.clipboardData || window.clipboardData).getData("text"); document.execCommand("insertText", false, x);
       };
       t.oninput = function () {
-        var v = memoClean(t); if (v.replace(/<[^>]+>/g, "").trim()) MEMO[t.dataset.memo] = v; else { delete MEMO[t.dataset.memo]; if (!t.textContent.trim()) t.innerHTML = ""; }
+        var v = memoClean(t); if (v.replace(/<[^>]+>/g, "").trim()) MEMO[t.dataset.memo] = v; else { delete MEMO[t.dataset.memo]; if (!t.textContent && !t.querySelector("br,div")) t.innerHTML = ""; }   // 탭·빈칸만 있는 줄은 지우지 않는다(빈 칸에서 Tab 먼저 누를 때)
         try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
       };
     });
