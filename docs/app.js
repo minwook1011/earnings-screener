@@ -272,7 +272,29 @@
     })(el);
     return out.replace(/<b><\/b>/g, "").replace(/(<br>)+$/, "");
   }
-  function memoBox(c) { return '<div class="memo" contenteditable="true" role="textbox" aria-multiline="true" data-memo="' + esc(c) + '" data-ph="메모 (Ctrl+B 굵게)" aria-label="메모">' + memoHtml(MEMO[c]) + "</div>"; }
+  function memoIndent(out) {   // 커서가 있는 줄(<br>·줄 칸 사이) 맨 앞에 탭을 넣거나 뺀다 — 여러 줄을 고르면 고른 줄 모두
+    var sel = window.getSelection(); if (!sel.rangeCount) return;
+    var rg = sel.getRangeAt(0), root = rg.commonAncestorContainer;
+    while (root && !(root.nodeType === 1 && root.hasAttribute("data-memo"))) root = root.parentNode;
+    if (!root) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT), n, starts = [], fresh = true;
+    while ((n = w.nextNode())) {   // 줄마다 첫 글자 칸(줄의 시작 위치)을 모은다
+      if (n.nodeType === 1) { if (n.tagName === "BR" || ((n.tagName === "DIV" || n.tagName === "P") && n !== root)) fresh = true; continue; }
+      if (fresh) { starts.push(n); fresh = false; }
+    }
+    var lines = starts.filter(function (x) { return rg.intersectsNode(x) || x === rg.startContainer; });
+    if (!lines.length) {   // 빈 줄·글자 칸 밖 — 커서 자리에 탭만
+      if (!out) document.execCommand("insertText", false, "\t"); return;
+    }
+    var sc = rg.startContainer, so = rg.startOffset, ec = rg.endContainer, eo = rg.endOffset;
+    lines.forEach(function (x) {
+      if (out) {
+        if (x.nodeValue.charAt(0) === "\t") { x.nodeValue = x.nodeValue.slice(1); if (x === sc) so = Math.max(0, so - 1); if (x === ec) eo = Math.max(0, eo - 1); }
+      } else { x.nodeValue = "\t" + x.nodeValue; if (x === sc) so++; if (x === ec) eo++; }
+    });
+    try { var r2 = document.createRange(); r2.setStart(sc, Math.min(so, sc.nodeType === 3 ? sc.nodeValue.length : so)); r2.setEnd(ec, Math.min(eo, ec.nodeType === 3 ? ec.nodeValue.length : eo)); sel.removeAllRanges(); sel.addRange(r2); } catch (er) {}
+  }
+  function memoBox(c) { return '<div class="memo" contenteditable="true" role="textbox" aria-multiline="true" data-memo="' + esc(c) + '" data-ph="메모 (Ctrl+B 굵게 · Tab 들여쓰기)" aria-label="메모">' + memoHtml(MEMO[c]) + "</div>"; }
   function fitMemo() {}
   function togglePick(c, n) {
     n = +n;
@@ -1211,6 +1233,9 @@
       t.onkeydown = function (e) {
         e.stopPropagation();
         if ((e.ctrlKey || e.metaKey) && !e.altKey && (e.key === "b" || e.key === "B" || e.code === "KeyB")) { e.preventDefault(); document.execCommand("bold"); t.oninput(); }
+        if (e.key === "Tab" && !e.ctrlKey && !e.metaKey && !e.altKey) {   // 옵시디언처럼 Tab = 그 줄 들여쓰기, Shift+Tab = 내어쓰기(2026-11-15 사용자)
+          e.preventDefault(); memoIndent(e.shiftKey); t.oninput();
+        }
       };
       t.onpaste = function (e) {   // 붙여 넣기는 글자만(다른 사이트 서식·그림이 끼지 않게)
         e.preventDefault(); var x = (e.clipboardData || window.clipboardData).getData("text"); document.execCommand("insertText", false, x);
