@@ -1,0 +1,596 @@
+{
+ "c": "9341",
+ "n": "제노바",
+ "asof": "2026-11-13",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ]
+ ],
+ "annual_src": "결산단신 연간 실적(TDnet), 계획은 최신 결산단신 회사 예상",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "분기 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·결산설명자료"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "분기 영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·결산설명자료"
+  },
+  {
+   "t": "제조 경비(분기)",
+   "def": "원재료·외주 등 — 26.2Q부터 자회사 연결로 증가",
+   "d": "q",
+   "bars": [
+    {
+     "k": "c_mfg",
+     "l": "제조 경비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "c_mfg_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료 — 27.2Q 증가분 중 약 12억엔이 치과재료 자회사(아카사카) 연결 효과",
+   "sec": "key"
+  },
+  {
+   "sec": "key",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신·결산설명자료 — 결산단신 재무상태표(최근 분기말·직전 결산기말만). 총차입금 = 단기 + 장기 차입금"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "영업이익률",
+   "d": "q",
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신·결산설명자료"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "분기 경상이익·순이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ord",
+     "l": "경상이익",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "net",
+     "l": "순이익",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신·결산설명자료"
+  },
+  {
+   "sec": "연간(분기 자료가 없거나 더 긴 것)",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 연간 실적, 계획은 회사 예상"
+  },
+  {
+   "sec": "연간(분기 자료가 없거나 더 긴 것)",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산단신 연간 실적, 계획은 회사 예상"
+  },
+  {
+   "sec": "비용 구조",
+   "t": "분기 비용 내역",
+   "d": "q",
+   "stack": 1,
+   "bars": [
+    {
+     "k": "c_mfg",
+     "l": "제조 경비",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "c_hr",
+     "l": "인건비",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "c_oth",
+     "l": "기타 경비",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "c_ad",
+     "l": "판촉·광고비",
+     "u": "억엔",
+     "c": 3
+    },
+    {
+     "k": "c_rent",
+     "l": "임차·광열비",
+     "u": "억엔",
+     "c": 4
+    }
+   ],
+   "src": "2Q27 결산설명자료"
+  },
+  {
+   "sec": "비용 구조",
+   "t": "인건비(분기)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "c_hr",
+     "l": "인건비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "c_hr_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "x": "24.3Q",
+    "sales": 21.24,
+    "op": 5.02,
+    "ord": 5.04,
+    "net": 3.21,
+    "opm": 23.6,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "sales": 25.79,
+    "op": 8.3,
+    "ord": 8.34,
+    "net": 7.79,
+    "opm": 32.2,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "x": "25.1Q",
+    "sales": 25.38,
+    "op": 5.91,
+    "ord": 5.92,
+    "net": 3.84,
+    "opm": 23.3,
+    "c_mfg": 6.5,
+    "c_hr": 7.3,
+    "c_rent": 0.7,
+    "c_ad": 1.5,
+    "c_oth": 3.1,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "c_mfg_yoy": null,
+    "c_hr_yoy": null,
+    "c_rent_yoy": null,
+    "c_ad_yoy": null,
+    "c_oth_yoy": null
+   },
+   {
+    "x": "25.2Q",
+    "sales": 26.05,
+    "op": 6.26,
+    "ord": 6.11,
+    "net": 4.3,
+    "opm": 24.0,
+    "c_mfg": 6.3,
+    "c_hr": 7.2,
+    "c_rent": 1.0,
+    "c_ad": 1.8,
+    "c_oth": 3.2,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "c_mfg_yoy": null,
+    "c_hr_yoy": null,
+    "c_rent_yoy": null,
+    "c_ad_yoy": null,
+    "c_oth_yoy": null
+   },
+   {
+    "x": "25.3Q",
+    "sales": 24.68,
+    "op": 4.09,
+    "ord": 4.09,
+    "net": 2.72,
+    "opm": 16.6,
+    "c_mfg": 6.8,
+    "c_hr": 7.0,
+    "c_rent": 1.0,
+    "c_ad": 2.0,
+    "c_oth": 3.5,
+    "sales_yoy": 16.2,
+    "op_yoy": -18.5,
+    "ord_yoy": -18.8,
+    "net_yoy": -15.3,
+    "c_mfg_yoy": null,
+    "c_hr_yoy": null,
+    "c_rent_yoy": null,
+    "c_ad_yoy": null,
+    "c_oth_yoy": null
+   },
+   {
+    "x": "25.4Q",
+    "sales": 23.95,
+    "op": 4.0,
+    "ord": 4.06,
+    "net": 3.27,
+    "opm": 16.7,
+    "c_mfg": 6.5,
+    "c_hr": 6.9,
+    "c_rent": 1.0,
+    "c_ad": 2.1,
+    "c_oth": 3.3,
+    "sales_yoy": -7.1,
+    "op_yoy": -51.8,
+    "ord_yoy": -51.3,
+    "net_yoy": -58.0,
+    "c_mfg_yoy": null,
+    "c_hr_yoy": null,
+    "c_rent_yoy": null,
+    "c_ad_yoy": null,
+    "c_oth_yoy": null
+   },
+   {
+    "x": "26.1Q",
+    "sales": 18.55,
+    "op": -1.74,
+    "ord": -1.72,
+    "net": -0.98,
+    "opm": -9.4,
+    "c_mfg": 6.1,
+    "c_hr": 7.6,
+    "c_rent": 1.0,
+    "c_ad": 2.2,
+    "c_oth": 3.2,
+    "sales_yoy": -26.9,
+    "op_yoy": -129.4,
+    "ord_yoy": -129.1,
+    "net_yoy": -125.5,
+    "c_mfg_yoy": -6.2,
+    "c_hr_yoy": 4.1,
+    "c_rent_yoy": 42.9,
+    "c_ad_yoy": 46.7,
+    "c_oth_yoy": 3.2
+   },
+   {
+    "x": "26.2Q",
+    "sales": 31.19,
+    "op": 1.38,
+    "ord": 1.46,
+    "net": 0.85,
+    "opm": 4.4,
+    "c_mfg": 13.9,
+    "c_hr": 9.0,
+    "c_rent": 1.1,
+    "c_ad": 1.7,
+    "c_oth": 3.9,
+    "sales_yoy": 19.7,
+    "op_yoy": -78.0,
+    "ord_yoy": -76.1,
+    "net_yoy": -80.2,
+    "c_mfg_yoy": 120.6,
+    "c_hr_yoy": 25.0,
+    "c_rent_yoy": 10.0,
+    "c_ad_yoy": -5.6,
+    "c_oth_yoy": 21.9
+   },
+   {
+    "x": "26.3Q",
+    "sales": 29.56,
+    "op": 0.13,
+    "ord": 0.23,
+    "net": 0.63,
+    "opm": 0.4,
+    "c_mfg": 14.7,
+    "c_hr": 8.5,
+    "c_rent": 1.1,
+    "c_ad": 1.8,
+    "c_oth": 3.2,
+    "sales_yoy": 19.8,
+    "op_yoy": -96.8,
+    "ord_yoy": -94.4,
+    "net_yoy": -76.8,
+    "c_mfg_yoy": 116.2,
+    "c_hr_yoy": 21.4,
+    "c_rent_yoy": 10.0,
+    "c_ad_yoy": -10.0,
+    "c_oth_yoy": -8.6
+   },
+   {
+    "x": "26.4Q",
+    "sales": 36.35,
+    "op": 4.23,
+    "ord": 4.35,
+    "net": 2.25,
+    "opm": 11.6,
+    "cash": 53.17,
+    "st_debt": 0.0,
+    "lt_debt": 6.18,
+    "equity": 68.99,
+    "debt_total": 6.18,
+    "c_mfg": 16.1,
+    "c_hr": 8.5,
+    "c_rent": 1.1,
+    "c_ad": 1.7,
+    "c_oth": 4.5,
+    "sales_yoy": 51.8,
+    "op_yoy": 5.8,
+    "ord_yoy": 7.1,
+    "net_yoy": -31.2,
+    "cash_yoy": null,
+    "st_debt_yoy": null,
+    "lt_debt_yoy": null,
+    "equity_yoy": null,
+    "debt_total_yoy": null,
+    "c_mfg_yoy": 147.7,
+    "c_hr_yoy": 23.2,
+    "c_rent_yoy": 10.0,
+    "c_ad_yoy": -19.0,
+    "c_oth_yoy": 36.4
+   },
+   {
+    "x": "27.1Q",
+    "sales": 30.57,
+    "op": -2.22,
+    "ord": -2.13,
+    "net": 2.49,
+    "opm": -7.3,
+    "c_mfg": 15.2,
+    "c_hr": 9.4,
+    "c_rent": 1.2,
+    "c_ad": 2.1,
+    "c_oth": 4.7,
+    "sales_yoy": 64.8,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "c_mfg_yoy": 149.2,
+    "c_hr_yoy": 23.7,
+    "c_rent_yoy": 20.0,
+    "c_ad_yoy": -4.5,
+    "c_oth_yoy": 46.9
+   },
+   {
+    "x": "27.2Q",
+    "sales": 47.52,
+    "op": 2.68,
+    "ord": 2.82,
+    "net": 1.09,
+    "opm": 5.6,
+    "cash": 56.55,
+    "st_debt": 2.3,
+    "lt_debt": 11.71,
+    "equity": 62.59,
+    "debt_total": 14.01,
+    "c_mfg": 27.5,
+    "c_hr": 9.9,
+    "c_rent": 1.2,
+    "c_ad": 1.7,
+    "c_oth": 4.2,
+    "sales_yoy": 52.4,
+    "op_yoy": 94.2,
+    "ord_yoy": 93.2,
+    "net_yoy": 28.2,
+    "cash_yoy": null,
+    "st_debt_yoy": null,
+    "lt_debt_yoy": null,
+    "equity_yoy": null,
+    "debt_total_yoy": null,
+    "c_mfg_yoy": 97.8,
+    "c_hr_yoy": 10.0,
+    "c_rent_yoy": 9.1,
+    "c_ad_yoy": 0.0,
+    "c_oth_yoy": 7.7
+   }
+  ],
+  "a": [
+   {
+    "x": "2024",
+    "year": "2024",
+    "sales": 86.83,
+    "op": 23.01,
+    "ord": 23.09,
+    "net": 17.26,
+    "opm": 26.5,
+    "plan": 0,
+    "kind": "실적",
+    "sales_yoy": null,
+    "op_yoy": null
+   },
+   {
+    "x": "2025",
+    "year": "2025",
+    "sales": 100.06,
+    "op": 20.26,
+    "ord": 20.18,
+    "net": 14.13,
+    "opm": 20.2,
+    "plan": 0,
+    "kind": "실적",
+    "sales_yoy": 15.2,
+    "op_yoy": -12.0
+   },
+   {
+    "x": "2026",
+    "year": "2026",
+    "sales": 115.65,
+    "op": 4.0,
+    "ord": 4.32,
+    "net": 2.75,
+    "opm": 3.5,
+    "plan": 0,
+    "kind": "실적",
+    "sales_yoy": 15.6,
+    "op_yoy": -80.3
+   },
+   {
+    "x": "2027 계획",
+    "year": "2027 계획",
+    "sales": 216.04,
+    "op": 15.73,
+    "ord": 15.57,
+    "net": 11.9,
+    "opm": 7.3,
+    "plan": 1,
+    "kind": "회사 계획",
+    "sales_yoy": 86.8,
+    "op_yoy": 293.2
+   }
+  ]
+ }
+}

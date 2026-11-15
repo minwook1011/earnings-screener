@@ -1,0 +1,589 @@
+{
+ "c": "9553",
+ "n": "마이크로애드",
+ "asof": "2026-11-13",
+ "latest": "2026년 9월기 4분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ]
+ ],
+ "annual_src": "결산단신 연간 실적(TDnet), 계획은 최신 결산단신 회사 예상",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "분기 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "분기 영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  },
+  {
+   "t": "데이터 프로덕트 매출(UNIVERSE)",
+   "def": "자사 플랫폼 + 타사 플랫폼, 비연결된 자회사 분 제외",
+   "d": "q",
+   "bars": [
+    {
+     "k": "dp_sales",
+     "l": "데이터 프로덕트 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "dp_sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료",
+   "sec": "key"
+  },
+  {
+   "sec": "key",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료 — 결산단신 재무상태표(최근 분기말·직전 결산기말만). 총차입금 = 단기 + 장기 차입금"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "영업이익률",
+   "d": "q",
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "분기 경상이익·순이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ord",
+     "l": "경상이익",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "net",
+     "l": "순이익",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  },
+  {
+   "sec": "연간(분기 자료가 없거나 더 긴 것)",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 연간 실적, 계획은 회사 예상"
+  },
+  {
+   "sec": "연간(분기 자료가 없거나 더 긴 것)",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산단신 연간 실적, 계획은 회사 예상"
+  },
+  {
+   "sec": "사업 지표",
+   "t": "UNIVERSE 플랫폼별 매출",
+   "d": "q",
+   "stack": 1,
+   "bars": [
+    {
+     "k": "dp_self",
+     "l": "자사 플랫폼",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dp_other",
+     "l": "타사 플랫폼",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료"
+  },
+  {
+   "sec": "사업 지표",
+   "t": "UNIVERSE 플랫폼별 매출총이익",
+   "d": "q",
+   "stack": 1,
+   "bars": [
+    {
+     "k": "dp_gp_self",
+     "l": "자사 플랫폼",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dp_gp_other",
+     "l": "타사 플랫폼",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료"
+  },
+  {
+   "sec": "사업 지표",
+   "t": "타사 플랫폼 매출 성장",
+   "d": "q",
+   "bars": [
+    {
+     "k": "dp_other",
+     "l": "타사 플랫폼 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "dp_other_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "x": "24.1Q",
+    "sales": 34.42,
+    "op": 1.74,
+    "ord": 1.74,
+    "net": 1.31,
+    "opm": 5.1,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "x": "24.2Q",
+    "sales": 36.44,
+    "op": 2.37,
+    "ord": 2.44,
+    "net": 1.98,
+    "opm": 6.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "x": "24.3Q",
+    "sales": 32.38,
+    "op": -0.58,
+    "ord": -1.16,
+    "net": -0.43,
+    "opm": -1.8,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "sales": 33.88,
+    "op": -0.46,
+    "ord": -0.08,
+    "net": -0.04,
+    "opm": -1.4,
+    "dp_self": 16.36,
+    "dp_other": 3.74,
+    "dp_sales": 20.1,
+    "dp_gp_self": 5.63,
+    "dp_gp_other": 0.93,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "dp_self_yoy": null,
+    "dp_other_yoy": null,
+    "dp_sales_yoy": null,
+    "dp_gp_self_yoy": null,
+    "dp_gp_other_yoy": null
+   },
+   {
+    "x": "25.1Q",
+    "sales": 38.73,
+    "op": 1.23,
+    "ord": 0.73,
+    "net": -0.22,
+    "opm": 3.2,
+    "dp_self": 18.17,
+    "dp_other": 4.98,
+    "dp_sales": 23.15,
+    "dp_gp_self": 6.63,
+    "dp_gp_other": 1.24,
+    "sales_yoy": 12.5,
+    "op_yoy": -29.3,
+    "ord_yoy": -58.0,
+    "net_yoy": -116.8,
+    "dp_self_yoy": null,
+    "dp_other_yoy": null,
+    "dp_sales_yoy": null,
+    "dp_gp_self_yoy": null,
+    "dp_gp_other_yoy": null
+   },
+   {
+    "x": "25.2Q",
+    "sales": 43.12,
+    "op": 3.09,
+    "ord": 3.24,
+    "net": 0.49,
+    "opm": 7.2,
+    "dp_self": 18.72,
+    "dp_other": 6.01,
+    "dp_sales": 24.73,
+    "dp_gp_self": 7.02,
+    "dp_gp_other": 1.48,
+    "sales_yoy": 18.3,
+    "op_yoy": 30.4,
+    "ord_yoy": 32.8,
+    "net_yoy": -75.3,
+    "dp_self_yoy": null,
+    "dp_other_yoy": null,
+    "dp_sales_yoy": null,
+    "dp_gp_self_yoy": null,
+    "dp_gp_other_yoy": null
+   },
+   {
+    "x": "25.3Q",
+    "sales": 34.95,
+    "op": 0.82,
+    "ord": 0.64,
+    "net": 0.63,
+    "opm": 2.3,
+    "dp_self": 15.19,
+    "dp_other": 5.48,
+    "dp_sales": 20.67,
+    "dp_gp_self": 5.73,
+    "dp_gp_other": 1.36,
+    "sales_yoy": 7.9,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "dp_self_yoy": null,
+    "dp_other_yoy": null,
+    "dp_sales_yoy": null,
+    "dp_gp_self_yoy": null,
+    "dp_gp_other_yoy": null
+   },
+   {
+    "x": "25.4Q",
+    "sales": 39.9,
+    "op": 0.99,
+    "ord": 0.7,
+    "net": 1.05,
+    "opm": 2.5,
+    "cash": 23.55,
+    "st_debt": 24.8,
+    "lt_debt": 1.85,
+    "equity": 38.97,
+    "debt_total": 26.65,
+    "dp_self": 17.06,
+    "dp_other": 6.06,
+    "dp_sales": 23.12,
+    "dp_gp_self": 6.57,
+    "dp_gp_other": 1.5,
+    "sales_yoy": 17.8,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "st_debt_yoy": null,
+    "lt_debt_yoy": null,
+    "equity_yoy": null,
+    "debt_total_yoy": null,
+    "dp_self_yoy": 4.3,
+    "dp_other_yoy": 62.0,
+    "dp_sales_yoy": 15.0,
+    "dp_gp_self_yoy": 16.7,
+    "dp_gp_other_yoy": 61.3
+   },
+   {
+    "x": "26.1Q",
+    "sales": 45.57,
+    "op": 3.98,
+    "ord": 3.85,
+    "net": 3.04,
+    "opm": 8.7,
+    "dp_self": 19.1,
+    "dp_other": 7.59,
+    "dp_sales": 26.69,
+    "dp_gp_self": 7.92,
+    "dp_gp_other": 2.06,
+    "sales_yoy": 17.7,
+    "op_yoy": 223.6,
+    "ord_yoy": 427.4,
+    "net_yoy": null,
+    "dp_self_yoy": 5.1,
+    "dp_other_yoy": 52.4,
+    "dp_sales_yoy": 15.3,
+    "dp_gp_self_yoy": 19.5,
+    "dp_gp_other_yoy": 66.1
+   },
+   {
+    "x": "26.2Q",
+    "sales": 50.76,
+    "op": 3.79,
+    "ord": 3.47,
+    "net": 2.88,
+    "opm": 7.5,
+    "dp_self": 18.78,
+    "dp_other": 9.16,
+    "dp_sales": 27.94,
+    "dp_gp_self": 7.56,
+    "dp_gp_other": 2.48,
+    "sales_yoy": 17.7,
+    "op_yoy": 22.7,
+    "ord_yoy": 7.1,
+    "net_yoy": 487.8,
+    "dp_self_yoy": 0.3,
+    "dp_other_yoy": 52.4,
+    "dp_sales_yoy": 13.0,
+    "dp_gp_self_yoy": 7.7,
+    "dp_gp_other_yoy": 67.6
+   },
+   {
+    "x": "26.3Q",
+    "sales": 48.08,
+    "op": 0.85,
+    "ord": 0.36,
+    "net": -0.07,
+    "opm": 1.8,
+    "dp_self": 16.03,
+    "dp_other": 8.66,
+    "dp_sales": 24.69,
+    "dp_gp_self": 5.92,
+    "dp_gp_other": 2.12,
+    "sales_yoy": 37.6,
+    "op_yoy": 3.7,
+    "ord_yoy": -43.8,
+    "net_yoy": -111.1,
+    "dp_self_yoy": 5.5,
+    "dp_other_yoy": 58.0,
+    "dp_sales_yoy": 19.4,
+    "dp_gp_self_yoy": 3.3,
+    "dp_gp_other_yoy": 55.9
+   },
+   {
+    "x": "26.4Q",
+    "sales": 60.11,
+    "op": 2.52,
+    "ord": 2.35,
+    "net": 1.75,
+    "opm": 4.2,
+    "cash": 57.42,
+    "st_debt": 27.8,
+    "lt_debt": 10.01,
+    "equity": 35.91,
+    "debt_total": 37.81,
+    "dp_self": 20.15,
+    "dp_other": 7.55,
+    "dp_sales": 27.7,
+    "dp_gp_self": 7.29,
+    "dp_gp_other": 1.89,
+    "sales_yoy": 50.7,
+    "op_yoy": 154.5,
+    "ord_yoy": 235.7,
+    "net_yoy": 66.7,
+    "cash_yoy": 143.8,
+    "st_debt_yoy": 12.1,
+    "lt_debt_yoy": 441.1,
+    "equity_yoy": -7.9,
+    "debt_total_yoy": 41.9,
+    "dp_self_yoy": 18.1,
+    "dp_other_yoy": 24.6,
+    "dp_sales_yoy": 19.8,
+    "dp_gp_self_yoy": 11.0,
+    "dp_gp_other_yoy": 26.0
+   }
+  ],
+  "a": [
+   {
+    "x": "2024",
+    "year": "2024",
+    "sales": 137.12,
+    "op": 3.07,
+    "ord": 2.94,
+    "net": 2.82,
+    "opm": 2.2,
+    "plan": 0,
+    "kind": "실적",
+    "sales_yoy": null,
+    "op_yoy": null
+   },
+   {
+    "x": "2025",
+    "year": "2025",
+    "sales": 156.7,
+    "op": 6.13,
+    "ord": 5.31,
+    "net": 1.95,
+    "opm": 3.9,
+    "plan": 0,
+    "kind": "실적",
+    "sales_yoy": 14.3,
+    "op_yoy": 99.7
+   },
+   {
+    "x": "2026",
+    "year": "2026",
+    "sales": 204.52,
+    "op": 11.14,
+    "ord": 10.03,
+    "net": 7.6,
+    "opm": 5.4,
+    "plan": 0,
+    "kind": "실적",
+    "sales_yoy": 30.5,
+    "op_yoy": 81.7
+   },
+   {
+    "x": "2027 계획",
+    "year": "2027 계획",
+    "sales": 216.74,
+    "op": 15.09,
+    "ord": 14.44,
+    "net": 10.01,
+    "opm": 7.0,
+    "plan": 1,
+    "kind": "회사 계획",
+    "sales_yoy": 6.0,
+    "op_yoy": 35.5
+   }
+  ]
+ }
+}
