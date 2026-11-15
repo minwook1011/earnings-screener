@@ -231,7 +231,7 @@
     return (t.getUTCMonth() + 1) + "월 " + t.getUTCDate() + "일 (" + "일월화수목금토"[t.getUTCDay()] + ")";
   }
   function cl(t) { return '<span class="cl">' + t + "</span>"; }
-  /* 1·2·3 분류 — 2단계 목록에서 회사마다 1(파랑)·2(초록)·3(빨강)을 매기면 그 순서(1→2→3→없음)로 정렬되고 이 브라우저에 저장(es-grade). 같은 번호를 다시 누르면 지움. 옛 「3단계로」 버튼은 없앰(2026-11-12 사용자) */
+  /* 1·2·3·4 분류(4 = 보라, 2026-11-15 사용자 추가 — 저장된 기존 분류는 그대로) — 2단계 목록에서 회사마다 1(파랑)·2(초록)·3(빨강)을 매기면 그 순서(1→2→3→없음)로 정렬되고 이 브라우저에 저장(es-grade). 같은 번호를 다시 누르면 지움. 옛 「3단계로」 버튼은 없앰(2026-11-12 사용자) */
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
   var GRADE = load("es-grade");
   function stOf(o) { return o.stage; }
@@ -240,8 +240,8 @@
   function mehBtn(c) {
     var o = S.cos[c] || {}, g = GRADE[c] || 0;
     if (!(o.stage >= 2)) return "";
-    return '<span class="picks grades">' + [1, 2, 3].map(function (n) {
-      return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 " + n + " 분류를 지웁니다" : n + "로 분류 — 목록에서 1·2·3 순서로 올라갑니다") + '">' + n + "</button>";
+    return '<span class="picks grades">' + [1, 2, 3, 4].map(function (n) {
+      return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 " + n + " 분류를 지웁니다" : n + "로 분류 — 목록에서 1·2·3·4 순서로 올라갑니다") + '">' + n + "</button>";
     }).join("") + "</span>";
   }
   /* 메모 — 2단계 목록 시총·PER 아래 작은 글씨 메모 칸, 이 브라우저에 저장(es-memo, 2026-11-12 사용자) */

@@ -589,9 +589,9 @@ html.locked body > :not(#gate) { visibility: hidden; }
 .dnm .picks { margin-left: 10px; }
 .dnm .picks .meh { margin-left: 0; }
 .dnm .good { font-size: 13px; padding: 6px 11px; font-family: inherit; }
-/* 1·2·3 분류 버튼 — 1 파랑 · 2 초록 · 3 빨강(2026-11-12 사용자) */
+/* 1·2·3·4 분류 버튼 — 1 파랑 · 2 초록 · 3 빨강(2026-11-12) · 4 보라(2026-11-15 사용자) */
 .gr { --c: #2563eb; flex: none; font: inherit; font-size: 12px; font-weight: 800; line-height: 1; width: 26px; height: 24px; padding: 0; border-radius: 6px; border: 1.5px solid var(--c); background: transparent; color: var(--c); cursor: pointer; opacity: .55; }
-.gr.g2 { --c: #16a34a; } .gr.g3 { --c: #dc2626; }
+.gr.g2 { --c: #16a34a; } .gr.g3 { --c: #dc2626; } .gr.g4 { --c: #7c3aed; }
 .gr:hover { opacity: 1; }
 .gr.on { background: var(--c); color: #fff; opacity: 1; }
 .gr:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
