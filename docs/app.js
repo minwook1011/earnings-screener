@@ -817,16 +817,18 @@
     panel.classList.add("on"); scrim.classList.add("on"); document.body.style.overflow = "hidden";
     (CO[c] ? Promise.resolve(CO[c]) : getJSON("data/jp/co/" + c + ".json").catch(function () { return {}; })).then(function (d) { CO[c] = d; drawPanel(o, d); panel.focus(); });
   }
-  /* 카드 맨 위 링크 줄(2026-11-13 사용자): 트레이딩뷰 · 카부탄 · (M/D) 결산단신 PDF · 한글 번역 — PDF 목록은 data/jp/pdf.json(tools/pdf_index.py) */
+  /* 카드 맨 위 링크 줄(2026-11-13 사용자): 트레이딩뷰 · 카부탄 · (M/D) 실적설명회 PDF · 한글 번역 — PDF 목록은 data/jp/pdf.json(tools/pdf_index.py) */
   function docChips(c) {
     var ce = encodeURIComponent(c), p = (S.pdf.items || {})[c], h = "";
     h += '<a class="chip" href="https://www.tradingview.com/chart/?symbol=TSE%3A' + ce + '" target="_blank" rel="noopener noreferrer">트레이딩뷰 ↗</a>';
     h += '<a class="chip" href="https://kabutan.jp/stock/?code=' + ce + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a>';
-    if (p) {
+    if (p && p.s) {   // 실적설명회 자료(2026-11-15 사용자 — 결산단신 말고 이것, 번역도 이것)
       var base = "research/" + ce + "/";
-      h += '<a class="chip" href="' + base + 'tanshin.pdf" target="_blank" rel="noopener">' + (p.t ? "(" + md(p.t) + ") " : "") + "결산단신 PDF</a>";
-      h += p.ko ? '<a class="chip k" href="' + base + 'tanshin_ko.pdf" target="_blank" rel="noopener">한글 번역</a>'
+      h += '<a class="chip" href="' + base + 'setsumei.pdf" target="_blank" rel="noopener">(' + md(p.s) + ") 실적설명회 PDF</a>";
+      h += p.sko ? '<a class="chip k" href="' + base + 'setsumei_ko.pdf" target="_blank" rel="noopener">한글 번역</a>'
         : '<button type="button" class="chip off" data-tr="' + esc(c) + '" title="번역본이 아직 없습니다. 누르면 Claude에 붙여 넣을 번역 요청 문구가 복사됩니다(자동 번역 안 함)">한글 번역 요청</button>';
+    } else if (p && p.t) {
+      h += '<span class="chip off" title="이 회사는 아직 실적설명회 자료를 받지 못했습니다(안 냈거나 아직 안 올라옴)">실적설명회 PDF 없음</span>';
     }
     return h;
   }
@@ -880,7 +882,7 @@
     document.getElementById("px").onclick = function () { location.hash = back(); };
     pin.querySelectorAll("[data-tr]").forEach(function (b) {   // 번역본 없음 → 요청 문구 복사(번역은 사용자가 따로 요청, 2026-11-13)
       b.onclick = function () {
-        var c = b.dataset.tr, t = (o.n || c) + "(" + c + ") 결산단신 한글 번역해줘 — 실적 스크리너 docs/research/" + c + "/tanshin.pdf → tanshin_ko.pdf";
+        var c = b.dataset.tr, t = (o.n || c) + "(" + c + ") 실적설명회 자료 한글 번역해줘 — 실적 스크리너 docs/research/" + c + "/setsumei.pdf → setsumei_ko.pdf";
         var ok = function () { b.textContent = "요청 문구 복사됨"; setTimeout(function () { b.textContent = "한글 번역 요청"; }, 2000); };
         if (navigator.clipboard) navigator.clipboard.writeText(t).then(ok, function () { window.prompt("복사해서 Claude에 붙여 넣으세요", t); });
         else window.prompt("복사해서 Claude에 붙여 넣으세요", t);
@@ -1241,7 +1243,7 @@
         e.preventDefault(); var x = (e.clipboardData || window.clipboardData).getData("text"); document.execCommand("insertText", false, x);
       };
       t.oninput = function () {
-        var v = memoClean(t); if (v.replace(/<[^>]+>/g, "").trim()) MEMO[t.dataset.memo] = v; else { delete MEMO[t.dataset.memo]; if (!t.textContent.trim()) t.innerHTML = ""; }
+        var v = memoClean(t); if (v.replace(/<[^>]+>/g, "").trim()) MEMO[t.dataset.memo] = v; else { delete MEMO[t.dataset.memo]; if (!t.textContent && !t.querySelector("br,div")) t.innerHTML = ""; }   // 탭·빈칸만 있는 줄은 지우지 않는다(빈 칸에서 Tab 먼저 누를 때)
         try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
       };
     });

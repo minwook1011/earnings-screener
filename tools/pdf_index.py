@@ -16,27 +16,43 @@ OUT = os.path.join(ROOT, "docs", "data", "jp", "pdf.json")
 KST = timezone(timedelta(hours=9))
 
 
+def doc_day(p):
+    """사본 옆 .doc(거래소 문서 번호 1401+YYYYMMDD… 또는 주소)에서 공개일 — 주소면 파일 받은 날"""
+    try:
+        v = open(p + ".doc", encoding="utf-8").read().strip()
+    except OSError:
+        return None, ""
+    m = re.match(r"\d{4}(\d{4})(\d{2})(\d{2})\d+$", v) or re.search(r"/(\d{4})(\d{2})(\d{2})\d{6,}\.pdf", v)
+    if m:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}", v
+    return datetime.fromtimestamp(os.path.getmtime(p), KST).strftime("%Y-%m-%d"), v
+
+
+def ko_ok(d, name):
+    """번역본이 지금 원본의 것인지(원본이 새 분기로 바뀌면 옛 번역은 안 보여 줌)"""
+    k = os.path.join(d, name + "_ko.pdf")
+    if not os.path.isfile(k):
+        return 0
+    try:
+        return 1 if open(k + ".doc", encoding="utf-8").read().strip() == open(os.path.join(d, name + ".pdf.doc"), encoding="utf-8").read().strip() else 0
+    except OSError:
+        return 0
+
+
 def build():
+    """t·ko = 결산단신, s·sko = 실적설명회 자료(setsumei.pdf — 카드 칩은 이것을 먼저 보인다, 2026-11-15 사용자)"""
     items = {}
     for c in sorted(os.listdir(RES)):
         d = os.path.join(RES, c)
-        p = os.path.join(d, "tanshin.pdf")
-        if not os.path.isfile(p):
-            continue
-        t = None
-        try:
-            m = re.match(r"\d{4}(\d{4})(\d{2})(\d{2})", open(p + ".doc", encoding="utf-8").read().strip())
-            if m:
-                t = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-        except OSError:
-            pass
-        ko = os.path.isfile(os.path.join(d, "tanshin_ko.pdf"))
-        if ko:   # 번역본이 지금 원본의 것인지(원본이 새 분기로 바뀌면 옛 번역은 안 보여 줌)
-            try:
-                ko = open(os.path.join(d, "tanshin_ko.pdf.doc"), encoding="utf-8").read().strip() == open(p + ".doc", encoding="utf-8").read().strip()
-            except OSError:
-                ko = False
-        items[c] = {"t": t, "ko": 1 if ko else 0}
+        it = {}
+        if os.path.isfile(os.path.join(d, "tanshin.pdf")):
+            it["t"] = doc_day(os.path.join(d, "tanshin.pdf"))[0]
+            it["ko"] = ko_ok(d, "tanshin")
+        if os.path.isfile(os.path.join(d, "setsumei.pdf")):
+            it["s"] = doc_day(os.path.join(d, "setsumei.pdf"))[0]
+            it["sko"] = ko_ok(d, "setsumei")
+        if it:
+            items[c] = it
     old = {}
     if os.path.exists(OUT):
         try:
@@ -52,4 +68,4 @@ def build():
 
 if __name__ == "__main__":
     it = build()
-    print(f"결산단신 {len(it)}곳 · 번역본 {sum(v['ko'] for v in it.values())}곳 → docs/data/jp/pdf.json")
+    print(f"결산단신 {sum(1 for v in it.values() if 't' in v)}곳 · 설명회 자료 {sum(1 for v in it.values() if 's' in v)}곳 · 설명회 번역본 {sum(v.get('sko', 0) for v in it.values())}곳 → docs/data/jp/pdf.json")

@@ -35,6 +35,7 @@ ROOT = os.path.dirname(TOOLS)
 DATA = os.path.join(ROOT, "docs", "data", "jp")
 SRC = os.path.join(TOOLS, "ir_src.json")
 SEEN = os.path.join(TOOLS, "ir_seen.json")
+DMAP = {}
 KST = timezone(timedelta(hours=9))
 DAYS = 45          # 결산단신 발표 뒤 며칠까지 지켜보나
 BUDGET = 240       # 한 회차 최대 초 — 넘으면 다음 회차가 이어서
@@ -210,6 +211,8 @@ def run(dry=False):
     src = load(SRC, {})
     seen = load(SEEN, {})
     res = {"deck": [], "qa": [], "cal": [], "nosrc": [], "checked": 0, "sec": 0}
+    global DMAP
+    DMAP = load(os.path.join(TOOLS, "deck_src.json"), {}).get("items", {})
     todo = [(c, n, info, wants(c)) for c, n, info in targets()]
     todo = [x for x in todo if x[3] or seen.get(x[0], {}).get("boost")]
     try:
@@ -226,14 +229,15 @@ def run(dry=False):
         for f in td.get(c, []):
             u = f"https://www.release.tdnet.info/inbs/{f['doc']}.pdf"
             cands.append(("qa" if QA_W.search(f["title"]) else "deck", u, f["title"]))
-        if "deck" in w and info["ann"] >= (datetime.now(KST).date() - timedelta(days=3)).isoformat():
+        dm = DMAP.get(c, {})   # 설명회 자료 출처 지도(tools/deck_src.json, deck_map.py) — tdnet 회사는 날짜 상관없이 공시에서, ir 회사는 자료실에서
+        if "deck" in w and (dm.get("via") == "tdnet" or info["ann"] >= (datetime.now(KST).date() - timedelta(days=3)).isoformat()):
             try:
                 import build_xlsx
                 for f in build_xlsx.decks(c, info["ann"]):
                     cands.append(("deck", f"https://www.release.tdnet.info/inbs/{f['doc']}.pdf", f["title"]))
             except Exception:
                 pass
-        s = src.get(c)
+        s = src.get(c) or ({"lib": dm["lib"], "cal": ""} if dm.get("via") == "ir" and dm.get("lib") else None)
         if not s:
             res["nosrc"].append(c)
         elif s.get("ok", True):
