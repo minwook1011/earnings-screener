@@ -246,6 +246,15 @@
   }
   /* 메모 — 2단계 목록 시총·PER 아래 작은 글씨 메모 칸, 이 브라우저에 저장(es-memo, 2026-11-12 사용자) */
   var MEMO = load("es-memo");
+  (function memoBackup() {   // 메모 날짜별 사본(es-memo-bak-YYYY-MM-DD, 최근 14일) — 사라져도 되살릴 수 있게(2026-11-15 사용자)
+    try {
+      var raw = localStorage.getItem("es-memo"); if (!raw || raw === "{}") return;
+      var t = new Date(), d = t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
+      if (!localStorage.getItem("es-memo-bak-" + d)) localStorage.setItem("es-memo-bak-" + d, raw);
+      var ks = []; for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (/^es-memo-bak-/.test(k)) ks.push(k); }
+      ks.sort().slice(0, Math.max(0, ks.length - 14)).forEach(function (k) { localStorage.removeItem(k); });
+    } catch (e) {}
+  })();
   /* Ctrl+B 굵게(2026-11-15 사용자) — 칸을 글자 서식이 되는 편집 칸으로. 저장은 <b>·<br> 만 남긴 HTML(예전 글자 메모도 그대로 읽힘) */
   function memoHtml(v) { v = String(v || ""); return v.indexOf("<") < 0 ? esc(v).replace(/\n/g, "<br>") : v; }
   function memoClean(el) {   // 굵게·줄바꿈만 남기고 나머지 태그·속성은 버린다(붙여 넣은 서식 포함)
