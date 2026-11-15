@@ -27,7 +27,9 @@ import build_xlsx  # noqa: E402
 OUT = os.path.join(TOOLS, "deck_src.json")
 RES = os.path.join(ROOT, "docs", "research")
 KST = timezone(timedelta(hours=9))
-NOT = re.compile(r"訂正|English|英文")
+NOT = re.compile(r"訂正|English|英文|抜粋|優待|成長可能性|中期経営|配当")
+EARN = re.compile(r"決算|四半期|中間期|通期")
+RANK = re.compile(r"説明会|決算説明資料|プレゼンテーション")
 
 
 def load(p, e):
@@ -47,9 +49,9 @@ def tdnet_decks(c):
         t = it.get("Tdnet", it) if isinstance(it, dict) else {}
         title, day = t.get("title", ""), t.get("pubdate", "")[:10]
         m = re.search(r"(\d{18})\.pdf", t.get("document_url", ""))
-        if m and day >= cut and build_xlsx.DECK.search(title) and not NOT.search(title):
+        if m and day >= cut and build_xlsx.DECK.search(title) and EARN.search(title) and not NOT.search(title):
             out.append({"doc": m.group(1), "date": day, "title": title})
-    return sorted(out, key=lambda f: f["date"], reverse=True)
+    return sorted(out, key=lambda f: (f["date"], bool(RANK.search(f["title"]))), reverse=True)   # 같은 날이면 설명회 본 자료 먼저
 
 
 def one(c, src):

@@ -22,6 +22,10 @@ def doc_day(p):
         v = open(p + ".doc", encoding="utf-8").read().strip()
     except OSError:
         return None, ""
+    try:   # 실제 공개일(deck_refresh.py 가 적음) — 문서 번호 속 날짜는 공개일과 다를 수 있다
+        return open(p + ".day", encoding="utf-8").read().strip()[:10], v
+    except OSError:
+        pass
     m = re.match(r"\d{4}(\d{4})(\d{2})(\d{2})\d+$", v) or re.search(r"/(\d{4})(\d{2})(\d{2})\d{6,}\.pdf", v)
     if m:
         return f"{m.group(1)}-{m.group(2)}-{m.group(3)}", v
