@@ -762,6 +762,7 @@
     if (st === 2) {
       var dates = {}; S.list.forEach(function (o) { if (o.stage >= 2) dates[o.d || "-"] = (dates[o.d || "-"] || 0) + 1; });
       var keys = Object.keys(dates).filter(function (k) { return k !== "-"; }).sort();
+      if (!S.day) { try { S.day = sessionStorage.getItem("es-day"); } catch (e) {} }
       if (!S.day || !dates[S.day]) { var td = kstYmd(); S.day = keys.filter(function (k) { return k <= td; }).pop() || keys[keys.length - 1] || null; }
       var di = keys.indexOf(S.day);
       if (day) {
@@ -1248,9 +1249,9 @@
       };
     });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
-    app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { S.day = b.dataset.dd; rerender(); }; });
+    app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { S.day = b.dataset.dd; try { sessionStorage.setItem("es-day", S.day); } catch (e) {} rerender(); }; });
     app.querySelectorAll("[data-dstep]").forEach(function (b) {
-      b.onclick = function () { var k = [].map.call(app.querySelectorAll("[data-dd]"), function (x) { return x.dataset.dd; }); S.day = k[Math.max(0, Math.min(k.length - 1, k.indexOf(S.day) + +b.dataset.dstep))]; rerender(); };
+      b.onclick = function () { var k = [].map.call(app.querySelectorAll("[data-dd]"), function (x) { return x.dataset.dd; }); S.day = k[Math.max(0, Math.min(k.length - 1, k.indexOf(S.day) + +b.dataset.dstep))]; try { sessionStorage.setItem("es-day", S.day); } catch (e) {} rerender(); };
     });
     var q = document.getElementById("q");
     // 한글 조합 중(ㄱ→가)엔 다시 그리지 않음 — 그리면 입력칸이 새로 생겨 'ㄱ교ㅅ세' 처럼 깨짐(2026-10-29 사용자)
