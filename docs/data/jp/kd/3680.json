@@ -1,1 +1,1568 @@
-{"c": "3680", "n": "핫링크", "asof": "2026-11-13", "latest": "2026년 12월기 3분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "세전이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "IFRS, 12월 결산. 경상 칸 = 세전이익. 25.4Q·24.4Q 영업적자는 투자 평가손·감손(특수 요인). 현금 = 현금 및 현금성자산, 순자산 = 자본 합계", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "SNS 마케팅 지원 매출", "d": "q", "bars": [{"k": "sns", "l": "SNS 마케팅 매출", "u": "억엔", "c": 0}], "lines": [{"k": "sns_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료 p25 · 1Q·4Q 쏠림(광고 예산 소진·연말 판매)"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금성자산", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "3Q26 결산설명자료·결산단신 · 총차입금 = 유동 + 비유동 차입금"}, {"sec": "사업 지표", "t": "부문별 매출", "d": "q", "src": "3Q26 결산설명자료 p25 · Web3는 0.01~0.04억엔이라 뺌, 24년엔 그 밖 0.74~0.96억엔 있음", "lines": [{"k": "sns", "l": "SNS 마케팅 지원", "u": "억엔", "c": 0}, {"k": "daas", "l": "DaaS(미국 트랙 등)", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "DaaS 매출", "d": "q", "bars": [{"k": "daas", "l": "DaaS 매출", "u": "억엔", "c": 0}], "lines": [{"k": "daas_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료 p25"}, {"sec": "사업 지표", "t": "부문 이익(특수 요인 전)", "d": "q", "lines": [{"k": "daas_op", "l": "DaaS", "u": "억엔", "c": 0}, {"k": "sns_op", "l": "SNS 마케팅", "u": "억엔", "c": 1}, {"k": "sns_opm", "l": "SNS 이익률", "u": "%", "c": 0, "r": 1}, {"k": "daas_opm", "l": "DaaS 이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산설명자료 p26"}, {"sec": "사업 지표", "t": "부문 이익 합계와 본사 비용", "d": "q", "src": "3Q26 결산설명자료 p26 · 차이 = 본사 비용(분기 약 1.6~2.1억엔) + 투자 평가손 등", "lines": [{"k": "ngop", "l": "부문 이익 합계(회사 비GAAP)", "u": "억엔", "c": 0}, {"k": "op", "l": "공시 영업이익", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "본사 비용", "d": "q", "bars": [{"k": "corp", "l": "본사 비용(음수)", "u": "억엔", "c": 0}], "src": "3Q26 결산설명자료 p26"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}], "tables": {"q": [{"q": "23.4Q", "x": "23.4Q", "sales": 13.31, "op": 0.44, "ord": -0.23, "net": -0.19, "gp": 4.33, "sga": 3.67, "cogs": 8.98, "cash": 34.96, "equity": 61.37, "total_assets": 84.9, "debt_total": 7.72, "gpm": 32.5, "opm": 3.3, "sns": null, "daas": null, "sns_op": null, "daas_op": null, "corp": null, "ngop": null, "sns_opm": null, "daas_opm": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "sns_yoy": null, "daas_yoy": null, "sns_op_yoy": null, "daas_op_yoy": null, "ngop_yoy": null}, {"q": "24.1Q", "x": "24.1Q", "sales": 11.71, "op": 0.25, "ord": 1.37, "net": 0.87, "gp": 3.51, "sga": 3.33, "cogs": 8.2, "cash": 37.01, "equity": 64.13, "total_assets": 87.22, "debt_total": 7.45, "gpm": 30.0, "opm": 2.1, "sns": 4.53, "daas": 6.21, "sns_op": 0.35, "daas_op": 1.74, "corp": -1.83, "ngop": 2.08, "sns_opm": 7.7, "daas_opm": 28.0, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "sns_yoy": null, "daas_yoy": null, "sns_op_yoy": null, "daas_op_yoy": null, "ngop_yoy": null}, {"q": "24.2Q", "x": "24.2Q", "sales": 11.2, "op": 0.14, "ord": 1.86, "net": 1.31, "gp": 3.37, "sga": 3.44, "cogs": 7.83, "cash": 36.34, "equity": 67.38, "total_assets": 89.53, "debt_total": 7.13, "gpm": 30.1, "opm": 1.3, "sns": 4.7, "daas": 5.6, "sns_op": 0.22, "daas_op": 1.56, "corp": -1.75, "ngop": 1.88, "sns_opm": 4.7, "daas_opm": 27.9, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "sns_yoy": null, "daas_yoy": null, "sns_op_yoy": null, "daas_op_yoy": null, "ngop_yoy": null}, {"q": "24.3Q", "x": "24.3Q", "sales": 9.71, "op": -0.81, "ord": -2.44, "net": -2.13, "gp": 2.8, "sga": 3.32, "cogs": 6.91, "cash": 32.64, "equity": 61.4, "total_assets": 81.58, "debt_total": 6.75, "gpm": 28.8, "opm": -8.3, "sns": 4.89, "daas": 3.96, "sns_op": 0.37, "daas_op": 0.86, "corp": -1.66, "ngop": 1.0, "sns_opm": 7.6, "daas_opm": 21.7, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "sns_yoy": null, "daas_yoy": null, "sns_op_yoy": null, "daas_op_yoy": null, "ngop_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 10.06, "op": -6.63, "ord": -5.66, "net": -5.69, "gp": 3.2, "sga": 3.7, "cogs": 6.86, "cash": 33.02, "equity": 58.56, "total_assets": 78.71, "debt_total": 6.4, "gpm": 31.8, "opm": -65.9, "sns": 5.58, "daas": 3.71, "sns_op": 0.84, "daas_op": 0.81, "corp": -2.09, "ngop": 1.59, "sns_opm": 15.1, "daas_opm": 21.8, "sales_yoy": -24.4, "gp_yoy": -26.1, "sga_yoy": 0.8, "op_yoy": -1606.8, "ord_yoy": null, "net_yoy": null, "cash_yoy": -5.5, "sns_yoy": null, "daas_yoy": null, "sns_op_yoy": null, "daas_op_yoy": null, "ngop_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 9.21, "op": -0.25, "ord": -1.03, "net": -1.04, "gp": 3.27, "sga": 3.51, "cogs": 5.94, "cash": 30.66, "equity": 56.07, "total_assets": 75.37, "debt_total": 6.02, "gpm": 35.5, "opm": -2.7, "sns": 5.7, "daas": 3.5, "sns_op": 0.79, "daas_op": 0.78, "corp": -1.8, "ngop": 1.56, "sns_opm": 13.9, "daas_opm": 22.3, "sales_yoy": -21.3, "gp_yoy": -6.8, "sga_yoy": 5.4, "op_yoy": -200.0, "ord_yoy": -175.2, "net_yoy": -219.5, "cash_yoy": -17.2, "sns_yoy": 25.8, "daas_yoy": -43.6, "sns_op_yoy": 125.7, "daas_op_yoy": -55.2, "ngop_yoy": -25.0}, {"q": "25.2Q", "x": "25.2Q", "sales": 8.07, "op": -0.93, "ord": -1.43, "net": -1.25, "gp": 2.45, "sga": 3.4, "cogs": 5.62, "cash": 29.72, "equity": 54.03, "total_assets": 71.75, "debt_total": 5.65, "gpm": 30.4, "opm": -11.5, "sns": 4.98, "daas": 3.07, "sns_op": 0.28, "daas_op": 0.63, "corp": -1.8, "ngop": 0.87, "sns_opm": 5.6, "daas_opm": 20.5, "sales_yoy": -27.9, "gp_yoy": -27.3, "sga_yoy": -1.2, "op_yoy": -764.3, "ord_yoy": -176.9, "net_yoy": -195.4, "cash_yoy": -18.2, "sns_yoy": 6.0, "daas_yoy": -45.2, "sns_op_yoy": 27.3, "daas_op_yoy": -59.6, "ngop_yoy": -53.7}, {"q": "25.3Q", "x": "25.3Q", "sales": 8.6, "op": -0.51, "ord": -0.19, "net": -0.27, "gp": 2.65, "sga": 3.27, "cogs": 5.95, "cash": 28.53, "equity": 54.18, "total_assets": 71.45, "debt_total": 5.28, "gpm": 30.8, "opm": -5.9, "sns": 5.42, "daas": 3.15, "sns_op": 0.44, "daas_op": 0.88, "corp": -1.89, "ngop": 1.38, "sns_opm": 8.1, "daas_opm": 27.9, "sales_yoy": -11.4, "gp_yoy": -5.4, "sga_yoy": -1.5, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -12.6, "sns_yoy": 10.8, "daas_yoy": -20.5, "sns_op_yoy": 18.9, "daas_op_yoy": 2.3, "ngop_yoy": 38.0}, {"q": "25.4Q", "x": "25.4Q", "sales": 10.63, "op": -16.64, "ord": -17.25, "net": -15.31, "gp": 3.29, "sga": 3.73, "cogs": 7.34, "cash": 24.32, "equity": 40.34, "total_assets": 59.97, "debt_total": 6.91, "gpm": 31.0, "opm": -156.5, "sns": 7.15, "daas": 3.42, "sns_op": 0.57, "daas_op": 0.6, "corp": -1.79, "ngop": 1.03, "sns_opm": 8.0, "daas_opm": 17.5, "sales_yoy": 5.7, "gp_yoy": 2.8, "sga_yoy": 0.8, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -26.3, "sns_yoy": 28.1, "daas_yoy": -7.8, "sns_op_yoy": -32.1, "daas_op_yoy": -25.9, "ngop_yoy": -35.2}, {"q": "26.1Q", "x": "26.1Q", "sales": 9.96, "op": 0.45, "ord": -0.56, "net": -0.45, "gp": 3.94, "sga": 3.54, "cogs": 6.02, "cash": 23.06, "equity": 39.33, "total_assets": 57.44, "debt_total": 6.43, "gpm": 39.6, "opm": 4.5, "sns": 6.44, "daas": 3.51, "sns_op": 0.79, "daas_op": 1.44, "corp": -1.71, "ngop": 2.17, "sns_opm": 12.3, "daas_opm": 41.0, "sales_yoy": 8.1, "gp_yoy": 20.5, "sga_yoy": 0.9, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -24.8, "sns_yoy": 13.0, "daas_yoy": 0.3, "sns_op_yoy": 0.0, "daas_op_yoy": 84.6, "ngop_yoy": 39.1}, {"q": "26.2Q", "x": "26.2Q", "sales": 9.19, "op": -0.67, "ord": -0.69, "net": -0.69, "gp": 3.36, "sga": 3.58, "cogs": 5.83, "cash": 21.82, "equity": 38.94, "total_assets": 56.43, "debt_total": 5.96, "gpm": 36.6, "opm": -7.3, "sns": 5.97, "daas": 3.2, "sns_op": 0.47, "daas_op": 1.0, "corp": -1.6, "ngop": 1.45, "sns_opm": 7.9, "daas_opm": 31.2, "sales_yoy": 13.9, "gp_yoy": 37.1, "sga_yoy": 5.3, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -26.6, "sns_yoy": 19.9, "daas_yoy": 4.2, "sns_op_yoy": 67.9, "daas_op_yoy": 58.7, "ngop_yoy": 66.7}, {"q": "26.3Q", "x": "26.3Q", "sales": 11.38, "op": 1.12, "ord": 0.45, "net": 0.44, "gp": 4.29, "sga": 3.75, "cogs": 7.09, "cash": 21.6, "equity": 38.3, "total_assets": 55.95, "debt_total": 5.51, "gpm": 37.7, "opm": 9.8, "sns": 8.05, "daas": 3.31, "sns_op": 1.26, "daas_op": 1.48, "corp": -1.71, "ngop": 2.83, "sns_opm": 15.7, "daas_opm": 44.7, "sales_yoy": 32.3, "gp_yoy": 61.9, "sga_yoy": 14.7, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -24.3, "sns_yoy": 48.5, "daas_yoy": 5.1, "sns_op_yoy": 186.4, "daas_op_yoy": 68.2, "ngop_yoy": 105.1}], "a": [{"year": "2021", "x": "2021", "sales": 65.71, "op": 3.55, "ord": 10.59, "net": 7.64, "opm": 5.4, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 79.06, "op": 21.1, "ord": 18.75, "net": 18.18, "opm": 26.7, "sales_yoy": 20.3, "op_yoy": 494.4, "net_yoy": 138.0}, {"year": "2023", "x": "2023", "sales": 47.39, "op": 2.2, "ord": 2.87, "net": 2.26, "opm": 4.6, "sales_yoy": -40.1, "op_yoy": -89.6, "net_yoy": -87.6}, {"year": "2024", "x": "2024", "sales": 42.68, "op": -7.05, "ord": -4.87, "net": -5.64, "opm": -16.5, "sales_yoy": -9.9, "op_yoy": -420.5, "net_yoy": -349.6}, {"year": "2025", "x": "2025", "sales": 36.51, "op": -18.33, "ord": -19.9, "net": -17.87, "opm": -50.2, "sales_yoy": -14.5, "op_yoy": null, "net_yoy": null}, {"year": "2026 계획", "x": "2026 계획", "sales": 40.7, "op": 1.04, "ord": 1.08, "net": 0.89, "opm": 2.6, "sales_yoy": 11.5, "op_yoy": null, "net_yoy": null, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "3680",
+ "n": "핫링크",
+ "asof": "2026-11-13",
+ "latest": "2026년 12월기 3분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "세전이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "IFRS, 12월 결산. 경상 칸 = 세전이익. 25.4Q·24.4Q 영업적자는 투자 평가손·감손(특수 요인). 현금 = 현금 및 현금성자산, 순자산 = 자본 합계",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "SNS 마케팅 지원 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sns",
+     "l": "SNS 마케팅 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sns_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료 p25 · 1Q·4Q 쏠림(광고 예산 소진·연말 판매)"
+  },
+  {
+   "sec": "key",
+   "t": "사업별 매출총이익",
+   "d": "q",
+   "lines": [
+    {
+     "k": "sns_gp",
+     "l": "SNS 마케팅 지원",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "daas_gp",
+     "l": "DaaS",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "def": "각 분기 자료의 사업별 누계 매출총이익에서 앞 분기 누계를 빼 분기 단독으로 계산",
+   "src": "25.1Q~26.3Q 결산단신 보충자료 「각 사업 개황·손익 구조」"
+  },
+  {
+   "sec": "부문 실적",
+   "t": "부문별 매출",
+   "d": "q",
+   "src": "3Q26 결산단신 보충자료 p25 · SNS 마케팅 지원은 구전 계장(SNS 구전 서비스, 25년 정지) 제외 기준, 구전 계장은 따로 그림. Web3는 0.01~0.04억엔이라 뺌",
+   "lines": [
+    {
+     "k": "sns",
+     "l": "SNS 마케팅 지원",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "daas",
+     "l": "DaaS(미국 트랙 등)",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "sns_kk",
+     "l": "구전 계장(25년 정지)",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문 실적",
+   "t": "DaaS 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "daas",
+     "l": "DaaS 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "daas_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료 p25"
+  },
+  {
+   "sec": "부문 실적",
+   "t": "부문 이익(특수 요인 전)",
+   "d": "q",
+   "lines": [
+    {
+     "k": "daas_op",
+     "l": "DaaS",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "sns_op",
+     "l": "SNS 마케팅",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "sns_opm",
+     "l": "SNS 이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "daas_opm",
+     "l": "DaaS 이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료 p26"
+  },
+  {
+   "sec": "부문 실적",
+   "t": "부문 이익 합계와 본사 비용",
+   "d": "q",
+   "src": "3Q26 결산설명자료 p26 · 차이 = 본사 비용(분기 약 1.6~2.1억엔) + 투자 평가손 등",
+   "lines": [
+    {
+     "k": "ngop",
+     "l": "부문 이익 합계(회사 비GAAP)",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "op",
+     "l": "공시 영업이익",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문 실적",
+   "t": "본사 비용",
+   "d": "q",
+   "bars": [
+    {
+     "k": "corp",
+     "l": "본사 비용(음수)",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "3Q26 결산설명자료 p26"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "gpm",
+     "l": "매출총이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "고객·인력",
+   "t": "사업별 고객 수",
+   "d": "q",
+   "lines": [
+    {
+     "k": "cl_sns_c",
+     "l": "SNS 마케팅(누적 기준)",
+     "u": "사",
+     "c": 0
+    },
+    {
+     "k": "cl_daas_c",
+     "l": "DaaS(누적 기준)",
+     "u": "사",
+     "c": 1
+    },
+    {
+     "k": "cl_sns",
+     "l": "SNS 마케팅(실가동 기준)",
+     "u": "사",
+     "c": 2
+    },
+    {
+     "k": "cl_daas",
+     "l": "DaaS(실가동 기준)",
+     "u": "사",
+     "c": 3
+    },
+    {
+     "k": "cl_web3_c",
+     "l": "Web3(누적)",
+     "u": "사",
+     "c": 4
+    },
+    {
+     "k": "cl_web3",
+     "l": "Web3(실가동)",
+     "u": "사",
+     "c": 5
+    }
+   ],
+   "def": "분기 말 고객 수. 26년 1분기부터 회사가 누적 고객 수에서 실제 거래 중인 고객 수로 기준을 바꿈 — 두 기준은 이어 보지 말 것",
+   "src": "25.1Q~26.3Q 결산단신 보충자료 「재무·사업 주요 지표 요약」"
+  },
+  {
+   "sec": "고객·인력",
+   "t": "종업원 수",
+   "d": "q",
+   "bars": [
+    {
+     "k": "emp",
+     "l": "종업원 수(정사원)",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "25.1Q~26.3Q 결산단신 보충자료 「재무·사업 주요 지표 요약」 · 정사원만"
+  },
+  {
+   "sec": "고객·인력",
+   "t": "국내·해외 종업원 수",
+   "d": "q",
+   "lines": [
+    {
+     "k": "emp_jp",
+     "l": "일본",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp_os",
+     "l": "해외",
+     "u": "명",
+     "c": 1
+    }
+   ],
+   "src": "25.1Q~26.3Q 결산단신 보충자료 · 정사원만"
+  },
+  {
+   "sec": "고객·인력",
+   "t": "종업원 1인당 분기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "spe",
+     "l": "1인당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "def": "분기 연결 매출 ÷ 분기 말 종업원 수(정사원)",
+   "src": "결산단신·25.1Q~26.3Q 결산단신 보충자료"
+  },
+  {
+   "sec": "고객·인력",
+   "t": "고객 1사당 분기 매출(실가동 기준)",
+   "d": "q",
+   "lines": [
+    {
+     "k": "sns_pc",
+     "l": "SNS 마케팅",
+     "u": "백만엔",
+     "c": 0
+    },
+    {
+     "k": "daas_pc",
+     "l": "DaaS",
+     "u": "백만엔",
+     "c": 1
+    }
+   ],
+   "def": "사업별 분기 매출 ÷ 분기 말 실가동 고객 수(26년~ 기준)",
+   "src": "26.1Q~26.3Q 결산단신 보충자료"
+  },
+  {
+   "sec": "수익성·단가",
+   "t": "사업별 매출총이익률",
+   "d": "q",
+   "lines": [
+    {
+     "k": "sns_gpm",
+     "l": "SNS 마케팅 지원",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "daas_gpm",
+     "l": "DaaS",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "def": "분기 단독 사업별 매출총이익 ÷ 사업별 매출",
+   "src": "25.1Q~26.3Q 결산단신 보충자료"
+  },
+  {
+   "sec": "수익성·단가",
+   "t": "SNS 마케팅 연간 ARPU",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "arpu_sns",
+     "l": "고객 1사당 연 매출",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "def": "ARPU = 고객 1사당 연 매출(회사 정의). 마지막 막대 = 2026년 목표",
+   "src": "3Q26 결산단신 보충자료 p17(천엔 → 만엔)"
+  },
+  {
+   "sec": "수익성·단가",
+   "t": "DaaS 연간 ARPU",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "arpu_daas",
+     "l": "고객 1사당 연 매출",
+     "u": "천달러",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "def": "ARPU = 고객 1사당 연 매출(달러 기준). 마지막 막대 = 2026년 목표",
+   "src": "3Q26 결산단신 보충자료 p17"
+  },
+  {
+   "sec": "수익성·단가",
+   "t": "투자 손익 조정 EBITDA",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ebitda",
+     "l": "조정 EBITDA",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ebitda_m",
+     "l": "EBITDA 마진",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "def": "회사 정의: 영업이익 + 감가상각 ± 기타 손익(투자 평가 등 제외). 누계 값에서 앞 분기 누계를 빼 분기 단독으로 계산",
+   "src": "25.1Q~26.3Q 결산단신 보충자료 「재무·사업 주요 지표 요약」"
+  },
+  {
+   "sec": "지역",
+   "t": "국내·해외 매출",
+   "d": "q",
+   "lines": [
+    {
+     "k": "jp_s",
+     "l": "일본",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "os_s",
+     "l": "해외(미국 DaaS 등)",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "def": "회사가 낸 누계(0.1억엔 단위)에서 앞 분기 누계를 빼 분기 단독으로 계산",
+   "src": "25.1Q~26.3Q 결산단신 보충자료 「재무·사업 주요 지표 요약」"
+  },
+  {
+   "sec": "지역",
+   "t": "해외 매출 비중",
+   "d": "q",
+   "lines": [
+    {
+     "k": "os_sh",
+     "l": "해외 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "def": "분기 해외 매출 ÷ (일본 + 해외)",
+   "src": "25.1Q~26.3Q 결산단신 보충자료"
+  },
+  {
+   "sec": "투자",
+   "t": "전사 누적 투자 리턴",
+   "d": "q",
+   "lines": [
+    {
+     "k": "inv_real",
+     "l": "누적 실현 이익",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "inv_cost",
+     "l": "투자 원가",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "inv_unr",
+     "l": "미실현 평가익",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "3Q26 결산단신 보충자료 p27 · Web2·Web3 포함 전사, 분기 말 누적"
+  },
+  {
+   "sec": "투자",
+   "t": "Web3 투자 누적 리턴",
+   "d": "q",
+   "lines": [
+    {
+     "k": "w3_cost",
+     "l": "투자 원가(DeFi 포함)",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "w3_real",
+     "l": "누적 실현 이익",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "w3_unr",
+     "l": "미실현 손익",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "w3_defi",
+     "l": "DeFi 누적 수익",
+     "u": "억엔",
+     "c": 3
+    }
+   ],
+   "def": "25년 4분기 원가 급증 = 6억엔 DeFi(스테이블코인) 운용 시작",
+   "src": "3Q26 결산단신 보충자료 p48"
+  },
+  {
+   "sec": "투자",
+   "t": "투자 누적 리턴 ROI",
+   "d": "q",
+   "lines": [
+    {
+     "k": "roi",
+     "l": "ROI(BS 평가 포함)",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "25.1Q~26.3Q 결산단신 보충자료 「재무·사업 주요 지표 요약」 · 회사 계산"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금성자산",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신 · 총차입금 = 유동 + 비유동 차입금"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "23.4Q",
+    "x": "23.4Q",
+    "sales": 13.31,
+    "op": 0.44,
+    "ord": -0.23,
+    "net": -0.19,
+    "gp": 4.33,
+    "sga": 3.67,
+    "cogs": 8.98,
+    "cash": 34.96,
+    "equity": 61.37,
+    "total_assets": 84.9,
+    "debt_total": 7.72,
+    "gpm": 32.5,
+    "opm": 3.3,
+    "sns": null,
+    "daas": null,
+    "sns_op": null,
+    "daas_op": null,
+    "corp": null,
+    "ngop": null,
+    "sns_opm": null,
+    "daas_opm": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "sns_yoy": null,
+    "daas_yoy": null,
+    "sns_op_yoy": null,
+    "daas_op_yoy": null,
+    "ngop_yoy": null,
+    "sns_kk": null,
+    "emp": null,
+    "emp_jp": null,
+    "emp_os": null,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": null,
+    "os_s": null,
+    "os_sh": null,
+    "ebitda": null,
+    "ebitda_m": null,
+    "inv_cost": null,
+    "inv_unr": null,
+    "inv_real": null,
+    "w3_cost": null,
+    "w3_unr": null,
+    "w3_real": null,
+    "w3_defi": null,
+    "roi": null,
+    "sns_gp": null,
+    "daas_gp": null,
+    "sns_gpm": null,
+    "daas_gpm": null,
+    "spe": null,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 11.71,
+    "op": 0.25,
+    "ord": 1.37,
+    "net": 0.87,
+    "gp": 3.51,
+    "sga": 3.33,
+    "cogs": 8.2,
+    "cash": 37.01,
+    "equity": 64.13,
+    "total_assets": 87.22,
+    "debt_total": 7.45,
+    "gpm": 30.0,
+    "opm": 2.1,
+    "sns": 4.53,
+    "daas": 6.21,
+    "sns_op": 0.35,
+    "daas_op": 1.74,
+    "corp": -1.83,
+    "ngop": 2.08,
+    "sns_opm": 7.7,
+    "daas_opm": 28.0,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "sns_yoy": null,
+    "daas_yoy": null,
+    "sns_op_yoy": null,
+    "daas_op_yoy": null,
+    "ngop_yoy": null,
+    "sns_kk": 0.96,
+    "emp": null,
+    "emp_jp": null,
+    "emp_os": null,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": null,
+    "os_s": null,
+    "os_sh": null,
+    "ebitda": null,
+    "ebitda_m": null,
+    "inv_cost": 8.45,
+    "inv_unr": 6.04,
+    "inv_real": 15.29,
+    "w3_cost": 4.47,
+    "w3_unr": 2.41,
+    "w3_real": 0.99,
+    "w3_defi": null,
+    "roi": null,
+    "sns_gp": null,
+    "daas_gp": null,
+    "sns_gpm": null,
+    "daas_gpm": null,
+    "spe": null,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 11.2,
+    "op": 0.14,
+    "ord": 1.86,
+    "net": 1.31,
+    "gp": 3.37,
+    "sga": 3.44,
+    "cogs": 7.83,
+    "cash": 36.34,
+    "equity": 67.38,
+    "total_assets": 89.53,
+    "debt_total": 7.13,
+    "gpm": 30.1,
+    "opm": 1.3,
+    "sns": 4.7,
+    "daas": 5.6,
+    "sns_op": 0.22,
+    "daas_op": 1.56,
+    "corp": -1.75,
+    "ngop": 1.88,
+    "sns_opm": 4.7,
+    "daas_opm": 27.9,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "sns_yoy": null,
+    "daas_yoy": null,
+    "sns_op_yoy": null,
+    "daas_op_yoy": null,
+    "ngop_yoy": null,
+    "sns_kk": 0.87,
+    "emp": null,
+    "emp_jp": null,
+    "emp_os": null,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": null,
+    "os_s": null,
+    "os_sh": null,
+    "ebitda": null,
+    "ebitda_m": null,
+    "inv_cost": 8.84,
+    "inv_unr": 7.57,
+    "inv_real": 15.33,
+    "w3_cost": 4.86,
+    "w3_unr": 3.93,
+    "w3_real": 1.03,
+    "w3_defi": null,
+    "roi": null,
+    "sns_gp": null,
+    "daas_gp": null,
+    "sns_gpm": null,
+    "daas_gpm": null,
+    "spe": null,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 9.71,
+    "op": -0.81,
+    "ord": -2.44,
+    "net": -2.13,
+    "gp": 2.8,
+    "sga": 3.32,
+    "cogs": 6.91,
+    "cash": 32.64,
+    "equity": 61.4,
+    "total_assets": 81.58,
+    "debt_total": 6.75,
+    "gpm": 28.8,
+    "opm": -8.3,
+    "sns": 4.89,
+    "daas": 3.96,
+    "sns_op": 0.37,
+    "daas_op": 0.86,
+    "corp": -1.66,
+    "ngop": 1.0,
+    "sns_opm": 7.6,
+    "daas_opm": 21.7,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "sns_yoy": null,
+    "daas_yoy": null,
+    "sns_op_yoy": null,
+    "daas_op_yoy": null,
+    "ngop_yoy": null,
+    "sns_kk": 0.85,
+    "emp": null,
+    "emp_jp": null,
+    "emp_os": null,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": null,
+    "os_s": null,
+    "os_sh": null,
+    "ebitda": null,
+    "ebitda_m": null,
+    "inv_cost": 9.02,
+    "inv_unr": 6.07,
+    "inv_real": 15.35,
+    "w3_cost": 5.04,
+    "w3_unr": 2.47,
+    "w3_real": 1.05,
+    "w3_defi": null,
+    "roi": null,
+    "sns_gp": null,
+    "daas_gp": null,
+    "sns_gpm": null,
+    "daas_gpm": null,
+    "spe": null,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 10.06,
+    "op": -6.63,
+    "ord": -5.66,
+    "net": -5.69,
+    "gp": 3.2,
+    "sga": 3.7,
+    "cogs": 6.86,
+    "cash": 33.02,
+    "equity": 58.56,
+    "total_assets": 78.71,
+    "debt_total": 6.4,
+    "gpm": 31.8,
+    "opm": -65.9,
+    "sns": 5.58,
+    "daas": 3.71,
+    "sns_op": 0.84,
+    "daas_op": 0.81,
+    "corp": -2.09,
+    "ngop": 1.59,
+    "sns_opm": 15.1,
+    "daas_opm": 21.8,
+    "sales_yoy": -24.4,
+    "gp_yoy": -26.1,
+    "sga_yoy": 0.8,
+    "op_yoy": -1606.8,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -5.5,
+    "sns_yoy": null,
+    "daas_yoy": null,
+    "sns_op_yoy": null,
+    "daas_op_yoy": null,
+    "ngop_yoy": null,
+    "sns_kk": 0.74,
+    "emp": null,
+    "emp_jp": null,
+    "emp_os": null,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": null,
+    "os_s": null,
+    "os_sh": null,
+    "ebitda": null,
+    "ebitda_m": null,
+    "inv_cost": 9.33,
+    "inv_unr": 6.67,
+    "inv_real": 15.35,
+    "w3_cost": 5.35,
+    "w3_unr": 3.18,
+    "w3_real": 1.05,
+    "w3_defi": null,
+    "roi": null,
+    "sns_gp": null,
+    "daas_gp": null,
+    "sns_gpm": null,
+    "daas_gpm": null,
+    "spe": null,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 9.21,
+    "op": -0.25,
+    "ord": -1.03,
+    "net": -1.04,
+    "gp": 3.27,
+    "sga": 3.51,
+    "cogs": 5.94,
+    "cash": 30.66,
+    "equity": 56.07,
+    "total_assets": 75.37,
+    "debt_total": 6.02,
+    "gpm": 35.5,
+    "opm": -2.7,
+    "sns": 5.7,
+    "daas": 3.5,
+    "sns_op": 0.79,
+    "daas_op": 0.78,
+    "corp": -1.8,
+    "ngop": 1.56,
+    "sns_opm": 13.9,
+    "daas_opm": 22.3,
+    "sales_yoy": -21.3,
+    "gp_yoy": -6.8,
+    "sga_yoy": 5.4,
+    "op_yoy": -200.0,
+    "ord_yoy": -175.2,
+    "net_yoy": -219.5,
+    "cash_yoy": -17.2,
+    "sns_yoy": 25.8,
+    "daas_yoy": -43.6,
+    "sns_op_yoy": 125.7,
+    "daas_op_yoy": -55.2,
+    "ngop_yoy": -25.0,
+    "sns_kk": null,
+    "emp": 140,
+    "emp_jp": 122,
+    "emp_os": 18,
+    "cl_sns_c": 139,
+    "cl_daas_c": 40,
+    "cl_web3_c": 4,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": 5.7,
+    "os_s": 3.5,
+    "os_sh": 38.0,
+    "ebitda": 0.85,
+    "ebitda_m": 9.2,
+    "inv_cost": 9.33,
+    "inv_unr": 6.04,
+    "inv_real": 15.36,
+    "w3_cost": 5.35,
+    "w3_unr": 2.55,
+    "w3_real": 1.06,
+    "w3_defi": null,
+    "roi": 229,
+    "sns_gp": 1.76,
+    "daas_gp": 1.49,
+    "sns_gpm": 30.9,
+    "daas_gpm": 42.6,
+    "spe": 6.58,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 8.07,
+    "op": -0.93,
+    "ord": -1.43,
+    "net": -1.25,
+    "gp": 2.45,
+    "sga": 3.4,
+    "cogs": 5.62,
+    "cash": 29.72,
+    "equity": 54.03,
+    "total_assets": 71.75,
+    "debt_total": 5.65,
+    "gpm": 30.4,
+    "opm": -11.5,
+    "sns": 4.98,
+    "daas": 3.07,
+    "sns_op": 0.28,
+    "daas_op": 0.63,
+    "corp": -1.8,
+    "ngop": 0.87,
+    "sns_opm": 5.6,
+    "daas_opm": 20.5,
+    "sales_yoy": -27.9,
+    "gp_yoy": -27.3,
+    "sga_yoy": -1.2,
+    "op_yoy": -764.3,
+    "ord_yoy": -176.9,
+    "net_yoy": -195.4,
+    "cash_yoy": -18.2,
+    "sns_yoy": 6.0,
+    "daas_yoy": -45.2,
+    "sns_op_yoy": 27.3,
+    "daas_op_yoy": -59.6,
+    "ngop_yoy": -53.7,
+    "sns_kk": null,
+    "emp": 144,
+    "emp_jp": 125,
+    "emp_os": 19,
+    "cl_sns_c": 119,
+    "cl_daas_c": 38,
+    "cl_web3_c": 4,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": 4.9,
+    "os_s": 3.1,
+    "os_sh": 38.8,
+    "ebitda": 0.11,
+    "ebitda_m": 1.4,
+    "inv_cost": 9.44,
+    "inv_unr": 5.62,
+    "inv_real": 15.39,
+    "w3_cost": 5.46,
+    "w3_unr": 2.15,
+    "w3_real": 1.09,
+    "w3_defi": null,
+    "roi": 223,
+    "sns_gp": 1.26,
+    "daas_gp": 1.18,
+    "sns_gpm": 25.3,
+    "daas_gpm": 38.4,
+    "spe": 5.6,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 8.6,
+    "op": -0.51,
+    "ord": -0.19,
+    "net": -0.27,
+    "gp": 2.65,
+    "sga": 3.27,
+    "cogs": 5.95,
+    "cash": 28.53,
+    "equity": 54.18,
+    "total_assets": 71.45,
+    "debt_total": 5.28,
+    "gpm": 30.8,
+    "opm": -5.9,
+    "sns": 5.42,
+    "daas": 3.15,
+    "sns_op": 0.44,
+    "daas_op": 0.88,
+    "corp": -1.89,
+    "ngop": 1.38,
+    "sns_opm": 8.1,
+    "daas_opm": 27.9,
+    "sales_yoy": -11.4,
+    "gp_yoy": -5.4,
+    "sga_yoy": -1.5,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -12.6,
+    "sns_yoy": 10.8,
+    "daas_yoy": -20.5,
+    "sns_op_yoy": 18.9,
+    "daas_op_yoy": 2.3,
+    "ngop_yoy": 38.0,
+    "sns_kk": null,
+    "emp": 140,
+    "emp_jp": 123,
+    "emp_os": 17,
+    "cl_sns_c": 125,
+    "cl_daas_c": 44,
+    "cl_web3_c": 4,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": 5.5,
+    "os_s": 3.1,
+    "os_sh": 36.0,
+    "ebitda": 0.45,
+    "ebitda_m": 5.2,
+    "inv_cost": 9.59,
+    "inv_unr": 6.04,
+    "inv_real": 15.42,
+    "w3_cost": 5.6,
+    "w3_unr": 2.36,
+    "w3_real": 1.12,
+    "w3_defi": null,
+    "roi": 224,
+    "sns_gp": 1.41,
+    "daas_gp": 1.2,
+    "sns_gpm": 26.0,
+    "daas_gpm": 38.1,
+    "spe": 6.14,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 10.63,
+    "op": -16.64,
+    "ord": -17.25,
+    "net": -15.31,
+    "gp": 3.29,
+    "sga": 3.73,
+    "cogs": 7.34,
+    "cash": 24.32,
+    "equity": 40.34,
+    "total_assets": 59.97,
+    "debt_total": 6.91,
+    "gpm": 31.0,
+    "opm": -156.5,
+    "sns": 7.15,
+    "daas": 3.42,
+    "sns_op": 0.57,
+    "daas_op": 0.6,
+    "corp": -1.79,
+    "ngop": 1.03,
+    "sns_opm": 8.0,
+    "daas_opm": 17.5,
+    "sales_yoy": 5.7,
+    "gp_yoy": 2.8,
+    "sga_yoy": 0.8,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -26.3,
+    "sns_yoy": 28.1,
+    "daas_yoy": -7.8,
+    "sns_op_yoy": -32.1,
+    "daas_op_yoy": -25.9,
+    "ngop_yoy": -35.2,
+    "sns_kk": null,
+    "emp": 136,
+    "emp_jp": 119,
+    "emp_os": 17,
+    "cl_sns_c": 128,
+    "cl_daas_c": 47,
+    "cl_web3_c": 5,
+    "cl_sns": null,
+    "cl_daas": null,
+    "cl_web3": null,
+    "jp_s": 7.1,
+    "os_s": 3.5,
+    "os_sh": 33.0,
+    "ebitda": 0.72,
+    "ebitda_m": 6.8,
+    "inv_cost": 9.59,
+    "inv_unr": 6.82,
+    "inv_real": 14.98,
+    "w3_cost": 11.81,
+    "w3_unr": 1.85,
+    "w3_real": 1.13,
+    "w3_defi": 0.03,
+    "roi": 227,
+    "sns_gp": 1.88,
+    "daas_gp": 1.37,
+    "sns_gpm": 26.3,
+    "daas_gpm": 40.1,
+    "spe": 7.82,
+    "sns_pc": null,
+    "daas_pc": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 9.96,
+    "op": 0.45,
+    "ord": -0.56,
+    "net": -0.45,
+    "gp": 3.94,
+    "sga": 3.54,
+    "cogs": 6.02,
+    "cash": 23.06,
+    "equity": 39.33,
+    "total_assets": 57.44,
+    "debt_total": 6.43,
+    "gpm": 39.6,
+    "opm": 4.5,
+    "sns": 6.44,
+    "daas": 3.51,
+    "sns_op": 0.79,
+    "daas_op": 1.44,
+    "corp": -1.71,
+    "ngop": 2.17,
+    "sns_opm": 12.3,
+    "daas_opm": 41.0,
+    "sales_yoy": 8.1,
+    "gp_yoy": 20.5,
+    "sga_yoy": 0.9,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -24.8,
+    "sns_yoy": 13.0,
+    "daas_yoy": 0.3,
+    "sns_op_yoy": 0.0,
+    "daas_op_yoy": 84.6,
+    "ngop_yoy": 39.1,
+    "sns_kk": null,
+    "emp": 137,
+    "emp_jp": 118,
+    "emp_os": 19,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": 80,
+    "cl_daas": 45,
+    "cl_web3": 3,
+    "jp_s": 6.4,
+    "os_s": 3.5,
+    "os_sh": 35.4,
+    "ebitda": 0.66,
+    "ebitda_m": 6.6,
+    "inv_cost": 9.59,
+    "inv_unr": 5.78,
+    "inv_real": 14.63,
+    "w3_cost": 11.81,
+    "w3_unr": 0.8,
+    "w3_real": 0.78,
+    "w3_defi": 0.09,
+    "roi": 216,
+    "sns_gp": 1.71,
+    "daas_gp": 2.21,
+    "sns_gpm": 26.6,
+    "daas_gpm": 63.0,
+    "spe": 7.27,
+    "sns_pc": 8.05,
+    "daas_pc": 7.8
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 9.19,
+    "op": -0.67,
+    "ord": -0.69,
+    "net": -0.69,
+    "gp": 3.36,
+    "sga": 3.58,
+    "cogs": 5.83,
+    "cash": 21.82,
+    "equity": 38.94,
+    "total_assets": 56.43,
+    "debt_total": 5.96,
+    "gpm": 36.6,
+    "opm": -7.3,
+    "sns": 5.97,
+    "daas": 3.2,
+    "sns_op": 0.47,
+    "daas_op": 1.0,
+    "corp": -1.6,
+    "ngop": 1.45,
+    "sns_opm": 7.9,
+    "daas_opm": 31.2,
+    "sales_yoy": 13.9,
+    "gp_yoy": 37.1,
+    "sga_yoy": 5.3,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -26.6,
+    "sns_yoy": 19.9,
+    "daas_yoy": 4.2,
+    "sns_op_yoy": 67.9,
+    "daas_op_yoy": 58.7,
+    "ngop_yoy": 66.7,
+    "sns_kk": null,
+    "emp": 141,
+    "emp_jp": 122,
+    "emp_os": 19,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": 80,
+    "cl_daas": 45,
+    "cl_web3": 3,
+    "jp_s": 6.0,
+    "os_s": 3.2,
+    "os_sh": 34.8,
+    "ebitda": 0.11,
+    "ebitda_m": 1.2,
+    "inv_cost": 9.59,
+    "inv_unr": 5.07,
+    "inv_real": 14.73,
+    "w3_cost": 11.81,
+    "w3_unr": 0.11,
+    "w3_real": 0.88,
+    "w3_defi": 0.12,
+    "roi": 209,
+    "sns_gp": 1.46,
+    "daas_gp": 1.9,
+    "sns_gpm": 24.5,
+    "daas_gpm": 59.4,
+    "spe": 6.52,
+    "sns_pc": 7.46,
+    "daas_pc": 7.11
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 11.38,
+    "op": 1.12,
+    "ord": 0.45,
+    "net": 0.44,
+    "gp": 4.29,
+    "sga": 3.75,
+    "cogs": 7.09,
+    "cash": 21.6,
+    "equity": 38.3,
+    "total_assets": 55.95,
+    "debt_total": 5.51,
+    "gpm": 37.7,
+    "opm": 9.8,
+    "sns": 8.05,
+    "daas": 3.31,
+    "sns_op": 1.26,
+    "daas_op": 1.48,
+    "corp": -1.71,
+    "ngop": 2.83,
+    "sns_opm": 15.7,
+    "daas_opm": 44.7,
+    "sales_yoy": 32.3,
+    "gp_yoy": 61.9,
+    "sga_yoy": 14.7,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -24.3,
+    "sns_yoy": 48.5,
+    "daas_yoy": 5.1,
+    "sns_op_yoy": 186.4,
+    "daas_op_yoy": 68.2,
+    "ngop_yoy": 105.1,
+    "sns_kk": null,
+    "emp": 143,
+    "emp_jp": 121,
+    "emp_os": 22,
+    "cl_sns_c": null,
+    "cl_daas_c": null,
+    "cl_web3_c": null,
+    "cl_sns": 83,
+    "cl_daas": 44,
+    "cl_web3": 3,
+    "jp_s": 8.0,
+    "os_s": 3.3,
+    "os_sh": 29.2,
+    "ebitda": 0.92,
+    "ebitda_m": 8.1,
+    "inv_cost": 9.59,
+    "inv_unr": 4.45,
+    "inv_real": 14.73,
+    "w3_cost": 11.81,
+    "w3_unr": -0.51,
+    "w3_real": 0.88,
+    "w3_defi": 0.18,
+    "roi": 199,
+    "sns_gp": 2.19,
+    "daas_gp": 2.09,
+    "sns_gpm": 27.2,
+    "daas_gpm": 63.1,
+    "spe": 7.96,
+    "sns_pc": 9.7,
+    "daas_pc": 7.52
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 65.71,
+    "op": 3.55,
+    "ord": 10.59,
+    "net": 7.64,
+    "opm": 5.4,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 79.06,
+    "op": 21.1,
+    "ord": 18.75,
+    "net": 18.18,
+    "opm": 26.7,
+    "sales_yoy": 20.3,
+    "op_yoy": 494.4,
+    "net_yoy": 138.0
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 47.39,
+    "op": 2.2,
+    "ord": 2.87,
+    "net": 2.26,
+    "opm": 4.6,
+    "sales_yoy": -40.1,
+    "op_yoy": -89.6,
+    "net_yoy": -87.6
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 42.68,
+    "op": -7.05,
+    "ord": -4.87,
+    "net": -5.64,
+    "opm": -16.5,
+    "sales_yoy": -9.9,
+    "op_yoy": -420.5,
+    "net_yoy": -349.6
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 36.51,
+    "op": -18.33,
+    "ord": -19.9,
+    "net": -17.87,
+    "opm": -50.2,
+    "sales_yoy": -14.5,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2026 계획",
+    "x": "2026 계획",
+    "sales": 40.7,
+    "op": 1.04,
+    "ord": 1.08,
+    "net": 0.89,
+    "opm": 2.6,
+    "sales_yoy": 11.5,
+    "op_yoy": null,
+    "net_yoy": null,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "ba": [
+   {
+    "x": "2023",
+    "arpu_sns": 2853.4,
+    "arpu_daas": 255
+   },
+   {
+    "x": "2024",
+    "arpu_sns": 2881.0,
+    "arpu_daas": 216
+   },
+   {
+    "x": "2025",
+    "arpu_sns": 3086.3,
+    "arpu_daas": 171
+   },
+   {
+    "x": "2026 목표",
+    "arpu_sns": 3191.8,
+    "arpu_daas": 202,
+    "plan": 1
+   }
+  ]
+ }
+}
