@@ -1,1 +1,1982 @@
-{"c": "3979", "n": "우루루", "asof": "2026-11-12", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "입찰정보 서비스 NJSS 중심 거브테크 + BPO·폰데스크·포토. 3월 결산(27.2Q = 2026년 7~9월). 사업 지표는 설명자료가 각 연도 2분기 값만 보여 줘 연 1점씩. 2026년 3월기 중 주식 분할", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "거브테크 ARR", "d": "h2", "bars": [{"k": "gov_arr", "l": "ARR", "u": "억엔", "c": 0}], "lines": [{"k": "gov_arr_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)", "def": "입찰정보 서비스 NJSS·nSearch 분기말 MRR × 12"}, {"sec": "key", "t": "거브테크 유료 계약 수", "d": "h2", "bars": [{"k": "gov_cnt", "l": "유료 계약", "u": "건", "c": 0}], "lines": [{"k": "gov_cnt_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)", "def": "NJSS + nSearch"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "사업 지표(매년 2분기)", "t": "SaaS·그 밖 매출", "d": "h2", "src": "2Q27 결산설명자료(각 연도 2분기 값)", "def": "SaaS = NJSS·nSearch·폰데스크·엔포토", "lines": [{"k": "saas", "l": "SaaS 매출", "u": "억엔", "c": 0}, {"k": "other", "l": "그 밖 매출", "u": "억엔", "c": 1}]}, {"sec": "사업 지표(매년 2분기)", "t": "전사 EBITDA", "d": "h2", "bars": [{"k": "ebitda", "l": "EBITDA", "u": "억엔", "c": 0}], "lines": [{"k": "ebitda_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "거브테크(매년 2분기)", "t": "NJSS·nSearch 유료 계약", "d": "h2", "src": "2Q27 결산설명자료(각 연도 2분기 값)", "lines": [{"k": "njss", "l": "NJSS", "u": "건", "c": 0}, {"k": "nsearch", "l": "nSearch", "u": "건", "c": 1}]}, {"sec": "거브테크(매년 2분기)", "t": "NJSS 월 해지율", "d": "h2", "lines": [{"k": "njss_churn", "l": "해지율", "u": "%", "c": 0}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "거브테크(매년 2분기)", "t": "NJSS 연간 ARPU", "d": "h2", "bars": [{"k": "njss_arpu", "l": "ARPU/년", "u": "천엔", "c": 0}], "lines": [{"k": "njss_arpu_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)", "def": "ARR 기준"}, {"sec": "거브테크(매년 2분기)", "t": "거브테크 매출", "d": "h2", "bars": [{"k": "gov_sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "gov_sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "거브테크(매년 2분기)", "t": "거브테크 EBITDA", "d": "h2", "bars": [{"k": "gov_ebitda", "l": "EBITDA", "u": "억엔", "c": 0}], "lines": [{"k": "gov_ebitda_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "BPO(매년 2분기)", "t": "BPO 매출", "d": "h2", "bars": [{"k": "bpo_sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "bpo_sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "BPO(매년 2분기)", "t": "BPO EBITDA", "d": "h2", "bars": [{"k": "bpo_ebitda", "l": "EBITDA", "u": "억엔", "c": 0}], "lines": [{"k": "bpo_ebitda_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "폰데스크(매년 2분기)", "t": "폰데스크 유료 계약", "d": "h2", "bars": [{"k": "fd_cnt", "l": "유료 계약", "u": "건", "c": 0}], "lines": [{"k": "fd_cnt_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)", "def": "전화 응대 대행 서비스"}, {"sec": "폰데스크(매년 2분기)", "t": "폰데스크 월 ARPU", "d": "h2", "src": "2Q27 결산설명자료(각 연도 2분기 값)", "lines": [{"k": "fd_arpu_fix", "l": "고정 요금", "u": "엔", "c": 0}, {"k": "fd_arpu_var", "l": "종량 요금", "u": "엔", "c": 1}]}, {"sec": "폰데스크(매년 2분기)", "t": "폰데스크 월 해지율", "d": "h2", "lines": [{"k": "fd_churn", "l": "해지율", "u": "%", "c": 0}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "폰데스크(매년 2분기)", "t": "폰데스크 매출", "d": "h2", "bars": [{"k": "fd_sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "fd_sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "포토(매년 2분기)", "t": "엔포토 계약 원 수", "d": "h2", "bars": [{"k": "ep_en", "l": "계약 원", "u": "곳", "c": 0}], "lines": [{"k": "ep_en_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)", "def": "유치원·보육원 사진 판매 시스템"}, {"sec": "포토(매년 2분기)", "t": "엔포토 원당 매출", "d": "h2", "bars": [{"k": "ep_per", "l": "원당 매출", "u": "엔", "c": 0}], "lines": [{"k": "ep_per_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "포토(매년 2분기)", "t": "엔포토 매출", "d": "h2", "bars": [{"k": "ep_sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "ep_sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)"}, {"sec": "포토(매년 2분기)", "t": "아워포토 촬영 건수", "d": "h2", "bars": [{"k": "op_shoots", "l": "촬영", "u": "건", "c": 0}], "lines": [{"k": "op_shoots_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(각 연도 2분기 값)", "def": "출장 촬영 중개 · 26.2Q 는 회사 정정값"}, {"sec": "부문", "t": "부문 매출(상반기 누계)", "d": "seg", "x": "label", "src": "2Q27 결산설명자료·결산단신 · 2027년 3월기부터 새 부문", "lines": [{"k": "ytd_2027", "l": "2027년 상반기", "u": "억엔", "c": 0}, {"k": "ytd_2026", "l": "2026년 상반기", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문 매출 통기 계획", "d": "seg", "x": "label", "bars": [{"k": "plan_2027", "l": "2027년 계획", "u": "억엔", "c": 0}], "src": "2Q27 결산설명자료"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 상환분·사채 포함)"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 14.74, "op": 3.35, "ord": 3.36, "net": 2.24, "gp": 10.62, "sga": 7.27, "cogs": 4.12, "cash": 30.53, "st_debt": 0.09, "lt_debt": 0, "equity": 26.45, "total_assets": 53.36, "debt_total": 0.09, "gpm": 72.0, "opm": 22.7, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 18.22, "op": 4.6, "ord": 4.32, "net": 1.69, "gp": 12.25, "sga": 7.65, "cogs": 5.97, "cash": 35.9, "st_debt": 0.4, "lt_debt": 1.58, "equity": 28.12, "total_assets": 60.51, "debt_total": 1.98, "gpm": 67.2, "opm": 25.2, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 14.85, "op": 0.59, "ord": 0.82, "net": 0.48, "gp": 10.45, "sga": 9.86, "cogs": 4.4, "cash": 34.36, "st_debt": 0.4, "lt_debt": 1.48, "equity": 26.18, "total_assets": 56.87, "debt_total": 1.88, "gpm": 70.4, "opm": 4.0, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 15.55, "op": 1.19, "ord": 1.2, "net": 0.7, "gp": 10.9, "sga": 9.7, "cogs": 4.65, "cash": 33.05, "st_debt": 0.4, "lt_debt": 1.38, "equity": 26.89, "total_assets": 56.36, "debt_total": 1.78, "gpm": 70.1, "opm": 7.7, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 17.21, "op": 2.44, "ord": 2.44, "net": 1.64, "gp": 11.98, "sga": 9.55, "cogs": 5.23, "cash": 31.64, "st_debt": 0.4, "lt_debt": 1.28, "equity": 28.53, "total_assets": 57.42, "debt_total": 1.68, "gpm": 69.6, "opm": 14.2, "sales_yoy": 16.8, "gp_yoy": 12.8, "sga_yoy": 31.4, "op_yoy": -27.2, "ord_yoy": -27.4, "net_yoy": -26.8, "cash_yoy": 3.6, "debt_total_yoy": 1766.7}, {"q": "25.4Q", "x": "25.4Q", "sales": 19.4, "op": 3.4, "ord": 3.15, "net": 1.76, "gp": 13.43, "sga": 10.02, "cogs": 5.97, "cash": 34.05, "st_debt": 0.4, "lt_debt": 1.18, "equity": 30.28, "total_assets": 62.41, "debt_total": 1.58, "gpm": 69.2, "opm": 17.5, "sales_yoy": 6.5, "gp_yoy": 9.6, "sga_yoy": 31.0, "op_yoy": -26.1, "ord_yoy": -27.1, "net_yoy": 4.1, "cash_yoy": -5.2, "debt_total_yoy": -20.2}, {"q": "26.1Q", "x": "26.1Q", "sales": 16.99, "op": 1.28, "ord": 1.34, "net": 1.92, "gp": 12.38, "sga": 11.09, "cogs": 4.61, "cash": 36.95, "st_debt": 0.4, "lt_debt": 1.08, "equity": 31.52, "total_assets": 65.01, "debt_total": 1.48, "gpm": 72.9, "opm": 7.5, "sales_yoy": 14.4, "gp_yoy": 18.5, "sga_yoy": 12.5, "op_yoy": 116.9, "ord_yoy": 63.4, "net_yoy": 300.0, "cash_yoy": 7.5, "debt_total_yoy": -21.3}, {"q": "26.2Q", "x": "26.2Q", "sales": 17.42, "op": 2.2, "ord": 2.21, "net": 1.35, "gp": 12.81, "sga": 10.62, "cogs": 4.61, "cash": 37.35, "st_debt": 0.4, "lt_debt": 0.98, "equity": 32.86, "total_assets": 66.87, "debt_total": 1.38, "gpm": 73.5, "opm": 12.6, "sales_yoy": 12.0, "gp_yoy": 17.5, "sga_yoy": 9.5, "op_yoy": 84.9, "ord_yoy": 84.2, "net_yoy": 92.9, "cash_yoy": 13.0, "debt_total_yoy": -22.5}, {"q": "26.3Q", "x": "26.3Q", "sales": 20.01, "op": 2.7, "ord": 2.71, "net": 1.8, "gp": 14.31, "sga": 11.61, "cogs": 5.7, "cash": 42.18, "st_debt": 1.11, "lt_debt": 5.05, "equity": 34.66, "total_assets": 73.21, "debt_total": 6.16, "gpm": 71.5, "opm": 13.5, "sales_yoy": 16.3, "gp_yoy": 19.4, "sga_yoy": 21.6, "op_yoy": 10.7, "ord_yoy": 11.1, "net_yoy": 9.8, "cash_yoy": 33.3, "debt_total_yoy": 266.7}, {"q": "26.4Q", "x": "26.4Q", "sales": 23.09, "op": 3.14, "ord": 2.97, "net": 2.3, "gp": 16.12, "sga": 12.98, "cogs": 6.97, "cash": 45.81, "st_debt": 1.11, "lt_debt": 4.77, "equity": 36.97, "total_assets": 80.5, "debt_total": 5.88, "gpm": 69.8, "opm": 13.6, "sales_yoy": 19.0, "gp_yoy": 20.0, "sga_yoy": 29.5, "op_yoy": -7.6, "ord_yoy": -5.7, "net_yoy": 30.7, "cash_yoy": 34.5, "debt_total_yoy": 272.2}, {"q": "27.1Q", "x": "27.1Q", "sales": 19.39, "op": 2.32, "ord": 2.59, "net": 1.69, "gp": 14.42, "sga": 12.09, "cogs": 4.97, "cash": 47.28, "st_debt": 1.11, "lt_debt": 4.49, "equity": 37.03, "total_assets": 79.07, "debt_total": 5.6, "gpm": 74.4, "opm": 12.0, "sales_yoy": 14.1, "gp_yoy": 16.5, "sga_yoy": 9.0, "op_yoy": 81.2, "ord_yoy": 93.3, "net_yoy": -12.0, "cash_yoy": 28.0, "debt_total_yoy": 278.4}, {"q": "27.2Q", "x": "27.2Q", "sales": 20.68, "op": 3.14, "ord": 3.09, "net": 2.04, "gp": 15.27, "sga": 12.13, "cogs": 5.41, "cash": 48.67, "st_debt": 1.11, "lt_debt": 4.21, "equity": 38.39, "total_assets": 80.88, "debt_total": 5.32, "gpm": 73.8, "opm": 15.2, "sales_yoy": 18.7, "gp_yoy": 19.2, "sga_yoy": 14.2, "op_yoy": 42.7, "ord_yoy": 39.8, "net_yoy": 51.1, "cash_yoy": 30.3, "debt_total_yoy": 285.5}], "a": [{"year": "2021", "x": "2021", "sales": 32.19, "op": 1.35, "ord": 1.48, "net": 0.42, "opm": 4.2, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 40.29, "op": -2.41, "ord": -2.51, "net": -0.64, "opm": -6.0, "sales_yoy": 25.2, "op_yoy": -278.5, "net_yoy": -252.4}, {"year": "2023", "x": "2023", "sales": 48.62, "op": 0.08, "ord": 0.05, "net": -0.45, "opm": 0.2, "sales_yoy": 20.7, "op_yoy": null, "net_yoy": null}, {"year": "2024", "x": "2024", "sales": 59.37, "op": 13.24, "ord": 12.89, "net": 7.2, "opm": 22.3, "sales_yoy": 22.1, "op_yoy": 16450.0, "net_yoy": null}, {"year": "2025", "x": "2025", "sales": 67.01, "op": 7.62, "ord": 7.61, "net": 4.58, "opm": 11.4, "sales_yoy": 12.9, "op_yoy": -42.4, "net_yoy": -36.4}, {"year": "2026", "x": "2026", "sales": 77.51, "op": 9.32, "ord": 9.23, "net": 7.37, "opm": 12.0, "sales_yoy": 15.7, "op_yoy": 22.3, "net_yoy": 60.9}, {"year": "2027 계획", "x": "2027 계획", "sales": 91.0, "op": 11.2, "ord": 11.1, "net": 7.8, "opm": 12.3, "sales_yoy": 17.4, "op_yoy": 20.2, "net_yoy": 5.8, "plan": 1, "kind": "회사 계획"}], "h2": [{"x": "23.2Q", "sales": 11.97, "sales_yoy": null, "saas": 8.48, "saas_yoy": null, "other": 3.48, "other_yoy": null, "ebitda": 0.45, "ebitda_yoy": null, "gov_arr": 23.12, "gov_arr_yoy": null, "gov_sales": 5.84, "gov_sales_yoy": null, "gov_sub": 5.7, "gov_sub_yoy": null, "gov_ebitda": 2.16, "gov_ebitda_yoy": null, "njss": 5183, "njss_yoy": null, "nsearch": null, "nsearch_yoy": null, "gov_cnt": 5183, "gov_cnt_yoy": null, "njss_churn": 1.46, "njss_churn_yoy": null, "njss_arpu": 446, "njss_arpu_yoy": null, "bpo_sales": 3.23, "bpo_sales_yoy": null, "bpo_ebitda": 0.5, "bpo_ebitda_yoy": null, "fd_sales": 1.67, "fd_sales_yoy": null, "fd_ebitda": 0.11, "fd_ebitda_yoy": null, "fd_cnt": 3718, "fd_cnt_yoy": null, "fd_churn": 1.6, "fd_churn_yoy": null, "fd_arpu_fix": 10000, "fd_arpu_fix_yoy": null, "fd_arpu_var": 4987, "fd_arpu_var_yoy": null, "ep_sales": 0.96, "ep_sales_yoy": null, "ep_ebitda": -0.36, "ep_ebitda_yoy": null, "ep_en": 3835, "ep_en_yoy": null, "ep_per": 25222, "ep_per_yoy": null, "op_shoots": 3165, "op_shoots_yoy": null, "fd_arpu": 14987, "fd_arpu_yoy": null}, {"x": "24.2Q", "sales": 13.49, "sales_yoy": 12.7, "saas": 10.3, "saas_yoy": 21.5, "other": 3.18, "other_yoy": -8.6, "ebitda": 3.36, "ebitda_yoy": 646.7, "gov_arr": 27.54, "gov_arr_yoy": 19.1, "gov_sales": 7.09, "gov_sales_yoy": 21.4, "gov_sub": 6.85, "gov_sub_yoy": 20.2, "gov_ebitda": 4.01, "gov_ebitda_yoy": 85.6, "njss": 6247, "njss_yoy": 20.5, "nsearch": 550, "nsearch_yoy": null, "gov_cnt": 6797, "gov_cnt_yoy": 31.1, "njss_churn": 1.42, "njss_churn_yoy": -2.7, "njss_arpu": 405, "njss_arpu_yoy": -9.2, "bpo_sales": 2.91, "bpo_sales_yoy": -9.9, "bpo_ebitda": 0.37, "bpo_ebitda_yoy": -26.0, "fd_sales": 2.06, "fd_sales_yoy": 23.4, "fd_ebitda": 0.61, "fd_ebitda_yoy": 454.5, "fd_cnt": 4469, "fd_cnt_yoy": 20.2, "fd_churn": 1.3, "fd_churn_yoy": -18.8, "fd_arpu_fix": 10000, "fd_arpu_fix_yoy": 0.0, "fd_arpu_var": 5412, "fd_arpu_var_yoy": 8.5, "ep_sales": 1.13, "ep_sales_yoy": 17.7, "ep_ebitda": 0.11, "ep_ebitda_yoy": null, "ep_en": 4525, "ep_en_yoy": 18.0, "ep_per": 25164, "ep_per_yoy": -0.2, "op_shoots": 2813, "op_shoots_yoy": -11.1, "fd_arpu": 15412, "fd_arpu_yoy": 2.8}, {"x": "25.2Q", "sales": 15.54, "sales_yoy": 15.2, "saas": 11.73, "saas_yoy": 13.9, "other": 3.8, "other_yoy": 19.5, "ebitda": 1.74, "ebitda_yoy": -48.2, "gov_arr": 31.09, "gov_arr_yoy": 12.9, "gov_sales": 7.89, "gov_sales_yoy": 11.3, "gov_sub": 7.58, "gov_sub_yoy": 10.7, "gov_ebitda": 3.89, "gov_ebitda_yoy": -3.0, "njss": 6880, "njss_yoy": 10.1, "nsearch": 587, "nsearch_yoy": 6.7, "gov_cnt": 7467, "gov_cnt_yoy": 9.9, "njss_churn": 1.61, "njss_churn_yoy": 13.4, "njss_arpu": 416, "njss_arpu_yoy": 2.7, "bpo_sales": 3.53, "bpo_sales_yoy": 21.3, "bpo_ebitda": 0.25, "bpo_ebitda_yoy": -32.4, "fd_sales": 2.41, "fd_sales_yoy": 17.0, "fd_ebitda": 0.15, "fd_ebitda_yoy": -75.4, "fd_cnt": 5167, "fd_cnt_yoy": 15.6, "fd_churn": 1.2, "fd_churn_yoy": -7.7, "fd_arpu_fix": 10000, "fd_arpu_fix_yoy": 0.0, "fd_arpu_var": 5582, "fd_arpu_var_yoy": 3.1, "ep_sales": 1.42, "ep_sales_yoy": 25.7, "ep_ebitda": -0.1, "ep_ebitda_yoy": -190.9, "ep_en": 4947, "ep_en_yoy": 9.3, "ep_per": 28844, "ep_per_yoy": 14.6, "op_shoots": 2762, "op_shoots_yoy": -1.8, "fd_arpu": 15582, "fd_arpu_yoy": 1.1}, {"x": "26.2Q", "sales": 17.42, "sales_yoy": 12.1, "saas": 13.51, "saas_yoy": 15.2, "other": 3.9, "other_yoy": 2.6, "ebitda": 2.98, "ebitda_yoy": 71.3, "gov_arr": 35.43, "gov_arr_yoy": 14.0, "gov_sales": 9.15, "gov_sales_yoy": 16.0, "gov_sub": 8.74, "gov_sub_yoy": 15.3, "gov_ebitda": 4.81, "gov_ebitda_yoy": 23.7, "njss": 7158, "njss_yoy": 4.0, "nsearch": 745, "nsearch_yoy": 26.9, "gov_cnt": 7903, "gov_cnt_yoy": 5.8, "njss_churn": 1.49, "njss_churn_yoy": -7.5, "njss_arpu": 448, "njss_arpu_yoy": 7.7, "bpo_sales": 3.57, "bpo_sales_yoy": 1.1, "bpo_ebitda": 0.43, "bpo_ebitda_yoy": 72.0, "fd_sales": 2.77, "fd_sales_yoy": 14.9, "fd_ebitda": 0.57, "fd_ebitda_yoy": 280.0, "fd_cnt": 5885, "fd_cnt_yoy": 13.9, "fd_churn": 1.2, "fd_churn_yoy": 0.0, "fd_arpu_fix": 10000, "fd_arpu_fix_yoy": 0.0, "fd_arpu_var": 5627, "fd_arpu_var_yoy": 0.8, "ep_sales": 1.57, "ep_sales_yoy": 10.6, "ep_ebitda": -0.09, "ep_ebitda_yoy": null, "ep_en": 5307, "ep_en_yoy": 7.3, "ep_per": 29758, "ep_per_yoy": 3.2, "op_shoots": 3570, "op_shoots_yoy": 29.3, "fd_arpu": 15627, "fd_arpu_yoy": 0.3}, {"x": "27.2Q", "sales": 20.68, "sales_yoy": 18.7, "saas": 15.61, "saas_yoy": 15.5, "other": 5.07, "other_yoy": 30.0, "ebitda": 4.14, "ebitda_yoy": 38.9, "gov_arr": 42.28, "gov_arr_yoy": 19.3, "gov_sales": 10.75, "gov_sales_yoy": 17.5, "gov_sub": 10.4, "gov_sub_yoy": 19.0, "gov_ebitda": 5.21, "gov_ebitda_yoy": 8.3, "njss": 7351, "njss_yoy": 2.7, "nsearch": 859, "nsearch_yoy": 15.3, "gov_cnt": 8210, "gov_cnt_yoy": 3.9, "njss_churn": 1.39, "njss_churn_yoy": -6.7, "njss_arpu": 515, "njss_arpu_yoy": 15.0, "bpo_sales": 4.23, "bpo_sales_yoy": 18.5, "bpo_ebitda": 0.7, "bpo_ebitda_yoy": 62.8, "fd_sales": 3.05, "fd_sales_yoy": 10.1, "fd_ebitda": 0.6, "fd_ebitda_yoy": 5.3, "fd_cnt": 6442, "fd_cnt_yoy": 9.5, "fd_churn": 1.2, "fd_churn_yoy": 0.0, "fd_arpu_fix": 10000, "fd_arpu_fix_yoy": 0.0, "fd_arpu_var": 5081, "fd_arpu_var_yoy": -9.7, "ep_sales": 1.81, "ep_sales_yoy": 15.3, "ep_ebitda": 0.18, "ep_ebitda_yoy": null, "ep_en": 5704, "ep_en_yoy": 7.5, "ep_per": 31745, "ep_per_yoy": 6.7, "op_shoots": 3745, "op_shoots_yoy": 4.9, "fd_arpu": 15081, "fd_arpu_yoy": -3.5}], "seg": [{"label": "Govtech", "ytd_2027": 20.93, "ytd_2026": 18.12, "plan_2027": 43.3}, {"label": "BPO", "ytd_2027": 7.38, "ytd_2026": 6.9, "plan_2027": 21.5}, {"label": "폰데스크", "ytd_2027": 6.11, "ytd_2026": 5.55, "plan_2027": 13.0}, {"label": "포토", "ytd_2027": 5.54, "ytd_2026": 3.74, "plan_2027": 13.0}]}}
+{
+ "c": "3979",
+ "n": "우루루",
+ "asof": "2026-11-12",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "입찰정보 서비스 NJSS 중심 거브테크 + BPO·폰데스크·포토. 3월 결산(27.2Q = 2026년 7~9월). 사업 지표는 결산단신 분기 KPI 표(25.1Q~27.2Q), 월차는 NJSS MRR. 2026년 3월기 중 주식 분할",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "거브테크 ARR",
+   "d": "b",
+   "bars": [
+    {
+     "k": "gov_arr",
+     "l": "거브테크 ARR",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "gov_arr_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ],
+   "def": "분기 말 MRR × 12(nSearch 등 포함)"
+  },
+  {
+   "sec": "key",
+   "t": "NJSS 유료 계약 수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "njss_cnt",
+     "l": "NJSS 유료 계약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "njss_cnt_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ]
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "거브테크 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "gov_sales",
+     "l": "거브테크 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "gov_sales_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ],
+   "def": "NJSS + nSearch 등(2027년 3월기 부문 기준, 2026년 3월기는 NJSS 부문 값 — 같은 숫자)"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "NJSS·nSearch 유료 계약 수",
+   "d": "b",
+   "lines": [
+    {
+     "k": "njss_cnt",
+     "l": "NJSS",
+     "u": "건",
+     "c": 0
+    },
+    {
+     "k": "ns_cnt",
+     "l": "nSearch",
+     "u": "건",
+     "c": 1
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "NJSS 월 해지율(12개월 평균)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "njss_churn",
+     "l": "NJSS 해지율",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "def": "전월 말 유료 계약 대비 당월 해지 건수, 12개월 평균",
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "NJSS ARPU(일할)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "njss_arpu_d",
+     "l": "계약당 하루 매출",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "유료 계약 1건당 일할 매출"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "거브테크 ARPU(연간, ARR 기준)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "gov_arpu_y",
+     "l": "계약당 연간 ARR",
+     "u": "천엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "ARR ÷ 유료 계약 수(NJSS + nSearch). 2026년 3월기부터 공개"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "NJSS LTV",
+   "d": "b",
+   "bars": [
+    {
+     "k": "njss_ltv",
+     "l": "LTV",
+     "u": "천엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "ARPU × 1/해지율 × 매출총이익률 90%(회사 계산)"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "NPP(입찰 BPO) ARPU(일할)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "npp_arpu_d",
+     "l": "계약당 하루 매출",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "NJSS Pro Partners(옛 입찰 BPO), 스폿 매출 포함"
+  },
+  {
+   "sec": "거브테크(NJSS)",
+   "t": "거브테크 1인당 분기 매출(계산)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "gov_per_emp",
+     "l": "1인당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "거브테크 분기 매출 ÷ 거브테크 인원(임시직 환산 포함)"
+  },
+  {
+   "sec": "폰데스크",
+   "t": "폰데스크 유료 계약 수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "fd_cnt",
+     "l": "유료 계약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "fd_cnt_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ]
+  },
+  {
+   "sec": "폰데스크",
+   "t": "폰데스크 ARPU(월)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "fd_arpu",
+     "l": "계약당 월 매출",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "유료 계약 1건당 월할 매출(고정 1만엔 + 종량)"
+  },
+  {
+   "sec": "폰데스크",
+   "t": "폰데스크 월 해지율(12개월 평균)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "fd_churn",
+     "l": "해지율",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)"
+  },
+  {
+   "sec": "폰데스크",
+   "t": "폰데스크 ARR",
+   "d": "b",
+   "bars": [
+    {
+     "k": "fd_arr",
+     "l": "ARR",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "분기 구독 + 반복 매출 × 4. 26.1Q는 결산단신마다 값이 달라(11.00 / 11.10억엔) 비움"
+  },
+  {
+   "sec": "폰데스크",
+   "t": "폰데스크 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "fd_sales",
+     "l": "폰데스크 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "fd_sales_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ]
+  },
+  {
+   "sec": "포토",
+   "t": "엔포토 계약 원 수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ep_cnt",
+     "l": "계약 원 수",
+     "u": "원",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "ep_cnt_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ]
+  },
+  {
+   "sec": "포토",
+   "t": "엔포토 원당 분기 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ep_per",
+     "l": "원당 매출",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "ep_per_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ],
+   "def": "26.1Q는 결산단신마다 값이 달라(30,617 / 30,167엔) 비움. 3·4Q(졸업·행사 시즌)에 높음"
+  },
+  {
+   "sec": "포토",
+   "t": "엔포토 ARR",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ep_arr",
+     "l": "ARR",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "분기 반복 매출 × 4"
+  },
+  {
+   "sec": "포토",
+   "t": "아워포토 촬영 건수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "op_shoots",
+     "l": "촬영 건수",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "26.2Q는 회사 정정값(3,570건). 3Q(가을 행사)에 몰림"
+  },
+  {
+   "sec": "포토",
+   "t": "포토 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ph_sales",
+     "l": "포토 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "ph_sales_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ],
+   "def": "26.3Q부터 요코하마종합사진 연결"
+  },
+  {
+   "sec": "BPO·인원",
+   "t": "BPO 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "bpo_sales",
+     "l": "BPO 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "lines": [
+    {
+     "k": "bpo_sales_yoy",
+     "l": "전년 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1,
+     "yoy": 1
+    }
+   ],
+   "def": "4Q(1~3월)에 스캔 등 연도말 수요 집중"
+  },
+  {
+   "sec": "BPO·인원",
+   "t": "BPO 1인당 분기 매출(계산)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "bpo_per_emp",
+     "l": "1인당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)",
+   "def": "BPO 분기 매출 ÷ BPO 인원(임시직 환산 포함)"
+  },
+  {
+   "sec": "BPO·인원",
+   "t": "부문별 인원",
+   "d": "b",
+   "lines": [
+    {
+     "k": "bpo_emp",
+     "l": "BPO",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "gov_emp",
+     "l": "거브테크",
+     "u": "명",
+     "c": 1
+    },
+    {
+     "k": "ph_emp",
+     "l": "포토",
+     "u": "명",
+     "c": 2
+    },
+    {
+     "k": "fd_emp",
+     "l": "폰데스크",
+     "u": "명",
+     "c": 3
+    }
+   ],
+   "def": "임시직(파트·파견) 연평균 환산 포함",
+   "src": "2Q27·4Q26 결산단신(분기 KPI 표)"
+  },
+  {
+   "sec": "월차",
+   "t": "월차 최근 24개월",
+   "d": "mm",
+   "table": 1,
+   "cols": [
+    {
+     "k": "m0",
+     "l": "NJSS MRR",
+     "u": "백만엔"
+    },
+    {
+     "k": "m1",
+     "l": "NJSS MRR 전년 대비",
+     "u": "전년=100",
+     "yoy100": 1
+    }
+   ],
+   "src": "회사 월차 IR 리포트(TDnet) · 26.04~ 전년 대비는 회사 발표, 25.04~26.03은 전전기 값으로 계산, 24.11~25.03은 비교 값 없음"
+  },
+  {
+   "sec": "월차",
+   "t": "NJSS MRR",
+   "d": "mm",
+   "bars": [
+    {
+     "k": "m0",
+     "l": "NJSS MRR",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "def": "월말 구독·반복 매출(초기 비용 등 제외). 속보치",
+   "src": "회사 월차 IR 리포트"
+  },
+  {
+   "sec": "월차",
+   "t": "NJSS MRR 전년 대비",
+   "d": "mm",
+   "lines": [
+    {
+     "k": "m1",
+     "l": "전년 대비",
+     "u": "전년=100",
+     "c": 0
+    }
+   ],
+   "src": "회사 월차 IR 리포트"
+  },
+  {
+   "sec": "부문",
+   "t": "SaaS·그 밖 매출(매년 2분기)",
+   "d": "h2",
+   "src": "2Q27 결산설명자료(각 연도 2분기 값)",
+   "def": "SaaS = NJSS·nSearch·폰데스크·엔포토",
+   "lines": [
+    {
+     "k": "saas",
+     "l": "SaaS 매출",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "other",
+     "l": "그 밖 매출",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문 매출(상반기 누계)",
+   "d": "seg",
+   "x": "label",
+   "src": "2Q27 결산설명자료·결산단신 · 2027년 3월기부터 새 부문",
+   "lines": [
+    {
+     "k": "ytd_2027",
+     "l": "2027년 상반기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ytd_2026",
+     "l": "2026년 상반기",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문 매출 통기 계획",
+   "d": "seg",
+   "x": "label",
+   "bars": [
+    {
+     "k": "plan_2027",
+     "l": "2027년 계획",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27 결산설명자료"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "영업이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 상환분·사채 포함)"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 14.74,
+    "op": 3.35,
+    "ord": 3.36,
+    "net": 2.24,
+    "gp": 10.62,
+    "sga": 7.27,
+    "cogs": 4.12,
+    "cash": 30.53,
+    "st_debt": 0.09,
+    "lt_debt": 0,
+    "equity": 26.45,
+    "total_assets": 53.36,
+    "debt_total": 0.09,
+    "gpm": 72.0,
+    "opm": 22.7,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 18.22,
+    "op": 4.6,
+    "ord": 4.32,
+    "net": 1.69,
+    "gp": 12.25,
+    "sga": 7.65,
+    "cogs": 5.97,
+    "cash": 35.9,
+    "st_debt": 0.4,
+    "lt_debt": 1.58,
+    "equity": 28.12,
+    "total_assets": 60.51,
+    "debt_total": 1.98,
+    "gpm": 67.2,
+    "opm": 25.2,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 14.85,
+    "op": 0.59,
+    "ord": 0.82,
+    "net": 0.48,
+    "gp": 10.45,
+    "sga": 9.86,
+    "cogs": 4.4,
+    "cash": 34.36,
+    "st_debt": 0.4,
+    "lt_debt": 1.48,
+    "equity": 26.18,
+    "total_assets": 56.87,
+    "debt_total": 1.88,
+    "gpm": 70.4,
+    "opm": 4.0,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 15.55,
+    "op": 1.19,
+    "ord": 1.2,
+    "net": 0.7,
+    "gp": 10.9,
+    "sga": 9.7,
+    "cogs": 4.65,
+    "cash": 33.05,
+    "st_debt": 0.4,
+    "lt_debt": 1.38,
+    "equity": 26.89,
+    "total_assets": 56.36,
+    "debt_total": 1.78,
+    "gpm": 70.1,
+    "opm": 7.7,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 17.21,
+    "op": 2.44,
+    "ord": 2.44,
+    "net": 1.64,
+    "gp": 11.98,
+    "sga": 9.55,
+    "cogs": 5.23,
+    "cash": 31.64,
+    "st_debt": 0.4,
+    "lt_debt": 1.28,
+    "equity": 28.53,
+    "total_assets": 57.42,
+    "debt_total": 1.68,
+    "gpm": 69.6,
+    "opm": 14.2,
+    "sales_yoy": 16.8,
+    "gp_yoy": 12.8,
+    "sga_yoy": 31.4,
+    "op_yoy": -27.2,
+    "ord_yoy": -27.4,
+    "net_yoy": -26.8,
+    "cash_yoy": 3.6,
+    "debt_total_yoy": 1766.7
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 19.4,
+    "op": 3.4,
+    "ord": 3.15,
+    "net": 1.76,
+    "gp": 13.43,
+    "sga": 10.02,
+    "cogs": 5.97,
+    "cash": 34.05,
+    "st_debt": 0.4,
+    "lt_debt": 1.18,
+    "equity": 30.28,
+    "total_assets": 62.41,
+    "debt_total": 1.58,
+    "gpm": 69.2,
+    "opm": 17.5,
+    "sales_yoy": 6.5,
+    "gp_yoy": 9.6,
+    "sga_yoy": 31.0,
+    "op_yoy": -26.1,
+    "ord_yoy": -27.1,
+    "net_yoy": 4.1,
+    "cash_yoy": -5.2,
+    "debt_total_yoy": -20.2
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 16.99,
+    "op": 1.28,
+    "ord": 1.34,
+    "net": 1.92,
+    "gp": 12.38,
+    "sga": 11.09,
+    "cogs": 4.61,
+    "cash": 36.95,
+    "st_debt": 0.4,
+    "lt_debt": 1.08,
+    "equity": 31.52,
+    "total_assets": 65.01,
+    "debt_total": 1.48,
+    "gpm": 72.9,
+    "opm": 7.5,
+    "sales_yoy": 14.4,
+    "gp_yoy": 18.5,
+    "sga_yoy": 12.5,
+    "op_yoy": 116.9,
+    "ord_yoy": 63.4,
+    "net_yoy": 300.0,
+    "cash_yoy": 7.5,
+    "debt_total_yoy": -21.3
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 17.42,
+    "op": 2.2,
+    "ord": 2.21,
+    "net": 1.35,
+    "gp": 12.81,
+    "sga": 10.62,
+    "cogs": 4.61,
+    "cash": 37.35,
+    "st_debt": 0.4,
+    "lt_debt": 0.98,
+    "equity": 32.86,
+    "total_assets": 66.87,
+    "debt_total": 1.38,
+    "gpm": 73.5,
+    "opm": 12.6,
+    "sales_yoy": 12.0,
+    "gp_yoy": 17.5,
+    "sga_yoy": 9.5,
+    "op_yoy": 84.9,
+    "ord_yoy": 84.2,
+    "net_yoy": 92.9,
+    "cash_yoy": 13.0,
+    "debt_total_yoy": -22.5
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 20.01,
+    "op": 2.7,
+    "ord": 2.71,
+    "net": 1.8,
+    "gp": 14.31,
+    "sga": 11.61,
+    "cogs": 5.7,
+    "cash": 42.18,
+    "st_debt": 1.11,
+    "lt_debt": 5.05,
+    "equity": 34.66,
+    "total_assets": 73.21,
+    "debt_total": 6.16,
+    "gpm": 71.5,
+    "opm": 13.5,
+    "sales_yoy": 16.3,
+    "gp_yoy": 19.4,
+    "sga_yoy": 21.6,
+    "op_yoy": 10.7,
+    "ord_yoy": 11.1,
+    "net_yoy": 9.8,
+    "cash_yoy": 33.3,
+    "debt_total_yoy": 266.7
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 23.09,
+    "op": 3.14,
+    "ord": 2.97,
+    "net": 2.3,
+    "gp": 16.12,
+    "sga": 12.98,
+    "cogs": 6.97,
+    "cash": 45.81,
+    "st_debt": 1.11,
+    "lt_debt": 4.77,
+    "equity": 36.97,
+    "total_assets": 80.5,
+    "debt_total": 5.88,
+    "gpm": 69.8,
+    "opm": 13.6,
+    "sales_yoy": 19.0,
+    "gp_yoy": 20.0,
+    "sga_yoy": 29.5,
+    "op_yoy": -7.6,
+    "ord_yoy": -5.7,
+    "net_yoy": 30.7,
+    "cash_yoy": 34.5,
+    "debt_total_yoy": 272.2
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 19.39,
+    "op": 2.32,
+    "ord": 2.59,
+    "net": 1.69,
+    "gp": 14.42,
+    "sga": 12.09,
+    "cogs": 4.97,
+    "cash": 47.28,
+    "st_debt": 1.11,
+    "lt_debt": 4.49,
+    "equity": 37.03,
+    "total_assets": 79.07,
+    "debt_total": 5.6,
+    "gpm": 74.4,
+    "opm": 12.0,
+    "sales_yoy": 14.1,
+    "gp_yoy": 16.5,
+    "sga_yoy": 9.0,
+    "op_yoy": 81.2,
+    "ord_yoy": 93.3,
+    "net_yoy": -12.0,
+    "cash_yoy": 28.0,
+    "debt_total_yoy": 278.4
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 20.68,
+    "op": 3.14,
+    "ord": 3.09,
+    "net": 2.04,
+    "gp": 15.27,
+    "sga": 12.13,
+    "cogs": 5.41,
+    "cash": 48.67,
+    "st_debt": 1.11,
+    "lt_debt": 4.21,
+    "equity": 38.39,
+    "total_assets": 80.88,
+    "debt_total": 5.32,
+    "gpm": 73.8,
+    "opm": 15.2,
+    "sales_yoy": 18.7,
+    "gp_yoy": 19.2,
+    "sga_yoy": 14.2,
+    "op_yoy": 42.7,
+    "ord_yoy": 39.8,
+    "net_yoy": 51.1,
+    "cash_yoy": 30.3,
+    "debt_total_yoy": 285.5
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 32.19,
+    "op": 1.35,
+    "ord": 1.48,
+    "net": 0.42,
+    "opm": 4.2,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 40.29,
+    "op": -2.41,
+    "ord": -2.51,
+    "net": -0.64,
+    "opm": -6.0,
+    "sales_yoy": 25.2,
+    "op_yoy": -278.5,
+    "net_yoy": -252.4
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 48.62,
+    "op": 0.08,
+    "ord": 0.05,
+    "net": -0.45,
+    "opm": 0.2,
+    "sales_yoy": 20.7,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 59.37,
+    "op": 13.24,
+    "ord": 12.89,
+    "net": 7.2,
+    "opm": 22.3,
+    "sales_yoy": 22.1,
+    "op_yoy": 16450.0,
+    "net_yoy": null
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 67.01,
+    "op": 7.62,
+    "ord": 7.61,
+    "net": 4.58,
+    "opm": 11.4,
+    "sales_yoy": 12.9,
+    "op_yoy": -42.4,
+    "net_yoy": -36.4
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 77.51,
+    "op": 9.32,
+    "ord": 9.23,
+    "net": 7.37,
+    "opm": 12.0,
+    "sales_yoy": 15.7,
+    "op_yoy": 22.3,
+    "net_yoy": 60.9
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 91.0,
+    "op": 11.2,
+    "ord": 11.1,
+    "net": 7.8,
+    "opm": 12.3,
+    "sales_yoy": 17.4,
+    "op_yoy": 20.2,
+    "net_yoy": 5.8,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "h2": [
+   {
+    "x": "23.2Q",
+    "sales": 11.97,
+    "sales_yoy": null,
+    "saas": 8.48,
+    "saas_yoy": null,
+    "other": 3.48,
+    "other_yoy": null,
+    "ebitda": 0.45,
+    "ebitda_yoy": null,
+    "gov_arr": 23.12,
+    "gov_arr_yoy": null,
+    "gov_sales": 5.84,
+    "gov_sales_yoy": null,
+    "gov_sub": 5.7,
+    "gov_sub_yoy": null,
+    "gov_ebitda": 2.16,
+    "gov_ebitda_yoy": null,
+    "njss": 5183,
+    "njss_yoy": null,
+    "nsearch": null,
+    "nsearch_yoy": null,
+    "gov_cnt": 5183,
+    "gov_cnt_yoy": null,
+    "njss_churn": 1.46,
+    "njss_churn_yoy": null,
+    "njss_arpu": 446,
+    "njss_arpu_yoy": null,
+    "bpo_sales": 3.23,
+    "bpo_sales_yoy": null,
+    "bpo_ebitda": 0.5,
+    "bpo_ebitda_yoy": null,
+    "fd_sales": 1.67,
+    "fd_sales_yoy": null,
+    "fd_ebitda": 0.11,
+    "fd_ebitda_yoy": null,
+    "fd_cnt": 3718,
+    "fd_cnt_yoy": null,
+    "fd_churn": 1.6,
+    "fd_churn_yoy": null,
+    "fd_arpu_fix": 10000,
+    "fd_arpu_fix_yoy": null,
+    "fd_arpu_var": 4987,
+    "fd_arpu_var_yoy": null,
+    "ep_sales": 0.96,
+    "ep_sales_yoy": null,
+    "ep_ebitda": -0.36,
+    "ep_ebitda_yoy": null,
+    "ep_en": 3835,
+    "ep_en_yoy": null,
+    "ep_per": 25222,
+    "ep_per_yoy": null,
+    "op_shoots": 3165,
+    "op_shoots_yoy": null,
+    "fd_arpu": 14987,
+    "fd_arpu_yoy": null
+   },
+   {
+    "x": "24.2Q",
+    "sales": 13.49,
+    "sales_yoy": 12.7,
+    "saas": 10.3,
+    "saas_yoy": 21.5,
+    "other": 3.18,
+    "other_yoy": -8.6,
+    "ebitda": 3.36,
+    "ebitda_yoy": 646.7,
+    "gov_arr": 27.54,
+    "gov_arr_yoy": 19.1,
+    "gov_sales": 7.09,
+    "gov_sales_yoy": 21.4,
+    "gov_sub": 6.85,
+    "gov_sub_yoy": 20.2,
+    "gov_ebitda": 4.01,
+    "gov_ebitda_yoy": 85.6,
+    "njss": 6247,
+    "njss_yoy": 20.5,
+    "nsearch": 550,
+    "nsearch_yoy": null,
+    "gov_cnt": 6797,
+    "gov_cnt_yoy": 31.1,
+    "njss_churn": 1.42,
+    "njss_churn_yoy": -2.7,
+    "njss_arpu": 405,
+    "njss_arpu_yoy": -9.2,
+    "bpo_sales": 2.91,
+    "bpo_sales_yoy": -9.9,
+    "bpo_ebitda": 0.37,
+    "bpo_ebitda_yoy": -26.0,
+    "fd_sales": 2.06,
+    "fd_sales_yoy": 23.4,
+    "fd_ebitda": 0.61,
+    "fd_ebitda_yoy": 454.5,
+    "fd_cnt": 4469,
+    "fd_cnt_yoy": 20.2,
+    "fd_churn": 1.3,
+    "fd_churn_yoy": -18.8,
+    "fd_arpu_fix": 10000,
+    "fd_arpu_fix_yoy": 0.0,
+    "fd_arpu_var": 5412,
+    "fd_arpu_var_yoy": 8.5,
+    "ep_sales": 1.13,
+    "ep_sales_yoy": 17.7,
+    "ep_ebitda": 0.11,
+    "ep_ebitda_yoy": null,
+    "ep_en": 4525,
+    "ep_en_yoy": 18.0,
+    "ep_per": 25164,
+    "ep_per_yoy": -0.2,
+    "op_shoots": 2813,
+    "op_shoots_yoy": -11.1,
+    "fd_arpu": 15412,
+    "fd_arpu_yoy": 2.8
+   },
+   {
+    "x": "25.2Q",
+    "sales": 15.54,
+    "sales_yoy": 15.2,
+    "saas": 11.73,
+    "saas_yoy": 13.9,
+    "other": 3.8,
+    "other_yoy": 19.5,
+    "ebitda": 1.74,
+    "ebitda_yoy": -48.2,
+    "gov_arr": 31.09,
+    "gov_arr_yoy": 12.9,
+    "gov_sales": 7.89,
+    "gov_sales_yoy": 11.3,
+    "gov_sub": 7.58,
+    "gov_sub_yoy": 10.7,
+    "gov_ebitda": 3.89,
+    "gov_ebitda_yoy": -3.0,
+    "njss": 6880,
+    "njss_yoy": 10.1,
+    "nsearch": 587,
+    "nsearch_yoy": 6.7,
+    "gov_cnt": 7467,
+    "gov_cnt_yoy": 9.9,
+    "njss_churn": 1.61,
+    "njss_churn_yoy": 13.4,
+    "njss_arpu": 416,
+    "njss_arpu_yoy": 2.7,
+    "bpo_sales": 3.53,
+    "bpo_sales_yoy": 21.3,
+    "bpo_ebitda": 0.25,
+    "bpo_ebitda_yoy": -32.4,
+    "fd_sales": 2.41,
+    "fd_sales_yoy": 17.0,
+    "fd_ebitda": 0.15,
+    "fd_ebitda_yoy": -75.4,
+    "fd_cnt": 5167,
+    "fd_cnt_yoy": 15.6,
+    "fd_churn": 1.2,
+    "fd_churn_yoy": -7.7,
+    "fd_arpu_fix": 10000,
+    "fd_arpu_fix_yoy": 0.0,
+    "fd_arpu_var": 5582,
+    "fd_arpu_var_yoy": 3.1,
+    "ep_sales": 1.42,
+    "ep_sales_yoy": 25.7,
+    "ep_ebitda": -0.1,
+    "ep_ebitda_yoy": -190.9,
+    "ep_en": 4947,
+    "ep_en_yoy": 9.3,
+    "ep_per": 28844,
+    "ep_per_yoy": 14.6,
+    "op_shoots": 2762,
+    "op_shoots_yoy": -1.8,
+    "fd_arpu": 15582,
+    "fd_arpu_yoy": 1.1
+   },
+   {
+    "x": "26.2Q",
+    "sales": 17.42,
+    "sales_yoy": 12.1,
+    "saas": 13.51,
+    "saas_yoy": 15.2,
+    "other": 3.9,
+    "other_yoy": 2.6,
+    "ebitda": 2.98,
+    "ebitda_yoy": 71.3,
+    "gov_arr": 35.43,
+    "gov_arr_yoy": 14.0,
+    "gov_sales": 9.15,
+    "gov_sales_yoy": 16.0,
+    "gov_sub": 8.74,
+    "gov_sub_yoy": 15.3,
+    "gov_ebitda": 4.81,
+    "gov_ebitda_yoy": 23.7,
+    "njss": 7158,
+    "njss_yoy": 4.0,
+    "nsearch": 745,
+    "nsearch_yoy": 26.9,
+    "gov_cnt": 7903,
+    "gov_cnt_yoy": 5.8,
+    "njss_churn": 1.49,
+    "njss_churn_yoy": -7.5,
+    "njss_arpu": 448,
+    "njss_arpu_yoy": 7.7,
+    "bpo_sales": 3.57,
+    "bpo_sales_yoy": 1.1,
+    "bpo_ebitda": 0.43,
+    "bpo_ebitda_yoy": 72.0,
+    "fd_sales": 2.77,
+    "fd_sales_yoy": 14.9,
+    "fd_ebitda": 0.57,
+    "fd_ebitda_yoy": 280.0,
+    "fd_cnt": 5885,
+    "fd_cnt_yoy": 13.9,
+    "fd_churn": 1.2,
+    "fd_churn_yoy": 0.0,
+    "fd_arpu_fix": 10000,
+    "fd_arpu_fix_yoy": 0.0,
+    "fd_arpu_var": 5627,
+    "fd_arpu_var_yoy": 0.8,
+    "ep_sales": 1.57,
+    "ep_sales_yoy": 10.6,
+    "ep_ebitda": -0.09,
+    "ep_ebitda_yoy": null,
+    "ep_en": 5307,
+    "ep_en_yoy": 7.3,
+    "ep_per": 29758,
+    "ep_per_yoy": 3.2,
+    "op_shoots": 3570,
+    "op_shoots_yoy": 29.3,
+    "fd_arpu": 15627,
+    "fd_arpu_yoy": 0.3
+   },
+   {
+    "x": "27.2Q",
+    "sales": 20.68,
+    "sales_yoy": 18.7,
+    "saas": 15.61,
+    "saas_yoy": 15.5,
+    "other": 5.07,
+    "other_yoy": 30.0,
+    "ebitda": 4.14,
+    "ebitda_yoy": 38.9,
+    "gov_arr": 42.28,
+    "gov_arr_yoy": 19.3,
+    "gov_sales": 10.75,
+    "gov_sales_yoy": 17.5,
+    "gov_sub": 10.4,
+    "gov_sub_yoy": 19.0,
+    "gov_ebitda": 5.21,
+    "gov_ebitda_yoy": 8.3,
+    "njss": 7351,
+    "njss_yoy": 2.7,
+    "nsearch": 859,
+    "nsearch_yoy": 15.3,
+    "gov_cnt": 8210,
+    "gov_cnt_yoy": 3.9,
+    "njss_churn": 1.39,
+    "njss_churn_yoy": -6.7,
+    "njss_arpu": 515,
+    "njss_arpu_yoy": 15.0,
+    "bpo_sales": 4.23,
+    "bpo_sales_yoy": 18.5,
+    "bpo_ebitda": 0.7,
+    "bpo_ebitda_yoy": 62.8,
+    "fd_sales": 3.05,
+    "fd_sales_yoy": 10.1,
+    "fd_ebitda": 0.6,
+    "fd_ebitda_yoy": 5.3,
+    "fd_cnt": 6442,
+    "fd_cnt_yoy": 9.5,
+    "fd_churn": 1.2,
+    "fd_churn_yoy": 0.0,
+    "fd_arpu_fix": 10000,
+    "fd_arpu_fix_yoy": 0.0,
+    "fd_arpu_var": 5081,
+    "fd_arpu_var_yoy": -9.7,
+    "ep_sales": 1.81,
+    "ep_sales_yoy": 15.3,
+    "ep_ebitda": 0.18,
+    "ep_ebitda_yoy": null,
+    "ep_en": 5704,
+    "ep_en_yoy": 7.5,
+    "ep_per": 31745,
+    "ep_per_yoy": 6.7,
+    "op_shoots": 3745,
+    "op_shoots_yoy": 4.9,
+    "fd_arpu": 15081,
+    "fd_arpu_yoy": -3.5
+   }
+  ],
+  "seg": [
+   {
+    "label": "Govtech",
+    "ytd_2027": 20.93,
+    "ytd_2026": 18.12,
+    "plan_2027": 43.3
+   },
+   {
+    "label": "BPO",
+    "ytd_2027": 7.38,
+    "ytd_2026": 6.9,
+    "plan_2027": 21.5
+   },
+   {
+    "label": "폰데스크",
+    "ytd_2027": 6.11,
+    "ytd_2026": 5.55,
+    "plan_2027": 13.0
+   },
+   {
+    "label": "포토",
+    "ytd_2027": 5.54,
+    "ytd_2026": 3.74,
+    "plan_2027": 13.0
+   }
+  ],
+  "b": [
+   {
+    "x": "25.1Q",
+    "gov_sales": 7.61,
+    "gov_arr": 30.17,
+    "njss_cnt": 6756,
+    "ns_cnt": 578,
+    "njss_arpu_d": 1151,
+    "npp_arpu_d": 26,
+    "njss_churn": 1.58,
+    "njss_ltv": 1989,
+    "gov_arpu_y": null,
+    "gov_emp": 134,
+    "bpo_sales": 3.13,
+    "bpo_emp": 177,
+    "fd_sales": 2.36,
+    "fd_cnt": 4980,
+    "fd_arpu": 15845,
+    "fd_churn": 1.2,
+    "fd_arr": 9.46,
+    "fd_emp": 18,
+    "ph_sales": 1.68,
+    "ep_cnt": 4845,
+    "ep_per": 29685,
+    "ep_arr": 5.75,
+    "op_shoots": 3669,
+    "ph_emp": 41,
+    "gov_sales_yoy": null,
+    "gov_arr_yoy": null,
+    "njss_cnt_yoy": null,
+    "bpo_sales_yoy": null,
+    "fd_sales_yoy": null,
+    "fd_cnt_yoy": null,
+    "ph_sales_yoy": null,
+    "ep_cnt_yoy": null,
+    "ep_per_yoy": null,
+    "gov_per_emp": 5.68,
+    "bpo_per_emp": 1.77
+   },
+   {
+    "x": "25.2Q",
+    "gov_sales": 7.89,
+    "gov_arr": 31.09,
+    "njss_cnt": 6880,
+    "ns_cnt": 587,
+    "njss_arpu_d": 1160,
+    "npp_arpu_d": 21,
+    "njss_churn": 1.61,
+    "njss_ltv": 1994,
+    "gov_arpu_y": null,
+    "gov_emp": 137,
+    "bpo_sales": 3.53,
+    "bpo_emp": 193,
+    "fd_sales": 2.41,
+    "fd_cnt": 5167,
+    "fd_arpu": 15582,
+    "fd_churn": 1.2,
+    "fd_arr": 9.66,
+    "fd_emp": 17,
+    "ph_sales": 1.63,
+    "ep_cnt": 4947,
+    "ep_per": 28844,
+    "ep_arr": 5.7,
+    "op_shoots": 2762,
+    "ph_emp": 43,
+    "gov_sales_yoy": null,
+    "gov_arr_yoy": null,
+    "njss_cnt_yoy": null,
+    "bpo_sales_yoy": null,
+    "fd_sales_yoy": null,
+    "fd_cnt_yoy": null,
+    "ph_sales_yoy": null,
+    "ep_cnt_yoy": null,
+    "ep_per_yoy": null,
+    "gov_per_emp": 5.76,
+    "bpo_per_emp": 1.83
+   },
+   {
+    "x": "25.3Q",
+    "gov_sales": 8.27,
+    "gov_arr": 32.31,
+    "njss_cnt": 7028,
+    "ns_cnt": 606,
+    "njss_arpu_d": 1174,
+    "npp_arpu_d": 38,
+    "njss_churn": 1.55,
+    "njss_ltv": 2085,
+    "gov_arpu_y": null,
+    "gov_emp": 140,
+    "bpo_sales": 3.97,
+    "bpo_emp": 201,
+    "fd_sales": 2.55,
+    "fd_cnt": 5422,
+    "fd_arpu": 15681,
+    "fd_churn": 1.2,
+    "fd_arr": 10.2,
+    "fd_emp": 17,
+    "ph_sales": 2.35,
+    "ep_cnt": 5028,
+    "ep_per": 34645,
+    "ep_arr": 6.96,
+    "op_shoots": 9051,
+    "ph_emp": 45,
+    "gov_sales_yoy": null,
+    "gov_arr_yoy": null,
+    "njss_cnt_yoy": null,
+    "bpo_sales_yoy": null,
+    "fd_sales_yoy": null,
+    "fd_cnt_yoy": null,
+    "ph_sales_yoy": null,
+    "ep_cnt_yoy": null,
+    "ep_per_yoy": null,
+    "gov_per_emp": 5.91,
+    "bpo_per_emp": 1.98
+   },
+   {
+    "x": "25.4Q",
+    "gov_sales": 8.66,
+    "gov_arr": 33.02,
+    "njss_cnt": 7073,
+    "ns_cnt": 682,
+    "njss_arpu_d": 1210,
+    "npp_arpu_d": 81,
+    "njss_churn": 1.5,
+    "njss_ltv": 2172,
+    "gov_arpu_y": null,
+    "gov_emp": 140,
+    "bpo_sales": 5.5,
+    "bpo_emp": 197,
+    "fd_sales": 2.48,
+    "fd_cnt": 5589,
+    "fd_arpu": 14810,
+    "fd_churn": 1.2,
+    "fd_arr": 9.95,
+    "fd_emp": 16,
+    "ph_sales": 2.68,
+    "ep_cnt": 5139,
+    "ep_per": 47661,
+    "ep_arr": 9.79,
+    "op_shoots": 2961,
+    "ph_emp": 46,
+    "gov_sales_yoy": null,
+    "gov_arr_yoy": null,
+    "njss_cnt_yoy": null,
+    "bpo_sales_yoy": null,
+    "fd_sales_yoy": null,
+    "fd_cnt_yoy": null,
+    "ph_sales_yoy": null,
+    "ep_cnt_yoy": null,
+    "ep_per_yoy": null,
+    "gov_per_emp": 6.19,
+    "bpo_per_emp": 2.79
+   },
+   {
+    "x": "26.1Q",
+    "gov_sales": 8.96,
+    "gov_arr": 34.39,
+    "njss_cnt": 7153,
+    "ns_cnt": 715,
+    "njss_arpu_d": 1236,
+    "npp_arpu_d": 65,
+    "njss_churn": 1.49,
+    "njss_ltv": 2267,
+    "gov_arpu_y": 437,
+    "gov_emp": 148,
+    "bpo_sales": 3.31,
+    "bpo_emp": 249,
+    "fd_sales": 2.77,
+    "fd_cnt": 5723,
+    "fd_arpu": 16070,
+    "fd_churn": 1.1,
+    "fd_arr": null,
+    "fd_emp": 21,
+    "ph_sales": 1.87,
+    "ep_cnt": 5227,
+    "ep_per": null,
+    "ep_arr": 6.3,
+    "op_shoots": 4296,
+    "ph_emp": 50,
+    "gov_sales_yoy": 17.7,
+    "gov_arr_yoy": 14.0,
+    "njss_cnt_yoy": 5.9,
+    "bpo_sales_yoy": 5.8,
+    "fd_sales_yoy": 17.4,
+    "fd_cnt_yoy": 14.9,
+    "ph_sales_yoy": 11.3,
+    "ep_cnt_yoy": 7.9,
+    "ep_per_yoy": null,
+    "gov_per_emp": 6.05,
+    "bpo_per_emp": 1.33
+   },
+   {
+    "x": "26.2Q",
+    "gov_sales": 9.15,
+    "gov_arr": 35.43,
+    "njss_cnt": 7158,
+    "ns_cnt": 745,
+    "njss_arpu_d": 1279,
+    "npp_arpu_d": 37,
+    "njss_churn": 1.49,
+    "njss_ltv": 2372,
+    "gov_arpu_y": 448,
+    "gov_emp": 145,
+    "bpo_sales": 3.57,
+    "bpo_emp": 202,
+    "fd_sales": 2.77,
+    "fd_cnt": 5885,
+    "fd_arpu": 15627,
+    "fd_churn": 1.2,
+    "fd_arr": 11.11,
+    "fd_emp": 21,
+    "ph_sales": 1.85,
+    "ep_cnt": 5307,
+    "ep_per": 29758,
+    "ep_arr": 6.31,
+    "op_shoots": 3570,
+    "ph_emp": 48,
+    "gov_sales_yoy": 16.0,
+    "gov_arr_yoy": 14.0,
+    "njss_cnt_yoy": 4.0,
+    "bpo_sales_yoy": 1.1,
+    "fd_sales_yoy": 14.9,
+    "fd_cnt_yoy": 13.9,
+    "ph_sales_yoy": 13.5,
+    "ep_cnt_yoy": 7.3,
+    "ep_per_yoy": 3.2,
+    "gov_per_emp": 6.31,
+    "bpo_per_emp": 1.77
+   },
+   {
+    "x": "26.3Q",
+    "gov_sales": 9.4,
+    "gov_arr": 36.81,
+    "njss_cnt": 7275,
+    "ns_cnt": 772,
+    "njss_arpu_d": 1302,
+    "npp_arpu_d": 25,
+    "njss_churn": 1.44,
+    "njss_ltv": 2492,
+    "gov_arpu_y": 457,
+    "gov_emp": 148,
+    "bpo_sales": 3.99,
+    "bpo_emp": 194,
+    "fd_sales": 2.83,
+    "fd_cnt": 6094,
+    "fd_arpu": 15184,
+    "fd_churn": 1.1,
+    "fd_arr": 11.32,
+    "fd_emp": 21,
+    "ph_sales": 3.25,
+    "ep_cnt": 5360,
+    "ep_per": 37628,
+    "ep_arr": 8.06,
+    "op_shoots": 10551,
+    "ph_emp": 59,
+    "gov_sales_yoy": 13.7,
+    "gov_arr_yoy": 13.9,
+    "njss_cnt_yoy": 3.5,
+    "bpo_sales_yoy": 0.5,
+    "fd_sales_yoy": 11.0,
+    "fd_cnt_yoy": 12.4,
+    "ph_sales_yoy": 38.3,
+    "ep_cnt_yoy": 6.6,
+    "ep_per_yoy": 8.6,
+    "gov_per_emp": 6.35,
+    "bpo_per_emp": 2.06
+   },
+   {
+    "x": "26.4Q",
+    "gov_sales": 9.75,
+    "gov_arr": 38.35,
+    "njss_cnt": 7295,
+    "ns_cnt": 839,
+    "njss_arpu_d": 1352,
+    "npp_arpu_d": 56,
+    "njss_churn": 1.42,
+    "njss_ltv": 2570,
+    "gov_arpu_y": 471,
+    "gov_emp": 149,
+    "bpo_sales": 6.46,
+    "bpo_emp": 205,
+    "fd_sales": 2.79,
+    "fd_cnt": 6224,
+    "fd_arpu": 14523,
+    "fd_churn": 1.1,
+    "fd_arr": 11.17,
+    "fd_emp": 21,
+    "ph_sales": 4.02,
+    "ep_cnt": 5506,
+    "ep_per": 51923,
+    "ep_arr": 11.42,
+    "op_shoots": 3711,
+    "ph_emp": 60,
+    "gov_sales_yoy": 12.6,
+    "gov_arr_yoy": 16.1,
+    "njss_cnt_yoy": 3.1,
+    "bpo_sales_yoy": 17.5,
+    "fd_sales_yoy": 12.5,
+    "fd_cnt_yoy": 11.4,
+    "ph_sales_yoy": 50.0,
+    "ep_cnt_yoy": 7.1,
+    "ep_per_yoy": 8.9,
+    "gov_per_emp": 6.54,
+    "bpo_per_emp": 3.15
+   },
+   {
+    "x": "27.1Q",
+    "gov_sales": 10.18,
+    "gov_arr": 40.58,
+    "njss_cnt": 7303,
+    "ns_cnt": 865,
+    "njss_arpu_d": 1427,
+    "npp_arpu_d": 21,
+    "njss_churn": 1.44,
+    "njss_ltv": 2702,
+    "gov_arpu_y": 496,
+    "gov_emp": 162,
+    "bpo_sales": 3.15,
+    "bpo_emp": 210,
+    "fd_sales": 3.06,
+    "fd_cnt": 6314,
+    "fd_arpu": 15599,
+    "fd_churn": 1.1,
+    "fd_arr": 12.24,
+    "fd_emp": 23,
+    "ph_sales": 2.94,
+    "ep_cnt": 5593,
+    "ep_per": 32268,
+    "ep_arr": 7.21,
+    "op_shoots": 4966,
+    "ph_emp": 57,
+    "gov_sales_yoy": 13.6,
+    "gov_arr_yoy": 18.0,
+    "njss_cnt_yoy": 2.1,
+    "bpo_sales_yoy": -4.8,
+    "fd_sales_yoy": 10.5,
+    "fd_cnt_yoy": 10.3,
+    "ph_sales_yoy": 57.2,
+    "ep_cnt_yoy": 7.0,
+    "ep_per_yoy": null,
+    "gov_per_emp": 6.28,
+    "bpo_per_emp": 1.5
+   },
+   {
+    "x": "27.2Q",
+    "gov_sales": 10.75,
+    "gov_arr": 42.28,
+    "njss_cnt": 7351,
+    "ns_cnt": 859,
+    "njss_arpu_d": 1481,
+    "npp_arpu_d": 20,
+    "njss_churn": 1.39,
+    "njss_ltv": 2931,
+    "gov_arpu_y": 515,
+    "gov_emp": 161,
+    "bpo_sales": 4.23,
+    "bpo_emp": 217,
+    "fd_sales": 3.05,
+    "fd_cnt": 6442,
+    "fd_arpu": 15081,
+    "fd_churn": 1.2,
+    "fd_arr": 12.2,
+    "fd_emp": 23,
+    "ph_sales": 2.6,
+    "ep_cnt": 5704,
+    "ep_per": 31745,
+    "ep_arr": 7.24,
+    "op_shoots": 3745,
+    "ph_emp": 55,
+    "gov_sales_yoy": 17.5,
+    "gov_arr_yoy": 19.3,
+    "njss_cnt_yoy": 2.7,
+    "bpo_sales_yoy": 18.5,
+    "fd_sales_yoy": 10.1,
+    "fd_cnt_yoy": 9.5,
+    "ph_sales_yoy": 40.5,
+    "ep_cnt_yoy": 7.5,
+    "ep_per_yoy": 6.7,
+    "gov_per_emp": 6.68,
+    "bpo_per_emp": 1.95
+   }
+  ],
+  "mm": [
+   {
+    "x": "24.11",
+    "m0": 266.6,
+    "m1": null
+   },
+   {
+    "x": "24.12",
+    "m0": 269.3,
+    "m1": null
+   },
+   {
+    "x": "25.01",
+    "m0": 272.8,
+    "m1": null
+   },
+   {
+    "x": "25.02",
+    "m0": 275.6,
+    "m1": null
+   },
+   {
+    "x": "25.03",
+    "m0": 275.2,
+    "m1": null
+   },
+   {
+    "x": "25.04",
+    "m0": 278.0,
+    "m1": 112.9
+   },
+   {
+    "x": "25.05",
+    "m0": 281.8,
+    "m1": 113.1
+   },
+   {
+    "x": "25.06",
+    "m0": 286.6,
+    "m1": 114.0
+   },
+   {
+    "x": "25.07",
+    "m0": 289.3,
+    "m1": 113.9
+   },
+   {
+    "x": "25.08",
+    "m0": 292.5,
+    "m1": 114.7
+   },
+   {
+    "x": "25.09",
+    "m0": 295.3,
+    "m1": 114.0
+   },
+   {
+    "x": "25.10",
+    "m0": 299.3,
+    "m1": 114.3
+   },
+   {
+    "x": "25.11",
+    "m0": 302.8,
+    "m1": 113.6
+   },
+   {
+    "x": "25.12",
+    "m0": 306.8,
+    "m1": 113.9
+   },
+   {
+    "x": "26.01",
+    "m0": 310.8,
+    "m1": 113.9
+   },
+   {
+    "x": "26.02",
+    "m0": 315.3,
+    "m1": 114.4
+   },
+   {
+    "x": "26.03",
+    "m0": 319.7,
+    "m1": 116.1
+   },
+   {
+    "x": "26.04",
+    "m0": 327.8,
+    "m1": 117.9
+   },
+   {
+    "x": "26.05",
+    "m0": 332.9,
+    "m1": 118.1
+   },
+   {
+    "x": "26.06",
+    "m0": 338.2,
+    "m1": 118.0
+   },
+   {
+    "x": "26.07",
+    "m0": 343.4,
+    "m1": 118.7
+   },
+   {
+    "x": "26.08",
+    "m0": 347.6,
+    "m1": 118.8
+   },
+   {
+    "x": "26.09",
+    "m0": 352.3,
+    "m1": 119.3
+   },
+   {
+    "x": "26.10",
+    "m0": 356.5,
+    "m1": 119.1
+   }
+  ]
+ }
+}
