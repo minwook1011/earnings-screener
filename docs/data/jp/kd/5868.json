@@ -1,1 +1,1184 @@
-{"c": "5868", "n": "로코코", "asof": "2026-11-13", "latest": "2026년 12월기 3분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "IT 인력 아웃소싱·콜센터(ITO&BPO)와 ServiceNow 도입·근태관리(클라우드). 26년 1분기 결산단신 자료가 없어 26.1Q·26.2Q 는 비움(상반기 합계 매출 47.08억엔·영업이익 0.94억엔). 26년부터 팬클럽 사업을 클라우드에서 ITO&BPO 로 옮겨 부문 YoY 는 약간 어긋남", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신·결산보충자료"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신·결산보충자료"}, {"sec": "key", "t": "ITO&BPO 부문 매출", "def": "IT 인력 상주·콜센터·이벤트·얼굴인증", "d": "q", "bars": [{"k": "seg_ito", "l": "ITO&BPO 매출", "u": "억엔", "c": 0}], "lines": [{"k": "seg_ito_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문정보(누계 차분)"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "3Q26 결산단신·결산보충자료 · 총차입금 = 단기 + 장기 차입금(사채 포함)"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산단신·결산보충자료"}, {"sec": "부문", "t": "부문별 분기 매출", "d": "q", "src": "결산단신 부문정보(누계 차분)", "lines": [{"k": "seg_ito", "l": "ITO&BPO", "u": "억엔", "c": 0}, {"k": "seg_cloud", "l": "클라우드 솔루션", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문 영업이익(1~3분기 누계)", "d": "seg", "lines": [{"k": "op_ito", "l": "ITO&BPO", "u": "억엔", "c": 0}, {"k": "op_cloud", "l": "클라우드 솔루션", "u": "억엔", "c": 1}, {"k": "opm_ito", "l": "ITO&BPO 이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm_cloud", "l": "클라우드 이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산보충자료"}, {"sec": "사업 지표", "t": "ServiceNow 누적 거래 회사 수", "d": "sn", "bars": [{"k": "sn", "l": "누적 거래 회사", "u": "개사", "c": 0}], "src": "3Q26 결산보충자료"}], "tables": {"q": [{"q": "24.1Q", "x": "24.1Q", "sales": 19.41, "op": 1.22, "ord": 1.26, "net": 0.8, "gp": 6.98, "sga": 5.75, "cogs": 12.43, "debt_total": null, "equity": null, "total_assets": null, "cash": null, "gpm": 36.0, "opm": 6.3, "seg_ito": 13.14, "seg_cloud": 5.91, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_ito_yoy": null, "seg_cloud_yoy": null}, {"q": "24.2Q", "x": "24.2Q", "sales": 18.25, "op": -0.76, "ord": -0.83, "net": -0.69, "gp": 5.95, "sga": 6.72, "cogs": 12.3, "debt_total": null, "equity": null, "total_assets": null, "cash": null, "gpm": 32.6, "opm": -4.2, "seg_ito": 12.02, "seg_cloud": 5.87, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_ito_yoy": null, "seg_cloud_yoy": null}, {"q": "24.3Q", "x": "24.3Q", "sales": 19.44, "op": 1.89, "ord": 2.08, "net": 1.45, "gp": 7.48, "sga": 5.58, "cogs": 11.96, "debt_total": null, "equity": null, "total_assets": null, "cash": null, "gpm": 38.5, "opm": 9.7, "seg_ito": 12.46, "seg_cloud": 6.61, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_ito_yoy": null, "seg_cloud_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 20.93, "op": 1.91, "ord": 1.9, "net": 1.22, "gp": 8.02, "sga": 6.11, "cogs": 12.91, "debt_total": 4.92, "equity": 27.5, "total_assets": 43.42, "cash": 19.27, "gpm": 38.3, "opm": 9.1, "seg_ito": 13.62, "seg_cloud": 6.98, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_ito_yoy": null, "seg_cloud_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 21.17, "op": 1.97, "ord": 2.06, "net": 1.42, "gp": 7.77, "sga": 5.8, "cogs": 13.4, "debt_total": 4.25, "equity": 27.7, "total_assets": 42.9, "cash": 15.08, "gpm": 36.7, "opm": 9.3, "seg_ito": 13.67, "seg_cloud": 7.16, "sales_yoy": 9.1, "gp_yoy": 11.3, "sga_yoy": 0.9, "op_yoy": 61.5, "ord_yoy": 63.5, "net_yoy": 77.5, "cash_yoy": null, "seg_ito_yoy": 4.0, "seg_cloud_yoy": 21.2}, {"q": "25.2Q", "x": "25.2Q", "sales": 21.86, "op": 0.68, "ord": 0.78, "net": 0.53, "gp": 7.76, "sga": 7.07, "cogs": 14.1, "debt_total": 3.73, "equity": 28.2, "total_assets": 42.85, "cash": 16.28, "gpm": 35.5, "opm": 3.1, "seg_ito": 14.56, "seg_cloud": 7.0, "sales_yoy": 19.8, "gp_yoy": 30.4, "sga_yoy": 5.2, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_ito_yoy": 21.1, "seg_cloud_yoy": 19.3}, {"q": "25.3Q", "x": "25.3Q", "sales": 22.5, "op": 1.41, "ord": 1.39, "net": 0.92, "gp": 7.76, "sga": 6.36, "cogs": 14.74, "debt_total": 3.23, "equity": 29.19, "total_assets": 48.14, "cash": 18.23, "gpm": 34.5, "opm": 6.3, "seg_ito": 14.8, "seg_cloud": 7.36, "sales_yoy": 15.7, "gp_yoy": 3.7, "sga_yoy": 14.0, "op_yoy": -25.4, "ord_yoy": -33.2, "net_yoy": -36.6, "cash_yoy": null, "seg_ito_yoy": 18.8, "seg_cloud_yoy": 11.3}, {"q": "25.4Q", "x": "25.4Q", "sales": 26.36, "op": 1.19, "ord": 0.82, "net": 0.3, "gp": 8.11, "sga": 6.92, "cogs": 18.25, "debt_total": 6.61, "equity": 29.6, "total_assets": 49.98, "cash": 19.45, "gpm": 30.8, "opm": 4.5, "seg_ito": 18.63, "seg_cloud": 7.45, "sales_yoy": 25.9, "gp_yoy": 1.1, "sga_yoy": 13.3, "op_yoy": -37.7, "ord_yoy": -56.8, "net_yoy": -75.4, "cash_yoy": 0.9, "seg_ito_yoy": 36.8, "seg_cloud_yoy": 6.7}, {"q": "26.1Q", "x": "26.1Q", "sales": null, "op": null, "ord": null, "net": null, "gp": null, "sga": null, "cogs": null, "debt_total": null, "equity": null, "total_assets": null, "cash": null, "gpm": null, "opm": null, "seg_ito": null, "seg_cloud": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_ito_yoy": null, "seg_cloud_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": null, "op": null, "ord": null, "net": null, "gp": null, "sga": null, "cogs": null, "debt_total": 5.92, "equity": 28.59, "total_assets": 46.1, "cash": 15.84, "gpm": null, "opm": null, "seg_ito": null, "seg_cloud": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -2.7, "seg_ito_yoy": null, "seg_cloud_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 24.57, "op": 2.03, "ord": 2.05, "net": 1.31, "gp": 9.42, "sga": 7.39, "cogs": 15.15, "debt_total": 6.31, "equity": 29.1, "total_assets": 48.25, "cash": 18.75, "gpm": 38.3, "opm": 8.3, "seg_ito": 16.84, "seg_cloud": 7.44, "sales_yoy": 9.2, "gp_yoy": 21.4, "sga_yoy": 16.2, "op_yoy": 44.0, "ord_yoy": 47.5, "net_yoy": 42.4, "cash_yoy": 2.9, "seg_ito_yoy": 13.8, "seg_cloud_yoy": 1.1}], "a": [{"year": "2023", "x": "2023", "sales": 71.75, "op": 4.8, "ord": 4.5, "net": 2.89, "opm": 6.7, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2024", "x": "2024", "sales": 78.03, "op": 4.26, "ord": 4.41, "net": 2.78, "opm": 5.5, "sales_yoy": 8.8, "op_yoy": -11.3, "net_yoy": -3.8}, {"year": "2025", "x": "2025", "sales": 91.89, "op": 5.25, "ord": 5.05, "net": 3.17, "opm": 5.7, "sales_yoy": 17.8, "op_yoy": 23.2, "net_yoy": 14.0}, {"year": "2026 계획", "x": "2026 계획", "sales": 103.04, "op": 6.1, "ord": 6.03, "net": 4.09, "opm": 5.9, "sales_yoy": 12.1, "op_yoy": 16.2, "net_yoy": 29.0, "plan": 1, "kind": "회사 계획"}], "seg": [{"x": "25.1~3Q", "op_ito": 2.16, "op_cloud": 1.87, "opm_ito": 5.0, "opm_cloud": 8.9}, {"x": "26.1~3Q", "op_ito": 1.92, "op_cloud": 1.37, "opm_ito": 3.9, "opm_cloud": 6.2}], "sn": [{"x": "2020", "sn": 15}, {"x": "2021", "sn": 20}, {"x": "2022", "sn": 26}, {"x": "2023", "sn": 34}, {"x": "2024", "sn": 54}, {"x": "2025", "sn": 65}]}}
+{
+ "c": "5868",
+ "n": "로코코",
+ "asof": "2026-11-16",
+ "latest": "2026년 12월기 3분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "IT 인력 아웃소싱·콜센터(ITO&BPO)와 ServiceNow 도입·근태관리(클라우드). 26년 1분기 결산단신 자료가 없어 26.1Q·26.2Q 는 비움(상반기 합계 매출 47.08억엔·영업이익 0.94억엔). 26년부터 팬클럽 사업을 클라우드에서 ITO&BPO 로 옮겨 부문 YoY 는 약간 어긋남",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신·결산보충자료"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신·결산보충자료"
+  },
+  {
+   "sec": "key",
+   "t": "ServiceNow 누적 거래 회사 수",
+   "d": "sn",
+   "bars": [
+    {
+     "k": "sn",
+     "l": "누적 거래 회사",
+     "u": "개사",
+     "c": 0
+    }
+   ],
+   "src": "3Q26 결산보충설명자료",
+   "def": "ServiceNow 도입·운용 지원 사업의 누적 거래 회사 수(연도말)"
+  },
+  {
+   "sec": "key",
+   "t": "연결 종업원 수",
+   "def": "임시 고용(최근 1년 평균) 포함, 자료 시점 인원 — 26.3Q 는 10월 말",
+   "d": "b",
+   "bars": [
+    {
+     "k": "emp_con",
+     "l": "연결 종업원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부) 회사 개요"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "gpm",
+     "l": "매출총이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신·결산보충자료"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산단신·결산보충자료 · 총차입금 = 단기 + 장기 차입금(사채 포함)"
+  },
+  {
+   "sec": "부문",
+   "t": "ITO&BPO 부문 매출",
+   "def": "IT 인력 상주·콜센터·이벤트·얼굴인증",
+   "d": "q",
+   "bars": [
+    {
+     "k": "seg_ito",
+     "l": "ITO&BPO 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "seg_ito_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문정보(누계 차분)"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 분기 매출",
+   "d": "q",
+   "src": "결산단신 부문정보(누계 차분)",
+   "lines": [
+    {
+     "k": "seg_ito",
+     "l": "ITO&BPO",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_cloud",
+     "l": "클라우드 솔루션",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문 영업이익(1~3분기 누계)",
+   "d": "seg",
+   "lines": [
+    {
+     "k": "op_ito",
+     "l": "ITO&BPO",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "op_cloud",
+     "l": "클라우드 솔루션",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "opm_ito",
+     "l": "ITO&BPO 이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "opm_cloud",
+     "l": "클라우드 이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산보충자료"
+  },
+  {
+   "sec": "ServiceNow",
+   "t": "ServiceNow 사업 엔지니어 수",
+   "def": "분기말 ServiceNow 사업 담당 엔지니어",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sn_eng",
+     "l": "엔지니어",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부)"
+  },
+  {
+   "sec": "ServiceNow",
+   "t": "ServiceNow 고객 만족도",
+   "def": "ServiceNow 사가 제공하는 파트너 고객 만족 점수(5점 만점), 자료에 실린 시점 값",
+   "d": "b",
+   "lines": [
+    {
+     "k": "sn_csat",
+     "l": "고객 만족도",
+     "u": "점",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부)"
+  },
+  {
+   "sec": "ServiceNow",
+   "t": "ServiceNow 인증 자격 취득자",
+   "def": "ServiceNow 사 공개 인증 기준 누적 취득자(24.11·25.3·25.6 시점)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sn_cert",
+     "l": "취득자",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부)"
+  },
+  {
+   "sec": "인력",
+   "t": "연결·단체 종업원 수",
+   "def": "임시 고용(최근 1년 평균) 포함. 26.2Q 급증은 생성 AI 회사 Automagica 편입 뒤",
+   "d": "b",
+   "lines": [
+    {
+     "k": "emp_con",
+     "l": "연결",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp_solo",
+     "l": "단체",
+     "u": "명",
+     "c": 1
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부) 회사 개요"
+  },
+  {
+   "sec": "인력",
+   "t": "연도말 엔지니어 수",
+   "def": "단체 기준 엔지니어(2024년 6월 말 540명)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "eng",
+     "l": "엔지니어",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "2Q24 결산설명자료"
+  },
+  {
+   "sec": "인력",
+   "t": "엔지니어 이직률",
+   "def": "과거 1년 퇴직 엔지니어 ÷ 기말 엔지니어(단체). 업계 평균 10~13%",
+   "d": "b",
+   "lines": [
+    {
+     "k": "turnover",
+     "l": "이직률",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부) '로코코의 강점'"
+  },
+  {
+   "sec": "인력",
+   "t": "여성·외국 국적 비율",
+   "d": "b",
+   "lines": [
+    {
+     "k": "female",
+     "l": "여성 비율",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "foreign",
+     "l": "외국 국적 비율",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부) 회사 개요"
+  },
+  {
+   "sec": "인력",
+   "t": "IT 자격 보유자 수(연인원)",
+   "def": "계장급 이하 자격 보유 연인원. 26.2Q 부터 ServiceNow·PMP 자격을 넣어 집계 기준이 바뀜",
+   "d": "b",
+   "bars": [
+    {
+     "k": "certs",
+     "l": "자격 보유자",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부) 'IT 인재 채용과 육성'"
+  },
+  {
+   "sec": "인력",
+   "t": "자격 종류별 보유자",
+   "d": "b",
+   "lines": [
+    {
+     "k": "c_ms",
+     "l": "마이크로소프트",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "c_ipa",
+     "l": "정보처리추진기구(국가자격)",
+     "u": "명",
+     "c": 1
+    },
+    {
+     "k": "c_sn",
+     "l": "ServiceNow",
+     "u": "명",
+     "c": 2
+    },
+    {
+     "k": "c_itil",
+     "l": "ITIL",
+     "u": "명",
+     "c": 3
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부)"
+  },
+  {
+   "sec": "인력",
+   "t": "종업원 1인당 매출",
+   "def": "연결 매출 ÷ 연도말 연결 종업원(임시 포함, 계산)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "sales_per_emp",
+     "l": "1인당 매출",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "src": "결산단신 매출 · 결산보충설명자료 종업원 수"
+  },
+  {
+   "sec": "고객",
+   "t": "연간 거래 회사 수",
+   "def": "대기업 = 자본금 1억엔 이상·상장사와 그 그룹사",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "clients",
+     "l": "전체 거래 회사",
+     "u": "사",
+     "c": 0
+    },
+    {
+     "k": "big_clients",
+     "l": "대기업",
+     "u": "사",
+     "c": 1
+    }
+   ],
+   "src": "1Q25·4Q25 결산보충설명자료(각 연도 회사 거래 데이터)"
+  },
+  {
+   "sec": "고객",
+   "t": "대기업 비중",
+   "def": "매출 비중은 단체 매출 기준 회사 표기(2023 '약 70%'), 회사 수 비중 = 대기업 ÷ 전체 거래 회사(계산)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "big_share",
+     "l": "대기업 매출 비중",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "big_ratio",
+     "l": "대기업 회사 수 비중",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충설명자료 '로코코의 강점'"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 분기 영업이익",
+   "def": "누계 차분. 26.2Q 는 팬클럽 사업 부문 이동으로 계산 불가",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ito_op",
+     "l": "ITO&BPO",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "cl_op",
+     "l": "클라우드 솔루션",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부) 부문별 실적"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 분기 영업이익률",
+   "def": "부문 영업이익 ÷ 부문 매출(누계 차분, 계산)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ito_opm",
+     "l": "ITO&BPO",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "cl_opm",
+     "l": "클라우드 솔루션",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충설명자료(24년 12월기 1Q~26년 12월기 3Q, 11부) 부문별 실적"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 19.41,
+    "op": 1.22,
+    "ord": 1.26,
+    "net": 0.8,
+    "gp": 6.98,
+    "sga": 5.75,
+    "cogs": 12.43,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cash": null,
+    "gpm": 36.0,
+    "opm": 6.3,
+    "seg_ito": 13.14,
+    "seg_cloud": 5.91,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_ito_yoy": null,
+    "seg_cloud_yoy": null
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 18.25,
+    "op": -0.76,
+    "ord": -0.83,
+    "net": -0.69,
+    "gp": 5.95,
+    "sga": 6.72,
+    "cogs": 12.3,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cash": null,
+    "gpm": 32.6,
+    "opm": -4.2,
+    "seg_ito": 12.02,
+    "seg_cloud": 5.87,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_ito_yoy": null,
+    "seg_cloud_yoy": null
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 19.44,
+    "op": 1.89,
+    "ord": 2.08,
+    "net": 1.45,
+    "gp": 7.48,
+    "sga": 5.58,
+    "cogs": 11.96,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cash": null,
+    "gpm": 38.5,
+    "opm": 9.7,
+    "seg_ito": 12.46,
+    "seg_cloud": 6.61,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_ito_yoy": null,
+    "seg_cloud_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 20.93,
+    "op": 1.91,
+    "ord": 1.9,
+    "net": 1.22,
+    "gp": 8.02,
+    "sga": 6.11,
+    "cogs": 12.91,
+    "debt_total": 4.92,
+    "equity": 27.5,
+    "total_assets": 43.42,
+    "cash": 19.27,
+    "gpm": 38.3,
+    "opm": 9.1,
+    "seg_ito": 13.62,
+    "seg_cloud": 6.98,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_ito_yoy": null,
+    "seg_cloud_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 21.17,
+    "op": 1.97,
+    "ord": 2.06,
+    "net": 1.42,
+    "gp": 7.77,
+    "sga": 5.8,
+    "cogs": 13.4,
+    "debt_total": 4.25,
+    "equity": 27.7,
+    "total_assets": 42.9,
+    "cash": 15.08,
+    "gpm": 36.7,
+    "opm": 9.3,
+    "seg_ito": 13.67,
+    "seg_cloud": 7.16,
+    "sales_yoy": 9.1,
+    "gp_yoy": 11.3,
+    "sga_yoy": 0.9,
+    "op_yoy": 61.5,
+    "ord_yoy": 63.5,
+    "net_yoy": 77.5,
+    "cash_yoy": null,
+    "seg_ito_yoy": 4.0,
+    "seg_cloud_yoy": 21.2
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 21.86,
+    "op": 0.68,
+    "ord": 0.78,
+    "net": 0.53,
+    "gp": 7.76,
+    "sga": 7.07,
+    "cogs": 14.1,
+    "debt_total": 3.73,
+    "equity": 28.2,
+    "total_assets": 42.85,
+    "cash": 16.28,
+    "gpm": 35.5,
+    "opm": 3.1,
+    "seg_ito": 14.56,
+    "seg_cloud": 7.0,
+    "sales_yoy": 19.8,
+    "gp_yoy": 30.4,
+    "sga_yoy": 5.2,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_ito_yoy": 21.1,
+    "seg_cloud_yoy": 19.3
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 22.5,
+    "op": 1.41,
+    "ord": 1.39,
+    "net": 0.92,
+    "gp": 7.76,
+    "sga": 6.36,
+    "cogs": 14.74,
+    "debt_total": 3.23,
+    "equity": 29.19,
+    "total_assets": 48.14,
+    "cash": 18.23,
+    "gpm": 34.5,
+    "opm": 6.3,
+    "seg_ito": 14.8,
+    "seg_cloud": 7.36,
+    "sales_yoy": 15.7,
+    "gp_yoy": 3.7,
+    "sga_yoy": 14.0,
+    "op_yoy": -25.4,
+    "ord_yoy": -33.2,
+    "net_yoy": -36.6,
+    "cash_yoy": null,
+    "seg_ito_yoy": 18.8,
+    "seg_cloud_yoy": 11.3
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 26.36,
+    "op": 1.19,
+    "ord": 0.82,
+    "net": 0.3,
+    "gp": 8.11,
+    "sga": 6.92,
+    "cogs": 18.25,
+    "debt_total": 6.61,
+    "equity": 29.6,
+    "total_assets": 49.98,
+    "cash": 19.45,
+    "gpm": 30.8,
+    "opm": 4.5,
+    "seg_ito": 18.63,
+    "seg_cloud": 7.45,
+    "sales_yoy": 25.9,
+    "gp_yoy": 1.1,
+    "sga_yoy": 13.3,
+    "op_yoy": -37.7,
+    "ord_yoy": -56.8,
+    "net_yoy": -75.4,
+    "cash_yoy": 0.9,
+    "seg_ito_yoy": 36.8,
+    "seg_cloud_yoy": 6.7
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": null,
+    "op": null,
+    "ord": null,
+    "net": null,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cash": null,
+    "gpm": null,
+    "opm": null,
+    "seg_ito": null,
+    "seg_cloud": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_ito_yoy": null,
+    "seg_cloud_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": null,
+    "op": null,
+    "ord": null,
+    "net": null,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "debt_total": 5.92,
+    "equity": 28.59,
+    "total_assets": 46.1,
+    "cash": 15.84,
+    "gpm": null,
+    "opm": null,
+    "seg_ito": null,
+    "seg_cloud": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -2.7,
+    "seg_ito_yoy": null,
+    "seg_cloud_yoy": null
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 24.57,
+    "op": 2.03,
+    "ord": 2.05,
+    "net": 1.31,
+    "gp": 9.42,
+    "sga": 7.39,
+    "cogs": 15.15,
+    "debt_total": 6.31,
+    "equity": 29.1,
+    "total_assets": 48.25,
+    "cash": 18.75,
+    "gpm": 38.3,
+    "opm": 8.3,
+    "seg_ito": 16.84,
+    "seg_cloud": 7.44,
+    "sales_yoy": 9.2,
+    "gp_yoy": 21.4,
+    "sga_yoy": 16.2,
+    "op_yoy": 44.0,
+    "ord_yoy": 47.5,
+    "net_yoy": 42.4,
+    "cash_yoy": 2.9,
+    "seg_ito_yoy": 13.8,
+    "seg_cloud_yoy": 1.1
+   }
+  ],
+  "a": [
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 71.75,
+    "op": 4.8,
+    "ord": 4.5,
+    "net": 2.89,
+    "opm": 6.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 78.03,
+    "op": 4.26,
+    "ord": 4.41,
+    "net": 2.78,
+    "opm": 5.5,
+    "sales_yoy": 8.8,
+    "op_yoy": -11.3,
+    "net_yoy": -3.8
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 91.89,
+    "op": 5.25,
+    "ord": 5.05,
+    "net": 3.17,
+    "opm": 5.7,
+    "sales_yoy": 17.8,
+    "op_yoy": 23.2,
+    "net_yoy": 14.0
+   },
+   {
+    "year": "2026 계획",
+    "x": "2026 계획",
+    "sales": 103.04,
+    "op": 6.1,
+    "ord": 6.03,
+    "net": 4.09,
+    "opm": 5.9,
+    "sales_yoy": 12.1,
+    "op_yoy": 16.2,
+    "net_yoy": 29.0,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "seg": [
+   {
+    "x": "25.1~3Q",
+    "op_ito": 2.16,
+    "op_cloud": 1.87,
+    "opm_ito": 5.0,
+    "opm_cloud": 8.9
+   },
+   {
+    "x": "26.1~3Q",
+    "op_ito": 1.92,
+    "op_cloud": 1.37,
+    "opm_ito": 3.9,
+    "opm_cloud": 6.2
+   }
+  ],
+  "sn": [
+   {
+    "x": "2020",
+    "sn": 15
+   },
+   {
+    "x": "2021",
+    "sn": 20
+   },
+   {
+    "x": "2022",
+    "sn": 26
+   },
+   {
+    "x": "2023",
+    "sn": 34
+   },
+   {
+    "x": "2024",
+    "sn": 54
+   },
+   {
+    "x": "2025",
+    "sn": 65
+   }
+  ],
+  "b": [
+   {
+    "x": "24.1Q",
+    "ito_s": 13.14,
+    "ito_op": 0.72,
+    "cl_s": 5.9,
+    "cl_op": 0.47,
+    "ito_opm": 5.5,
+    "cl_opm": 8.0
+   },
+   {
+    "x": "24.2Q",
+    "emp_con": 710,
+    "female": 38.0,
+    "foreign": 14.0,
+    "turnover": 7.0,
+    "ito_s": 12.02,
+    "ito_op": -0.43,
+    "cl_s": 5.87,
+    "cl_op": -0.26,
+    "ito_opm": -3.6,
+    "cl_opm": -4.4
+   },
+   {
+    "x": "24.3Q",
+    "ito_s": 12.46,
+    "ito_op": 1.15,
+    "cl_s": 6.61,
+    "cl_op": 0.6,
+    "ito_opm": 9.2,
+    "cl_opm": 9.1
+   },
+   {
+    "x": "24.4Q",
+    "emp_con": 725,
+    "emp_solo": 646,
+    "female": 36.0,
+    "foreign": 15.0,
+    "certs": 469,
+    "c_ms": 219,
+    "c_ipa": 150,
+    "c_itil": 41,
+    "sn_csat": 4.42,
+    "sn_cert": 183,
+    "turnover": 7.6,
+    "ito_s": 13.61,
+    "ito_op": 1.16,
+    "cl_s": 6.98,
+    "cl_op": 0.6,
+    "ito_opm": 8.5,
+    "cl_opm": 8.6
+   },
+   {
+    "x": "25.1Q",
+    "sn_csat": 4.48,
+    "sn_cert": 195,
+    "sn_eng": 115,
+    "ito_s": 13.67,
+    "ito_op": 1.24,
+    "cl_s": 7.15,
+    "cl_op": 0.7,
+    "ito_opm": 9.1,
+    "cl_opm": 9.8
+   },
+   {
+    "x": "25.2Q",
+    "emp_con": 776,
+    "emp_solo": 695,
+    "female": 39.1,
+    "foreign": 13.5,
+    "certs": 519,
+    "c_ms": 232,
+    "c_ipa": 191,
+    "c_itil": 46,
+    "sn_csat": 4.64,
+    "sn_cert": 219,
+    "turnover": 6.9,
+    "ito_s": 14.55,
+    "ito_op": 0.48,
+    "cl_s": 7.0,
+    "cl_op": 0.23,
+    "ito_opm": 3.3,
+    "cl_opm": 3.3
+   },
+   {
+    "x": "25.3Q",
+    "certs": 566,
+    "c_ms": 252,
+    "c_ipa": 210,
+    "c_itil": 49,
+    "sn_csat": 4.72,
+    "sn_eng": 118,
+    "turnover": 6.2,
+    "ito_s": 14.81,
+    "ito_op": 0.76,
+    "cl_s": 7.37,
+    "cl_op": 0.63,
+    "ito_opm": 5.1,
+    "cl_opm": 8.5
+   },
+   {
+    "x": "25.4Q",
+    "emp_con": 810,
+    "emp_solo": 728,
+    "female": 37.9,
+    "foreign": 13.7,
+    "sn_csat": 4.83,
+    "sn_eng": 123,
+    "turnover": 7.7,
+    "ito_s": 18.63,
+    "ito_op": 0.9,
+    "cl_s": 7.45,
+    "cl_op": 0.15,
+    "ito_opm": 4.8,
+    "cl_opm": 2.0
+   },
+   {
+    "x": "26.1Q",
+    "sn_csat": 4.84,
+    "ito_s": 16.22,
+    "ito_op": 0.85,
+    "cl_s": 7.5,
+    "cl_op": 0.24,
+    "ito_opm": 5.2,
+    "cl_opm": 3.2
+   },
+   {
+    "x": "26.2Q",
+    "emp_con": 1007,
+    "emp_solo": 928,
+    "female": 37.8,
+    "foreign": 12.5,
+    "certs": 783,
+    "c_ms": 316,
+    "c_ipa": 232,
+    "c_itil": 49,
+    "c_sn": 122,
+    "sn_csat": 4.83
+   },
+   {
+    "x": "26.3Q",
+    "emp_con": 1059,
+    "emp_solo": 977,
+    "female": 38.0,
+    "foreign": 10.6,
+    "certs": 746,
+    "c_ms": 308,
+    "c_ipa": 230,
+    "c_itil": 47,
+    "c_sn": 103,
+    "sn_csat": 4.82,
+    "ito_s": 16.84,
+    "ito_op": 1.31,
+    "cl_s": 7.51,
+    "cl_op": 0.74,
+    "ito_opm": 7.8,
+    "cl_opm": 9.9
+   }
+  ],
+  "ba": [
+   {
+    "x": "2017",
+    "eng": 277
+   },
+   {
+    "x": "2018",
+    "eng": 324
+   },
+   {
+    "x": "2019",
+    "eng": 407
+   },
+   {
+    "x": "2020",
+    "eng": 420
+   },
+   {
+    "x": "2021",
+    "eng": 434
+   },
+   {
+    "x": "2022",
+    "eng": 463
+   },
+   {
+    "x": "2023",
+    "eng": 515,
+    "big_share": 70
+   },
+   {
+    "x": "2024",
+    "clients": 422,
+    "big_clients": 265,
+    "big_share": 80,
+    "emp_con": 725,
+    "turnover": 7.6,
+    "big_ratio": 62.8,
+    "sales_per_emp": 1076.0
+   },
+   {
+    "x": "2025",
+    "clients": 452,
+    "big_clients": 286,
+    "big_share": 80,
+    "emp_con": 810,
+    "turnover": 7.7,
+    "big_ratio": 63.3,
+    "sales_per_emp": 1134.0
+   }
+  ]
+ }
+}
