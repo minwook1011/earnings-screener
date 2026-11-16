@@ -346,7 +346,7 @@
     if (it.stack) first = ymAdd(endYm, -11);
     var months = []; for (var ym = first; ym <= endYm; ym = ymAdd(ym, 1)) months.push(ym);
     var W = Math.max(320, host.clientWidth), pL = 50, pR = 12, IW = W - pL - pR, n = months.length, bw = IW / n;
-    var top = 30, h1 = W < 600 ? 170 : 210, gap = 34, h2 = W < 600 ? 92 : 112, H = top + h1 + gap + h2 + 26;
+    var top = 30, h1 = W < 600 ? 170 : 210, gap = 34, h3 = W < 600 ? 72 : 86, gap2 = 30, h2 = W < 600 ? 92 : 112, yTop = top + h1 + gap, sTop = yTop + h3 + gap2, H = sTop + h2 + 26;
     var x = function (i) { return pL + bw * (i + 0.5); };
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H });
     var defs = el("defs", {}, svg);
@@ -392,12 +392,31 @@
       if (n <= 18 || i % 2 === 0) txt(ga, x(i), H - 6, ymLab(m), null, "middle");
     });
 
+    // 가운데: YoY(%) — 절댓값 지표는 늘 YoY 를 같이(2026-11-16 사용자). 월 지표 YoY(민트) · 분기 매출 YoY(보라), 같은 % 축 하나
+    var iy = months.map(function (m, i) { var p = mm(it)[m], b = mm(it)[ymAdd(m, -12)]; return p && b ? { x: x(i), v: (p[1] / b[1] - 1) * 100, m: m } : null; }).filter(Boolean);
+    var sy = Qs.map(function (Q) { var v = yoy(co, "sales", Q.q); return v != null ? { x: pL + bw * (Q.a + Q.b + 1) / 2, v: v, q: Q.q } : null; }).filter(Boolean);
+    var ey = s.est && main1 && s.est.yoy != null ? Qs.filter(function (Q) { return Q.q === s.est.q; }).map(function (Q) { return { x: pL + bw * (Q.a + Q.b + 1) / 2, v: s.est.yoy }; })[0] : null;
+    var yv = iy.map(function (d) { return d.v; }).concat(sy.map(function (d) { return d.v; })).concat(ey ? [ey.v] : []);
+    var ylo = Math.min.apply(null, yv.concat([0])), yhi = Math.max.apply(null, yv.concat([10])) * 1.25;
+    var y3 = function (v) { return yTop + 6 + (1 - (v - ylo) / ((yhi - ylo) || 1)) * (h3 - 12); };
+    txt(ga, pL - 6, yTop + 12, "YoY", "sub-ax", "end"); txt(ga, pL - 6, yTop + 24, "%", "sub-ax", "end");
+    el("line", { x1: pL, x2: W - pR, y1: y3(0), y2: y3(0), stroke: "var(--line-2)" }, gg);
+    nice(ylo, yhi, 2).forEach(function (v) { if (v <= ylo || v > yhi || v === 0) return; el("line", { x1: pL, x2: W - pR, y1: y3(v), y2: y3(v) }, gg); });
+    txt(ga, pL - 6, y3(0) + 3.5, "0%", null, "end");
+    function yline(arr, col, cls, lastOnly) {
+      if (arr.length > 1) el("path", { d: arr.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y3(d.v).toFixed(1); }).join(""), fill: "none", stroke: col, "stroke-width": 2, "stroke-linejoin": "round", "class": "draw" }, gT);
+      arr.forEach(function (d, i) { el("circle", { cx: d.x, cy: y3(d.v), r: 4, fill: col, stroke: "var(--panel)", "stroke-width": 2, "class": "fade" }, gT); if (i === arr.length - 1 || (!lastOnly && arr.length <= 6)) txt(gT, d.x + (lastOnly ? -6 : 0), y3(d.v) - 8, pct(d.v, 1), "ibar-lab " + cls + " fade", lastOnly ? "end" : "middle"); });
+    }
+    yline(sy, "var(--acc-2)", "est2", false); yline(iy, "var(--ind)", "indl", true);
+    if (ey) { el("circle", { cx: ey.x, cy: y3(ey.v), r: 4.5, fill: "var(--panel)", stroke: "var(--acc-2)", "stroke-width": 2, "stroke-dasharray": "2 2", "class": "fade" }, gT); txt(gT, ey.x + 8, y3(ey.v) + 16, "추정 " + pct(ey.v, 0), "ibar-lab est2 fade", "middle"); }
+    if (iy.length < 3) txt(gT, pL + 8, yTop + h3 - 4, "가입자 YoY는 전년 값이 쌓이는 중 — " + (iy.length ? iy.length + "개월만" : "아직 없음"), "apr", "start");
+
     // 아래: 분기 매출(회사 발표 결과) + 이번 분기 추정
     var sv2 = Qs.map(function (Q) { return sv(co, "sales", Q.q); }).filter(function (v) { return v != null; });
     if (s.est && main1) sv2.push(s.est.hi); if (co.consensus && co.consensus.q === pq) sv2.push(co.consensus.sales);
-    var smax = Math.max.apply(null, sv2.concat([1])) * 1.2, base2 = top + h1 + gap + h2;
+    var smax = Math.max.apply(null, sv2.concat([1])) * 1.2, base2 = sTop + h2;
     var y2 = function (v) { return base2 - v / smax * h2; };
-    txt(ga, pL - 6, top + h1 + gap + 12, "매출", "sub-ax", "end"); txt(ga, pL - 6, top + h1 + gap + 24, "억엔", "sub-ax", "end");
+    txt(ga, pL - 6, sTop + 12, "매출", "sub-ax", "end"); txt(ga, pL - 6, sTop + 24, "억엔", "sub-ax", "end");
     el("line", { x1: pL, x2: W - pR, y1: base2, y2: base2, stroke: "var(--line-2)" }, gg);
     Qs.forEach(function (Q) {
       var a = pL + bw * Q.a + 6, w = bw * (Q.b - Q.a + 1) - 12, v = sv(co, "sales", Q.q), cx = a + w / 2, r0 = s.rows.filter(function (r) { return r.q === Q.q; })[0];
@@ -416,7 +435,7 @@
 
     var hl = el("rect", { fill: "var(--ink)", opacity: 0, rx: 6 }, gB);
     hits.forEach(function (h) {
-      var a = pL + bw * h.a, w = bw * (h.b - h.a + 1), yy = h.up ? top - 24 : top + h1 + gap - 6, hh = h.up ? h1 + 44 : h2 + 10;
+      var a = pL + bw * h.a, w = bw * (h.b - h.a + 1), yy = h.up ? top - 24 : yTop - 8, hh = h.up ? h1 + 44 : h3 + gap2 + h2 + 14;
       var r = el("rect", { x: a, y: yy, width: w, height: hh, fill: "transparent" }, svg);
       r.addEventListener("mousemove", function (ev) { hl.setAttribute("x", a); hl.setAttribute("y", yy); hl.setAttribute("width", w); hl.setAttribute("height", hh); hl.setAttribute("opacity", ".05"); showTip(h.h, ev); });
       r.addEventListener("mouseleave", function () { hl.setAttribute("opacity", 0); hideTip(); });
@@ -424,7 +443,7 @@
     host.innerHTML = ""; host.appendChild(svg);
     if (anim) animate(svg);
     document.getElementById("llg").innerHTML = (it.stack ? it.stack.map(function (sk, j) { return '<span><i class="lg-s' + j + '"></i>' + esc(sk[1]) + "</span>"; }).join("") : '<span><i class="lg-ind"></i>' + esc(it.short) + " (월)</span>") +
-      '<span><i class="lg-ghost"></i>미발표 달</span><span><i class="lg-sales"></i>분기 매출(회사 발표 결과)</span>' + (main1 ? '<span><i class="lg-est2"></i>이번 분기 매출 추정(가입자 기준)</span>' : "") + (co.consensus ? '<span><i class="lg-rel"></i>컨센서스</span>' : "");
+      '<span><i class="lg-ghost"></i>미발표 달</span><span><i class="lg-yi"></i>가입자 YoY</span><span><i class="lg-ys"></i>매출 YoY</span><span><i class="lg-sales"></i>분기 매출(회사 발표 결과)</span>' + (main1 ? '<span><i class="lg-est2"></i>이번 분기 매출 추정(가입자 기준)</span>' : "") + (co.consensus ? '<span><i class="lg-rel"></i>컨센서스</span>' : "");
     drawStats(co, it, s);
   }
 

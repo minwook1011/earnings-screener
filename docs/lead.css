@@ -497,3 +497,7 @@ a.chip:hover { border-color: var(--acc); color: var(--ink); }
 .soon-box .tco, .tree > .clist .tco { margin-left: 0; border-left: 0; border-radius: 9px; }
 .tsub.cur { color: var(--ink); }
 @media (max-width: 1100px) { .lead-grid { grid-template-columns: 1fr; } .lstats { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
+
+.lg-yi { height: 3px !important; background: var(--ind); border-radius: 2px; }
+.lg-ys { height: 3px !important; background: var(--acc-2); border-radius: 2px; }
+.ibar-lab.indl { fill: var(--ind-2); }
