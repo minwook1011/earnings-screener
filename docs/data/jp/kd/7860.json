@@ -1,1 +1,1363 @@
-{"c": "7860", "n": "에이벡스", "asof": "2026-11-12", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "음악(라이브·굿즈·음반·배신·EC)과 애니·영상이 축. 경상이익은 26.3Q 전 분기 값 없음. 차입금은 거의 없음. 회사 계획은 영업이익·순이익만 공표", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신·업적설명자료"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신·업적설명자료"}, {"sec": "key", "t": "상반기 음악 사업 매출", "def": "각 회계연도 상반기 누계(부문 내부거래 미소거)", "d": "h", "bars": [{"k": "music", "l": "음악 매출", "u": "억엔", "c": 0}], "src": "2Q27 업적설명자료 9쪽 그래프"}, {"sec": "key", "t": "상반기 애니·영상 매출", "def": "각 회계연도 상반기 누계", "d": "h", "bars": [{"k": "anime", "l": "애니·영상 매출", "u": "억엔", "c": 0}], "src": "2Q27 업적설명자료 10쪽 그래프"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산단신·업적설명자료"}, {"sec": "사업 지표", "t": "라이브 공연 수와 동원", "def": "상반기, 수탁 제작 공연 포함·온라인 제외", "d": "h", "bars": [{"k": "shows", "l": "공연 수(회)", "u": "회", "c": 0}], "lines": [{"k": "attend", "l": "동원(만 명)", "u": "만 명", "c": 1}], "src": "2Q27 업적설명자료 8쪽"}, {"sec": "사업 지표", "t": "음반 판매 수량", "def": "상반기 신보, 천 장", "d": "h", "src": "2Q27 업적설명자료 8쪽", "lines": [{"k": "single", "l": "싱글", "u": "천 장", "c": 0}, {"k": "album", "l": "앨범", "u": "천 장", "c": 1}]}, {"sec": "사업 지표", "t": "음악 사업 세부 매출", "def": "상반기", "d": "h", "src": "2Q27 업적설명자료 25쪽", "lines": [{"k": "live", "l": "라이브", "u": "억엔", "c": 0}, {"k": "pkg", "l": "음반", "u": "억엔", "c": 1}, {"k": "ec", "l": "EC", "u": "억엔", "c": 2}, {"k": "dist", "l": "배신", "u": "억엔", "c": 3}, {"k": "md", "l": "굿즈", "u": "억엔", "c": 4}, {"k": "mgmt", "l": "매니지먼트", "u": "억엔", "c": 5}]}, {"sec": "부문", "t": "부문별 영업이익", "def": "상반기", "d": "h", "src": "2Q27 업적설명자료 25~27쪽", "lines": [{"k": "op_anime", "l": "애니·영상", "u": "억엔", "c": 0}, {"k": "op_music", "l": "음악", "u": "억엔", "c": 1}, {"k": "op_other", "l": "기타", "u": "억엔", "c": 2}]}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산단신·업적설명자료 · 총차입금 = 단기 + 장기 차입금(1년 내 상환 포함)"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 300.27, "op": -5.9, "ord": null, "net": -10.21, "gp": 89.35, "sga": 95.24, "cogs": 210.92, "cash": 493.16, "inventory": null, "debt_total": 0.07, "equity": 563.06, "total_assets": 1121.06, "gpm": 29.8, "opm": -2.0, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 390.05, "op": -3.12, "ord": null, "net": -4.5, "gp": 102.86, "sga": 105.99, "cogs": 287.19, "cash": 470.75, "inventory": null, "debt_total": 0.06, "equity": 560.99, "total_assets": 1098.87, "gpm": 26.4, "opm": -0.8, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 255.48, "op": -12.81, "ord": null, "net": 18.34, "gp": 70.22, "sga": 83.03, "cogs": 185.26, "cash": 414.85, "inventory": null, "debt_total": 0.05, "equity": 571.82, "total_assets": 1043.55, "gpm": 27.5, "opm": -5.0, "sales_yoy": -20.1, "gp_yoy": -36.7, "sga_yoy": -9.8, "op_yoy": -168.1, "ord_yoy": null, "net_yoy": -32.2, "inventory_yoy": null, "cash_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 305.83, "op": -8.41, "ord": null, "net": -2.02, "gp": 89.26, "sga": 97.67, "cogs": 216.57, "cash": 458.04, "inventory": null, "debt_total": 0.04, "equity": 535.72, "total_assets": 1081.61, "gpm": 29.2, "opm": -2.7, "sales_yoy": -5.6, "gp_yoy": -0.6, "sga_yoy": 12.4, "op_yoy": -394.1, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 364.76, "op": 8.6, "ord": null, "net": 5.23, "gp": 104.2, "sga": 95.61, "cogs": 260.56, "cash": 411.06, "inventory": null, "debt_total": 0.04, "equity": 519.38, "total_assets": 1099.75, "gpm": 28.6, "opm": 2.4, "sales_yoy": 21.5, "gp_yoy": 16.6, "sga_yoy": 0.4, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": -16.6}, {"q": "25.4Q", "x": "25.4Q", "sales": 390.84, "op": -5.57, "ord": null, "net": -10.17, "gp": 94.71, "sga": 100.27, "cogs": 296.13, "cash": 356.9, "inventory": null, "debt_total": 0.03, "equity": 511.12, "total_assets": 1059.6, "gpm": 24.2, "opm": -1.4, "sales_yoy": 0.2, "gp_yoy": -7.9, "sga_yoy": -5.4, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": -24.2}, {"q": "26.1Q", "x": "26.1Q", "sales": 327.35, "op": 14.58, "ord": null, "net": 7.61, "gp": 96.65, "sga": 82.07, "cogs": 230.7, "cash": 283.6, "inventory": null, "debt_total": 0.02, "equity": 507.86, "total_assets": 1021.36, "gpm": 29.5, "opm": 4.5, "sales_yoy": 28.1, "gp_yoy": 37.6, "sga_yoy": -1.2, "op_yoy": null, "ord_yoy": null, "net_yoy": -58.5, "inventory_yoy": null, "cash_yoy": -31.6}, {"q": "26.2Q", "x": "26.2Q", "sales": 312.93, "op": -3.39, "ord": null, "net": 1.03, "gp": 82.84, "sga": 86.22, "cogs": 230.09, "cash": 309.96, "inventory": null, "debt_total": 0.01, "equity": 505.51, "total_assets": 1083.96, "gpm": 26.5, "opm": -1.1, "sales_yoy": 2.3, "gp_yoy": -7.2, "sga_yoy": -11.7, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": -32.3}, {"q": "26.3Q", "x": "26.3Q", "sales": 390.32, "op": 18.94, "ord": 21.89, "net": 22.03, "gp": 117.9, "sga": 98.96, "cogs": 272.42, "cash": 332.66, "inventory": null, "debt_total": 0.01, "equity": 521.14, "total_assets": 1109.24, "gpm": 30.2, "opm": 4.9, "sales_yoy": 7.0, "gp_yoy": 13.1, "sga_yoy": 3.5, "op_yoy": 120.2, "ord_yoy": null, "net_yoy": 321.2, "inventory_yoy": null, "cash_yoy": -19.1}, {"q": "26.4Q", "x": "26.4Q", "sales": 435.11, "op": 10.72, "ord": 8.17, "net": 4.86, "gp": 120.4, "sga": 109.69, "cogs": 314.71, "cash": 343.05, "inventory": null, "debt_total": 0.0, "equity": 528.89, "total_assets": 1107.93, "gpm": 27.7, "opm": 2.5, "sales_yoy": 11.3, "gp_yoy": 27.1, "sga_yoy": 9.4, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": -3.9}, {"q": "27.1Q", "x": "27.1Q", "sales": 349.3, "op": 12.77, "ord": 13.72, "net": 4.25, "gp": 100.22, "sga": 87.45, "cogs": 249.08, "cash": 340.1, "inventory": null, "debt_total": 6.65, "equity": 524.12, "total_assets": 1088.26, "gpm": 28.7, "opm": 3.7, "sales_yoy": 6.7, "gp_yoy": 3.7, "sga_yoy": 6.6, "op_yoy": -12.4, "ord_yoy": null, "net_yoy": -44.2, "inventory_yoy": null, "cash_yoy": 19.9}, {"q": "27.2Q", "x": "27.2Q", "sales": 385.9, "op": 22.01, "ord": 22.49, "net": 11.72, "gp": 117.93, "sga": 95.91, "cogs": 267.97, "cash": 453.46, "inventory": null, "debt_total": 6.45, "equity": 514.87, "total_assets": 1175.97, "gpm": 30.6, "opm": 5.7, "sales_yoy": 23.3, "gp_yoy": 42.4, "sga_yoy": 11.2, "op_yoy": null, "ord_yoy": null, "net_yoy": 1037.9, "inventory_yoy": null, "cash_yoy": 46.3}], "a": [{"year": "2021", "x": "2021", "sales": 815.27, "op": -62.78, "ord": -65.38, "net": 128.31, "opm": -7.7, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 984.37, "op": 25.82, "ord": 23.51, "net": 9.19, "opm": 2.6, "sales_yoy": 20.7, "op_yoy": null, "net_yoy": -92.8}, {"year": "2023", "x": "2023", "sales": 1215.61, "op": 33.85, "ord": 40.55, "net": 27.42, "opm": 2.8, "sales_yoy": 23.5, "op_yoy": 31.1, "net_yoy": 198.4}, {"year": "2024", "x": "2024", "sales": 1333.87, "op": 12.65, "ord": 11.37, "net": 9.87, "opm": 0.9, "sales_yoy": 9.7, "op_yoy": -62.6, "net_yoy": -64.0}, {"year": "2025", "x": "2025", "sales": 1316.91, "op": -18.19, "ord": -17.03, "net": 11.38, "opm": -1.4, "sales_yoy": -1.3, "op_yoy": -243.8, "net_yoy": 15.3}, {"year": "2026", "x": "2026", "sales": 1465.71, "op": 40.85, "ord": 43.33, "net": 35.53, "opm": 2.8, "sales_yoy": 11.3, "op_yoy": null, "net_yoy": 212.2}, {"year": "2027 계획", "x": "2027 계획", "sales": null, "op": 60.0, "ord": null, "net": 32.0, "opm": null, "sales_yoy": null, "op_yoy": 46.9, "net_yoy": -9.9, "plan": 1, "kind": "회사 계획"}], "h": [{"x": "23.2Q", "music": 475, "anime": 65}, {"x": "24.2Q", "music": 563, "anime": 72}, {"x": "25.2Q", "music": 474, "anime": 89}, {"x": "26.2Q", "music": 534.72, "anime": 98.05, "other": 16.69, "shows": 583, "attend": 149, "ticket": 13102, "single": 2481, "album": 1108, "live": 237.91, "md": 29.53, "pkg": 80.88, "dist": 74.21, "ec": 73.22, "mgmt": 50.49, "op_music": 6.55, "op_anime": 8.48, "op_other": -3.77}, {"x": "27.2Q", "music": 579.27, "anime": 144.77, "other": 22.9, "shows": 648, "attend": 179, "ticket": 12188, "single": 3222, "album": 887, "live": 242.49, "md": 48.93, "pkg": 92.32, "dist": 80.56, "ec": 88.49, "mgmt": 47.52, "op_music": 16.39, "op_anime": 17.58, "op_other": 0.81}]}}
+{
+ "c": "7860",
+ "n": "에이벡스",
+ "asof": "2026-11-12",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "음악(라이브·굿즈·음반·배신·EC)과 애니·영상이 축. 경상이익은 26.3Q 전 분기 값 없음. 차입금은 거의 없음. 회사 계획은 영업이익·순이익만 공표",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·업적설명자료"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·업적설명자료"
+  },
+  {
+   "sec": "key",
+   "t": "라이브 동원 수",
+   "def": "분기 단독(누계 차분), 수탁 제작 공연 포함·온라인 제외",
+   "d": "b",
+   "bars": [
+    {
+     "k": "attend",
+     "l": "동원",
+     "u": "만 명",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "key",
+   "t": "애니메이션 매출",
+   "def": "분기 단독(누계 차분), 애니·영상 부문 내 소부문",
+   "d": "b",
+   "bars": [
+    {
+     "k": "anime",
+     "l": "애니메이션",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "gpm",
+     "l": "매출총이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·업적설명자료"
+  },
+  {
+   "sec": "음악 매출 구성",
+   "t": "음악 소부문 매출(큰 것)",
+   "def": "분기 단독, 소부문 내 거래 미소거",
+   "d": "b",
+   "lines": [
+    {
+     "k": "live",
+     "l": "라이브",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ec",
+     "l": "E-커머스",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "pkg",
+     "l": "음반",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "dist",
+     "l": "음원 배신",
+     "u": "억엔",
+     "c": 3
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "음악 매출 구성",
+   "t": "음악 소부문 매출(작은 것)",
+   "def": "분기 단독. 매니지먼트는 26년 3월기부터 팬클럽 포함 재분류(25년 3월기부터 소급), 그 전은 비움",
+   "d": "b",
+   "lines": [
+    {
+     "k": "md",
+     "l": "굿즈(MD)",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "mgmt",
+     "l": "매니지먼트",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "pub",
+     "l": "음악 출판",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "음악 매출 구성",
+   "t": "라이브 매출",
+   "def": "분기 단독",
+   "d": "b",
+   "bars": [
+    {
+     "k": "live",
+     "l": "라이브",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "음악 매출 구성",
+   "t": "음원 배신 매출",
+   "def": "분기 단독",
+   "d": "b",
+   "bars": [
+    {
+     "k": "dist",
+     "l": "음원 배신",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "음악 매출 구성",
+   "t": "굿즈(MD) 매출",
+   "def": "분기 단독",
+   "d": "b",
+   "bars": [
+    {
+     "k": "md",
+     "l": "굿즈",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "라이브",
+   "t": "공연 수",
+   "def": "분기 단독, 수탁 제작 포함·온라인·무대·이벤트 제외",
+   "d": "b",
+   "bars": [
+    {
+     "k": "shows",
+     "l": "공연 수",
+     "u": "회",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "라이브",
+   "t": "공연장 규모별 공연 수",
+   "def": "분기 단독",
+   "d": "b",
+   "lines": [
+    {
+     "k": "hall",
+     "l": "홀·라이브하우스",
+     "u": "회",
+     "c": 0
+    },
+    {
+     "k": "arena",
+     "l": "아레나",
+     "u": "회",
+     "c": 1
+    },
+    {
+     "k": "stad",
+     "l": "스타디움",
+     "u": "회",
+     "c": 2
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "라이브",
+   "t": "공연당 동원",
+   "def": "동원 수 ÷ 공연 수(분기 단독)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "per_show",
+     "l": "공연당 동원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "라이브",
+   "t": "티켓 평균 단가",
+   "def": "회계연도 누계(1Q·상반기·3Q 누계·연간) 값 그대로",
+   "d": "bc",
+   "lines": [
+    {
+     "k": "ticket",
+     "l": "티켓 평균 단가",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "음반·영상",
+   "t": "음반·영상 판매 수량",
+   "def": "분기 단독, 신보만(판매 수탁 포함). DVD/BD는 26년 3월기 자료부터 공개",
+   "d": "b",
+   "lines": [
+    {
+     "k": "sg_n",
+     "l": "싱글",
+     "u": "천 장",
+     "c": 0
+    },
+    {
+     "k": "al_n",
+     "l": "앨범",
+     "u": "천 장",
+     "c": 1
+    },
+    {
+     "k": "dvd_n",
+     "l": "DVD/BD",
+     "u": "천 장",
+     "c": 2
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "음반·영상",
+   "t": "음반·영상 평균 단가",
+   "def": "회계연도 누계 값 그대로, 신보만",
+   "d": "bc",
+   "lines": [
+    {
+     "k": "dvd_p",
+     "l": "DVD/BD",
+     "u": "엔",
+     "c": 0
+    },
+    {
+     "k": "al_p",
+     "l": "앨범",
+     "u": "엔",
+     "c": 1
+    },
+    {
+     "k": "sg_p",
+     "l": "싱글",
+     "u": "엔",
+     "c": 2
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "애니·영상",
+   "t": "애니·실사 매출",
+   "def": "분기 단독, 소부문 공개는 26년 3월기 자료부터(전년 25년 3월기 포함)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "anime",
+     "l": "애니메이션",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "jissha",
+     "l": "실사 영상",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "업적설명자료 25.1Q~27.2Q(누계 표, 분기 단독 = 누계 차분)"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익",
+   "def": "상반기",
+   "d": "h",
+   "src": "2Q27 업적설명자료 25~27쪽",
+   "lines": [
+    {
+     "k": "op_anime",
+     "l": "애니·영상",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "op_music",
+     "l": "음악",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "op_other",
+     "l": "기타",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신·업적설명자료 · 총차입금 = 단기 + 장기 차입금(1년 내 상환 포함)"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 300.27,
+    "op": -5.9,
+    "ord": null,
+    "net": -10.21,
+    "gp": 89.35,
+    "sga": 95.24,
+    "cogs": 210.92,
+    "cash": 493.16,
+    "inventory": null,
+    "debt_total": 0.07,
+    "equity": 563.06,
+    "total_assets": 1121.06,
+    "gpm": 29.8,
+    "opm": -2.0,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 390.05,
+    "op": -3.12,
+    "ord": null,
+    "net": -4.5,
+    "gp": 102.86,
+    "sga": 105.99,
+    "cogs": 287.19,
+    "cash": 470.75,
+    "inventory": null,
+    "debt_total": 0.06,
+    "equity": 560.99,
+    "total_assets": 1098.87,
+    "gpm": 26.4,
+    "opm": -0.8,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 255.48,
+    "op": -12.81,
+    "ord": null,
+    "net": 18.34,
+    "gp": 70.22,
+    "sga": 83.03,
+    "cogs": 185.26,
+    "cash": 414.85,
+    "inventory": null,
+    "debt_total": 0.05,
+    "equity": 571.82,
+    "total_assets": 1043.55,
+    "gpm": 27.5,
+    "opm": -5.0,
+    "sales_yoy": -20.1,
+    "gp_yoy": -36.7,
+    "sga_yoy": -9.8,
+    "op_yoy": -168.1,
+    "ord_yoy": null,
+    "net_yoy": -32.2,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 305.83,
+    "op": -8.41,
+    "ord": null,
+    "net": -2.02,
+    "gp": 89.26,
+    "sga": 97.67,
+    "cogs": 216.57,
+    "cash": 458.04,
+    "inventory": null,
+    "debt_total": 0.04,
+    "equity": 535.72,
+    "total_assets": 1081.61,
+    "gpm": 29.2,
+    "opm": -2.7,
+    "sales_yoy": -5.6,
+    "gp_yoy": -0.6,
+    "sga_yoy": 12.4,
+    "op_yoy": -394.1,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 364.76,
+    "op": 8.6,
+    "ord": null,
+    "net": 5.23,
+    "gp": 104.2,
+    "sga": 95.61,
+    "cogs": 260.56,
+    "cash": 411.06,
+    "inventory": null,
+    "debt_total": 0.04,
+    "equity": 519.38,
+    "total_assets": 1099.75,
+    "gpm": 28.6,
+    "opm": 2.4,
+    "sales_yoy": 21.5,
+    "gp_yoy": 16.6,
+    "sga_yoy": 0.4,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": -16.6
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 390.84,
+    "op": -5.57,
+    "ord": null,
+    "net": -10.17,
+    "gp": 94.71,
+    "sga": 100.27,
+    "cogs": 296.13,
+    "cash": 356.9,
+    "inventory": null,
+    "debt_total": 0.03,
+    "equity": 511.12,
+    "total_assets": 1059.6,
+    "gpm": 24.2,
+    "opm": -1.4,
+    "sales_yoy": 0.2,
+    "gp_yoy": -7.9,
+    "sga_yoy": -5.4,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": -24.2
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 327.35,
+    "op": 14.58,
+    "ord": null,
+    "net": 7.61,
+    "gp": 96.65,
+    "sga": 82.07,
+    "cogs": 230.7,
+    "cash": 283.6,
+    "inventory": null,
+    "debt_total": 0.02,
+    "equity": 507.86,
+    "total_assets": 1021.36,
+    "gpm": 29.5,
+    "opm": 4.5,
+    "sales_yoy": 28.1,
+    "gp_yoy": 37.6,
+    "sga_yoy": -1.2,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": -58.5,
+    "inventory_yoy": null,
+    "cash_yoy": -31.6
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 312.93,
+    "op": -3.39,
+    "ord": null,
+    "net": 1.03,
+    "gp": 82.84,
+    "sga": 86.22,
+    "cogs": 230.09,
+    "cash": 309.96,
+    "inventory": null,
+    "debt_total": 0.01,
+    "equity": 505.51,
+    "total_assets": 1083.96,
+    "gpm": 26.5,
+    "opm": -1.1,
+    "sales_yoy": 2.3,
+    "gp_yoy": -7.2,
+    "sga_yoy": -11.7,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": -32.3
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 390.32,
+    "op": 18.94,
+    "ord": 21.89,
+    "net": 22.03,
+    "gp": 117.9,
+    "sga": 98.96,
+    "cogs": 272.42,
+    "cash": 332.66,
+    "inventory": null,
+    "debt_total": 0.01,
+    "equity": 521.14,
+    "total_assets": 1109.24,
+    "gpm": 30.2,
+    "opm": 4.9,
+    "sales_yoy": 7.0,
+    "gp_yoy": 13.1,
+    "sga_yoy": 3.5,
+    "op_yoy": 120.2,
+    "ord_yoy": null,
+    "net_yoy": 321.2,
+    "inventory_yoy": null,
+    "cash_yoy": -19.1
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 435.11,
+    "op": 10.72,
+    "ord": 8.17,
+    "net": 4.86,
+    "gp": 120.4,
+    "sga": 109.69,
+    "cogs": 314.71,
+    "cash": 343.05,
+    "inventory": null,
+    "debt_total": 0.0,
+    "equity": 528.89,
+    "total_assets": 1107.93,
+    "gpm": 27.7,
+    "opm": 2.5,
+    "sales_yoy": 11.3,
+    "gp_yoy": 27.1,
+    "sga_yoy": 9.4,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": -3.9
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 349.3,
+    "op": 12.77,
+    "ord": 13.72,
+    "net": 4.25,
+    "gp": 100.22,
+    "sga": 87.45,
+    "cogs": 249.08,
+    "cash": 340.1,
+    "inventory": null,
+    "debt_total": 6.65,
+    "equity": 524.12,
+    "total_assets": 1088.26,
+    "gpm": 28.7,
+    "opm": 3.7,
+    "sales_yoy": 6.7,
+    "gp_yoy": 3.7,
+    "sga_yoy": 6.6,
+    "op_yoy": -12.4,
+    "ord_yoy": null,
+    "net_yoy": -44.2,
+    "inventory_yoy": null,
+    "cash_yoy": 19.9
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 385.9,
+    "op": 22.01,
+    "ord": 22.49,
+    "net": 11.72,
+    "gp": 117.93,
+    "sga": 95.91,
+    "cogs": 267.97,
+    "cash": 453.46,
+    "inventory": null,
+    "debt_total": 6.45,
+    "equity": 514.87,
+    "total_assets": 1175.97,
+    "gpm": 30.6,
+    "opm": 5.7,
+    "sales_yoy": 23.3,
+    "gp_yoy": 42.4,
+    "sga_yoy": 11.2,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": 1037.9,
+    "inventory_yoy": null,
+    "cash_yoy": 46.3
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 815.27,
+    "op": -62.78,
+    "ord": -65.38,
+    "net": 128.31,
+    "opm": -7.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 984.37,
+    "op": 25.82,
+    "ord": 23.51,
+    "net": 9.19,
+    "opm": 2.6,
+    "sales_yoy": 20.7,
+    "op_yoy": null,
+    "net_yoy": -92.8
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 1215.61,
+    "op": 33.85,
+    "ord": 40.55,
+    "net": 27.42,
+    "opm": 2.8,
+    "sales_yoy": 23.5,
+    "op_yoy": 31.1,
+    "net_yoy": 198.4
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 1333.87,
+    "op": 12.65,
+    "ord": 11.37,
+    "net": 9.87,
+    "opm": 0.9,
+    "sales_yoy": 9.7,
+    "op_yoy": -62.6,
+    "net_yoy": -64.0
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 1316.91,
+    "op": -18.19,
+    "ord": -17.03,
+    "net": 11.38,
+    "opm": -1.4,
+    "sales_yoy": -1.3,
+    "op_yoy": -243.8,
+    "net_yoy": 15.3
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 1465.71,
+    "op": 40.85,
+    "ord": 43.33,
+    "net": 35.53,
+    "opm": 2.8,
+    "sales_yoy": 11.3,
+    "op_yoy": null,
+    "net_yoy": 212.2
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": null,
+    "op": 60.0,
+    "ord": null,
+    "net": 32.0,
+    "opm": null,
+    "sales_yoy": null,
+    "op_yoy": 46.9,
+    "net_yoy": -9.9,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "h": [
+   {
+    "x": "23.2Q",
+    "music": 475,
+    "anime": 65
+   },
+   {
+    "x": "24.2Q",
+    "music": 563,
+    "anime": 72
+   },
+   {
+    "x": "25.2Q",
+    "music": 474,
+    "anime": 89
+   },
+   {
+    "x": "26.2Q",
+    "music": 534.72,
+    "anime": 98.05,
+    "other": 16.69,
+    "shows": 583,
+    "attend": 149,
+    "ticket": 13102,
+    "single": 2481,
+    "album": 1108,
+    "live": 237.91,
+    "md": 29.53,
+    "pkg": 80.88,
+    "dist": 74.21,
+    "ec": 73.22,
+    "mgmt": 50.49,
+    "op_music": 6.55,
+    "op_anime": 8.48,
+    "op_other": -3.77
+   },
+   {
+    "x": "27.2Q",
+    "music": 579.27,
+    "anime": 144.77,
+    "other": 22.9,
+    "shows": 648,
+    "attend": 179,
+    "ticket": 12188,
+    "single": 3222,
+    "album": 887,
+    "live": 242.49,
+    "md": 48.93,
+    "pkg": 92.32,
+    "dist": 80.56,
+    "ec": 88.49,
+    "mgmt": 47.52,
+    "op_music": 16.39,
+    "op_anime": 17.58,
+    "op_other": 0.81
+   }
+  ],
+  "b": [
+   {
+    "x": "24.1Q",
+    "live": 111.27,
+    "md": 21.39,
+    "mgmt": null,
+    "pkg": 49.96,
+    "dist": 31.83,
+    "pub": 7.83,
+    "ec": 27.87,
+    "anime": null,
+    "jissha": null,
+    "shows": 350.0,
+    "stad": 10.0,
+    "arena": 27.0,
+    "hall": 313.0,
+    "attend": 79.0,
+    "al_n": 1587.0,
+    "sg_n": 733.0,
+    "dvd_n": null,
+    "per_show": 2257
+   },
+   {
+    "x": "24.2Q",
+    "live": 112.55,
+    "md": 12.04,
+    "mgmt": null,
+    "pkg": 73.37,
+    "dist": 31.51,
+    "pub": 6.68,
+    "ec": 46.22,
+    "anime": null,
+    "jissha": null,
+    "shows": 327.0,
+    "stad": 4.0,
+    "arena": 20.0,
+    "hall": 303.0,
+    "attend": 91.0,
+    "al_n": 788.0,
+    "sg_n": 2655.0,
+    "dvd_n": null,
+    "per_show": 2783
+   },
+   {
+    "x": "24.3Q",
+    "live": 76.38,
+    "md": 16.52,
+    "mgmt": null,
+    "pkg": 54.33,
+    "dist": 32.47,
+    "pub": 7.48,
+    "ec": 29.0,
+    "anime": null,
+    "jissha": null,
+    "shows": 340.0,
+    "stad": 1.0,
+    "arena": 44.0,
+    "hall": 295.0,
+    "attend": 41.0,
+    "al_n": 693.0,
+    "sg_n": 290.0,
+    "dvd_n": null,
+    "per_show": 1206
+   },
+   {
+    "x": "24.4Q",
+    "live": 143.55,
+    "md": 17.77,
+    "mgmt": null,
+    "pkg": 69.57,
+    "dist": 34.26,
+    "pub": 7.28,
+    "ec": 49.96,
+    "anime": null,
+    "jissha": null,
+    "shows": 248.0,
+    "stad": 17.0,
+    "arena": 38.0,
+    "hall": 193.0,
+    "attend": 133.0,
+    "al_n": 1078.0,
+    "sg_n": 2487.0,
+    "dvd_n": null,
+    "per_show": 5363
+   },
+   {
+    "x": "25.1Q",
+    "live": 83.8,
+    "md": 10.18,
+    "mgmt": 24.23,
+    "pkg": 39.16,
+    "dist": 32.34,
+    "pub": 8.0,
+    "ec": 34.61,
+    "anime": 27.45,
+    "jissha": 7.8,
+    "shows": 268.0,
+    "stad": 5.0,
+    "arena": 11.0,
+    "hall": 252.0,
+    "attend": 51.0,
+    "al_n": 476.0,
+    "sg_n": 940.0,
+    "dvd_n": 138.0,
+    "per_show": 1903
+   },
+   {
+    "x": "25.2Q",
+    "live": 97.62,
+    "md": 14.2,
+    "mgmt": 21.93,
+    "pkg": 44.79,
+    "dist": 34.06,
+    "pub": 7.39,
+    "ec": 35.45,
+    "anime": 37.54,
+    "jissha": 15.36,
+    "shows": 289.0,
+    "stad": 1.0,
+    "arena": 55.0,
+    "hall": 233.0,
+    "attend": 62.0,
+    "al_n": 496.0,
+    "sg_n": 2122.0,
+    "dvd_n": 162.0,
+    "per_show": 2145
+   },
+   {
+    "x": "25.3Q",
+    "live": 113.09,
+    "md": 29.47,
+    "mgmt": 34.97,
+    "pkg": 67.59,
+    "dist": 34.42,
+    "pub": 8.95,
+    "ec": 50.04,
+    "anime": 36.94,
+    "jissha": 15.47,
+    "shows": 286.0,
+    "stad": 8.0,
+    "arena": 46.0,
+    "hall": 232.0,
+    "attend": 78.0,
+    "al_n": 2197.0,
+    "sg_n": 714.0,
+    "dvd_n": 288.0,
+    "per_show": 2727
+   },
+   {
+    "x": "25.4Q",
+    "live": 161.2,
+    "md": 20.8,
+    "mgmt": 31.79,
+    "pkg": 62.91,
+    "dist": 38.27,
+    "pub": 7.8,
+    "ec": 45.25,
+    "anime": 33.15,
+    "jissha": 8.61,
+    "shows": 289.0,
+    "stad": 18.0,
+    "arena": 62.0,
+    "hall": 209.0,
+    "attend": 127.0,
+    "al_n": 2317.0,
+    "sg_n": 893.0,
+    "dvd_n": 316.0,
+    "per_show": 4394
+   },
+   {
+    "x": "26.1Q",
+    "live": 133.1,
+    "md": 15.88,
+    "mgmt": 24.71,
+    "pkg": 38.02,
+    "dist": 36.75,
+    "pub": 8.39,
+    "ec": 34.95,
+    "anime": 30.75,
+    "jissha": 12.06,
+    "shows": 315.0,
+    "stad": 10.0,
+    "arena": 29.0,
+    "hall": 276.0,
+    "attend": 84.0,
+    "al_n": 557.0,
+    "sg_n": 532.0,
+    "dvd_n": 789.0,
+    "per_show": 2667
+   },
+   {
+    "x": "26.2Q",
+    "live": 104.81,
+    "md": 13.65,
+    "mgmt": 25.78,
+    "pkg": 42.86,
+    "dist": 37.46,
+    "pub": 7.75,
+    "ec": 38.27,
+    "anime": 45.01,
+    "jissha": 9.43,
+    "shows": 268.0,
+    "stad": 4.0,
+    "arena": 41.0,
+    "hall": 223.0,
+    "attend": 65.0,
+    "al_n": 551.0,
+    "sg_n": 1949.0,
+    "dvd_n": 117.0,
+    "per_show": 2425
+   },
+   {
+    "x": "26.3Q",
+    "live": 141.51,
+    "md": 22.67,
+    "mgmt": 33.45,
+    "pkg": 54.23,
+    "dist": 40.05,
+    "pub": 8.05,
+    "ec": 46.52,
+    "anime": 48.18,
+    "jissha": 10.1,
+    "shows": 303.0,
+    "stad": 2.0,
+    "arena": 79.0,
+    "hall": 222.0,
+    "attend": 73.0,
+    "al_n": 1803.0,
+    "sg_n": 650.0,
+    "dvd_n": 139.0,
+    "per_show": 2409
+   },
+   {
+    "x": "26.4Q",
+    "live": 155.4,
+    "md": 30.18,
+    "mgmt": 37.08,
+    "pkg": 62.3,
+    "dist": 42.18,
+    "pub": 8.43,
+    "ec": 58.6,
+    "anime": 47.44,
+    "jissha": 12.18,
+    "shows": 252.0,
+    "stad": 9.0,
+    "arena": 38.0,
+    "hall": 205.0,
+    "attend": 96.0,
+    "al_n": 1011.0,
+    "sg_n": 619.0,
+    "dvd_n": 489.0,
+    "per_show": 3810
+   },
+   {
+    "x": "27.1Q",
+    "live": 109.16,
+    "md": 21.21,
+    "mgmt": 25.71,
+    "pkg": 32.12,
+    "dist": 40.04,
+    "pub": 8.09,
+    "ec": 35.22,
+    "anime": 47.32,
+    "jissha": 41.5,
+    "shows": 318.0,
+    "stad": 6.0,
+    "arena": 57.0,
+    "hall": 255.0,
+    "attend": 91.0,
+    "al_n": 385.0,
+    "sg_n": 1698.0,
+    "dvd_n": 49.0,
+    "per_show": 2862
+   },
+   {
+    "x": "27.2Q",
+    "live": 133.33,
+    "md": 27.72,
+    "mgmt": 21.81,
+    "pkg": 60.2,
+    "dist": 40.52,
+    "pub": 8.37,
+    "ec": 53.27,
+    "anime": 48.42,
+    "jissha": 7.53,
+    "shows": 330.0,
+    "stad": 2.0,
+    "arena": 67.0,
+    "hall": 261.0,
+    "attend": 88.0,
+    "al_n": 502.0,
+    "sg_n": 1524.0,
+    "dvd_n": 790.0,
+    "per_show": 2667
+   }
+  ],
+  "bc": [
+   {
+    "x": "24.1Q",
+    "ticket": 11446.0,
+    "al_p": 2875.0,
+    "sg_p": 1324.0,
+    "dvd_p": null
+   },
+   {
+    "x": "24.2Q",
+    "ticket": 11117.0,
+    "al_p": 2650.0,
+    "sg_p": 1122.0,
+    "dvd_p": null
+   },
+   {
+    "x": "24.3Q",
+    "ticket": 11141.0,
+    "al_p": 2578.0,
+    "sg_p": 1134.0,
+    "dvd_p": null
+   },
+   {
+    "x": "24.4Q",
+    "ticket": 12851.0,
+    "al_p": 2615.0,
+    "sg_p": 1080.0,
+    "dvd_p": null
+   },
+   {
+    "x": "25.1Q",
+    "ticket": 11003.0,
+    "al_p": 2432.0,
+    "sg_p": 1299.0,
+    "dvd_p": 5439.0
+   },
+   {
+    "x": "25.2Q",
+    "ticket": 12019.0,
+    "al_p": 2803.0,
+    "sg_p": 1136.0,
+    "dvd_p": 5645.0
+   },
+   {
+    "x": "25.3Q",
+    "ticket": 12527.0,
+    "al_p": 2916.0,
+    "sg_p": 1141.0,
+    "dvd_p": 5692.0
+   },
+   {
+    "x": "25.4Q",
+    "ticket": 12782.0,
+    "al_p": 2950.0,
+    "sg_p": 1161.0,
+    "dvd_p": 6164.0
+   },
+   {
+    "x": "26.1Q",
+    "ticket": 13550.0,
+    "al_p": 1907.0,
+    "sg_p": 1407.0,
+    "dvd_p": 5035.0
+   },
+   {
+    "x": "26.2Q",
+    "ticket": 13102.0,
+    "al_p": 1998.0,
+    "sg_p": 1213.0,
+    "dvd_p": 5250.0
+   },
+   {
+    "x": "26.3Q",
+    "ticket": 12833.0,
+    "al_p": 2464.0,
+    "sg_p": 1201.0,
+    "dvd_p": 5630.0
+   },
+   {
+    "x": "26.4Q",
+    "ticket": 13104.0,
+    "al_p": 2638.0,
+    "sg_p": 1196.0,
+    "dvd_p": 5763.0
+   },
+   {
+    "x": "27.1Q",
+    "ticket": 12227.0,
+    "al_p": 2305.0,
+    "sg_p": 1229.0,
+    "dvd_p": 7494.0
+   },
+   {
+    "x": "27.2Q",
+    "ticket": 12188.0,
+    "al_p": 2441.0,
+    "sg_p": 1199.0,
+    "dvd_p": 5833.0
+   }
+  ]
+ }
+}

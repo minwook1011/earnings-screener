@@ -29,7 +29,24 @@
   }
   function axisTxt(v, u) { var a = Math.abs(v); return (a >= 10000 ? Math.round(v / 1000) + "k" : a >= 1000 ? (v / 1000).toFixed(a >= 10000 ? 0 : 1).replace(/\.0$/, "") + "k" : fmt(v, a < 10 ? u : "")) + (u === "%" ? "%" : ""); }
 
+  function mtable(ch, rows) {   // 표 차트(table:1, 2026-11-16 사용자 — 월차 24개월 표) — 행 = 달(최신 위), 열 = cols[{k,l,u}]
+    var cols = ch.cols || [];
+    rows = rows.filter(function (r) { return cols.some(function (c) { return n(r[c.k]) != null; }); }).slice(-(ch.last || 24)).reverse();
+    if (!rows.length) return "";
+    return '<figure class="kd-fig kd-tbl"><figcaption><b>' + esc(ch.t) + "</b><span>" + esc(ch.cap || (/^\d{2}\.\d{2}$/.test(rows[0].x) ? "최신 달 위 · " + rows.length + "개월" : rows.length + "개 항목")) + "</span></figcaption>" +
+      (ch.def ? '<p class="kd-def">' + esc(ch.def) + "</p>" : "") +
+      '<div class="kd-tw"><table><thead><tr><th>' + esc(ch.xl || (/^\d{2}\.\d{2}$/.test(rows[0].x) ? "달" : "")) + '</th>' + cols.map(function (c) { return "<th>" + esc(c.l) + (c.u ? "<small>" + esc(c.u) + "</small>" : "") + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      rows.map(function (r) {
+        return "<tr><td>" + esc(r.x) + "</td>" + cols.map(function (c) {
+          var v = n(r[c.k]), cl = c.yoy100 && v != null ? (v > 100 ? " up" : v < 100 ? " dn" : "") : c.yoy && v != null ? (v > 0 ? " up" : v < 0 ? " dn" : "") : "";
+          return '<td class="n' + cl + '">' + (v == null ? "—" : esc(c.yoy100 || c.u === "%" ? v.toFixed(1) : fmt(v, c.u))) + "</td>";
+        }).join("") + "</tr>";
+      }).join("") + "</tbody></table></div>" +
+      '<p class="kd-src">출처: ' + esc(ch.src || "") + "</p></figure>";
+  }
+
   function chart(ch, rows) {
+    if (ch.table) return mtable(ch, rows);
     var xk = ch.x || "x", bars = ch.bars || [], lines = ch.lines || [];
     if (ch.noplan) rows = rows.filter(function (r) { return !r.plan; });
     rows = rows.filter(function (r) { return bars.concat(lines).some(function (s) { return n(r[s.k]) != null; }); });
@@ -105,6 +122,33 @@
       '<p class="kd-src">출처: ' + esc(ch.src || "") + "</p></figure>";
   }
 
+  function quarterTable(doc) {   // 최근 12분기 재무제표(2026-11-16 사용자) — 2단계 리포트 맨 위 표(build_deep.py _fs_table)와 같은 모양
+    var q = ((doc.tables || {}).q || []).filter(function (r) { return !r.plan && n(r.sales) != null; }).slice(-12);
+    if (!q.length) return "";
+    var by = {}; ((doc.tables || {}).q || []).forEach(function (r) { by[r.x] = r; });
+    function prev(x) { var m = /^(\d+)\.(\d)Q$/.exec(x || ""); return m ? by[(+m[1] - 1) + "." + m[2] + "Q"] : null; }
+    function yo(r, k) { if (n(r[k + "_yoy"]) != null) return n(r[k + "_yoy"]); var b = prev(r.x), a = n(r[k]), c = b ? n(b[k]) : null; return a != null && c != null && c > 0 ? (a / c - 1) * 100 : null; }
+    function mg(r, k) { var a = n(r[k]), s = n(r.sales); return a != null && s ? a / s * 100 : null; }
+    var rows = [["매출액", function (r) { return n(r.sales); }, "num", "mj"], ["YoY", function (r) { return yo(r, "sales"); }, "yoy", "g"],
+      ["매출총이익", function (r) { return n(r.gp); }, "num", "sep"], ["GPM", function (r) { return mg(r, "gp"); }, "pct", "g"],
+      ["영업이익", function (r) { return n(r.op); }, "num", "mj sep"], ["OPM", function (r) { return mg(r, "op"); }, "pct", "g"], ["YoY", function (r) { return yo(r, "op"); }, "yoy", "g"],
+      ["순이익", function (r) { return n(r.net); }, "num", "mj sep"], ["YoY", function (r) { return yo(r, "net"); }, "yoy", "g"]];
+    var last = q.length - 1, cur = function (i) { return i === last ? " cur" : ""; };
+    var pc = function (v, sg) { return v == null ? "—" : (sg && v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(1) + "%"; };
+    var head = '<tr class="curl"><th></th>' + q.map(function (r, i) { return i === last ? '<th class="curt">이번 실적' + (r.pub ? "(" + esc(r.pub) + ")" : "") + "</th>" : "<th></th>"; }).join("") + "</tr>" +
+      "<tr><th>억엔</th>" + q.map(function (r, i) { return '<th class="' + cur(i).trim() + '">' + esc(r.x) + (r.span ? '<small class="qs">' + esc(r.span) + "</small>" : "") + (r.pub ? '<small class="qp">발표 ' + esc(r.pub) + "</small>" : "") + "</th>"; }).join("") + "</tr>";
+    var major = "", body = "";
+    rows.forEach(function (sp) {
+      if (sp[2] === "num") major = sp[0];
+      var vals = q.map(sp[1]); if (vals.every(function (v) { return v == null; })) return;
+      body += '<tr class="' + sp[3] + '"><td>' + esc(sp[0]) + "</td>" + vals.map(function (v, i) {
+        var t = sp[2] === "num" ? fmt(v, "억엔") : pc(v, sp[2] === "yoy"), ring = i === last && sp[2] === "yoy" && (major === "매출액" || major === "영업이익") && v != null;
+        return '<td class="n' + (ring ? " hl" : "") + cur(i) + '">' + (ring ? "<span>" + esc(t) + "</span>" : esc(t)) + "</td>";
+      }).join("") + "</tr>";
+    });
+    return '<div class="dsec"><span>분기 재무제표 · 최근 ' + q.length + '분기</span><span class="hint">억엔 · 오른쪽이 최근</span></div><div class="tw kdq-w"><table class="fst kdq"><thead>' + head + "</thead><tbody>" + body + "</tbody></table></div>";
+  }
+
   function annualTable(doc) {   // 분기 표와 같은 항목·틀(app.js FTABLE)
     var a = (doc.tables || {}).a || [];
     if (!a.length || !window.FTABLE) return "";
@@ -126,13 +170,13 @@
     if (!mainEl) return;
     var secs = [];
     charts.forEach(function (c) { if (c.sec !== "key" && secs.indexOf(c.sec) < 0) secs.push(c.sec); });
-    mainEl.innerHTML = annualTable(doc) +
+    mainEl.innerHTML = quarterTable(doc) + annualTable(doc) +
       '<div class="dsec"><span>데이터</span><span class="hint">' + esc(doc.latest || "") + " 자료 · " + esc(doc.unit || "") + "</span></div>" +
       secs.map(function (s) {
         return '<div class="kd-sec">' + esc(s) + '</div><div class="kd-grid">' + charts.filter(function (c) { return c.sec === s; }).map(function (c) { return chart(c, rows(c)); }).join("") + "</div>";
       }).join("") +
       '<details class="kd-rule"><summary>차트 원칙</summary><p>절댓값은 막대, 비율·성장률·비교는 꺾은선. 막대 색은 민트 → 보라 → 하늘 → 살구 → 분홍 → 버터 → 회청 순서로, 최신 값이 큰 계열부터. 꺾은선은 노랑 → 초록 → 파랑 → 빨강 → 보라 → 청록 → 회색. YoY 는 노란 선과 오른쪽 축.</p></details>';
-    var tw = mainEl.querySelector(".ftw"); if (tw) tw.scrollLeft = tw.scrollWidth;
+    mainEl.querySelectorAll(".ftw,.kdq-w").forEach(function (tw) { tw.scrollLeft = tw.scrollWidth; });
   }
 
   window.KD = {

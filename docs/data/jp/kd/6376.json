@@ -1,1 +1,2073 @@
-{"c": "6376", "n": "니키소", "asof": "2026-11-13", "latest": "2026년 12월기 3분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "세전이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "IFRS. 경상 칸 = 세전이익. 산업 부문(펌프·LNG·항공기 부품)과 의료 부문(인공투석 장치)", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신"}, {"sec": "key", "t": "재고자산", "def": "분기말 재고자산", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "3Q26 결산단신 · 총차입금 = 단기 + 장기 차입금(사채 포함)"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "분기 영업이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "3Q26 결산단신"}, {"sec": "실적 추이", "t": "통기 계획 진척률(1~3Q)", "d": "prog", "x": "label", "lines": [{"k": "progress_pct", "l": "올해 누계 ÷ 회사 계획", "u": "%", "c": 0}, {"k": "prior_progress_pct", "l": "작년 같은 시점(÷ 작년 실적)", "u": "%", "c": 1}], "max": 100, "src": "3Q26 결산단신"}, {"sec": "부문", "t": "부문별 매출(1~3Q 누계)", "d": "seg", "x": "label", "lines": [{"k": "ytd_2026", "l": "2026년", "u": "억엔", "c": 0}, {"k": "ytd_2025", "l": "2025년", "u": "억엔", "c": 1}, {"k": "yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신 · 내부거래 공제 전 · 인더스트리얼·항공우주는 산업 부문 안"}, {"sec": "부문", "t": "부문별 이익(1~3Q 누계)", "d": "segop", "x": "label", "src": "3Q26 결산단신 · 내부거래 공제 전 · 인더스트리얼·항공우주는 산업 부문 안", "lines": [{"k": "ytd_2026", "l": "2026년", "u": "억엔", "c": 0}, {"k": "ytd_2025", "l": "2025년", "u": "억엔", "c": 1}]}], "tables": {"q": [{"q": "23.4Q", "x": "23.4Q", "sales": 591.3, "op": 41.85, "ord": 30.44, "net": 28.03, "cash": 323.04, "equity": 1262.88, "total_assets": 2962.28, "inventory": 564.7, "debt_total": 647.84, "opm": 7.1, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.1Q", "x": "24.1Q", "sales": 482.51, "op": 12.98, "ord": 33.15, "net": 28.26, "cash": 351.8, "equity": 1335.61, "total_assets": 3110.4, "inventory": 601.25, "debt_total": 865.6, "opm": 2.7, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.2Q", "x": "24.2Q", "sales": 544.25, "op": 14.38, "ord": 37.9, "net": 31.26, "cash": 350.5, "equity": 1422.86, "total_assets": 3226.64, "inventory": 568.1, "debt_total": 877.36, "opm": 2.6, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.3Q", "x": "24.3Q", "sales": 490.32, "op": 10.03, "ord": -24.83, "net": -17.64, "cash": 320.37, "equity": 1298.57, "total_assets": 3111.13, "inventory": 584.66, "debt_total": 859.04, "opm": 2.0, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 616.71, "op": 26.59, "ord": 53.88, "net": 37.69, "cash": 346.63, "equity": 1420.05, "total_assets": 3255.63, "inventory": 575.01, "debt_total": 843.31, "opm": 4.3, "sales_yoy": 4.3, "op_yoy": -36.5, "ord_yoy": 77.0, "net_yoy": 34.5, "inventory_yoy": 1.8, "cash_yoy": 7.3, "debt_total_yoy": 30.2}, {"q": "25.1Q", "x": "25.1Q", "sales": 483.14, "op": 29.53, "ord": 18.22, "net": 22.64, "cash": 387.86, "equity": 1383.72, "total_assets": 3108.31, "inventory": 598.37, "debt_total": 808.4, "opm": 6.1, "sales_yoy": 0.1, "op_yoy": 127.5, "ord_yoy": -45.0, "net_yoy": -19.9, "inventory_yoy": -0.5, "cash_yoy": 10.3, "debt_total_yoy": -6.6}, {"q": "25.2Q", "x": "25.2Q", "sales": 520.03, "op": 29.14, "ord": 30.23, "net": 26.65, "cash": 381.33, "equity": 1437.84, "total_assets": 3132.91, "inventory": 593.23, "debt_total": 790.11, "opm": 5.6, "sales_yoy": -4.5, "op_yoy": 102.6, "ord_yoy": -20.2, "net_yoy": -14.7, "inventory_yoy": 4.4, "cash_yoy": 8.8, "debt_total_yoy": -9.9}, {"q": "25.3Q", "x": "25.3Q", "sales": 519.61, "op": 23.44, "ord": 31.4, "net": 24.02, "cash": 325.31, "equity": 1495.31, "total_assets": 3283.54, "inventory": 616.49, "debt_total": 776.71, "opm": 4.5, "sales_yoy": 6.0, "op_yoy": 133.7, "ord_yoy": null, "net_yoy": null, "inventory_yoy": 5.4, "cash_yoy": 1.5, "debt_total_yoy": -9.6}, {"q": "25.4Q", "x": "25.4Q", "sales": 633.64, "op": 71.2, "ord": 92.7, "net": 63.21, "cash": 445.84, "equity": 1602.28, "total_assets": 3581.29, "inventory": 607.52, "debt_total": 826.08, "opm": 11.2, "sales_yoy": 2.7, "op_yoy": 167.8, "ord_yoy": 72.0, "net_yoy": 67.7, "inventory_yoy": 5.7, "cash_yoy": 28.6, "debt_total_yoy": -2.0}, {"q": "26.1Q", "x": "26.1Q", "sales": 553.66, "op": 36.89, "ord": 42.55, "net": 31.56, "cash": 386.13, "equity": 1654.56, "total_assets": 3604.51, "inventory": 629.82, "debt_total": 868.31, "opm": 6.7, "sales_yoy": 14.6, "op_yoy": 24.9, "ord_yoy": 133.5, "net_yoy": 39.4, "inventory_yoy": 5.3, "cash_yoy": -0.4, "debt_total_yoy": 7.4}, {"q": "26.2Q", "x": "26.2Q", "sales": 630.49, "op": 53.33, "ord": 61.41, "net": 51.01, "cash": 379.83, "equity": 1739.12, "total_assets": 3740.83, "inventory": 631.37, "debt_total": 851.08, "opm": 8.5, "sales_yoy": 21.2, "op_yoy": 83.0, "ord_yoy": 103.1, "net_yoy": 91.4, "inventory_yoy": 6.4, "cash_yoy": -0.4, "debt_total_yoy": 7.7}, {"q": "26.3Q", "x": "26.3Q", "sales": 594.7, "op": 49.97, "ord": 38.35, "net": 33.52, "cash": 408.53, "equity": 1689.85, "total_assets": 3754.39, "inventory": 666.73, "debt_total": 877.73, "opm": 8.4, "sales_yoy": 14.5, "op_yoy": 113.2, "ord_yoy": 22.1, "net_yoy": 39.6, "inventory_yoy": 8.1, "cash_yoy": 25.6, "debt_total_yoy": 13.0}], "a": [{"year": "2021", "x": "2021", "sales": 1677.59, "op": 31.25, "ord": 39.52, "net": 2.21, "opm": 1.9, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 1771.09, "op": 342.22, "ord": 326.82, "net": 136.39, "opm": 19.3, "sales_yoy": 5.6, "op_yoy": 995.1, "net_yoy": 6071.5}, {"year": "2023", "x": "2023", "sales": 1926.29, "op": 58.85, "ord": 116.26, "net": 90.71, "opm": 3.1, "sales_yoy": 8.8, "op_yoy": -82.8, "net_yoy": -33.5}, {"year": "2024", "x": "2024", "sales": 2133.79, "op": 63.98, "ord": 100.1, "net": 79.57, "opm": 3.0, "sales_yoy": 10.8, "op_yoy": 8.7, "net_yoy": -12.3}, {"year": "2025", "x": "2025", "sales": 2156.42, "op": 153.31, "ord": 172.55, "net": 136.52, "opm": 7.1, "sales_yoy": 1.1, "op_yoy": 139.6, "net_yoy": 71.6}, {"year": "2026 계획", "x": "2026 계획", "sales": 2477.0, "op": 197.0, "ord": 200.0, "net": 158.0, "opm": 8.0, "sales_yoy": 14.9, "op_yoy": 28.5, "net_yoy": 15.7, "plan": 1, "kind": "회사 계획"}], "prog": [{"label": "매출", "ytd_2026": 1778.85, "fy_plan": 2477.0, "progress_pct": 71.8, "ytd_2025": 1522.78, "fy_2025": 2156.42, "prior_progress_pct": 70.6}, {"label": "영업이익", "ytd_2026": 140.19, "fy_plan": 197.0, "progress_pct": 71.2, "ytd_2025": 82.11, "fy_2025": 153.31, "prior_progress_pct": 53.6}], "seg": [{"label": "산업 부문", "ytd_2026": 1184.47, "ytd_2025": 961.42, "yoy": 23.2}, {"label": "인더스트리얼", "ytd_2026": 1007.27, "ytd_2025": 831.52, "yoy": 21.1}, {"label": "항공우주", "ytd_2026": 176.48, "ytd_2025": 127.08, "yoy": 38.9}, {"label": "의료 부문", "ytd_2026": 594.65, "ytd_2025": 563.36, "yoy": 5.6}], "segop": [{"label": "산업 부문", "ytd_2026": 99.18, "ytd_2025": 72.57}, {"label": "인더스트리얼", "ytd_2026": 83.63, "ytd_2025": 74.78}, {"label": "의료 부문", "ytd_2026": 49.03, "ytd_2025": 37.84}, {"label": "항공우주", "ytd_2026": 16.01, "ytd_2025": 0.1}]}}
+{
+ "c": "6376",
+ "n": "니키소",
+ "asof": "2026-11-13",
+ "latest": "2026년 12월기 3분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "세전이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "IFRS. 경상 칸 = 세전이익. 산업 부문(펌프·LNG·항공기 부품)과 의료 부문(인공투석 장치)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "인더스트리얼 수주잔고",
+   "def": "분기말 수주잔고(정밀기기 제외·내부거래 공제 후). LNG·수소용 극저온 펌프·기화기 등",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ind_backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ind_backlog_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표"
+  },
+  {
+   "sec": "key",
+   "t": "CE&IG 수주잔고(달러)",
+   "def": "극저온 기기 자회사군 Clean Energy & Industrial Gases 그룹의 분기말 수주잔고",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ce_backlog",
+     "l": "수주잔고",
+     "u": "백만달러",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ce_backlog_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료 CE&IG 차트 라벨(22.1Q~23.4Q는 누계 차트)"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "def": "분기말 재고자산",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산단신 · 총차입금 = 단기 + 장기 차입금(사채 포함)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "분기 영업이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "통기 계획 진척률(1~3Q)",
+   "d": "prog",
+   "x": "label",
+   "lines": [
+    {
+     "k": "progress_pct",
+     "l": "올해 누계 ÷ 회사 계획",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "prior_progress_pct",
+     "l": "작년 같은 시점(÷ 작년 실적)",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "max": 100,
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(1~3Q 누계)",
+   "d": "seg",
+   "x": "label",
+   "lines": [
+    {
+     "k": "ytd_2026",
+     "l": "2026년",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ytd_2025",
+     "l": "2025년",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신 · 내부거래 공제 전 · 인더스트리얼·항공우주는 산업 부문 안"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 이익(1~3Q 누계)",
+   "d": "segop",
+   "x": "label",
+   "src": "3Q26 결산단신 · 내부거래 공제 전 · 인더스트리얼·항공우주는 산업 부문 안",
+   "lines": [
+    {
+     "k": "ytd_2026",
+     "l": "2026년",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ytd_2025",
+     "l": "2025년",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "수주(인더스트리얼)",
+   "t": "인더스트리얼 분기 수주",
+   "def": "분기 단독 수주고(정밀기기 제외·내부거래 공제 후)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ind_orders",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ind_orders_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표"
+  },
+  {
+   "sec": "수주(인더스트리얼)",
+   "t": "인더스트리얼 수주·매출·수주잔고",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ind_orders",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ind_sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "ind_backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표 · 매출은 정밀기기 포함·내부거래 공제 전"
+  },
+  {
+   "sec": "수주(인더스트리얼)",
+   "t": "인더스트리얼 해외 비중",
+   "def": "해외 수주 ÷ 수주, 해외 매출 ÷ 매출",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ind_orders_ovs_pct",
+     "l": "수주 해외 비중",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "ind_ovs_pct",
+     "l": "매출 해외 비중",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표"
+  },
+  {
+   "sec": "수주(인더스트리얼)",
+   "t": "인더스트리얼 연간 수주·매출",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ind_orders",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ind_sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산보충설명자료(4Q25·3Q26) · 2026 = 회사 계획"
+  },
+  {
+   "sec": "CE&IG(극저온 기기)",
+   "t": "CE&IG 분기 수주·매출(달러)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ce_orders",
+     "l": "수주",
+     "u": "백만달러",
+     "c": 0
+    },
+    {
+     "k": "ce_sales",
+     "l": "매출",
+     "u": "백만달러",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료 CE&IG 분기 단독 차트 라벨"
+  },
+  {
+   "sec": "CE&IG(극저온 기기)",
+   "t": "CE&IG 분기 영업이익(달러)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ce_op",
+     "l": "영업이익",
+     "u": "백만달러",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ce_opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료 · 이익률 = 영업이익 ÷ 매출"
+  },
+  {
+   "sec": "CE&IG(극저온 기기)",
+   "t": "CE&IG 수주/매출 배율",
+   "def": "분기 수주 ÷ 분기 매출(1 넘으면 잔고 증가)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ce_btb",
+     "l": "수주÷매출",
+     "u": "배",
+     "c": 0
+    }
+   ],
+   "src": "3Q26 결산보충설명자료"
+  },
+  {
+   "sec": "CE&IG(극저온 기기)",
+   "t": "CE&IG 연간 수주·매출·잔고(달러)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ce_orders",
+     "l": "수주",
+     "u": "백만달러",
+     "c": 0
+    },
+    {
+     "k": "ce_sales",
+     "l": "매출",
+     "u": "백만달러",
+     "c": 1
+    },
+    {
+     "k": "ce_backlog",
+     "l": "연말 수주잔고",
+     "u": "백만달러",
+     "c": 2
+    }
+   ],
+   "muted": "plan",
+   "src": "3Q26 결산보충설명자료 CE&IG 누계 차트 4Q 라벨 · 2026 = 회사 예상"
+  },
+  {
+   "sec": "CE&IG(극저온 기기)",
+   "t": "CE&IG 지역별 매출 비중(1~3Q)",
+   "d": "mix_ce_r",
+   "x": "label",
+   "lines": [
+    {
+     "k": "y2026",
+     "l": "2026년",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "y2025",
+     "l": "2025년",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료"
+  },
+  {
+   "sec": "사업부 분기 실적",
+   "t": "사업부별 분기 매출",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ind_sales",
+     "l": "인더스트리얼",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "med_sales",
+     "l": "메디컬",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "aero_sales",
+     "l": "항공우주",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표 · 내부거래 공제 전"
+  },
+  {
+   "sec": "사업부 분기 실적",
+   "t": "항공우주 분기 매출",
+   "def": "CFRP 제 캐스케이드(역추진 장치 부품) 등 민항기 부품",
+   "d": "b",
+   "bars": [
+    {
+     "k": "aero_sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "aero_sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표"
+  },
+  {
+   "sec": "사업부 분기 실적",
+   "t": "메디컬 분기 매출",
+   "def": "인공 투석 장치·소모품·메인터넌스",
+   "d": "b",
+   "bars": [
+    {
+     "k": "med_sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "med_sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표"
+  },
+  {
+   "sec": "사업부 분기 실적",
+   "t": "사업부별 해외 매출 비중",
+   "def": "해외 매출 ÷ 매출",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ind_ovs_pct",
+     "l": "인더스트리얼",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "aero_ovs_pct",
+     "l": "항공우주",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "med_ovs_pct",
+     "l": "메디컬",
+     "u": "%",
+     "c": 2
+    }
+   ],
+   "src": "결산보충설명자료(4Q24·3Q26) 분기 단독 표"
+  },
+  {
+   "sec": "사업부 분기 실적",
+   "t": "사업부별 분기 영업이익",
+   "def": "분기 = 이번 누계 − 직전 누계(억엔 미만 버린 값끼리라 ±1억엔 오차). 혈액 투석 = 의료 부문 − 헬스케어",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ind_op",
+     "l": "인더스트리얼",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dial_op",
+     "l": "혈액 투석",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "aero_op",
+     "l": "항공우주",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산보충설명자료(4Q25·1Q26·2Q26·3Q26) 사업별 누계 표"
+  },
+  {
+   "sec": "사업부 분기 실적",
+   "t": "사업부 연간 영업이익률",
+   "def": "영업이익 ÷ 매출(CE&IG 는 달러 기준)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ind_opm",
+     "l": "인더스트리얼",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "med_opm",
+     "l": "의료 부문",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "aero_opm",
+     "l": "항공우주",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "ce_opm",
+     "l": "CE&IG",
+     "u": "%",
+     "c": 3
+    }
+   ],
+   "muted": "plan",
+   "src": "결산보충설명자료(4Q25·3Q26) · 2026 = 회사 계획"
+  },
+  {
+   "sec": "제품·지역 구성",
+   "t": "인더스트리얼 제품별 매출 비중(1~3Q)",
+   "d": "mix_ind_p",
+   "x": "label",
+   "lines": [
+    {
+     "k": "y2026",
+     "l": "2026년",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "y2025",
+     "l": "2025년",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료"
+  },
+  {
+   "sec": "제품·지역 구성",
+   "t": "인더스트리얼 지역별 매출 비중(1~3Q)",
+   "d": "mix_ind_r",
+   "x": "label",
+   "lines": [
+    {
+     "k": "y2026",
+     "l": "2026년",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "y2025",
+     "l": "2025년",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료"
+  },
+  {
+   "sec": "제품·지역 구성",
+   "t": "항공우주 제품별 매출 비중(1~3Q)",
+   "d": "mix_aero_p",
+   "x": "label",
+   "lines": [
+    {
+     "k": "y2026",
+     "l": "2026년",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "y2025",
+     "l": "2025년",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료"
+  },
+  {
+   "sec": "제품·지역 구성",
+   "t": "항공우주 지역별 매출 비중(1~3Q)",
+   "d": "mix_aero_r",
+   "x": "label",
+   "lines": [
+    {
+     "k": "y2026",
+     "l": "2026년",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "y2025",
+     "l": "2025년",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료"
+  },
+  {
+   "sec": "제품·지역 구성",
+   "t": "메디컬 제품별 매출 비중(1~3Q)",
+   "d": "mix_med_p",
+   "x": "label",
+   "lines": [
+    {
+     "k": "y2026",
+     "l": "2026년",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "y2025",
+     "l": "2025년",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료 · CRRT 는 2025년 1Q 양도"
+  },
+  {
+   "sec": "제품·지역 구성",
+   "t": "메디컬 지역별 매출 비중(1~3Q)",
+   "d": "mix_med_r",
+   "x": "label",
+   "lines": [
+    {
+     "k": "y2026",
+     "l": "2026년",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "y2025",
+     "l": "2025년",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산보충설명자료 · CRRT 제외"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "23.4Q",
+    "x": "23.4Q",
+    "sales": 591.3,
+    "op": 41.85,
+    "ord": 30.44,
+    "net": 28.03,
+    "cash": 323.04,
+    "equity": 1262.88,
+    "total_assets": 2962.28,
+    "inventory": 564.7,
+    "debt_total": 647.84,
+    "opm": 7.1,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 482.51,
+    "op": 12.98,
+    "ord": 33.15,
+    "net": 28.26,
+    "cash": 351.8,
+    "equity": 1335.61,
+    "total_assets": 3110.4,
+    "inventory": 601.25,
+    "debt_total": 865.6,
+    "opm": 2.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 544.25,
+    "op": 14.38,
+    "ord": 37.9,
+    "net": 31.26,
+    "cash": 350.5,
+    "equity": 1422.86,
+    "total_assets": 3226.64,
+    "inventory": 568.1,
+    "debt_total": 877.36,
+    "opm": 2.6,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 490.32,
+    "op": 10.03,
+    "ord": -24.83,
+    "net": -17.64,
+    "cash": 320.37,
+    "equity": 1298.57,
+    "total_assets": 3111.13,
+    "inventory": 584.66,
+    "debt_total": 859.04,
+    "opm": 2.0,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 616.71,
+    "op": 26.59,
+    "ord": 53.88,
+    "net": 37.69,
+    "cash": 346.63,
+    "equity": 1420.05,
+    "total_assets": 3255.63,
+    "inventory": 575.01,
+    "debt_total": 843.31,
+    "opm": 4.3,
+    "sales_yoy": 4.3,
+    "op_yoy": -36.5,
+    "ord_yoy": 77.0,
+    "net_yoy": 34.5,
+    "inventory_yoy": 1.8,
+    "cash_yoy": 7.3,
+    "debt_total_yoy": 30.2
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 483.14,
+    "op": 29.53,
+    "ord": 18.22,
+    "net": 22.64,
+    "cash": 387.86,
+    "equity": 1383.72,
+    "total_assets": 3108.31,
+    "inventory": 598.37,
+    "debt_total": 808.4,
+    "opm": 6.1,
+    "sales_yoy": 0.1,
+    "op_yoy": 127.5,
+    "ord_yoy": -45.0,
+    "net_yoy": -19.9,
+    "inventory_yoy": -0.5,
+    "cash_yoy": 10.3,
+    "debt_total_yoy": -6.6
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 520.03,
+    "op": 29.14,
+    "ord": 30.23,
+    "net": 26.65,
+    "cash": 381.33,
+    "equity": 1437.84,
+    "total_assets": 3132.91,
+    "inventory": 593.23,
+    "debt_total": 790.11,
+    "opm": 5.6,
+    "sales_yoy": -4.5,
+    "op_yoy": 102.6,
+    "ord_yoy": -20.2,
+    "net_yoy": -14.7,
+    "inventory_yoy": 4.4,
+    "cash_yoy": 8.8,
+    "debt_total_yoy": -9.9
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 519.61,
+    "op": 23.44,
+    "ord": 31.4,
+    "net": 24.02,
+    "cash": 325.31,
+    "equity": 1495.31,
+    "total_assets": 3283.54,
+    "inventory": 616.49,
+    "debt_total": 776.71,
+    "opm": 4.5,
+    "sales_yoy": 6.0,
+    "op_yoy": 133.7,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": 5.4,
+    "cash_yoy": 1.5,
+    "debt_total_yoy": -9.6
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 633.64,
+    "op": 71.2,
+    "ord": 92.7,
+    "net": 63.21,
+    "cash": 445.84,
+    "equity": 1602.28,
+    "total_assets": 3581.29,
+    "inventory": 607.52,
+    "debt_total": 826.08,
+    "opm": 11.2,
+    "sales_yoy": 2.7,
+    "op_yoy": 167.8,
+    "ord_yoy": 72.0,
+    "net_yoy": 67.7,
+    "inventory_yoy": 5.7,
+    "cash_yoy": 28.6,
+    "debt_total_yoy": -2.0
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 553.66,
+    "op": 36.89,
+    "ord": 42.55,
+    "net": 31.56,
+    "cash": 386.13,
+    "equity": 1654.56,
+    "total_assets": 3604.51,
+    "inventory": 629.82,
+    "debt_total": 868.31,
+    "opm": 6.7,
+    "sales_yoy": 14.6,
+    "op_yoy": 24.9,
+    "ord_yoy": 133.5,
+    "net_yoy": 39.4,
+    "inventory_yoy": 5.3,
+    "cash_yoy": -0.4,
+    "debt_total_yoy": 7.4
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 630.49,
+    "op": 53.33,
+    "ord": 61.41,
+    "net": 51.01,
+    "cash": 379.83,
+    "equity": 1739.12,
+    "total_assets": 3740.83,
+    "inventory": 631.37,
+    "debt_total": 851.08,
+    "opm": 8.5,
+    "sales_yoy": 21.2,
+    "op_yoy": 83.0,
+    "ord_yoy": 103.1,
+    "net_yoy": 91.4,
+    "inventory_yoy": 6.4,
+    "cash_yoy": -0.4,
+    "debt_total_yoy": 7.7
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 594.7,
+    "op": 49.97,
+    "ord": 38.35,
+    "net": 33.52,
+    "cash": 408.53,
+    "equity": 1689.85,
+    "total_assets": 3754.39,
+    "inventory": 666.73,
+    "debt_total": 877.73,
+    "opm": 8.4,
+    "sales_yoy": 14.5,
+    "op_yoy": 113.2,
+    "ord_yoy": 22.1,
+    "net_yoy": 39.6,
+    "inventory_yoy": 8.1,
+    "cash_yoy": 25.6,
+    "debt_total_yoy": 13.0
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 1677.59,
+    "op": 31.25,
+    "ord": 39.52,
+    "net": 2.21,
+    "opm": 1.9,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 1771.09,
+    "op": 342.22,
+    "ord": 326.82,
+    "net": 136.39,
+    "opm": 19.3,
+    "sales_yoy": 5.6,
+    "op_yoy": 995.1,
+    "net_yoy": 6071.5
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 1926.29,
+    "op": 58.85,
+    "ord": 116.26,
+    "net": 90.71,
+    "opm": 3.1,
+    "sales_yoy": 8.8,
+    "op_yoy": -82.8,
+    "net_yoy": -33.5
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 2133.79,
+    "op": 63.98,
+    "ord": 100.1,
+    "net": 79.57,
+    "opm": 3.0,
+    "sales_yoy": 10.8,
+    "op_yoy": 8.7,
+    "net_yoy": -12.3
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 2156.42,
+    "op": 153.31,
+    "ord": 172.55,
+    "net": 136.52,
+    "opm": 7.1,
+    "sales_yoy": 1.1,
+    "op_yoy": 139.6,
+    "net_yoy": 71.6
+   },
+   {
+    "year": "2026 계획",
+    "x": "2026 계획",
+    "sales": 2477.0,
+    "op": 197.0,
+    "ord": 200.0,
+    "net": 158.0,
+    "opm": 8.0,
+    "sales_yoy": 14.9,
+    "op_yoy": 28.5,
+    "net_yoy": 15.7,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "prog": [
+   {
+    "label": "매출",
+    "ytd_2026": 1778.85,
+    "fy_plan": 2477.0,
+    "progress_pct": 71.8,
+    "ytd_2025": 1522.78,
+    "fy_2025": 2156.42,
+    "prior_progress_pct": 70.6
+   },
+   {
+    "label": "영업이익",
+    "ytd_2026": 140.19,
+    "fy_plan": 197.0,
+    "progress_pct": 71.2,
+    "ytd_2025": 82.11,
+    "fy_2025": 153.31,
+    "prior_progress_pct": 53.6
+   }
+  ],
+  "seg": [
+   {
+    "label": "산업 부문",
+    "ytd_2026": 1184.47,
+    "ytd_2025": 961.42,
+    "yoy": 23.2
+   },
+   {
+    "label": "인더스트리얼",
+    "ytd_2026": 1007.27,
+    "ytd_2025": 831.52,
+    "yoy": 21.1
+   },
+   {
+    "label": "항공우주",
+    "ytd_2026": 176.48,
+    "ytd_2025": 127.08,
+    "yoy": 38.9
+   },
+   {
+    "label": "의료 부문",
+    "ytd_2026": 594.65,
+    "ytd_2025": 563.36,
+    "yoy": 5.6
+   }
+  ],
+  "segop": [
+   {
+    "label": "산업 부문",
+    "ytd_2026": 99.18,
+    "ytd_2025": 72.57
+   },
+   {
+    "label": "인더스트리얼",
+    "ytd_2026": 83.63,
+    "ytd_2025": 74.78
+   },
+   {
+    "label": "의료 부문",
+    "ytd_2026": 49.03,
+    "ytd_2025": 37.84
+   },
+   {
+    "label": "항공우주",
+    "ytd_2026": 16.01,
+    "ytd_2025": 0.1
+   }
+  ],
+  "b": [
+   {
+    "x": "22.1Q",
+    "ind_orders": 306.4,
+    "ind_orders_ovs": 286.0,
+    "ind_backlog": 738.1,
+    "ind_backlog_ovs": 684.1,
+    "ind_sales": 213.5,
+    "aero_sales": 20.4,
+    "med_sales": 169.4,
+    "ind_ovs_pct": 85.9,
+    "aero_ovs_pct": 79.0,
+    "med_ovs_pct": 38.9,
+    "ind_orders_ovs_pct": 93.3,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 385,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": null,
+    "ind_backlog_yoy": null,
+    "ind_sales_yoy": null,
+    "aero_sales_yoy": null,
+    "med_sales_yoy": null,
+    "ce_backlog_yoy": null,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "22.2Q",
+    "ind_orders": 346.5,
+    "ind_orders_ovs": 320.7,
+    "ind_backlog": 861.7,
+    "ind_backlog_ovs": 788.3,
+    "ind_sales": 238.5,
+    "aero_sales": 30.9,
+    "med_sales": 195.1,
+    "ind_ovs_pct": 86.9,
+    "aero_ovs_pct": 75.9,
+    "med_ovs_pct": 36.3,
+    "ind_orders_ovs_pct": 92.5,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 430,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": null,
+    "ind_backlog_yoy": null,
+    "ind_sales_yoy": null,
+    "aero_sales_yoy": null,
+    "med_sales_yoy": null,
+    "ce_backlog_yoy": null,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "22.3Q",
+    "ind_orders": 175.4,
+    "ind_orders_ovs": 154.5,
+    "ind_backlog": 769.5,
+    "ind_backlog_ovs": 720.0,
+    "ind_sales": 217.5,
+    "aero_sales": 30.6,
+    "med_sales": 184.8,
+    "ind_ovs_pct": 83.1,
+    "aero_ovs_pct": 72.8,
+    "med_ovs_pct": 37.7,
+    "ind_orders_ovs_pct": 88.1,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 518,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": null,
+    "ind_backlog_yoy": null,
+    "ind_sales_yoy": null,
+    "aero_sales_yoy": null,
+    "med_sales_yoy": null,
+    "ce_backlog_yoy": null,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "22.4Q",
+    "ind_orders": 228.9,
+    "ind_orders_ovs": 207.0,
+    "ind_backlog": 728.1,
+    "ind_backlog_ovs": 679.4,
+    "ind_sales": 213.4,
+    "aero_sales": 37.7,
+    "med_sales": 203.1,
+    "ind_ovs_pct": 85.8,
+    "aero_ovs_pct": 84.9,
+    "med_ovs_pct": 39.5,
+    "ind_orders_ovs_pct": 90.5,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 531,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": null,
+    "ind_backlog_yoy": null,
+    "ind_sales_yoy": null,
+    "aero_sales_yoy": null,
+    "med_sales_yoy": null,
+    "ce_backlog_yoy": null,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "23.1Q",
+    "ind_orders": 282.6,
+    "ind_orders_ovs": 242.4,
+    "ind_backlog": 875.9,
+    "ind_backlog_ovs": 831.0,
+    "ind_sales": 174.4,
+    "aero_sales": 26.8,
+    "med_sales": 206.8,
+    "ind_ovs_pct": 82.7,
+    "aero_ovs_pct": 75.6,
+    "med_ovs_pct": 42.7,
+    "ind_orders_ovs_pct": 85.8,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 598,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": -7.8,
+    "ind_backlog_yoy": 18.7,
+    "ind_sales_yoy": -18.3,
+    "aero_sales_yoy": 31.4,
+    "med_sales_yoy": 22.1,
+    "ce_backlog_yoy": 55.3,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "23.2Q",
+    "ind_orders": 203.0,
+    "ind_orders_ovs": 191.5,
+    "ind_backlog": 943.2,
+    "ind_backlog_ovs": 893.6,
+    "ind_sales": 212.4,
+    "aero_sales": 36.9,
+    "med_sales": 212.1,
+    "ind_ovs_pct": 83.4,
+    "aero_ovs_pct": 71.6,
+    "med_ovs_pct": 41.8,
+    "ind_orders_ovs_pct": 94.3,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 591,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": -41.4,
+    "ind_backlog_yoy": 9.5,
+    "ind_sales_yoy": -10.9,
+    "aero_sales_yoy": 19.4,
+    "med_sales_yoy": 8.7,
+    "ce_backlog_yoy": 37.4,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "23.3Q",
+    "ind_orders": 179.1,
+    "ind_orders_ovs": 166.0,
+    "ind_backlog": 991.8,
+    "ind_backlog_ovs": 942.5,
+    "ind_sales": 223.4,
+    "aero_sales": 37.9,
+    "med_sales": 200.1,
+    "ind_ovs_pct": 87.1,
+    "aero_ovs_pct": 71.0,
+    "med_ovs_pct": 43.1,
+    "ind_orders_ovs_pct": 92.7,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 558,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": 2.1,
+    "ind_backlog_yoy": 28.9,
+    "ind_sales_yoy": 2.7,
+    "aero_sales_yoy": 23.9,
+    "med_sales_yoy": 8.3,
+    "ce_backlog_yoy": 7.7,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "23.4Q",
+    "ind_orders": 252.7,
+    "ind_orders_ovs": 223.9,
+    "ind_backlog": 914.3,
+    "ind_backlog_ovs": 868.1,
+    "ind_sales": 303.8,
+    "aero_sales": 56.5,
+    "med_sales": 219.6,
+    "ind_ovs_pct": 87.0,
+    "aero_ovs_pct": 74.8,
+    "med_ovs_pct": 34.4,
+    "ind_orders_ovs_pct": 88.6,
+    "ce_orders": null,
+    "ce_sales": null,
+    "ce_op": null,
+    "ce_backlog": 549,
+    "ce_opm": null,
+    "ce_btb": null,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": 10.4,
+    "ind_backlog_yoy": 25.6,
+    "ind_sales_yoy": 42.4,
+    "aero_sales_yoy": 49.9,
+    "med_sales_yoy": 8.1,
+    "ce_backlog_yoy": 3.4,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "24.1Q",
+    "ind_orders": 297.8,
+    "ind_orders_ovs": 273.8,
+    "ind_backlog": 1022.5,
+    "ind_backlog_ovs": 973.4,
+    "ind_sales": 246.5,
+    "aero_sales": 40.9,
+    "med_sales": 194.4,
+    "ind_ovs_pct": 88.0,
+    "aero_ovs_pct": 74.8,
+    "med_ovs_pct": 39.0,
+    "ind_orders_ovs_pct": 92.0,
+    "ce_orders": 170,
+    "ce_sales": 130,
+    "ce_op": 10,
+    "ce_backlog": 588,
+    "ce_opm": 7.7,
+    "ce_btb": 1.31,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": 5.4,
+    "ind_backlog_yoy": 16.7,
+    "ind_sales_yoy": 41.3,
+    "aero_sales_yoy": 52.6,
+    "med_sales_yoy": -6.0,
+    "ce_backlog_yoy": -1.7,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "24.2Q",
+    "ind_orders": 386.1,
+    "ind_orders_ovs": 361.9,
+    "ind_backlog": 1194.3,
+    "ind_backlog_ovs": 1143.1,
+    "ind_sales": 293.5,
+    "aero_sales": 46.4,
+    "med_sales": 203.1,
+    "ind_ovs_pct": 88.6,
+    "aero_ovs_pct": 72.7,
+    "med_ovs_pct": 38.0,
+    "ind_orders_ovs_pct": 93.7,
+    "ce_orders": 225,
+    "ce_sales": 147,
+    "ce_op": 15,
+    "ce_backlog": 663,
+    "ce_opm": 10.2,
+    "ce_btb": 1.53,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": 90.2,
+    "ind_backlog_yoy": 26.6,
+    "ind_sales_yoy": 38.2,
+    "aero_sales_yoy": 25.7,
+    "med_sales_yoy": -4.2,
+    "ce_backlog_yoy": 12.2,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "24.3Q",
+    "ind_orders": 255.8,
+    "ind_orders_ovs": 231.8,
+    "ind_backlog": 1088.2,
+    "ind_backlog_ovs": 1036.7,
+    "ind_sales": 262.6,
+    "aero_sales": 32.8,
+    "med_sales": 192.8,
+    "ind_ovs_pct": 86.2,
+    "aero_ovs_pct": 61.8,
+    "med_ovs_pct": 42.8,
+    "ind_orders_ovs_pct": 90.6,
+    "ce_orders": 145,
+    "ce_sales": 135,
+    "ce_op": 8,
+    "ce_backlog": 680,
+    "ce_opm": 5.9,
+    "ce_btb": 1.07,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": 42.8,
+    "ind_backlog_yoy": 9.7,
+    "ind_sales_yoy": 17.5,
+    "aero_sales_yoy": -13.5,
+    "med_sales_yoy": -3.6,
+    "ce_backlog_yoy": 21.9,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "ind_orders": 216.2,
+    "ind_orders_ovs": 185.4,
+    "ind_backlog": 1095.5,
+    "ind_backlog_ovs": 1040.7,
+    "ind_sales": 318.2,
+    "aero_sales": 53.9,
+    "med_sales": 242.6,
+    "ind_ovs_pct": 86.5,
+    "aero_ovs_pct": 74.7,
+    "med_ovs_pct": 37.8,
+    "ind_orders_ovs_pct": 85.8,
+    "ce_orders": 87,
+    "ce_sales": 156,
+    "ce_op": 15,
+    "ce_backlog": 598,
+    "ce_opm": 9.6,
+    "ce_btb": 0.56,
+    "ind_op": null,
+    "aero_op": null,
+    "dial_op": null,
+    "ind_orders_yoy": -14.4,
+    "ind_backlog_yoy": 19.8,
+    "ind_sales_yoy": 4.7,
+    "aero_sales_yoy": -4.6,
+    "med_sales_yoy": 10.5,
+    "ce_backlog_yoy": 8.9,
+    "ce_sales_yoy": null
+   },
+   {
+    "x": "25.1Q",
+    "ind_orders": 261.3,
+    "ind_orders_ovs": 234.9,
+    "ind_backlog": 1068.3,
+    "ind_backlog_ovs": 1008.3,
+    "ind_sales": 255.3,
+    "aero_sales": 39.7,
+    "med_sales": 188.0,
+    "ind_ovs_pct": 86.8,
+    "aero_ovs_pct": 73.2,
+    "med_ovs_pct": 41.6,
+    "ind_orders_ovs_pct": 89.9,
+    "ce_orders": 150,
+    "ce_sales": 129,
+    "ce_op": 8,
+    "ce_backlog": 622,
+    "ce_opm": 6.2,
+    "ce_btb": 1.16,
+    "ind_op": 21,
+    "aero_op": 0,
+    "dial_op": 18,
+    "ind_orders_yoy": -12.3,
+    "ind_backlog_yoy": 4.5,
+    "ind_sales_yoy": 3.6,
+    "aero_sales_yoy": -2.9,
+    "med_sales_yoy": -3.3,
+    "ce_backlog_yoy": 5.8,
+    "ce_sales_yoy": -0.8
+   },
+   {
+    "x": "25.2Q",
+    "ind_orders": 299.2,
+    "ind_orders_ovs": 243.3,
+    "ind_backlog": 1074.8,
+    "ind_backlog_ovs": 1010.9,
+    "ind_sales": 281.5,
+    "aero_sales": 40.4,
+    "med_sales": 197.9,
+    "ind_ovs_pct": 85.3,
+    "aero_ovs_pct": 64.5,
+    "med_ovs_pct": 34.6,
+    "ind_orders_ovs_pct": 81.3,
+    "ce_orders": 168,
+    "ce_sales": 152,
+    "ce_op": 15,
+    "ce_backlog": 647,
+    "ce_opm": 9.9,
+    "ce_btb": 1.11,
+    "ind_op": 27,
+    "aero_op": -1,
+    "dial_op": 11,
+    "ind_orders_yoy": -22.5,
+    "ind_backlog_yoy": -10.0,
+    "ind_sales_yoy": -4.1,
+    "aero_sales_yoy": -12.9,
+    "med_sales_yoy": -2.6,
+    "ce_backlog_yoy": -2.4,
+    "ce_sales_yoy": 3.4
+   },
+   {
+    "x": "25.3Q",
+    "ind_orders": 323.5,
+    "ind_orders_ovs": 313.1,
+    "ind_backlog": 1150.7,
+    "ind_backlog_ovs": 1081.3,
+    "ind_sales": 294.7,
+    "aero_sales": 47.0,
+    "med_sales": 177.5,
+    "ind_ovs_pct": 86.4,
+    "aero_ovs_pct": 72.9,
+    "med_ovs_pct": 38.9,
+    "ind_orders_ovs_pct": 96.8,
+    "ce_orders": 197,
+    "ce_sales": 153,
+    "ce_op": 10,
+    "ce_backlog": 687,
+    "ce_opm": 6.5,
+    "ce_btb": 1.29,
+    "ind_op": 26,
+    "aero_op": 1,
+    "dial_op": 12,
+    "ind_orders_yoy": 26.5,
+    "ind_backlog_yoy": 5.7,
+    "ind_sales_yoy": 12.2,
+    "aero_sales_yoy": 43.3,
+    "med_sales_yoy": -7.9,
+    "ce_backlog_yoy": 1.0,
+    "ce_sales_yoy": 13.3
+   },
+   {
+    "x": "25.4Q",
+    "ind_orders": 377.5,
+    "ind_orders_ovs": 348.3,
+    "ind_backlog": 1118.6,
+    "ind_backlog_ovs": 1049.2,
+    "ind_sales": 339.2,
+    "aero_sales": 68.7,
+    "med_sales": 225.6,
+    "ind_ovs_pct": 85.8,
+    "aero_ovs_pct": 73.6,
+    "med_ovs_pct": 37.7,
+    "ind_orders_ovs_pct": 92.3,
+    "ce_orders": 195,
+    "ce_sales": 171,
+    "ce_op": 26,
+    "ce_backlog": 712,
+    "ce_opm": 15.2,
+    "ce_btb": 1.14,
+    "ind_op": 54,
+    "aero_op": 9,
+    "dial_op": 28,
+    "ind_orders_yoy": 74.6,
+    "ind_backlog_yoy": 2.1,
+    "ind_sales_yoy": 6.6,
+    "aero_sales_yoy": 27.5,
+    "med_sales_yoy": -7.0,
+    "ce_backlog_yoy": 19.1,
+    "ce_sales_yoy": 9.6
+   },
+   {
+    "x": "26.1Q",
+    "ind_orders": 406.0,
+    "ind_orders_ovs": 370.9,
+    "ind_backlog": 1392.8,
+    "ind_backlog_ovs": 1318.0,
+    "ind_sales": 313.2,
+    "aero_sales": 52.1,
+    "med_sales": 188.2,
+    "ind_ovs_pct": 86.0,
+    "aero_ovs_pct": 67.3,
+    "med_ovs_pct": 43.1,
+    "ind_orders_ovs_pct": 91.4,
+    "ce_orders": 223,
+    "ce_sales": 154,
+    "ce_op": 9,
+    "ce_backlog": 777,
+    "ce_opm": 5.8,
+    "ce_btb": 1.45,
+    "ind_op": 26,
+    "aero_op": 4,
+    "dial_op": 16,
+    "ind_orders_yoy": 55.4,
+    "ind_backlog_yoy": 30.4,
+    "ind_sales_yoy": 22.7,
+    "aero_sales_yoy": 31.2,
+    "med_sales_yoy": 0.1,
+    "ce_backlog_yoy": 24.9,
+    "ce_sales_yoy": 19.4
+   },
+   {
+    "x": "26.2Q",
+    "ind_orders": 382.3,
+    "ind_orders_ovs": 354.0,
+    "ind_backlog": 1457.7,
+    "ind_backlog_ovs": 1383.7,
+    "ind_sales": 347.9,
+    "aero_sales": 67.2,
+    "med_sales": 215.2,
+    "ind_ovs_pct": 88.4,
+    "aero_ovs_pct": 71.5,
+    "med_ovs_pct": 41.4,
+    "ind_orders_ovs_pct": 92.6,
+    "ce_orders": 193,
+    "ce_sales": 180,
+    "ce_op": 18,
+    "ce_backlog": 790,
+    "ce_opm": 10.0,
+    "ce_btb": 1.07,
+    "ind_op": 37,
+    "aero_op": 5,
+    "dial_op": 19,
+    "ind_orders_yoy": 27.8,
+    "ind_backlog_yoy": 35.6,
+    "ind_sales_yoy": 23.6,
+    "aero_sales_yoy": 66.3,
+    "med_sales_yoy": 8.7,
+    "ce_backlog_yoy": 22.1,
+    "ce_sales_yoy": 18.4
+   },
+   {
+    "x": "26.3Q",
+    "ind_orders": 399.9,
+    "ind_orders_ovs": 378.4,
+    "ind_backlog": 1486.7,
+    "ind_backlog_ovs": 1421.0,
+    "ind_sales": 346.1,
+    "aero_sales": 57.2,
+    "med_sales": 191.2,
+    "ind_ovs_pct": 88.2,
+    "aero_ovs_pct": 73.6,
+    "med_ovs_pct": 44.4,
+    "ind_orders_ovs_pct": 94.6,
+    "ce_orders": 221,
+    "ce_sales": 177,
+    "ce_op": 6,
+    "ce_backlog": 835,
+    "ce_opm": 3.4,
+    "ce_btb": 1.25,
+    "ind_op": 20,
+    "aero_op": 7,
+    "dial_op": 14,
+    "ind_orders_yoy": 23.6,
+    "ind_backlog_yoy": 29.2,
+    "ind_sales_yoy": 17.4,
+    "aero_sales_yoy": 21.7,
+    "med_sales_yoy": 7.7,
+    "ce_backlog_yoy": 21.5,
+    "ce_sales_yoy": 15.7
+   }
+  ],
+  "ba": [
+   {
+    "x": "2021",
+    "ce_orders": 397,
+    "ce_sales": 276,
+    "ce_op": 16,
+    "ce_backlog": 337,
+    "ce_opm": 5.8
+   },
+   {
+    "x": "2022",
+    "ce_orders": 558,
+    "ce_sales": 352,
+    "ce_op": 13,
+    "ce_backlog": 531,
+    "ce_opm": 3.7
+   },
+   {
+    "x": "2023",
+    "ce_orders": 520,
+    "ce_sales": 475,
+    "ce_op": 25,
+    "ce_backlog": 549,
+    "ce_opm": 5.3
+   },
+   {
+    "x": "2024",
+    "ce_orders": 627,
+    "ce_sales": 569,
+    "ce_op": 48,
+    "ce_backlog": 598,
+    "ind_orders": 1218,
+    "ind_sales": 1120,
+    "ind_op": 99,
+    "aero_orders": 177,
+    "aero_sales": 173,
+    "aero_op": 0,
+    "med_orders": 820,
+    "med_sales": 832,
+    "med_op": 40,
+    "ce_opm": 8.4,
+    "ind_opm": 8.8,
+    "aero_opm": 0.0,
+    "med_opm": 4.8
+   },
+   {
+    "x": "2025",
+    "ce_orders": 709,
+    "ce_sales": 604,
+    "ce_op": 58,
+    "ce_backlog": 712,
+    "ind_orders": 1332,
+    "ind_sales": 1170,
+    "ind_op": 128,
+    "aero_orders": 195,
+    "aero_sales": 195,
+    "aero_op": 9,
+    "med_orders": 785,
+    "med_sales": 788,
+    "med_op": 60,
+    "ce_opm": 9.6,
+    "ind_opm": 10.9,
+    "aero_opm": 4.6,
+    "med_opm": 7.6
+   },
+   {
+    "x": "2026 계획",
+    "plan": 1,
+    "ce_orders": 777,
+    "ce_sales": 704,
+    "ce_op": 59,
+    "ind_orders": 1544,
+    "ind_sales": 1380,
+    "ind_op": 130,
+    "aero_orders": 269,
+    "aero_sales": 270,
+    "aero_op": 30,
+    "med_orders": 825,
+    "med_sales": 825,
+    "med_op": 61,
+    "ce_opm": 8.4,
+    "ind_opm": 9.4,
+    "aero_opm": 11.1,
+    "med_opm": 7.4
+   }
+  ],
+  "mix_ind_p": [
+   {
+    "label": "액화가스·산업가스 기기",
+    "y2025": 82,
+    "y2026": 85
+   },
+   {
+    "label": "산업용 펌프·시스템",
+    "y2025": 8,
+    "y2026": 7
+   },
+   {
+    "label": "정밀기기",
+    "y2025": 6,
+    "y2026": 4
+   },
+   {
+    "label": "기타",
+    "y2025": 4,
+    "y2026": 4
+   }
+  ],
+  "mix_ind_r": [
+   {
+    "label": "일본",
+    "y2025": 14,
+    "y2026": 12
+   },
+   {
+    "label": "아시아",
+    "y2025": 37,
+    "y2026": 30
+   },
+   {
+    "label": "북미",
+    "y2025": 32,
+    "y2026": 43
+   },
+   {
+    "label": "유럽",
+    "y2025": 10,
+    "y2026": 10
+   },
+   {
+    "label": "기타",
+    "y2025": 7,
+    "y2026": 5
+   }
+  ],
+  "mix_ce_r": [
+   {
+    "label": "북미",
+    "y2025": 41,
+    "y2026": 53
+   },
+   {
+    "label": "아시아",
+    "y2025": 40,
+    "y2026": 31
+   },
+   {
+    "label": "유럽",
+    "y2025": 13,
+    "y2026": 12
+   },
+   {
+    "label": "기타",
+    "y2025": 6,
+    "y2026": 4
+   }
+  ],
+  "mix_aero_p": [
+   {
+    "label": "캐스케이드",
+    "y2025": 40,
+    "y2026": 39
+   },
+   {
+    "label": "엔진 부품",
+    "y2025": 27,
+    "y2026": 26
+   },
+   {
+    "label": "날개 부품",
+    "y2025": 18,
+    "y2026": 19
+   },
+   {
+    "label": "나셀 부품",
+    "y2025": 11,
+    "y2026": 10
+   },
+   {
+    "label": "기타",
+    "y2025": 5,
+    "y2026": 5
+   }
+  ],
+  "mix_aero_r": [
+   {
+    "label": "북미",
+    "y2025": 50,
+    "y2026": 49
+   },
+   {
+    "label": "일본",
+    "y2025": 30,
+    "y2026": 29
+   },
+   {
+    "label": "유럽",
+    "y2025": 10,
+    "y2026": 14
+   },
+   {
+    "label": "아시아",
+    "y2025": 10,
+    "y2026": 8
+   }
+  ],
+  "mix_med_p": [
+   {
+    "label": "국내 소모품",
+    "y2025": 32,
+    "y2026": 30
+   },
+   {
+    "label": "해외 투석 장치",
+    "y2025": 18,
+    "y2026": 22
+   },
+   {
+    "label": "메인터넌스",
+    "y2025": 12,
+    "y2026": 12
+   },
+   {
+    "label": "국내 투석 장치",
+    "y2025": 11,
+    "y2026": 8
+   },
+   {
+    "label": "해외 소모품",
+    "y2025": 7,
+    "y2026": 9
+   },
+   {
+    "label": "CRRT",
+    "y2025": 2,
+    "y2026": 0
+   },
+   {
+    "label": "기타",
+    "y2025": 18,
+    "y2026": 18
+   }
+  ],
+  "mix_med_r": [
+   {
+    "label": "일본",
+    "y2025": 63,
+    "y2026": 57
+   },
+   {
+    "label": "유럽",
+    "y2025": 15,
+    "y2026": 20
+   },
+   {
+    "label": "중국",
+    "y2025": 14,
+    "y2026": 15
+   },
+   {
+    "label": "기타 아시아",
+    "y2025": 5,
+    "y2026": 6
+   },
+   {
+    "label": "북미",
+    "y2025": 2,
+    "y2026": 1
+   },
+   {
+    "label": "기타",
+    "y2025": 1,
+    "y2026": 1
+   }
+  ]
+ }
+}

@@ -979,3 +979,38 @@ html.pxm-open { overflow: hidden; }
 .memo:empty::before { content: attr(data-ph); color: var(--ink-mute); opacity: .7; pointer-events: none; }
 .memo:hover { border-color: color-mix(in srgb, var(--ink) 32%, transparent); }
 .memo:focus { outline: none; border-style: solid; border-color: var(--accent-ink, #2563eb); background: var(--surface); }
+
+/* ---------- 오프라인 스터디(2026-11-16 사용자) — 맨 앞 칸 팀 점수·코멘트, 오른쪽 회사·내 코멘트 ---------- */
+.so { --c: #0f766e; --cs: rgba(15,118,110,.09); }
+.stlist { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+.stcard { display: grid; grid-template-columns: minmax(260px, 340px) 1fr; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; }
+.st-score { background: #f3f8f7; border-right: 1px solid var(--line-soft); padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
+.st-avg { display: flex; align-items: baseline; gap: 8px; }
+.st-avg b { font: 800 30px/1 var(--mono); color: var(--ink); }
+.st-avg span { font-size: 11.5px; color: var(--ink-mute); }
+.st-avg.hi b { color: #c2255c; } .st-avg.mid b { color: #e67700; } .st-avg.lo b { color: #1c7ed6; }
+.stc { border-top: 1px dashed #cfe0dd; padding-top: 8px; }
+.stc-h { display: flex; align-items: center; gap: 6px; font-size: 12.5px; }
+.stc-h b { color: var(--ink); }
+.stsc { font: 700 11.5px var(--mono); padding: 1px 7px; border-radius: 999px; background: #e9ecef; color: var(--ink); }
+.stsc.hi { background: #ffe3ec; color: #c2255c; } .stsc.mid { background: #fff0db; color: #d9480f; } .stsc.lo { background: #e7f1fd; color: #1c7ed6; }
+.stc-d { margin-left: auto; font: 10.5px var(--mono); color: var(--ink-mute); }
+.stc-p, .stc-t summary, .stc-t p { margin: 4px 0 0; font-size: 12.5px; line-height: 1.55; color: var(--ink-mid); white-space: pre-wrap; }
+.stc-t summary { cursor: pointer; list-style: none; } .stc-t summary::-webkit-details-marker { display: none; }
+.stc-t summary i { font-style: normal; color: #0f766e; font-weight: 600; }
+.stc-t[open] summary { display: none; }
+.st-main { padding: 12px 16px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.st-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.st-top .rk { font: 700 12px var(--mono); color: var(--ink-mute); min-width: 18px; }
+.st-top .tkc { font: 700 12px var(--mono); color: #2b6cb0; }
+.st-nm { font-size: 17px; font-weight: 800; color: var(--ink); cursor: pointer; margin-right: 4px; }
+.st-nm:hover { text-decoration: underline; }
+.st-bm { margin: 0; font-size: 12.5px; color: var(--ink-mid); }
+.st-kv { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 13px; }
+.st-kv span { display: inline-flex; flex-direction: column; } .st-kv .cl { display: block; font-size: 10.5px; color: var(--ink-mute); }
+.st-lb { display: flex; flex-wrap: wrap; gap: 5px; }
+.st-lb .chip { font-size: 11.5px; padding: 2px 9px; }
+.st-q { overflow-x: auto; }
+.st-my { border-top: 1px solid var(--line-soft); padding-top: 8px; }
+.st-myh { display: block; font-size: 11px; font-weight: 700; color: #0f766e; margin-bottom: 4px; }
+@media (max-width: 760px) { .stcard { grid-template-columns: 1fr; } .st-score { border-right: 0; border-bottom: 1px solid var(--line-soft); } }

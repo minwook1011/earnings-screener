@@ -4,7 +4,7 @@
   --kl0: #F5A524; --kl1: #2F9E44; --kl2: #2B6CB0; --kl3: #E03131; --kl4: #7048E8; --kl5: #0C8599; --kl6: #6B7280;
 }
 .kd-sec { margin: 18px 0 8px; font-size: 12.5px; font-weight: 700; color: var(--ink-mid); padding-left: 8px; border-left: 3px solid var(--kb0); }
-.kd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px; }
+.kd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 10px; }
 .kd-fig { margin: 0; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 8px; padding: 10px 10px 6px; min-width: 0; }
 .kd-fig figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; font-size: 12px; padding: 0 4px; }
 .kd-fig figcaption b { color: var(--ink); }
@@ -34,6 +34,12 @@
 .kd-l.c1 { stroke: var(--kl1); } .kd-d.c1, .kd-lt.c1 { fill: var(--kl1); } .kd-sw.ln.c1 { background: var(--kl1); }
 .kd-l.c2 { stroke: var(--kl2); } .kd-d.c2, .kd-lt.c2 { fill: var(--kl2); } .kd-sw.ln.c2 { background: var(--kl2); }
 .kd-l.c3 { stroke: var(--kl3); } .kd-d.c3, .kd-lt.c3 { fill: var(--kl3); } .kd-sw.ln.c3 { background: var(--kl3); }
+.kd-l.c4 { stroke: var(--kl4); } .kd-d.c4, .kd-lt.c4 { fill: var(--kl4); } .kd-sw.ln.c4 { background: var(--kl4); }
+.kd-l.c5 { stroke: var(--kl5); } .kd-d.c5, .kd-lt.c5 { fill: var(--kl5); } .kd-sw.ln.c5 { background: var(--kl5); }
+.kd-l.c6 { stroke: var(--kl6); } .kd-d.c6, .kd-lt.c6 { fill: var(--kl6); } .kd-sw.ln.c6 { background: var(--kl6); }
+.kd-l.c7 { stroke: var(--kl6); } .kd-d.c7, .kd-lt.c7 { fill: var(--kl6); } .kd-sw.ln.c7 { background: var(--kl6); }
+.kd-l.c8 { stroke: var(--kl6); } .kd-d.c8, .kd-lt.c8 { fill: var(--kl6); } .kd-sw.ln.c8 { background: var(--kl6); }
+.kd-l.c9 { stroke: var(--kl6); } .kd-d.c9, .kd-lt.c9 { fill: var(--kl6); } .kd-sw.ln.c9 { background: var(--kl6); }
 .kd-tw { overflow-x: auto; border: 1px solid var(--line-soft); border-radius: 8px; background: var(--surface); }
 .kd-t { border-collapse: collapse; width: 100%; font: 11.5px var(--mono); font-variant-numeric: tabular-nums; }
 .kd-t th, .kd-t td { padding: 6px 9px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line-soft); }
@@ -107,3 +113,37 @@ table.ft { border-collapse: separate; border-spacing: 0; width: max-content; min
 .ft tr.ds th.l { padding-left: 32px; font-weight: 400; }
 .kd-bl { font: 600 8.5px var(--mono); fill: var(--ink-mid); text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 2.5px; }
 .kd-bl.sm { font-size: 8px; }
+
+/* 12분기 재무제표(2026-11-16 사용자) — 2단계 리포트 맨 위 표(build_deep.py .fst)와 같은 모양 */
+.kdq-w { overflow-x: auto; margin: 8px 0 4px; max-width: 100%; }
+table.kdq { border-collapse: collapse; font-size: 13px; background: var(--surface); width: max-content; min-width: 100%; }
+.kdq th { background: #e7ebf0; color: #1d2430; text-align: right; font: 700 12.5px var(--sans, inherit); padding: 7px 8px; white-space: nowrap; }
+.kdq th:first-child, .kdq td:first-child { text-align: left; white-space: nowrap; }
+.kdq th small { display: block; font: 500 10px inherit; }
+.kdq th small.qs { font: 700 11px var(--mono); color: #d4a106; margin-top: 2px; }
+.kdq th small.qp { font: 500 10px var(--mono); color: var(--ink-mute); }
+.kdq tr.curl th { background: transparent; padding: 0 8px 3px; }
+.kdq th.curt { color: #e03131; font-weight: 800; font-size: 12px; text-align: center; }
+.kdq .cur { box-shadow: inset 2.5px 0 #e03131, inset -2.5px 0 #e03131; }
+.kdq thead tr:nth-child(2) th.cur { box-shadow: inset 2.5px 0 #e03131, inset -2.5px 0 #e03131, inset 0 2.5px #e03131; }
+.kdq tbody tr:last-child td.cur { box-shadow: inset 2.5px 0 #e03131, inset -2.5px 0 #e03131, inset 0 -2.5px #e03131; }
+.kdq td { padding: 6px 8px; }
+.kdq td.n { font-family: var(--mono); font-size: 12.5px; text-align: right; white-space: nowrap; }
+.kdq tr.mj td { font-weight: 700; color: var(--ink); font-size: 13.5px; }
+.kdq tr.mj td:first-child { font-size: 14px; }
+.kdq tr.g td { color: var(--ink-mute); }
+.kdq tr.g td:first-child { padding-left: 22px; font-weight: 400; }
+.kdq tr.sep td { border-top: 1px dotted var(--line); }
+.kdq td.hl span { display: inline-block; border: 2px solid #e03131; border-radius: 999px; padding: 0 6px; margin: -2px -8px -2px 0; }
+
+/* 표 차트(월차 24개월 표 등) — 그리드 한 줄 전체 */
+.kd-fig.kd-tbl { grid-column: 1 / -1; }
+.kd-tw { overflow: auto; max-height: 420px; margin-top: 6px; }
+.kd-tw table { border-collapse: collapse; width: max-content; min-width: 100%; font-size: 12px; }
+.kd-tw th { position: sticky; top: 0; background: #e7ebf0; color: #1d2430; font-weight: 700; padding: 5px 8px; text-align: right; white-space: normal; min-width: 7.5em; max-width: 10em; line-height: 1.3; vertical-align: bottom; }
+.kd-tw th:first-child { min-width: 0; }
+.kd-tw th small { display: block; font-weight: 500; font-size: 10px; opacity: .8; }
+.kd-tw th:first-child, .kd-tw td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); }
+.kd-tw th:first-child { background: #e7ebf0; z-index: 1; }
+.kd-tw td { padding: 4px 8px; border-bottom: 1px solid var(--line-soft); font-family: var(--mono); white-space: nowrap; }
+.kd-tw td.up { color: #d6336c; } .kd-tw td.dn { color: #1c7ed6; }

@@ -1,1 +1,1557 @@
-{"c": "1663", "n": "K&O에너지그룹", "asof": "2026-11-13", "latest": "2026년 12월기 3분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "지바현 남관동 가스전에서 천연가스와 함께 나오는 지하수(함수)로 요오드를 만드는 회사. 가스 매출이 크지만 이익은 요오드가 더 큼. 판관비 칸 = 공급판매비+판관비 합계. 차입금은 연말만 공개(9억엔 안팎, 사실상 무차입). 26.3Q 현금 감소는 유가증권(284억엔)으로 옮긴 영향. 설명회 자료 없음", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산단신"}, {"sec": "key", "t": "요오드 부문 이익", "def": "요오드·요오드 화합물·함수 판매", "d": "q", "bars": [{"k": "op_iod", "l": "요오드 부문 이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_iod_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문정보(누계 차분)"}, {"sec": "key", "t": "가스 부문 매출", "def": "도시가스·발전용 가스 판매(외부 고객)", "d": "q", "bars": [{"k": "seg_gas", "l": "가스 부문 매출", "u": "억엔", "c": 0}], "lines": [{"k": "seg_gas_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문정보(누계 차분)"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산단신"}, {"sec": "부문", "t": "부문별 분기 매출(외부 고객)", "d": "q", "src": "결산단신 부문정보(누계 차분)", "lines": [{"k": "seg_gas", "l": "가스", "u": "억엔", "c": 0}, {"k": "seg_iod", "l": "요오드", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 분기 이익", "d": "q", "src": "결산단신 부문정보(누계 차분) · 전사 비용 제외", "lines": [{"k": "op_iod", "l": "요오드", "u": "억엔", "c": 0}, {"k": "op_gas", "l": "가스", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "요오드 부문 매출", "d": "q", "bars": [{"k": "seg_iod", "l": "요오드 매출", "u": "억엔", "c": 0}], "lines": [{"k": "seg_iod_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문정보(누계 차분)", "def": "엔저로 판매 가격 상승"}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "3Q26 결산단신 · 총차입금 = 단기 + 장기 차입금"}], "tables": {"q": [{"q": "23.4Q", "x": "23.4Q", "sales": 239.08, "op": 22.74, "ord": 25.16, "net": 16.64, "gp": 49.3, "sga": 26.55, "cogs": 189.78, "debt_total": 9.26, "equity": 929.29, "total_assets": 1114.45, "cash": 231.79, "gpm": 20.6, "opm": 9.5, "seg_gas": null, "seg_iod": null, "op_gas": null, "op_iod": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "24.1Q", "x": "24.1Q", "sales": 259.25, "op": 24.93, "ord": 25.99, "net": 16.91, "gp": 51.96, "sga": 27.03, "cogs": 207.29, "debt_total": null, "equity": 946.7, "total_assets": 1119.92, "cash": 155.64, "gpm": 20.0, "opm": 9.6, "seg_gas": null, "seg_iod": null, "op_gas": null, "op_iod": null, "sales_yoy": null, "gp_yoy": 1.2, "sga_yoy": 9.9, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "24.2Q", "x": "24.2Q", "sales": 229.09, "op": 31.13, "ord": 33.31, "net": 20.08, "gp": 58.15, "sga": 27.01, "cogs": 170.94, "debt_total": null, "equity": 973.01, "total_assets": 1159.73, "cash": 157.47, "gpm": 25.4, "opm": 13.6, "seg_gas": null, "seg_iod": null, "op_gas": null, "op_iod": null, "sales_yoy": null, "gp_yoy": 15.4, "sga_yoy": 6.6, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "24.3Q", "x": "24.3Q", "sales": 217.65, "op": 20.82, "ord": 22.21, "net": 13.3, "gp": 50.5, "sga": 29.69, "cogs": 167.15, "debt_total": null, "equity": 977.49, "total_assets": 1163.11, "cash": 167.74, "gpm": 23.2, "opm": 9.6, "seg_gas": null, "seg_iod": null, "op_gas": null, "op_iod": null, "sales_yoy": null, "gp_yoy": 6.4, "sga_yoy": 17.2, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 218.22, "op": 11.32, "ord": 16.79, "net": 11.38, "gp": 40.98, "sga": 29.65, "cogs": 177.24, "debt_total": 9.13, "equity": 994.06, "total_assets": 1194.47, "cash": 284.98, "gpm": 18.8, "opm": 5.2, "seg_gas": 174.05, "seg_iod": 28.26, "op_gas": 5.55, "op_iod": 15.71, "sales_yoy": -8.7, "gp_yoy": -16.9, "sga_yoy": 11.7, "op_yoy": -50.2, "ord_yoy": -33.3, "net_yoy": -31.6, "cash_yoy": 22.9, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 262.42, "op": 33.93, "ord": 36.53, "net": 32.27, "gp": 61.09, "sga": 27.15, "cogs": 201.33, "debt_total": null, "equity": 1020.9, "total_assets": 1215.24, "cash": 152.57, "gpm": 23.3, "opm": 12.9, "seg_gas": 203.54, "seg_iod": 34.89, "op_gas": 21.13, "op_iod": 21.28, "sales_yoy": 1.2, "gp_yoy": 17.6, "sga_yoy": 0.4, "op_yoy": 36.1, "ord_yoy": 40.6, "net_yoy": 90.8, "cash_yoy": -2.0, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 222.94, "op": 32.13, "ord": 34.81, "net": 22.69, "gp": 56.43, "sga": 24.3, "cogs": 166.51, "debt_total": null, "equity": 1045.83, "total_assets": 1222.64, "cash": 168.12, "gpm": 25.3, "opm": 14.4, "seg_gas": 163.32, "seg_iod": 38.76, "op_gas": 14.17, "op_iod": 21.88, "sales_yoy": -2.7, "gp_yoy": -3.0, "sga_yoy": -10.0, "op_yoy": 3.2, "ord_yoy": 4.5, "net_yoy": 13.0, "cash_yoy": 6.8, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 209.64, "op": 18.99, "ord": 20.75, "net": 13.67, "gp": 50.09, "sga": 31.11, "cogs": 159.55, "debt_total": null, "equity": 1059.94, "total_assets": 1241.73, "cash": 165.17, "gpm": 23.9, "opm": 9.1, "seg_gas": 151.8, "seg_iod": 38.06, "op_gas": 7.82, "op_iod": 22.49, "sales_yoy": -3.7, "gp_yoy": -0.8, "sga_yoy": 4.8, "op_yoy": -8.8, "ord_yoy": -6.6, "net_yoy": 2.8, "cash_yoy": -1.5, "seg_gas_yoy": null, "seg_iod_yoy": null, "op_gas_yoy": null, "op_iod_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 218.54, "op": 20.89, "ord": 24.9, "net": 15.16, "gp": 50.24, "sga": 29.35, "cogs": 168.3, "debt_total": 8.77, "equity": 1088.88, "total_assets": 1277.73, "cash": 305.47, "gpm": 23.0, "opm": 9.6, "seg_gas": 158.26, "seg_iod": 39.21, "op_gas": 6.54, "op_iod": 22.03, "sales_yoy": 0.1, "gp_yoy": 22.6, "sga_yoy": -1.0, "op_yoy": 84.5, "ord_yoy": 48.3, "net_yoy": 33.2, "cash_yoy": 7.2, "seg_gas_yoy": -9.1, "seg_iod_yoy": 38.7, "op_gas_yoy": 17.8, "op_iod_yoy": 40.2}, {"q": "26.1Q", "x": "26.1Q", "sales": 254.53, "op": 36.67, "ord": 39.23, "net": 24.04, "gp": 63.83, "sga": 27.16, "cogs": 190.7, "debt_total": null, "equity": 1108.24, "total_assets": 1298.86, "cash": 161.54, "gpm": 25.1, "opm": 14.4, "seg_gas": 188.48, "seg_iod": 38.89, "op_gas": 21.0, "op_iod": 22.86, "sales_yoy": -3.0, "gp_yoy": 4.5, "sga_yoy": 0.0, "op_yoy": 8.1, "ord_yoy": 7.4, "net_yoy": -25.5, "cash_yoy": 5.9, "seg_gas_yoy": -7.4, "seg_iod_yoy": 11.5, "op_gas_yoy": -0.6, "op_iod_yoy": 7.4}, {"q": "26.2Q", "x": "26.2Q", "sales": 224.84, "op": 29.37, "ord": 33.24, "net": 20.66, "gp": 56.49, "sga": 27.12, "cogs": 168.35, "debt_total": null, "equity": 1140.22, "total_assets": 1329.89, "cash": 183.64, "gpm": 25.1, "opm": 13.1, "seg_gas": 161.92, "seg_iod": 44.37, "op_gas": 12.7, "op_iod": 24.04, "sales_yoy": 0.9, "gp_yoy": 0.1, "sga_yoy": 11.6, "op_yoy": -8.6, "ord_yoy": -4.5, "net_yoy": -8.9, "cash_yoy": 9.2, "seg_gas_yoy": -0.9, "seg_iod_yoy": 14.5, "op_gas_yoy": -10.4, "op_iod_yoy": 9.9}, {"q": "26.3Q", "x": "26.3Q", "sales": 258.73, "op": 22.51, "ord": 25.21, "net": 16.22, "gp": 53.99, "sga": 31.47, "cogs": 204.74, "debt_total": null, "equity": 1157.86, "total_assets": 1366.41, "cash": 138.4, "gpm": 20.9, "opm": 8.7, "seg_gas": 195.17, "seg_iod": 44.15, "op_gas": 10.42, "op_iod": 24.12, "sales_yoy": 23.4, "gp_yoy": 7.8, "sga_yoy": 1.2, "op_yoy": 18.5, "ord_yoy": 21.5, "net_yoy": 18.7, "cash_yoy": -16.2, "seg_gas_yoy": 28.6, "seg_iod_yoy": 16.0, "op_gas_yoy": 33.2, "op_iod_yoy": 7.2}], "a": [{"year": "2020", "x": "2020", "sales": 584.52, "op": 36.25, "ord": 40.5, "net": 28.44, "opm": 6.2, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2021", "x": "2021", "sales": 660.7, "op": 39.37, "ord": 44.23, "net": 28.46, "opm": 6.0, "sales_yoy": 13.0, "op_yoy": 8.6, "net_yoy": 0.1}, {"year": "2022", "x": "2022", "sales": 1062.0, "op": 73.04, "ord": 79.31, "net": 47.66, "opm": 6.9, "sales_yoy": 60.7, "op_yoy": 85.5, "net_yoy": 67.5}, {"year": "2023", "x": "2023", "sales": 962.98, "op": 96.68, "ord": 104.08, "net": 64.64, "opm": 10.0, "sales_yoy": -9.3, "op_yoy": 32.4, "net_yoy": 35.6}, {"year": "2024", "x": "2024", "sales": 924.21, "op": 88.2, "ord": 98.3, "net": 61.67, "opm": 9.5, "sales_yoy": -4.0, "op_yoy": -8.8, "net_yoy": -4.6}, {"year": "2025", "x": "2025", "sales": 913.54, "op": 105.94, "ord": 116.99, "net": 83.79, "opm": 11.6, "sales_yoy": -1.2, "op_yoy": 20.1, "net_yoy": 35.9}, {"year": "2026 계획", "x": "2026 계획", "sales": 999.0, "op": 96.0, "ord": 109.0, "net": 68.0, "opm": 9.6, "sales_yoy": 9.4, "op_yoy": -9.4, "net_yoy": -18.8, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "1663",
+ "n": "K&O에너지그룹",
+ "asof": "2026-11-13",
+ "latest": "2026년 12월기 3분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "지바현 남관동 가스전에서 천연가스와 함께 나오는 지하수(함수)로 요오드를 만드는 회사. 가스 매출이 크지만 이익은 요오드가 더 큼. 판관비 칸 = 공급판매비+판관비 합계. 차입금은 연말만 공개(9억엔 안팎, 사실상 무차입). 26.3Q 현금 감소는 유가증권(284억엔)으로 옮긴 영향. 반기 결산설명회 자료는 회사 IR 사이트에만 있음(TDnet 미게재)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "요오드 판매량(반기)",
+   "d": "bh",
+   "bars": [
+    {
+     "k": "iod_sales",
+     "l": "판매량",
+     "u": "t",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "iod_sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "요오드+요오드화칼륨, 전년 같은 반기 대비 YoY"
+  },
+  {
+   "sec": "key",
+   "t": "가스 판매량(반기)",
+   "d": "bh",
+   "bars": [
+    {
+     "k": "gas_total",
+     "l": "판매량",
+     "u": "백만Nm³",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "gas_total_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "39MJ/Nm³ 환산, 전년 같은 반기 대비 YoY"
+  },
+  {
+   "sec": "부문",
+   "t": "요오드 부문 이익",
+   "def": "요오드·요오드 화합물·함수 판매",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op_iod",
+     "l": "요오드 부문 이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_iod_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문정보(누계 차분)"
+  },
+  {
+   "sec": "부문",
+   "t": "가스 부문 매출",
+   "def": "도시가스·발전용 가스 판매(외부 고객)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "seg_gas",
+     "l": "가스 부문 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "seg_gas_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문정보(누계 차분)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "gpm",
+     "l": "매출총이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 분기 매출(외부 고객)",
+   "d": "q",
+   "src": "결산단신 부문정보(누계 차분)",
+   "lines": [
+    {
+     "k": "seg_gas",
+     "l": "가스",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_iod",
+     "l": "요오드",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 분기 이익",
+   "d": "q",
+   "src": "결산단신 부문정보(누계 차분) · 전사 비용 제외",
+   "lines": [
+    {
+     "k": "op_iod",
+     "l": "요오드",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "op_gas",
+     "l": "가스",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "요오드",
+   "t": "요오드 부문 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "seg_iod",
+     "l": "요오드 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "seg_iod_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문정보(누계 차분)",
+   "def": "엔저로 판매 가격 상승"
+  },
+  {
+   "sec": "가스",
+   "t": "네트워크별 가스 판매량(반기)",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "gas_lng",
+     "l": "LNG 네트워크",
+     "u": "백만Nm³",
+     "c": 0
+    },
+    {
+     "k": "gas_pref",
+     "l": "지바현산 가스 네트워크",
+     "u": "백만Nm³",
+     "c": 1
+    }
+   ],
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "LNG 네트워크 = 발전·대형 공업용(판매량 약 70%), 지바현산 가스 네트워크 = 가정용 등(고객 수 99.9% 이상)"
+  },
+  {
+   "sec": "가스",
+   "t": "가스 판매 단가(반기)",
+   "d": "bh",
+   "bars": [
+    {
+     "k": "gas_price",
+     "l": "Nm³당 매출",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "gas_price_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "가스 부문 매출 ÷ 가스 판매량(부문 매출에 LP가스 등 포함)"
+  },
+  {
+   "sec": "가스",
+   "t": "연간 가스 생산량·판매량",
+   "d": "ba",
+   "muted": "plan",
+   "lines": [
+    {
+     "k": "gas_sales",
+     "l": "판매량",
+     "u": "백만Nm³",
+     "c": 0
+    },
+    {
+     "k": "gas_prod",
+     "l": "생산량",
+     "u": "백만Nm³",
+     "c": 1
+    },
+    {
+     "k": "gas_buy",
+     "l": "구입량",
+     "u": "백만Nm³",
+     "c": 2
+    }
+   ],
+   "src": "결산설명회 자료(25년 기말·26년 중간) 보충자료 · 2026 = 회사 계획",
+   "def": "생산량 = 자사 남관동 가스전 생산, 구입량 = 판매량 − 생산량(LNG 등) · 중계 2027 목표 생산 1.8억㎥/년"
+  },
+  {
+   "sec": "가스",
+   "t": "LNG-CIF 적용 가격",
+   "d": "ba",
+   "muted": "plan",
+   "lines": [
+    {
+     "k": "cif",
+     "l": "LNG-CIF",
+     "u": "천엔/t",
+     "c": 0
+    }
+   ],
+   "src": "결산설명회 자료(각 연도 기말) · 2024는 25년 자료 수정치 95 · 26년 상반기 87(25년 상반기 94) · 2026 = 회사 계획",
+   "def": "가스 판매 가격에 반영되는 수입 LNG 가격"
+  },
+  {
+   "sec": "가스",
+   "t": "오타키가스 도시가스 고객 수",
+   "d": "ba",
+   "noplan": 1,
+   "bars": [
+    {
+     "k": "cust",
+     "l": "고객",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cust_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 「오타키가스 도시가스 현황」(23~26년)",
+   "def": "계량기 설치 수(연말)"
+  },
+  {
+   "sec": "가스",
+   "t": "오타키가스 도시가스 판매량",
+   "d": "ba",
+   "noplan": 1,
+   "bars": [
+    {
+     "k": "city_vol",
+     "l": "판매량",
+     "u": "백만㎥",
+     "c": 0
+    }
+   ],
+   "src": "결산설명회 자료 「오타키가스 도시가스 현황」(23~26년)"
+  },
+  {
+   "sec": "가스",
+   "t": "가스 가채 매장량",
+   "d": "ba",
+   "noplan": 1,
+   "bars": [
+    {
+     "k": "reserve",
+     "l": "가채 매장량",
+     "u": "억㎥",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서(2023~2025년) 「채굴 광구 및 가채 매장량」",
+   "def": "회사 광구 안(지바현), JIS 용적법 · 현재 생산량으로 약 600년분"
+  },
+  {
+   "sec": "요오드",
+   "t": "요오드 수출·국내 판매량(반기)",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "iod_exp",
+     "l": "수출",
+     "u": "t",
+     "c": 0
+    },
+    {
+     "k": "iod_dom",
+     "l": "국내",
+     "u": "t",
+     "c": 1
+    }
+   ],
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기"
+  },
+  {
+   "sec": "요오드",
+   "t": "요오드 수출 비중(반기)",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "exp_share",
+     "l": "수출 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "max": 100,
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "수출 ÷ (수출 + 국내) 판매량"
+  },
+  {
+   "sec": "요오드",
+   "t": "요오드 1kg당 매출(반기)",
+   "d": "bh",
+   "bars": [
+    {
+     "k": "iod_price",
+     "l": "kg당 매출",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "iod_price_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "요오드 부문 매출 ÷ 요오드 판매량(부문 매출에 함수 판매 포함)"
+  },
+  {
+   "sec": "요오드",
+   "t": "요오드 생산량(반기)",
+   "d": "bh",
+   "bars": [
+    {
+     "k": "iod_prod",
+     "l": "생산량",
+     "u": "t",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "iod_prod_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료(25·26년 중간, 24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "22·23년 상반기 생산량은 미공개 · 26년 상반기는 원료 함수 설비 문제로 감소"
+  },
+  {
+   "sec": "요오드",
+   "t": "연간 요오드 생산량·판매량",
+   "d": "ba",
+   "muted": "plan",
+   "lines": [
+    {
+     "k": "iod_sales",
+     "l": "판매량",
+     "u": "t",
+     "c": 0
+    },
+    {
+     "k": "iod_prod",
+     "l": "생산량",
+     "u": "t",
+     "c": 1
+    }
+   ],
+   "src": "결산설명회 자료(25년 기말·26년 중간) 보충자료 · 2026 = 회사 계획(8/12 수정)",
+   "def": "판매량은 요오드화칼륨 포함 · 중계 2027 목표 판매 1,900t/년 · 회사 세계 점유율 약 5%"
+  },
+  {
+   "sec": "요오드",
+   "t": "요오드 매출 적용 환율(TTB)",
+   "d": "ba",
+   "muted": "plan",
+   "lines": [
+    {
+     "k": "fx",
+     "l": "엔/달러",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명회 자료(각 연도 기말) · 26년 상반기 161(25년 상반기 147) · 2026 = 회사 계획",
+   "def": "회사 감응도: 26년 하반기 1엔 엔저 = 하반기 매출 +0.4억엔"
+  },
+  {
+   "sec": "기타 사업",
+   "t": "기타 부문 사업별 매출(반기)",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "oth_con",
+     "l": "건설",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "oth_pwr",
+     "l": "전력",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "oth_app",
+     "l": "기기 판매",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산설명회 자료(반기, 23·24·25·26년 중간, 23·24·25년 기말) · H2 = 연간 − 상반기",
+   "def": "건설 = 배관·지열정 굴착 공사, 기기 = 가스 기기·공조 판매, 전력 = 전기 소매·도매"
+  },
+  {
+   "sec": "인력·투자",
+   "t": "종업원 수",
+   "d": "ba",
+   "noplan": 1,
+   "bars": [
+    {
+     "k": "emp",
+     "l": "종업원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서(2023~2025년)",
+   "def": "연결 취업 인원(연말)"
+  },
+  {
+   "sec": "인력·투자",
+   "t": "부문별 종업원 수",
+   "d": "ba",
+   "noplan": 1,
+   "lines": [
+    {
+     "k": "emp_gas",
+     "l": "가스",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp_corp",
+     "l": "전사 공통",
+     "u": "명",
+     "c": 1
+    },
+    {
+     "k": "emp_oth",
+     "l": "기타",
+     "u": "명",
+     "c": 2
+    },
+    {
+     "k": "emp_iod",
+     "l": "요오드",
+     "u": "명",
+     "c": 3
+    }
+   ],
+   "src": "유가증권보고서(2023~2025년)"
+  },
+  {
+   "sec": "인력·투자",
+   "t": "설비투자·감가상각비",
+   "d": "ba",
+   "muted": "plan",
+   "lines": [
+    {
+     "k": "capex",
+     "l": "설비투자",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dep",
+     "l": "감가상각비",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산설명회 자료(25년 기말·26년 중간) 보충자료 · 2026 = 회사 계획",
+   "def": "26년 계획 투자: 가스·요오드 개발 26억, 노후 설비 22억, 도관 8억, 기타 16억엔"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산단신 · 총차입금 = 단기 + 장기 차입금"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "23.4Q",
+    "x": "23.4Q",
+    "sales": 239.08,
+    "op": 22.74,
+    "ord": 25.16,
+    "net": 16.64,
+    "gp": 49.3,
+    "sga": 26.55,
+    "cogs": 189.78,
+    "debt_total": 9.26,
+    "equity": 929.29,
+    "total_assets": 1114.45,
+    "cash": 231.79,
+    "gpm": 20.6,
+    "opm": 9.5,
+    "seg_gas": null,
+    "seg_iod": null,
+    "op_gas": null,
+    "op_iod": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 259.25,
+    "op": 24.93,
+    "ord": 25.99,
+    "net": 16.91,
+    "gp": 51.96,
+    "sga": 27.03,
+    "cogs": 207.29,
+    "debt_total": null,
+    "equity": 946.7,
+    "total_assets": 1119.92,
+    "cash": 155.64,
+    "gpm": 20.0,
+    "opm": 9.6,
+    "seg_gas": null,
+    "seg_iod": null,
+    "op_gas": null,
+    "op_iod": null,
+    "sales_yoy": null,
+    "gp_yoy": 1.2,
+    "sga_yoy": 9.9,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 229.09,
+    "op": 31.13,
+    "ord": 33.31,
+    "net": 20.08,
+    "gp": 58.15,
+    "sga": 27.01,
+    "cogs": 170.94,
+    "debt_total": null,
+    "equity": 973.01,
+    "total_assets": 1159.73,
+    "cash": 157.47,
+    "gpm": 25.4,
+    "opm": 13.6,
+    "seg_gas": null,
+    "seg_iod": null,
+    "op_gas": null,
+    "op_iod": null,
+    "sales_yoy": null,
+    "gp_yoy": 15.4,
+    "sga_yoy": 6.6,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 217.65,
+    "op": 20.82,
+    "ord": 22.21,
+    "net": 13.3,
+    "gp": 50.5,
+    "sga": 29.69,
+    "cogs": 167.15,
+    "debt_total": null,
+    "equity": 977.49,
+    "total_assets": 1163.11,
+    "cash": 167.74,
+    "gpm": 23.2,
+    "opm": 9.6,
+    "seg_gas": null,
+    "seg_iod": null,
+    "op_gas": null,
+    "op_iod": null,
+    "sales_yoy": null,
+    "gp_yoy": 6.4,
+    "sga_yoy": 17.2,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 218.22,
+    "op": 11.32,
+    "ord": 16.79,
+    "net": 11.38,
+    "gp": 40.98,
+    "sga": 29.65,
+    "cogs": 177.24,
+    "debt_total": 9.13,
+    "equity": 994.06,
+    "total_assets": 1194.47,
+    "cash": 284.98,
+    "gpm": 18.8,
+    "opm": 5.2,
+    "seg_gas": 174.05,
+    "seg_iod": 28.26,
+    "op_gas": 5.55,
+    "op_iod": 15.71,
+    "sales_yoy": -8.7,
+    "gp_yoy": -16.9,
+    "sga_yoy": 11.7,
+    "op_yoy": -50.2,
+    "ord_yoy": -33.3,
+    "net_yoy": -31.6,
+    "cash_yoy": 22.9,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 262.42,
+    "op": 33.93,
+    "ord": 36.53,
+    "net": 32.27,
+    "gp": 61.09,
+    "sga": 27.15,
+    "cogs": 201.33,
+    "debt_total": null,
+    "equity": 1020.9,
+    "total_assets": 1215.24,
+    "cash": 152.57,
+    "gpm": 23.3,
+    "opm": 12.9,
+    "seg_gas": 203.54,
+    "seg_iod": 34.89,
+    "op_gas": 21.13,
+    "op_iod": 21.28,
+    "sales_yoy": 1.2,
+    "gp_yoy": 17.6,
+    "sga_yoy": 0.4,
+    "op_yoy": 36.1,
+    "ord_yoy": 40.6,
+    "net_yoy": 90.8,
+    "cash_yoy": -2.0,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 222.94,
+    "op": 32.13,
+    "ord": 34.81,
+    "net": 22.69,
+    "gp": 56.43,
+    "sga": 24.3,
+    "cogs": 166.51,
+    "debt_total": null,
+    "equity": 1045.83,
+    "total_assets": 1222.64,
+    "cash": 168.12,
+    "gpm": 25.3,
+    "opm": 14.4,
+    "seg_gas": 163.32,
+    "seg_iod": 38.76,
+    "op_gas": 14.17,
+    "op_iod": 21.88,
+    "sales_yoy": -2.7,
+    "gp_yoy": -3.0,
+    "sga_yoy": -10.0,
+    "op_yoy": 3.2,
+    "ord_yoy": 4.5,
+    "net_yoy": 13.0,
+    "cash_yoy": 6.8,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 209.64,
+    "op": 18.99,
+    "ord": 20.75,
+    "net": 13.67,
+    "gp": 50.09,
+    "sga": 31.11,
+    "cogs": 159.55,
+    "debt_total": null,
+    "equity": 1059.94,
+    "total_assets": 1241.73,
+    "cash": 165.17,
+    "gpm": 23.9,
+    "opm": 9.1,
+    "seg_gas": 151.8,
+    "seg_iod": 38.06,
+    "op_gas": 7.82,
+    "op_iod": 22.49,
+    "sales_yoy": -3.7,
+    "gp_yoy": -0.8,
+    "sga_yoy": 4.8,
+    "op_yoy": -8.8,
+    "ord_yoy": -6.6,
+    "net_yoy": 2.8,
+    "cash_yoy": -1.5,
+    "seg_gas_yoy": null,
+    "seg_iod_yoy": null,
+    "op_gas_yoy": null,
+    "op_iod_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 218.54,
+    "op": 20.89,
+    "ord": 24.9,
+    "net": 15.16,
+    "gp": 50.24,
+    "sga": 29.35,
+    "cogs": 168.3,
+    "debt_total": 8.77,
+    "equity": 1088.88,
+    "total_assets": 1277.73,
+    "cash": 305.47,
+    "gpm": 23.0,
+    "opm": 9.6,
+    "seg_gas": 158.26,
+    "seg_iod": 39.21,
+    "op_gas": 6.54,
+    "op_iod": 22.03,
+    "sales_yoy": 0.1,
+    "gp_yoy": 22.6,
+    "sga_yoy": -1.0,
+    "op_yoy": 84.5,
+    "ord_yoy": 48.3,
+    "net_yoy": 33.2,
+    "cash_yoy": 7.2,
+    "seg_gas_yoy": -9.1,
+    "seg_iod_yoy": 38.7,
+    "op_gas_yoy": 17.8,
+    "op_iod_yoy": 40.2
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 254.53,
+    "op": 36.67,
+    "ord": 39.23,
+    "net": 24.04,
+    "gp": 63.83,
+    "sga": 27.16,
+    "cogs": 190.7,
+    "debt_total": null,
+    "equity": 1108.24,
+    "total_assets": 1298.86,
+    "cash": 161.54,
+    "gpm": 25.1,
+    "opm": 14.4,
+    "seg_gas": 188.48,
+    "seg_iod": 38.89,
+    "op_gas": 21.0,
+    "op_iod": 22.86,
+    "sales_yoy": -3.0,
+    "gp_yoy": 4.5,
+    "sga_yoy": 0.0,
+    "op_yoy": 8.1,
+    "ord_yoy": 7.4,
+    "net_yoy": -25.5,
+    "cash_yoy": 5.9,
+    "seg_gas_yoy": -7.4,
+    "seg_iod_yoy": 11.5,
+    "op_gas_yoy": -0.6,
+    "op_iod_yoy": 7.4
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 224.84,
+    "op": 29.37,
+    "ord": 33.24,
+    "net": 20.66,
+    "gp": 56.49,
+    "sga": 27.12,
+    "cogs": 168.35,
+    "debt_total": null,
+    "equity": 1140.22,
+    "total_assets": 1329.89,
+    "cash": 183.64,
+    "gpm": 25.1,
+    "opm": 13.1,
+    "seg_gas": 161.92,
+    "seg_iod": 44.37,
+    "op_gas": 12.7,
+    "op_iod": 24.04,
+    "sales_yoy": 0.9,
+    "gp_yoy": 0.1,
+    "sga_yoy": 11.6,
+    "op_yoy": -8.6,
+    "ord_yoy": -4.5,
+    "net_yoy": -8.9,
+    "cash_yoy": 9.2,
+    "seg_gas_yoy": -0.9,
+    "seg_iod_yoy": 14.5,
+    "op_gas_yoy": -10.4,
+    "op_iod_yoy": 9.9
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 258.73,
+    "op": 22.51,
+    "ord": 25.21,
+    "net": 16.22,
+    "gp": 53.99,
+    "sga": 31.47,
+    "cogs": 204.74,
+    "debt_total": null,
+    "equity": 1157.86,
+    "total_assets": 1366.41,
+    "cash": 138.4,
+    "gpm": 20.9,
+    "opm": 8.7,
+    "seg_gas": 195.17,
+    "seg_iod": 44.15,
+    "op_gas": 10.42,
+    "op_iod": 24.12,
+    "sales_yoy": 23.4,
+    "gp_yoy": 7.8,
+    "sga_yoy": 1.2,
+    "op_yoy": 18.5,
+    "ord_yoy": 21.5,
+    "net_yoy": 18.7,
+    "cash_yoy": -16.2,
+    "seg_gas_yoy": 28.6,
+    "seg_iod_yoy": 16.0,
+    "op_gas_yoy": 33.2,
+    "op_iod_yoy": 7.2
+   }
+  ],
+  "a": [
+   {
+    "year": "2020",
+    "x": "2020",
+    "sales": 584.52,
+    "op": 36.25,
+    "ord": 40.5,
+    "net": 28.44,
+    "opm": 6.2,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 660.7,
+    "op": 39.37,
+    "ord": 44.23,
+    "net": 28.46,
+    "opm": 6.0,
+    "sales_yoy": 13.0,
+    "op_yoy": 8.6,
+    "net_yoy": 0.1
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 1062.0,
+    "op": 73.04,
+    "ord": 79.31,
+    "net": 47.66,
+    "opm": 6.9,
+    "sales_yoy": 60.7,
+    "op_yoy": 85.5,
+    "net_yoy": 67.5
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 962.98,
+    "op": 96.68,
+    "ord": 104.08,
+    "net": 64.64,
+    "opm": 10.0,
+    "sales_yoy": -9.3,
+    "op_yoy": 32.4,
+    "net_yoy": 35.6
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 924.21,
+    "op": 88.2,
+    "ord": 98.3,
+    "net": 61.67,
+    "opm": 9.5,
+    "sales_yoy": -4.0,
+    "op_yoy": -8.8,
+    "net_yoy": -4.6
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 913.54,
+    "op": 105.94,
+    "ord": 116.99,
+    "net": 83.79,
+    "opm": 11.6,
+    "sales_yoy": -1.2,
+    "op_yoy": 20.1,
+    "net_yoy": 35.9
+   },
+   {
+    "year": "2026 계획",
+    "x": "2026 계획",
+    "sales": 999.0,
+    "op": 96.0,
+    "ord": 109.0,
+    "net": 68.0,
+    "opm": 9.6,
+    "sales_yoy": 9.4,
+    "op_yoy": -9.4,
+    "net_yoy": -18.8,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "bh": [
+   {
+    "x": "22.H1",
+    "h": "H1",
+    "gas_total": 572,
+    "gas_lng": 406,
+    "gas_pref": 165,
+    "iod_sales": 840,
+    "iod_exp": 625,
+    "iod_dom": 215,
+    "iod_prod": null,
+    "oth_con": 15.21,
+    "oth_app": 6.76,
+    "oth_pwr": 7.54,
+    "gas_price": 74.3,
+    "iod_price": 4245,
+    "exp_share": 74.4,
+    "gas_total_yoy": null,
+    "iod_sales_yoy": null,
+    "iod_prod_yoy": null,
+    "gas_price_yoy": null,
+    "iod_price_yoy": null
+   },
+   {
+    "x": "22.H2",
+    "h": "H2",
+    "gas_total": 495,
+    "gas_lng": 352,
+    "gas_pref": 144,
+    "iod_sales": 862,
+    "iod_exp": 609,
+    "iod_dom": 253,
+    "iod_prod": null,
+    "oth_con": 24.39,
+    "oth_app": 6.19,
+    "oth_pwr": 13.03,
+    "gas_price": 95.9,
+    "iod_price": 6179,
+    "exp_share": 70.6,
+    "gas_total_yoy": null,
+    "iod_sales_yoy": null,
+    "iod_prod_yoy": null,
+    "gas_price_yoy": null,
+    "iod_price_yoy": null
+   },
+   {
+    "x": "23.H1",
+    "h": "H1",
+    "gas_total": 457,
+    "gas_lng": 297,
+    "gas_pref": 160,
+    "iod_sales": 771,
+    "iod_exp": 586,
+    "iod_dom": 184,
+    "iod_prod": null,
+    "oth_con": 17.35,
+    "oth_app": 7.52,
+    "oth_pwr": 11.24,
+    "gas_price": 90.4,
+    "iod_price": 7073,
+    "exp_share": 76.1,
+    "gas_total_yoy": -20.1,
+    "iod_sales_yoy": -8.2,
+    "iod_prod_yoy": null,
+    "gas_price_yoy": 21.7,
+    "iod_price_yoy": 66.6
+   },
+   {
+    "x": "23.H2",
+    "h": "H2",
+    "gas_total": 480,
+    "gas_lng": 340,
+    "gas_pref": 140,
+    "iod_sales": 880,
+    "iod_exp": 685,
+    "iod_dom": 196,
+    "iod_prod": null,
+    "oth_con": 26.67,
+    "oth_app": 6.54,
+    "oth_pwr": 12.74,
+    "gas_price": 72.0,
+    "iod_price": 7678,
+    "exp_share": 77.8,
+    "gas_total_yoy": -3.0,
+    "iod_sales_yoy": 2.1,
+    "iod_prod_yoy": null,
+    "gas_price_yoy": -24.9,
+    "iod_price_yoy": 24.3
+   },
+   {
+    "x": "24.H1",
+    "h": "H1",
+    "gas_total": 492,
+    "gas_lng": 333,
+    "gas_pref": 158,
+    "iod_sales": 840,
+    "iod_exp": 646,
+    "iod_dom": 194,
+    "iod_prod": 832,
+    "oth_con": 15.89,
+    "oth_app": 8.05,
+    "oth_pwr": 10.85,
+    "gas_price": 78.8,
+    "iod_price": 7821,
+    "exp_share": 76.9,
+    "gas_total_yoy": 7.7,
+    "iod_sales_yoy": 8.9,
+    "iod_prod_yoy": null,
+    "gas_price_yoy": -12.8,
+    "iod_price_yoy": 10.6
+   },
+   {
+    "x": "24.H2",
+    "h": "H2",
+    "gas_total": 446,
+    "gas_lng": 303,
+    "gas_pref": 144,
+    "iod_sales": 883,
+    "iod_exp": 702,
+    "iod_dom": 180,
+    "iod_prod": 809,
+    "oth_con": 11.03,
+    "oth_app": 7.05,
+    "oth_pwr": 14.64,
+    "gas_price": 74.8,
+    "iod_price": 7871,
+    "exp_share": 79.6,
+    "gas_total_yoy": -7.1,
+    "iod_sales_yoy": 0.3,
+    "iod_prod_yoy": null,
+    "gas_price_yoy": 3.9,
+    "iod_price_yoy": 2.5
+   },
+   {
+    "x": "25.H1",
+    "h": "H1",
+    "gas_total": 470,
+    "gas_lng": 309,
+    "gas_pref": 161,
+    "iod_sales": 902,
+    "iod_exp": 710,
+    "iod_dom": 192,
+    "iod_prod": 898,
+    "oth_con": 25.6,
+    "oth_app": 6.41,
+    "oth_pwr": 12.82,
+    "gas_price": 78.1,
+    "iod_price": 8165,
+    "exp_share": 78.7,
+    "gas_total_yoy": -4.5,
+    "iod_sales_yoy": 7.4,
+    "iod_prod_yoy": 7.9,
+    "gas_price_yoy": -0.9,
+    "iod_price_yoy": 4.4
+   },
+   {
+    "x": "25.H2",
+    "h": "H2",
+    "gas_total": 439,
+    "gas_lng": 298,
+    "gas_pref": 141,
+    "iod_sales": 898,
+    "iod_exp": 722,
+    "iod_dom": 175,
+    "iod_prod": 857,
+    "oth_con": 20.08,
+    "oth_app": 6.08,
+    "oth_pwr": 14.69,
+    "gas_price": 70.6,
+    "iod_price": 8605,
+    "exp_share": 80.5,
+    "gas_total_yoy": -1.6,
+    "iod_sales_yoy": 1.7,
+    "iod_prod_yoy": 5.9,
+    "gas_price_yoy": -5.6,
+    "iod_price_yoy": 9.3
+   },
+   {
+    "x": "26.H1",
+    "h": "H1",
+    "gas_total": 469,
+    "gas_lng": 315,
+    "gas_pref": 154,
+    "iod_sales": 922,
+    "iod_exp": 724,
+    "iod_dom": 198,
+    "iod_prod": 861,
+    "oth_con": 23.74,
+    "oth_app": 9.62,
+    "oth_pwr": 12.33,
+    "gas_price": 74.7,
+    "iod_price": 9030,
+    "exp_share": 78.5,
+    "gas_total_yoy": -0.2,
+    "iod_sales_yoy": 2.2,
+    "iod_prod_yoy": -4.1,
+    "gas_price_yoy": -4.4,
+    "iod_price_yoy": 10.6
+   }
+  ],
+  "ba": [
+   {
+    "x": "2020",
+    "gas_prod": 184,
+    "gas_sales": 988,
+    "iod_prod": 1635,
+    "iod_sales": 1618,
+    "capex": 45.34,
+    "dep": 50.23,
+    "cif": null,
+    "fx": null,
+    "cust": null,
+    "city_vol": null,
+    "emp": null,
+    "emp_gas": null,
+    "emp_iod": null,
+    "emp_oth": null,
+    "emp_corp": null,
+    "reserve": null,
+    "cust_yoy": null,
+    "gas_buy": 804
+   },
+   {
+    "x": "2021",
+    "gas_prod": 180,
+    "gas_sales": 1055,
+    "iod_prod": 1621,
+    "iod_sales": 1722,
+    "capex": 55.82,
+    "dep": 53.09,
+    "cif": null,
+    "fx": null,
+    "cust": null,
+    "city_vol": null,
+    "emp": null,
+    "emp_gas": null,
+    "emp_iod": null,
+    "emp_oth": null,
+    "emp_corp": null,
+    "reserve": null,
+    "cust_yoy": null,
+    "gas_buy": 875
+   },
+   {
+    "x": "2022",
+    "gas_prod": 184,
+    "gas_sales": 1067,
+    "iod_prod": 1657,
+    "iod_sales": 1702,
+    "capex": 71.51,
+    "dep": 54.16,
+    "cif": 110,
+    "fx": 131,
+    "cust": 179546,
+    "city_vol": 901,
+    "emp": null,
+    "emp_gas": null,
+    "emp_iod": null,
+    "emp_oth": null,
+    "emp_corp": null,
+    "reserve": null,
+    "cust_yoy": null,
+    "gas_buy": 883
+   },
+   {
+    "x": "2023",
+    "gas_prod": 178,
+    "gas_sales": 937,
+    "iod_prod": 1613,
+    "iod_sales": 1651,
+    "capex": 63.19,
+    "dep": 55.64,
+    "cif": 103,
+    "fx": 141,
+    "cust": 181218,
+    "city_vol": 770,
+    "emp": 652,
+    "emp_gas": 395,
+    "emp_iod": 72,
+    "emp_oth": 68,
+    "emp_corp": 117,
+    "reserve": 1039.45,
+    "cust_yoy": 0.9,
+    "gas_buy": 759
+   },
+   {
+    "x": "2024",
+    "gas_prod": 181,
+    "gas_sales": 938,
+    "iod_prod": 1641,
+    "iod_sales": 1723,
+    "capex": 67.48,
+    "dep": 57.95,
+    "cif": 95,
+    "fx": 151,
+    "cust": 183334,
+    "city_vol": 768,
+    "emp": 663,
+    "emp_gas": 395,
+    "emp_iod": 72,
+    "emp_oth": 83,
+    "emp_corp": 113,
+    "reserve": 1073.54,
+    "cust_yoy": 1.2,
+    "gas_buy": 757
+   },
+   {
+    "x": "2025",
+    "gas_prod": 181,
+    "gas_sales": 909,
+    "iod_prod": 1755,
+    "iod_sales": 1800,
+    "capex": 75.46,
+    "dep": 62.93,
+    "cif": 89,
+    "fx": 149,
+    "cust": 184560,
+    "city_vol": 739,
+    "emp": 691,
+    "emp_gas": 418,
+    "emp_iod": 77,
+    "emp_oth": 92,
+    "emp_corp": 104,
+    "reserve": 1150.51,
+    "cust_yoy": 0.7,
+    "gas_buy": 728
+   },
+   {
+    "x": "2026 계획",
+    "gas_prod": 180,
+    "gas_sales": 917,
+    "iod_prod": 1733,
+    "iod_sales": 1779,
+    "capex": 81.8,
+    "dep": 67.17,
+    "cif": 101,
+    "fx": 160,
+    "cust": null,
+    "city_vol": null,
+    "emp": null,
+    "emp_gas": null,
+    "emp_iod": null,
+    "emp_oth": null,
+    "emp_corp": null,
+    "reserve": null,
+    "plan": 1,
+    "cust_yoy": null,
+    "gas_buy": 737
+   }
+  ]
+ }
+}
