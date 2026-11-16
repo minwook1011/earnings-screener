@@ -1,1 +1,1317 @@
-{"c": "6723", "n": "르네사스 일렉트로닉스", "asof": "2026-10-29", "latest": "2026년 12월기 3분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "세전이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 회사 연간 계획 없음", "note": "IFRS. 경상 칸 = 세전이익. 차량용·산업용 반도체(MCU·아날로그). 26.3Q 에 타이밍 사업을 팔아 IFRS 이익이 크게 튐", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "Non-GAAP 영업이익", "d": "q", "bars": [{"k": "ng_op", "l": "Non-GAAP 영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "ng_opm", "l": "Non-GAAP 영업이익률", "u": "%", "c": 0, "r": 1}], "src": "3Q26 결산설명자료(Non-GAAP) · 인수 PPA 상각·주식보상·일회성 제외", "def": "회사가 쓰는 본업 이익. IFRS 영업이익은 26.3Q 타이밍 사업 매각익 4,503억엔 때문에 5,653억엔"}, {"sec": "key", "t": "산업·인프라·IoT 매출", "d": "q", "bars": [{"k": "ng_io", "l": "산업·인프라·IoT", "u": "억엔", "c": 0}], "lines": [{"k": "ng_io_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료(Non-GAAP) · 데이터센터·AI 관련 수요로 가장 빨리 늘어남"}, {"sec": "key", "t": "현금과 유이자부채", "d": "q", "bars": [{"k": "cash", "l": "현금성자산", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "유이자부채", "u": "억엔", "c": 1}], "src": "3Q26 결산설명자료 · 유이자부채 = 차입금 + 사채 + 리스부채"}, {"sec": "사업 지표", "t": "Non-GAAP 매출총이익률·영업이익률", "d": "q", "bars": [{"k": "ng_sales", "l": "Non-GAAP 매출", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "ng_gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "ng_opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산설명자료(Non-GAAP)"}, {"sec": "사업 지표", "t": "EBITDA(Non-GAAP)", "d": "q", "bars": [{"k": "ebitda", "l": "EBITDA", "u": "억엔", "c": 0}], "lines": [{"k": "ebitda_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료(Non-GAAP) · 영업이익 + 감가상각비"}, {"sec": "사업 지표", "t": "연구개발비와 매출 대비 비율", "d": "q", "bars": [{"k": "rnd", "l": "연구개발비", "u": "억엔", "c": 0}], "lines": [{"k": "rnd_ratio", "l": "매출 대비", "u": "%", "c": 0, "r": 1}], "src": "3Q26 결산설명자료(Non-GAAP)"}, {"sec": "사업 지표", "t": "자동차향 매출", "d": "q", "bars": [{"k": "ng_au", "l": "자동차", "u": "억엔", "c": 0}], "lines": [{"k": "ng_au_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료(Non-GAAP)"}, {"sec": "부문", "t": "부문별 매출(Non-GAAP)", "d": "q", "src": "3Q26 결산설명자료(Non-GAAP) · 타이밍 사업은 25.1Q 부터 '기타'로 옮겨 다시 계산", "lines": [{"k": "ng_io", "l": "산업·인프라·IoT", "u": "억엔", "c": 0}, {"k": "ng_au", "l": "자동차", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 영업이익(Non-GAAP)", "d": "q", "src": "3Q26 결산설명자료(Non-GAAP)", "lines": [{"k": "ng_io_op", "l": "산업·인프라·IoT", "u": "억엔", "c": 0}, {"k": "ng_au_op", "l": "자동차", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 매출(IFRS)", "d": "q", "src": "결산단신 XBRL(부문 정보, IFRS) · 누계 차분으로 분기 단독 · 외부 고객 매출, 24년 이전은 옛 구분", "lines": [{"k": "seg_io", "l": "산업·인프라·IoT", "u": "억엔", "c": 0}, {"k": "seg_au", "l": "자동차", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 영업이익(IFRS)", "d": "q", "src": "결산단신 XBRL(부문 정보, IFRS) · 누계 차분으로 분기 단독", "lines": [{"k": "seg_io_op", "l": "산업·인프라·IoT", "u": "억엔", "c": 0}, {"k": "seg_au_op", "l": "자동차", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 영업이익률(IFRS)", "d": "q", "lines": [{"k": "seg_io_opm", "l": "산업·인프라·IoT", "u": "%", "c": 0}, {"k": "seg_au_opm", "l": "자동차", "u": "%", "c": 1}], "src": "결산단신 XBRL(부문 정보, IFRS) · 누계 차분으로 분기 단독"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 · 회사는 연간 예상을 내지 않음(분기 예상만)"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "결산단신(IFRS)"}, {"sec": "실적 추이", "t": "분기 영업이익(IFRS)", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신 · 26.3Q 는 타이밍 사업 매각익 포함"}, {"sec": "재무", "t": "재고자산", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 XBRL·결산설명자료"}], "tables": {"q": [{"q": "23.4Q", "x": "23.4Q", "sales": 3619.33, "op": 722.38, "ord": 785.42, "net": 659.52, "gp": 2034.97, "sga": 1231.59, "cogs": 1584.36, "cash": 4346.81, "inventory": 1630.54, "total_assets": 31670.03, "equity": 20055.88, "debt_total": null, "gpm": 56.2, "opm": 20.0, "seg_au": 1719.62, "seg_io": 1877.97, "seg_au_op": 568.99, "seg_io_op": 565.29, "seg_au_gp": 900.07, "seg_io_gp": 1132.96, "seg_au_opm": 33.1, "seg_io_opm": 30.1, "ng_sales": null, "ng_gpm": null, "ng_opm": null, "ng_op": null, "rnd": null, "ebitda": null, "ng_au": null, "ng_io": null, "ng_au_op": null, "ng_io_op": null, "rnd_ratio": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": null, "seg_io_yoy": null, "ebitda_yoy": null}, {"q": "24.1Q", "x": "24.1Q", "sales": 3517.9, "op": 778.36, "ord": 917.52, "net": 798.66, "gp": 1974.63, "sga": 1198.69, "cogs": 1543.27, "cash": 2318.4, "inventory": 1713.7, "total_assets": 32337.47, "equity": 22023.43, "debt_total": null, "gpm": 56.1, "opm": 22.1, "seg_au": 1781.54, "seg_io": 1715.75, "seg_au_op": 573.52, "seg_io_op": 558.03, "seg_au_gp": 933.65, "seg_io_gp": 1056.1, "seg_au_opm": 32.2, "seg_io_opm": 32.5, "ng_sales": null, "ng_gpm": null, "ng_opm": null, "ng_op": null, "rnd": null, "ebitda": null, "ng_au": null, "ng_io": null, "ng_au_op": null, "ng_io_op": null, "rnd_ratio": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": null, "seg_io_yoy": null, "ebitda_yoy": null}, {"q": "24.2Q", "x": "24.2Q", "sales": 3588.07, "op": 697.29, "ord": 742.9, "net": 597.66, "gp": 2009.31, "sga": 1311.71, "cogs": 1578.76, "cash": null, "inventory": null, "total_assets": null, "equity": null, "debt_total": null, "gpm": 56.0, "opm": 19.4, "seg_au": 1904.04, "seg_io": 1661.93, "seg_au_op": 626.66, "seg_io_op": 469.63, "seg_au_gp": 1024.34, "seg_io_gp": 1002.0, "seg_au_opm": 32.9, "seg_io_opm": 28.3, "ng_sales": null, "ng_gpm": null, "ng_opm": null, "ng_op": null, "rnd": null, "ebitda": null, "ng_au": null, "ng_io": null, "ng_au_op": null, "ng_io_op": null, "rnd_ratio": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": null, "seg_io_yoy": null, "ebitda_yoy": null}, {"q": "24.3Q", "x": "24.3Q", "sales": 3452.82, "op": 572.29, "ord": 725.55, "net": 606.29, "gp": 1921.62, "sga": 1373.85, "cogs": 1531.2, "cash": null, "inventory": null, "total_assets": null, "equity": null, "debt_total": null, "gpm": 55.7, "opm": 16.6, "seg_au": 1854.64, "seg_io": 1581.98, "seg_au_op": 567.22, "seg_io_op": 420.37, "seg_au_gp": 966.21, "seg_io_gp": 958.26, "seg_au_opm": 30.6, "seg_io_opm": 26.6, "ng_sales": null, "ng_gpm": null, "ng_opm": null, "ng_op": null, "rnd": null, "ebitda": null, "ng_au": null, "ng_io": null, "ng_au_op": null, "ng_io_op": null, "rnd_ratio": null, "sales_yoy": -9.0, "gp_yoy": -12.5, "sga_yoy": 13.4, "op_yoy": -41.6, "ord_yoy": -29.6, "net_yoy": -19.5, "inventory_yoy": null, "cash_yoy": null, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": 10.3, "seg_io_yoy": -24.3, "ebitda_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 2926.0, "op": 181.83, "ord": 252.36, "net": 188.23, "gp": 1592.4, "sga": 1390.5, "cogs": 1333.6, "cash": 2292.49, "inventory": 1765.44, "total_assets": 44904.36, "equity": 25422.98, "debt_total": null, "gpm": 54.4, "opm": 6.2, "seg_au": 1487.9, "seg_io": 1407.94, "seg_au_op": 457.46, "seg_io_op": 285.76, "seg_au_gp": 753.51, "seg_io_gp": 841.87, "seg_au_opm": 30.7, "seg_io_opm": 20.3, "ng_sales": null, "ng_gpm": null, "ng_opm": null, "ng_op": null, "rnd": null, "ebitda": null, "ng_au": null, "ng_io": null, "ng_au_op": null, "ng_io_op": null, "rnd_ratio": null, "sales_yoy": -19.2, "gp_yoy": -21.7, "sga_yoy": 12.9, "op_yoy": -74.8, "ord_yoy": -67.9, "net_yoy": -71.5, "inventory_yoy": 8.3, "cash_yoy": -47.3, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": -13.5, "seg_io_yoy": -25.0, "ebitda_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 3087.77, "op": 215.25, "ord": 267.69, "net": 260.06, "gp": 1728.62, "sga": 1353.18, "cogs": 1359.15, "cash": 1776, "inventory": 1756, "total_assets": 41955, "equity": 23223, "debt_total": 13779, "gpm": 56.0, "opm": 7.0, "seg_au": 1552.97, "seg_io": 1507.76, "seg_au_op": 461.55, "seg_io_op": 322.1, "seg_au_gp": 810.9, "seg_io_gp": 933.01, "seg_au_opm": 29.7, "seg_io_opm": 21.4, "ng_sales": 3088, "ng_gpm": 56.7, "ng_opm": 27.1, "ng_op": 838, "rnd": 538, "ebitda": 1035, "ng_au": 1549, "ng_io": 1439, "ng_au_op": 460, "ng_io_op": 288, "rnd_ratio": 17.4, "sales_yoy": -12.2, "gp_yoy": -12.5, "sga_yoy": 12.9, "op_yoy": -72.3, "ord_yoy": -70.8, "net_yoy": -67.4, "inventory_yoy": 2.5, "cash_yoy": -23.4, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": -12.8, "seg_io_yoy": -12.1, "ebitda_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 3255.34, "op": 397.76, "ord": -1960.57, "net": -2013.48, "gp": 1813.42, "sga": 1283.69, "cogs": 1441.92, "cash": 2111, "inventory": 1657, "total_assets": 38722, "equity": 20363, "debt_total": 13466, "gpm": 55.7, "opm": 12.2, "seg_au": 1610.09, "seg_io": 1476.07, "seg_au_op": 374.43, "seg_io_op": 349.2, "seg_au_gp": 842.52, "seg_io_gp": 882.47, "seg_au_opm": 23.3, "seg_io_opm": 23.7, "ng_sales": 3246, "ng_gpm": 56.8, "ng_opm": 28.3, "ng_op": 919, "rnd": 540, "ebitda": 1102, "ng_au": 1614, "ng_io": 1545, "ng_au_op": 376, "ng_io_op": 383, "rnd_ratio": 16.6, "sales_yoy": -9.3, "gp_yoy": -9.7, "sga_yoy": -2.1, "op_yoy": -43.0, "ord_yoy": -363.9, "net_yoy": -436.9, "inventory_yoy": null, "cash_yoy": null, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": -15.4, "seg_io_yoy": -11.2, "ebitda_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 3353.64, "op": 726.2, "ord": 1200.45, "net": 1062.56, "gp": 1922.65, "sga": 1234.03, "cogs": 1430.99, "cash": 2384, "inventory": 1745, "total_assets": 40127, "equity": 22423, "debt_total": 13043, "gpm": 57.3, "opm": 21.7, "seg_au": 1587.91, "seg_io": 1665.29, "seg_au_op": 560.7, "seg_io_op": 456.64, "seg_au_gp": 877.0, "seg_io_gp": 988.56, "seg_au_opm": 35.3, "seg_io_opm": 27.4, "ng_sales": 3342, "ng_gpm": 57.6, "ng_opm": 30.9, "ng_op": 1032, "rnd": 524, "ebitda": 1225, "ng_au": 1588, "ng_io": 1665, "ng_au_op": 561, "ng_io_op": 457, "rnd_ratio": 15.7, "sales_yoy": -2.9, "gp_yoy": 0.1, "sga_yoy": -10.2, "op_yoy": 26.9, "ord_yoy": 65.5, "net_yoy": 75.3, "inventory_yoy": null, "cash_yoy": null, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": -14.4, "seg_io_yoy": 5.3, "ebitda_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 3515.37, "op": 672.45, "ord": 189.68, "net": 173.23, "gp": 2073.23, "sga": 1341.59, "cogs": 1442.14, "cash": 2959, "inventory": 1859, "total_assets": 41772, "equity": 24485, "debt_total": 12268, "gpm": 59.0, "opm": 19.1, "seg_au": 1645.93, "seg_io": 2068.48, "seg_au_op": 569.08, "seg_io_op": 566.1, "seg_au_gp": 932.94, "seg_io_gp": 1305.11, "seg_au_opm": 34.6, "seg_io_opm": 27.4, "ng_sales": 3509, "ng_gpm": 59.3, "ng_opm": 30.8, "ng_op": 1080, "rnd": 581, "ebitda": 1278, "ng_au": 1629, "ng_io": 1776, "ng_au_op": 560, "ng_io_op": 416, "rnd_ratio": 16.6, "sales_yoy": 20.1, "gp_yoy": 30.2, "sga_yoy": -3.5, "op_yoy": 269.8, "ord_yoy": -24.8, "net_yoy": -8.0, "inventory_yoy": 5.3, "cash_yoy": 29.1, "ng_sales_yoy": null, "ng_op_yoy": null, "ng_au_yoy": null, "ng_io_yoy": null, "seg_au_yoy": 10.6, "seg_io_yoy": 46.9, "ebitda_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 3802.93, "op": 905.64, "ord": 845.18, "net": 681.49, "gp": 2232.99, "sga": 1318.34, "cogs": 1569.94, "cash": 2676, "inventory": 2000, "total_assets": 42274, "equity": 25464, "debt_total": 12035, "gpm": 58.7, "opm": 23.8, "seg_au": 1717.49, "seg_io": 1989.64, "seg_au_op": 617.54, "seg_io_op": 642.21, "seg_au_gp": 965.07, "seg_io_gp": 1234.07, "seg_au_opm": 36.0, "seg_io_opm": 32.3, "ng_sales": 3723, "ng_gpm": 59.2, "ng_opm": 33.7, "ng_op": 1254, "rnd": 545, "ebitda": 1462, "ng_au": 1716, "ng_io": 1959, "ng_au_op": 617, "ng_io_op": 628, "rnd_ratio": 14.6, "sales_yoy": 23.2, "gp_yoy": 29.2, "sga_yoy": -2.6, "op_yoy": 320.7, "ord_yoy": 215.7, "net_yoy": 162.1, "inventory_yoy": 13.9, "cash_yoy": 50.7, "ng_sales_yoy": 20.6, "ng_op_yoy": 49.6, "ng_au_yoy": 10.8, "ng_io_yoy": 36.1, "seg_au_yoy": 10.6, "seg_io_yoy": 32.0, "ebitda_yoy": 41.3}, {"q": "26.2Q", "x": "26.2Q", "sales": 4184.49, "op": 1021.16, "ord": 1702.67, "net": 1491.84, "gp": 2451.12, "sga": 1402.23, "cogs": 1733.37, "cash": 3760, "inventory": 2121, "total_assets": 45625, "equity": 28556, "debt_total": 11794, "gpm": 58.6, "opm": 24.4, "seg_au": 1869.3, "seg_io": 2132.42, "seg_au_op": 643.07, "seg_io_op": 676.06, "seg_au_gp": 1032.7, "seg_io_gp": 1291.41, "seg_au_opm": 34.4, "seg_io_opm": 31.7, "ng_sales": 4053, "ng_gpm": 58.1, "ng_opm": 32.7, "ng_op": 1327, "rnd": 581, "ebitda": 1543, "ng_au": 1871, "ng_io": 2163, "ng_au_op": 644, "ng_io_op": 690, "rnd_ratio": 14.3, "sales_yoy": 28.5, "gp_yoy": 35.2, "sga_yoy": 9.2, "op_yoy": 156.7, "ord_yoy": null, "net_yoy": null, "inventory_yoy": 28.0, "cash_yoy": 78.1, "ng_sales_yoy": 24.9, "ng_op_yoy": 44.4, "ng_au_yoy": 15.9, "ng_io_yoy": 40.0, "seg_au_yoy": 16.1, "seg_io_yoy": 44.5, "ebitda_yoy": 40.0}, {"q": "26.3Q", "x": "26.3Q", "sales": 4359.17, "op": 5653.11, "ord": 5154.01, "net": 3721.93, "gp": 2570.6, "sga": 1401.21, "cogs": 1788.57, "cash": 6372, "inventory": 2319, "total_assets": 47023, "equity": 29050, "debt_total": 11475, "gpm": 59.0, "opm": 129.7, "seg_au": 1894.74, "seg_io": 2438.04, "seg_au_op": 622.73, "seg_io_op": 882.7, "seg_au_gp": 1048.39, "seg_io_gp": 1532.12, "seg_au_opm": 32.9, "seg_io_opm": 36.2, "ng_sales": 4352, "ng_gpm": 59.4, "ng_opm": 34.6, "ng_op": 1505, "rnd": 616, "ebitda": 1734, "ng_au": 1895, "ng_io": 2438, "ng_au_op": 623, "ng_io_op": 883, "rnd_ratio": 14.2, "sales_yoy": 30.0, "gp_yoy": 33.7, "sga_yoy": 13.5, "op_yoy": 678.5, "ord_yoy": 329.3, "net_yoy": 250.3, "inventory_yoy": 32.9, "cash_yoy": 167.3, "ng_sales_yoy": 30.2, "ng_op_yoy": 45.8, "ng_au_yoy": 19.3, "ng_io_yoy": 46.4, "seg_au_yoy": 19.3, "seg_io_yoy": 46.4, "ebitda_yoy": 41.6}], "a": [{"year": "2020", "x": "2020", "sales": 7156.73, "op": 651.42, "ord": 652.16, "net": 456.26, "opm": 9.1, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2021", "x": "2021", "sales": 9944.18, "op": 1836.01, "ord": 1524.63, "net": 1272.61, "opm": 18.5, "sales_yoy": 38.9, "op_yoy": 181.8, "net_yoy": 178.9}, {"year": "2022", "x": "2022", "sales": 15008.53, "op": 4241.7, "ord": 3622.99, "net": 2566.32, "opm": 28.3, "sales_yoy": 50.9, "op_yoy": 131.0, "net_yoy": 101.7}, {"year": "2023", "x": "2023", "sales": 14694.15, "op": 3907.66, "ord": 4221.73, "net": 3370.86, "opm": 26.6, "sales_yoy": -2.1, "op_yoy": -7.9, "net_yoy": 31.3}, {"year": "2024", "x": "2024", "sales": 13484.79, "op": 2229.77, "ord": 2638.33, "net": 2190.84, "opm": 16.5, "sales_yoy": -8.2, "op_yoy": -42.9, "net_yoy": -35.0}, {"year": "2025", "x": "2025", "sales": 13212.12, "op": 2011.66, "ord": -302.75, "net": -517.63, "opm": 15.2, "sales_yoy": -2.0, "op_yoy": -9.8, "net_yoy": -123.6}]}}
+{
+ "c": "6723",
+ "n": "르네사스 일렉트로닉스",
+ "asof": "2026-10-29",
+ "latest": "2026년 12월기 3분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "세전이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 회사 연간 계획 없음",
+ "note": "IFRS. 경상 칸 = 세전이익. 차량용·산업용 반도체(MCU·아날로그). 26.3Q 에 타이밍 사업을 팔아 IFRS 이익이 크게 튐",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "Non-GAAP 영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ng_op",
+     "l": "Non-GAAP 영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ng_opm",
+     "l": "Non-GAAP 영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료(Non-GAAP) · 인수 PPA 상각·주식보상·일회성 제외",
+   "def": "회사가 쓰는 본업 이익. IFRS 영업이익은 26.3Q 타이밍 사업 매각익 4,503억엔 때문에 5,653억엔"
+  },
+  {
+   "sec": "key",
+   "t": "산업·인프라·IoT 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ng_io",
+     "l": "산업·인프라·IoT",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ng_io_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료(Non-GAAP) · 데이터센터·AI 관련 수요로 가장 빨리 늘어남"
+  },
+  {
+   "sec": "key",
+   "t": "재고일수(DOI)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "doi",
+     "l": "DOI",
+     "u": "일",
+     "c": 0
+    }
+   ],
+   "src": "결산단신 재고자산 · 결산설명자료 Non-GAAP 매출·매출총이익률로 계산 · 26.1Q 부터 타이밍 사업 제외",
+   "def": "분기말 재고자산 ÷ 그 분기 Non-GAAP 매출원가 × 90(회사 정의와 같음). 매출원가 = Non-GAAP 매출 × (1 − 매출총이익률)"
+  },
+  {
+   "sec": "생산·투자",
+   "t": "설비투자(투자 결정 기준)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "capex",
+     "l": "설비투자",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "3Q26·2Q26·1Q26·4Q25 결산설명자료 「가동률 및 설비투자 현황」 · 투자 결정 기준·당기 예산 환율 환산이라 현금흐름표와 다름 · 26.1Q·26.3Q 대형 투자 결정"
+  },
+  {
+   "sec": "용도별",
+   "t": "용도별 매출 비중(Non-GAAP)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ng_io_share",
+     "l": "산업·인프라·IoT",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "ng_au_share",
+     "l": "자동차",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료(Non-GAAP) · 나머지는 기타",
+   "def": "부문 매출 ÷ 전사 Non-GAAP 매출"
+  },
+  {
+   "sec": "용도별",
+   "t": "용도별 영업이익률(Non-GAAP)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ng_io_opm",
+     "l": "산업·인프라·IoT",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "ng_au_opm",
+     "l": "자동차",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료(Non-GAAP)",
+   "def": "부문 영업이익 ÷ 부문 매출"
+  },
+  {
+   "sec": "생산·투자",
+   "t": "달러 환율(분기 평균)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "usd",
+     "l": "USD/엔",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "1Q25~3Q26 결산설명자료 「결산 개요」 · 원 단위 반올림"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 유이자부채",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금성자산",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "유이자부채",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료 · 유이자부채 = 차입금 + 사채 + 리스부채"
+  },
+  {
+   "sec": "용도별",
+   "t": "Non-GAAP 매출·영업이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ng_sales",
+     "l": "Non-GAAP 매출",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "ng_opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료(Non-GAAP)"
+  },
+  {
+   "sec": "용도별",
+   "t": "연구개발비와 매출 대비 비율",
+   "d": "q",
+   "bars": [
+    {
+     "k": "rnd",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "rnd_ratio",
+     "l": "매출 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료(Non-GAAP)"
+  },
+  {
+   "sec": "용도별",
+   "t": "자동차향 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ng_au",
+     "l": "자동차",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ng_au_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료(Non-GAAP)"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(Non-GAAP)",
+   "d": "q",
+   "src": "3Q26 결산설명자료(Non-GAAP) · 타이밍 사업은 25.1Q 부터 '기타'로 옮겨 다시 계산",
+   "lines": [
+    {
+     "k": "ng_io",
+     "l": "산업·인프라·IoT",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ng_au",
+     "l": "자동차",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익(Non-GAAP)",
+   "d": "q",
+   "src": "3Q26 결산설명자료(Non-GAAP)",
+   "lines": [
+    {
+     "k": "ng_io_op",
+     "l": "산업·인프라·IoT",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ng_au_op",
+     "l": "자동차",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(IFRS)",
+   "d": "q",
+   "src": "결산단신 XBRL(부문 정보, IFRS) · 누계 차분으로 분기 단독 · 외부 고객 매출, 24년 이전은 옛 구분",
+   "lines": [
+    {
+     "k": "seg_io",
+     "l": "산업·인프라·IoT",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_au",
+     "l": "자동차",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익(IFRS)",
+   "d": "q",
+   "src": "결산단신 XBRL(부문 정보, IFRS) · 누계 차분으로 분기 단독",
+   "lines": [
+    {
+     "k": "seg_io_op",
+     "l": "산업·인프라·IoT",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_au_op",
+     "l": "자동차",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익률(IFRS)",
+   "d": "q",
+   "lines": [
+    {
+     "k": "seg_io_opm",
+     "l": "산업·인프라·IoT",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "seg_au_opm",
+     "l": "자동차",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산단신 XBRL(부문 정보, IFRS) · 누계 차분으로 분기 단독"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 회사는 연간 예상을 내지 않음(분기 예상만)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산단신(IFRS)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "분기 영업이익(IFRS)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신 · 26.3Q 는 타이밍 사업 매각익 포함"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 XBRL·결산설명자료"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "23.4Q",
+    "x": "23.4Q",
+    "sales": 3619.33,
+    "op": 722.38,
+    "ord": 785.42,
+    "net": 659.52,
+    "gp": 2034.97,
+    "sga": 1231.59,
+    "cogs": 1584.36,
+    "cash": 4346.81,
+    "inventory": 1630.54,
+    "total_assets": 31670.03,
+    "equity": 20055.88,
+    "debt_total": null,
+    "gpm": 56.2,
+    "opm": 20.0,
+    "seg_au": 1719.62,
+    "seg_io": 1877.97,
+    "seg_au_op": 568.99,
+    "seg_io_op": 565.29,
+    "seg_au_gp": 900.07,
+    "seg_io_gp": 1132.96,
+    "seg_au_opm": 33.1,
+    "seg_io_opm": 30.1,
+    "ng_sales": null,
+    "ng_gpm": null,
+    "ng_opm": null,
+    "ng_op": null,
+    "rnd": null,
+    "ebitda": null,
+    "ng_au": null,
+    "ng_io": null,
+    "ng_au_op": null,
+    "ng_io_op": null,
+    "rnd_ratio": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": null,
+    "seg_io_yoy": null,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 3517.9,
+    "op": 778.36,
+    "ord": 917.52,
+    "net": 798.66,
+    "gp": 1974.63,
+    "sga": 1198.69,
+    "cogs": 1543.27,
+    "cash": 2318.4,
+    "inventory": 1713.7,
+    "total_assets": 32337.47,
+    "equity": 22023.43,
+    "debt_total": null,
+    "gpm": 56.1,
+    "opm": 22.1,
+    "seg_au": 1781.54,
+    "seg_io": 1715.75,
+    "seg_au_op": 573.52,
+    "seg_io_op": 558.03,
+    "seg_au_gp": 933.65,
+    "seg_io_gp": 1056.1,
+    "seg_au_opm": 32.2,
+    "seg_io_opm": 32.5,
+    "ng_sales": null,
+    "ng_gpm": null,
+    "ng_opm": null,
+    "ng_op": null,
+    "rnd": null,
+    "ebitda": null,
+    "ng_au": null,
+    "ng_io": null,
+    "ng_au_op": null,
+    "ng_io_op": null,
+    "rnd_ratio": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": null,
+    "seg_io_yoy": null,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 3588.07,
+    "op": 697.29,
+    "ord": 742.9,
+    "net": 597.66,
+    "gp": 2009.31,
+    "sga": 1311.71,
+    "cogs": 1578.76,
+    "cash": null,
+    "inventory": null,
+    "total_assets": null,
+    "equity": null,
+    "debt_total": null,
+    "gpm": 56.0,
+    "opm": 19.4,
+    "seg_au": 1904.04,
+    "seg_io": 1661.93,
+    "seg_au_op": 626.66,
+    "seg_io_op": 469.63,
+    "seg_au_gp": 1024.34,
+    "seg_io_gp": 1002.0,
+    "seg_au_opm": 32.9,
+    "seg_io_opm": 28.3,
+    "ng_sales": null,
+    "ng_gpm": null,
+    "ng_opm": null,
+    "ng_op": null,
+    "rnd": null,
+    "ebitda": null,
+    "ng_au": null,
+    "ng_io": null,
+    "ng_au_op": null,
+    "ng_io_op": null,
+    "rnd_ratio": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": null,
+    "seg_io_yoy": null,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 3452.82,
+    "op": 572.29,
+    "ord": 725.55,
+    "net": 606.29,
+    "gp": 1921.62,
+    "sga": 1373.85,
+    "cogs": 1531.2,
+    "cash": null,
+    "inventory": null,
+    "total_assets": null,
+    "equity": null,
+    "debt_total": null,
+    "gpm": 55.7,
+    "opm": 16.6,
+    "seg_au": 1854.64,
+    "seg_io": 1581.98,
+    "seg_au_op": 567.22,
+    "seg_io_op": 420.37,
+    "seg_au_gp": 966.21,
+    "seg_io_gp": 958.26,
+    "seg_au_opm": 30.6,
+    "seg_io_opm": 26.6,
+    "ng_sales": null,
+    "ng_gpm": null,
+    "ng_opm": null,
+    "ng_op": null,
+    "rnd": null,
+    "ebitda": null,
+    "ng_au": null,
+    "ng_io": null,
+    "ng_au_op": null,
+    "ng_io_op": null,
+    "rnd_ratio": null,
+    "sales_yoy": -9.0,
+    "gp_yoy": -12.5,
+    "sga_yoy": 13.4,
+    "op_yoy": -41.6,
+    "ord_yoy": -29.6,
+    "net_yoy": -19.5,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": 10.3,
+    "seg_io_yoy": -24.3,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 2926.0,
+    "op": 181.83,
+    "ord": 252.36,
+    "net": 188.23,
+    "gp": 1592.4,
+    "sga": 1390.5,
+    "cogs": 1333.6,
+    "cash": 2292.49,
+    "inventory": 1765.44,
+    "total_assets": 44904.36,
+    "equity": 25422.98,
+    "debt_total": null,
+    "gpm": 54.4,
+    "opm": 6.2,
+    "seg_au": 1487.9,
+    "seg_io": 1407.94,
+    "seg_au_op": 457.46,
+    "seg_io_op": 285.76,
+    "seg_au_gp": 753.51,
+    "seg_io_gp": 841.87,
+    "seg_au_opm": 30.7,
+    "seg_io_opm": 20.3,
+    "ng_sales": null,
+    "ng_gpm": null,
+    "ng_opm": null,
+    "ng_op": null,
+    "rnd": null,
+    "ebitda": null,
+    "ng_au": null,
+    "ng_io": null,
+    "ng_au_op": null,
+    "ng_io_op": null,
+    "rnd_ratio": null,
+    "sales_yoy": -19.2,
+    "gp_yoy": -21.7,
+    "sga_yoy": 12.9,
+    "op_yoy": -74.8,
+    "ord_yoy": -67.9,
+    "net_yoy": -71.5,
+    "inventory_yoy": 8.3,
+    "cash_yoy": -47.3,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": -13.5,
+    "seg_io_yoy": -25.0,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 3087.77,
+    "op": 215.25,
+    "ord": 267.69,
+    "net": 260.06,
+    "gp": 1728.62,
+    "sga": 1353.18,
+    "cogs": 1359.15,
+    "cash": 1776,
+    "inventory": 1756,
+    "total_assets": 41955,
+    "equity": 23223,
+    "debt_total": 13779,
+    "gpm": 56.0,
+    "opm": 7.0,
+    "seg_au": 1552.97,
+    "seg_io": 1507.76,
+    "seg_au_op": 461.55,
+    "seg_io_op": 322.1,
+    "seg_au_gp": 810.9,
+    "seg_io_gp": 933.01,
+    "seg_au_opm": 29.7,
+    "seg_io_opm": 21.4,
+    "ng_sales": 3088,
+    "ng_gpm": 56.7,
+    "ng_opm": 27.1,
+    "ng_op": 838,
+    "rnd": 538,
+    "ebitda": 1035,
+    "ng_au": 1549,
+    "ng_io": 1439,
+    "ng_au_op": 460,
+    "ng_io_op": 288,
+    "rnd_ratio": 17.4,
+    "sales_yoy": -12.2,
+    "gp_yoy": -12.5,
+    "sga_yoy": 12.9,
+    "op_yoy": -72.3,
+    "ord_yoy": -70.8,
+    "net_yoy": -67.4,
+    "inventory_yoy": 2.5,
+    "cash_yoy": -23.4,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": -12.8,
+    "seg_io_yoy": -12.1,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 3255.34,
+    "op": 397.76,
+    "ord": -1960.57,
+    "net": -2013.48,
+    "gp": 1813.42,
+    "sga": 1283.69,
+    "cogs": 1441.92,
+    "cash": 2111,
+    "inventory": 1657,
+    "total_assets": 38722,
+    "equity": 20363,
+    "debt_total": 13466,
+    "gpm": 55.7,
+    "opm": 12.2,
+    "seg_au": 1610.09,
+    "seg_io": 1476.07,
+    "seg_au_op": 374.43,
+    "seg_io_op": 349.2,
+    "seg_au_gp": 842.52,
+    "seg_io_gp": 882.47,
+    "seg_au_opm": 23.3,
+    "seg_io_opm": 23.7,
+    "ng_sales": 3246,
+    "ng_gpm": 56.8,
+    "ng_opm": 28.3,
+    "ng_op": 919,
+    "rnd": 540,
+    "ebitda": 1102,
+    "ng_au": 1614,
+    "ng_io": 1545,
+    "ng_au_op": 376,
+    "ng_io_op": 383,
+    "rnd_ratio": 16.6,
+    "sales_yoy": -9.3,
+    "gp_yoy": -9.7,
+    "sga_yoy": -2.1,
+    "op_yoy": -43.0,
+    "ord_yoy": -363.9,
+    "net_yoy": -436.9,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": -15.4,
+    "seg_io_yoy": -11.2,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 3353.64,
+    "op": 726.2,
+    "ord": 1200.45,
+    "net": 1062.56,
+    "gp": 1922.65,
+    "sga": 1234.03,
+    "cogs": 1430.99,
+    "cash": 2384,
+    "inventory": 1745,
+    "total_assets": 40127,
+    "equity": 22423,
+    "debt_total": 13043,
+    "gpm": 57.3,
+    "opm": 21.7,
+    "seg_au": 1587.91,
+    "seg_io": 1665.29,
+    "seg_au_op": 560.7,
+    "seg_io_op": 456.64,
+    "seg_au_gp": 877.0,
+    "seg_io_gp": 988.56,
+    "seg_au_opm": 35.3,
+    "seg_io_opm": 27.4,
+    "ng_sales": 3342,
+    "ng_gpm": 57.6,
+    "ng_opm": 30.9,
+    "ng_op": 1032,
+    "rnd": 524,
+    "ebitda": 1225,
+    "ng_au": 1588,
+    "ng_io": 1665,
+    "ng_au_op": 561,
+    "ng_io_op": 457,
+    "rnd_ratio": 15.7,
+    "sales_yoy": -2.9,
+    "gp_yoy": 0.1,
+    "sga_yoy": -10.2,
+    "op_yoy": 26.9,
+    "ord_yoy": 65.5,
+    "net_yoy": 75.3,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": -14.4,
+    "seg_io_yoy": 5.3,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 3515.37,
+    "op": 672.45,
+    "ord": 189.68,
+    "net": 173.23,
+    "gp": 2073.23,
+    "sga": 1341.59,
+    "cogs": 1442.14,
+    "cash": 2959,
+    "inventory": 1859,
+    "total_assets": 41772,
+    "equity": 24485,
+    "debt_total": 12268,
+    "gpm": 59.0,
+    "opm": 19.1,
+    "seg_au": 1645.93,
+    "seg_io": 2068.48,
+    "seg_au_op": 569.08,
+    "seg_io_op": 566.1,
+    "seg_au_gp": 932.94,
+    "seg_io_gp": 1305.11,
+    "seg_au_opm": 34.6,
+    "seg_io_opm": 27.4,
+    "ng_sales": 3509,
+    "ng_gpm": 59.3,
+    "ng_opm": 30.8,
+    "ng_op": 1080,
+    "rnd": 581,
+    "ebitda": 1278,
+    "ng_au": 1629,
+    "ng_io": 1776,
+    "ng_au_op": 560,
+    "ng_io_op": 416,
+    "rnd_ratio": 16.6,
+    "sales_yoy": 20.1,
+    "gp_yoy": 30.2,
+    "sga_yoy": -3.5,
+    "op_yoy": 269.8,
+    "ord_yoy": -24.8,
+    "net_yoy": -8.0,
+    "inventory_yoy": 5.3,
+    "cash_yoy": 29.1,
+    "ng_sales_yoy": null,
+    "ng_op_yoy": null,
+    "ng_au_yoy": null,
+    "ng_io_yoy": null,
+    "seg_au_yoy": 10.6,
+    "seg_io_yoy": 46.9,
+    "ebitda_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 3802.93,
+    "op": 905.64,
+    "ord": 845.18,
+    "net": 681.49,
+    "gp": 2232.99,
+    "sga": 1318.34,
+    "cogs": 1569.94,
+    "cash": 2676,
+    "inventory": 2000,
+    "total_assets": 42274,
+    "equity": 25464,
+    "debt_total": 12035,
+    "gpm": 58.7,
+    "opm": 23.8,
+    "seg_au": 1717.49,
+    "seg_io": 1989.64,
+    "seg_au_op": 617.54,
+    "seg_io_op": 642.21,
+    "seg_au_gp": 965.07,
+    "seg_io_gp": 1234.07,
+    "seg_au_opm": 36.0,
+    "seg_io_opm": 32.3,
+    "ng_sales": 3723,
+    "ng_gpm": 59.2,
+    "ng_opm": 33.7,
+    "ng_op": 1254,
+    "rnd": 545,
+    "ebitda": 1462,
+    "ng_au": 1716,
+    "ng_io": 1959,
+    "ng_au_op": 617,
+    "ng_io_op": 628,
+    "rnd_ratio": 14.6,
+    "sales_yoy": 23.2,
+    "gp_yoy": 29.2,
+    "sga_yoy": -2.6,
+    "op_yoy": 320.7,
+    "ord_yoy": 215.7,
+    "net_yoy": 162.1,
+    "inventory_yoy": 13.9,
+    "cash_yoy": 50.7,
+    "ng_sales_yoy": 20.6,
+    "ng_op_yoy": 49.6,
+    "ng_au_yoy": 10.8,
+    "ng_io_yoy": 36.1,
+    "seg_au_yoy": 10.6,
+    "seg_io_yoy": 32.0,
+    "ebitda_yoy": 41.3
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 4184.49,
+    "op": 1021.16,
+    "ord": 1702.67,
+    "net": 1491.84,
+    "gp": 2451.12,
+    "sga": 1402.23,
+    "cogs": 1733.37,
+    "cash": 3760,
+    "inventory": 2121,
+    "total_assets": 45625,
+    "equity": 28556,
+    "debt_total": 11794,
+    "gpm": 58.6,
+    "opm": 24.4,
+    "seg_au": 1869.3,
+    "seg_io": 2132.42,
+    "seg_au_op": 643.07,
+    "seg_io_op": 676.06,
+    "seg_au_gp": 1032.7,
+    "seg_io_gp": 1291.41,
+    "seg_au_opm": 34.4,
+    "seg_io_opm": 31.7,
+    "ng_sales": 4053,
+    "ng_gpm": 58.1,
+    "ng_opm": 32.7,
+    "ng_op": 1327,
+    "rnd": 581,
+    "ebitda": 1543,
+    "ng_au": 1871,
+    "ng_io": 2163,
+    "ng_au_op": 644,
+    "ng_io_op": 690,
+    "rnd_ratio": 14.3,
+    "sales_yoy": 28.5,
+    "gp_yoy": 35.2,
+    "sga_yoy": 9.2,
+    "op_yoy": 156.7,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": 28.0,
+    "cash_yoy": 78.1,
+    "ng_sales_yoy": 24.9,
+    "ng_op_yoy": 44.4,
+    "ng_au_yoy": 15.9,
+    "ng_io_yoy": 40.0,
+    "seg_au_yoy": 16.1,
+    "seg_io_yoy": 44.5,
+    "ebitda_yoy": 40.0
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 4359.17,
+    "op": 5653.11,
+    "ord": 5154.01,
+    "net": 3721.93,
+    "gp": 2570.6,
+    "sga": 1401.21,
+    "cogs": 1788.57,
+    "cash": 6372,
+    "inventory": 2319,
+    "total_assets": 47023,
+    "equity": 29050,
+    "debt_total": 11475,
+    "gpm": 59.0,
+    "opm": 129.7,
+    "seg_au": 1894.74,
+    "seg_io": 2438.04,
+    "seg_au_op": 622.73,
+    "seg_io_op": 882.7,
+    "seg_au_gp": 1048.39,
+    "seg_io_gp": 1532.12,
+    "seg_au_opm": 32.9,
+    "seg_io_opm": 36.2,
+    "ng_sales": 4352,
+    "ng_gpm": 59.4,
+    "ng_opm": 34.6,
+    "ng_op": 1505,
+    "rnd": 616,
+    "ebitda": 1734,
+    "ng_au": 1895,
+    "ng_io": 2438,
+    "ng_au_op": 623,
+    "ng_io_op": 883,
+    "rnd_ratio": 14.2,
+    "sales_yoy": 30.0,
+    "gp_yoy": 33.7,
+    "sga_yoy": 13.5,
+    "op_yoy": 678.5,
+    "ord_yoy": 329.3,
+    "net_yoy": 250.3,
+    "inventory_yoy": 32.9,
+    "cash_yoy": 167.3,
+    "ng_sales_yoy": 30.2,
+    "ng_op_yoy": 45.8,
+    "ng_au_yoy": 19.3,
+    "ng_io_yoy": 46.4,
+    "seg_au_yoy": 19.3,
+    "seg_io_yoy": 46.4,
+    "ebitda_yoy": 41.6
+   }
+  ],
+  "a": [
+   {
+    "year": "2020",
+    "x": "2020",
+    "sales": 7156.73,
+    "op": 651.42,
+    "ord": 652.16,
+    "net": 456.26,
+    "opm": 9.1,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 9944.18,
+    "op": 1836.01,
+    "ord": 1524.63,
+    "net": 1272.61,
+    "opm": 18.5,
+    "sales_yoy": 38.9,
+    "op_yoy": 181.8,
+    "net_yoy": 178.9
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 15008.53,
+    "op": 4241.7,
+    "ord": 3622.99,
+    "net": 2566.32,
+    "opm": 28.3,
+    "sales_yoy": 50.9,
+    "op_yoy": 131.0,
+    "net_yoy": 101.7
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 14694.15,
+    "op": 3907.66,
+    "ord": 4221.73,
+    "net": 3370.86,
+    "opm": 26.6,
+    "sales_yoy": -2.1,
+    "op_yoy": -7.9,
+    "net_yoy": 31.3
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 13484.79,
+    "op": 2229.77,
+    "ord": 2638.33,
+    "net": 2190.84,
+    "opm": 16.5,
+    "sales_yoy": -8.2,
+    "op_yoy": -42.9,
+    "net_yoy": -35.0
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 13212.12,
+    "op": 2011.66,
+    "ord": -302.75,
+    "net": -517.63,
+    "opm": 15.2,
+    "sales_yoy": -2.0,
+    "op_yoy": -9.8,
+    "net_yoy": -123.6
+   }
+  ],
+  "b": [
+   {
+    "x": "24.1Q",
+    "capex": 137,
+    "usd": 147,
+    "doi": null,
+    "ng_au_opm": null,
+    "ng_au_share": null,
+    "ng_io_opm": null,
+    "ng_io_share": null,
+    "capex_yoy": null
+   },
+   {
+    "x": "24.2Q",
+    "capex": 366,
+    "usd": 153,
+    "doi": null,
+    "ng_au_opm": null,
+    "ng_au_share": null,
+    "ng_io_opm": null,
+    "ng_io_share": null,
+    "capex_yoy": null
+   },
+   {
+    "x": "24.3Q",
+    "capex": 222,
+    "usd": 154,
+    "doi": null,
+    "ng_au_opm": null,
+    "ng_au_share": null,
+    "ng_io_opm": null,
+    "ng_io_share": null,
+    "capex_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "capex": 173,
+    "usd": 149,
+    "doi": null,
+    "ng_au_opm": null,
+    "ng_au_share": null,
+    "ng_io_opm": null,
+    "ng_io_share": null,
+    "capex_yoy": null
+   },
+   {
+    "x": "25.1Q",
+    "capex": 127,
+    "usd": 154,
+    "doi": 118.2,
+    "ng_au_opm": 29.7,
+    "ng_au_share": 50.2,
+    "ng_io_opm": 20.0,
+    "ng_io_share": 46.6,
+    "capex_yoy": -7.3
+   },
+   {
+    "x": "25.2Q",
+    "capex": 84,
+    "usd": 146,
+    "doi": 106.3,
+    "ng_au_opm": 23.3,
+    "ng_au_share": 49.7,
+    "ng_io_opm": 24.8,
+    "ng_io_share": 47.6,
+    "capex_yoy": -77.0
+   },
+   {
+    "x": "25.3Q",
+    "capex": 178,
+    "usd": 146,
+    "doi": 110.8,
+    "ng_au_opm": 35.3,
+    "ng_au_share": 47.5,
+    "ng_io_opm": 27.4,
+    "ng_io_share": 49.8,
+    "capex_yoy": -19.8
+   },
+   {
+    "x": "25.4Q",
+    "capex": 188,
+    "usd": 152,
+    "doi": 117.2,
+    "ng_au_opm": 34.4,
+    "ng_au_share": 46.4,
+    "ng_io_opm": 23.4,
+    "ng_io_share": 50.6,
+    "capex_yoy": 8.7
+   },
+   {
+    "x": "26.1Q",
+    "capex": 940,
+    "usd": 156,
+    "doi": 118.5,
+    "ng_au_opm": 36.0,
+    "ng_au_share": 46.1,
+    "ng_io_opm": 32.1,
+    "ng_io_share": 52.6,
+    "capex_yoy": 640.2
+   },
+   {
+    "x": "26.2Q",
+    "capex": 226,
+    "usd": 159,
+    "doi": 112.4,
+    "ng_au_opm": 34.4,
+    "ng_au_share": 46.2,
+    "ng_io_opm": 31.9,
+    "ng_io_share": 53.4,
+    "capex_yoy": 169.0
+   },
+   {
+    "x": "26.3Q",
+    "capex": 1112,
+    "usd": 161,
+    "doi": 118.1,
+    "ng_au_opm": 32.9,
+    "ng_au_share": 43.5,
+    "ng_io_opm": 36.2,
+    "ng_io_share": 56.0,
+    "capex_yoy": 524.7
+   }
+  ]
+ }
+}
