@@ -1,1 +1,1155 @@
-{"c": "1992", "n": "간다쓰신키", "asof": "2026-11-09", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "통신 네트워크(PBX·광회선) 설계·시공·보수가 주력, 조명제어(DALI)를 키우는 중. 설명회 자료 없음 — 부문 숫자는 결산단신 부문 정보 누계 차분", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신", "note": "4분기(1~3월)에 공사 완성이 몰려 1·3분기는 적자가 잦음"}, {"sec": "key", "t": "조명제어 부문 매출", "def": "DALI 조명제어 시스템 설계·판매·시공", "d": "q", "bars": [{"k": "seg_light", "l": "조명제어 매출", "u": "억엔", "c": 0}], "lines": [{"k": "seg_light_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신 부문 정보(누계 차분)"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산단신 · 총차입금 = 단기차입금(리스 채무 제외)"}, {"sec": "부문", "t": "부문별 매출", "d": "q", "src": "2Q27 결산단신 부문 정보(누계 차분)", "lines": [{"k": "seg_ict", "l": "정보통신", "u": "억엔", "c": 0}, {"k": "seg_light", "l": "조명제어", "u": "억엔", "c": 1}, {"k": "seg_re", "l": "부동산 임대", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "부문별 영업이익", "d": "q", "src": "2Q27 결산단신 부문 정보(누계 차분)", "lines": [{"k": "segop_ict", "l": "정보통신", "u": "억엔", "c": 0}, {"k": "segop_re", "l": "부동산 임대", "u": "억엔", "c": 1}, {"k": "segop_light", "l": "조명제어", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "정보통신 부문 매출", "d": "q", "bars": [{"k": "seg_ict", "l": "정보통신 매출", "u": "억엔", "c": 0}], "lines": [{"k": "seg_ict_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신 부문 정보(누계 차분)"}, {"sec": "사업 지표", "t": "미성공사 지출금", "def": "진행 중 공사에 들어간 원가(재고)", "d": "q", "bars": [{"k": "inventory", "l": "미성공사 지출금", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산단신"}], "tables": {"q": [{"q": "25.1Q", "x": "25.1Q", "sales": 13.9, "op": 1.11, "gp": 4.18, "sga": 3.07, "seg_ict": 11.16, "seg_light": 2.58, "seg_re": 0.16, "segop_ict": 0.18, "segop_light": 0.83, "segop_re": 0.1, "ord": 1.36, "net": 0.99, "cogs": 9.72, "gpm": 30.1, "opm": 8.0, "sales_yoy": null, "op_yoy": null, "gp_yoy": null, "sga_yoy": null, "seg_ict_yoy": null, "seg_light_yoy": null, "seg_re_yoy": null, "segop_ict_yoy": null, "segop_light_yoy": null, "segop_re_yoy": null, "ord_yoy": null, "net_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 18.42, "op": 2.28, "gp": 5.9, "sga": 3.63, "seg_ict": 16.04, "seg_light": 2.22, "seg_re": 0.16, "segop_ict": 1.62, "segop_light": 0.56, "segop_re": 0.1, "ord": 2.46, "net": 1.83, "cogs": 12.52, "gpm": 32.0, "opm": 12.4, "sales_yoy": null, "op_yoy": null, "gp_yoy": null, "sga_yoy": null, "seg_ict_yoy": null, "seg_light_yoy": null, "seg_re_yoy": null, "segop_ict_yoy": null, "segop_light_yoy": null, "segop_re_yoy": null, "ord_yoy": null, "net_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 16.14, "op": 0.56, "gp": 3.93, "sga": 3.37, "seg_ict": 14.41, "seg_light": 1.57, "seg_re": 0.16, "segop_ict": 0.26, "segop_light": 0.2, "segop_re": 0.1, "ord": 0.78, "net": 0.55, "cogs": 12.21, "gpm": 24.3, "opm": 3.5, "sales_yoy": null, "op_yoy": null, "gp_yoy": null, "sga_yoy": null, "seg_ict_yoy": null, "seg_light_yoy": null, "seg_re_yoy": null, "segop_ict_yoy": null, "segop_light_yoy": null, "segop_re_yoy": null, "ord_yoy": null, "net_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 23.34, "op": 2.31, "gp": 8.19, "sga": 5.88, "seg_ict": 21.9, "seg_light": 1.28, "seg_re": 0.16, "segop_ict": 2.4, "segop_light": -0.12, "segop_re": 0.02, "ord": 2.52, "net": 0.94, "cash": 27.62, "st_debt": 2.0, "inventory": 1.04, "equity": 61.16, "total_assets": 94.86, "cogs": 15.15, "gpm": 35.1, "opm": 9.9, "debt_total": 2.0, "sales_yoy": null, "op_yoy": null, "gp_yoy": null, "sga_yoy": null, "seg_ict_yoy": null, "seg_light_yoy": null, "seg_re_yoy": null, "segop_ict_yoy": null, "segop_light_yoy": null, "segop_re_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "debt_total_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 13.51, "op": -0.05, "gp": 3.41, "sga": 3.46, "seg_ict": 11.87, "seg_light": 1.49, "seg_re": 0.15, "segop_ict": -0.24, "segop_light": 0.1, "segop_re": 0.09, "ord": 0.2, "net": 0.97, "cash": 36.79, "st_debt": 2.0, "inventory": 1.26, "equity": 60.34, "total_assets": 91.05, "cogs": 10.1, "gpm": 25.2, "opm": -0.4, "debt_total": 2.0, "sales_yoy": -2.8, "op_yoy": -104.5, "gp_yoy": -18.4, "sga_yoy": 12.7, "seg_ict_yoy": 6.4, "seg_light_yoy": -42.2, "seg_re_yoy": -6.2, "segop_ict_yoy": -233.3, "segop_light_yoy": -88.0, "segop_re_yoy": -10.0, "ord_yoy": -85.3, "net_yoy": -2.0, "cash_yoy": null, "inventory_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "debt_total_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 16.81, "op": 1.76, "gp": 5.36, "sga": 3.59, "seg_ict": 15.75, "seg_light": 0.91, "seg_re": 0.15, "segop_ict": 1.89, "segop_light": -0.22, "segop_re": 0.09, "ord": 1.95, "net": 1.3, "cash": 33.31, "st_debt": 2.0, "inventory": 1.13, "equity": 61.95, "total_assets": 92.85, "cogs": 11.45, "gpm": 31.9, "opm": 10.5, "debt_total": 2.0, "sales_yoy": -8.7, "op_yoy": -22.8, "gp_yoy": -9.2, "sga_yoy": -1.1, "seg_ict_yoy": -1.8, "seg_light_yoy": -59.0, "seg_re_yoy": -6.2, "segop_ict_yoy": 16.7, "segop_light_yoy": -139.3, "segop_re_yoy": -10.0, "ord_yoy": -20.7, "net_yoy": -29.0, "cash_yoy": null, "inventory_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "debt_total_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 13.72, "op": -0.6, "gp": 2.69, "sga": 3.29, "seg_ict": 12.64, "seg_light": 0.93, "seg_re": 0.15, "segop_ict": 0.12, "segop_light": -0.43, "segop_re": -0.29, "ord": -0.39, "net": -0.65, "cash": 32.9, "st_debt": 2.0, "inventory": 1.67, "equity": 61.23, "total_assets": 89.65, "cogs": 11.03, "gpm": 19.6, "opm": -4.4, "debt_total": 2.0, "sales_yoy": -15.0, "op_yoy": -207.1, "gp_yoy": -31.6, "sga_yoy": -2.4, "seg_ict_yoy": -12.3, "seg_light_yoy": -40.8, "seg_re_yoy": -6.2, "segop_ict_yoy": -53.8, "segop_light_yoy": -315.0, "segop_re_yoy": -390.0, "ord_yoy": -150.0, "net_yoy": -218.2, "cash_yoy": null, "inventory_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "debt_total_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 23.75, "op": 3.27, "gp": 8.09, "sga": 4.82, "seg_ict": 22.01, "seg_light": 1.59, "seg_re": 0.15, "segop_ict": 3.62, "segop_light": -0.44, "segop_re": 0.09, "ord": 3.44, "net": 2.1, "cash": 34.38, "st_debt": 2.0, "inventory": 0.97, "equity": 63.53, "total_assets": 97.92, "cogs": 15.66, "gpm": 34.1, "opm": 13.8, "debt_total": 2.0, "sales_yoy": 1.8, "op_yoy": 41.6, "gp_yoy": -1.2, "sga_yoy": -18.0, "seg_ict_yoy": 0.5, "seg_light_yoy": 24.2, "seg_re_yoy": -6.2, "segop_ict_yoy": 50.8, "segop_light_yoy": null, "segop_re_yoy": 350.0, "ord_yoy": 36.5, "net_yoy": 123.4, "cash_yoy": 24.5, "inventory_yoy": -6.7, "equity_yoy": 3.9, "total_assets_yoy": 3.2, "debt_total_yoy": 0.0}, {"q": "27.1Q", "x": "27.1Q", "sales": 12.6, "op": -0.75, "gp": 2.63, "sga": 3.38, "seg_ict": 11.65, "seg_light": 0.79, "seg_re": 0.16, "segop_ict": -0.21, "segop_light": -0.64, "segop_re": 0.1, "ord": -0.47, "net": -0.44, "cash": 36.71, "st_debt": 2.0, "inventory": 1.73, "equity": 61.39, "total_assets": 91.93, "cogs": 9.97, "gpm": 20.9, "opm": -6.0, "debt_total": 2.0, "sales_yoy": -6.7, "op_yoy": null, "gp_yoy": -22.9, "sga_yoy": -2.3, "seg_ict_yoy": -1.9, "seg_light_yoy": -47.0, "seg_re_yoy": 6.7, "segop_ict_yoy": null, "segop_light_yoy": -740.0, "segop_re_yoy": 11.1, "ord_yoy": -335.0, "net_yoy": -145.4, "cash_yoy": -0.2, "inventory_yoy": 37.3, "equity_yoy": 1.7, "total_assets_yoy": 1.0, "debt_total_yoy": 0.0}, {"q": "27.2Q", "x": "27.2Q", "sales": 19.45, "op": 2.6, "gp": 6.48, "sga": 3.88, "seg_ict": 16.84, "seg_light": 2.45, "seg_re": 0.16, "segop_ict": 2.55, "segop_light": -0.03, "segop_re": 0.09, "ord": 2.79, "net": 1.24, "cash": 32.56, "st_debt": 2.0, "inventory": 1.51, "equity": 64.63, "total_assets": 97.68, "cogs": 12.97, "gpm": 33.3, "opm": 13.4, "debt_total": 2.0, "sales_yoy": 15.7, "op_yoy": 47.7, "gp_yoy": 20.9, "sga_yoy": 8.1, "seg_ict_yoy": 6.9, "seg_light_yoy": 169.2, "seg_re_yoy": 6.7, "segop_ict_yoy": 34.9, "segop_light_yoy": null, "segop_re_yoy": 0.0, "ord_yoy": 43.1, "net_yoy": -4.6, "cash_yoy": -2.3, "inventory_yoy": 33.6, "equity_yoy": 4.3, "total_assets_yoy": 5.2, "debt_total_yoy": 0.0}], "a": [{"year": "2021", "x": "2021", "sales": 65.45, "op": 4.97, "ord": 5.68, "net": 3.31, "opm": 7.6, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 59.45, "op": 3.7, "ord": 4.43, "net": 5.63, "opm": 6.2, "sales_yoy": -9.2, "op_yoy": -25.6, "net_yoy": 70.1}, {"year": "2023", "x": "2023", "sales": 59.78, "op": 4.83, "ord": 5.59, "net": 3.83, "opm": 8.1, "sales_yoy": 0.6, "op_yoy": 30.5, "net_yoy": -32.0}, {"year": "2024", "x": "2024", "sales": 71.52, "op": 7.21, "ord": 8.04, "net": 5.45, "opm": 10.1, "sales_yoy": 19.6, "op_yoy": 49.3, "net_yoy": 42.3}, {"year": "2025", "x": "2025", "sales": 71.79, "op": 6.25, "ord": 7.12, "net": 4.31, "opm": 8.7, "sales_yoy": 0.4, "op_yoy": -13.3, "net_yoy": -20.9}, {"year": "2026", "x": "2026", "sales": 67.77, "op": 4.38, "ord": 5.2, "net": 3.72, "opm": 6.5, "sales_yoy": -5.6, "op_yoy": -29.9, "net_yoy": -13.7}, {"year": "2027 계획", "x": "2027 계획", "sales": 71.0, "op": 4.0, "ord": 4.5, "net": 3.0, "opm": 5.6, "sales_yoy": 4.8, "op_yoy": -8.7, "net_yoy": -19.4, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "1992",
+ "n": "간다쓰신키",
+ "asof": "2026-11-09",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "통신 네트워크(PBX·광회선) 설계·시공·보수가 주력, 조명제어(DALI)를 키우는 중. 설명회 자료·월차 없음(TDnet·월차 원장 확인) — 부문 숫자는 결산단신 부문 정보 누계 차분 · 수주·인원은 유가증권보고서 연간 숫자",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신",
+   "note": "4분기(1~3월)에 공사 완성이 몰려 1·3분기는 적자가 잦음"
+  },
+  {
+   "sec": "key",
+   "t": "연간 수주고",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "ord",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ord_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26(3월기) 경영성적 개요 부문별 수주고"
+  },
+  {
+   "sec": "key",
+   "t": "조명제어 부문 매출",
+   "def": "DALI 조명제어 시스템 설계·판매·시공",
+   "d": "q",
+   "bars": [
+    {
+     "k": "seg_light",
+     "l": "조명제어 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "seg_light_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신 부문 정보(누계 차분)"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신 · 총차입금 = 단기차입금(리스 채무 제외)"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출",
+   "d": "q",
+   "src": "2Q27 결산단신 부문 정보(누계 차분)",
+   "lines": [
+    {
+     "k": "seg_ict",
+     "l": "정보통신",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_light",
+     "l": "조명제어",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "seg_re",
+     "l": "부동산 임대",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익",
+   "d": "q",
+   "src": "2Q27 결산단신 부문 정보(누계 차분)",
+   "lines": [
+    {
+     "k": "segop_ict",
+     "l": "정보통신",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "segop_re",
+     "l": "부동산 임대",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "segop_light",
+     "l": "조명제어",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "정보통신 부문 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "seg_ict",
+     "l": "정보통신 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "seg_ict_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신 부문 정보(누계 차분)"
+  },
+  {
+   "sec": "재무",
+   "t": "미성공사 지출금",
+   "def": "진행 중 공사에 들어간 원가(재고)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "미성공사 지출금",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "수주",
+   "t": "부문별 연간 수주고",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ord_ict",
+     "l": "정보통신",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ord_light",
+     "l": "조명제어",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "ord_re",
+     "l": "부동산 임대",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26(3월기) 경영성적 개요 부문별 수주고"
+  },
+  {
+   "sec": "수주",
+   "t": "정보통신 수주고",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "ord_ict",
+     "l": "정보통신 수주",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ord_ict_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26(3월기) 경영성적 개요 부문별 수주고"
+  },
+  {
+   "sec": "수주",
+   "t": "조명제어 수주고",
+   "def": "DALI 조명제어 시스템 수주",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "ord_light",
+     "l": "조명제어 수주",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ord_light_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26(3월기) 경영성적 개요 부문별 수주고",
+   "note": "FY26 수주 10.0억엔(+159%) — 다음 해 매출로 이어질 대형 안건"
+  },
+  {
+   "sec": "수주",
+   "t": "수주/매출 비율(B/B)",
+   "def": "연간 수주고 ÷ 연간 매출(1 넘으면 잔고 증가)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "btb",
+     "l": "전사",
+     "u": "배",
+     "c": 0
+    },
+    {
+     "k": "btb_ict",
+     "l": "정보통신",
+     "u": "배",
+     "c": 1
+    },
+    {
+     "k": "btb_light",
+     "l": "조명제어",
+     "u": "배",
+     "c": 2
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26(3월기) 경영성적 개요 부문별 수주고·부문 매출로 계산"
+  },
+  {
+   "sec": "수주",
+   "t": "조명제어 비중",
+   "def": "조명제어 매출 ÷ 전사 매출, 조명제어 수주 ÷ 전사 수주",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "light_share",
+     "l": "매출 비중",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "light_ord_share",
+     "l": "수주 비중",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26(3월기) 경영성적 개요 부문별 수주고로 계산"
+  },
+  {
+   "sec": "인원·생산성",
+   "t": "연결 종업원 수",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "emp",
+     "l": "종업원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26 종업원 현황(연결, 3월 말 취업 인원)"
+  },
+  {
+   "sec": "인원·생산성",
+   "t": "부문별 종업원 수",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "emp_ict",
+     "l": "정보통신",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp_corp",
+     "l": "전사 공통",
+     "u": "명",
+     "c": 1
+    },
+    {
+     "k": "emp_light",
+     "l": "조명제어",
+     "u": "명",
+     "c": 2
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26 종업원 현황(연결, 3월 말 취업 인원)",
+   "note": "조명제어 인원 19→34명으로 늘려 키우는 중"
+  },
+  {
+   "sec": "인원·생산성",
+   "t": "1인당 매출",
+   "def": "연간 매출 ÷ 연말 종업원 수(부문은 부문 매출 ÷ 부문 인원)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "spe",
+     "l": "전사",
+     "u": "만엔",
+     "c": 0
+    },
+    {
+     "k": "spe_ict",
+     "l": "정보통신",
+     "u": "만엔",
+     "c": 1
+    },
+    {
+     "k": "spe_light",
+     "l": "조명제어",
+     "u": "만엔",
+     "c": 2
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26 종업원 현황(연결, 3월 말 취업 인원)·결산단신 매출로 계산"
+  },
+  {
+   "sec": "인원·생산성",
+   "t": "평균 연간 급여(단독)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "salary",
+     "l": "평균 연간 급여",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서 FY22~FY26 제출회사 현황(상여 포함)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 13.9,
+    "op": 1.11,
+    "gp": 4.18,
+    "sga": 3.07,
+    "seg_ict": 11.16,
+    "seg_light": 2.58,
+    "seg_re": 0.16,
+    "segop_ict": 0.18,
+    "segop_light": 0.83,
+    "segop_re": 0.1,
+    "ord": 1.36,
+    "net": 0.99,
+    "cogs": 9.72,
+    "gpm": 30.1,
+    "opm": 8.0,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "seg_ict_yoy": null,
+    "seg_light_yoy": null,
+    "seg_re_yoy": null,
+    "segop_ict_yoy": null,
+    "segop_light_yoy": null,
+    "segop_re_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 18.42,
+    "op": 2.28,
+    "gp": 5.9,
+    "sga": 3.63,
+    "seg_ict": 16.04,
+    "seg_light": 2.22,
+    "seg_re": 0.16,
+    "segop_ict": 1.62,
+    "segop_light": 0.56,
+    "segop_re": 0.1,
+    "ord": 2.46,
+    "net": 1.83,
+    "cogs": 12.52,
+    "gpm": 32.0,
+    "opm": 12.4,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "seg_ict_yoy": null,
+    "seg_light_yoy": null,
+    "seg_re_yoy": null,
+    "segop_ict_yoy": null,
+    "segop_light_yoy": null,
+    "segop_re_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 16.14,
+    "op": 0.56,
+    "gp": 3.93,
+    "sga": 3.37,
+    "seg_ict": 14.41,
+    "seg_light": 1.57,
+    "seg_re": 0.16,
+    "segop_ict": 0.26,
+    "segop_light": 0.2,
+    "segop_re": 0.1,
+    "ord": 0.78,
+    "net": 0.55,
+    "cogs": 12.21,
+    "gpm": 24.3,
+    "opm": 3.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "seg_ict_yoy": null,
+    "seg_light_yoy": null,
+    "seg_re_yoy": null,
+    "segop_ict_yoy": null,
+    "segop_light_yoy": null,
+    "segop_re_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 23.34,
+    "op": 2.31,
+    "gp": 8.19,
+    "sga": 5.88,
+    "seg_ict": 21.9,
+    "seg_light": 1.28,
+    "seg_re": 0.16,
+    "segop_ict": 2.4,
+    "segop_light": -0.12,
+    "segop_re": 0.02,
+    "ord": 2.52,
+    "net": 0.94,
+    "cash": 27.62,
+    "st_debt": 2.0,
+    "inventory": 1.04,
+    "equity": 61.16,
+    "total_assets": 94.86,
+    "cogs": 15.15,
+    "gpm": 35.1,
+    "opm": 9.9,
+    "debt_total": 2.0,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "seg_ict_yoy": null,
+    "seg_light_yoy": null,
+    "seg_re_yoy": null,
+    "segop_ict_yoy": null,
+    "segop_light_yoy": null,
+    "segop_re_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 13.51,
+    "op": -0.05,
+    "gp": 3.41,
+    "sga": 3.46,
+    "seg_ict": 11.87,
+    "seg_light": 1.49,
+    "seg_re": 0.15,
+    "segop_ict": -0.24,
+    "segop_light": 0.1,
+    "segop_re": 0.09,
+    "ord": 0.2,
+    "net": 0.97,
+    "cash": 36.79,
+    "st_debt": 2.0,
+    "inventory": 1.26,
+    "equity": 60.34,
+    "total_assets": 91.05,
+    "cogs": 10.1,
+    "gpm": 25.2,
+    "opm": -0.4,
+    "debt_total": 2.0,
+    "sales_yoy": -2.8,
+    "op_yoy": -104.5,
+    "gp_yoy": -18.4,
+    "sga_yoy": 12.7,
+    "seg_ict_yoy": 6.4,
+    "seg_light_yoy": -42.2,
+    "seg_re_yoy": -6.2,
+    "segop_ict_yoy": -233.3,
+    "segop_light_yoy": -88.0,
+    "segop_re_yoy": -10.0,
+    "ord_yoy": -85.3,
+    "net_yoy": -2.0,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 16.81,
+    "op": 1.76,
+    "gp": 5.36,
+    "sga": 3.59,
+    "seg_ict": 15.75,
+    "seg_light": 0.91,
+    "seg_re": 0.15,
+    "segop_ict": 1.89,
+    "segop_light": -0.22,
+    "segop_re": 0.09,
+    "ord": 1.95,
+    "net": 1.3,
+    "cash": 33.31,
+    "st_debt": 2.0,
+    "inventory": 1.13,
+    "equity": 61.95,
+    "total_assets": 92.85,
+    "cogs": 11.45,
+    "gpm": 31.9,
+    "opm": 10.5,
+    "debt_total": 2.0,
+    "sales_yoy": -8.7,
+    "op_yoy": -22.8,
+    "gp_yoy": -9.2,
+    "sga_yoy": -1.1,
+    "seg_ict_yoy": -1.8,
+    "seg_light_yoy": -59.0,
+    "seg_re_yoy": -6.2,
+    "segop_ict_yoy": 16.7,
+    "segop_light_yoy": -139.3,
+    "segop_re_yoy": -10.0,
+    "ord_yoy": -20.7,
+    "net_yoy": -29.0,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 13.72,
+    "op": -0.6,
+    "gp": 2.69,
+    "sga": 3.29,
+    "seg_ict": 12.64,
+    "seg_light": 0.93,
+    "seg_re": 0.15,
+    "segop_ict": 0.12,
+    "segop_light": -0.43,
+    "segop_re": -0.29,
+    "ord": -0.39,
+    "net": -0.65,
+    "cash": 32.9,
+    "st_debt": 2.0,
+    "inventory": 1.67,
+    "equity": 61.23,
+    "total_assets": 89.65,
+    "cogs": 11.03,
+    "gpm": 19.6,
+    "opm": -4.4,
+    "debt_total": 2.0,
+    "sales_yoy": -15.0,
+    "op_yoy": -207.1,
+    "gp_yoy": -31.6,
+    "sga_yoy": -2.4,
+    "seg_ict_yoy": -12.3,
+    "seg_light_yoy": -40.8,
+    "seg_re_yoy": -6.2,
+    "segop_ict_yoy": -53.8,
+    "segop_light_yoy": -315.0,
+    "segop_re_yoy": -390.0,
+    "ord_yoy": -150.0,
+    "net_yoy": -218.2,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 23.75,
+    "op": 3.27,
+    "gp": 8.09,
+    "sga": 4.82,
+    "seg_ict": 22.01,
+    "seg_light": 1.59,
+    "seg_re": 0.15,
+    "segop_ict": 3.62,
+    "segop_light": -0.44,
+    "segop_re": 0.09,
+    "ord": 3.44,
+    "net": 2.1,
+    "cash": 34.38,
+    "st_debt": 2.0,
+    "inventory": 0.97,
+    "equity": 63.53,
+    "total_assets": 97.92,
+    "cogs": 15.66,
+    "gpm": 34.1,
+    "opm": 13.8,
+    "debt_total": 2.0,
+    "sales_yoy": 1.8,
+    "op_yoy": 41.6,
+    "gp_yoy": -1.2,
+    "sga_yoy": -18.0,
+    "seg_ict_yoy": 0.5,
+    "seg_light_yoy": 24.2,
+    "seg_re_yoy": -6.2,
+    "segop_ict_yoy": 50.8,
+    "segop_light_yoy": null,
+    "segop_re_yoy": 350.0,
+    "ord_yoy": 36.5,
+    "net_yoy": 123.4,
+    "cash_yoy": 24.5,
+    "inventory_yoy": -6.7,
+    "equity_yoy": 3.9,
+    "total_assets_yoy": 3.2,
+    "debt_total_yoy": 0.0
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 12.6,
+    "op": -0.75,
+    "gp": 2.63,
+    "sga": 3.38,
+    "seg_ict": 11.65,
+    "seg_light": 0.79,
+    "seg_re": 0.16,
+    "segop_ict": -0.21,
+    "segop_light": -0.64,
+    "segop_re": 0.1,
+    "ord": -0.47,
+    "net": -0.44,
+    "cash": 36.71,
+    "st_debt": 2.0,
+    "inventory": 1.73,
+    "equity": 61.39,
+    "total_assets": 91.93,
+    "cogs": 9.97,
+    "gpm": 20.9,
+    "opm": -6.0,
+    "debt_total": 2.0,
+    "sales_yoy": -6.7,
+    "op_yoy": null,
+    "gp_yoy": -22.9,
+    "sga_yoy": -2.3,
+    "seg_ict_yoy": -1.9,
+    "seg_light_yoy": -47.0,
+    "seg_re_yoy": 6.7,
+    "segop_ict_yoy": null,
+    "segop_light_yoy": -740.0,
+    "segop_re_yoy": 11.1,
+    "ord_yoy": -335.0,
+    "net_yoy": -145.4,
+    "cash_yoy": -0.2,
+    "inventory_yoy": 37.3,
+    "equity_yoy": 1.7,
+    "total_assets_yoy": 1.0,
+    "debt_total_yoy": 0.0
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 19.45,
+    "op": 2.6,
+    "gp": 6.48,
+    "sga": 3.88,
+    "seg_ict": 16.84,
+    "seg_light": 2.45,
+    "seg_re": 0.16,
+    "segop_ict": 2.55,
+    "segop_light": -0.03,
+    "segop_re": 0.09,
+    "ord": 2.79,
+    "net": 1.24,
+    "cash": 32.56,
+    "st_debt": 2.0,
+    "inventory": 1.51,
+    "equity": 64.63,
+    "total_assets": 97.68,
+    "cogs": 12.97,
+    "gpm": 33.3,
+    "opm": 13.4,
+    "debt_total": 2.0,
+    "sales_yoy": 15.7,
+    "op_yoy": 47.7,
+    "gp_yoy": 20.9,
+    "sga_yoy": 8.1,
+    "seg_ict_yoy": 6.9,
+    "seg_light_yoy": 169.2,
+    "seg_re_yoy": 6.7,
+    "segop_ict_yoy": 34.9,
+    "segop_light_yoy": null,
+    "segop_re_yoy": 0.0,
+    "ord_yoy": 43.1,
+    "net_yoy": -4.6,
+    "cash_yoy": -2.3,
+    "inventory_yoy": 33.6,
+    "equity_yoy": 4.3,
+    "total_assets_yoy": 5.2,
+    "debt_total_yoy": 0.0
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 65.45,
+    "op": 4.97,
+    "ord": 5.68,
+    "net": 3.31,
+    "opm": 7.6,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 59.45,
+    "op": 3.7,
+    "ord": 4.43,
+    "net": 5.63,
+    "opm": 6.2,
+    "sales_yoy": -9.2,
+    "op_yoy": -25.6,
+    "net_yoy": 70.1
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 59.78,
+    "op": 4.83,
+    "ord": 5.59,
+    "net": 3.83,
+    "opm": 8.1,
+    "sales_yoy": 0.6,
+    "op_yoy": 30.5,
+    "net_yoy": -32.0
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 71.52,
+    "op": 7.21,
+    "ord": 8.04,
+    "net": 5.45,
+    "opm": 10.1,
+    "sales_yoy": 19.6,
+    "op_yoy": 49.3,
+    "net_yoy": 42.3
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 71.79,
+    "op": 6.25,
+    "ord": 7.12,
+    "net": 4.31,
+    "opm": 8.7,
+    "sales_yoy": 0.4,
+    "op_yoy": -13.3,
+    "net_yoy": -20.9
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 67.77,
+    "op": 4.38,
+    "ord": 5.2,
+    "net": 3.72,
+    "opm": 6.5,
+    "sales_yoy": -5.6,
+    "op_yoy": -29.9,
+    "net_yoy": -13.7
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 71.0,
+    "op": 4.0,
+    "ord": 4.5,
+    "net": 3.0,
+    "opm": 5.6,
+    "sales_yoy": 4.8,
+    "op_yoy": -8.7,
+    "net_yoy": -19.4,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "ba": [
+   {
+    "x": "2022",
+    "ord": 53.89,
+    "ord_ict": 48.28,
+    "ord_light": 5.0,
+    "ord_re": 0.6,
+    "s_ict": 53.92,
+    "s_light": 4.92,
+    "btb": 0.91,
+    "btb_ict": 0.9,
+    "btb_light": 1.02,
+    "emp": 254,
+    "emp_ict": 194,
+    "emp_light": 19,
+    "emp_corp": 41,
+    "emp_p": 216,
+    "salary": 569.4,
+    "spe": 2341.0,
+    "spe_ict": 2779.0,
+    "spe_light": 2589.0,
+    "light_share": 8.3,
+    "light_ord_share": 9.3
+   },
+   {
+    "x": "2023",
+    "ord": 61.49,
+    "ord_ict": 57.17,
+    "ord_light": 3.71,
+    "ord_re": 0.6,
+    "s_ict": 55.5,
+    "s_light": 3.67,
+    "btb": 1.03,
+    "btb_ict": 1.03,
+    "btb_light": 1.01,
+    "emp": 243,
+    "emp_ict": 187,
+    "emp_light": 19,
+    "emp_corp": 37,
+    "emp_p": 207,
+    "salary": 605.8,
+    "spe": 2460.0,
+    "spe_ict": 2968.0,
+    "spe_light": 1932.0,
+    "light_share": 6.1,
+    "light_ord_share": 6.0,
+    "ord_yoy": 14.1,
+    "ord_ict_yoy": 18.4,
+    "ord_light_yoy": -25.8
+   },
+   {
+    "x": "2024",
+    "ord": 75.2,
+    "ord_ict": 67.23,
+    "ord_light": 7.35,
+    "ord_re": 0.61,
+    "s_ict": 63.86,
+    "s_light": 7.04,
+    "btb": 1.05,
+    "btb_ict": 1.05,
+    "btb_light": 1.04,
+    "emp": 249,
+    "emp_ict": 185,
+    "emp_light": 30,
+    "emp_corp": 34,
+    "emp_p": 213,
+    "salary": 675.1,
+    "spe": 2872.0,
+    "spe_ict": 3452.0,
+    "spe_light": 2347.0,
+    "light_share": 9.8,
+    "light_ord_share": 9.8,
+    "ord_yoy": 22.3,
+    "ord_ict_yoy": 17.6,
+    "ord_light_yoy": 98.1
+   },
+   {
+    "x": "2025",
+    "ord": 62.23,
+    "ord_ict": 57.74,
+    "ord_light": 3.86,
+    "ord_re": 0.63,
+    "s_ict": 63.51,
+    "s_light": 7.64,
+    "btb": 0.87,
+    "btb_ict": 0.91,
+    "btb_light": 0.51,
+    "emp": 240,
+    "emp_ict": 169,
+    "emp_light": 31,
+    "emp_corp": 40,
+    "emp_p": 206,
+    "salary": 752.2,
+    "spe": 2991.0,
+    "spe_ict": 3758.0,
+    "spe_light": 2465.0,
+    "light_share": 10.6,
+    "light_ord_share": 6.2,
+    "ord_yoy": -17.2,
+    "ord_ict_yoy": -14.1,
+    "ord_light_yoy": -47.5
+   },
+   {
+    "x": "2026",
+    "ord": 75.24,
+    "ord_ict": 64.62,
+    "ord_light": 10.01,
+    "ord_re": 0.6,
+    "s_ict": 62.26,
+    "s_light": 4.9,
+    "btb": 1.11,
+    "btb_ict": 1.04,
+    "btb_light": 2.04,
+    "emp": 244,
+    "emp_ict": 167,
+    "emp_light": 34,
+    "emp_corp": 43,
+    "emp_p": 208,
+    "salary": 731.6,
+    "spe": 2777.0,
+    "spe_ict": 3728.0,
+    "spe_light": 1441.0,
+    "light_share": 7.2,
+    "light_ord_share": 13.3,
+    "ord_yoy": 20.9,
+    "ord_ict_yoy": 11.9,
+    "ord_light_yoy": 159.3
+   }
+  ]
+ }
+}
