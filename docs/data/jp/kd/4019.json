@@ -1,1 +1,1397 @@
-{"c": "4019", "n": "스타멘", "asof": "2026-11-13", "latest": "2026년 12월기 3분기", "unit": "금액 억엔, 기업·커뮤니티 수 곳, MRR 천엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "사내 소통·참여 앱 「튜낙」(이용 기업 1,517곳, 26년 9월 말)과 팬 커뮤니티 앱 「팬츠」(운영 커뮤니티 724곳). 튜낙 연간 반복매출(ARR) 36.6억엔(전년 +5.8억엔), 팬츠 ARR 5.5억엔. 3Q 영업이익 1.8억엔은 분기 최고. 26년 회사 계획은 2분기에 영업이익 4.0억→5.5억엔으로 올림. 총차입금 = 단기 + 장기 차입금(1년 내 상환분은 26년 분기부터 결산단신에서 확인돼 포함, 그 전은 빠졌을 수 있음). 2020·2021년은 단독 실적", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "튜낙 이용 기업 수", "d": "q", "bars": [{"k": "tunag_co", "l": "이용 기업", "u": "곳", "c": 0}], "lines": [{"k": "tunag_co_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료 · 분기말"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "사업 지표", "t": "튜낙 평균 MRR", "def": "이용 기업 1곳당 월 반복매출", "d": "q", "bars": [{"k": "tunag_co", "l": "이용 기업", "u": "곳", "c": 0, "f": 1}], "lines": [{"k": "tunag_mrr", "l": "평균 MRR(천엔)", "u": "천엔", "c": 1, "r": 1}], "src": "3Q26 결산설명자료 · 분기말"}, {"sec": "사업 지표", "t": "튜낙 분기 매출", "d": "q", "bars": [{"k": "tunag_sales", "l": "튜낙 매출", "u": "억엔", "c": 0}], "lines": [{"k": "tunag_sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료"}, {"sec": "사업 지표", "t": "팬츠 분기 매출", "d": "q", "bars": [{"k": "fants_sales", "l": "팬츠 매출", "u": "억엔", "c": 0}], "lines": [{"k": "fants_sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료"}, {"sec": "사업 지표", "t": "팬츠 운영 커뮤니티 수", "d": "q", "bars": [{"k": "fants_comm", "l": "커뮤니티", "u": "곳", "c": 0}], "lines": [{"k": "fants_comm_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료 · 분기말"}, {"sec": "사업 지표", "t": "계약부채(선수금)", "def": "미리 받은 이용료 — 앞으로 매출이 될 몫", "d": "q", "bars": [{"k": "contract_liab", "l": "분기말 계약부채", "u": "억엔", "c": 0}], "src": "결산단신"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}], "tables": {"q": [{"q": "23.4Q", "x": "23.4Q", "sales": 5.29, "op": 0.55, "ord": 0.52, "net": 0.41, "gp": 4.12, "sga": 3.58, "cogs": 1.17, "debt_total": 0.18, "equity": 12.16, "total_assets": 18.38, "cash": 13.94, "contract_liab": 2.96, "tunag_co": 767, "tunag_mrr": 189, "tunag_sales": 4.64, "fants_sales": 0.51, "fants_comm": 140, "gpm": 77.9, "opm": 10.4, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "contract_liab_yoy": null, "tunag_co_yoy": null, "tunag_mrr_yoy": null, "tunag_sales_yoy": null, "fants_sales_yoy": null, "fants_comm_yoy": null}, {"q": "24.1Q", "x": "24.1Q", "sales": 5.77, "op": 0.27, "ord": 0.27, "net": -0.01, "gp": 4.48, "sga": 4.2, "cogs": 1.29, "debt_total": 1.14, "equity": 11.87, "total_assets": 19.64, "cash": 15.35, "contract_liab": 3.01, "tunag_co": 819, "tunag_mrr": 195, "tunag_sales": 5.06, "fants_sales": 0.63, "fants_comm": 136, "gpm": 77.6, "opm": 4.7, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "contract_liab_yoy": null, "tunag_co_yoy": null, "tunag_mrr_yoy": null, "tunag_sales_yoy": null, "fants_sales_yoy": null, "fants_comm_yoy": null}, {"q": "24.2Q", "x": "24.2Q", "sales": 6.53, "op": -0.19, "ord": -0.18, "net": -0.18, "gp": 4.97, "sga": 5.16, "cogs": 1.56, "debt_total": 0.1, "equity": 11.74, "total_assets": 18.68, "cash": 14.6, "contract_liab": 3.4, "tunag_co": 888, "tunag_mrr": 194, "tunag_sales": 5.61, "fants_sales": 0.79, "fants_comm": 151, "gpm": 76.1, "opm": -2.9, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "contract_liab_yoy": null, "tunag_co_yoy": null, "tunag_mrr_yoy": null, "tunag_sales_yoy": null, "fants_sales_yoy": null, "fants_comm_yoy": null}, {"q": "24.3Q", "x": "24.3Q", "sales": 7.09, "op": 1.56, "ord": 1.56, "net": 0.7, "gp": 5.61, "sga": 4.06, "cogs": 1.48, "debt_total": 0.08, "equity": 12.55, "total_assets": 20.08, "cash": 15.57, "contract_liab": 3.3, "tunag_co": 972, "tunag_mrr": 196, "tunag_sales": 6.18, "fants_sales": 0.81, "fants_comm": 166, "gpm": 79.1, "opm": 22.0, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "contract_liab_yoy": null, "tunag_co_yoy": null, "tunag_mrr_yoy": null, "tunag_sales_yoy": null, "fants_sales_yoy": null, "fants_comm_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 7.53, "op": 0.6, "ord": 0.59, "net": 0.86, "gp": 5.84, "sga": 5.23, "cogs": 1.69, "debt_total": 0.07, "equity": 13.46, "total_assets": 21.66, "cash": 11.38, "contract_liab": 3.35, "tunag_co": 1056, "tunag_mrr": 196, "tunag_sales": 6.69, "fants_sales": 0.73, "fants_comm": 187, "gpm": 77.6, "opm": 8.0, "sales_yoy": 42.3, "gp_yoy": 41.7, "sga_yoy": 46.1, "op_yoy": 9.1, "ord_yoy": 13.5, "net_yoy": 109.8, "cash_yoy": -18.4, "contract_liab_yoy": 13.2, "tunag_co_yoy": 37.7, "tunag_mrr_yoy": 3.7, "tunag_sales_yoy": 44.2, "fants_sales_yoy": 43.1, "fants_comm_yoy": 33.6}, {"q": "25.1Q", "x": "25.1Q", "sales": 8.12, "op": 0.47, "ord": 0.49, "net": 0.23, "gp": 6.02, "sga": 5.54, "cogs": 2.1, "debt_total": 0.55, "equity": 13.41, "total_assets": 20.43, "cash": 8.74, "contract_liab": 2.48, "tunag_co": 1116, "tunag_mrr": 198, "tunag_sales": 7.31, "fants_sales": 0.75, "fants_comm": 288, "gpm": 74.1, "opm": 5.8, "sales_yoy": 40.7, "gp_yoy": 34.4, "sga_yoy": 31.9, "op_yoy": 74.1, "ord_yoy": 81.5, "net_yoy": null, "cash_yoy": -43.1, "contract_liab_yoy": -17.6, "tunag_co_yoy": 36.3, "tunag_mrr_yoy": 1.5, "tunag_sales_yoy": 44.5, "fants_sales_yoy": 19.0, "fants_comm_yoy": 111.8}, {"q": "25.2Q", "x": "25.2Q", "sales": 9.01, "op": 0.61, "ord": 0.63, "net": 0.49, "gp": 6.82, "sga": 6.22, "cogs": 2.19, "debt_total": 0.03, "equity": 13.91, "total_assets": 21.39, "cash": 9.11, "contract_liab": 2.89, "tunag_co": 1195, "tunag_mrr": 200, "tunag_sales": 7.8, "fants_sales": 1.12, "fants_comm": 414, "gpm": 75.7, "opm": 6.8, "sales_yoy": 38.0, "gp_yoy": 37.2, "sga_yoy": 20.5, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -37.6, "contract_liab_yoy": -15.0, "tunag_co_yoy": 34.6, "tunag_mrr_yoy": 3.1, "tunag_sales_yoy": 39.0, "fants_sales_yoy": 41.8, "fants_comm_yoy": 174.2}, {"q": "25.3Q", "x": "25.3Q", "sales": 10.25, "op": 0.45, "ord": 0.48, "net": 0.31, "gp": 7.24, "sga": 6.79, "cogs": 3.01, "debt_total": 1.1, "equity": 14.27, "total_assets": 23.92, "cash": 10.82, "contract_liab": 3.2, "tunag_co": 1266, "tunag_mrr": 202, "tunag_sales": 8.93, "fants_sales": 1.22, "fants_comm": 490, "gpm": 70.6, "opm": 4.4, "sales_yoy": 44.6, "gp_yoy": 29.1, "sga_yoy": 67.2, "op_yoy": -71.2, "ord_yoy": -69.2, "net_yoy": -55.7, "cash_yoy": -30.5, "contract_liab_yoy": -3.0, "tunag_co_yoy": 30.2, "tunag_mrr_yoy": 3.1, "tunag_sales_yoy": 44.5, "fants_sales_yoy": 50.6, "fants_comm_yoy": 195.2}, {"q": "25.4Q", "x": "25.4Q", "sales": 10.79, "op": 1.38, "ord": 1.38, "net": 1.05, "gp": 7.94, "sga": 6.56, "cogs": 2.85, "debt_total": 0.9, "equity": 15.37, "total_assets": 24.52, "cash": 11.06, "contract_liab": 2.97, "tunag_co": 1344, "tunag_mrr": 202, "tunag_sales": 9.28, "fants_sales": 1.44, "fants_comm": 566, "gpm": 73.6, "opm": 12.8, "sales_yoy": 43.3, "gp_yoy": 36.0, "sga_yoy": 25.4, "op_yoy": 130.0, "ord_yoy": 133.9, "net_yoy": 22.1, "cash_yoy": -2.8, "contract_liab_yoy": -11.3, "tunag_co_yoy": 27.3, "tunag_mrr_yoy": 3.1, "tunag_sales_yoy": 38.7, "fants_sales_yoy": 97.3, "fants_comm_yoy": 202.7}, {"q": "26.1Q", "x": "26.1Q", "sales": 11.43, "op": 1.05, "ord": 1.08, "net": 0.71, "gp": 8.36, "sga": 7.3, "cogs": 3.07, "debt_total": 1.3, "equity": 15.57, "total_assets": 24.83, "cash": 11.5, "contract_liab": 2.68, "tunag_co": 1404, "tunag_mrr": 202, "tunag_sales": 9.93, "fants_sales": 1.42, "fants_comm": 607, "gpm": 73.1, "opm": 9.2, "sales_yoy": 40.8, "gp_yoy": 38.9, "sga_yoy": 31.8, "op_yoy": 123.4, "ord_yoy": 120.4, "net_yoy": 208.7, "cash_yoy": 31.6, "contract_liab_yoy": 8.1, "tunag_co_yoy": 25.8, "tunag_mrr_yoy": 2.0, "tunag_sales_yoy": 35.8, "fants_sales_yoy": 89.3, "fants_comm_yoy": 110.8}, {"q": "26.2Q", "x": "26.2Q", "sales": 11.41, "op": 1.27, "ord": 1.29, "net": 0.87, "gp": 8.52, "sga": 7.25, "cogs": 2.89, "debt_total": 0.7, "equity": 16.45, "total_assets": 25.39, "cash": 11.79, "contract_liab": 2.91, "tunag_co": 1460, "tunag_mrr": 199, "tunag_sales": 9.79, "fants_sales": 1.51, "fants_comm": 667, "gpm": 74.7, "opm": 11.1, "sales_yoy": 26.6, "gp_yoy": 24.9, "sga_yoy": 16.6, "op_yoy": 108.2, "ord_yoy": 104.8, "net_yoy": 77.6, "cash_yoy": 29.4, "contract_liab_yoy": 0.7, "tunag_co_yoy": 22.2, "tunag_mrr_yoy": -0.5, "tunag_sales_yoy": 25.5, "fants_sales_yoy": 34.8, "fants_comm_yoy": 61.1}, {"q": "26.3Q", "x": "26.3Q", "sales": 12.28, "op": 1.81, "ord": 1.84, "net": 1.23, "gp": 9.08, "sga": 7.27, "cogs": 3.2, "debt_total": 1.6, "equity": 17.7, "total_assets": 27.78, "cash": 13.98, "contract_liab": 2.84, "tunag_co": 1517, "tunag_mrr": 201, "tunag_sales": 10.53, "fants_sales": 1.65, "fants_comm": 724, "gpm": 73.9, "opm": 14.7, "sales_yoy": 19.8, "gp_yoy": 25.4, "sga_yoy": 7.1, "op_yoy": 302.2, "ord_yoy": 283.3, "net_yoy": 296.8, "cash_yoy": 29.2, "contract_liab_yoy": -11.3, "tunag_co_yoy": 19.8, "tunag_mrr_yoy": -0.5, "tunag_sales_yoy": 17.9, "fants_sales_yoy": 35.2, "fants_comm_yoy": 47.8}], "a": [{"year": "2020", "x": "2020", "sales": 6.2, "op": 0.21, "ord": 0.07, "net": 0.04, "opm": 3.4, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2021", "x": "2021", "sales": 9.13, "op": 0.33, "ord": 0.32, "net": 0.36, "opm": 3.6, "sales_yoy": 47.3, "op_yoy": 57.1, "net_yoy": 800.0}, {"year": "2022", "x": "2022", "sales": 13.0, "op": 1.31, "ord": 1.32, "net": 0.99, "opm": 10.1, "sales_yoy": 42.4, "op_yoy": 297.0, "net_yoy": 175.0}, {"year": "2023", "x": "2023", "sales": 18.79, "op": 1.64, "ord": 1.62, "net": 1.25, "opm": 8.7, "sales_yoy": 44.5, "op_yoy": 25.2, "net_yoy": 26.3}, {"year": "2024", "x": "2024", "sales": 26.92, "op": 2.24, "ord": 2.24, "net": 1.37, "opm": 8.3, "sales_yoy": 43.3, "op_yoy": 36.6, "net_yoy": 9.6}, {"year": "2025", "x": "2025", "sales": 38.17, "op": 2.91, "ord": 2.98, "net": 2.08, "opm": 7.6, "sales_yoy": 41.8, "op_yoy": 29.9, "net_yoy": 51.8}, {"year": "2026 계획", "x": "2026 계획", "sales": 51.55, "op": 5.5, "ord": 5.58, "net": 3.66, "opm": 10.7, "sales_yoy": 35.1, "op_yoy": 89.0, "net_yoy": 76.0, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "4019",
+ "n": "스타멘",
+ "asof": "2026-11-13",
+ "latest": "2026년 12월기 3분기",
+ "unit": "금액 억엔(사업 지표 일부 백만엔), 기업·커뮤니티 수 곳, MRR 천엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "사내 소통·참여 앱 「튜낙」(이용 기업 1,517곳, 26년 9월 말)과 팬 커뮤니티 앱 「팬츠」(운영 커뮤니티 724곳). 튜낙 연간 반복매출(ARR) 36.6억엔(전년 +5.8억엔), 팬츠 ARR 5.5억엔. 3Q 영업이익 1.8억엔은 분기 최고. 26년 회사 계획은 2분기에 영업이익 4.0억→5.5억엔으로 올림. 총차입금 = 단기 + 장기 차입금(1년 내 상환분은 26년 분기부터 결산단신에서 확인돼 포함, 그 전은 빠졌을 수 있음). 2020·2021년은 단독 실적",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "튜낙 이용 기업 수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "co",
+     "l": "이용 기업",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "co_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조) · 분기말"
+  },
+  {
+   "sec": "key",
+   "t": "튜낙 연환산 반복매출(계산)",
+   "def": "분기말 이용 기업 수 × 평균 MRR × 12 — 회사 ARR(36.6억엔)과 같은 방식",
+   "d": "b",
+   "bars": [
+    {
+     "k": "tarr",
+     "l": "반복매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "tarr_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조)"
+  },
+  {
+   "sec": "사업별 매출",
+   "t": "튜낙 분기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "tunag_sales",
+     "l": "튜낙 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "tunag_sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료"
+  },
+  {
+   "sec": "사업별 매출",
+   "t": "팬츠 분기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "fants_sales",
+     "l": "팬츠 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "fants_sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료"
+  },
+  {
+   "sec": "재무",
+   "t": "계약부채(선수금)",
+   "def": "미리 받은 이용료 — 앞으로 매출이 될 몫",
+   "d": "q",
+   "bars": [
+    {
+     "k": "contract_liab",
+     "l": "분기말 계약부채",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "튜낙",
+   "t": "튜낙 평균 MRR",
+   "def": "이용 기업 1곳당 월 반복매출, 분기말",
+   "d": "b",
+   "lines": [
+    {
+     "k": "mrr",
+     "l": "평균 MRR",
+     "u": "천엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조)"
+  },
+  {
+   "sec": "튜낙",
+   "t": "튜낙 분기 순증 기업 수",
+   "def": "분기말 이용 기업 수 − 전 분기말",
+   "d": "b",
+   "bars": [
+    {
+     "k": "co_add",
+     "l": "순증",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조)"
+  },
+  {
+   "sec": "튜낙",
+   "t": "튜낙 플랫폼 수익",
+   "def": "이용료 + 도입 초기비용(부대 서비스 제외)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "plat",
+     "l": "플랫폼 수익",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "plat_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조) · 23.1Q부터"
+  },
+  {
+   "sec": "팬츠",
+   "t": "팬츠 운영 커뮤니티 수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "fcomm",
+     "l": "커뮤니티",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "fcomm_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조) · 분기말"
+  },
+  {
+   "sec": "팬츠",
+   "t": "팬츠 평균 MRR",
+   "def": "커뮤니티 1곳당 월 반복매출, 분기말",
+   "d": "b",
+   "lines": [
+    {
+     "k": "fmrr",
+     "l": "평균 MRR",
+     "u": "천엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조) · 라벨이 분명한 24.4Q부터"
+  },
+  {
+   "sec": "팬츠",
+   "t": "팬츠 연환산 반복매출(계산)",
+   "def": "운영 커뮤니티 수 × 평균 MRR × 12 — 회사 ARR(5.5억엔)과 같은 방식",
+   "d": "b",
+   "bars": [
+    {
+     "k": "farr",
+     "l": "반복매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "farr_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조)"
+  },
+  {
+   "sec": "팬츠",
+   "t": "팬츠 분기 순증 커뮤니티 수",
+   "def": "분기말 커뮤니티 수 − 전 분기말",
+   "d": "b",
+   "bars": [
+    {
+     "k": "fcomm_add",
+     "l": "순증",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조)"
+  },
+  {
+   "sec": "사업별 매출",
+   "t": "사업별 분기 매출",
+   "d": "b",
+   "lines": [
+    {
+     "k": "tsales",
+     "l": "튜낙",
+     "u": "백만엔",
+     "c": 0
+    },
+    {
+     "k": "fsales",
+     "l": "팬츠",
+     "u": "백만엔",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조)"
+  },
+  {
+   "sec": "사업별 매출",
+   "t": "튜낙 매출 비중",
+   "def": "튜낙 매출 ÷ (튜낙 + 팬츠 매출)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "t_share",
+     "l": "튜낙 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q 자료의 분기 추이 그래프 라벨, 25.3Q~26.3Q 자료 대조)"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "23.4Q",
+    "x": "23.4Q",
+    "sales": 5.29,
+    "op": 0.55,
+    "ord": 0.52,
+    "net": 0.41,
+    "gp": 4.12,
+    "sga": 3.58,
+    "cogs": 1.17,
+    "debt_total": 0.18,
+    "equity": 12.16,
+    "total_assets": 18.38,
+    "cash": 13.94,
+    "contract_liab": 2.96,
+    "tunag_co": 767,
+    "tunag_mrr": 189,
+    "tunag_sales": 4.64,
+    "fants_sales": 0.51,
+    "fants_comm": 140,
+    "gpm": 77.9,
+    "opm": 10.4,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "contract_liab_yoy": null,
+    "tunag_co_yoy": null,
+    "tunag_mrr_yoy": null,
+    "tunag_sales_yoy": null,
+    "fants_sales_yoy": null,
+    "fants_comm_yoy": null
+   },
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 5.77,
+    "op": 0.27,
+    "ord": 0.27,
+    "net": -0.01,
+    "gp": 4.48,
+    "sga": 4.2,
+    "cogs": 1.29,
+    "debt_total": 1.14,
+    "equity": 11.87,
+    "total_assets": 19.64,
+    "cash": 15.35,
+    "contract_liab": 3.01,
+    "tunag_co": 819,
+    "tunag_mrr": 195,
+    "tunag_sales": 5.06,
+    "fants_sales": 0.63,
+    "fants_comm": 136,
+    "gpm": 77.6,
+    "opm": 4.7,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "contract_liab_yoy": null,
+    "tunag_co_yoy": null,
+    "tunag_mrr_yoy": null,
+    "tunag_sales_yoy": null,
+    "fants_sales_yoy": null,
+    "fants_comm_yoy": null
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 6.53,
+    "op": -0.19,
+    "ord": -0.18,
+    "net": -0.18,
+    "gp": 4.97,
+    "sga": 5.16,
+    "cogs": 1.56,
+    "debt_total": 0.1,
+    "equity": 11.74,
+    "total_assets": 18.68,
+    "cash": 14.6,
+    "contract_liab": 3.4,
+    "tunag_co": 888,
+    "tunag_mrr": 194,
+    "tunag_sales": 5.61,
+    "fants_sales": 0.79,
+    "fants_comm": 151,
+    "gpm": 76.1,
+    "opm": -2.9,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "contract_liab_yoy": null,
+    "tunag_co_yoy": null,
+    "tunag_mrr_yoy": null,
+    "tunag_sales_yoy": null,
+    "fants_sales_yoy": null,
+    "fants_comm_yoy": null
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 7.09,
+    "op": 1.56,
+    "ord": 1.56,
+    "net": 0.7,
+    "gp": 5.61,
+    "sga": 4.06,
+    "cogs": 1.48,
+    "debt_total": 0.08,
+    "equity": 12.55,
+    "total_assets": 20.08,
+    "cash": 15.57,
+    "contract_liab": 3.3,
+    "tunag_co": 972,
+    "tunag_mrr": 196,
+    "tunag_sales": 6.18,
+    "fants_sales": 0.81,
+    "fants_comm": 166,
+    "gpm": 79.1,
+    "opm": 22.0,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "contract_liab_yoy": null,
+    "tunag_co_yoy": null,
+    "tunag_mrr_yoy": null,
+    "tunag_sales_yoy": null,
+    "fants_sales_yoy": null,
+    "fants_comm_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 7.53,
+    "op": 0.6,
+    "ord": 0.59,
+    "net": 0.86,
+    "gp": 5.84,
+    "sga": 5.23,
+    "cogs": 1.69,
+    "debt_total": 0.07,
+    "equity": 13.46,
+    "total_assets": 21.66,
+    "cash": 11.38,
+    "contract_liab": 3.35,
+    "tunag_co": 1056,
+    "tunag_mrr": 196,
+    "tunag_sales": 6.69,
+    "fants_sales": 0.73,
+    "fants_comm": 187,
+    "gpm": 77.6,
+    "opm": 8.0,
+    "sales_yoy": 42.3,
+    "gp_yoy": 41.7,
+    "sga_yoy": 46.1,
+    "op_yoy": 9.1,
+    "ord_yoy": 13.5,
+    "net_yoy": 109.8,
+    "cash_yoy": -18.4,
+    "contract_liab_yoy": 13.2,
+    "tunag_co_yoy": 37.7,
+    "tunag_mrr_yoy": 3.7,
+    "tunag_sales_yoy": 44.2,
+    "fants_sales_yoy": 43.1,
+    "fants_comm_yoy": 33.6
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 8.12,
+    "op": 0.47,
+    "ord": 0.49,
+    "net": 0.23,
+    "gp": 6.02,
+    "sga": 5.54,
+    "cogs": 2.1,
+    "debt_total": 0.55,
+    "equity": 13.41,
+    "total_assets": 20.43,
+    "cash": 8.74,
+    "contract_liab": 2.48,
+    "tunag_co": 1116,
+    "tunag_mrr": 198,
+    "tunag_sales": 7.31,
+    "fants_sales": 0.75,
+    "fants_comm": 288,
+    "gpm": 74.1,
+    "opm": 5.8,
+    "sales_yoy": 40.7,
+    "gp_yoy": 34.4,
+    "sga_yoy": 31.9,
+    "op_yoy": 74.1,
+    "ord_yoy": 81.5,
+    "net_yoy": null,
+    "cash_yoy": -43.1,
+    "contract_liab_yoy": -17.6,
+    "tunag_co_yoy": 36.3,
+    "tunag_mrr_yoy": 1.5,
+    "tunag_sales_yoy": 44.5,
+    "fants_sales_yoy": 19.0,
+    "fants_comm_yoy": 111.8
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 9.01,
+    "op": 0.61,
+    "ord": 0.63,
+    "net": 0.49,
+    "gp": 6.82,
+    "sga": 6.22,
+    "cogs": 2.19,
+    "debt_total": 0.03,
+    "equity": 13.91,
+    "total_assets": 21.39,
+    "cash": 9.11,
+    "contract_liab": 2.89,
+    "tunag_co": 1195,
+    "tunag_mrr": 200,
+    "tunag_sales": 7.8,
+    "fants_sales": 1.12,
+    "fants_comm": 414,
+    "gpm": 75.7,
+    "opm": 6.8,
+    "sales_yoy": 38.0,
+    "gp_yoy": 37.2,
+    "sga_yoy": 20.5,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -37.6,
+    "contract_liab_yoy": -15.0,
+    "tunag_co_yoy": 34.6,
+    "tunag_mrr_yoy": 3.1,
+    "tunag_sales_yoy": 39.0,
+    "fants_sales_yoy": 41.8,
+    "fants_comm_yoy": 174.2
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 10.25,
+    "op": 0.45,
+    "ord": 0.48,
+    "net": 0.31,
+    "gp": 7.24,
+    "sga": 6.79,
+    "cogs": 3.01,
+    "debt_total": 1.1,
+    "equity": 14.27,
+    "total_assets": 23.92,
+    "cash": 10.82,
+    "contract_liab": 3.2,
+    "tunag_co": 1266,
+    "tunag_mrr": 202,
+    "tunag_sales": 8.93,
+    "fants_sales": 1.22,
+    "fants_comm": 490,
+    "gpm": 70.6,
+    "opm": 4.4,
+    "sales_yoy": 44.6,
+    "gp_yoy": 29.1,
+    "sga_yoy": 67.2,
+    "op_yoy": -71.2,
+    "ord_yoy": -69.2,
+    "net_yoy": -55.7,
+    "cash_yoy": -30.5,
+    "contract_liab_yoy": -3.0,
+    "tunag_co_yoy": 30.2,
+    "tunag_mrr_yoy": 3.1,
+    "tunag_sales_yoy": 44.5,
+    "fants_sales_yoy": 50.6,
+    "fants_comm_yoy": 195.2
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 10.79,
+    "op": 1.38,
+    "ord": 1.38,
+    "net": 1.05,
+    "gp": 7.94,
+    "sga": 6.56,
+    "cogs": 2.85,
+    "debt_total": 0.9,
+    "equity": 15.37,
+    "total_assets": 24.52,
+    "cash": 11.06,
+    "contract_liab": 2.97,
+    "tunag_co": 1344,
+    "tunag_mrr": 202,
+    "tunag_sales": 9.28,
+    "fants_sales": 1.44,
+    "fants_comm": 566,
+    "gpm": 73.6,
+    "opm": 12.8,
+    "sales_yoy": 43.3,
+    "gp_yoy": 36.0,
+    "sga_yoy": 25.4,
+    "op_yoy": 130.0,
+    "ord_yoy": 133.9,
+    "net_yoy": 22.1,
+    "cash_yoy": -2.8,
+    "contract_liab_yoy": -11.3,
+    "tunag_co_yoy": 27.3,
+    "tunag_mrr_yoy": 3.1,
+    "tunag_sales_yoy": 38.7,
+    "fants_sales_yoy": 97.3,
+    "fants_comm_yoy": 202.7
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 11.43,
+    "op": 1.05,
+    "ord": 1.08,
+    "net": 0.71,
+    "gp": 8.36,
+    "sga": 7.3,
+    "cogs": 3.07,
+    "debt_total": 1.3,
+    "equity": 15.57,
+    "total_assets": 24.83,
+    "cash": 11.5,
+    "contract_liab": 2.68,
+    "tunag_co": 1404,
+    "tunag_mrr": 202,
+    "tunag_sales": 9.93,
+    "fants_sales": 1.42,
+    "fants_comm": 607,
+    "gpm": 73.1,
+    "opm": 9.2,
+    "sales_yoy": 40.8,
+    "gp_yoy": 38.9,
+    "sga_yoy": 31.8,
+    "op_yoy": 123.4,
+    "ord_yoy": 120.4,
+    "net_yoy": 208.7,
+    "cash_yoy": 31.6,
+    "contract_liab_yoy": 8.1,
+    "tunag_co_yoy": 25.8,
+    "tunag_mrr_yoy": 2.0,
+    "tunag_sales_yoy": 35.8,
+    "fants_sales_yoy": 89.3,
+    "fants_comm_yoy": 110.8
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 11.41,
+    "op": 1.27,
+    "ord": 1.29,
+    "net": 0.87,
+    "gp": 8.52,
+    "sga": 7.25,
+    "cogs": 2.89,
+    "debt_total": 0.7,
+    "equity": 16.45,
+    "total_assets": 25.39,
+    "cash": 11.79,
+    "contract_liab": 2.91,
+    "tunag_co": 1460,
+    "tunag_mrr": 199,
+    "tunag_sales": 9.79,
+    "fants_sales": 1.51,
+    "fants_comm": 667,
+    "gpm": 74.7,
+    "opm": 11.1,
+    "sales_yoy": 26.6,
+    "gp_yoy": 24.9,
+    "sga_yoy": 16.6,
+    "op_yoy": 108.2,
+    "ord_yoy": 104.8,
+    "net_yoy": 77.6,
+    "cash_yoy": 29.4,
+    "contract_liab_yoy": 0.7,
+    "tunag_co_yoy": 22.2,
+    "tunag_mrr_yoy": -0.5,
+    "tunag_sales_yoy": 25.5,
+    "fants_sales_yoy": 34.8,
+    "fants_comm_yoy": 61.1
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 12.28,
+    "op": 1.81,
+    "ord": 1.84,
+    "net": 1.23,
+    "gp": 9.08,
+    "sga": 7.27,
+    "cogs": 3.2,
+    "debt_total": 1.6,
+    "equity": 17.7,
+    "total_assets": 27.78,
+    "cash": 13.98,
+    "contract_liab": 2.84,
+    "tunag_co": 1517,
+    "tunag_mrr": 201,
+    "tunag_sales": 10.53,
+    "fants_sales": 1.65,
+    "fants_comm": 724,
+    "gpm": 73.9,
+    "opm": 14.7,
+    "sales_yoy": 19.8,
+    "gp_yoy": 25.4,
+    "sga_yoy": 7.1,
+    "op_yoy": 302.2,
+    "ord_yoy": 283.3,
+    "net_yoy": 296.8,
+    "cash_yoy": 29.2,
+    "contract_liab_yoy": -11.3,
+    "tunag_co_yoy": 19.8,
+    "tunag_mrr_yoy": -0.5,
+    "tunag_sales_yoy": 17.9,
+    "fants_sales_yoy": 35.2,
+    "fants_comm_yoy": 47.8
+   }
+  ],
+  "a": [
+   {
+    "year": "2020",
+    "x": "2020",
+    "sales": 6.2,
+    "op": 0.21,
+    "ord": 0.07,
+    "net": 0.04,
+    "opm": 3.4,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 9.13,
+    "op": 0.33,
+    "ord": 0.32,
+    "net": 0.36,
+    "opm": 3.6,
+    "sales_yoy": 47.3,
+    "op_yoy": 57.1,
+    "net_yoy": 800.0
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 13.0,
+    "op": 1.31,
+    "ord": 1.32,
+    "net": 0.99,
+    "opm": 10.1,
+    "sales_yoy": 42.4,
+    "op_yoy": 297.0,
+    "net_yoy": 175.0
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 18.79,
+    "op": 1.64,
+    "ord": 1.62,
+    "net": 1.25,
+    "opm": 8.7,
+    "sales_yoy": 44.5,
+    "op_yoy": 25.2,
+    "net_yoy": 26.3
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 26.92,
+    "op": 2.24,
+    "ord": 2.24,
+    "net": 1.37,
+    "opm": 8.3,
+    "sales_yoy": 43.3,
+    "op_yoy": 36.6,
+    "net_yoy": 9.6
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 38.17,
+    "op": 2.91,
+    "ord": 2.98,
+    "net": 2.08,
+    "opm": 7.6,
+    "sales_yoy": 41.8,
+    "op_yoy": 29.9,
+    "net_yoy": 51.8
+   },
+   {
+    "year": "2026 계획",
+    "x": "2026 계획",
+    "sales": 51.55,
+    "op": 5.5,
+    "ord": 5.58,
+    "net": 3.66,
+    "opm": 10.7,
+    "sales_yoy": 35.1,
+    "op_yoy": 89.0,
+    "net_yoy": 76.0,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "b": [
+   {
+    "x": "21.4Q",
+    "co": 422,
+    "mrr": 171,
+    "plat": null,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 8.7,
+    "farr": null,
+    "co_add": null,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": null,
+    "plat_yoy": null,
+    "tarr_yoy": null,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "22.1Q",
+    "co": 452,
+    "mrr": 173,
+    "plat": null,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 9.4,
+    "farr": null,
+    "co_add": 30,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": null,
+    "plat_yoy": null,
+    "tarr_yoy": null,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "22.2Q",
+    "co": 483,
+    "mrr": 177,
+    "plat": null,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 10.3,
+    "farr": null,
+    "co_add": 31,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": null,
+    "plat_yoy": null,
+    "tarr_yoy": null,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "22.3Q",
+    "co": 526,
+    "mrr": 178,
+    "plat": null,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 11.2,
+    "farr": null,
+    "co_add": 43,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": null,
+    "plat_yoy": null,
+    "tarr_yoy": null,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "22.4Q",
+    "co": 570,
+    "mrr": 181,
+    "plat": null,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 12.4,
+    "farr": null,
+    "co_add": 44,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": 35.1,
+    "plat_yoy": null,
+    "tarr_yoy": 42.5,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "23.1Q",
+    "co": 605,
+    "mrr": 185,
+    "plat": 357,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 13.4,
+    "farr": null,
+    "co_add": 35,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": 33.8,
+    "plat_yoy": null,
+    "tarr_yoy": 42.6,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "23.2Q",
+    "co": 651,
+    "mrr": 185,
+    "plat": 385,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 14.5,
+    "farr": null,
+    "co_add": 46,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": 34.8,
+    "plat_yoy": null,
+    "tarr_yoy": 40.8,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "23.3Q",
+    "co": 711,
+    "mrr": 187,
+    "plat": 422,
+    "fmrr": null,
+    "fcomm": null,
+    "tsales": null,
+    "fsales": null,
+    "tarr": 16.0,
+    "farr": null,
+    "co_add": 60,
+    "fcomm_add": null,
+    "t_share": null,
+    "co_yoy": 35.2,
+    "plat_yoy": null,
+    "tarr_yoy": 42.9,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "23.4Q",
+    "co": 767,
+    "mrr": 189,
+    "plat": 465,
+    "fmrr": null,
+    "fcomm": 140,
+    "tsales": 464,
+    "fsales": 51,
+    "tarr": 17.4,
+    "farr": null,
+    "co_add": 56,
+    "fcomm_add": null,
+    "t_share": 90.1,
+    "co_yoy": 34.6,
+    "plat_yoy": null,
+    "tarr_yoy": 40.3,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "24.1Q",
+    "co": 819,
+    "mrr": 195,
+    "plat": 495,
+    "fmrr": null,
+    "fcomm": 136,
+    "tsales": 506,
+    "fsales": 63,
+    "tarr": 19.2,
+    "farr": null,
+    "co_add": 52,
+    "fcomm_add": -4,
+    "t_share": 88.9,
+    "co_yoy": 35.4,
+    "plat_yoy": 38.7,
+    "tarr_yoy": 43.3,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "24.2Q",
+    "co": 888,
+    "mrr": 194,
+    "plat": 545,
+    "fmrr": null,
+    "fcomm": 151,
+    "tsales": 561,
+    "fsales": 79,
+    "tarr": 20.7,
+    "farr": null,
+    "co_add": 69,
+    "fcomm_add": 15,
+    "t_share": 87.7,
+    "co_yoy": 36.4,
+    "plat_yoy": 41.6,
+    "tarr_yoy": 42.8,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "24.3Q",
+    "co": 972,
+    "mrr": 196,
+    "plat": 595,
+    "fmrr": null,
+    "fcomm": 166,
+    "tsales": 618,
+    "fsales": 81,
+    "tarr": 22.9,
+    "farr": null,
+    "co_add": 84,
+    "fcomm_add": 15,
+    "t_share": 88.4,
+    "co_yoy": 36.7,
+    "plat_yoy": 41.0,
+    "tarr_yoy": 43.1,
+    "farr_yoy": null,
+    "fcomm_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "co": 1056,
+    "mrr": 196,
+    "plat": 649,
+    "fmrr": 56,
+    "fcomm": 187,
+    "tsales": 669,
+    "fsales": 73,
+    "tarr": 24.8,
+    "farr": 1.26,
+    "co_add": 84,
+    "fcomm_add": 21,
+    "t_share": 90.2,
+    "co_yoy": 37.7,
+    "plat_yoy": 39.6,
+    "tarr_yoy": 42.5,
+    "farr_yoy": null,
+    "fcomm_yoy": 33.6
+   },
+   {
+    "x": "25.1Q",
+    "co": 1116,
+    "mrr": 198,
+    "plat": 699,
+    "fmrr": 49,
+    "fcomm": 288,
+    "tsales": 731,
+    "fsales": 75,
+    "tarr": 26.5,
+    "farr": 1.69,
+    "co_add": 60,
+    "fcomm_add": 101,
+    "t_share": 90.7,
+    "co_yoy": 36.3,
+    "plat_yoy": 41.2,
+    "tarr_yoy": 38.0,
+    "farr_yoy": null,
+    "fcomm_yoy": 111.8
+   },
+   {
+    "x": "25.2Q",
+    "co": 1195,
+    "mrr": 200,
+    "plat": 737,
+    "fmrr": 53,
+    "fcomm": 414,
+    "tsales": 780,
+    "fsales": 112,
+    "tarr": 28.7,
+    "farr": 2.63,
+    "co_add": 79,
+    "fcomm_add": 126,
+    "t_share": 87.4,
+    "co_yoy": 34.6,
+    "plat_yoy": 35.2,
+    "tarr_yoy": 38.6,
+    "farr_yoy": null,
+    "fcomm_yoy": 174.2
+   },
+   {
+    "x": "25.3Q",
+    "co": 1266,
+    "mrr": 202,
+    "plat": 799,
+    "fmrr": 54,
+    "fcomm": 490,
+    "tsales": 893,
+    "fsales": 122,
+    "tarr": 30.7,
+    "farr": 3.18,
+    "co_add": 71,
+    "fcomm_add": 76,
+    "t_share": 88.0,
+    "co_yoy": 30.2,
+    "plat_yoy": 34.3,
+    "tarr_yoy": 34.1,
+    "farr_yoy": null,
+    "fcomm_yoy": 195.2
+   },
+   {
+    "x": "25.4Q",
+    "co": 1344,
+    "mrr": 202,
+    "plat": 839,
+    "fmrr": 58,
+    "fcomm": 566,
+    "tsales": 928,
+    "fsales": 144,
+    "tarr": 32.6,
+    "farr": 3.94,
+    "co_add": 78,
+    "fcomm_add": 76,
+    "t_share": 86.6,
+    "co_yoy": 27.3,
+    "plat_yoy": 29.3,
+    "tarr_yoy": 31.5,
+    "farr_yoy": 212.7,
+    "fcomm_yoy": 202.7
+   },
+   {
+    "x": "26.1Q",
+    "co": 1404,
+    "mrr": 202,
+    "plat": 896,
+    "fmrr": 61,
+    "fcomm": 607,
+    "tsales": 993,
+    "fsales": 142,
+    "tarr": 34.0,
+    "farr": 4.44,
+    "co_add": 60,
+    "fcomm_add": 41,
+    "t_share": 87.5,
+    "co_yoy": 25.8,
+    "plat_yoy": 28.2,
+    "tarr_yoy": 28.3,
+    "farr_yoy": 162.7,
+    "fcomm_yoy": 110.8
+   },
+   {
+    "x": "26.2Q",
+    "co": 1460,
+    "mrr": 199,
+    "plat": 912,
+    "fmrr": 60,
+    "fcomm": 667,
+    "tsales": 979,
+    "fsales": 151,
+    "tarr": 34.9,
+    "farr": 4.8,
+    "co_add": 56,
+    "fcomm_add": 60,
+    "t_share": 86.6,
+    "co_yoy": 22.2,
+    "plat_yoy": 23.7,
+    "tarr_yoy": 21.6,
+    "farr_yoy": 82.5,
+    "fcomm_yoy": 61.1
+   },
+   {
+    "x": "26.3Q",
+    "co": 1517,
+    "mrr": 201,
+    "plat": 959,
+    "fmrr": 63,
+    "fcomm": 724,
+    "tsales": 1053,
+    "fsales": 165,
+    "tarr": 36.6,
+    "farr": 5.47,
+    "co_add": 57,
+    "fcomm_add": 57,
+    "t_share": 86.5,
+    "co_yoy": 19.8,
+    "plat_yoy": 20.0,
+    "tarr_yoy": 19.2,
+    "farr_yoy": 72.0,
+    "fcomm_yoy": 47.8
+   }
+  ]
+ }
+}
