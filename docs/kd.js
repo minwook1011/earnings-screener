@@ -33,9 +33,9 @@
     var cols = ch.cols || [];
     rows = rows.filter(function (r) { return cols.some(function (c) { return n(r[c.k]) != null; }); }).slice(-(ch.last || 24)).reverse();
     if (!rows.length) return "";
-    return '<figure class="kd-fig kd-tbl"><figcaption><b>' + esc(ch.t) + "</b><span>최신 달 위 · " + rows.length + "개월</span></figcaption>" +
+    return '<figure class="kd-fig kd-tbl"><figcaption><b>' + esc(ch.t) + "</b><span>" + esc(ch.cap || (/^\d{2}\.\d{2}$/.test(rows[0].x) ? "최신 달 위 · " + rows.length + "개월" : rows.length + "개 항목")) + "</span></figcaption>" +
       (ch.def ? '<p class="kd-def">' + esc(ch.def) + "</p>" : "") +
-      '<div class="kd-tw"><table><thead><tr><th>달</th>' + cols.map(function (c) { return "<th>" + esc(c.l) + (c.u ? "<small>" + esc(c.u) + "</small>" : "") + "</th>"; }).join("") + "</tr></thead><tbody>" +
+      '<div class="kd-tw"><table><thead><tr><th>' + esc(ch.xl || (/^\d{2}\.\d{2}$/.test(rows[0].x) ? "달" : "")) + '</th>' + cols.map(function (c) { return "<th>" + esc(c.l) + (c.u ? "<small>" + esc(c.u) + "</small>" : "") + "</th>"; }).join("") + "</tr></thead><tbody>" +
       rows.map(function (r) {
         return "<tr><td>" + esc(r.x) + "</td>" + cols.map(function (c) {
           var v = n(r[c.k]), cl = c.yoy100 && v != null ? (v > 100 ? " up" : v < 100 ? " dn" : "") : c.yoy && v != null ? (v > 0 ? " up" : v < 0 ? " dn" : "") : "";
