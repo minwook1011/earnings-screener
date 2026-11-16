@@ -1,1 +1,1342 @@
-{"c": "6803", "n": "티악", "asof": "2026-11-06", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "세전이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 11월 상향)", "note": "IFRS. 경상 칸 = 세전이익. 설명회 자료 없음 — 사업 지표는 결산단신 숫자만. 상반기 미국 관세 환급금 계상(회사)", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신"}, {"sec": "key", "t": "재고자산", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 재무상태표"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 0}, {"k": "cash", "l": "현금·현금성자산", "u": "억엔", "c": 1}], "src": "결산단신 재무상태표 · 총차입금 = 사채 및 차입금(유동+비유동)"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 11월 상향)"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 11월 상향)"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "결산단신"}, {"sec": "부문", "t": "부문 영업이익(상반기 누계)", "d": "segh", "x": "x", "src": "2Q27 결산단신 · 분기 단독 부문 이익은 결산단신에 없음", "lines": [{"k": "audio", "l": "음향기기", "u": "억엔", "c": 0}, {"k": "info", "l": "정보기기", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 매출(분기)", "d": "q", "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)", "lines": [{"k": "s_음향기기", "l": "음향기기", "u": "억엔", "c": 0}, {"k": "s_정보기기", "l": "정보기기", "u": "억엔", "c": 1}, {"k": "s_기타", "l": "기타", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "음향기기 매출", "d": "q", "bars": [{"k": "s_음향기기", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_음향기기_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)"}, {"sec": "부문", "t": "정보기기 매출", "d": "q", "bars": [{"k": "s_정보기기", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_정보기기_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)"}, {"sec": "부문", "t": "기타 매출", "d": "q", "bars": [{"k": "s_기타", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_기타_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 38.89, "op": 1.48, "ord": 1.79, "net": 1.81, "gp": 17.99, "sga": 16.53, "cogs": 20.9, "cash": 13.69, "debt_total": 36.55, "inventory": 46.62, "total_assets": 115.62, "equity": 31.24, "gpm": 46.3, "opm": 3.8, "s_음향기기": 27.87, "p_음향기기": null, "s_정보기기": 8.84, "p_정보기기": null, "s_기타": 2.18, "p_기타": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_음향기기_yoy": null, "p_음향기기_yoy": null, "s_정보기기_yoy": null, "p_정보기기_yoy": null, "s_기타_yoy": null, "p_기타_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 44.57, "op": 3.44, "ord": 1.83, "net": 1.34, "gp": 19.8, "sga": 16.45, "cogs": 24.77, "cash": 12.27, "debt_total": 35.88, "inventory": 42.14, "total_assets": 118.71, "equity": 35.74, "gpm": 44.4, "opm": 7.7, "s_음향기기": 28.56, "p_음향기기": null, "s_정보기기": 14.6, "p_정보기기": null, "s_기타": 1.41, "p_기타": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_음향기기_yoy": null, "p_음향기기_yoy": null, "s_정보기기_yoy": null, "p_정보기기_yoy": null, "s_기타_yoy": null, "p_기타_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 30.73, "op": -2.75, "ord": -3.98, "net": -3.93, "gp": 13.4, "sga": 16.17, "cogs": 17.33, "cash": 14.87, "debt_total": 40.24, "inventory": 50.82, "total_assets": 118.74, "equity": 34.16, "gpm": 43.6, "opm": -8.9, "s_음향기기": 22.41, "p_음향기기": null, "s_정보기기": 6.72, "p_정보기기": null, "s_기타": 1.6, "p_기타": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_음향기기_yoy": null, "p_음향기기_yoy": null, "s_정보기기_yoy": null, "p_정보기기_yoy": null, "s_기타_yoy": null, "p_기타_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 36.63, "op": -0.07, "ord": 0.37, "net": 0.49, "gp": 15.92, "sga": 16.02, "cogs": 20.71, "cash": 13.47, "debt_total": 39.92, "inventory": 49.25, "total_assets": 114.04, "equity": 29.84, "gpm": 43.5, "opm": -0.2, "s_음향기기": 26.12, "p_음향기기": null, "s_정보기기": 8.82, "p_정보기기": null, "s_기타": 1.69, "p_기타": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_음향기기_yoy": null, "p_음향기기_yoy": null, "s_정보기기_yoy": null, "p_정보기기_yoy": null, "s_기타_yoy": null, "p_기타_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 43.03, "op": 1.97, "ord": 0.19, "net": 0.13, "gp": 17.95, "sga": 16.01, "cogs": 25.08, "cash": 12.91, "debt_total": 42.26, "inventory": 49.57, "total_assets": 118.31, "equity": 33.92, "gpm": 41.7, "opm": 4.6, "s_음향기기": 32.11, "p_음향기기": null, "s_정보기기": 10.02, "p_정보기기": null, "s_기타": 0.9, "p_기타": null, "sales_yoy": 10.6, "op_yoy": 33.1, "ord_yoy": -89.4, "net_yoy": -92.8, "gp_yoy": -0.2, "sga_yoy": -3.1, "cogs_yoy": 20.0, "cash_yoy": -5.7, "debt_total_yoy": 15.6, "inventory_yoy": 6.3, "total_assets_yoy": 2.3, "equity_yoy": 8.6, "s_음향기기_yoy": 15.2, "p_음향기기_yoy": null, "s_정보기기_yoy": 13.3, "p_정보기기_yoy": null, "s_기타_yoy": -58.7, "p_기타_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 46.29, "op": 4.25, "ord": 4.01, "net": 4.12, "gp": 20.69, "sga": 15.93, "cogs": 25.6, "cash": 15.52, "debt_total": 33.62, "inventory": 36.61, "total_assets": 108.15, "equity": 35.58, "gpm": 44.7, "opm": 9.2, "s_음향기기": 29.8, "p_음향기기": null, "s_정보기기": 14.33, "p_정보기기": null, "s_기타": 2.16, "p_기타": null, "sales_yoy": 3.9, "op_yoy": 23.5, "ord_yoy": 119.1, "net_yoy": 207.5, "gp_yoy": 4.5, "sga_yoy": -3.2, "cogs_yoy": 3.4, "cash_yoy": 26.5, "debt_total_yoy": -6.3, "inventory_yoy": -13.1, "total_assets_yoy": -8.9, "equity_yoy": -0.4, "s_음향기기_yoy": 4.3, "p_음향기기_yoy": null, "s_정보기기_yoy": -1.8, "p_정보기기_yoy": null, "s_기타_yoy": 53.2, "p_기타_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 31.52, "op": -2.92, "ord": -2.8, "net": -2.64, "gp": 13.34, "sga": 16.22, "cogs": 18.18, "cash": 18.54, "debt_total": 35.37, "inventory": 41.34, "total_assets": 106.96, "equity": 31.64, "gpm": 42.3, "opm": -9.3, "s_음향기기": 22.74, "p_음향기기": null, "s_정보기기": 7.35, "p_정보기기": null, "s_기타": 1.44, "p_기타": null, "sales_yoy": 2.6, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": -0.4, "sga_yoy": 0.3, "cogs_yoy": 4.9, "cash_yoy": 24.7, "debt_total_yoy": -12.1, "inventory_yoy": -18.7, "total_assets_yoy": -9.9, "equity_yoy": -7.4, "s_음향기기_yoy": 1.5, "p_음향기기_yoy": null, "s_정보기기_yoy": 9.4, "p_정보기기_yoy": null, "s_기타_yoy": -10.0, "p_기타_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 40.86, "op": 0.66, "ord": 0.39, "net": 0.62, "gp": 16.67, "sga": 15.45, "cogs": 24.19, "cash": 14.64, "debt_total": 36.52, "inventory": 41.57, "total_assets": 109.14, "equity": 33.29, "gpm": 40.8, "opm": 1.6, "s_음향기기": 28.5, "p_음향기기": null, "s_정보기기": 10.74, "p_정보기기": null, "s_기타": 1.62, "p_기타": null, "sales_yoy": 11.5, "op_yoy": null, "ord_yoy": 5.4, "net_yoy": 26.5, "gp_yoy": 4.7, "sga_yoy": -3.6, "cogs_yoy": 16.8, "cash_yoy": 8.7, "debt_total_yoy": -8.5, "inventory_yoy": -15.6, "total_assets_yoy": -4.3, "equity_yoy": 11.6, "s_음향기기_yoy": 9.1, "p_음향기기_yoy": null, "s_정보기기_yoy": 21.8, "p_정보기기_yoy": null, "s_기타_yoy": -4.1, "p_기타_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 41.99, "op": 3.08, "ord": 3.09, "net": 2.98, "gp": 18.44, "sga": 15.49, "cogs": 23.55, "cash": 17.01, "debt_total": 36.52, "inventory": 42.43, "total_assets": 112.95, "equity": 38.14, "gpm": 43.9, "opm": 7.3, "s_음향기기": 30.27, "p_음향기기": null, "s_정보기기": 9.87, "p_정보기기": null, "s_기타": 1.84, "p_기타": null, "sales_yoy": -2.4, "op_yoy": 56.3, "ord_yoy": 1526.3, "net_yoy": 2192.3, "gp_yoy": 2.7, "sga_yoy": -3.2, "cogs_yoy": -6.1, "cash_yoy": 31.8, "debt_total_yoy": -13.6, "inventory_yoy": -14.4, "total_assets_yoy": -4.5, "equity_yoy": 12.4, "s_음향기기_yoy": -5.7, "p_음향기기_yoy": null, "s_정보기기_yoy": -1.5, "p_정보기기_yoy": null, "s_기타_yoy": 104.4, "p_기타_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 45.06, "op": 5.94, "ord": 5.44, "net": 4.82, "gp": 19.98, "sga": 17.31, "cogs": 25.08, "cash": 21.73, "debt_total": 29.76, "inventory": 32.75, "total_assets": 105.93, "equity": 40.7, "gpm": 44.3, "opm": 13.2, "s_음향기기": 29.18, "p_음향기기": null, "s_정보기기": 12.17, "p_정보기기": null, "s_기타": 3.71, "p_기타": null, "sales_yoy": -2.7, "op_yoy": 39.8, "ord_yoy": 35.7, "net_yoy": 17.0, "gp_yoy": -3.4, "sga_yoy": 8.7, "cogs_yoy": -2.0, "cash_yoy": 40.0, "debt_total_yoy": -11.5, "inventory_yoy": -10.5, "total_assets_yoy": -2.1, "equity_yoy": 14.4, "s_음향기기_yoy": -2.1, "p_음향기기_yoy": null, "s_정보기기_yoy": -15.1, "p_정보기기_yoy": null, "s_기타_yoy": 71.8, "p_기타_yoy": null}, {"q": "27.1Q", "x": "27.1Q", "sales": 36.22, "op": 0.23, "ord": -0.17, "net": -0.29, "gp": 16.22, "sga": 16.02, "cogs": 20.0, "cash": 24.42, "debt_total": 33.42, "inventory": 37.98, "total_assets": 108.95, "equity": 40.69, "gpm": 44.8, "opm": 0.6, "s_음향기기": 24.64, "p_음향기기": null, "s_정보기기": 9.92, "p_정보기기": null, "s_기타": 1.66, "p_기타": null, "sales_yoy": 14.9, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": 21.6, "sga_yoy": -1.2, "cogs_yoy": 10.0, "cash_yoy": 31.7, "debt_total_yoy": -5.5, "inventory_yoy": -8.1, "total_assets_yoy": 1.9, "equity_yoy": 28.6, "s_음향기기_yoy": 8.4, "p_음향기기_yoy": null, "s_정보기기_yoy": 35.0, "p_정보기기_yoy": null, "s_기타_yoy": 15.3, "p_기타_yoy": null}, {"q": "27.2Q", "x": "27.2Q", "sales": 40.71, "op": 4.53, "ord": 4.2, "net": 4.17, "gp": 20.48, "sga": 16.01, "cogs": 20.23, "cash": 26.34, "debt_total": 31.83, "inventory": 39.11, "total_assets": 111.91, "equity": 43.71, "gpm": 50.3, "opm": 11.1, "s_음향기기": 27.48, "p_음향기기": null, "s_정보기기": 10.88, "p_정보기기": null, "s_기타": 2.35, "p_기타": null, "sales_yoy": -0.4, "op_yoy": 586.4, "ord_yoy": 976.9, "net_yoy": 572.6, "gp_yoy": 22.9, "sga_yoy": 3.6, "cogs_yoy": -16.4, "cash_yoy": 79.9, "debt_total_yoy": -12.8, "inventory_yoy": -5.9, "total_assets_yoy": 2.5, "equity_yoy": 31.3, "s_음향기기_yoy": -3.6, "p_음향기기_yoy": null, "s_정보기기_yoy": 1.3, "p_정보기기_yoy": null, "s_기타_yoy": 45.1, "p_기타_yoy": null}], "a": [{"year": "2022/3", "x": "2022/3", "sales": 160.04, "op": 6.54, "ord": 4.81, "net": 3.92, "opm": 4.1, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023/3", "x": "2023/3", "sales": 156.99, "op": 5.63, "ord": 3.41, "net": 3.05, "opm": 3.6, "sales_yoy": -1.9, "op_yoy": -13.9, "net_yoy": -22.2}, {"year": "2024/3", "x": "2024/3", "sales": 156.72, "op": 4.45, "ord": 0.05, "net": -0.53, "opm": 2.8, "sales_yoy": -0.2, "op_yoy": -21.0, "net_yoy": -117.4}, {"year": "2025/3", "x": "2025/3", "sales": 156.68, "op": 3.4, "ord": 0.59, "net": 0.81, "opm": 2.2, "sales_yoy": -0.0, "op_yoy": -23.6, "net_yoy": null}, {"year": "2026/3", "x": "2026/3", "sales": 159.43, "op": 6.76, "ord": 6.12, "net": 5.78, "opm": 4.2, "sales_yoy": 1.8, "op_yoy": 98.8, "net_yoy": 613.6}, {"year": "2027/3 계획", "x": "2027/3 계획", "sales": 160.0, "op": 7.0, "ord": 5.5, "net": 5.0, "opm": 4.4, "sales_yoy": 0.4, "op_yoy": 3.6, "net_yoy": -13.5, "plan": 1, "kind": "회사 계획"}], "segh": [{"x": "2026/3 상반기", "audio": 5.02, "info": -0.84}, {"x": "2027/3 상반기", "audio": 9.04, "info": 1.14}]}}
+{
+ "c": "6803",
+ "n": "티악",
+ "asof": "2026-11-06",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "세전이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 11월 상향)",
+ "note": "IFRS. 경상 칸 = 세전이익. 설명회 자료는 TDnet 에 없음 — 회사 IR 결산하이라이트(데이터 시트 포함)로 부문 이익·지역·BtoB 비중을 채움. 상반기 미국 관세 환급금 계상(회사)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "음향기기 부문 영업이익",
+   "def": "TEAC·ESOTERIC·TASCAM. 회사 이익의 대부분",
+   "d": "q",
+   "bars": [
+    {
+     "k": "p_음향기기",
+     "l": "부문 이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "p_음향기기_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 3월기 2분기 결산하이라이트 p14 재무 데이터 시트(회사 IR) · 2024년 3월기 분기는 2026년 3월기 결산하이라이트 p5~6"
+  },
+  {
+   "sec": "key",
+   "t": "정보기기 부문 영업이익",
+   "def": "계측기기·의료 영상 기록·기내 엔터테인먼트·IT 솔루션",
+   "d": "q",
+   "bars": [
+    {
+     "k": "p_정보기기",
+     "l": "부문 이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2027년 3월기 2분기 결산하이라이트 p14 재무 데이터 시트(회사 IR) · 2024년 3월기 분기는 2026년 3월기 결산하이라이트 p5~6"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 재무상태표"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "cash",
+     "l": "현금·현금성자산",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산단신 재무상태표 · 총차입금 = 사채 및 차입금(유동+비유동)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 11월 상향)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 11월 상향)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "영업이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문 영업이익(상반기 누계)",
+   "d": "segh",
+   "x": "x",
+   "src": "2Q27 결산단신 · 분기 단독 부문 이익은 결산단신에 없음",
+   "lines": [
+    {
+     "k": "audio",
+     "l": "음향기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "info",
+     "l": "정보기기",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(분기)",
+   "d": "q",
+   "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)",
+   "lines": [
+    {
+     "k": "s_음향기기",
+     "l": "음향기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "s_정보기기",
+     "l": "정보기기",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "s_기타",
+     "l": "기타",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "음향기기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_음향기기",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_음향기기_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)"
+  },
+  {
+   "sec": "부문",
+   "t": "정보기기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_정보기기",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_정보기기_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)"
+  },
+  {
+   "sec": "부문",
+   "t": "기타 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_기타",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_기타_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보(외부 고객 매출, 누계 차분으로 분기 단독)"
+  },
+  {
+   "sec": "부문 이익",
+   "t": "부문 영업이익(분기)",
+   "d": "q",
+   "lines": [
+    {
+     "k": "p_음향기기",
+     "l": "음향기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "p_정보기기",
+     "l": "정보기기",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "p_기타",
+     "l": "기타",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "2027년 3월기 2분기 결산하이라이트 p14 재무 데이터 시트(회사 IR) · 2024년 3월기 분기는 2026년 3월기 결산하이라이트 p5~6"
+  },
+  {
+   "sec": "부문 이익",
+   "t": "부문 이익률(분기)",
+   "def": "부문 이익 ÷ 부문 외부 매출",
+   "d": "q",
+   "lines": [
+    {
+     "k": "m_음향기기",
+     "l": "음향기기",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "m_정보기기",
+     "l": "정보기기",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "2027년 3월기 2분기 결산하이라이트 p14 재무 데이터 시트(회사 IR) · 2024년 3월기 분기는 2026년 3월기 결산하이라이트 p5~6"
+  },
+  {
+   "sec": "부문 이익",
+   "t": "개별 공시 항목 전 영업이익",
+   "def": "회사 지표 — 구조개혁비(26.2Q −0.58억엔)·일회성 이익(26.4Q +3.21억엔) 제외",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op_pre",
+     "l": "개별 항목 전 영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2027년 3월기 2분기 결산하이라이트 p14 재무 데이터 시트(회사 IR) · 2024년 3월기 분기는 2026년 3월기 결산하이라이트 p5~6"
+  },
+  {
+   "sec": "지역·고객",
+   "t": "지역별 매출(연간)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "jp",
+     "l": "일본",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "am",
+     "l": "미주",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "eu",
+     "l": "유럽",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "as",
+     "l": "아시아",
+     "u": "억엔",
+     "c": 3
+    },
+    {
+     "k": "ot",
+     "l": "기타 지역",
+     "u": "억엔",
+     "c": 4
+    }
+   ],
+   "src": "2026년 3월기 결산하이라이트 p7·8(연간), 2027년 3월기 2분기 결산하이라이트 p7·8(상반기) — 회사 IR"
+  },
+  {
+   "sec": "지역·고객",
+   "t": "지역별 매출(상반기)",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "jp",
+     "l": "일본",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "am",
+     "l": "미주",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "eu",
+     "l": "유럽",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "as",
+     "l": "아시아",
+     "u": "억엔",
+     "c": 3
+    },
+    {
+     "k": "ot",
+     "l": "기타 지역",
+     "u": "억엔",
+     "c": 4
+    }
+   ],
+   "src": "2026년 3월기 결산하이라이트 p7·8(연간), 2027년 3월기 2분기 결산하이라이트 p7·8(상반기) — 회사 IR"
+  },
+  {
+   "sec": "지역·고객",
+   "t": "지역별 매출 비중(연간)",
+   "def": "지역 매출 ÷ 전체 매출",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "jp_r",
+     "l": "일본",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "am_r",
+     "l": "미주",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "eu_r",
+     "l": "유럽",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "as_r",
+     "l": "아시아",
+     "u": "%",
+     "c": 3
+    }
+   ],
+   "src": "2026년 3월기 결산하이라이트 p7·8(연간), 2027년 3월기 2분기 결산하이라이트 p7·8(상반기) — 회사 IR"
+  },
+  {
+   "sec": "지역·고객",
+   "t": "지역별 매출 비중(상반기)",
+   "def": "지역 매출 ÷ 전체 매출",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "jp_r",
+     "l": "일본",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "am_r",
+     "l": "미주",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "eu_r",
+     "l": "유럽",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "as_r",
+     "l": "아시아",
+     "u": "%",
+     "c": 3
+    }
+   ],
+   "src": "2026년 3월기 결산하이라이트 p7·8(연간), 2027년 3월기 2분기 결산하이라이트 p7·8(상반기) — 회사 IR"
+  },
+  {
+   "sec": "지역·고객",
+   "t": "해외 매출 비중",
+   "def": "(전체 − 일본) ÷ 전체",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ovs_r",
+     "l": "해외 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "2026년 3월기 결산하이라이트 p7·8(연간), 2027년 3월기 2분기 결산하이라이트 p7·8(상반기) — 회사 IR"
+  },
+  {
+   "sec": "지역·고객",
+   "t": "코어 BtoB 매출 비중(연간)",
+   "def": "회사 공시 비율 — 업무용 음향(TASCAM 방송·설비)과 정보기기 부문",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "btob",
+     "l": "코어 BtoB",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "2026년 3월기 결산하이라이트 p7·8(연간), 2027년 3월기 2분기 결산하이라이트 p7·8(상반기) — 회사 IR"
+  },
+  {
+   "sec": "지역·고객",
+   "t": "코어 BtoB 매출 비중(상반기)",
+   "def": "회사 공시 비율",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "btob",
+     "l": "코어 BtoB",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "2026년 3월기 결산하이라이트 p7·8(연간), 2027년 3월기 2분기 결산하이라이트 p7·8(상반기) — 회사 IR"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 38.89,
+    "op": 1.48,
+    "ord": 1.79,
+    "net": 1.81,
+    "gp": 17.99,
+    "sga": 16.53,
+    "cogs": 20.9,
+    "cash": 13.69,
+    "debt_total": 36.55,
+    "inventory": 46.62,
+    "total_assets": 115.62,
+    "equity": 31.24,
+    "gpm": 46.3,
+    "opm": 3.8,
+    "s_음향기기": 27.87,
+    "p_음향기기": 3.87,
+    "s_정보기기": 8.84,
+    "p_정보기기": -0.09,
+    "s_기타": 2.18,
+    "p_기타": null,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_음향기기_yoy": null,
+    "p_음향기기_yoy": null,
+    "s_정보기기_yoy": null,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": null,
+    "p_기타_yoy": null,
+    "m_음향기기": 13.9,
+    "m_정보기기": -1.0,
+    "op_pre": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 44.57,
+    "op": 3.44,
+    "ord": 1.83,
+    "net": 1.34,
+    "gp": 19.8,
+    "sga": 16.45,
+    "cogs": 24.77,
+    "cash": 12.27,
+    "debt_total": 35.88,
+    "inventory": 42.14,
+    "total_assets": 118.71,
+    "equity": 35.74,
+    "gpm": 44.4,
+    "opm": 7.7,
+    "s_음향기기": 28.56,
+    "p_음향기기": 3.64,
+    "s_정보기기": 14.6,
+    "p_정보기기": 2.4,
+    "s_기타": 1.41,
+    "p_기타": null,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_음향기기_yoy": null,
+    "p_음향기기_yoy": null,
+    "s_정보기기_yoy": null,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": null,
+    "p_기타_yoy": null,
+    "m_음향기기": 12.7,
+    "m_정보기기": 16.4,
+    "op_pre": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 30.73,
+    "op": -2.75,
+    "ord": -3.98,
+    "net": -3.93,
+    "gp": 13.4,
+    "sga": 16.17,
+    "cogs": 17.33,
+    "cash": 14.87,
+    "debt_total": 40.24,
+    "inventory": 50.82,
+    "total_assets": 118.74,
+    "equity": 34.16,
+    "gpm": 43.6,
+    "opm": -8.9,
+    "s_음향기기": 22.41,
+    "p_음향기기": 0.9,
+    "s_정보기기": 6.72,
+    "p_정보기기": -0.92,
+    "s_기타": 1.6,
+    "p_기타": 0.16,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_음향기기_yoy": null,
+    "p_음향기기_yoy": null,
+    "s_정보기기_yoy": null,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": null,
+    "p_기타_yoy": null,
+    "m_음향기기": 4.0,
+    "m_정보기기": -13.7,
+    "op_pre": -2.75
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 36.63,
+    "op": -0.07,
+    "ord": 0.37,
+    "net": 0.49,
+    "gp": 15.92,
+    "sga": 16.02,
+    "cogs": 20.71,
+    "cash": 13.47,
+    "debt_total": 39.92,
+    "inventory": 49.25,
+    "total_assets": 114.04,
+    "equity": 29.84,
+    "gpm": 43.5,
+    "opm": -0.2,
+    "s_음향기기": 26.12,
+    "p_음향기기": 2.43,
+    "s_정보기기": 8.82,
+    "p_정보기기": -0.09,
+    "s_기타": 1.69,
+    "p_기타": 0.17,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_음향기기_yoy": null,
+    "p_음향기기_yoy": null,
+    "s_정보기기_yoy": null,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": null,
+    "p_기타_yoy": null,
+    "m_음향기기": 9.3,
+    "m_정보기기": -1.0,
+    "op_pre": -0.07
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 43.03,
+    "op": 1.97,
+    "ord": 0.19,
+    "net": 0.13,
+    "gp": 17.95,
+    "sga": 16.01,
+    "cogs": 25.08,
+    "cash": 12.91,
+    "debt_total": 42.26,
+    "inventory": 49.57,
+    "total_assets": 118.31,
+    "equity": 33.92,
+    "gpm": 41.7,
+    "opm": 4.6,
+    "s_음향기기": 32.11,
+    "p_음향기기": 4.69,
+    "s_정보기기": 10.02,
+    "p_정보기기": 0.06,
+    "s_기타": 0.9,
+    "p_기타": -0.2,
+    "sales_yoy": 10.6,
+    "op_yoy": 33.1,
+    "ord_yoy": -89.4,
+    "net_yoy": -92.8,
+    "gp_yoy": -0.2,
+    "sga_yoy": -3.1,
+    "cogs_yoy": 20.0,
+    "cash_yoy": -5.7,
+    "debt_total_yoy": 15.6,
+    "inventory_yoy": 6.3,
+    "total_assets_yoy": 2.3,
+    "equity_yoy": 8.6,
+    "s_음향기기_yoy": 15.2,
+    "p_음향기기_yoy": 21.2,
+    "s_정보기기_yoy": 13.3,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": -58.7,
+    "p_기타_yoy": null,
+    "m_음향기기": 14.6,
+    "m_정보기기": 0.6,
+    "op_pre": 1.98
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 46.29,
+    "op": 4.25,
+    "ord": 4.01,
+    "net": 4.12,
+    "gp": 20.69,
+    "sga": 15.93,
+    "cogs": 25.6,
+    "cash": 15.52,
+    "debt_total": 33.62,
+    "inventory": 36.61,
+    "total_assets": 108.15,
+    "equity": 35.58,
+    "gpm": 44.7,
+    "opm": 9.2,
+    "s_음향기기": 29.8,
+    "p_음향기기": 4.18,
+    "s_정보기기": 14.33,
+    "p_정보기기": 3.05,
+    "s_기타": 2.16,
+    "p_기타": 0.08,
+    "sales_yoy": 3.9,
+    "op_yoy": 23.5,
+    "ord_yoy": 119.1,
+    "net_yoy": 207.5,
+    "gp_yoy": 4.5,
+    "sga_yoy": -3.2,
+    "cogs_yoy": 3.4,
+    "cash_yoy": 26.5,
+    "debt_total_yoy": -6.3,
+    "inventory_yoy": -13.1,
+    "total_assets_yoy": -8.9,
+    "equity_yoy": -0.4,
+    "s_음향기기_yoy": 4.3,
+    "p_음향기기_yoy": 14.8,
+    "s_정보기기_yoy": -1.8,
+    "p_정보기기_yoy": 27.1,
+    "s_기타_yoy": 53.2,
+    "p_기타_yoy": null,
+    "m_음향기기": 14.0,
+    "m_정보기기": 21.3,
+    "op_pre": 4.25
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 31.52,
+    "op": -2.92,
+    "ord": -2.8,
+    "net": -2.64,
+    "gp": 13.34,
+    "sga": 16.22,
+    "cogs": 18.18,
+    "cash": 18.54,
+    "debt_total": 35.37,
+    "inventory": 41.34,
+    "total_assets": 106.96,
+    "equity": 31.64,
+    "gpm": 42.3,
+    "opm": -9.3,
+    "s_음향기기": 22.74,
+    "p_음향기기": 1.32,
+    "s_정보기기": 7.35,
+    "p_정보기기": -1.1,
+    "s_기타": 1.44,
+    "p_기타": -0.11,
+    "sales_yoy": 2.6,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": -0.4,
+    "sga_yoy": 0.3,
+    "cogs_yoy": 4.9,
+    "cash_yoy": 24.7,
+    "debt_total_yoy": -12.1,
+    "inventory_yoy": -18.7,
+    "total_assets_yoy": -9.9,
+    "equity_yoy": -7.4,
+    "s_음향기기_yoy": 1.5,
+    "p_음향기기_yoy": 46.7,
+    "s_정보기기_yoy": 9.4,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": -10.0,
+    "p_기타_yoy": null,
+    "m_음향기기": 5.8,
+    "m_정보기기": -15.0,
+    "op_pre": -2.92
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 40.86,
+    "op": 0.66,
+    "ord": 0.39,
+    "net": 0.62,
+    "gp": 16.67,
+    "sga": 15.45,
+    "cogs": 24.19,
+    "cash": 14.64,
+    "debt_total": 36.52,
+    "inventory": 41.57,
+    "total_assets": 109.14,
+    "equity": 33.29,
+    "gpm": 40.8,
+    "opm": 1.6,
+    "s_음향기기": 28.5,
+    "p_음향기기": 3.7,
+    "s_정보기기": 10.74,
+    "p_정보기기": 0.26,
+    "s_기타": 1.62,
+    "p_기타": -0.12,
+    "sales_yoy": 11.5,
+    "op_yoy": null,
+    "ord_yoy": 5.4,
+    "net_yoy": 26.5,
+    "gp_yoy": 4.7,
+    "sga_yoy": -3.6,
+    "cogs_yoy": 16.8,
+    "cash_yoy": 8.7,
+    "debt_total_yoy": -8.5,
+    "inventory_yoy": -15.6,
+    "total_assets_yoy": -4.3,
+    "equity_yoy": 11.6,
+    "s_음향기기_yoy": 9.1,
+    "p_음향기기_yoy": 52.3,
+    "s_정보기기_yoy": 21.8,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": -4.1,
+    "p_기타_yoy": null,
+    "m_음향기기": 13.0,
+    "m_정보기기": 2.4,
+    "op_pre": 1.24
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 41.99,
+    "op": 3.08,
+    "ord": 3.09,
+    "net": 2.98,
+    "gp": 18.44,
+    "sga": 15.49,
+    "cogs": 23.55,
+    "cash": 17.01,
+    "debt_total": 36.52,
+    "inventory": 42.43,
+    "total_assets": 112.95,
+    "equity": 38.14,
+    "gpm": 43.9,
+    "opm": 7.3,
+    "s_음향기기": 30.27,
+    "p_음향기기": 5.52,
+    "s_정보기기": 9.87,
+    "p_정보기기": 0.06,
+    "s_기타": 1.84,
+    "p_기타": -0.04,
+    "sales_yoy": -2.4,
+    "op_yoy": 56.3,
+    "ord_yoy": 1526.3,
+    "net_yoy": 2192.3,
+    "gp_yoy": 2.7,
+    "sga_yoy": -3.2,
+    "cogs_yoy": -6.1,
+    "cash_yoy": 31.8,
+    "debt_total_yoy": -13.6,
+    "inventory_yoy": -14.4,
+    "total_assets_yoy": -4.5,
+    "equity_yoy": 12.4,
+    "s_음향기기_yoy": -5.7,
+    "p_음향기기_yoy": 17.7,
+    "s_정보기기_yoy": -1.5,
+    "p_정보기기_yoy": 0.0,
+    "s_기타_yoy": 104.4,
+    "p_기타_yoy": null,
+    "m_음향기기": 18.2,
+    "m_정보기기": 0.6,
+    "op_pre": 3.08
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 45.06,
+    "op": 5.94,
+    "ord": 5.44,
+    "net": 4.82,
+    "gp": 19.98,
+    "sga": 17.31,
+    "cogs": 25.08,
+    "cash": 21.73,
+    "debt_total": 29.76,
+    "inventory": 32.75,
+    "total_assets": 105.93,
+    "equity": 40.7,
+    "gpm": 44.3,
+    "opm": 13.2,
+    "s_음향기기": 29.18,
+    "p_음향기기": 4.29,
+    "s_정보기기": 12.17,
+    "p_정보기기": 0.75,
+    "s_기타": 3.71,
+    "p_기타": 0.47,
+    "sales_yoy": -2.7,
+    "op_yoy": 39.8,
+    "ord_yoy": 35.7,
+    "net_yoy": 17.0,
+    "gp_yoy": -3.4,
+    "sga_yoy": 8.7,
+    "cogs_yoy": -2.0,
+    "cash_yoy": 40.0,
+    "debt_total_yoy": -11.5,
+    "inventory_yoy": -10.5,
+    "total_assets_yoy": -2.1,
+    "equity_yoy": 14.4,
+    "s_음향기기_yoy": -2.1,
+    "p_음향기기_yoy": 2.6,
+    "s_정보기기_yoy": -15.1,
+    "p_정보기기_yoy": -75.4,
+    "s_기타_yoy": 71.8,
+    "p_기타_yoy": null,
+    "m_음향기기": 14.7,
+    "m_정보기기": 6.2,
+    "op_pre": 2.73
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 36.22,
+    "op": 0.23,
+    "ord": -0.17,
+    "net": -0.29,
+    "gp": 16.22,
+    "sga": 16.02,
+    "cogs": 20.0,
+    "cash": 24.42,
+    "debt_total": 33.42,
+    "inventory": 37.98,
+    "total_assets": 108.95,
+    "equity": 40.69,
+    "gpm": 44.8,
+    "opm": 0.6,
+    "s_음향기기": 24.64,
+    "p_음향기기": 2.97,
+    "s_정보기기": 9.92,
+    "p_정보기기": 0.13,
+    "s_기타": 1.66,
+    "p_기타": 0.05,
+    "sales_yoy": 14.9,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": 21.6,
+    "sga_yoy": -1.2,
+    "cogs_yoy": 10.0,
+    "cash_yoy": 31.7,
+    "debt_total_yoy": -5.5,
+    "inventory_yoy": -8.1,
+    "total_assets_yoy": 1.9,
+    "equity_yoy": 28.6,
+    "s_음향기기_yoy": 8.4,
+    "p_음향기기_yoy": 125.0,
+    "s_정보기기_yoy": 35.0,
+    "p_정보기기_yoy": null,
+    "s_기타_yoy": 15.3,
+    "p_기타_yoy": null,
+    "m_음향기기": 12.1,
+    "m_정보기기": 1.3,
+    "op_pre": 0.23
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 40.71,
+    "op": 4.53,
+    "ord": 4.2,
+    "net": 4.17,
+    "gp": 20.48,
+    "sga": 16.01,
+    "cogs": 20.23,
+    "cash": 26.34,
+    "debt_total": 31.83,
+    "inventory": 39.11,
+    "total_assets": 111.91,
+    "equity": 43.71,
+    "gpm": 50.3,
+    "opm": 11.1,
+    "s_음향기기": 27.48,
+    "p_음향기기": 6.08,
+    "s_정보기기": 10.88,
+    "p_정보기기": 1.01,
+    "s_기타": 2.35,
+    "p_기타": 0.18,
+    "sales_yoy": -0.4,
+    "op_yoy": 586.4,
+    "ord_yoy": 976.9,
+    "net_yoy": 572.6,
+    "gp_yoy": 22.9,
+    "sga_yoy": 3.6,
+    "cogs_yoy": -16.4,
+    "cash_yoy": 79.9,
+    "debt_total_yoy": -12.8,
+    "inventory_yoy": -5.9,
+    "total_assets_yoy": 2.5,
+    "equity_yoy": 31.3,
+    "s_음향기기_yoy": -3.6,
+    "p_음향기기_yoy": 64.3,
+    "s_정보기기_yoy": 1.3,
+    "p_정보기기_yoy": 288.5,
+    "s_기타_yoy": 45.1,
+    "p_기타_yoy": null,
+    "m_음향기기": 22.1,
+    "m_정보기기": 9.3,
+    "op_pre": 4.53
+   }
+  ],
+  "a": [
+   {
+    "year": "2022/3",
+    "x": "2022/3",
+    "sales": 160.04,
+    "op": 6.54,
+    "ord": 4.81,
+    "net": 3.92,
+    "opm": 4.1,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023/3",
+    "x": "2023/3",
+    "sales": 156.99,
+    "op": 5.63,
+    "ord": 3.41,
+    "net": 3.05,
+    "opm": 3.6,
+    "sales_yoy": -1.9,
+    "op_yoy": -13.9,
+    "net_yoy": -22.2
+   },
+   {
+    "year": "2024/3",
+    "x": "2024/3",
+    "sales": 156.72,
+    "op": 4.45,
+    "ord": 0.05,
+    "net": -0.53,
+    "opm": 2.8,
+    "sales_yoy": -0.2,
+    "op_yoy": -21.0,
+    "net_yoy": -117.4
+   },
+   {
+    "year": "2025/3",
+    "x": "2025/3",
+    "sales": 156.68,
+    "op": 3.4,
+    "ord": 0.59,
+    "net": 0.81,
+    "opm": 2.2,
+    "sales_yoy": -0.0,
+    "op_yoy": -23.6,
+    "net_yoy": null
+   },
+   {
+    "year": "2026/3",
+    "x": "2026/3",
+    "sales": 159.43,
+    "op": 6.76,
+    "ord": 6.12,
+    "net": 5.78,
+    "opm": 4.2,
+    "sales_yoy": 1.8,
+    "op_yoy": 98.8,
+    "net_yoy": 613.6
+   },
+   {
+    "year": "2027/3 계획",
+    "x": "2027/3 계획",
+    "sales": 160.0,
+    "op": 7.0,
+    "ord": 5.5,
+    "net": 5.0,
+    "opm": 4.4,
+    "sales_yoy": 0.4,
+    "op_yoy": 3.6,
+    "net_yoy": -13.5,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "segh": [
+   {
+    "x": "2026/3 상반기",
+    "audio": 5.02,
+    "info": -0.84
+   },
+   {
+    "x": "2027/3 상반기",
+    "audio": 9.04,
+    "info": 1.14
+   }
+  ],
+  "ba": [
+   {
+    "x": "2024/3",
+    "jp": 76.91,
+    "am": 31.48,
+    "eu": 31.92,
+    "as": 13.34,
+    "ot": 3.07,
+    "btob": 46,
+    "jp_r": 49.1,
+    "am_r": 20.1,
+    "eu_r": 20.4,
+    "as_r": 8.5,
+    "ovs_r": 50.9
+   },
+   {
+    "x": "2025/3",
+    "jp": 76.31,
+    "am": 33.12,
+    "eu": 31.63,
+    "as": 13.44,
+    "ot": 2.19,
+    "btob": 48,
+    "jp_r": 48.7,
+    "am_r": 21.1,
+    "eu_r": 20.2,
+    "as_r": 8.6,
+    "ovs_r": 51.3
+   },
+   {
+    "x": "2026/3",
+    "jp": 76.72,
+    "am": 33.96,
+    "eu": 31.61,
+    "as": 14.68,
+    "ot": 2.46,
+    "btob": 51,
+    "jp_r": 48.1,
+    "am_r": 21.3,
+    "eu_r": 19.8,
+    "as_r": 9.2,
+    "ovs_r": 51.9
+   }
+  ],
+  "bh": [
+   {
+    "x": "2025/3 상반기",
+    "jp": 32.12,
+    "am": 13.52,
+    "eu": 14.01,
+    "as": 6.58,
+    "ot": 1.13,
+    "btob": 45,
+    "jp_r": 47.7,
+    "am_r": 20.1,
+    "eu_r": 20.8,
+    "as_r": 9.8,
+    "ovs_r": 52.3
+   },
+   {
+    "x": "2026/3 상반기",
+    "jp": 34.08,
+    "am": 15.18,
+    "eu": 15.54,
+    "as": 6.47,
+    "ot": 1.11,
+    "btob": 50,
+    "jp_r": 47.1,
+    "am_r": 21.0,
+    "eu_r": 21.5,
+    "as_r": 8.9,
+    "ovs_r": 52.9
+   },
+   {
+    "x": "2027/3 상반기",
+    "jp": 38.76,
+    "am": 16.4,
+    "eu": 13.66,
+    "as": 6.87,
+    "ot": 1.24,
+    "btob": 54,
+    "jp_r": 50.4,
+    "am_r": 21.3,
+    "eu_r": 17.8,
+    "as_r": 8.9,
+    "ovs_r": 49.6
+   }
+  ]
+ }
+}

@@ -1,1 +1,1524 @@
-{"c": "6806", "n": "히로세전기", "asof": "2026-11-04", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "세전이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 8월 상향, 11월 유지)", "note": "IFRS. 경상 칸 = 세전이익. 무차입이라 총차입금 0. 분야별 매출은 설명회 자료 개수(억엔 정수)", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 · 2Q27 결산설명회 자료"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 · 2Q27 결산설명회 자료"}, {"sec": "key", "t": "수주액", "def": "분기 수주(설명회 자료 표). 2025년 3월기 이전·26.3Q·26.4Q 는 자료 없음", "d": "q", "bars": [{"k": "orders", "l": "수주", "u": "억엔", "c": 0}], "lines": [{"k": "orders_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명회 자료 p3 · 2Q 누계 1,496억엔(+40.9%)"}, {"sec": "key", "t": "일반 산업기기용 매출", "def": "최대 분야(2Q 누계 33%). 생산능력 증강 중", "d": "q", "bars": [{"k": "s_일반 산업기기", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_일반 산업기기_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명회 자료 p13·p21"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 8월 상향, 11월 유지)"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 8월 상향, 11월 유지)"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "결산단신 · 2Q27 결산설명회 자료"}, {"sec": "사업 지표", "t": "재고자산", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 재무상태표 · 회사: 수주·생산 증가에 맞춘 재고 확보"}, {"sec": "사업 지표", "t": "현금성 자산", "def": "현금 및 현금성자산. 차입금 없음(무차입). 정기예금 등 기타금융자산 1,352억엔(26년 9월말)은 별도", "d": "q", "bars": [{"k": "cash", "l": "현금·현금성자산", "u": "억엔", "c": 0}], "src": "결산단신 재무상태표 · 2Q27 설명회 자료 p8"}, {"sec": "사업 지표", "t": "히로세SER(반도체 테스트 프로브) 매출", "def": "커넥터 외 신사업. 2026년 3월기에는 '기타'에 포함", "d": "q", "bars": [{"k": "ser", "l": "매출", "u": "억엔", "c": 0}], "src": "2Q27 결산설명회 자료 p18·p21 · 목표 반도체 검사 매출 300억엔"}, {"sec": "사업 지표", "t": "설비투자와 감가상각비(연간)", "d": "capex", "x": "x", "src": "2Q27 결산설명회 자료 p10(토지·건물·소프트웨어 제외) · 마지막 = 회사 예상", "lines": [{"k": "capex", "l": "설비투자", "u": "억엔", "c": 0}, {"k": "dep", "l": "감가상각비", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 매출(분기)", "d": "q", "src": "2Q27 결산설명회 자료 p21 분야별 매출 개수(억엔, 정수). 2026년 3월기 1Q 이전은 회사 공개 없음", "lines": [{"k": "s_일반 산업기기", "l": "일반 산업기기", "u": "억엔", "c": 0}, {"k": "s_자동차·모빌리티", "l": "자동차·모빌리티", "u": "억엔", "c": 1}, {"k": "s_스마트폰·휴대단말", "l": "스마트폰·휴대단말", "u": "억엔", "c": 2}, {"k": "s_컨슈머·모바일기기", "l": "컨슈머·모바일기기", "u": "억엔", "c": 3}, {"k": "s_통신 인프라", "l": "통신 인프라", "u": "억엔", "c": 4}]}, {"sec": "부문", "t": "일반 산업기기 매출", "d": "q", "bars": [{"k": "s_일반 산업기기", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_일반 산업기기_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명회 자료 p21 분야별 매출 개수(억엔, 정수). 2026년 3월기 1Q 이전은 회사 공개 없음"}, {"sec": "부문", "t": "자동차·모빌리티 매출", "d": "q", "bars": [{"k": "s_자동차·모빌리티", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_자동차·모빌리티_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명회 자료 p21 분야별 매출 개수(억엔, 정수). 2026년 3월기 1Q 이전은 회사 공개 없음"}, {"sec": "부문", "t": "스마트폰·휴대단말 매출", "d": "q", "bars": [{"k": "s_스마트폰·휴대단말", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_스마트폰·휴대단말_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명회 자료 p21 분야별 매출 개수(억엔, 정수). 2026년 3월기 1Q 이전은 회사 공개 없음"}, {"sec": "부문", "t": "컨슈머·모바일기기 매출", "d": "q", "bars": [{"k": "s_컨슈머·모바일기기", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_컨슈머·모바일기기_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명회 자료 p21 분야별 매출 개수(억엔, 정수). 2026년 3월기 1Q 이전은 회사 공개 없음"}, {"sec": "부문", "t": "통신 인프라 매출", "d": "q", "bars": [{"k": "s_통신 인프라", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "s_통신 인프라_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명회 자료 p21 분야별 매출 개수(억엔, 정수). 2026년 3월기 1Q 이전은 회사 공개 없음"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 422.52, "op": 100.4, "ord": 109.54, "net": 81.17, "gp": null, "sga": null, "cogs": null, "cash": null, "debt_total": null, "inventory": null, "total_assets": null, "equity": null, "gpm": null, "opm": 23.8, "s_일반 산업기기": null, "p_일반 산업기기": null, "s_스마트폰·휴대단말": null, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": null, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": null, "p_자동차·모빌리티": null, "s_통신 인프라": null, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 403.47, "op": 67.86, "ord": 81.27, "net": 57.66, "gp": null, "sga": null, "cogs": null, "cash": 903.41, "debt_total": 0.0, "inventory": 243.59, "total_assets": 4034.5, "equity": 3641.73, "gpm": null, "opm": 16.8, "s_일반 산업기기": null, "p_일반 산업기기": null, "s_스마트폰·휴대단말": null, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": null, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": null, "p_자동차·모빌리티": null, "s_통신 인프라": null, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 448.71, "op": 102.61, "ord": 118.42, "net": 84.04, "gp": 201.97, "sga": 100.07, "cogs": 246.74, "cash": 821.06, "debt_total": 0.0, "inventory": null, "total_assets": null, "equity": 3720.29, "gpm": 45.0, "opm": 22.9, "s_일반 산업기기": null, "p_일반 산업기기": null, "s_스마트폰·휴대단말": null, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": null, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": null, "p_자동차·모빌리티": null, "s_통신 인프라": null, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 496.48, "op": 119.55, "ord": 120.04, "net": 91.27, "gp": 225.91, "sga": 105.48, "cogs": 270.57, "cash": null, "debt_total": null, "inventory": null, "total_assets": null, "equity": 3701.19, "gpm": 45.5, "opm": 24.1, "s_일반 산업기기": null, "p_일반 산업기기": null, "s_스마트폰·휴대단말": null, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": null, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": null, "p_자동차·모빌리티": null, "s_통신 인프라": null, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 499.03, "op": 119.99, "ord": 136.22, "net": 100.52, "gp": 231.18, "sga": 110.83, "cogs": 267.85, "cash": 809.1, "debt_total": 0.0, "inventory": 246.06, "total_assets": 4222.93, "equity": 3758.91, "gpm": 46.3, "opm": 24.0, "s_일반 산업기기": null, "p_일반 산업기기": null, "s_스마트폰·휴대단말": null, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": null, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": null, "p_자동차·모빌리티": null, "s_통신 인프라": null, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": 18.1, "op_yoy": 19.5, "ord_yoy": 24.4, "net_yoy": 23.8, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": null, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 449.98, "op": 84.57, "ord": 87.5, "net": 54.5, "gp": 194.66, "sga": 108.29, "cogs": 255.32, "cash": 856.66, "debt_total": 0.0, "inventory": 250.91, "total_assets": 4168.66, "equity": 3701.47, "gpm": 43.3, "opm": 18.8, "s_일반 산업기기": null, "p_일반 산업기기": null, "s_스마트폰·휴대단말": null, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": null, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": null, "p_자동차·모빌리티": null, "s_통신 인프라": null, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": 11.5, "op_yoy": 24.6, "ord_yoy": 7.7, "net_yoy": -5.5, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "cash_yoy": -5.2, "debt_total_yoy": null, "inventory_yoy": 3.0, "total_assets_yoy": 3.3, "equity_yoy": 1.6, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 489.72, "op": 98.33, "ord": 102.38, "net": 72.27, "gp": 207.57, "sga": 109.26, "cogs": 282.15, "cash": 817.74, "debt_total": 0.0, "inventory": 254.2, "total_assets": 4204.69, "equity": 3741.5, "gpm": 42.4, "opm": 20.1, "s_일반 산업기기": 141.0, "p_일반 산업기기": null, "s_스마트폰·휴대단말": 104.0, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": 86.0, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": 128.0, "p_자동차·모빌리티": null, "s_통신 인프라": 13.0, "p_통신 인프라": null, "orders": 520.1, "ser": null, "sales_yoy": 9.1, "op_yoy": -4.2, "ord_yoy": -13.5, "net_yoy": -14.0, "gp_yoy": 2.8, "sga_yoy": 9.2, "cogs_yoy": 14.4, "cash_yoy": -0.4, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": 0.6, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 530.53, "op": 106.28, "ord": 118.63, "net": 82.96, "gp": 221.59, "sga": 112.73, "cogs": 308.94, "cash": 840.24, "debt_total": 0.0, "inventory": 258.89, "total_assets": 4269.47, "equity": 3773.71, "gpm": 41.8, "opm": 20.0, "s_일반 산업기기": 144.0, "p_일반 산업기기": null, "s_스마트폰·휴대단말": 122.0, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": 90.0, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": 137.0, "p_자동차·모빌리티": null, "s_통신 인프라": 15.0, "p_통신 인프라": null, "orders": 541.4, "ser": null, "sales_yoy": 6.9, "op_yoy": -11.1, "ord_yoy": -1.2, "net_yoy": -9.1, "gp_yoy": -1.9, "sga_yoy": 6.9, "cogs_yoy": 14.2, "cash_yoy": null, "debt_total_yoy": null, "inventory_yoy": null, "total_assets_yoy": null, "equity_yoy": 2.0, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 545.24, "op": 120.42, "ord": 131.93, "net": 92.89, "gp": 234.32, "sga": 113.97, "cogs": 310.92, "cash": 863.38, "debt_total": 0.0, "inventory": 278.86, "total_assets": 4278.27, "equity": 3776.32, "gpm": 43.0, "opm": 22.1, "s_일반 산업기기": 162.0, "p_일반 산업기기": null, "s_스마트폰·휴대단말": 115.0, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": 87.0, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": 138.0, "p_자동차·모빌리티": null, "s_통신 인프라": 17.0, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": 9.3, "op_yoy": 0.4, "ord_yoy": -3.1, "net_yoy": -7.6, "gp_yoy": 1.4, "sga_yoy": 2.8, "cogs_yoy": 16.1, "cash_yoy": 6.7, "debt_total_yoy": null, "inventory_yoy": 13.3, "total_assets_yoy": 1.3, "equity_yoy": 0.5, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 547.15, "op": 104.92, "ord": 113.32, "net": 83.3, "gp": 226.48, "sga": 121.14, "cogs": 320.67, "cash": 873.35, "debt_total": 0.0, "inventory": 301.93, "total_assets": 4311.77, "equity": 3780.75, "gpm": 41.4, "opm": 19.2, "s_일반 산업기기": 173.0, "p_일반 산업기기": null, "s_스마트폰·휴대단말": 102.0, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": 84.0, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": 140.0, "p_자동차·모빌리티": null, "s_통신 인프라": 22.0, "p_통신 인프라": null, "orders": null, "ser": null, "sales_yoy": 21.6, "op_yoy": 24.1, "ord_yoy": 29.5, "net_yoy": 52.8, "gp_yoy": 16.3, "sga_yoy": 11.9, "cogs_yoy": 25.6, "cash_yoy": 1.9, "debt_total_yoy": null, "inventory_yoy": 20.3, "total_assets_yoy": 3.4, "equity_yoy": 2.1, "s_일반 산업기기_yoy": null, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": null, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": null, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": null, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": null, "p_통신 인프라_yoy": null, "orders_yoy": null, "ser_yoy": null}, {"q": "27.1Q", "x": "27.1Q", "sales": 620.85, "op": 133.38, "ord": 144.66, "net": 73.31, "gp": 259.91, "sga": 123.84, "cogs": 360.94, "cash": 1102.99, "debt_total": 0.0, "inventory": 337.28, "total_assets": 4392.67, "equity": 3794.49, "gpm": 41.9, "opm": 21.5, "s_일반 산업기기": 206.0, "p_일반 산업기기": null, "s_스마트폰·휴대단말": 108.0, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": 95.0, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": 156.0, "p_자동차·모빌리티": null, "s_통신 인프라": 25.0, "p_통신 인프라": null, "orders": 710.6, "ser": 11, "sales_yoy": 26.8, "op_yoy": 35.6, "ord_yoy": 41.3, "net_yoy": 1.4, "gp_yoy": 25.2, "sga_yoy": 13.3, "cogs_yoy": 27.9, "cash_yoy": 34.9, "debt_total_yoy": null, "inventory_yoy": 32.7, "total_assets_yoy": 4.5, "equity_yoy": 1.4, "s_일반 산업기기_yoy": 46.1, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": 3.8, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": 10.5, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": 21.9, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": 92.3, "p_통신 인프라_yoy": null, "orders_yoy": 36.6, "ser_yoy": null}, {"q": "27.2Q", "x": "27.2Q", "sales": 660.13, "op": 153.87, "ord": 151.1, "net": 105.74, "gp": 276.63, "sga": 122.15, "cogs": 383.5, "cash": 903.61, "debt_total": 0.0, "inventory": 362.37, "total_assets": 4436.99, "equity": 3849.06, "gpm": 41.9, "opm": 23.3, "s_일반 산업기기": 217.0, "p_일반 산업기기": null, "s_스마트폰·휴대단말": 128.0, "p_스마트폰·휴대단말": null, "s_컨슈머·모바일기기": 100.0, "p_컨슈머·모바일기기": null, "s_자동차·모빌리티": 157.0, "p_자동차·모빌리티": null, "s_통신 인프라": 23.0, "p_통신 인프라": null, "orders": 785.4, "ser": 12, "sales_yoy": 24.4, "op_yoy": 44.8, "ord_yoy": 27.4, "net_yoy": 27.5, "gp_yoy": 24.8, "sga_yoy": 8.4, "cogs_yoy": 24.1, "cash_yoy": 7.5, "debt_total_yoy": null, "inventory_yoy": 40.0, "total_assets_yoy": 3.9, "equity_yoy": 2.0, "s_일반 산업기기_yoy": 50.7, "p_일반 산업기기_yoy": null, "s_스마트폰·휴대단말_yoy": 4.9, "p_스마트폰·휴대단말_yoy": null, "s_컨슈머·모바일기기_yoy": 11.1, "p_컨슈머·모바일기기_yoy": null, "s_자동차·모빌리티_yoy": 14.6, "p_자동차·모빌리티_yoy": null, "s_통신 인프라_yoy": 53.3, "p_통신 인프라_yoy": null, "orders_yoy": 45.1, "ser_yoy": null}], "a": [{"year": "2022/3", "x": "2022/3", "sales": 1636.71, "op": 407.65, "ord": 430.81, "net": 314.37, "opm": 24.9, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023/3", "x": "2023/3", "sales": 1832.24, "op": 467.51, "ord": 485.91, "net": 346.48, "opm": 25.5, "sales_yoy": 11.9, "op_yoy": 14.7, "net_yoy": 10.2}, {"year": "2024/3", "x": "2024/3", "sales": 1655.09, "op": 340.17, "ord": 387.61, "net": 264.8, "opm": 20.6, "sales_yoy": -9.7, "op_yoy": -27.2, "net_yoy": -23.6}, {"year": "2025/3", "x": "2025/3", "sales": 1894.2, "op": 426.72, "ord": 462.18, "net": 330.33, "opm": 22.5, "sales_yoy": 14.4, "op_yoy": 25.4, "net_yoy": 24.7}, {"year": "2026/3", "x": "2026/3", "sales": 2112.64, "op": 429.95, "ord": 466.26, "net": 331.42, "opm": 20.4, "sales_yoy": 11.5, "op_yoy": 0.8, "net_yoy": 0.3}, {"year": "2027/3 계획", "x": "2027/3 계획", "sales": 2500.0, "op": 500.0, "ord": 530.0, "net": 350.0, "opm": 20.0, "sales_yoy": 18.3, "op_yoy": 16.3, "net_yoy": 5.6, "plan": 1, "kind": "회사 계획"}], "capex": [{"x": "2024/3", "capex": 188, "dep": 140}, {"x": "2025/3", "capex": 212, "dep": 149}, {"x": "2026/3", "capex": 199, "dep": 161}, {"x": "2027/3 예상", "capex": 250, "dep": 180}]}}
+{
+ "c": "6806",
+ "n": "히로세전기",
+ "asof": "2026-11-04",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "세전이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 8월 상향, 11월 유지)",
+ "note": "IFRS. 경상 칸 = 세전이익. 무차입이라 총차입금 0. 분야별 매출은 설명회 자료 개수(억엔 정수)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 2Q27 결산설명회 자료"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 2Q27 결산설명회 자료"
+  },
+  {
+   "sec": "key",
+   "t": "수주액",
+   "def": "분기 수주(설명회 자료 표). 24.4Q·26.4Q 는 하반기 − 3분기로 계산",
+   "d": "q",
+   "bars": [
+    {
+     "k": "orders",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "orders_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 업적 요약 — 1Q~4Q25·1Q~4Q26·1Q~2Q27(9분기 자료). 4분기 = 하반기 − 3분기(24.4Q·26.4Q) · 2Q27 수주 785.4억엔(+45.1%)"
+  },
+  {
+   "sec": "key",
+   "t": "일반 산업기기용 매출",
+   "def": "최대 분야(2Q 누계 33%). 생산능력 증강 중",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_일반 산업기기",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_일반 산업기기_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "수주·SER·투자",
+   "t": "수주와 매출",
+   "d": "q",
+   "lines": [
+    {
+     "k": "orders",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산설명회 자료 업적 요약 — 1Q~4Q25·1Q~4Q26·1Q~2Q27(9분기 자료). 4분기 = 하반기 − 3분기(24.4Q·26.4Q)"
+  },
+  {
+   "sec": "수주·SER·투자",
+   "t": "수주 ÷ 매출(BB 비율)",
+   "def": "분기 수주 ÷ 분기 매출. 1 이상이면 수주가 매출보다 많음",
+   "d": "q",
+   "lines": [
+    {
+     "k": "b2b",
+     "l": "BB 비율",
+     "u": "배",
+     "c": 0
+    }
+   ],
+   "src": "결산설명회 자료 업적 요약 — 1Q~4Q25·1Q~4Q26·1Q~2Q27(9분기 자료). 4분기 = 하반기 − 3분기(24.4Q·26.4Q)"
+  },
+  {
+   "sec": "분야",
+   "t": "커넥터 매출 합계",
+   "def": "분야별 합계(그 밖·SER 제외)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_conn",
+     "l": "커넥터",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_conn_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "분야",
+   "t": "분야별 비중(커넥터 안)",
+   "def": "분야 매출 ÷ 커넥터 합계",
+   "d": "q",
+   "lines": [
+    {
+     "k": "sh_ind",
+     "l": "일반 산업기기",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "sh_auto",
+     "l": "자동차·모빌리티",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "sh_phone",
+     "l": "스마트폰·휴대단말",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "sh_cons",
+     "l": "컨슈머·모바일기기",
+     "u": "%",
+     "c": 3
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "분야",
+   "t": "OA 기기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_oa",
+     "l": "OA 기기",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_oa_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "분야",
+   "t": "기타(커넥터 외) 매출",
+   "def": "2026년 3월기는 히로세SER 포함, 2027년 3월기부터 SER 따로",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_other",
+     "l": "기타",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "인원",
+   "t": "종업원 수(국내·해외)",
+   "def": "유가증권보고서 기준 기말(26.4Q 국내 증가는 히로세SER 연결 편입). 27.2Q = 2026년 9월 말",
+   "d": "q",
+   "lines": [
+    {
+     "k": "emp_jp",
+     "l": "국내",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp_ovs",
+     "l": "해외",
+     "u": "명",
+     "c": 1
+    }
+   ],
+   "src": "결산설명회 자료 「従業員数 推移」 2Q27(2023년 3월 말 국내 3,697·해외 1,247명)"
+  },
+  {
+   "sec": "인원",
+   "t": "종업원 수(합계)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "emp",
+     "l": "종업원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산설명회 자료 「従業員数 推移」 2Q27"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 8월 상향, 11월 유지)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신(연간 실적) · 마지막 = 회사 계획(2026년 8월 상향, 11월 유지)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 2Q27 결산설명회 자료"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 재무상태표 · 회사: 수주·생산 증가에 맞춘 재고 확보"
+  },
+  {
+   "sec": "재무",
+   "t": "현금성 자산",
+   "def": "현금 및 현금성자산. 차입금 없음(무차입). 정기예금 등 기타금융자산 1,352억엔(26년 9월말)은 별도",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·현금성자산",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산단신 재무상태표 · 2Q27 설명회 자료 p8"
+  },
+  {
+   "sec": "수주·SER·투자",
+   "t": "히로세SER(반도체 테스트 프로브) 매출",
+   "def": "반도체 테스트 프로브 자회사. 26.2Q 4억엔(그해 1~2Q 는 표, 3·4Q 는 그래프 라벨 짝이 불확실해 뺌), 2026년 3월기에는 「기타」에 포함",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ser",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27 결산설명회 자료 p18·p21 · 목표 반도체 검사 매출 300억엔",
+   "lines": [
+    {
+     "k": "ser_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "수주·SER·투자",
+   "t": "설비투자와 감가상각비(연간)",
+   "d": "capex",
+   "x": "x",
+   "src": "2Q27 결산설명회 자료 p10(토지·건물·소프트웨어 제외) · 마지막 = 회사 예상",
+   "lines": [
+    {
+     "k": "capex",
+     "l": "설비투자",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dep",
+     "l": "감가상각비",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(분기)",
+   "d": "q",
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결",
+   "lines": [
+    {
+     "k": "s_일반 산업기기",
+     "l": "일반 산업기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "s_자동차·모빌리티",
+     "l": "자동차·모빌리티",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "s_스마트폰·휴대단말",
+     "l": "스마트폰·휴대단말",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "s_컨슈머·모바일기기",
+     "l": "컨슈머·모바일기기",
+     "u": "억엔",
+     "c": 3
+    },
+    {
+     "k": "s_통신 인프라",
+     "l": "통신 인프라",
+     "u": "억엔",
+     "c": 4
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "일반 산업기기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_일반 산업기기",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_일반 산업기기_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "부문",
+   "t": "자동차·모빌리티 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_자동차·모빌리티",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_자동차·모빌리티_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "부문",
+   "t": "스마트폰·휴대단말 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_스마트폰·휴대단말",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_스마트폰·휴대단말_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "부문",
+   "t": "컨슈머·모바일기기 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_컨슈머·모바일기기",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_컨슈머·모바일기기_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  },
+  {
+   "sec": "부문",
+   "t": "통신 인프라 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_통신 인프라",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "s_통신 인프라_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료 부록 「分野別売上推移 概数（四半期ベース）」(억엔 정수) — 2Q25·4Q25·4Q26·2Q27 자료로 연결"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 422.52,
+    "op": 100.4,
+    "ord": 109.54,
+    "net": 81.17,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": null,
+    "debt_total": null,
+    "inventory": null,
+    "total_assets": null,
+    "equity": null,
+    "gpm": null,
+    "opm": 23.8,
+    "s_일반 산업기기": 119,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 99,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 62,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 115,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 10,
+    "p_통신 인프라": null,
+    "orders": 365.6,
+    "ser": null,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_일반 산업기기_yoy": null,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": null,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": null,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": null,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": null,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": null,
+    "ser_yoy": null,
+    "s_oa": 4,
+    "s_conn": 408,
+    "s_other": 14,
+    "b2b": 0.87,
+    "sh_ind": 29.2,
+    "sh_phone": 24.3,
+    "sh_auto": 28.2,
+    "sh_cons": 15.2,
+    "s_oa_yoy": null,
+    "s_conn_yoy": null,
+    "s_other_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 403.47,
+    "op": 67.86,
+    "ord": 81.27,
+    "net": 57.66,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 903.41,
+    "debt_total": 0.0,
+    "inventory": 243.59,
+    "total_assets": 4034.5,
+    "equity": 3641.73,
+    "gpm": null,
+    "opm": 16.8,
+    "s_일반 산업기기": 104,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 87,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 67,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 119,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 12,
+    "p_통신 인프라": null,
+    "orders": 404.0,
+    "ser": null,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_일반 산업기기_yoy": null,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": null,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": null,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": null,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": null,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": null,
+    "ser_yoy": null,
+    "s_oa": 4,
+    "s_conn": 392,
+    "s_other": 11,
+    "b2b": 1.0,
+    "sh_ind": 26.5,
+    "sh_phone": 22.2,
+    "sh_auto": 30.4,
+    "sh_cons": 17.1,
+    "emp_jp": 3365,
+    "emp_ovs": 1289,
+    "emp": 4654,
+    "s_oa_yoy": null,
+    "s_conn_yoy": null,
+    "s_other_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 448.71,
+    "op": 102.61,
+    "ord": 118.42,
+    "net": 84.04,
+    "gp": 201.97,
+    "sga": 100.07,
+    "cogs": 246.74,
+    "cash": 821.06,
+    "debt_total": 0.0,
+    "inventory": null,
+    "total_assets": null,
+    "equity": 3720.29,
+    "gpm": 45.0,
+    "opm": 22.9,
+    "s_일반 산업기기": 111,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 99,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 84,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 124,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 13,
+    "p_통신 인프라": null,
+    "orders": 484.8,
+    "ser": null,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_일반 산업기기_yoy": -27.0,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 37.5,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 50.0,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 33.3,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 18.2,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 31.5,
+    "ser_yoy": null,
+    "s_oa": 4,
+    "s_conn": 434,
+    "s_other": 14,
+    "b2b": 1.08,
+    "sh_ind": 25.6,
+    "sh_phone": 22.8,
+    "sh_auto": 28.6,
+    "sh_cons": 19.4,
+    "s_oa_yoy": -20.0,
+    "s_conn_yoy": 11.6,
+    "s_other_yoy": -12.5
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 496.48,
+    "op": 119.55,
+    "ord": 120.04,
+    "net": 91.27,
+    "gp": 225.91,
+    "sga": 105.48,
+    "cogs": 270.57,
+    "cash": null,
+    "debt_total": null,
+    "inventory": null,
+    "total_assets": null,
+    "equity": 3701.19,
+    "gpm": 45.5,
+    "opm": 24.1,
+    "s_일반 산업기기": 115,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 133,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 96,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 122,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 14,
+    "p_통신 인프라": null,
+    "orders": 491.1,
+    "ser": null,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_일반 산업기기_yoy": -11.5,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 37.1,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 41.2,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 19.6,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 16.7,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 27.3,
+    "ser_yoy": null,
+    "s_oa": 5,
+    "s_conn": 485,
+    "s_other": 12,
+    "b2b": 0.99,
+    "sh_ind": 23.7,
+    "sh_phone": 27.4,
+    "sh_auto": 25.2,
+    "sh_cons": 19.8,
+    "s_oa_yoy": 25.0,
+    "s_conn_yoy": 17.4,
+    "s_other_yoy": 0.0
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 499.03,
+    "op": 119.99,
+    "ord": 136.22,
+    "net": 100.52,
+    "gp": 231.18,
+    "sga": 110.83,
+    "cogs": 267.85,
+    "cash": 809.1,
+    "debt_total": 0.0,
+    "inventory": 246.06,
+    "total_assets": 4222.93,
+    "equity": 3758.91,
+    "gpm": 46.3,
+    "opm": 24.0,
+    "s_일반 산업기기": 122,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 130,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 89,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 127,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 13,
+    "p_통신 인프라": null,
+    "orders": 473.3,
+    "ser": null,
+    "sales_yoy": 18.1,
+    "op_yoy": 19.5,
+    "ord_yoy": 24.4,
+    "net_yoy": 23.8,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": null,
+    "s_일반 산업기기_yoy": 2.5,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 31.3,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 43.5,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 10.4,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 30.0,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 29.5,
+    "ser_yoy": null,
+    "s_oa": 5,
+    "s_conn": 486,
+    "s_other": 13,
+    "b2b": 0.95,
+    "sh_ind": 25.1,
+    "sh_phone": 26.7,
+    "sh_auto": 26.1,
+    "sh_cons": 18.3,
+    "s_oa_yoy": 25.0,
+    "s_conn_yoy": 19.1,
+    "s_other_yoy": -7.1
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 449.98,
+    "op": 84.57,
+    "ord": 87.5,
+    "net": 54.5,
+    "gp": 194.66,
+    "sga": 108.29,
+    "cogs": 255.32,
+    "cash": 856.66,
+    "debt_total": 0.0,
+    "inventory": 250.91,
+    "total_assets": 4168.66,
+    "equity": 3701.47,
+    "gpm": 43.3,
+    "opm": 18.8,
+    "s_일반 산업기기": 121,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 102,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 78,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 119,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 14,
+    "p_통신 인프라": null,
+    "orders": 477.4,
+    "ser": null,
+    "sales_yoy": 11.5,
+    "op_yoy": 24.6,
+    "ord_yoy": 7.7,
+    "net_yoy": -5.5,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "cash_yoy": -5.2,
+    "debt_total_yoy": null,
+    "inventory_yoy": 3.0,
+    "total_assets_yoy": 3.3,
+    "equity_yoy": 1.6,
+    "s_일반 산업기기_yoy": 16.3,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 17.2,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 16.4,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 0.0,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 16.7,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 18.2,
+    "ser_yoy": null,
+    "s_oa": 4,
+    "s_conn": 438,
+    "s_other": 12,
+    "b2b": 1.06,
+    "sh_ind": 27.6,
+    "sh_phone": 23.3,
+    "sh_auto": 27.2,
+    "sh_cons": 17.8,
+    "emp_jp": 3355,
+    "emp_ovs": 1523,
+    "emp": 4878,
+    "s_oa_yoy": 0.0,
+    "s_conn_yoy": 11.7,
+    "s_other_yoy": 9.1
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 489.72,
+    "op": 98.33,
+    "ord": 102.38,
+    "net": 72.27,
+    "gp": 207.57,
+    "sga": 109.26,
+    "cogs": 282.15,
+    "cash": 817.74,
+    "debt_total": 0.0,
+    "inventory": 254.2,
+    "total_assets": 4204.69,
+    "equity": 3741.5,
+    "gpm": 42.4,
+    "opm": 20.1,
+    "s_일반 산업기기": 141,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 104,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 86,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 128,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 13,
+    "p_통신 인프라": null,
+    "orders": 520.1,
+    "ser": null,
+    "sales_yoy": 9.1,
+    "op_yoy": -4.2,
+    "ord_yoy": -13.5,
+    "net_yoy": -14.0,
+    "gp_yoy": 2.8,
+    "sga_yoy": 9.2,
+    "cogs_yoy": 14.4,
+    "cash_yoy": -0.4,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": 0.6,
+    "s_일반 산업기기_yoy": 27.0,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 5.1,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 2.4,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 3.2,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 0.0,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 7.3,
+    "ser_yoy": null,
+    "s_oa": 5,
+    "s_conn": 478,
+    "s_other": 12,
+    "b2b": 1.06,
+    "sh_ind": 29.5,
+    "sh_phone": 21.8,
+    "sh_auto": 26.8,
+    "sh_cons": 18.0,
+    "s_oa_yoy": 25.0,
+    "s_conn_yoy": 10.1,
+    "s_other_yoy": -14.3
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 530.53,
+    "op": 106.28,
+    "ord": 118.63,
+    "net": 82.96,
+    "gp": 221.59,
+    "sga": 112.73,
+    "cogs": 308.94,
+    "cash": 840.24,
+    "debt_total": 0.0,
+    "inventory": 258.89,
+    "total_assets": 4269.47,
+    "equity": 3773.71,
+    "gpm": 41.8,
+    "opm": 20.0,
+    "s_일반 산업기기": 144,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 122,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 90,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 137,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 15,
+    "p_통신 인프라": null,
+    "orders": 541.4,
+    "ser": 4,
+    "sales_yoy": 6.9,
+    "op_yoy": -11.1,
+    "ord_yoy": -1.2,
+    "net_yoy": -9.1,
+    "gp_yoy": -1.9,
+    "sga_yoy": 6.9,
+    "cogs_yoy": 14.2,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "inventory_yoy": null,
+    "total_assets_yoy": null,
+    "equity_yoy": 2.0,
+    "s_일반 산업기기_yoy": 25.2,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": -8.3,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": -6.2,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 12.3,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 7.1,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 10.2,
+    "ser_yoy": null,
+    "s_oa": 5,
+    "s_conn": 513,
+    "s_other": 17,
+    "b2b": 1.02,
+    "sh_ind": 28.1,
+    "sh_phone": 23.8,
+    "sh_auto": 26.7,
+    "sh_cons": 17.5,
+    "s_oa_yoy": 0.0,
+    "s_conn_yoy": 5.8,
+    "s_other_yoy": 41.7
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 545.24,
+    "op": 120.42,
+    "ord": 131.93,
+    "net": 92.89,
+    "gp": 234.32,
+    "sga": 113.97,
+    "cogs": 310.92,
+    "cash": 863.38,
+    "debt_total": 0.0,
+    "inventory": 278.86,
+    "total_assets": 4278.27,
+    "equity": 3776.32,
+    "gpm": 43.0,
+    "opm": 22.1,
+    "s_일반 산업기기": 162,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 115,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 87,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 138,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 17,
+    "p_통신 인프라": null,
+    "orders": 555.9,
+    "ser": null,
+    "sales_yoy": 9.3,
+    "op_yoy": 0.4,
+    "ord_yoy": -3.1,
+    "net_yoy": -7.6,
+    "gp_yoy": 1.4,
+    "sga_yoy": 2.8,
+    "cogs_yoy": 16.1,
+    "cash_yoy": 6.7,
+    "debt_total_yoy": null,
+    "inventory_yoy": 13.3,
+    "total_assets_yoy": 1.3,
+    "equity_yoy": 0.5,
+    "s_일반 산업기기_yoy": 32.8,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": -11.5,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": -2.2,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 8.7,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 30.8,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 17.5,
+    "ser_yoy": null,
+    "s_oa": 4,
+    "s_conn": 523,
+    "s_other": 22,
+    "b2b": 1.02,
+    "sh_ind": 31.0,
+    "sh_phone": 22.0,
+    "sh_auto": 26.4,
+    "sh_cons": 16.6,
+    "s_oa_yoy": -20.0,
+    "s_conn_yoy": 7.6,
+    "s_other_yoy": 69.2
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 547.15,
+    "op": 104.92,
+    "ord": 113.32,
+    "net": 83.3,
+    "gp": 226.48,
+    "sga": 121.14,
+    "cogs": 320.67,
+    "cash": 873.35,
+    "debt_total": 0.0,
+    "inventory": 301.93,
+    "total_assets": 4311.77,
+    "equity": 3780.75,
+    "gpm": 41.4,
+    "opm": 19.2,
+    "s_일반 산업기기": 173,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 102,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 84,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 140,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 22,
+    "p_통신 인프라": null,
+    "orders": 632.4,
+    "ser": null,
+    "sales_yoy": 21.6,
+    "op_yoy": 24.1,
+    "ord_yoy": 29.5,
+    "net_yoy": 52.8,
+    "gp_yoy": 16.3,
+    "sga_yoy": 11.9,
+    "cogs_yoy": 25.6,
+    "cash_yoy": 1.9,
+    "debt_total_yoy": null,
+    "inventory_yoy": 20.3,
+    "total_assets_yoy": 3.4,
+    "equity_yoy": 2.1,
+    "s_일반 산업기기_yoy": 43.0,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 0.0,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 7.7,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 17.6,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 57.1,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 32.5,
+    "ser_yoy": null,
+    "s_oa": 5,
+    "s_conn": 526,
+    "s_other": 21,
+    "b2b": 1.16,
+    "sh_ind": 32.9,
+    "sh_phone": 19.4,
+    "sh_auto": 26.6,
+    "sh_cons": 16.0,
+    "emp_jp": 3386,
+    "emp_ovs": 1724,
+    "emp": 5110,
+    "s_oa_yoy": 25.0,
+    "s_conn_yoy": 20.1,
+    "s_other_yoy": 75.0
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 620.85,
+    "op": 133.38,
+    "ord": 144.66,
+    "net": 73.31,
+    "gp": 259.91,
+    "sga": 123.84,
+    "cogs": 360.94,
+    "cash": 1102.99,
+    "debt_total": 0.0,
+    "inventory": 337.28,
+    "total_assets": 4392.67,
+    "equity": 3794.49,
+    "gpm": 41.9,
+    "opm": 21.5,
+    "s_일반 산업기기": 206,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 108,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 95,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 156,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 25,
+    "p_통신 인프라": null,
+    "orders": 710.6,
+    "ser": 11,
+    "sales_yoy": 26.8,
+    "op_yoy": 35.6,
+    "ord_yoy": 41.3,
+    "net_yoy": 1.4,
+    "gp_yoy": 25.2,
+    "sga_yoy": 13.3,
+    "cogs_yoy": 27.9,
+    "cash_yoy": 34.9,
+    "debt_total_yoy": null,
+    "inventory_yoy": 32.7,
+    "total_assets_yoy": 4.5,
+    "equity_yoy": 1.4,
+    "s_일반 산업기기_yoy": 46.1,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 3.8,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 10.5,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 21.9,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 92.3,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 36.6,
+    "ser_yoy": null,
+    "s_oa": 5,
+    "s_conn": 594,
+    "s_other": 16,
+    "b2b": 1.14,
+    "sh_ind": 34.7,
+    "sh_phone": 18.2,
+    "sh_auto": 26.3,
+    "sh_cons": 16.0,
+    "s_oa_yoy": 0.0,
+    "s_conn_yoy": 24.3,
+    "s_other_yoy": 33.3
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 660.13,
+    "op": 153.87,
+    "ord": 151.1,
+    "net": 105.74,
+    "gp": 276.63,
+    "sga": 122.15,
+    "cogs": 383.5,
+    "cash": 903.61,
+    "debt_total": 0.0,
+    "inventory": 362.37,
+    "total_assets": 4436.99,
+    "equity": 3849.06,
+    "gpm": 41.9,
+    "opm": 23.3,
+    "s_일반 산업기기": 217,
+    "p_일반 산업기기": null,
+    "s_스마트폰·휴대단말": 128,
+    "p_스마트폰·휴대단말": null,
+    "s_컨슈머·모바일기기": 100,
+    "p_컨슈머·모바일기기": null,
+    "s_자동차·모빌리티": 157,
+    "p_자동차·모빌리티": null,
+    "s_통신 인프라": 23,
+    "p_통신 인프라": null,
+    "orders": 785.4,
+    "ser": 12,
+    "sales_yoy": 24.4,
+    "op_yoy": 44.8,
+    "ord_yoy": 27.4,
+    "net_yoy": 27.5,
+    "gp_yoy": 24.8,
+    "sga_yoy": 8.4,
+    "cogs_yoy": 24.1,
+    "cash_yoy": 7.5,
+    "debt_total_yoy": null,
+    "inventory_yoy": 40.0,
+    "total_assets_yoy": 3.9,
+    "equity_yoy": 2.0,
+    "s_일반 산업기기_yoy": 50.7,
+    "p_일반 산업기기_yoy": null,
+    "s_스마트폰·휴대단말_yoy": 4.9,
+    "p_스마트폰·휴대단말_yoy": null,
+    "s_컨슈머·모바일기기_yoy": 11.1,
+    "p_컨슈머·모바일기기_yoy": null,
+    "s_자동차·모빌리티_yoy": 14.6,
+    "p_자동차·모빌리티_yoy": null,
+    "s_통신 인프라_yoy": 53.3,
+    "p_통신 인프라_yoy": null,
+    "orders_yoy": 45.1,
+    "ser_yoy": 200.0,
+    "s_oa": 6,
+    "s_conn": 631,
+    "s_other": 17,
+    "b2b": 1.19,
+    "sh_ind": 34.4,
+    "sh_phone": 20.3,
+    "sh_auto": 24.9,
+    "sh_cons": 15.8,
+    "emp_jp": 3338,
+    "emp_ovs": 1773,
+    "emp": 5111,
+    "s_oa_yoy": 20.0,
+    "s_conn_yoy": 23.0,
+    "s_other_yoy": 0.0
+   }
+  ],
+  "a": [
+   {
+    "year": "2022/3",
+    "x": "2022/3",
+    "sales": 1636.71,
+    "op": 407.65,
+    "ord": 430.81,
+    "net": 314.37,
+    "opm": 24.9,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023/3",
+    "x": "2023/3",
+    "sales": 1832.24,
+    "op": 467.51,
+    "ord": 485.91,
+    "net": 346.48,
+    "opm": 25.5,
+    "sales_yoy": 11.9,
+    "op_yoy": 14.7,
+    "net_yoy": 10.2
+   },
+   {
+    "year": "2024/3",
+    "x": "2024/3",
+    "sales": 1655.09,
+    "op": 340.17,
+    "ord": 387.61,
+    "net": 264.8,
+    "opm": 20.6,
+    "sales_yoy": -9.7,
+    "op_yoy": -27.2,
+    "net_yoy": -23.6
+   },
+   {
+    "year": "2025/3",
+    "x": "2025/3",
+    "sales": 1894.2,
+    "op": 426.72,
+    "ord": 462.18,
+    "net": 330.33,
+    "opm": 22.5,
+    "sales_yoy": 14.4,
+    "op_yoy": 25.4,
+    "net_yoy": 24.7
+   },
+   {
+    "year": "2026/3",
+    "x": "2026/3",
+    "sales": 2112.64,
+    "op": 429.95,
+    "ord": 466.26,
+    "net": 331.42,
+    "opm": 20.4,
+    "sales_yoy": 11.5,
+    "op_yoy": 0.8,
+    "net_yoy": 0.3
+   },
+   {
+    "year": "2027/3 계획",
+    "x": "2027/3 계획",
+    "sales": 2500.0,
+    "op": 500.0,
+    "ord": 530.0,
+    "net": 350.0,
+    "opm": 20.0,
+    "sales_yoy": 18.3,
+    "op_yoy": 16.3,
+    "net_yoy": 5.6,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "capex": [
+   {
+    "x": "2024/3",
+    "capex": 188,
+    "dep": 140
+   },
+   {
+    "x": "2025/3",
+    "capex": 212,
+    "dep": 149
+   },
+   {
+    "x": "2026/3",
+    "capex": 199,
+    "dep": 161
+   },
+   {
+    "x": "2027/3 예상",
+    "capex": 250,
+    "dep": 180
+   }
+  ]
+ }
+}

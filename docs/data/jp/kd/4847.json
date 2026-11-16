@@ -1,1 +1,1116 @@
-{"c": "4847", "n": "인텔리전트 웨이브", "asof": "2026-11-04", "latest": "2027년 6월기 1분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "카드 결제 시스템(FEP·부정 탐지·가맹점 관리) 개발과 클라우드 서비스, 정보 보안 제품(CWAT). 대일본인쇄(DNP) 자회사. 단독 결산·단일 부문이라 결산단신 부문 숫자는 없고 사업 영역은 설명회 자료에서. 차입금 없음. 26.1Q 이익 급감은 일부 고객 품질 대응 비용", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "1Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "1Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "수주잔고", "d": "q", "bars": [{"k": "backlog", "l": "수주잔고", "u": "억엔", "c": 0}], "lines": [{"k": "backlog_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "1Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "수주고", "d": "q", "bars": [{"k": "orders", "l": "수주고", "u": "억엔", "c": 0}], "lines": [{"k": "orders_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "1Q27 결산설명자료·결산단신"}, {"sec": "사업 지표", "t": "수주잔고 · 스톡과 플로", "d": "q", "src": "1Q27 결산설명자료·결산단신 · 스톡 = 클라우드·보안 이용료·운용 보수처럼 매번 나는 매출, 플로 = 시스템 개발·제품 판매", "lines": [{"k": "bl_stock", "l": "수주잔고 · 스톡", "u": "억엔", "c": 0}, {"k": "bl_flow", "l": "수주잔고 · 플로", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "사업 영역별 매출", "d": "q", "src": "1Q27 결산설명자료·결산단신 · 설명회 자료에 1분기·상반기만 공개 — 26.2Q 는 상반기에서 1분기를 뺀 값, 빈 칸은 미공개", "lines": [{"k": "pay", "l": "결제 영역 매출", "u": "억엔", "c": 0}, {"k": "sec", "l": "보안 영역 매출", "u": "억엔", "c": 1}, {"k": "data", "l": "데이터 통신·분석 기반 매출", "u": "억엔", "c": 2}]}, {"sec": "사업 지표", "t": "시스템 개발과 클라우드 서비스 매출", "d": "q", "src": "1Q27 결산설명자료·결산단신 · 26.2Q 는 상반기에서 1분기를 뺀 값", "lines": [{"k": "sysdev", "l": "시스템 개발 매출", "u": "억엔", "c": 0}, {"k": "cloud", "l": "클라우드 서비스 매출", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "스톡·플로 매출(1분기)", "d": "q", "src": "1Q27 결산설명자료·결산단신 · 설명회 자료는 각 연도 1분기만 공개", "lines": [{"k": "st_sales", "l": "스톡 매출", "u": "억엔", "c": 0}, {"k": "fl_sales", "l": "플로 매출", "u": "억엔", "c": 1}]}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "1Q27 결산설명자료·결산단신"}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "1Q27 결산설명자료·결산단신"}], "tables": {"q": [{"q": "24.4Q", "x": "24.4Q", "sales": 37.67, "op": 5.34, "ord": 5.69, "net": 3.93, "gp": null, "sga": null, "cogs": null, "cash": 48.21, "debt_total": 0, "equity": 92.23, "total_assets": 168.48, "gpm": null, "opm": 14.2, "orders": null, "backlog": null, "bl_stock": null, "bl_flow": null, "pay": null, "sec": null, "data": null, "sysdev": null, "cloud": null, "st_sales": null, "fl_sales": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "orders_yoy": null, "backlog_yoy": null, "bl_stock_yoy": null, "bl_flow_yoy": null, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 35.42, "op": 3.04, "ord": 3.04, "net": 2.08, "gp": 9.79, "sga": 6.75, "cogs": 25.63, "cash": 45.04, "debt_total": 0, "equity": 87.28, "total_assets": 159.03, "gpm": 27.6, "opm": 8.6, "orders": 55.94, "backlog": 186.36, "bl_stock": 164.01, "bl_flow": 22.35, "pay": null, "sec": null, "data": null, "sysdev": null, "cloud": null, "st_sales": 19.59, "fl_sales": 15.83, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "orders_yoy": null, "backlog_yoy": null, "bl_stock_yoy": null, "bl_flow_yoy": null, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 39.98, "op": 5.53, "ord": 5.83, "net": 4.02, "gp": 12.52, "sga": 6.99, "cogs": 27.46, "cash": 46.71, "debt_total": 0, "equity": 91.16, "total_assets": 168.7, "gpm": 31.3, "opm": 13.8, "orders": 71.56, "backlog": 217.95, "bl_stock": 198.98, "bl_flow": 18.96, "pay": null, "sec": null, "data": null, "sysdev": null, "cloud": null, "st_sales": null, "fl_sales": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "orders_yoy": null, "backlog_yoy": null, "bl_stock_yoy": null, "bl_flow_yoy": null, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 39.9, "op": 5.88, "ord": 5.73, "net": 4.14, "gp": 13.02, "sga": 7.13, "cogs": 26.88, "cash": 48.84, "debt_total": 0, "equity": 91.35, "total_assets": 180.33, "gpm": 32.6, "opm": 14.7, "orders": 33.82, "backlog": 211.87, "bl_stock": 195.98, "bl_flow": 15.88, "pay": null, "sec": null, "data": null, "sysdev": null, "cloud": null, "st_sales": null, "fl_sales": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "orders_yoy": null, "backlog_yoy": null, "bl_stock_yoy": null, "bl_flow_yoy": null, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 40.66, "op": 4.03, "ord": 4.3, "net": 3.25, "gp": 11.32, "sga": 7.3, "cogs": 29.34, "cash": 64.31, "debt_total": 0, "equity": 94.75, "total_assets": 186.91, "gpm": 27.8, "opm": 9.9, "orders": 31.89, "backlog": 203.11, "bl_stock": 191.96, "bl_flow": 11.15, "pay": null, "sec": null, "data": null, "sysdev": null, "cloud": null, "st_sales": null, "fl_sales": null, "sales_yoy": 7.9, "gp_yoy": null, "sga_yoy": null, "op_yoy": -24.5, "ord_yoy": -24.4, "net_yoy": -17.3, "cash_yoy": 33.4, "orders_yoy": null, "backlog_yoy": null, "bl_stock_yoy": null, "bl_flow_yoy": null, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 37.46, "op": 2.05, "ord": 2.04, "net": 1.39, "gp": 9.33, "sga": 7.27, "cogs": 28.13, "cash": 51.34, "debt_total": 0, "equity": 91.23, "total_assets": 172.78, "gpm": 24.9, "opm": 5.5, "orders": 36.73, "backlog": 202.38, "bl_stock": 179.27, "bl_flow": 23.1, "pay": 30.68, "sec": 4.99, "data": 1.77, "sysdev": 12.75, "cloud": 10.14, "st_sales": 26.17, "fl_sales": 11.28, "sales_yoy": 5.8, "gp_yoy": -4.7, "sga_yoy": 7.7, "op_yoy": -32.6, "ord_yoy": -32.9, "net_yoy": -33.2, "cash_yoy": 14.0, "orders_yoy": -34.3, "backlog_yoy": 8.6, "bl_stock_yoy": 9.3, "bl_flow_yoy": 3.4, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": 33.6, "fl_sales_yoy": -28.7}, {"q": "26.2Q", "x": "26.2Q", "sales": 46.06, "op": 6.7, "ord": 6.97, "net": 4.67, "gp": 13.8, "sga": 7.1, "cogs": 32.26, "cash": 48.26, "debt_total": 0, "equity": 97.01, "total_assets": 174.21, "gpm": 30.0, "opm": 14.5, "orders": 33.92, "backlog": 190.24, "bl_stock": 170.18, "bl_flow": 20.05, "pay": 39.01, "sec": 4.93, "data": 2.1, "sysdev": 14.94, "cloud": 10.21, "st_sales": null, "fl_sales": null, "sales_yoy": 15.2, "gp_yoy": 10.2, "sga_yoy": 1.6, "op_yoy": 21.2, "ord_yoy": 19.6, "net_yoy": 16.2, "cash_yoy": 3.3, "orders_yoy": -52.6, "backlog_yoy": -12.7, "bl_stock_yoy": -14.5, "bl_flow_yoy": 5.7, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 41.45, "op": 4.86, "ord": 4.9, "net": 3.45, "gp": 11.7, "sga": 6.83, "cogs": 29.75, "cash": 46.29, "debt_total": 0, "equity": 96.13, "total_assets": 169.91, "gpm": 28.2, "opm": 11.7, "orders": 39.11, "backlog": 187.9, "bl_stock": 158.94, "bl_flow": 28.95, "pay": null, "sec": null, "data": null, "sysdev": null, "cloud": null, "st_sales": null, "fl_sales": null, "sales_yoy": 3.9, "gp_yoy": -10.1, "sga_yoy": -4.2, "op_yoy": -17.3, "ord_yoy": -14.5, "net_yoy": -16.7, "cash_yoy": -5.2, "orders_yoy": 15.6, "backlog_yoy": -11.3, "bl_stock_yoy": -18.9, "bl_flow_yoy": 82.3, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 47.5, "op": 7.15, "ord": 7.38, "net": 5.36, "gp": 14.64, "sga": 7.49, "cogs": 32.86, "cash": 46.43, "debt_total": 0, "equity": 100.66, "total_assets": 173.33, "gpm": 30.8, "opm": 15.1, "orders": 43.88, "backlog": 184.28, "bl_stock": 158.2, "bl_flow": 26.08, "pay": null, "sec": null, "data": null, "sysdev": null, "cloud": null, "st_sales": null, "fl_sales": null, "sales_yoy": 16.8, "gp_yoy": 29.3, "sga_yoy": 2.6, "op_yoy": 77.4, "ord_yoy": 71.6, "net_yoy": 64.9, "cash_yoy": -27.8, "orders_yoy": 37.6, "backlog_yoy": -9.3, "bl_stock_yoy": -17.6, "bl_flow_yoy": 133.9, "pay_yoy": null, "sec_yoy": null, "data_yoy": null, "sysdev_yoy": null, "cloud_yoy": null, "st_sales_yoy": null, "fl_sales_yoy": null}, {"q": "27.1Q", "x": "27.1Q", "sales": 46.38, "op": 6.74, "ord": 6.76, "net": 4.57, "gp": 13.84, "sga": 7.09, "cogs": 32.54, "cash": 51.2, "debt_total": 0, "equity": 99.66, "total_assets": 171.9, "gpm": 29.8, "opm": 14.5, "orders": 29.79, "backlog": 167.7, "bl_stock": 148.82, "bl_flow": 18.88, "pay": 39.05, "sec": 5.37, "data": 1.96, "sysdev": 16.47, "cloud": 11.42, "st_sales": 27.56, "fl_sales": 18.82, "sales_yoy": 23.8, "gp_yoy": 48.3, "sga_yoy": -2.5, "op_yoy": 228.8, "ord_yoy": 231.4, "net_yoy": 228.8, "cash_yoy": -0.3, "orders_yoy": -18.9, "backlog_yoy": -17.1, "bl_stock_yoy": -17.0, "bl_flow_yoy": -18.3, "pay_yoy": 27.3, "sec_yoy": 7.6, "data_yoy": 10.7, "sysdev_yoy": 29.2, "cloud_yoy": 12.6, "st_sales_yoy": 5.3, "fl_sales_yoy": 66.8}], "a": [{"x": "2021", "sales": 111.87, "op": 11.3, "ord": 11.71, "net": 8.4, "opm": 10.1, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"x": "2022", "sales": 114.93, "op": 15.19, "ord": 15.56, "net": 10.55, "opm": 13.2, "sales_yoy": 2.7, "op_yoy": 34.4, "net_yoy": 25.6}, {"x": "2023", "sales": 133.74, "op": 15.56, "ord": 16.03, "net": 11.65, "opm": 11.6, "sales_yoy": 16.4, "op_yoy": 2.4, "net_yoy": 10.4}, {"x": "2024", "sales": 145.18, "op": 20.3, "ord": 20.72, "net": 14.2, "opm": 14.0, "sales_yoy": 8.6, "op_yoy": 30.5, "net_yoy": 21.9}, {"x": "2025", "sales": 155.96, "op": 18.48, "ord": 18.9, "net": 13.49, "opm": 11.8, "sales_yoy": 7.4, "op_yoy": -9.0, "net_yoy": -5.0}, {"x": "2026", "sales": 172.47, "op": 20.76, "ord": 21.29, "net": 14.87, "opm": 12.0, "sales_yoy": 10.6, "op_yoy": 12.3, "net_yoy": 10.2}, {"x": "2027 계획", "sales": 177.0, "op": 22.0, "ord": 22.4, "net": 15.3, "opm": 12.4, "sales_yoy": 2.6, "op_yoy": 6.0, "net_yoy": 2.9, "plan": 1}]}}
+{
+ "c": "4847",
+ "n": "인텔리전트 웨이브",
+ "asof": "2026-11-04",
+ "latest": "2027년 6월기 1분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "카드 결제 시스템(FEP·부정 탐지·가맹점 관리) 개발과 클라우드 서비스, 정보 보안 제품(CWAT). 대일본인쇄(DNP) 자회사. 단독 결산·단일 부문이라 결산단신 부문 숫자는 없고 사업 영역은 설명회 자료에서. 차입금 없음. 26.1Q 이익 급감은 일부 고객 품질 대응 비용",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "1Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "1Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "수주잔고",
+   "d": "q",
+   "bars": [
+    {
+     "k": "backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "backlog_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "1Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "수주고",
+   "d": "q",
+   "bars": [
+    {
+     "k": "orders",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "orders_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "1Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "사업 지표",
+   "t": "수주잔고 · 스톡과 플로",
+   "d": "q",
+   "src": "1Q27 결산설명자료·결산단신 · 스톡 = 클라우드·보안 이용료·운용 보수처럼 매번 나는 매출, 플로 = 시스템 개발·제품 판매",
+   "lines": [
+    {
+     "k": "bl_stock",
+     "l": "수주잔고 · 스톡",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "bl_flow",
+     "l": "수주잔고 · 플로",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "사업 지표",
+   "t": "사업 영역별 매출",
+   "d": "q",
+   "src": "1Q27 결산설명자료·결산단신 · 설명회 자료에 1분기·상반기만 공개 — 26.2Q 는 상반기에서 1분기를 뺀 값, 빈 칸은 미공개",
+   "lines": [
+    {
+     "k": "pay",
+     "l": "결제 영역 매출",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "sec",
+     "l": "보안 영역 매출",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "data",
+     "l": "데이터 통신·분석 기반 매출",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "사업 지표",
+   "t": "시스템 개발과 클라우드 서비스 매출",
+   "d": "q",
+   "src": "1Q27 결산설명자료·결산단신 · 26.2Q 는 상반기에서 1분기를 뺀 값",
+   "lines": [
+    {
+     "k": "sysdev",
+     "l": "시스템 개발 매출",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "cloud",
+     "l": "클라우드 서비스 매출",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "사업 지표",
+   "t": "스톡·플로 매출(1분기)",
+   "d": "q",
+   "src": "1Q27 결산설명자료·결산단신 · 설명회 자료는 각 연도 1분기만 공개",
+   "lines": [
+    {
+     "k": "st_sales",
+     "l": "스톡 매출",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "fl_sales",
+     "l": "플로 매출",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "영업이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "1Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "1Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "수주",
+   "t": "제품별 수주고",
+   "d": "q",
+   "lines": [
+    {
+     "k": "ord_dev",
+     "l": "시스템 개발",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ord_mnt",
+     "l": "보수·자사 제품·타사 제품",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "ord_cld",
+     "l": "클라우드 서비스",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "ord_sec",
+     "l": "보안",
+     "u": "억엔",
+     "c": 3
+    }
+   ],
+   "src": "2027년 6월기 1Q 결산설명회 자료 p8·p9(제품 카테고리별 분기 추이, 25.1Q~27.1Q)"
+  },
+  {
+   "sec": "수주",
+   "t": "제품별 수주잔고",
+   "d": "q",
+   "lines": [
+    {
+     "k": "bl_dev",
+     "l": "시스템 개발",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "bl_mnt",
+     "l": "보수·자사 제품·타사 제품",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "bl_cld",
+     "l": "클라우드 서비스",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "bl_sec",
+     "l": "보안",
+     "u": "억엔",
+     "c": 3
+    }
+   ],
+   "src": "2027년 6월기 1Q 결산설명회 자료 p8·p9(제품 카테고리별 분기 추이, 25.1Q~27.1Q)"
+  },
+  {
+   "sec": "수주",
+   "t": "클라우드 서비스 수주잔고",
+   "d": "q",
+   "bars": [
+    {
+     "k": "bl_cld",
+     "l": "클라우드 수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "bl_cld_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 6월기 1Q 결산설명회 자료 p8·p9(제품 카테고리별 분기 추이, 25.1Q~27.1Q)"
+  },
+  {
+   "sec": "수주",
+   "t": "시스템 개발 수주고",
+   "d": "q",
+   "bars": [
+    {
+     "k": "ord_dev",
+     "l": "시스템 개발 수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ord_dev_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 6월기 1Q 결산설명회 자료 p8·p9(제품 카테고리별 분기 추이, 25.1Q~27.1Q)"
+  },
+  {
+   "sec": "수주",
+   "t": "보안 수주잔고",
+   "d": "q",
+   "bars": [
+    {
+     "k": "bl_sec",
+     "l": "보안 수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "bl_sec_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 6월기 1Q 결산설명회 자료 p8·p9(제품 카테고리별 분기 추이, 25.1Q~27.1Q)"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 37.67,
+    "op": 5.34,
+    "ord": 5.69,
+    "net": 3.93,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 48.21,
+    "debt_total": 0,
+    "equity": 92.23,
+    "total_assets": 168.48,
+    "gpm": null,
+    "opm": 14.2,
+    "orders": null,
+    "backlog": null,
+    "bl_stock": null,
+    "bl_flow": null,
+    "pay": null,
+    "sec": null,
+    "data": null,
+    "sysdev": null,
+    "cloud": null,
+    "st_sales": null,
+    "fl_sales": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "orders_yoy": null,
+    "backlog_yoy": null,
+    "bl_stock_yoy": null,
+    "bl_flow_yoy": null,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 35.42,
+    "op": 3.04,
+    "ord": 3.04,
+    "net": 2.08,
+    "gp": 9.79,
+    "sga": 6.75,
+    "cogs": 25.63,
+    "cash": 45.04,
+    "debt_total": 0,
+    "equity": 87.28,
+    "total_assets": 159.03,
+    "gpm": 27.6,
+    "opm": 8.6,
+    "orders": 55.94,
+    "backlog": 186.36,
+    "bl_stock": 164.01,
+    "bl_flow": 22.35,
+    "pay": null,
+    "sec": null,
+    "data": null,
+    "sysdev": null,
+    "cloud": null,
+    "st_sales": 19.59,
+    "fl_sales": 15.83,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "orders_yoy": null,
+    "backlog_yoy": null,
+    "bl_stock_yoy": null,
+    "bl_flow_yoy": null,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null,
+    "ord_dev": 17.45,
+    "ord_mnt": 3.15,
+    "ord_cld": 16.18,
+    "ord_sec": 19.15,
+    "bl_dev": 25.03,
+    "bl_mnt": 27.04,
+    "bl_cld": 103.26,
+    "bl_sec": 31.02
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 39.98,
+    "op": 5.53,
+    "ord": 5.83,
+    "net": 4.02,
+    "gp": 12.52,
+    "sga": 6.99,
+    "cogs": 27.46,
+    "cash": 46.71,
+    "debt_total": 0,
+    "equity": 91.16,
+    "total_assets": 168.7,
+    "gpm": 31.3,
+    "opm": 13.8,
+    "orders": 71.56,
+    "backlog": 217.95,
+    "bl_stock": 198.98,
+    "bl_flow": 18.96,
+    "pay": null,
+    "sec": null,
+    "data": null,
+    "sysdev": null,
+    "cloud": null,
+    "st_sales": null,
+    "fl_sales": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "orders_yoy": null,
+    "backlog_yoy": null,
+    "bl_stock_yoy": null,
+    "bl_flow_yoy": null,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null,
+    "ord_dev": 16.83,
+    "ord_mnt": 28.35,
+    "ord_cld": 19.32,
+    "ord_sec": 7.04,
+    "bl_dev": 22.17,
+    "bl_mnt": 48.37,
+    "bl_cld": 114.49,
+    "bl_sec": 32.89
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 39.9,
+    "op": 5.88,
+    "ord": 5.73,
+    "net": 4.14,
+    "gp": 13.02,
+    "sga": 7.13,
+    "cogs": 26.88,
+    "cash": 48.84,
+    "debt_total": 0,
+    "equity": 91.35,
+    "total_assets": 180.33,
+    "gpm": 32.6,
+    "opm": 14.7,
+    "orders": 33.82,
+    "backlog": 211.87,
+    "bl_stock": 195.98,
+    "bl_flow": 15.88,
+    "pay": null,
+    "sec": null,
+    "data": null,
+    "sysdev": null,
+    "cloud": null,
+    "st_sales": null,
+    "fl_sales": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "orders_yoy": null,
+    "backlog_yoy": null,
+    "bl_stock_yoy": null,
+    "bl_flow_yoy": null,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null,
+    "ord_dev": 13.19,
+    "ord_mnt": 10.15,
+    "ord_cld": 4.66,
+    "ord_sec": 5.81,
+    "bl_dev": 18.81,
+    "bl_mnt": 50.55,
+    "bl_cld": 109.35,
+    "bl_sec": 33.13
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 40.66,
+    "op": 4.03,
+    "ord": 4.3,
+    "net": 3.25,
+    "gp": 11.32,
+    "sga": 7.3,
+    "cogs": 29.34,
+    "cash": 64.31,
+    "debt_total": 0,
+    "equity": 94.75,
+    "total_assets": 186.91,
+    "gpm": 27.8,
+    "opm": 9.9,
+    "orders": 31.89,
+    "backlog": 203.11,
+    "bl_stock": 191.96,
+    "bl_flow": 11.15,
+    "pay": null,
+    "sec": null,
+    "data": null,
+    "sysdev": null,
+    "cloud": null,
+    "st_sales": null,
+    "fl_sales": null,
+    "sales_yoy": 7.9,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": -24.5,
+    "ord_yoy": -24.4,
+    "net_yoy": -17.3,
+    "cash_yoy": 33.4,
+    "orders_yoy": null,
+    "backlog_yoy": null,
+    "bl_stock_yoy": null,
+    "bl_flow_yoy": null,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null,
+    "ord_dev": 12.2,
+    "ord_mnt": 8.73,
+    "ord_cld": 8.85,
+    "ord_sec": 2.09,
+    "bl_dev": 13.98,
+    "bl_mnt": 50.77,
+    "bl_cld": 108.5,
+    "bl_sec": 29.85
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 37.46,
+    "op": 2.05,
+    "ord": 2.04,
+    "net": 1.39,
+    "gp": 9.33,
+    "sga": 7.27,
+    "cogs": 28.13,
+    "cash": 51.34,
+    "debt_total": 0,
+    "equity": 91.23,
+    "total_assets": 172.78,
+    "gpm": 24.9,
+    "opm": 5.5,
+    "orders": 36.73,
+    "backlog": 202.38,
+    "bl_stock": 179.27,
+    "bl_flow": 23.1,
+    "pay": 30.68,
+    "sec": 4.99,
+    "data": 1.77,
+    "sysdev": 12.75,
+    "cloud": 10.14,
+    "st_sales": 26.17,
+    "fl_sales": 11.28,
+    "sales_yoy": 5.8,
+    "gp_yoy": -4.7,
+    "sga_yoy": 7.7,
+    "op_yoy": -32.6,
+    "ord_yoy": -32.9,
+    "net_yoy": -33.2,
+    "cash_yoy": 14.0,
+    "orders_yoy": -34.3,
+    "backlog_yoy": 8.6,
+    "bl_stock_yoy": 9.3,
+    "bl_flow_yoy": 3.4,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": 33.6,
+    "fl_sales_yoy": -28.7,
+    "ord_dev": 17.92,
+    "ord_mnt": 12.31,
+    "ord_cld": 1.59,
+    "ord_sec": 4.88,
+    "bl_dev": 19.14,
+    "bl_mnt": 53.53,
+    "bl_cld": 99.95,
+    "bl_sec": 29.73,
+    "ord_dev_yoy": 2.7,
+    "ord_mnt_yoy": 290.8,
+    "ord_cld_yoy": -90.2,
+    "ord_sec_yoy": -74.5,
+    "bl_dev_yoy": -23.5,
+    "bl_mnt_yoy": 98.0,
+    "bl_cld_yoy": -3.2,
+    "bl_sec_yoy": -4.2
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 46.06,
+    "op": 6.7,
+    "ord": 6.97,
+    "net": 4.67,
+    "gp": 13.8,
+    "sga": 7.1,
+    "cogs": 32.26,
+    "cash": 48.26,
+    "debt_total": 0,
+    "equity": 97.01,
+    "total_assets": 174.21,
+    "gpm": 30.0,
+    "opm": 14.5,
+    "orders": 33.92,
+    "backlog": 190.24,
+    "bl_stock": 170.18,
+    "bl_flow": 20.05,
+    "pay": 39.01,
+    "sec": 4.93,
+    "data": 2.1,
+    "sysdev": 14.94,
+    "cloud": 10.21,
+    "st_sales": null,
+    "fl_sales": null,
+    "sales_yoy": 15.2,
+    "gp_yoy": 10.2,
+    "sga_yoy": 1.6,
+    "op_yoy": 21.2,
+    "ord_yoy": 19.6,
+    "net_yoy": 16.2,
+    "cash_yoy": 3.3,
+    "orders_yoy": -52.6,
+    "backlog_yoy": -12.7,
+    "bl_stock_yoy": -14.5,
+    "bl_flow_yoy": 5.7,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null,
+    "ord_dev": 16.92,
+    "ord_mnt": 7.23,
+    "ord_cld": 7.75,
+    "ord_sec": 1.99,
+    "bl_dev": 21.13,
+    "bl_mnt": 44.8,
+    "bl_cld": 97.5,
+    "bl_sec": 26.79,
+    "ord_dev_yoy": 0.5,
+    "ord_mnt_yoy": -74.5,
+    "ord_cld_yoy": -59.9,
+    "ord_sec_yoy": -71.7,
+    "bl_dev_yoy": -4.7,
+    "bl_mnt_yoy": -7.4,
+    "bl_cld_yoy": -14.8,
+    "bl_sec_yoy": -18.5
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 41.45,
+    "op": 4.86,
+    "ord": 4.9,
+    "net": 3.45,
+    "gp": 11.7,
+    "sga": 6.83,
+    "cogs": 29.75,
+    "cash": 46.29,
+    "debt_total": 0,
+    "equity": 96.13,
+    "total_assets": 169.91,
+    "gpm": 28.2,
+    "opm": 11.7,
+    "orders": 39.11,
+    "backlog": 187.9,
+    "bl_stock": 158.94,
+    "bl_flow": 28.95,
+    "pay": null,
+    "sec": null,
+    "data": null,
+    "sysdev": null,
+    "cloud": null,
+    "st_sales": null,
+    "fl_sales": null,
+    "sales_yoy": 3.9,
+    "gp_yoy": -10.1,
+    "sga_yoy": -4.2,
+    "op_yoy": -17.3,
+    "ord_yoy": -14.5,
+    "net_yoy": -16.7,
+    "cash_yoy": -5.2,
+    "orders_yoy": 15.6,
+    "backlog_yoy": -11.3,
+    "bl_stock_yoy": -18.9,
+    "bl_flow_yoy": 82.3,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null,
+    "ord_dev": 19.04,
+    "ord_mnt": 14.67,
+    "ord_cld": 3.75,
+    "ord_sec": 1.63,
+    "bl_dev": 24.0,
+    "bl_mnt": 49.85,
+    "bl_cld": 90.36,
+    "bl_sec": 23.65,
+    "ord_dev_yoy": 44.4,
+    "ord_mnt_yoy": 44.5,
+    "ord_cld_yoy": -19.5,
+    "ord_sec_yoy": -71.9,
+    "bl_dev_yoy": 27.6,
+    "bl_mnt_yoy": -1.4,
+    "bl_cld_yoy": -17.4,
+    "bl_sec_yoy": -28.6
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 47.5,
+    "op": 7.15,
+    "ord": 7.38,
+    "net": 5.36,
+    "gp": 14.64,
+    "sga": 7.49,
+    "cogs": 32.86,
+    "cash": 46.43,
+    "debt_total": 0,
+    "equity": 100.66,
+    "total_assets": 173.33,
+    "gpm": 30.8,
+    "opm": 15.1,
+    "orders": 43.88,
+    "backlog": 184.28,
+    "bl_stock": 158.2,
+    "bl_flow": 26.08,
+    "pay": null,
+    "sec": null,
+    "data": null,
+    "sysdev": null,
+    "cloud": null,
+    "st_sales": null,
+    "fl_sales": null,
+    "sales_yoy": 16.8,
+    "gp_yoy": 29.3,
+    "sga_yoy": 2.6,
+    "op_yoy": 77.4,
+    "ord_yoy": 71.6,
+    "net_yoy": 64.9,
+    "cash_yoy": -27.8,
+    "orders_yoy": 37.6,
+    "backlog_yoy": -9.3,
+    "bl_stock_yoy": -17.6,
+    "bl_flow_yoy": 133.9,
+    "pay_yoy": null,
+    "sec_yoy": null,
+    "data_yoy": null,
+    "sysdev_yoy": null,
+    "cloud_yoy": null,
+    "st_sales_yoy": null,
+    "fl_sales_yoy": null,
+    "ord_dev": 16.55,
+    "ord_mnt": 8.02,
+    "ord_cld": 15.39,
+    "ord_sec": 3.91,
+    "bl_dev": 22.54,
+    "bl_mnt": 46.04,
+    "bl_cld": 94.07,
+    "bl_sec": 21.63,
+    "ord_dev_yoy": 35.7,
+    "ord_mnt_yoy": -8.1,
+    "ord_cld_yoy": 73.9,
+    "ord_sec_yoy": 87.1,
+    "bl_dev_yoy": 61.2,
+    "bl_mnt_yoy": -9.3,
+    "bl_cld_yoy": -13.3,
+    "bl_sec_yoy": -27.5
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 46.38,
+    "op": 6.74,
+    "ord": 6.76,
+    "net": 4.57,
+    "gp": 13.84,
+    "sga": 7.09,
+    "cogs": 32.54,
+    "cash": 51.2,
+    "debt_total": 0,
+    "equity": 99.66,
+    "total_assets": 171.9,
+    "gpm": 29.8,
+    "opm": 14.5,
+    "orders": 29.79,
+    "backlog": 167.7,
+    "bl_stock": 148.82,
+    "bl_flow": 18.88,
+    "pay": 39.05,
+    "sec": 5.37,
+    "data": 1.96,
+    "sysdev": 16.47,
+    "cloud": 11.42,
+    "st_sales": 27.56,
+    "fl_sales": 18.82,
+    "sales_yoy": 23.8,
+    "gp_yoy": 48.3,
+    "sga_yoy": -2.5,
+    "op_yoy": 228.8,
+    "ord_yoy": 231.4,
+    "net_yoy": 228.8,
+    "cash_yoy": -0.3,
+    "orders_yoy": -18.9,
+    "backlog_yoy": -17.1,
+    "bl_stock_yoy": -17.0,
+    "bl_flow_yoy": -18.3,
+    "pay_yoy": 27.3,
+    "sec_yoy": 7.6,
+    "data_yoy": 10.7,
+    "sysdev_yoy": 29.2,
+    "cloud_yoy": 12.6,
+    "st_sales_yoy": 5.3,
+    "fl_sales_yoy": 66.8,
+    "ord_dev": 13.49,
+    "ord_mnt": 6.39,
+    "ord_cld": 7.15,
+    "ord_sec": 2.74,
+    "bl_dev": 19.57,
+    "bl_mnt": 39.32,
+    "bl_cld": 89.79,
+    "bl_sec": 19.0,
+    "ord_dev_yoy": -24.7,
+    "ord_mnt_yoy": -48.1,
+    "ord_cld_yoy": 349.7,
+    "ord_sec_yoy": -43.9,
+    "bl_dev_yoy": 2.2,
+    "bl_mnt_yoy": -26.5,
+    "bl_cld_yoy": -10.2,
+    "bl_sec_yoy": -36.1
+   }
+  ],
+  "a": [
+   {
+    "x": "2021",
+    "sales": 111.87,
+    "op": 11.3,
+    "ord": 11.71,
+    "net": 8.4,
+    "opm": 10.1,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "x": "2022",
+    "sales": 114.93,
+    "op": 15.19,
+    "ord": 15.56,
+    "net": 10.55,
+    "opm": 13.2,
+    "sales_yoy": 2.7,
+    "op_yoy": 34.4,
+    "net_yoy": 25.6
+   },
+   {
+    "x": "2023",
+    "sales": 133.74,
+    "op": 15.56,
+    "ord": 16.03,
+    "net": 11.65,
+    "opm": 11.6,
+    "sales_yoy": 16.4,
+    "op_yoy": 2.4,
+    "net_yoy": 10.4
+   },
+   {
+    "x": "2024",
+    "sales": 145.18,
+    "op": 20.3,
+    "ord": 20.72,
+    "net": 14.2,
+    "opm": 14.0,
+    "sales_yoy": 8.6,
+    "op_yoy": 30.5,
+    "net_yoy": 21.9
+   },
+   {
+    "x": "2025",
+    "sales": 155.96,
+    "op": 18.48,
+    "ord": 18.9,
+    "net": 13.49,
+    "opm": 11.8,
+    "sales_yoy": 7.4,
+    "op_yoy": -9.0,
+    "net_yoy": -5.0
+   },
+   {
+    "x": "2026",
+    "sales": 172.47,
+    "op": 20.76,
+    "ord": 21.29,
+    "net": 14.87,
+    "opm": 12.0,
+    "sales_yoy": 10.6,
+    "op_yoy": 12.3,
+    "net_yoy": 10.2
+   },
+   {
+    "x": "2027 계획",
+    "sales": 177.0,
+    "op": 22.0,
+    "ord": 22.4,
+    "net": 15.3,
+    "opm": 12.4,
+    "sales_yoy": 2.6,
+    "op_yoy": 6.0,
+    "net_yoy": 2.9,
+    "plan": 1
+   }
+  ]
+ }
+}
