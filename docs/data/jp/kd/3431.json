@@ -1,1 +1,1231 @@
-{"c": "3431", "n": "미야지엔지니어링그룹", "asof": "2026-11-11", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "교량 강구조물 회사. 매출총이익 = 완성공사총이익, 판관비 = 총이익 − 영업이익. 총차입금 = 단기차입금 + 장기차입금(1년 내 포함), 2025년 3월 이전은 장기 잔액을 못 찾아 비움. 결산설명회 자료는 연간(2026년 3월기) 자료라 수주 지표는 연간·반기만", "charts": [{"sec": "key", "t": "수주잔고(연간)", "def": "기말 수주잔고. 마지막 막대 = 회사 계획", "d": "order_a", "bars": [{"k": "backlog", "l": "수주잔고", "u": "억엔", "c": 0}], "muted": "plan", "src": "2026년 3월기 결산설명회 자료"}, {"sec": "key", "t": "수주고(연간)", "d": "order_a", "bars": [{"k": "orders", "l": "수주고", "u": "억엔", "c": 0}], "muted": "plan", "src": "2026년 3월기 결산설명회 자료 · 마지막 막대 = 회사 계획"}, {"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "사업 지표", "t": "상반기 부문별 수주고", "d": "order_h", "src": "2Q27 결산단신 · 수주 상황", "lines": [{"k": "ord_me", "l": "미야지엔지니어링", "u": "억엔", "c": 0}, {"k": "ord_mmb", "l": "엠엠브리지", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "상반기말 부문별 수주잔고", "d": "order_h", "src": "2Q27 결산단신 · 수주 상황 · 엠엠브리지가 대형 보수·갱신 공사를 따내 잔고가 미야지 본체를 넘음", "lines": [{"k": "bl_me", "l": "미야지엔지니어링", "u": "억엔", "c": 0}, {"k": "bl_mmb", "l": "엠엠브리지", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 매출(외부 고객)", "d": "q", "src": "결산단신 부문 정보(누계 차분)", "lines": [{"k": "seg_me", "l": "미야지엔지니어링", "u": "억엔", "c": 0}, {"k": "seg_mmb", "l": "엠엠브리지", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 영업이익", "d": "q", "src": "결산단신 부문 정보(누계 차분)", "lines": [{"k": "segop_me", "l": "미야지엔지니어링", "u": "억엔", "c": 0}, {"k": "segop_mmb", "l": "엠엠브리지", "u": "억엔", "c": 1}]}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "완성공사총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산단신 · 총차입금 정의는 메모 참고"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 206.15, "op": 38.5, "ord": 37.0, "net": 19.25, "gp": 53.15, "sga": 14.65, "cogs": 153.0, "debt_total": null, "equity": 449.53, "total_assets": 707.39, "cash": 107.4, "gpm": 25.8, "opm": 18.7, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "cash_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 170.56, "op": 11.03, "ord": 11.19, "net": 6.53, "gp": 25.75, "sga": 14.72, "cogs": 144.81, "debt_total": null, "equity": 466.14, "total_assets": 741.46, "cash": 191.15, "gpm": 15.1, "opm": 6.5, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "cash_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 156.92, "op": 12.1, "ord": 13.09, "net": 7.22, "gp": 23.11, "sga": 11.01, "cogs": 133.81, "debt_total": null, "equity": 454.46, "total_assets": 721.24, "cash": 176.57, "gpm": 14.7, "opm": 7.7, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "cash_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 204.08, "op": 32.7, "ord": 33.23, "net": 15.36, "gp": 43.84, "sga": 11.14, "cogs": 160.24, "debt_total": null, "equity": 458.1, "total_assets": 744.98, "cash": 92.6, "gpm": 21.5, "opm": 16.0, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cogs_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "cash_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 178.29, "op": 29.68, "ord": 30.55, "net": 14.63, "gp": 40.54, "sga": 10.86, "cogs": 137.75, "debt_total": null, "equity": 468.16, "total_assets": 775.99, "cash": 98.17, "gpm": 22.7, "opm": 16.6, "sales_yoy": -13.5, "op_yoy": -22.9, "ord_yoy": -17.4, "net_yoy": -24.0, "gp_yoy": -23.7, "sga_yoy": -25.9, "cogs_yoy": -10.0, "equity_yoy": 4.1, "total_assets_yoy": 9.7, "cash_yoy": -8.6}, {"q": "25.4Q", "x": "25.4Q", "sales": 207.96, "op": 17.2, "ord": 18.09, "net": 11.42, "gp": 34.52, "sga": 17.32, "cogs": 173.44, "debt_total": 78.0, "equity": 483.3, "total_assets": 905.97, "cash": 165.02, "gpm": 16.6, "opm": 8.3, "sales_yoy": 21.9, "op_yoy": 55.9, "ord_yoy": 61.7, "net_yoy": 74.9, "gp_yoy": 34.1, "sga_yoy": 17.7, "cogs_yoy": 19.8, "debt_total_yoy": null, "equity_yoy": 3.7, "total_assets_yoy": 22.2, "cash_yoy": -13.7}, {"q": "26.1Q", "x": "26.1Q", "sales": 147.34, "op": 14.37, "ord": 15.35, "net": 9.23, "gp": 26.53, "sga": 12.16, "cogs": 120.81, "debt_total": 18.0, "equity": 473.91, "total_assets": 779.67, "cash": 65.2, "gpm": 18.0, "opm": 9.8, "seg_me": 102.52, "seg_mmb": 44.26, "segop_me": 10.47, "segop_mmb": 3.88, "sales_yoy": -6.1, "op_yoy": 18.8, "ord_yoy": 17.3, "net_yoy": 27.8, "gp_yoy": 14.8, "sga_yoy": 10.4, "cogs_yoy": -9.7, "debt_total_yoy": null, "equity_yoy": 4.3, "total_assets_yoy": 8.1, "cash_yoy": -63.1, "seg_me_yoy": null, "seg_mmb_yoy": null, "segop_me_yoy": null, "segop_mmb_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 135.73, "op": 14.1, "ord": 14.61, "net": 8.78, "gp": 26.54, "sga": 12.44, "cogs": 109.19, "debt_total": 39.0, "equity": 488.98, "total_assets": 806.06, "cash": 57.26, "gpm": 19.6, "opm": 10.4, "seg_me": 99.76, "seg_mmb": 36.56, "segop_me": 10.67, "segop_mmb": 3.54, "sales_yoy": -33.5, "op_yoy": -56.9, "ord_yoy": -56.0, "net_yoy": -42.8, "gp_yoy": -39.5, "sga_yoy": 11.7, "cogs_yoy": -31.9, "debt_total_yoy": null, "equity_yoy": 6.7, "total_assets_yoy": 8.2, "cash_yoy": -38.2, "seg_me_yoy": null, "seg_mmb_yoy": null, "segop_me_yoy": null, "segop_mmb_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 126.11, "op": 5.4, "ord": 6.7, "net": 6.22, "gp": 19.08, "sga": 13.68, "cogs": 107.03, "debt_total": 9.0, "equity": 485.75, "total_assets": 775.87, "cash": 69.14, "gpm": 15.1, "opm": 4.3, "seg_me": 87.73, "seg_mmb": 38.36, "segop_me": 7.72, "segop_mmb": -2.08, "sales_yoy": -29.3, "op_yoy": -81.8, "ord_yoy": -78.1, "net_yoy": -57.5, "gp_yoy": -52.9, "sga_yoy": 26.0, "cogs_yoy": -22.3, "debt_total_yoy": null, "equity_yoy": 3.8, "total_assets_yoy": -0.0, "cash_yoy": -29.6, "seg_me_yoy": null, "seg_mmb_yoy": null, "segop_me_yoy": null, "segop_mmb_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 157.41, "op": 11.38, "ord": 11.64, "net": 8.41, "gp": 26.37, "sga": 14.99, "cogs": 131.04, "debt_total": 3.0, "equity": 499.88, "total_assets": 820.21, "cash": 123.7, "gpm": 16.8, "opm": 7.2, "seg_me": 97.91, "seg_mmb": 58.68, "segop_me": 10.9, "segop_mmb": 0.96, "sales_yoy": -24.3, "op_yoy": -33.8, "ord_yoy": -35.7, "net_yoy": -26.4, "gp_yoy": -23.6, "sga_yoy": -13.5, "cogs_yoy": -24.4, "debt_total_yoy": -96.2, "equity_yoy": 3.4, "total_assets_yoy": -9.5, "cash_yoy": -25.0, "seg_me_yoy": null, "seg_mmb_yoy": null, "segop_me_yoy": null, "segop_mmb_yoy": null}, {"q": "27.1Q", "x": "27.1Q", "sales": 114.27, "op": 3.41, "ord": 4.65, "net": 4.31, "gp": 16.48, "sga": 13.07, "cogs": 97.79, "debt_total": 3.0, "equity": 488.75, "total_assets": 778.62, "cash": 170.84, "gpm": 14.4, "opm": 3.0, "seg_me": 72.12, "seg_mmb": 41.87, "segop_me": 2.46, "segop_mmb": 1.3, "sales_yoy": -22.4, "op_yoy": -76.3, "ord_yoy": -69.7, "net_yoy": -53.3, "gp_yoy": -37.9, "sga_yoy": 7.5, "cogs_yoy": -19.1, "debt_total_yoy": -83.3, "equity_yoy": 3.1, "total_assets_yoy": -0.1, "cash_yoy": 162.0, "seg_me_yoy": -29.7, "seg_mmb_yoy": -5.4, "segop_me_yoy": -76.5, "segop_mmb_yoy": -66.5}, {"q": "27.2Q", "x": "27.2Q", "sales": 127.18, "op": 10.19, "ord": 10.96, "net": 6.52, "gp": 22.63, "sga": 12.44, "cogs": 104.55, "debt_total": 3.0, "equity": 494.07, "total_assets": 772.46, "cash": 111.88, "gpm": 17.8, "opm": 8.0, "seg_me": 86.2, "seg_mmb": 41.71, "segop_me": 7.6, "segop_mmb": 2.52, "sales_yoy": -6.3, "op_yoy": -27.7, "ord_yoy": -25.0, "net_yoy": -25.7, "gp_yoy": -14.7, "sga_yoy": 0.0, "cogs_yoy": -4.2, "debt_total_yoy": -92.3, "equity_yoy": 1.0, "total_assets_yoy": -4.2, "cash_yoy": 95.4, "seg_me_yoy": -13.6, "seg_mmb_yoy": 14.1, "segop_me_yoy": -28.8, "segop_mmb_yoy": -28.8}], "a": [{"year": "2022", "x": "2022", "sales": 580.02, "op": 58.1, "ord": 59.92, "net": 34.06, "opm": 10.0, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 602.79, "op": 51.27, "ord": 53.73, "net": 30.77, "opm": 8.5, "sales_yoy": 3.9, "op_yoy": -11.8, "net_yoy": -9.7}, {"year": "2024", "x": "2024", "sales": 693.65, "op": 79.04, "ord": 79.08, "net": 43.54, "opm": 11.4, "sales_yoy": 15.1, "op_yoy": 54.2, "net_yoy": 41.5}, {"year": "2025", "x": "2025", "sales": 747.25, "op": 91.68, "ord": 94.96, "net": 48.63, "opm": 12.3, "sales_yoy": 7.7, "op_yoy": 16.0, "net_yoy": 11.7}, {"year": "2026", "x": "2026", "sales": 566.59, "op": 45.25, "ord": 48.3, "net": 32.64, "opm": 8.0, "sales_yoy": -24.2, "op_yoy": -50.6, "net_yoy": -32.9}, {"year": "2027 계획", "x": "2027 계획", "sales": 560.0, "op": 30.0, "ord": 31.0, "net": 20.0, "opm": 5.4, "sales_yoy": -1.2, "op_yoy": -33.7, "net_yoy": -38.7, "plan": 1, "kind": "회사 계획"}], "order_a": [{"x": "2024", "orders": 844.86, "backlog": 1157.8}, {"x": "2025", "orders": 714.41, "backlog": 1124.96}, {"x": "2026", "orders": 505.77, "backlog": 1064.13}, {"x": "2027 계획", "orders": 560.0, "backlog": 1074.13, "plan": 1}], "order_h": [{"x": "26.상반기", "orders": 239.09, "ord_me": 147.72, "ord_mmb": 91.27, "backlog": 1080.98, "bl_me": 577.47, "bl_mmb": 503.09}, {"x": "27.상반기", "orders": 263.58, "ord_me": 130.41, "ord_mmb": 133.09, "backlog": 1086.27, "bl_me": 523.25, "bl_mmb": 562.87}]}}
+{
+ "c": "3431",
+ "n": "미야지엔지니어링그룹",
+ "asof": "2026-11-11",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "교량 강구조물 회사. 매출총이익 = 완성공사총이익, 판관비 = 총이익 − 영업이익. 총차입금 = 단기차입금 + 장기차입금(1년 내 포함), 2025년 3월 이전은 장기 잔액을 못 찾아 비움. 결산설명회는 반기마다(5월·11월)라 수주 지표는 연간·반기만. 27.3기 중간 설명회 자료는 아직 TDnet 에 없음",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "수주잔고(연간)",
+   "def": "기말 수주잔고. 마지막 막대 = 회사 계획",
+   "d": "order_a",
+   "bars": [
+    {
+     "k": "backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "2026년 3월기 결산설명회 자료"
+  },
+  {
+   "sec": "key",
+   "t": "수주고(연간)",
+   "d": "order_a",
+   "bars": [
+    {
+     "k": "orders",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "2026년 3월기 결산설명회 자료 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "수주(사업별)",
+   "t": "사업별 연간 수주고",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "o_new",
+     "l": "신설 교량",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "o_rail",
+     "l": "철도",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "o_ren",
+     "l": "대규모 갱신·보전",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "o_sea",
+     "l": "연안 구조물",
+     "u": "억엔",
+     "c": 3
+    },
+    {
+     "k": "o_bld",
+     "l": "대공간·특수건축",
+     "u": "억엔",
+     "c": 4
+    },
+    {
+     "k": "o_frp",
+     "l": "FRP·기타",
+     "u": "억엔",
+     "c": 5
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기(2026-05-22) 사업별 실적(3)"
+  },
+  {
+   "sec": "수주(사업별)",
+   "t": "사업별 연간 매출",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "s_new",
+     "l": "신설 교량",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "s_rail",
+     "l": "철도",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "s_ren",
+     "l": "대규모 갱신·보전",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "s_bld",
+     "l": "대공간·특수건축",
+     "u": "억엔",
+     "c": 3
+    },
+    {
+     "k": "s_frp",
+     "l": "FRP·기타",
+     "u": "억엔",
+     "c": 4
+    },
+    {
+     "k": "s_sea",
+     "l": "연안 구조물",
+     "u": "억엔",
+     "c": 5
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기(2026-05-22) 사업별 실적(3)"
+  },
+  {
+   "sec": "수주(사업별)",
+   "t": "신설 교량 수주고",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "o_new",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기(2026-05-22) 사업별 실적(3)"
+  },
+  {
+   "sec": "수주(사업별)",
+   "t": "대규모 갱신·보전 수주고",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "o_ren",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기(2026-05-22) 사업별 실적(3)",
+   "def": "고속도로 대규모 갱신·기존 교량 보수·확폭·교체"
+  },
+  {
+   "sec": "수주(사업별)",
+   "t": "철도 수주고",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "o_rail",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기(2026-05-22) 사업별 실적(3)"
+  },
+  {
+   "sec": "수주(사업별)",
+   "t": "수주/매출 배율(Book-to-bill)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "btb",
+     "l": "수주고 ÷ 매출",
+     "u": "배",
+     "c": 0
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기(2026-05-22) 사업별 실적(3) · 계산",
+   "def": "연간 수주고 ÷ 연간 매출. 1 미만이면 잔고 감소"
+  },
+  {
+   "sec": "수주(회사별)",
+   "t": "회사별 연간 수주고",
+   "d": "order_a",
+   "lines": [
+    {
+     "k": "o_me",
+     "l": "미야지엔지니어링",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "o_mmb",
+     "l": "엠엠브리지",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기 · 2025년 3월기 세그먼트별 실적"
+  },
+  {
+   "sec": "수주(회사별)",
+   "t": "회사별 연말 수주잔고",
+   "d": "order_a",
+   "lines": [
+    {
+     "k": "b_me",
+     "l": "미야지엔지니어링",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "b_mmb",
+     "l": "엠엠브리지",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기 · 2025년 3월기 세그먼트별 실적"
+  },
+  {
+   "sec": "수주(회사별)",
+   "t": "수주잔고 ÷ 연간 매출",
+   "d": "order_a",
+   "lines": [
+    {
+     "k": "bl_yrs",
+     "l": "잔고 ÷ 매출",
+     "u": "년",
+     "c": 0
+    }
+   ],
+   "src": "회사 결산설명회 자료 2026년 3월기 · 2025년 3월기 세그먼트별 실적 · 계산",
+   "def": "기말 수주잔고 ÷ 그해 매출(몇 년 치 일감인지)"
+  },
+  {
+   "sec": "수주(회사별)",
+   "t": "상반기 수주고",
+   "d": "order_h",
+   "bars": [
+    {
+     "k": "orders",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "회사 결산설명회 자료(중간기) 2026년 3월기 2Q · 27.상반기는 2Q27 결산단신"
+  },
+  {
+   "sec": "수주(회사별)",
+   "t": "상반기말 수주잔고",
+   "d": "order_h",
+   "bars": [
+    {
+     "k": "backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "회사 결산설명회 자료(중간기) 2026년 3월기 2Q · 27.상반기는 2Q27 결산단신"
+  },
+  {
+   "sec": "산업",
+   "t": "교량 발주액(업계)",
+   "d": "mkt",
+   "lines": [
+    {
+     "k": "m_new",
+     "l": "신설 관련",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "m_ren",
+     "l": "대규모 갱신·보전 관련",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "회사 결산설명회 자료 2025·2026년 3월기(회사 집계값) · 2024년도는 2026년 자료의 수정값",
+   "def": "회사 집계 교량 발주액(회계연도 4월~3월). 2025년도 강교 발주량은 9.6만t(일본교량건설협회, 1995년 90만t)"
+  },
+  {
+   "sec": "수주(회사별)",
+   "t": "상반기 부문별 수주고",
+   "d": "order_h",
+   "src": "회사 결산설명회 자료(중간기) 2026년 3월기 2Q · 27.상반기는 2Q27 결산단신",
+   "lines": [
+    {
+     "k": "ord_me",
+     "l": "미야지엔지니어링",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ord_mmb",
+     "l": "엠엠브리지",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "수주(회사별)",
+   "t": "상반기말 부문별 수주잔고",
+   "d": "order_h",
+   "src": "회사 결산설명회 자료(중간기) 2026년 3월기 2Q · 27.상반기는 2Q27 결산단신",
+   "lines": [
+    {
+     "k": "bl_me",
+     "l": "미야지엔지니어링",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "bl_mmb",
+     "l": "엠엠브리지",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(외부 고객)",
+   "d": "q",
+   "src": "결산단신 부문 정보(누계 차분)",
+   "lines": [
+    {
+     "k": "seg_me",
+     "l": "미야지엔지니어링",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_mmb",
+     "l": "엠엠브리지",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익",
+   "d": "q",
+   "src": "결산단신 부문 정보(누계 차분)",
+   "lines": [
+    {
+     "k": "segop_me",
+     "l": "미야지엔지니어링",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "segop_mmb",
+     "l": "엠엠브리지",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신 · 총차입금 정의는 메모 참고"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 206.15,
+    "op": 38.5,
+    "ord": 37.0,
+    "net": 19.25,
+    "gp": 53.15,
+    "sga": 14.65,
+    "cogs": 153.0,
+    "debt_total": null,
+    "equity": 449.53,
+    "total_assets": 707.39,
+    "cash": 107.4,
+    "gpm": 25.8,
+    "opm": 18.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 170.56,
+    "op": 11.03,
+    "ord": 11.19,
+    "net": 6.53,
+    "gp": 25.75,
+    "sga": 14.72,
+    "cogs": 144.81,
+    "debt_total": null,
+    "equity": 466.14,
+    "total_assets": 741.46,
+    "cash": 191.15,
+    "gpm": 15.1,
+    "opm": 6.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 156.92,
+    "op": 12.1,
+    "ord": 13.09,
+    "net": 7.22,
+    "gp": 23.11,
+    "sga": 11.01,
+    "cogs": 133.81,
+    "debt_total": null,
+    "equity": 454.46,
+    "total_assets": 721.24,
+    "cash": 176.57,
+    "gpm": 14.7,
+    "opm": 7.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 204.08,
+    "op": 32.7,
+    "ord": 33.23,
+    "net": 15.36,
+    "gp": 43.84,
+    "sga": 11.14,
+    "cogs": 160.24,
+    "debt_total": null,
+    "equity": 458.1,
+    "total_assets": 744.98,
+    "cash": 92.6,
+    "gpm": 21.5,
+    "opm": 16.0,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cogs_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 178.29,
+    "op": 29.68,
+    "ord": 30.55,
+    "net": 14.63,
+    "gp": 40.54,
+    "sga": 10.86,
+    "cogs": 137.75,
+    "debt_total": null,
+    "equity": 468.16,
+    "total_assets": 775.99,
+    "cash": 98.17,
+    "gpm": 22.7,
+    "opm": 16.6,
+    "sales_yoy": -13.5,
+    "op_yoy": -22.9,
+    "ord_yoy": -17.4,
+    "net_yoy": -24.0,
+    "gp_yoy": -23.7,
+    "sga_yoy": -25.9,
+    "cogs_yoy": -10.0,
+    "equity_yoy": 4.1,
+    "total_assets_yoy": 9.7,
+    "cash_yoy": -8.6
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 207.96,
+    "op": 17.2,
+    "ord": 18.09,
+    "net": 11.42,
+    "gp": 34.52,
+    "sga": 17.32,
+    "cogs": 173.44,
+    "debt_total": 78.0,
+    "equity": 483.3,
+    "total_assets": 905.97,
+    "cash": 165.02,
+    "gpm": 16.6,
+    "opm": 8.3,
+    "sales_yoy": 21.9,
+    "op_yoy": 55.9,
+    "ord_yoy": 61.7,
+    "net_yoy": 74.9,
+    "gp_yoy": 34.1,
+    "sga_yoy": 17.7,
+    "cogs_yoy": 19.8,
+    "debt_total_yoy": null,
+    "equity_yoy": 3.7,
+    "total_assets_yoy": 22.2,
+    "cash_yoy": -13.7
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 147.34,
+    "op": 14.37,
+    "ord": 15.35,
+    "net": 9.23,
+    "gp": 26.53,
+    "sga": 12.16,
+    "cogs": 120.81,
+    "debt_total": 18.0,
+    "equity": 473.91,
+    "total_assets": 779.67,
+    "cash": 65.2,
+    "gpm": 18.0,
+    "opm": 9.8,
+    "seg_me": 102.52,
+    "seg_mmb": 44.26,
+    "segop_me": 10.47,
+    "segop_mmb": 3.88,
+    "sales_yoy": -6.1,
+    "op_yoy": 18.8,
+    "ord_yoy": 17.3,
+    "net_yoy": 27.8,
+    "gp_yoy": 14.8,
+    "sga_yoy": 10.4,
+    "cogs_yoy": -9.7,
+    "debt_total_yoy": null,
+    "equity_yoy": 4.3,
+    "total_assets_yoy": 8.1,
+    "cash_yoy": -63.1,
+    "seg_me_yoy": null,
+    "seg_mmb_yoy": null,
+    "segop_me_yoy": null,
+    "segop_mmb_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 135.73,
+    "op": 14.1,
+    "ord": 14.61,
+    "net": 8.78,
+    "gp": 26.54,
+    "sga": 12.44,
+    "cogs": 109.19,
+    "debt_total": 39.0,
+    "equity": 488.98,
+    "total_assets": 806.06,
+    "cash": 57.26,
+    "gpm": 19.6,
+    "opm": 10.4,
+    "seg_me": 99.76,
+    "seg_mmb": 36.56,
+    "segop_me": 10.67,
+    "segop_mmb": 3.54,
+    "sales_yoy": -33.5,
+    "op_yoy": -56.9,
+    "ord_yoy": -56.0,
+    "net_yoy": -42.8,
+    "gp_yoy": -39.5,
+    "sga_yoy": 11.7,
+    "cogs_yoy": -31.9,
+    "debt_total_yoy": null,
+    "equity_yoy": 6.7,
+    "total_assets_yoy": 8.2,
+    "cash_yoy": -38.2,
+    "seg_me_yoy": null,
+    "seg_mmb_yoy": null,
+    "segop_me_yoy": null,
+    "segop_mmb_yoy": null
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 126.11,
+    "op": 5.4,
+    "ord": 6.7,
+    "net": 6.22,
+    "gp": 19.08,
+    "sga": 13.68,
+    "cogs": 107.03,
+    "debt_total": 9.0,
+    "equity": 485.75,
+    "total_assets": 775.87,
+    "cash": 69.14,
+    "gpm": 15.1,
+    "opm": 4.3,
+    "seg_me": 87.73,
+    "seg_mmb": 38.36,
+    "segop_me": 7.72,
+    "segop_mmb": -2.08,
+    "sales_yoy": -29.3,
+    "op_yoy": -81.8,
+    "ord_yoy": -78.1,
+    "net_yoy": -57.5,
+    "gp_yoy": -52.9,
+    "sga_yoy": 26.0,
+    "cogs_yoy": -22.3,
+    "debt_total_yoy": null,
+    "equity_yoy": 3.8,
+    "total_assets_yoy": -0.0,
+    "cash_yoy": -29.6,
+    "seg_me_yoy": null,
+    "seg_mmb_yoy": null,
+    "segop_me_yoy": null,
+    "segop_mmb_yoy": null
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 157.41,
+    "op": 11.38,
+    "ord": 11.64,
+    "net": 8.41,
+    "gp": 26.37,
+    "sga": 14.99,
+    "cogs": 131.04,
+    "debt_total": 3.0,
+    "equity": 499.88,
+    "total_assets": 820.21,
+    "cash": 123.7,
+    "gpm": 16.8,
+    "opm": 7.2,
+    "seg_me": 97.91,
+    "seg_mmb": 58.68,
+    "segop_me": 10.9,
+    "segop_mmb": 0.96,
+    "sales_yoy": -24.3,
+    "op_yoy": -33.8,
+    "ord_yoy": -35.7,
+    "net_yoy": -26.4,
+    "gp_yoy": -23.6,
+    "sga_yoy": -13.5,
+    "cogs_yoy": -24.4,
+    "debt_total_yoy": -96.2,
+    "equity_yoy": 3.4,
+    "total_assets_yoy": -9.5,
+    "cash_yoy": -25.0,
+    "seg_me_yoy": null,
+    "seg_mmb_yoy": null,
+    "segop_me_yoy": null,
+    "segop_mmb_yoy": null
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 114.27,
+    "op": 3.41,
+    "ord": 4.65,
+    "net": 4.31,
+    "gp": 16.48,
+    "sga": 13.07,
+    "cogs": 97.79,
+    "debt_total": 3.0,
+    "equity": 488.75,
+    "total_assets": 778.62,
+    "cash": 170.84,
+    "gpm": 14.4,
+    "opm": 3.0,
+    "seg_me": 72.12,
+    "seg_mmb": 41.87,
+    "segop_me": 2.46,
+    "segop_mmb": 1.3,
+    "sales_yoy": -22.4,
+    "op_yoy": -76.3,
+    "ord_yoy": -69.7,
+    "net_yoy": -53.3,
+    "gp_yoy": -37.9,
+    "sga_yoy": 7.5,
+    "cogs_yoy": -19.1,
+    "debt_total_yoy": -83.3,
+    "equity_yoy": 3.1,
+    "total_assets_yoy": -0.1,
+    "cash_yoy": 162.0,
+    "seg_me_yoy": -29.7,
+    "seg_mmb_yoy": -5.4,
+    "segop_me_yoy": -76.5,
+    "segop_mmb_yoy": -66.5
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 127.18,
+    "op": 10.19,
+    "ord": 10.96,
+    "net": 6.52,
+    "gp": 22.63,
+    "sga": 12.44,
+    "cogs": 104.55,
+    "debt_total": 3.0,
+    "equity": 494.07,
+    "total_assets": 772.46,
+    "cash": 111.88,
+    "gpm": 17.8,
+    "opm": 8.0,
+    "seg_me": 86.2,
+    "seg_mmb": 41.71,
+    "segop_me": 7.6,
+    "segop_mmb": 2.52,
+    "sales_yoy": -6.3,
+    "op_yoy": -27.7,
+    "ord_yoy": -25.0,
+    "net_yoy": -25.7,
+    "gp_yoy": -14.7,
+    "sga_yoy": 0.0,
+    "cogs_yoy": -4.2,
+    "debt_total_yoy": -92.3,
+    "equity_yoy": 1.0,
+    "total_assets_yoy": -4.2,
+    "cash_yoy": 95.4,
+    "seg_me_yoy": -13.6,
+    "seg_mmb_yoy": 14.1,
+    "segop_me_yoy": -28.8,
+    "segop_mmb_yoy": -28.8
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 580.02,
+    "op": 58.1,
+    "ord": 59.92,
+    "net": 34.06,
+    "opm": 10.0,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 602.79,
+    "op": 51.27,
+    "ord": 53.73,
+    "net": 30.77,
+    "opm": 8.5,
+    "sales_yoy": 3.9,
+    "op_yoy": -11.8,
+    "net_yoy": -9.7
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 693.65,
+    "op": 79.04,
+    "ord": 79.08,
+    "net": 43.54,
+    "opm": 11.4,
+    "sales_yoy": 15.1,
+    "op_yoy": 54.2,
+    "net_yoy": 41.5
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 747.25,
+    "op": 91.68,
+    "ord": 94.96,
+    "net": 48.63,
+    "opm": 12.3,
+    "sales_yoy": 7.7,
+    "op_yoy": 16.0,
+    "net_yoy": 11.7
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 566.59,
+    "op": 45.25,
+    "ord": 48.3,
+    "net": 32.64,
+    "opm": 8.0,
+    "sales_yoy": -24.2,
+    "op_yoy": -50.6,
+    "net_yoy": -32.9
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 560.0,
+    "op": 30.0,
+    "ord": 31.0,
+    "net": 20.0,
+    "opm": 5.4,
+    "sales_yoy": -1.2,
+    "op_yoy": -33.7,
+    "net_yoy": -38.7,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "order_a": [
+   {
+    "x": "2024",
+    "orders": 844.86,
+    "backlog": 1157.8,
+    "o_me": 450.63,
+    "o_mmb": 394.17,
+    "b_me": 625.96,
+    "b_mmb": 531.48,
+    "bl_yrs": 1.67
+   },
+   {
+    "x": "2025",
+    "orders": 714.41,
+    "backlog": 1124.96,
+    "o_me": 450.42,
+    "o_mmb": 263.93,
+    "b_me": 632.03,
+    "b_mmb": 492.63,
+    "bl_yrs": 1.51
+   },
+   {
+    "x": "2026",
+    "orders": 505.77,
+    "backlog": 1064.13,
+    "o_me": 307.06,
+    "o_mmb": 198.59,
+    "b_me": 551.16,
+    "b_mmb": 513.37,
+    "bl_yrs": 1.88
+   },
+   {
+    "x": "2027 계획",
+    "orders": 560.0,
+    "backlog": 1074.13,
+    "plan": 1
+   }
+  ],
+  "order_h": [
+   {
+    "x": "24.상반기",
+    "orders": 342.87,
+    "ord_me": 199.16,
+    "ord_mmb": 143.69,
+    "backlog": 1032.5,
+    "bl_me": 581.87,
+    "bl_mmb": 450.18
+   },
+   {
+    "x": "25.상반기",
+    "orders": 200.22,
+    "ord_me": 156.67,
+    "ord_mmb": 43.52,
+    "backlog": 997.02,
+    "bl_me": 574.53,
+    "bl_mmb": 422.08
+   },
+   {
+    "x": "26.상반기",
+    "orders": 239.09,
+    "ord_me": 147.72,
+    "ord_mmb": 91.27,
+    "backlog": 1080.98,
+    "bl_me": 577.47,
+    "bl_mmb": 503.09
+   },
+   {
+    "x": "27.상반기",
+    "orders": 263.58,
+    "ord_me": 130.41,
+    "ord_mmb": 133.09,
+    "backlog": 1086.27,
+    "bl_me": 523.25,
+    "bl_mmb": 562.87
+   }
+  ],
+  "ba": [
+   {
+    "x": "2020",
+    "s_new": 336.67,
+    "s_ren": 73.26,
+    "s_rail": 172.99,
+    "s_frp": 7.7,
+    "s_bld": 42.6,
+    "s_sea": 4.11,
+    "o_new": 242.59,
+    "o_ren": 121.0,
+    "o_rail": 147.16,
+    "o_frp": 6.58,
+    "o_bld": 18.85,
+    "o_sea": 0.29,
+    "o_tot": 537.55,
+    "s_tot": 638.41,
+    "btb": 0.84
+   },
+   {
+    "x": "2021",
+    "s_new": 253.39,
+    "s_ren": 83.75,
+    "s_rail": 183.17,
+    "s_frp": 7.84,
+    "s_bld": 22.64,
+    "s_sea": 0.83,
+    "o_new": 174.32,
+    "o_ren": 359.81,
+    "o_rail": 116.28,
+    "o_frp": 8.61,
+    "o_bld": 22.73,
+    "o_sea": 24.15,
+    "o_tot": 706.95,
+    "s_tot": 552.68,
+    "btb": 1.28
+   },
+   {
+    "x": "2022",
+    "s_new": 138.11,
+    "s_ren": 233.2,
+    "s_rail": 150.76,
+    "s_frp": 9.86,
+    "s_bld": 19.03,
+    "s_sea": 27.98,
+    "o_new": 282.79,
+    "o_ren": 165.46,
+    "o_rail": 139.49,
+    "o_frp": 10.76,
+    "o_bld": 23.98,
+    "o_sea": 16.18,
+    "o_tot": 639.74,
+    "s_tot": 580.02,
+    "btb": 1.1
+   },
+   {
+    "x": "2023",
+    "s_new": 203.22,
+    "s_ren": 218.37,
+    "s_rail": 128.76,
+    "s_frp": 9.77,
+    "s_bld": 17.44,
+    "s_sea": 24.16,
+    "o_new": 242.35,
+    "o_ren": 144.89,
+    "o_rail": 164.75,
+    "o_frp": 8.01,
+    "o_bld": 17.92,
+    "o_sea": 87.52,
+    "o_tot": 666.5,
+    "s_tot": 602.79,
+    "btb": 1.11
+   },
+   {
+    "x": "2024",
+    "s_new": 271.92,
+    "s_ren": 197.42,
+    "s_rail": 132.41,
+    "s_frp": 9.58,
+    "s_bld": 13.39,
+    "s_sea": 68.09,
+    "o_new": 343.09,
+    "o_ren": 330.51,
+    "o_rail": 141.22,
+    "o_frp": 12.85,
+    "o_bld": 15.89,
+    "o_sea": 0.47,
+    "o_tot": 844.86,
+    "s_tot": 693.65,
+    "btb": 1.22
+   },
+   {
+    "x": "2025",
+    "s_new": 361.9,
+    "s_ren": 197.46,
+    "s_rail": 144.61,
+    "s_frp": 9.62,
+    "s_bld": 20.16,
+    "s_sea": 12.99,
+    "o_new": 453.76,
+    "o_ren": 67.07,
+    "o_rail": 164.28,
+    "o_frp": 7.76,
+    "o_bld": 14.44,
+    "o_sea": 6.59,
+    "o_tot": 714.41,
+    "s_tot": 747.25,
+    "btb": 0.96
+   },
+   {
+    "x": "2026",
+    "s_new": 274.05,
+    "s_ren": 113.08,
+    "s_rail": 131.78,
+    "s_frp": 8.07,
+    "s_bld": 30.91,
+    "s_sea": 7.62,
+    "o_new": 139.45,
+    "o_ren": 128.43,
+    "o_rail": 145.07,
+    "o_frp": 6.92,
+    "o_bld": 30.72,
+    "o_sea": 54.1,
+    "o_tot": 505.77,
+    "s_tot": 566.59,
+    "btb": 0.89
+   }
+  ],
+  "mkt": [
+   {
+    "x": "2023년도",
+    "m_new": 2755,
+    "m_ren": 2338
+   },
+   {
+    "x": "2024년도",
+    "m_new": 2525,
+    "m_ren": 1802
+   },
+   {
+    "x": "2025년도",
+    "m_new": 1990,
+    "m_ren": 2100
+   }
+  ]
+ }
+}
