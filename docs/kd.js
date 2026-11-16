@@ -49,6 +49,8 @@
     if (ch.table) return mtable(ch, rows);
     var xk = ch.x || "x", bars = ch.bars || [], lines = ch.lines || [];
     if (ch.noplan) rows = rows.filter(function (r) { return !r.plan; });
+    if (lines.length && rows.some(function (r) { return r.plan; }))   // 회사 계획 행에는 꺾은선을 잇지 않는다(실적만 선, 계획은 옅은 막대 — 2026-11-16 사용자)
+      rows = rows.map(function (r) { if (!r.plan) return r; var o = {}; for (var k in r) o[k] = r[k]; lines.forEach(function (l) { if (!l.plan) o[l.k] = null; }); return o; });
     rows = rows.filter(function (r) { return bars.concat(lines).some(function (s) { return n(r[s.k]) != null; }); });
     var W = 440, H = 200, L = 34, R = lines.some(function (s) { return s.r; }) ? 36 : 10, T = 22, B = 24, nn = rows.length;
     if (!nn) return "";
