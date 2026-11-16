@@ -1,1 +1,965 @@
-{"c": "446A", "n": "노스샌드", "asof": "2026-09-11", "latest": "2027년 1월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "비연결. IT·DX 컨설팅(컨설턴트 상주형) 단일 세그먼트, 1월 결산, 2025년 11월 상장. 상장 전 분기(26.1~2Q)는 설명회 자료 숫자로 매출·매출총이익·판관비·영업이익만, 재무상태표는 26.3Q부터. 가동률 90%대·평균 단가 +6.5%는 추이 숫자가 없어 넣지 않음. 통기 계획 상향(매출 405.6억엔·영업이익 92.1억엔)", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2027년 1월기 2분기 결산설명회 자료 · 27.2Q 95.9억엔(+58.2%), 26.1~2Q는 설명회 자료"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "2027년 1월기 2분기 결산설명회 자료 · 27.2Q 19.6억엔(+56.4%)"}, {"sec": "key", "t": "컨설턴트 수(분기말)", "d": "q", "bars": [{"k": "cons", "l": "컨설턴트 수", "u": "명", "c": 0}], "lines": [{"k": "cons_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2027년 1월기 2분기 결산설명회 자료 · 27.2Q 1,916명(+689명)"}, {"sec": "key", "t": "컨설턴트 채용 인원(분기)", "d": "q", "src": "2027년 1월기 2분기 결산설명회 자료 · 신졸은 2분기에 계상", "lines": [{"k": "hire_mid", "l": "경력", "u": "명", "c": 0}, {"k": "hire_new", "l": "신졸", "u": "명", "c": 1}]}, {"sec": "사업 지표", "t": "매출원가 구성(분기)", "d": "q", "lines": [{"k": "lab", "l": "인건비(컨설턴트)", "u": "억엔", "c": 0}, {"k": "out", "l": "외주비·기타 노무비", "u": "억엔", "c": 1}, {"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}], "src": "2027년 1월기 2분기 결산설명회 자료"}, {"sec": "사업 지표", "t": "판관비 구성(분기)", "d": "q", "lines": [{"k": "sg_hr", "l": "인건비", "u": "억엔", "c": 0}, {"k": "sg_rec", "l": "채용·교육비", "u": "억엔", "c": 1}, {"k": "sg_off", "l": "오피스·운영비", "u": "억엔", "c": 2}, {"k": "sg_oth", "l": "기타", "u": "억엔", "c": 3}, {"k": "sga_ratio", "l": "판관비율", "u": "%", "c": 0, "r": 1}], "src": "2027년 1월기 2분기 결산설명회 자료"}, {"sec": "사업 지표", "t": "고객 수(연간)", "d": "c", "bars": [{"k": "cust", "l": "매출 계상 회사 수", "u": "곳", "c": 0}], "src": "2027년 1월기 2분기 결산설명회 자료 부록"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "결산단신(비연결)"}, {"sec": "실적 추이", "t": "연간 매출액·영업이익", "d": "a", "src": "결산단신(비연결) · 마지막 막대 = 회사 계획(상향 후)", "muted": "plan", "lines": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}, {"k": "op", "l": "영업이익", "u": "억엔", "c": 1}]}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "결산단신(비연결) · 분기말"}], "tables": {"q": [{"q": "26.1Q", "x": "26.1Q", "sales": 54.52, "gp": 26.79, "sga": 16.97, "op": 9.82, "ord": null, "net": null, "cash": null, "equity": null, "total_assets": null, "debt_total": null, "st_debt": null, "lt_debt": null, "lease": null, "inventory": null, "cogs": 27.73, "gpm": 49.1, "opm": 18.0, "lab": 20.51, "out": 7.21, "sg_hr": 7.56, "sg_rec": 4.33, "sg_off": 3.35, "sg_oth": 1.71, "cons": 1021, "hire_mid": 112, "hire_new": null, "sga_ratio": 31.1, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "cons_yoy": null, "lab_yoy": null, "out_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 60.62, "gp": 28.79, "sga": 16.28, "op": 12.51, "ord": null, "net": null, "cash": null, "equity": null, "total_assets": null, "debt_total": null, "st_debt": null, "lt_debt": null, "lease": null, "inventory": null, "cogs": 31.83, "gpm": 47.5, "opm": 20.6, "lab": 24.18, "out": 7.64, "sg_hr": 7.56, "sg_rec": 3.95, "sg_off": 3.42, "sg_oth": 1.33, "cons": 1227, "hire_mid": 116, "hire_new": 116, "sga_ratio": 26.9, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "cons_yoy": null, "lab_yoy": null, "out_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 68.47, "gp": 32.9, "sga": 18.08, "op": 14.82, "ord": 14.62, "net": 10.23, "cash": 50.9, "equity": 56.17, "total_assets": 99.25, "st_debt": 2.59, "lt_debt": 4.22, "debt_total": 6.81, "lease": 0.96, "cogs": 35.57, "gpm": 48.1, "opm": 21.6, "inventory": null, "lab": 27.26, "out": 8.3, "sg_hr": 7.59, "sg_rec": 5.31, "sg_off": 3.81, "sg_oth": 1.35, "cons": 1343, "hire_mid": 161, "hire_new": null, "sga_ratio": 26.4, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "cons_yoy": null, "lab_yoy": null, "out_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 78.24, "gp": 39.33, "sga": 21.01, "op": 18.32, "ord": 17.81, "net": 14.63, "cash": 146.02, "equity": 164.55, "total_assets": 218.61, "st_debt": 2.6, "lt_debt": 3.61, "debt_total": 6.21, "lease": 1.12, "cogs": 38.91, "gpm": 50.3, "opm": 23.4, "inventory": null, "lab": 29.35, "out": 9.55, "sg_hr": 7.64, "sg_rec": 4.94, "sg_off": 4.33, "sg_oth": 4.08, "cons": 1453, "hire_mid": 154, "hire_new": null, "sga_ratio": 26.9, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "cons_yoy": null, "lab_yoy": null, "out_yoy": null}, {"q": "27.1Q", "x": "27.1Q", "sales": 88.56, "gp": 44.04, "sga": 25.95, "op": 18.09, "ord": 18.15, "net": 13.37, "cash": 131.98, "equity": 177.93, "total_assets": 222.51, "st_debt": 2.43, "lt_debt": 3.07, "debt_total": 5.5, "lease": 1.27, "cogs": 44.52, "gpm": 49.7, "opm": 20.4, "inventory": null, "lab": 33.49, "out": 11.02, "sg_hr": 10.02, "sg_rec": 7.86, "sg_off": 4.89, "sg_oth": 3.16, "cons": 1596, "hire_mid": 188, "hire_new": null, "sga_ratio": 29.3, "sales_yoy": 62.4, "gp_yoy": 64.4, "sga_yoy": 52.9, "op_yoy": 84.2, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "cons_yoy": 56.3, "lab_yoy": 63.3, "out_yoy": 52.8}, {"q": "27.2Q", "x": "27.2Q", "sales": 95.89, "gp": 45.05, "sga": 25.48, "op": 19.57, "ord": 19.58, "net": 14.46, "cash": 143.94, "equity": 192.38, "total_assets": 243.76, "st_debt": 2.36, "lt_debt": 2.54, "debt_total": 4.9, "lease": 1.79, "cogs": 50.84, "gpm": 47.0, "opm": 20.4, "inventory": null, "lab": 39.58, "out": 11.25, "sg_hr": 11.15, "sg_rec": 6.18, "sg_off": 5.7, "sg_oth": 2.42, "cons": 1916, "hire_mid": 200, "hire_new": 177, "sga_ratio": 26.6, "sales_yoy": 58.2, "gp_yoy": 56.5, "sga_yoy": 56.5, "op_yoy": 56.4, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "cons_yoy": 56.2, "lab_yoy": 63.7, "out_yoy": 47.3}], "a": [{"year": "2026", "x": "2026", "sales": 261.85, "op": 55.47, "ord": 54.79, "net": 40.46, "opm": 21.2, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2027 계획", "x": "2027 계획", "sales": 405.6, "op": 92.07, "ord": 92.21, "net": 68.23, "opm": 22.7, "sales_yoy": 54.9, "op_yoy": 66.0, "net_yoy": 68.6, "plan": 1, "kind": "회사 계획"}], "c": [{"x": "23/1기", "cust": 92}, {"x": "24/1기", "cust": 144}, {"x": "25/1기", "cust": 179}, {"x": "26/1기", "cust": 293}]}}
+{
+ "c": "446A",
+ "n": "노스샌드",
+ "asof": "2026-09-11",
+ "latest": "2027년 1월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "비연결. IT·DX 컨설팅(컨설턴트 상주형) 단일 세그먼트, 1월 결산, 2025년 11월 상장. 상장 전 분기(26.1~2Q)는 설명회 자료 숫자로 매출·매출총이익·판관비·영업이익만, 재무상태표는 26.3Q부터. 가동률 90%대·평균 단가 +6.5%는 추이 숫자가 없어 넣지 않음. 통기 계획 상향(매출 405.6억엔·영업이익 92.1억엔)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료 · 27.2Q 95.9억엔(+58.2%), 26.1~2Q는 설명회 자료"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료 · 27.2Q 19.6억엔(+56.4%)"
+  },
+  {
+   "sec": "key",
+   "t": "컨설턴트 수(분기말)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "cons",
+     "l": "컨설턴트 수",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cons_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료 · 27.2Q 1,916명(+689명)"
+  },
+  {
+   "sec": "key",
+   "t": "컨설턴트 1인당 분기 매출",
+   "d": "b",
+   "def": "분기 매출 ÷ 분기말 컨설턴트 수(만엔). 회사 KPI 평균 단가(월)와 다름 — 내근 인원·기중 입사 효과 포함",
+   "bars": [
+    {
+     "k": "spc",
+     "l": "1인당 매출",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "spc_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료 · 계산 지표"
+  },
+  {
+   "sec": "인력",
+   "t": "컨설턴트 순증(분기)",
+   "d": "b",
+   "def": "분기말 컨설턴트 수 − 전 분기말 컨설턴트 수",
+   "bars": [
+    {
+     "k": "cons_net",
+     "l": "순증",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료 · 계산 지표"
+  },
+  {
+   "sec": "인력",
+   "t": "컨설턴트 채용 인원(분기)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "hire_mid",
+     "l": "경력",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "hire_new",
+     "l": "신졸",
+     "u": "명",
+     "c": 1
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료 · 신졸은 4월 입사·6월 가동이라 2분기에 계상"
+  },
+  {
+   "sec": "인력",
+   "t": "경력 채용 인원 YoY",
+   "d": "b",
+   "bars": [
+    {
+     "k": "hire_mid",
+     "l": "경력 채용",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "hire_mid_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료"
+  },
+  {
+   "sec": "인력",
+   "t": "종업원 수(연간)",
+   "d": "emp",
+   "bars": [
+    {
+     "k": "emp",
+     "l": "종업원 수",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "2027년 1월기 1분기 결산설명회 자료 부록 · 각 기말, 내근 포함"
+  },
+  {
+   "sec": "채용 기반",
+   "t": "인재 에이전트 수(연간)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "agent",
+     "l": "인재 에이전트",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "src": "2026년 1월기 통기 결산설명회 자료 · 채용에 협력한 인재 소개 회사 수"
+  },
+  {
+   "sec": "채용 기반",
+   "t": "채용 후보자 수(연간)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "cand",
+     "l": "채용 후보자",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "2026년 1월기 통기 결산설명회 자료"
+  },
+  {
+   "sec": "채용 기반",
+   "t": "고객 수(연간)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "cust",
+     "l": "매출 계상 회사 수",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료 부록 · 각 기에 매출을 계상한 회사 수"
+  },
+  {
+   "sec": "단위당",
+   "t": "컨설턴트 1인당 노무비(분기)",
+   "d": "b",
+   "def": "분기 매출원가 중 노무비 ÷ 분기말 컨설턴트 수(만엔)",
+   "bars": [
+    {
+     "k": "lpc",
+     "l": "1인당 노무비",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료 · 계산 지표"
+  },
+  {
+   "sec": "단위당",
+   "t": "컨설턴트 1인당 영업이익(분기)",
+   "d": "b",
+   "def": "분기 영업이익 ÷ 분기말 컨설턴트 수(만엔)",
+   "bars": [
+    {
+     "k": "opc",
+     "l": "1인당 영업이익",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료 · 계산 지표"
+  },
+  {
+   "sec": "단위당",
+   "t": "매출원가 구성(분기)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "lab",
+     "l": "노무비(컨설턴트 급여)",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "out",
+     "l": "외주비·기타",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2027년 1월기 2분기 결산설명회 자료(분기 추이) · 25/1기는 2026년 1월기 통기 결산설명회 자료"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산단신(비연결)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료·결산단신(비연결) · 마지막 막대 = 회사 계획(상향 후)",
+   "muted": "plan"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산설명회 자료·결산단신(비연결) · 마지막 막대 = 회사 계획(상향 후)",
+   "muted": "plan"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산단신(비연결) · 분기말"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 54.52,
+    "gp": 26.79,
+    "sga": 16.97,
+    "op": 9.82,
+    "ord": null,
+    "net": null,
+    "cash": null,
+    "equity": null,
+    "total_assets": null,
+    "debt_total": null,
+    "st_debt": null,
+    "lt_debt": null,
+    "lease": null,
+    "inventory": null,
+    "cogs": 27.73,
+    "gpm": 49.1,
+    "opm": 18.0,
+    "lab": 20.51,
+    "out": 7.21,
+    "sg_hr": 7.56,
+    "sg_rec": 4.33,
+    "sg_off": 3.35,
+    "sg_oth": 1.71,
+    "cons": 1021,
+    "hire_mid": 112,
+    "hire_new": null,
+    "sga_ratio": 31.1,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "cons_yoy": null,
+    "lab_yoy": null,
+    "out_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 60.62,
+    "gp": 28.79,
+    "sga": 16.28,
+    "op": 12.51,
+    "ord": null,
+    "net": null,
+    "cash": null,
+    "equity": null,
+    "total_assets": null,
+    "debt_total": null,
+    "st_debt": null,
+    "lt_debt": null,
+    "lease": null,
+    "inventory": null,
+    "cogs": 31.83,
+    "gpm": 47.5,
+    "opm": 20.6,
+    "lab": 24.18,
+    "out": 7.64,
+    "sg_hr": 7.56,
+    "sg_rec": 3.95,
+    "sg_off": 3.42,
+    "sg_oth": 1.33,
+    "cons": 1227,
+    "hire_mid": 116,
+    "hire_new": 116,
+    "sga_ratio": 26.9,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "cons_yoy": null,
+    "lab_yoy": null,
+    "out_yoy": null
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 68.47,
+    "gp": 32.9,
+    "sga": 18.08,
+    "op": 14.82,
+    "ord": 14.62,
+    "net": 10.23,
+    "cash": 50.9,
+    "equity": 56.17,
+    "total_assets": 99.25,
+    "st_debt": 2.59,
+    "lt_debt": 4.22,
+    "debt_total": 6.81,
+    "lease": 0.96,
+    "cogs": 35.57,
+    "gpm": 48.1,
+    "opm": 21.6,
+    "inventory": null,
+    "lab": 27.26,
+    "out": 8.3,
+    "sg_hr": 7.59,
+    "sg_rec": 5.31,
+    "sg_off": 3.81,
+    "sg_oth": 1.35,
+    "cons": 1343,
+    "hire_mid": 161,
+    "hire_new": null,
+    "sga_ratio": 26.4,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "cons_yoy": null,
+    "lab_yoy": null,
+    "out_yoy": null
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 78.24,
+    "gp": 39.33,
+    "sga": 21.01,
+    "op": 18.32,
+    "ord": 17.81,
+    "net": 14.63,
+    "cash": 146.02,
+    "equity": 164.55,
+    "total_assets": 218.61,
+    "st_debt": 2.6,
+    "lt_debt": 3.61,
+    "debt_total": 6.21,
+    "lease": 1.12,
+    "cogs": 38.91,
+    "gpm": 50.3,
+    "opm": 23.4,
+    "inventory": null,
+    "lab": 29.35,
+    "out": 9.55,
+    "sg_hr": 7.64,
+    "sg_rec": 4.94,
+    "sg_off": 4.33,
+    "sg_oth": 4.08,
+    "cons": 1453,
+    "hire_mid": 154,
+    "hire_new": null,
+    "sga_ratio": 26.9,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "cons_yoy": null,
+    "lab_yoy": null,
+    "out_yoy": null
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 88.56,
+    "gp": 44.04,
+    "sga": 25.95,
+    "op": 18.09,
+    "ord": 18.15,
+    "net": 13.37,
+    "cash": 131.98,
+    "equity": 177.93,
+    "total_assets": 222.51,
+    "st_debt": 2.43,
+    "lt_debt": 3.07,
+    "debt_total": 5.5,
+    "lease": 1.27,
+    "cogs": 44.52,
+    "gpm": 49.7,
+    "opm": 20.4,
+    "inventory": null,
+    "lab": 33.49,
+    "out": 11.02,
+    "sg_hr": 10.02,
+    "sg_rec": 7.86,
+    "sg_off": 4.89,
+    "sg_oth": 3.16,
+    "cons": 1596,
+    "hire_mid": 188,
+    "hire_new": null,
+    "sga_ratio": 29.3,
+    "sales_yoy": 62.4,
+    "gp_yoy": 64.4,
+    "sga_yoy": 52.9,
+    "op_yoy": 84.2,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "cons_yoy": 56.3,
+    "lab_yoy": 63.3,
+    "out_yoy": 52.8
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 95.89,
+    "gp": 45.05,
+    "sga": 25.48,
+    "op": 19.57,
+    "ord": 19.58,
+    "net": 14.46,
+    "cash": 143.94,
+    "equity": 192.38,
+    "total_assets": 243.76,
+    "st_debt": 2.36,
+    "lt_debt": 2.54,
+    "debt_total": 4.9,
+    "lease": 1.79,
+    "cogs": 50.84,
+    "gpm": 47.0,
+    "opm": 20.4,
+    "inventory": null,
+    "lab": 39.58,
+    "out": 11.25,
+    "sg_hr": 11.15,
+    "sg_rec": 6.18,
+    "sg_off": 5.7,
+    "sg_oth": 2.42,
+    "cons": 1916,
+    "hire_mid": 200,
+    "hire_new": 177,
+    "sga_ratio": 26.6,
+    "sales_yoy": 58.2,
+    "gp_yoy": 56.5,
+    "sga_yoy": 56.5,
+    "op_yoy": 56.4,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "cons_yoy": 56.2,
+    "lab_yoy": 63.7,
+    "out_yoy": 47.3
+   }
+  ],
+  "a": [
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 164.17,
+    "op": 27.74,
+    "opm": 16.9,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 261.85,
+    "op": 55.47,
+    "ord": 54.79,
+    "net": 40.46,
+    "opm": 21.2,
+    "sales_yoy": 59.5,
+    "op_yoy": 100.0,
+    "net_yoy": null
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 405.6,
+    "op": 92.07,
+    "ord": 92.21,
+    "net": 68.23,
+    "opm": 22.7,
+    "sales_yoy": 54.9,
+    "op_yoy": 66.0,
+    "net_yoy": 68.6,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "c": [
+   {
+    "x": "23/1기",
+    "cust": 92
+   },
+   {
+    "x": "24/1기",
+    "cust": 144
+   },
+   {
+    "x": "25/1기",
+    "cust": 179
+   },
+   {
+    "x": "26/1기",
+    "cust": 293
+   }
+  ],
+  "b": [
+   {
+    "x": "25.1Q",
+    "sales": 35.31,
+    "op": 5.17,
+    "lab": 14.21,
+    "out": 4.6,
+    "cons": 674,
+    "hire_mid": 97,
+    "hire_new": null,
+    "cons_net": null,
+    "cons_yoy": null,
+    "hire_mid_yoy": null,
+    "spc": 523.9,
+    "lpc": 210.8,
+    "opc": 76.7,
+    "spc_yoy": null
+   },
+   {
+    "x": "25.2Q",
+    "sales": 38.77,
+    "op": 6.37,
+    "lab": 16.61,
+    "out": 4.7,
+    "cons": 819,
+    "hire_mid": 91,
+    "hire_new": 92,
+    "cons_net": 145,
+    "cons_yoy": null,
+    "hire_mid_yoy": null,
+    "spc": 473.4,
+    "lpc": 202.8,
+    "opc": 77.8,
+    "spc_yoy": null
+   },
+   {
+    "x": "25.3Q",
+    "sales": 41.94,
+    "op": 7.14,
+    "lab": 17.73,
+    "out": 5.06,
+    "cons": 878,
+    "hire_mid": 91,
+    "hire_new": null,
+    "cons_net": 59,
+    "cons_yoy": null,
+    "hire_mid_yoy": null,
+    "spc": 477.7,
+    "lpc": 201.9,
+    "opc": 81.3,
+    "spc_yoy": null
+   },
+   {
+    "x": "25.4Q",
+    "sales": 48.14,
+    "op": 9.02,
+    "lab": 18.61,
+    "out": 6.38,
+    "cons": 940,
+    "hire_mid": 87,
+    "hire_new": null,
+    "cons_net": 62,
+    "cons_yoy": null,
+    "hire_mid_yoy": null,
+    "spc": 512.1,
+    "lpc": 198.0,
+    "opc": 96.0,
+    "spc_yoy": null
+   },
+   {
+    "x": "26.1Q",
+    "sales": 54.52,
+    "op": 9.82,
+    "lab": 20.51,
+    "out": 7.21,
+    "cons": 1021,
+    "hire_mid": 112,
+    "hire_new": null,
+    "cons_net": 81,
+    "cons_yoy": 51.5,
+    "hire_mid_yoy": 15.5,
+    "spc": 534.0,
+    "lpc": 200.9,
+    "opc": 96.2,
+    "spc_yoy": 1.9
+   },
+   {
+    "x": "26.2Q",
+    "sales": 60.62,
+    "op": 12.51,
+    "lab": 24.18,
+    "out": 7.64,
+    "cons": 1227,
+    "hire_mid": 116,
+    "hire_new": 116,
+    "cons_net": 206,
+    "cons_yoy": 49.8,
+    "hire_mid_yoy": 27.5,
+    "spc": 494.1,
+    "lpc": 197.1,
+    "opc": 102.0,
+    "spc_yoy": 4.4
+   },
+   {
+    "x": "26.3Q",
+    "sales": 68.46,
+    "op": 14.81,
+    "lab": 27.26,
+    "out": 8.3,
+    "cons": 1343,
+    "hire_mid": 161,
+    "hire_new": null,
+    "cons_net": 116,
+    "cons_yoy": 53.0,
+    "hire_mid_yoy": 76.9,
+    "spc": 509.8,
+    "lpc": 203.0,
+    "opc": 110.3,
+    "spc_yoy": 6.7
+   },
+   {
+    "x": "26.4Q",
+    "sales": 78.23,
+    "op": 18.32,
+    "lab": 29.35,
+    "out": 9.55,
+    "cons": 1453,
+    "hire_mid": 154,
+    "hire_new": null,
+    "cons_net": 110,
+    "cons_yoy": 54.6,
+    "hire_mid_yoy": 77.0,
+    "spc": 538.4,
+    "lpc": 202.0,
+    "opc": 126.1,
+    "spc_yoy": 5.1
+   },
+   {
+    "x": "27.1Q",
+    "sales": 88.56,
+    "op": 18.09,
+    "lab": 33.49,
+    "out": 11.02,
+    "cons": 1596,
+    "hire_mid": 188,
+    "hire_new": null,
+    "cons_net": 143,
+    "cons_yoy": 56.3,
+    "hire_mid_yoy": 67.9,
+    "spc": 554.9,
+    "lpc": 209.8,
+    "opc": 113.3,
+    "spc_yoy": 3.9
+   },
+   {
+    "x": "27.2Q",
+    "sales": 95.88,
+    "op": 19.57,
+    "lab": 39.58,
+    "out": 11.25,
+    "cons": 1916,
+    "hire_mid": 200,
+    "hire_new": 177,
+    "cons_net": 320,
+    "cons_yoy": 56.2,
+    "hire_mid_yoy": 72.4,
+    "spc": 500.4,
+    "lpc": 206.6,
+    "opc": 102.1,
+    "spc_yoy": 1.3
+   }
+  ],
+  "ba": [
+   {
+    "x": "23/1기",
+    "cust": 92,
+    "agent": 127,
+    "cand": 3631
+   },
+   {
+    "x": "24/1기",
+    "cust": 144,
+    "agent": 225,
+    "cand": 10401
+   },
+   {
+    "x": "25/1기",
+    "cust": 179,
+    "agent": 312,
+    "cand": 16110
+   },
+   {
+    "x": "26/1기",
+    "cust": 293,
+    "agent": 393,
+    "cand": 21433
+   }
+  ],
+  "emp": [
+   {
+    "x": "16/1기",
+    "emp": 10
+   },
+   {
+    "x": "17/1기",
+    "emp": 32
+   },
+   {
+    "x": "18/1기",
+    "emp": 57
+   },
+   {
+    "x": "19/1기",
+    "emp": 69
+   },
+   {
+    "x": "20/1기",
+    "emp": 89
+   },
+   {
+    "x": "21/1기",
+    "emp": 122
+   },
+   {
+    "x": "22/1기",
+    "emp": 170
+   },
+   {
+    "x": "23/1기",
+    "emp": 314
+   },
+   {
+    "x": "24/1기",
+    "emp": 710
+   },
+   {
+    "x": "25/1기",
+    "emp": 1170
+   },
+   {
+    "x": "26/1기",
+    "emp": 1762
+   }
+  ]
+ }
+}
