@@ -189,6 +189,7 @@
   function draw(doc, keyEl, mainEl) {
     var T = doc.tables || {}, charts = doc.charts || [];
     var rows = function (ch) { return T[ch.d] || []; };
+    var fsc = document.getElementById("fsc"); if (fsc && keyEl && charts.some(function (c) { return c.sec === "key"; })) fsc.remove();   // 데이터 차트에 매출·영업이익이 있으면 위쪽 같은 차트는 지운다(중복, 2026-11-16 사용자)
     if (keyEl) keyEl.innerHTML = charts.filter(function (c) { return c.sec === "key"; }).map(function (c) { return chart(c, rows(c)); }).join("");
     if (!mainEl) return;
     var secs = [];
