@@ -1,7 +1,7 @@
 /* 기업 데이터 차트(2026-11-13 사용자) — 상세 패널 아래에 실적 자료의 핵심 숫자를 차트로.
  * 데이터: data/jp/kd/<코드>.json (실적 발표 때마다 Claude 가 결산단신·설명회 자료에서 갱신)
  *   tables: { q: 분기 행, a: 연간 행, ... }  각 행의 x = 가로축 이름
- *   charts: [{ sec, t(제목), def(정의), d(표 이름), x(가로축 열, 기본 x), bars:[{k,l,u,c,f(옅게 40%)}], lines:[{k,l,u,c,yoy,r}], stack, max, muted, noplan, src }]
+ *   charts: [{ sec, t(제목), def(정의), d(표 이름), x(가로축 열, 기본 x), bars:[{k,l,u,c,f(옅게 40%)}], lines:[{k,l,u,c,yoy,r}], stack, min, max, muted, noplan, src }]
  * 차트 원칙: 절댓값 = 막대, 비율·성장률·비교 = 꺾은선.
  *   막대 색 순서 민트 → 보라 → 하늘 → 살구 → 분홍 → 버터 → 회청(계열은 최신 값이 큰 것부터 c=0,1,…)
  *   꺾은선 색 순서 노랑 → 초록 → 파랑 → 빨강 → 보라 → 청록 → 회색. YoY 는 노란 꺾은선 + 오른쪽 축 + 점마다 값. */
@@ -62,6 +62,7 @@
     var split = bars.length && right.length && !ch.max;   // 막대 + 오른쪽 꺾은선: 막대는 아래, 선은 위
     var lmin = Math.min(0, Math.min.apply(null, lv)), lmax = ch.max || nice(Math.max.apply(null, lv) * (split ? 1.55 : 1.12));
     if (lmin < 0) lmin = -nice(-lmin);
+    if (ch.min != null) lmin = ch.min;   // 0에서 시작하면 납작해지는 선(환율 등) — 축 아래 끝을 직접 지정
     var rv = []; rows.forEach(function (r) { right.forEach(function (s) { var v = n(r[s.k]); if (v != null) rv.push(Math.min(v, 300)); }); });
     var rmin = Math.min(0, Math.min.apply(null, rv.concat([0]))), rmax = Math.max.apply(null, rv.concat([10])); var pad = (rmax - rmin) * 0.15; rmax += pad; if (rmin < 0) rmin -= pad;
     if (split) rmin -= (rmax - rmin) * 0.9;   // 선을 위쪽 절반에
