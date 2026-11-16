@@ -166,6 +166,14 @@ def main():
             pr = f"실패 {e}"
         last = [it["pts"][-1][:2] for it in d["lead"]["items"]]
         print(f"  {c} {d['n']} 지표 {last} · 주가 {pr}")
+    idx = json.load(open(os.path.join(LEAD, "index.json"), encoding="utf-8"))   # 목록용 요약(다음 지표·실적 발표일)
+    for c in idx["cos"]:
+        try:
+            d = json.load(open(os.path.join(LEAD, f"{c}.json"), encoding="utf-8"))
+            idx["cos"][c].update({"ln": d["lead"]["next"]["date"], "nd": d["next"].get("date"), "nq": d["next"].get("q")})
+        except Exception:
+            pass
+    json.dump(idx, open(os.path.join(LEAD, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if "--push" in sys.argv:
         paths = ["docs/data/jp/lead"] + [f"docs/data/jp/px/{c}.json" for c in codes if os.path.exists(os.path.join(PX, f"{c}.json"))]
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "gpush.py"), f"data: 선행지표 갱신 {dt.date.today()}"] + paths, cwd=ROOT)
