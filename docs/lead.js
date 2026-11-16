@@ -67,8 +67,8 @@
 
   /* ---------- 선행지표 계산 ---------- */
   function U(it) { return it && it.unit ? it.unit : "명"; }
-  function NM(it) { return !it ? "가입자" : it.kind === "trends" ? "검색 관심도" : it.kind === "macro" ? (it.nm || "시장 통계") : "가입자"; }
-  function DG(it) { return it && (it.kind === "trends" || it.kind === "macro") ? 1 : 0; }
+  function NM(it) { return !it ? "지표" : it.kind === "trends" ? "검색 관심도" : it.kind === "pension" || !it.kind ? "가입자" : (it.nm || it.short || "지표"); }
+  function DG(it) { return it && it.kind !== "pension" && it.kind ? 1 : 0; }
   function bestIt(co) { return co.lead.items.filter(function (x) { return x.pts.length >= 12; })[0] || co.lead.items[0]; }
   function item(co, id) { return co.lead.items.filter(function (x) { return x.id === id; })[0] || co.lead.items[0]; }
   function mm(it) { if (!it._m) { it._m = {}; it.pts.forEach(function (p) { it._m[p[0]] = p; }); } return it._m; }
@@ -300,6 +300,7 @@
   function viewCompany(c) {
     var co = S.co[c]; if (!co) return viewHome();
     var g = co.sec.split("/"), G = S.idx.tree.filter(function (x) { return x.id === g[0]; })[0], K = G.kids.filter(function (x) { return x.id === g[1]; })[0];
+    if (!co.lead.items.length) co.lead.items.push({ id: "none", kind: "none", t: "외부 지표 없음", short: "외부 지표 없음", unit: "", entity: "", corp: "", note: co.lead.pick_note || "맞는 외부 월간 데이터를 찾는 중", pts: [], src: [] });
     var q = quote(c), d = dday(co.next.date), it0 = co.lead.items[0];
     var best = co.lead.items.filter(function (x) { return x.pts.length >= 12; })[0] || it0;
     var st = S.st[c] = S.st[c] || { li: best.id, ov: best.id, mode: "candle", range: "1Y", rel: true };
@@ -316,7 +317,7 @@
         '<div class="qv"><span>PER(회사 예상)</span><b>' + nf(q.per, 1) + "</b><small>배</small></div>" : "") +
       '<div class="qv next"><svg class="ring" viewBox="0 0 46 46"><circle class="bgc" cx="23" cy="23" r="19"/><circle class="fgc" id="ringfg" cx="23" cy="23" r="19" transform="rotate(-90 23 23)" stroke-dasharray="' + ringC.toFixed(1) + '" stroke-dashoffset="' + ringC.toFixed(1) + '"/></svg>' +
       "<div><span>다음 실적 · " + esc(co.next.q) + " (" + esc(co.next.period) + ")</span><b>D-" + d + "</b><small>" + md(tOf(co.next.date)) + (co.next.fixed ? " 확정" : " 예상") + "</small></div></div>" +
-      '<div class="qv ind-next"><span>다음 선행지표 발표</span><b>' + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + "</b><small>" + md(tOf(co.lead.next.date)) + " · " + co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준</small></div>" +
+      '<div class="qv ind-next"><span>다음 선행지표 발표</span><b>' + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + "</b><small>" + md(tOf(co.lead.next.date)) + " · " + (co.lead.next.basis ? co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준" : "공표 예정") + "</small></div>" +
       "</div></section>";
 
     var lead = '<div class="sec-t rv"><span class="n">01</span><h2>선행지표</h2><p>회사 발표가 아닌 외부 월간 데이터 — 실적보다 먼저 나옴</p></div>' +
@@ -363,7 +364,7 @@
     var host = document.getElementById("lw"); if (!host) return;
     var st = S.st[co.c], it = item(co, st.li), s = stat(co, it), nd = dday(co.lead.next.date), main1 = it.id === co.lead.items[0].id;
     if (!it.pts.length) { host.innerHTML = '<div class="empty">아직 수집 전입니다 — 다음 갱신(' + md(tOf(co.lead.next.date)) + ')부터 쌓입니다.</div>'; document.getElementById("ls").innerHTML = ""; return; }
-    document.getElementById("lnext").textContent = "다음 발표 " + md(tOf(co.lead.next.date)) + " (" + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + ") · " + co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준";
+    document.getElementById("lnext").textContent = "다음 발표 " + md(tOf(co.lead.next.date)) + " (" + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + ") · " + (co.lead.next.basis ? co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준" : "공표 예정");
     document.getElementById("lnote").innerHTML = "<b>대상</b> " + esc(it.entity) + ' <span class="mono">' + esc(it.corp) + "</span> — " + esc(it.note);
     var last = it.pts[it.pts.length - 1][0], pq = co.next.q, endYm = qMonthsList(co, pq)[2], first = it.pts[0][0];
     if (endYm <= last) endYm = ymAdd(last, 1);
@@ -482,7 +483,7 @@
   function drawStats(co, it, s) {
     var L = s.last, nd = dday(co.lead.next.date), main1 = it.id === co.lead.items[0].id;
     var rCls = s.r == null ? "" : s.r >= 0.8 ? "hi" : s.r >= 0.5 ? "mid" : "lo";
-    var h = '<div class="ls-box nx"><span>다음 선행지표 발표</span><b class="mono">' + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + '</b><div class="ls-sub"><span>' + md(tOf(co.lead.next.date)) + " · " + co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준</span><span>" + (function () { var g = Math.round((tOf(co.next.date) - tOf(co.lead.next.date)) / DAY); return g > 0 ? "실적(" + md(tOf(co.next.date)) + ")보다 " + g + "일 먼저" : "이번 실적(" + md(tOf(co.next.date)) + ") 뒤 갱신"; })() + "</span></div></div>";
+    var h = '<div class="ls-box nx"><span>다음 선행지표 발표</span><b class="mono">' + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + '</b><div class="ls-sub"><span>' + md(tOf(co.lead.next.date)) + " · " + (co.lead.next.basis ? co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준" : "공표 예정") + "</span><span>" + (function () { var g = Math.round((tOf(co.next.date) - tOf(co.lead.next.date)) / DAY); return g > 0 ? "실적(" + md(tOf(co.next.date)) + ")보다 " + g + "일 먼저" : "이번 실적(" + md(tOf(co.next.date)) + ") 뒤 갱신"; })() + "</span></div></div>";
     h += '<div class="ls-box"><span>최신 값 · ' + ymLab(L[0]) + ' 무렵</span><b class="mono">' + nf(L[1], DG(it)) + '<small>' + U(it) + '</small></b><div class="ls-sub"><span class="' + ud(s.mom) + '">전월 ' + (it.unit === "%" ? (s.mom > 0 ? "+" : "") + nf(s.mom, 1) + "%p" : sgn(s.mom)) + "</span>" + (s.yoy != null ? '<span class="' + ud(s.yoy) + '">전년 ' + pct(s.yoy) + "</span>" : "") + "</div></div>";
     if (true) {
       h += '<div class="ls-box r ' + rCls + '"><span>R · 분기 평균 ' + esc(NM(it)) + ' vs 분기 매출</span><b class="mono">' + (s.r == null ? "—" : nf(s.r, 2)) + '</b><div class="ls-sub"><span>n=' + s.n + "개 분기</span><span>" + (s.n < 6 ? "데이터 쌓이는 중 — 참고용" : "") + '</span></div><div class="rbar"><i data-w="' + Math.max(0, (s.r || 0) * 100).toFixed(0) + '"></i></div></div>';
@@ -792,11 +793,14 @@
         var se = (d.series || []).filter(function (x) { return x.key === n.at.key; })[0] || (d.series || [])[0]; if (!se || !se.pts || !se.pts.length) return;
         if (co.lead.items.some(function (x) { return x.id === "m" + i; })) return;
         var useY = n.at.yoy && se.yoy && se.yoy.length;
-        co.lead.items.push({ id: "m" + i, kind: "macro", t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (se.name || d.name).slice(0, 16) + (useY ? " YoY" : ""), nm: (se.name || d.name).slice(0, 14), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
+        if (d.next) { var nx = /(\d{4}-\d{2}-\d{2})/.exec(d.next); if (nx && dday(nx[1]) >= 0 && (!co._lnx || nx[1] < co._lnx)) co._lnx = nx[1]; }
+        co.lead.items.push({ id: "m" + i, rank: n.m.rank, kind: "macro", t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (se.name || d.name).slice(0, 16) + (useY ? " YoY" : ""), nm: (se.name || d.name).slice(0, 14), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
           pts: (useY ? se.yoy : se.pts).filter(function (p) { return p && p[1] != null; }).map(function (p) { return [p[0], p[1], "mc"]; }), src: [{ doc: d.src || d.name, where: (se.name || "") + " · " + (d.url || ""), freq: d.freq || "월", auto: "반자동", how: "공용 시장 통계 data/jp/lead/macro/" + n.at.file + " — 다음 공표 " + (d.next || "") }] });
         co.refs.mc = { date: "", t: d.src || d.name, url: d.url || "" };
       });
       co.lead.macro = co.lead.macro.filter(function (m) { return !ix[m.id]; });
+      co.lead.items.sort(function (a, b) { return (a.rank || 9) - (b.rank || 9); });
+      if (co._lnx && !co.lead.items.some(function (x) { return x.kind === "pension"; })) co.lead.next = { date: co._lnx, basis: "", note: "공용 시장 통계 다음 공표(예상)" };
     });
   }
 
