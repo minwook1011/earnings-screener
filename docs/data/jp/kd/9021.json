@@ -1,1 +1,1360 @@
-{"c": "9021", "n": "서일본여객철도(JR서일본)", "asof": "2026-11-05", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "서일본 철도(산요·호쿠리쿠 신칸센, 오사카·교토·고베 근교선) + 역 상업시설·부동산·호텔·여행. 4분기는 수선비 등 비용이 몰려 이익이 거의 0. 2026년 하반기 오사카 엑스포 효과가 빠짐", "charts": [{"sec": "key", "t": "영업수익(매출)", "d": "q", "bars": [{"k": "sales", "l": "영업수익", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신", "def": "4분기는 수선비·비용이 몰려 매년 거의 0"}, {"sec": "key", "t": "운수수입(단독)", "d": "q", "bars": [{"k": "rail_rev", "l": "운수수입", "u": "억엔", "c": 0}], "lines": [{"k": "rail_rev_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신", "def": "JR서일본 단독 철도 운임 수입 · 회사가 분기 그래프로 공개(26년 3월기부터)"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산설명자료·결산단신 · 총차입금 = 단기·장기 차입금 + 사채(1년 내 상환분 포함)"}, {"sec": "사업 지표", "t": "운수수입과 단독 비용", "def": "단독 비용 = JR서일본 단독 영업비용", "d": "q", "src": "2Q27 결산설명자료·결산단신 · 4분기 비용이 큼(수선 시기)", "lines": [{"k": "rail_rev", "l": "운수수입", "u": "억엔", "c": 0}, {"k": "unit_cost", "l": "단독 비용", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "인바운드 운수수입", "def": "외국인 방문객 상품 수입 + 일반 표 이용 추정", "d": "q", "bars": [{"k": "inbound", "l": "인바운드", "u": "억엔", "c": 0}], "lines": [{"k": "inbound_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신 · 중국 여행 자제 요청 영향"}, {"sec": "사업 지표", "t": "호텔 객실 단가(ADR)", "def": "1박 평균 객실 요금", "d": "q", "lines": [{"k": "adr_granvia", "l": "그랑비아(고급)", "u": "엔", "c": 0}, {"k": "adr_via", "l": "비아인(비즈니스)", "u": "엔", "c": 1}], "src": "2Q27 결산설명자료·결산단신 · 27.2Q 는 속보치"}, {"sec": "부문", "t": "부문별 영업수익(상반기)", "d": "seg", "src": "2Q27 결산설명자료 · 부문 간 거래 포함", "lines": [{"k": "s26", "l": "26년 3월기 상반기", "u": "억엔", "c": 0}, {"k": "s27", "l": "27년 3월기 상반기", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 영업이익(상반기)", "d": "seg", "src": "2Q27 결산설명자료", "lines": [{"k": "o26", "l": "26년 3월기 상반기", "u": "억엔", "c": 0}, {"k": "o27", "l": "27년 3월기 상반기", "u": "억엔", "c": 1}]}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "분기 영업이익·순이익", "d": "q", "src": "2Q27 결산설명자료·결산단신", "lines": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}, {"k": "net", "l": "순이익", "u": "억엔", "c": 1}]}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 4244.2, "op": 661.54, "net": 427.45, "gp": null, "sga": null, "ord": 625.75, "cogs": null, "cash": 2189.88, "debt_total": 14663.73, "equity": 12271.92, "total_assets": 36581.68, "gpm": null, "opm": 15.6, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 4407.01, "op": 73.02, "net": -111.27, "gp": null, "sga": null, "ord": 63.49, "cogs": null, "cash": 2334.65, "debt_total": 14762.77, "equity": 12271.11, "total_assets": 37800.73, "gpm": null, "opm": 1.7, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 4027.8, "op": 582.28, "net": 382.72, "gp": null, "sga": null, "ord": 552.44, "cogs": null, "cash": 1347.16, "debt_total": 14042.3, "equity": 12175.54, "total_assets": 36129.7, "gpm": null, "opm": 14.5, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 4086.06, "op": 465.62, "net": 314.39, "gp": null, "sga": null, "ord": 433.52, "cogs": null, "cash": 1157.67, "debt_total": 14194.26, "equity": 12264.94, "total_assets": 36006.46, "gpm": null, "opm": 11.4, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 4342.91, "op": 705.54, "net": 449.41, "gp": null, "sga": null, "ord": 656.58, "cogs": null, "cash": 1260.54, "debt_total": 14133.11, "equity": 12552.09, "total_assets": 36522.71, "gpm": null, "opm": 16.2, "sales_yoy": 2.3, "gp_yoy": null, "sga_yoy": null, "op_yoy": 6.7, "ord_yoy": 4.9, "net_yoy": 5.1, "inventory_yoy": null, "cash_yoy": -42.4, "debt_total_yoy": -3.6, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 4622.67, "op": 48.17, "net": -6.94, "gp": null, "sga": null, "ord": 14.16, "cogs": null, "cash": 1256.17, "debt_total": 14432.94, "equity": 12801.65, "total_assets": 37523.59, "gpm": null, "opm": 1.0, "sales_yoy": 4.9, "gp_yoy": null, "sga_yoy": null, "op_yoy": -34.0, "ord_yoy": -77.7, "net_yoy": null, "inventory_yoy": null, "cash_yoy": -46.2, "debt_total_yoy": -2.2, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 4270.59, "op": 633.86, "net": 488.42, "gp": null, "sga": null, "ord": 597.04, "cogs": null, "cash": 941.88, "debt_total": 14333.98, "equity": 12797.63, "total_assets": 36921.45, "gpm": null, "opm": 14.8, "rail_rev": 2273, "inbound": 133, "unit_cost": 2060, "adr_via": 12100, "adr_granvia": 23300, "sales_yoy": 6.0, "gp_yoy": null, "sga_yoy": null, "op_yoy": 8.9, "ord_yoy": 8.1, "net_yoy": 27.6, "inventory_yoy": null, "cash_yoy": -30.1, "debt_total_yoy": 2.1, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 4447.7, "op": 595.43, "net": 378.74, "gp": null, "sga": null, "ord": 554.41, "cogs": null, "cash": 1222.12, "debt_total": 14645.3, "equity": 12989.31, "total_assets": 37750.4, "gpm": null, "opm": 13.4, "rail_rev": 2384, "inbound": 113, "unit_cost": 2210, "adr_via": 11700, "adr_granvia": 21400, "sales_yoy": 8.9, "gp_yoy": null, "sga_yoy": null, "op_yoy": 27.9, "ord_yoy": 27.9, "net_yoy": 20.5, "inventory_yoy": null, "cash_yoy": 5.6, "debt_total_yoy": 3.2, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 4676.41, "op": 742.06, "net": 342.87, "gp": null, "sga": null, "ord": 696.27, "cogs": null, "cash": 1660.47, "debt_total": 14940.21, "equity": 13162.28, "total_assets": 38486.8, "gpm": null, "opm": 15.9, "rail_rev": 2534, "inbound": 141, "unit_cost": 2266, "adr_via": 13200, "adr_granvia": 24700, "sales_yoy": 7.7, "gp_yoy": null, "sga_yoy": null, "op_yoy": 5.2, "ord_yoy": 6.0, "net_yoy": -23.7, "inventory_yoy": null, "cash_yoy": 31.7, "debt_total_yoy": 5.7, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 5063.7, "op": 9.46, "net": 64.96, "gp": null, "sga": null, "ord": -10.9, "cogs": null, "cash": 1811.07, "debt_total": 15415.99, "equity": 13372.06, "total_assets": 39867.21, "gpm": null, "opm": 0.2, "rail_rev": 2287, "inbound": 105, "unit_cost": 2754, "adr_via": 11200, "adr_granvia": 21200, "sales_yoy": 9.5, "gp_yoy": null, "sga_yoy": null, "op_yoy": -80.4, "ord_yoy": -177.0, "net_yoy": null, "inventory_yoy": null, "cash_yoy": 44.2, "debt_total_yoy": 6.8, "rail_rev_yoy": null, "inbound_yoy": null, "unit_cost_yoy": null, "adr_via_yoy": null, "adr_granvia_yoy": null}, {"q": "27.1Q", "x": "27.1Q", "sales": 4244.03, "op": 559.89, "net": 390.46, "gp": null, "sga": null, "ord": 521.25, "cogs": null, "cash": 1999.15, "debt_total": 15561.73, "equity": 13542.38, "total_assets": 38999.88, "gpm": null, "opm": 13.2, "rail_rev": 2327, "inbound": 127, "unit_cost": 2157, "adr_via": 11800, "adr_granvia": 22800, "sales_yoy": -0.6, "gp_yoy": null, "sga_yoy": null, "op_yoy": -11.7, "ord_yoy": -12.7, "net_yoy": -20.1, "inventory_yoy": null, "cash_yoy": 112.3, "debt_total_yoy": 8.6, "rail_rev_yoy": 2.4, "inbound_yoy": -4.5, "unit_cost_yoy": 4.7, "adr_via_yoy": -2.5, "adr_granvia_yoy": -2.1}, {"q": "27.2Q", "x": "27.2Q", "sales": 4548.56, "op": 594.74, "net": 346.85, "gp": null, "sga": null, "ord": 543.51, "cogs": null, "cash": 2623.26, "debt_total": 16364.45, "equity": 13875.99, "total_assets": 40546.04, "gpm": null, "opm": 13.1, "rail_rev": 2470, "inbound": 108, "unit_cost": 2296, "adr_via": 11300, "adr_granvia": 21100, "sales_yoy": 2.3, "gp_yoy": null, "sga_yoy": null, "op_yoy": -0.1, "ord_yoy": -2.0, "net_yoy": -8.4, "inventory_yoy": null, "cash_yoy": 114.6, "debt_total_yoy": 11.7, "rail_rev_yoy": 3.6, "inbound_yoy": -4.4, "unit_cost_yoy": 3.9, "adr_via_yoy": -3.4, "adr_granvia_yoy": -1.4}], "a": [{"year": "2021", "x": "2021", "sales": 8981.72, "op": -2455.44, "ord": -2573.67, "net": -2332.14, "opm": -27.3, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 10311.03, "op": -1190.91, "ord": -1210.47, "net": -1131.98, "opm": -11.5, "sales_yoy": 14.8, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 13955.31, "op": 839.7, "ord": 736.19, "net": 885.28, "opm": 6.0, "sales_yoy": 35.3, "op_yoy": null, "net_yoy": null}, {"year": "2024", "x": "2024", "sales": 16350.23, "op": 1797.48, "ord": 1673.82, "net": 987.61, "opm": 11.0, "sales_yoy": 17.2, "op_yoy": 114.1, "net_yoy": 11.6}, {"year": "2025", "x": "2025", "sales": 17079.44, "op": 1801.61, "ord": 1656.7, "net": 1139.58, "opm": 10.5, "sales_yoy": 4.5, "op_yoy": 0.2, "net_yoy": 15.4}, {"year": "2026", "x": "2026", "sales": 18458.4, "op": 1980.81, "ord": 1836.82, "net": 1274.99, "opm": 10.7, "sales_yoy": 8.1, "op_yoy": 9.9, "net_yoy": 11.9}, {"year": "2027 계획", "x": "2027 계획", "sales": 18670.0, "op": 1850.0, "ord": 1660.0, "net": 1190.0, "opm": 9.9, "sales_yoy": 1.1, "op_yoy": -6.6, "net_yoy": -6.7, "plan": 1, "kind": "회사 계획"}], "seg": [{"x": "모빌리티", "s26": 5278, "s27": 5460, "o26": 863, "o27": 842, "plan_s": 11245, "plan_o": 1170}, {"x": "부동산", "s26": 1236, "s27": 1246, "o26": 255, "o27": 240, "plan_s": 2850, "plan_o": 475}, {"x": "유통", "s26": 1191, "s27": 1115, "o26": 103, "o27": 72, "plan_s": 2230, "plan_o": 145}, {"x": "여행·지역", "s26": 871, "s27": 832, "o26": -9, "o27": -9, "plan_s": 2010, "plan_o": 10}]}}
+{
+ "c": "9021",
+ "n": "서일본여객철도(JR서일본)",
+ "asof": "2026-11-05",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "서일본 철도(산요·호쿠리쿠 신칸센, 오사카·교토·고베 근교선) + 역 상업시설·부동산·호텔·여행. 4분기는 수선비 등 비용이 몰려 이익이 거의 0. 2026년 하반기 오사카 엑스포 효과가 빠짐",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "영업수익(매출)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "영업수익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신",
+   "def": "4분기는 수선비·비용이 몰려 매년 거의 0"
+  },
+  {
+   "sec": "key",
+   "t": "운수수입(단독)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "rail_rev",
+     "l": "운수수입",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "rail_rev_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "각 분기 결산설명회 자료 단체 운수수입 표(누계)에서 분기 단독을 뺄셈으로 계산 · 25년 3월기~",
+   "def": "JR서일본 단독 철도 운임 수입(분기 단독 = 누계 차이)"
+  },
+  {
+   "sec": "key",
+   "t": "신칸센 운수수입",
+   "def": "산요·호쿠리쿠 신칸센 운임 수입(분기 단독 = 누계 차이)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "shin",
+     "l": "신칸센",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "shin_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "각 분기 결산설명회 자료 단체 운수수입 표(누계)"
+  },
+  {
+   "sec": "철도",
+   "t": "노선별 운수수입",
+   "def": "분기 단독 = 누계 차이. 근기권 = 오사카·교토·고베 근교선",
+   "d": "q",
+   "lines": [
+    {
+     "k": "shin",
+     "l": "신칸센",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "kinki",
+     "l": "근기권",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "oth",
+     "l": "그 밖 재래선",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "각 분기 결산설명회 자료 단체 운수수입 표 · 25년 3월기부터 고가 밑 임대가 부동산업으로 옮겨 그 전 해와 기준이 달라 25년 3월기부터만 실음"
+  },
+  {
+   "sec": "철도",
+   "t": "노선별 운수수입 YoY",
+   "d": "q",
+   "lines": [
+    {
+     "k": "shin_yoy",
+     "l": "신칸센",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "kinki_yoy",
+     "l": "근기권",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "oth_yoy",
+     "l": "그 밖 재래선",
+     "u": "%",
+     "c": 2
+    }
+   ],
+   "src": "각 분기 결산설명회 자료로 계산"
+  },
+  {
+   "sec": "철도",
+   "t": "신칸센 비중",
+   "def": "신칸센 ÷ 단체 운수수입",
+   "d": "q",
+   "lines": [
+    {
+     "k": "shin_r",
+     "l": "신칸센 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "각 분기 결산설명회 자료로 계산"
+  },
+  {
+   "sec": "철도",
+   "t": "운수수입과 단독 비용",
+   "def": "단독 비용 = JR서일본 단독 영업비용",
+   "d": "q",
+   "src": "각 분기 결산설명회 자료(운수수입 누계 차이·단체 비용 분기 그래프) · 4분기 비용이 큼(수선 시기)",
+   "lines": [
+    {
+     "k": "rail_rev",
+     "l": "운수수입",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "unit_cost",
+     "l": "단독 비용",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "인바운드",
+   "t": "인바운드 운수수입",
+   "def": "외국인 방문객 상품 수입 + 일반 표 이용 추정",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inbound",
+     "l": "인바운드",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inbound_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "26년 3월기~ 결산설명회 자료 · 상반기 합 26년 246·27년 235억엔과 일치"
+  },
+  {
+   "sec": "인바운드",
+   "t": "인바운드 수입(연간)",
+   "def": "운수수입 = 방일객 상품 + 일반 표 이용(추정). 그룹 = 백화점·비아인·호텔·여행. 26년 3월기 운수 494 중 14 는 엑스포 수요와 겹침",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ib_rail",
+     "l": "운수수입",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ib_grp",
+     "l": "그룹 회사",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산설명회 자료 9쪽 · 마지막 행 = 27년 3월기 회사 상정(plan 행)"
+  },
+  {
+   "sec": "인바운드",
+   "t": "운수수입 중 인바운드 비중(연간)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ib_r",
+     "l": "인바운드 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "2Q27 결산설명회 자료 9쪽(회사 공표 비율) · 마지막 행 = 회사 상정"
+  },
+  {
+   "sec": "부동산·호텔",
+   "t": "SC(역 상업시설) 매출",
+   "def": "부동산업 쇼핑센터 테넌트 매출 합계(루쿠아 포함)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sc",
+     "l": "SC 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sc_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "각 분기 결산설명회 자료 부동산업 관련 지표 · 25년 3월기 값은 3Q26 자료, 26년 3월기~는 2Q27 자료(속보치 수정 반영) · 27.2Q 속보치"
+  },
+  {
+   "sec": "부동산·호텔",
+   "t": "루쿠아 오사카 매출",
+   "def": "기함 SC 루쿠아(오사카역) 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "lucua",
+     "l": "루쿠아",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "lucua_r",
+     "l": "SC 매출 중 비중",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명회 자료 12쪽 · 26년 3월기부터 공개"
+  },
+  {
+   "sec": "부동산·호텔",
+   "t": "호텔 객실 단가(ADR)",
+   "def": "1박 평균 객실 요금",
+   "d": "q",
+   "lines": [
+    {
+     "k": "adr_granvia",
+     "l": "그랑비아(고급)",
+     "u": "엔",
+     "c": 0
+    },
+    {
+     "k": "adr_via",
+     "l": "비아인(비즈니스)",
+     "u": "엔",
+     "c": 1
+    }
+   ],
+   "src": "각 분기 결산설명회 자료 부동산업 관련 지표 · 최신 자료 값(속보치는 다음 분기에 고쳐짐) · 27.2Q 속보치"
+  },
+  {
+   "sec": "부동산·호텔",
+   "t": "호텔 ADR YoY",
+   "d": "q",
+   "lines": [
+    {
+     "k": "adr_granvia_yoy",
+     "l": "그랑비아",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "adr_via_yoy",
+     "l": "비아인",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산설명회 자료 ADR 로 계산"
+  },
+  {
+   "sec": "월차",
+   "t": "월차 최근 24개월",
+   "d": "mm",
+   "table": 1,
+   "cols": [
+    {
+     "k": "m0",
+     "l": "전사 운수 취급수입",
+     "u": "전년=100",
+     "yoy100": 1
+    },
+    {
+     "k": "m4",
+     "l": "호쿠리쿠 신칸센 이용(가가야키·하쿠타카)",
+     "u": "전년=100",
+     "yoy100": 1
+    },
+    {
+     "k": "m1",
+     "l": "운수 취급수입 중장거리",
+     "u": "전년=100",
+     "yoy100": 1
+    },
+    {
+     "k": "m2",
+     "l": "운수 취급수입 정기",
+     "u": "전년=100",
+     "yoy100": 1
+    },
+    {
+     "k": "m3",
+     "l": "운수 취급수입 근거리",
+     "u": "전년=100",
+     "yoy100": 1
+    },
+    {
+     "k": "m5",
+     "l": "재래선 특급 이용",
+     "u": "전년=100",
+     "yoy100": 1
+    }
+   ],
+   "src": "회사 IR 월차(운수 취급수입·이용 상황 속보, jp_monthly 원장) · 중장거리·정기·근거리·재래선 특급은 25년 3월까지만 공표 · 26.09·26.08 은 다음 달 수정치"
+  },
+  {
+   "sec": "월차",
+   "t": "월차 전년 대비(%)",
+   "d": "mm",
+   "lines": [
+    {
+     "k": "m0p",
+     "l": "전사 운수 취급수입",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "m4p",
+     "l": "호쿠리쿠 신칸센 이용",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "회사 IR 월차(전년=100 지수 − 100)"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업수익(상반기)",
+   "d": "seg",
+   "src": "2Q27 결산설명자료 · 부문 간 거래 포함",
+   "lines": [
+    {
+     "k": "s26",
+     "l": "26년 3월기 상반기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "s27",
+     "l": "27년 3월기 상반기",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익(상반기)",
+   "d": "seg",
+   "src": "2Q27 결산설명자료",
+   "lines": [
+    {
+     "k": "o26",
+     "l": "26년 3월기 상반기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "o27",
+     "l": "27년 3월기 상반기",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신 · 총차입금 = 단기·장기 차입금 + 사채(1년 내 상환분 포함)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 4244.2,
+    "op": 661.54,
+    "cash": 2189.88,
+    "debt_total": 14663.73,
+    "opm": 15.6,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "rail_rev_yoy": null,
+    "inbound_yoy": null,
+    "unit_cost_yoy": null,
+    "adr_via_yoy": null,
+    "adr_granvia_yoy": null,
+    "sc": null,
+    "lucua": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 4407.01,
+    "op": 73.02,
+    "cash": 2334.65,
+    "debt_total": 14762.77,
+    "opm": 1.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "rail_rev_yoy": null,
+    "inbound_yoy": null,
+    "unit_cost_yoy": null,
+    "adr_via_yoy": null,
+    "adr_granvia_yoy": null,
+    "sc": null,
+    "lucua": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 4027.8,
+    "op": 582.28,
+    "cash": 1347.16,
+    "debt_total": 14042.3,
+    "opm": 14.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "rail_rev_yoy": null,
+    "inbound_yoy": null,
+    "unit_cost_yoy": null,
+    "adr_via_yoy": null,
+    "adr_granvia_yoy": null,
+    "rail_rev": 2125,
+    "shin": 1177,
+    "kinki": 758,
+    "oth": 188,
+    "shin_r": 55.4,
+    "unit_cost": 1932,
+    "adr_granvia": 21000,
+    "adr_via": 10500,
+    "sc": 920,
+    "lucua": null,
+    "shin_yoy": null,
+    "kinki_yoy": null,
+    "oth_yoy": null,
+    "sc_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 4086.06,
+    "op": 465.62,
+    "cash": 1157.67,
+    "debt_total": 14194.26,
+    "opm": 11.4,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "rail_rev_yoy": null,
+    "inbound_yoy": null,
+    "unit_cost_yoy": null,
+    "adr_via_yoy": null,
+    "adr_granvia_yoy": null,
+    "rail_rev": 2221,
+    "shin": 1270,
+    "kinki": 751,
+    "oth": 200,
+    "shin_r": 57.2,
+    "unit_cost": 2103,
+    "adr_granvia": 20800,
+    "adr_via": 10700,
+    "sc": 937,
+    "lucua": null,
+    "shin_yoy": null,
+    "kinki_yoy": null,
+    "oth_yoy": null,
+    "sc_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 4342.91,
+    "op": 705.54,
+    "cash": 1260.54,
+    "debt_total": 14133.11,
+    "opm": 16.2,
+    "sales_yoy": 2.3,
+    "op_yoy": 6.7,
+    "cash_yoy": -42.4,
+    "debt_total_yoy": -3.6,
+    "rail_rev_yoy": null,
+    "inbound_yoy": null,
+    "unit_cost_yoy": null,
+    "adr_via_yoy": null,
+    "adr_granvia_yoy": null,
+    "rail_rev": 2395,
+    "shin": 1401,
+    "kinki": 789,
+    "oth": 206,
+    "shin_r": 58.5,
+    "unit_cost": 2112,
+    "adr_granvia": 23200,
+    "adr_via": 12100,
+    "sc": 1084,
+    "lucua": null,
+    "shin_yoy": null,
+    "kinki_yoy": null,
+    "oth_yoy": null,
+    "sc_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 4622.67,
+    "op": 48.17,
+    "cash": 1256.17,
+    "debt_total": 14432.94,
+    "opm": 1.0,
+    "sales_yoy": 4.9,
+    "op_yoy": -34.0,
+    "cash_yoy": -46.2,
+    "debt_total_yoy": -2.2,
+    "rail_rev_yoy": null,
+    "inbound_yoy": null,
+    "unit_cost_yoy": null,
+    "adr_via_yoy": null,
+    "adr_granvia_yoy": null,
+    "rail_rev": 2185,
+    "shin": 1245,
+    "kinki": 747,
+    "oth": 193,
+    "shin_r": 57.0,
+    "unit_cost": 2605,
+    "adr_granvia": 20500,
+    "adr_via": 11100,
+    "sc": 968,
+    "lucua": null,
+    "shin_yoy": null,
+    "kinki_yoy": null,
+    "oth_yoy": null,
+    "sc_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 4270.59,
+    "op": 633.86,
+    "cash": 941.88,
+    "debt_total": 14333.98,
+    "opm": 14.8,
+    "rail_rev": 2273,
+    "inbound": 133,
+    "unit_cost": 2060,
+    "adr_via": 12100,
+    "adr_granvia": 23300,
+    "sales_yoy": 6.0,
+    "op_yoy": 8.9,
+    "cash_yoy": -30.1,
+    "debt_total_yoy": 2.1,
+    "rail_rev_yoy": 7.0,
+    "inbound_yoy": null,
+    "unit_cost_yoy": 6.6,
+    "adr_via_yoy": 15.2,
+    "adr_granvia_yoy": 11.0,
+    "shin": 1279,
+    "kinki": 796,
+    "oth": 198,
+    "shin_r": 56.3,
+    "sc": 1103,
+    "lucua": 268,
+    "lucua_r": 24.3,
+    "shin_yoy": 8.7,
+    "kinki_yoy": 5.0,
+    "oth_yoy": 5.3,
+    "sc_yoy": 19.9
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 4447.7,
+    "op": 595.43,
+    "cash": 1222.12,
+    "debt_total": 14645.3,
+    "opm": 13.4,
+    "rail_rev": 2384,
+    "inbound": 113,
+    "unit_cost": 2210,
+    "adr_via": 11700,
+    "adr_granvia": 21400,
+    "sales_yoy": 8.9,
+    "op_yoy": 27.9,
+    "cash_yoy": 5.6,
+    "debt_total_yoy": 3.2,
+    "rail_rev_yoy": 7.3,
+    "inbound_yoy": null,
+    "unit_cost_yoy": 5.1,
+    "adr_via_yoy": 9.3,
+    "adr_granvia_yoy": 2.9,
+    "shin": 1378,
+    "kinki": 801,
+    "oth": 205,
+    "shin_r": 57.8,
+    "sc": 1121,
+    "lucua": 269,
+    "lucua_r": 24.0,
+    "shin_yoy": 8.5,
+    "kinki_yoy": 6.7,
+    "oth_yoy": 2.5,
+    "sc_yoy": 19.6
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 4676.41,
+    "op": 742.06,
+    "cash": 1660.47,
+    "debt_total": 14940.21,
+    "opm": 15.9,
+    "rail_rev": 2535,
+    "inbound": 141,
+    "unit_cost": 2266,
+    "adr_via": 13200,
+    "adr_granvia": 24700,
+    "sales_yoy": 7.7,
+    "op_yoy": 5.2,
+    "cash_yoy": 31.7,
+    "debt_total_yoy": 5.7,
+    "rail_rev_yoy": 5.8,
+    "inbound_yoy": null,
+    "unit_cost_yoy": 7.3,
+    "adr_via_yoy": 9.1,
+    "adr_granvia_yoy": 6.5,
+    "shin": 1502,
+    "kinki": 817,
+    "oth": 215,
+    "shin_r": 59.3,
+    "sc": 1249,
+    "lucua": 308,
+    "lucua_r": 24.7,
+    "shin_yoy": 7.2,
+    "kinki_yoy": 3.5,
+    "oth_yoy": 4.4,
+    "sc_yoy": 15.2
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 5063.7,
+    "op": 9.46,
+    "cash": 1811.07,
+    "debt_total": 15415.99,
+    "opm": 0.2,
+    "rail_rev": 2287,
+    "inbound": 105,
+    "unit_cost": 2754,
+    "adr_via": 11200,
+    "adr_granvia": 21200,
+    "sales_yoy": 9.5,
+    "op_yoy": -80.4,
+    "cash_yoy": 44.2,
+    "debt_total_yoy": 6.8,
+    "rail_rev_yoy": 4.7,
+    "inbound_yoy": null,
+    "unit_cost_yoy": 5.7,
+    "adr_via_yoy": 0.9,
+    "adr_granvia_yoy": 3.4,
+    "shin": 1323,
+    "kinki": 766,
+    "oth": 198,
+    "shin_r": 57.8,
+    "sc": 1101,
+    "lucua": 258,
+    "lucua_r": 23.4,
+    "shin_yoy": 6.3,
+    "kinki_yoy": 2.5,
+    "oth_yoy": 2.6,
+    "sc_yoy": 13.7
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 4244.03,
+    "op": 559.89,
+    "cash": 1999.15,
+    "debt_total": 15561.73,
+    "opm": 13.2,
+    "rail_rev": 2327,
+    "inbound": 127,
+    "unit_cost": 2157,
+    "adr_via": 11800,
+    "adr_granvia": 22800,
+    "sales_yoy": -0.6,
+    "op_yoy": -11.7,
+    "cash_yoy": 112.3,
+    "debt_total_yoy": 8.6,
+    "rail_rev_yoy": 2.4,
+    "inbound_yoy": -4.5,
+    "unit_cost_yoy": 4.7,
+    "adr_via_yoy": -2.5,
+    "adr_granvia_yoy": -2.1,
+    "shin": 1337,
+    "kinki": 792,
+    "oth": 197,
+    "shin_r": 57.5,
+    "sc": 1154,
+    "lucua": 290,
+    "lucua_r": 25.1,
+    "shin_yoy": 4.5,
+    "kinki_yoy": -0.5,
+    "oth_yoy": -0.5,
+    "sc_yoy": 4.6
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 4548.56,
+    "op": 594.74,
+    "cash": 2623.26,
+    "debt_total": 16364.45,
+    "opm": 13.1,
+    "rail_rev": 2470,
+    "inbound": 108,
+    "unit_cost": 2296,
+    "adr_via": 11300,
+    "adr_granvia": 21100,
+    "sales_yoy": 2.3,
+    "op_yoy": -0.1,
+    "cash_yoy": 114.6,
+    "debt_total_yoy": 11.7,
+    "rail_rev_yoy": 3.6,
+    "inbound_yoy": -4.4,
+    "unit_cost_yoy": 3.9,
+    "adr_via_yoy": -3.4,
+    "adr_granvia_yoy": -1.4,
+    "shin": 1456,
+    "kinki": 797,
+    "oth": 217,
+    "shin_r": 58.9,
+    "sc": 1191,
+    "lucua": 293,
+    "lucua_r": 24.6,
+    "shin_yoy": 5.7,
+    "kinki_yoy": -0.5,
+    "oth_yoy": 5.9,
+    "sc_yoy": 6.2
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 8981.72,
+    "op": -2455.44,
+    "ord": -2573.67,
+    "net": -2332.14,
+    "opm": -27.3,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 10311.03,
+    "op": -1190.91,
+    "ord": -1210.47,
+    "net": -1131.98,
+    "opm": -11.5,
+    "sales_yoy": 14.8,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 13955.31,
+    "op": 839.7,
+    "ord": 736.19,
+    "net": 885.28,
+    "opm": 6.0,
+    "sales_yoy": 35.3,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 16350.23,
+    "op": 1797.48,
+    "ord": 1673.82,
+    "net": 987.61,
+    "opm": 11.0,
+    "sales_yoy": 17.2,
+    "op_yoy": 114.1,
+    "net_yoy": 11.6
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 17079.44,
+    "op": 1801.61,
+    "ord": 1656.7,
+    "net": 1139.58,
+    "opm": 10.5,
+    "sales_yoy": 4.5,
+    "op_yoy": 0.2,
+    "net_yoy": 15.4
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 18458.4,
+    "op": 1980.81,
+    "ord": 1836.82,
+    "net": 1274.99,
+    "opm": 10.7,
+    "sales_yoy": 8.1,
+    "op_yoy": 9.9,
+    "net_yoy": 11.9
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 18670.0,
+    "op": 1850.0,
+    "ord": 1660.0,
+    "net": 1190.0,
+    "opm": 9.9,
+    "sales_yoy": 1.1,
+    "op_yoy": -6.6,
+    "net_yoy": -6.7,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "seg": [
+   {
+    "x": "모빌리티",
+    "s26": 5278,
+    "s27": 5460,
+    "o26": 863,
+    "o27": 842,
+    "plan_s": 11245,
+    "plan_o": 1170
+   },
+   {
+    "x": "부동산",
+    "s26": 1236,
+    "s27": 1246,
+    "o26": 255,
+    "o27": 240,
+    "plan_s": 2850,
+    "plan_o": 475
+   },
+   {
+    "x": "유통",
+    "s26": 1191,
+    "s27": 1115,
+    "o26": 103,
+    "o27": 72,
+    "plan_s": 2230,
+    "plan_o": 145
+   },
+   {
+    "x": "여행·지역",
+    "s26": 871,
+    "s27": 832,
+    "o26": -9,
+    "o27": -9,
+    "plan_s": 2010,
+    "plan_o": 10
+   }
+  ],
+  "ba": [
+   {
+    "x": "2024",
+    "ib_rail": 355,
+    "ib_grp": 236,
+    "ib_r": 4.2,
+    "ib": 591
+   },
+   {
+    "x": "2025",
+    "ib_rail": 409,
+    "ib_grp": 314,
+    "ib_r": 4.6,
+    "ib": 723
+   },
+   {
+    "x": "2026",
+    "ib_rail": 494,
+    "ib_grp": 329,
+    "ib_r": 5.2,
+    "ib": 823
+   },
+   {
+    "x": "2027 계획",
+    "ib_rail": 500,
+    "ib_grp": 335,
+    "ib_r": 5.1,
+    "plan": 1,
+    "ib": 835
+   }
+  ],
+  "mm": [
+   {
+    "x": "24.11",
+    "m0": 105.9,
+    "m1": 107.7,
+    "m2": 98.7,
+    "m3": 105.1,
+    "m4": null,
+    "m5": 96.0,
+    "m0p": 5.9,
+    "m4p": null
+   },
+   {
+    "x": "24.12",
+    "m0": 105.9,
+    "m1": 106.3,
+    "m2": 101.9,
+    "m3": 107.0,
+    "m4": null,
+    "m5": 100.0,
+    "m0p": 5.9,
+    "m4p": null
+   },
+   {
+    "x": "25.01",
+    "m0": 107.3,
+    "m1": 109.3,
+    "m2": 101.8,
+    "m3": 106.2,
+    "m4": null,
+    "m5": 112.0,
+    "m0p": 7.3,
+    "m4p": null
+   },
+   {
+    "x": "25.02",
+    "m0": 100.8,
+    "m1": 101.2,
+    "m2": 99.7,
+    "m3": 100.2,
+    "m4": null,
+    "m5": 97.0,
+    "m0p": 0.8,
+    "m4p": null
+   },
+   {
+    "x": "25.03",
+    "m0": 104.6,
+    "m1": 103.8,
+    "m2": 107.6,
+    "m3": 104.3,
+    "m4": null,
+    "m5": 99.0,
+    "m0p": 4.6,
+    "m4p": null
+   },
+   {
+    "x": "25.04",
+    "m0": 103.8,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 100.0,
+    "m5": null,
+    "m0p": 3.8,
+    "m4p": 0.0
+   },
+   {
+    "x": "25.05",
+    "m0": 107.0,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 108.0,
+    "m5": null,
+    "m0p": 7.0,
+    "m4p": 8.0
+   },
+   {
+    "x": "25.06",
+    "m0": 106.7,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 105.0,
+    "m5": null,
+    "m0p": 6.7,
+    "m4p": 5.0
+   },
+   {
+    "x": "25.07",
+    "m0": 104.1,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 100.0,
+    "m5": null,
+    "m0p": 4.1,
+    "m4p": 0.0
+   },
+   {
+    "x": "25.08",
+    "m0": 113.0,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 97.0,
+    "m5": null,
+    "m0p": 13.0,
+    "m4p": -3.0
+   },
+   {
+    "x": "25.09",
+    "m0": 106.3,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 100.0,
+    "m5": null,
+    "m0p": 6.3,
+    "m4p": 0.0
+   },
+   {
+    "x": "25.10",
+    "m0": 107.4,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 102.0,
+    "m5": null,
+    "m0p": 7.4,
+    "m4p": 2.0
+   },
+   {
+    "x": "25.11",
+    "m0": 105.8,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 107.0,
+    "m5": null,
+    "m0p": 5.8,
+    "m4p": 7.0
+   },
+   {
+    "x": "25.12",
+    "m0": 102.9,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 108.0,
+    "m5": null,
+    "m0p": 2.9,
+    "m4p": 8.0
+   },
+   {
+    "x": "26.01",
+    "m0": 103.2,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 107.0,
+    "m5": null,
+    "m0p": 3.2,
+    "m4p": 7.0
+   },
+   {
+    "x": "26.02",
+    "m0": 103.9,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 109.0,
+    "m5": null,
+    "m0p": 3.9,
+    "m4p": 9.0
+   },
+   {
+    "x": "26.03",
+    "m0": 104.9,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 108.0,
+    "m5": null,
+    "m0p": 4.9,
+    "m4p": 8.0
+   },
+   {
+    "x": "26.04",
+    "m0": 103.3,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 108.0,
+    "m5": null,
+    "m0p": 3.3,
+    "m4p": 8.0
+   },
+   {
+    "x": "26.05",
+    "m0": 104.3,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 109.0,
+    "m5": null,
+    "m0p": 4.3,
+    "m4p": 9.0
+   },
+   {
+    "x": "26.06",
+    "m0": 99.4,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 104.0,
+    "m5": null,
+    "m0p": -0.6,
+    "m4p": 4.0
+   },
+   {
+    "x": "26.07",
+    "m0": 104.0,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 113.0,
+    "m5": null,
+    "m0p": 4.0,
+    "m4p": 13.0
+   },
+   {
+    "x": "26.08",
+    "m0": 103.3,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 106.0,
+    "m5": null,
+    "m0p": 3.3,
+    "m4p": 6.0
+   },
+   {
+    "x": "26.09",
+    "m0": 103.9,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 115.0,
+    "m5": null,
+    "m0p": 3.9,
+    "m4p": 15.0
+   },
+   {
+    "x": "26.10",
+    "m0": 103.1,
+    "m1": null,
+    "m2": null,
+    "m3": null,
+    "m4": 110.0,
+    "m5": null,
+    "m0p": 3.1,
+    "m4p": 10.0
+   }
+  ]
+ }
+}
