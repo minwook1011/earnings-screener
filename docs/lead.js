@@ -11,7 +11,7 @@
   "use strict";
   var NS = "http://www.w3.org/2000/svg";
   var DAY = 864e5;
-  var S = { idx: null, co: {}, px: {}, scr: null, st: {}, open: {} };
+  var S = { idx: null, co: {}, px: {}, scr: null, st: {}, open: {}, fold: {} };
   var main = document.getElementById("main");
   var tip = document.getElementById("tip");
   var REDUCE = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -196,11 +196,18 @@
         (open ? g.kids.map(function (k) {
           var on = active && active.sec === g.id + "/" + k.id;
           return '<a class="tsub' + (k.soon && !k.cos.length ? " soon" : "") + (on && !active.c ? " on" : "") + (on ? " cur" : "") + '" href="#s/' + g.id + "/" + k.id + '">' + esc(k.n) + (k.cos.length ? "<small>" + k.cos.length + "</small>" : "") + "</a>" +
-            (on && k.cos.length ? '<div class="clist in-sec">' + k.cos.map(function (c) { return coLink(c, active, false); }).join("") + "</div>" : "");
+            (on && k.cos.length && !S.fold[g.id + "/" + k.id] ? '<div class="clist in-sec">' + k.cos.map(function (c) { return coLink(c, active, false); }).join("") + "</div>" : "");
         }).join("") : "") + "</div>";
     }).join("");
     box.innerHTML = h;
     box.querySelectorAll(".tg-btn").forEach(function (b) { b.onclick = function () { S.open[b.dataset.g] = !S.open[b.dataset.g]; renderTree(active); }; });
+    box.querySelectorAll(".tsub").forEach(function (a2) {   // 펼친 세부 섹터를 다시 누르면 기업 목록 접기(2026-11-16 사용자)
+      a2.onclick = function (e) {
+        var sec = a2.getAttribute("href").slice(3);
+        if (active && active.sec === sec) { e.preventDefault(); S.fold[sec] = !S.fold[sec]; renderTree(active); }
+        else S.fold[sec] = false;
+      };
+    });
   }
 
   /* ---------- 홈 ---------- */
@@ -765,7 +772,7 @@
   var rT = null;
   window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(function () { var c = cur(); if (!c || !S.co[c]) return; drawLead(S.co[c], false); drawMain(S.co[c], false); }, 150); });
   document.getElementById("sideTg").onclick = function () { var sd = document.getElementById("side"), o = sd.classList.toggle("open"); this.setAttribute("aria-expanded", o); };
-  document.getElementById("tree").addEventListener("click", function (e) { if (e.target.closest("a")) { document.getElementById("side").classList.remove("open"); document.getElementById("sideTg").setAttribute("aria-expanded", false); } });
+  document.getElementById("tree").addEventListener("click", function (e) { if (e.target.closest("a") && !e.defaultPrevented) { document.getElementById("side").classList.remove("open"); document.getElementById("sideTg").setAttribute("aria-expanded", false); } });
   document.getElementById("q").addEventListener("input", function () { var c = cur(), h = location.hash.split("/"); renderTree(c ? { sec: S.idx.cos[c].sec, c: c } : h[0] === "#s" ? { sec: h[1] + "/" + h[2] } : null); });
 
   getJSON("data/jp/lead/index.json").then(function (idx) {
