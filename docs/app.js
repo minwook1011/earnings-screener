@@ -11,7 +11,8 @@
     { n: 2, lab: "2단계 · 리포트", hint: "볼 후보 — 실적 브리프" },
     { n: 3, lab: "3단계", hint: "텔레 3단계 기록" },
     { n: 4, lab: "4단계", hint: "텔레 4단계 기록" },
-    { n: "m", lab: "월차", hint: "월차 리포트 — 12개월 월차·주가 겹쳐 보기 + 2단계 본문" }   // 2026-11-02 사용자
+    { n: "m", lab: "월차", hint: "월차 리포트 — 12개월 월차·주가 겹쳐 보기 + 2단계 본문" },   // 2026-11-02 사용자
+    { n: "o", lab: "오프라인 스터디", hint: "팀 대시보드 3단계 종목 — 팀 점수·코멘트 + 내 코멘트" }   // 2026-11-16 사용자
   ];
   function stg(n) { return STAGES.filter(function (s) { return s.n === n; })[0] || STAGES[1]; }
   function moDocs() {   // 월차 리포트(research/index.json 의 "m") — 최신 먼저
@@ -84,7 +85,7 @@
   }
 
   /* ---------- 머리·레일 ---------- */
-  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0, m: S.res ? moDocs().length : 0 }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (stOf(o) >= 3) n[stOf(o)]++; }); return n; }
+  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0, m: S.res ? moDocs().length : 0, o: S.study ? S.study.items.length : "" }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (stOf(o) >= 3) n[stOf(o)]++; }); return n; }
   function head() {
     var n = counts();
     return '<header class="jhd"><div class="hd"><div class="jbrand">' +
@@ -94,11 +95,11 @@
       '<div class="stats"><div class="stat"><b>' + n[2] + "</b><span>리포트</span></div></div></div></header>" +
       // 2→3→4단계만, 1단계 퀵은 일단 뺌(2026-10-27 사용자: 사이트 = 일본 리포트 아카이빙)
       '<nav class="rail"><div class="rail-in">' + [1, 2, 3].map(function (i, k) { return (k ? '<span class="rail-sep">›</span>' : "") + cat(STAGES[i], n); }).join("") +
-      '<span class="rail-sep mo">|</span>' + cat(STAGES[4], n) +
+      '<span class="rail-sep mo">|</span>' + cat(STAGES[4], n) + cat(STAGES[5], n) +
       '<span class="rail-hint">' + esc(stg(S.stage).hint) + "</span></div></nav>";
   }
   function cat(s, n) {
-    return '<a class="cat s' + s.n + '" href="#jp/' + s.n + '" aria-pressed="' + (S.stage === s.n) + '"><i>' + (s.n === "m" ? "月" : s.n) + "</i>" + esc(s.lab) + '<span class="n">' + n[s.n] + "</span></a>";
+    return '<a class="cat s' + s.n + '" href="#jp/' + s.n + '" aria-pressed="' + (S.stage === s.n) + '"><i>' + (s.n === "m" ? "月" : s.n === "o" ? "習" : s.n) + "</i>" + esc(s.lab) + '<span class="n">' + n[s.n] + "</span></a>";
   }
 
   /* ---------- 1단계: 주간 실적 캘린더(월~금, 주 단위로 넘기기) ---------- */
@@ -1212,7 +1213,58 @@
         (x.doc ? docLink(x.doc) : "") + "</div>" + (x.doc && x.doc.sum ? '<p class="msum">' + esc(x.doc.sum) + "</p>" : "") + grid + "</article>";
     }).join("") + "</div>";
   }
-  function body() { return S.mode === "jps" ? scrView() : S.stage === 1 ? stage1() : S.stage === "m" ? moView() : stageN(S.stage); }
+  /* 오프라인 스터디(2026-11-16 사용자) — 팀 대시보드 3단계 종목(data/jp/study.json, 팀 대시보드에서 가져옴).
+   * 맨 앞 칸 = 팀 점수·코멘트, 1·2·3·4 표시(2단계와 같은 es-grade), 내 코멘트 = 메모 칸(키 "o:<코드>", 이 브라우저에 저장) */
+  function studyView() {
+    if (!S.study) {
+      if (!S.studyP) S.studyP = getJSON("data/jp/study.json").then(function (d) { S.study = d; }).catch(function () { S.study = { items: [] }; }).then(function () { if (S.stage === "o") render(); });
+      return '<div class="loading">불러오는 중…</div>';
+    }
+    var q = (S.q || "").trim().toLowerCase(), key = S.stSort || "at";
+    var rows = S.study.items.filter(function (x) { return !q || [x.n, x.c, (x.tg || []).join(" "), x.by].join(" ").toLowerCase().indexOf(q) >= 0; });
+    rows.sort(function (a, b) {
+      return grOf(a.c) - grOf(b.c) || (key === "avg" ? (b.avg || 0) - (a.avg || 0) : key === "mc" ? ((S.cos[b.c] || {}).mc || 0) - ((S.cos[a.c] || {}).mc || 0) : String(b.at || b.pub).localeCompare(String(a.at || a.pub)));
+    });
+    var ctl = '<div class="ctl"><div class="fld"><span>정렬</span><div class="seg" id="stsort">' + [["at", "최근 올린 순"], ["avg", "팀 점수 높은 순"], ["mc", "시총 큰 순"]].map(function (o) {
+        return '<button data-v="' + o[0] + '" aria-pressed="' + (key === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div></div>" +
+      '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커 · 섹터 · 담당" value="' + esc(S.q) + '"></div>' +
+      '<div class="count">팀 대시보드 ' + esc(S.study.updated || "") + " 기준 · <b>" + rows.length + "</b>개 기업</div></div>" +
+      '<p class="stage-note">팀 대시보드 3단계에 올라온 회사입니다. 맨 앞 칸이 팀 점수(평균)와 코멘트, 1·2·3·4는 내 분류(2단계와 같이 저장, 1부터 위로), 아래 칸은 내 코멘트(이 브라우저에 저장)입니다. 이름을 누르면 재무·주가가 열립니다.</p>';
+    if (!rows.length) return ctl + '<div class="empty">' + (q ? "검색과 맞는 기업이 없습니다." : "가져온 종목이 없습니다.") + "</div>";
+    function scoreCls(v) { return v == null ? "" : v >= 7 ? " hi" : v >= 5 ? " mid" : " lo"; }
+    function cms(x) {
+      var list = (x.cm || []).length ? x.cm : [{ n: x.by, s: null, t: x.why, a: x.at }];
+      return list.map(function (k) {
+        var t = k.t || "", long = t.length > 150;
+        return '<div class="stc"><div class="stc-h"><b>' + esc(k.n || "") + "</b>" + (k.s != null ? '<span class="stsc' + scoreCls(k.s) + '">' + k.s + "점</span>" : "") +
+          (k.st && k.st !== 3 ? '<span class="stgtag s' + k.st + '">' + k.st + "단계</span>" : "") + '<span class="stc-d">' + esc(k.a ? md(k.a.slice(0, 10)) : "") + "</span></div>" +
+          (long ? '<details class="stc-t"><summary>' + esc(t.slice(0, 150)) + '… <i>더 보기</i></summary><p>' + esc(t) + "</p></details>" : '<p class="stc-p">' + esc(t) + "</p>") + "</div>";
+      }).join("");
+    }
+    function picks(c) {
+      var g = GRADE[c] || 0;
+      return '<span class="picks grades">' + [1, 2, 3, 4].map(function (n) {
+        return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 지웁니다" : n + "로 분류 — 1·2·3·4 순서로 위로") + '">' + n + "</button>";
+      }).join("") + "</span>";
+    }
+    return ctl + '<div class="stlist">' + rows.map(function (x, i) {
+      var o = S.cos[x.c] || {}, rs = S.res && S.res.items && S.res.items[x.c], links = [];
+      ["2", "3", "4", "m"].forEach(function (k) { var r = rs && rs[k]; if (r && r.status === "완료" && r.html) links.push('<a class="chip" href="' + esc(ver(r.html, r.written)) + '" target="_blank" rel="noopener">' + (k === "m" ? "월차" : k + "단계") + " 리포트 ↗</a>"); });
+      return '<article class="stcard"><div class="st-score"><div class="st-avg' + scoreCls(x.avg) + '"><b>' + (x.avg != null ? x.avg : "—") + "</b><span>팀 점수 · " + (x.cm || []).length + "명</span></div>" + cms(x) + "</div>" +
+        '<div class="st-main"><div class="st-top"><span class="rk">' + (i + 1) + '</span><span class="tkc">' + esc(x.c) + "</span>" + picks(x.c) +
+        '<a class="st-nm" data-c="' + esc(x.c) + '">' + esc(x.n) + "</a>" + (x.tg || []).map(function (t) { return '<span class="chip k">' + esc(t) + "</span>"; }).join("") + "</div>" +
+        (x.bm ? '<p class="st-bm">' + esc(x.bm) + "</p>" : "") +
+        '<div class="st-kv"><span>' + cl("발표") + esc(x.pub ? md(x.pub.slice(0, 10)) : "—") + (x.p ? " · " + esc(x.p) : "") + "</span>" +
+        "<span>" + cl("시총(억엔)") + (o.mc ? mcap(o.mc) : x.kp ? esc(x.kp[0]) : "—") + "</span><span>" + cl("PER") + (o.per != null ? o.per.toFixed(1) : x.kp ? esc(x.kp[1]) : "—") + "</span>" +
+        "<span>" + cl("매출 YoY") + pct(o.rev) + "</span><span>" + cl("영업이익 YoY") + pct(o.op) + "</span>" +
+        "<span>" + cl("3단계 올린 사람") + esc(x.by || "—") + (x.at ? " · " + esc(md(x.at.slice(0, 10))) : "") + "</span></div>" +
+        ((x.lb || []).length ? '<div class="st-lb">' + x.lb.map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join("") + "</div>" : "") +
+        (links.length ? '<div class="st-lb">' + links.join("") + "</div>" : "") +
+        (S.qy[x.c] && S.qy[x.c].length ? '<div class="st-q">' + qline(x.c) + "</div>" : "") +
+        '<div class="st-my"><span class="st-myh">내 코멘트</span>' + memoBox("o:" + x.c) + "</div></div></article>";
+    }).join("") + "</div>";
+  }
+  function body() { return S.mode === "jps" ? scrView() : S.stage === 1 ? stage1() : S.stage === "m" ? moView() : S.stage === "o" ? studyView() : stageN(S.stage); }
   /* 일본 스크리닝 탭(2026-10-29 사용자: 2단계 '보기'에서 상단 탭으로 뺌) */
   function scrHead() {
     var n = S.list.filter(inScr).length;
@@ -1261,6 +1313,7 @@
     if (so) so.onchange = function () { S.sort = so.value; rerender(); };
     app.querySelectorAll("#dir button").forEach(function (b) { b.onclick = function () { S.dir = +b.dataset.v; rerender(); }; });
     app.querySelectorAll("#moall button").forEach(function (b) { b.onclick = function () { S.moAll = b.dataset.v === "1"; rerender(); }; });
+    app.querySelectorAll("#stsort button").forEach(function (b) { b.onclick = function () { S.stSort = b.dataset.v; rerender(); }; });
     app.querySelectorAll("#mosort button").forEach(function (b) { b.onclick = function () { S.moSort = b.dataset.v; rerender(); }; });
     app.querySelectorAll("[data-week]").forEach(function (b) { b.onclick = function () { S.week = b.dataset.week; S.openDay = null; rerender(); }; });
     app.querySelectorAll("[data-step]").forEach(function (b) {
@@ -1580,7 +1633,7 @@
     }
     closePanel();
     if (md0 === "jps") { if (sw || !app.querySelector("#view")) render(); return; }
-    var st = h[1] === "m" ? "m" : Math.min(4, Math.max(2, +h[1] || 2));   // 1단계 퀵은 일단 뺌(2026-10-27 사용자) — #jp/1 은 2단계로
+    var st = h[1] === "m" ? "m" : h[1] === "o" ? "o" : Math.min(4, Math.max(2, +h[1] || 2));   // 1단계 퀵은 일단 뺌(2026-10-27 사용자) — #jp/1 은 2단계로
     if (sw || st !== S.stage || !app.querySelector("#view")) { S.stage = st; if (st > 1 && S.sort === "up") S.sort = "mc"; render(); }
   }
 
