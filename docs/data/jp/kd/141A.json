@@ -193,13 +193,6 @@
    ],
    "lines": [
     {
-     "k": "gpm",
-     "l": "매출총이익률",
-     "u": "%",
-     "c": 0,
-     "r": 1
-    },
-    {
      "k": "opm",
      "l": "영업이익률",
      "u": "%",
@@ -210,7 +203,7 @@
    "src": "1Q27 결산단신·결산설명자료"
   },
   {
-   "sec": "사업 지표",
+   "sec": "점포·기존점",
    "t": "기존점 성장률(27년 1분기)",
    "def": "전년 같은 분기 대비 — 매출과 객수",
    "d": "ss",
@@ -231,7 +224,7 @@
    ]
   },
   {
-   "sec": "사업 지표",
+   "sec": "점포·기존점",
    "t": "회사별 매출총이익률",
    "d": "q",
    "lines": [
@@ -289,6 +282,243 @@
      "c": 1
     }
    ]
+  },
+  {
+   "sec": "점포·기존점",
+   "t": "트라이얼 기존점 매출(월별)",
+   "def": "전년 같은 달 대비 증감률",
+   "d": "ssm",
+   "lines": [
+    {
+     "k": "t_ss",
+     "l": "기존점 매출",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "1Q27 결산설명자료(월별 그래프 라벨) · 25.07~ 월차에는 기존점 항목 없음"
+  },
+  {
+   "sec": "점포·기존점",
+   "t": "트라이얼 업태별 점포 수",
+   "def": "6월 말 점포 수 — 26년 3분기 소형점 16곳을 smart로 재분류",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "sc",
+     "l": "슈퍼센터",
+     "u": "점",
+     "c": 0
+    },
+    {
+     "k": "smart",
+     "l": "smart",
+     "u": "점",
+     "c": 1
+    },
+    {
+     "k": "small",
+     "l": "소형점",
+     "u": "점",
+     "c": 2
+    },
+    {
+     "k": "mega",
+     "l": "메가센터",
+     "u": "점",
+     "c": 3
+    }
+   ],
+   "src": "1Q27 결산설명자료 · 마지막 = 2026년 9월 말"
+  },
+  {
+   "sec": "점포·기존점",
+   "t": "세이유 업태별 점포 수",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "sm",
+     "l": "슈퍼마켓",
+     "u": "점",
+     "c": 0
+    },
+    {
+     "k": "hm",
+     "l": "하이퍼마켓",
+     "u": "점",
+     "c": 1
+    },
+    {
+     "k": "ts",
+     "l": "트라이얼 세이유(업태 전환)",
+     "u": "점",
+     "c": 2
+    }
+   ],
+   "src": "1Q27 결산설명자료 · 2025년 7월 인수"
+  },
+  {
+   "sec": "상품·PB",
+   "t": "트라이얼 신선 4품 매출",
+   "def": "청과·정육·선어·반찬(분기 단독)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "t_fresh",
+     "l": "신선",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "t_fresh_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 26.1Q~27.1Q(5부) 상품 카테고리별 매출 · 누계 차분으로 분기 단독 · 26년부터 일부 품목 재분류(전년도 조정치)"
+  },
+  {
+   "sec": "상품·PB",
+   "t": "트라이얼 반찬 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "t_deli",
+     "l": "반찬",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "t_deli_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 26.1Q~27.1Q(5부) 상품 카테고리별 매출 · 누계 차분으로 분기 단독"
+  },
+  {
+   "sec": "상품·PB",
+   "t": "트라이얼 매출 중 신선·반찬 비중",
+   "def": "분기 카테고리 매출 ÷ 트라이얼 유통소매 매출",
+   "d": "q",
+   "lines": [
+    {
+     "k": "t_fresh_pct",
+     "l": "신선 4품",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "t_deli_pct",
+     "l": "반찬",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 26.1Q~27.1Q(5부) 상품 카테고리별 매출 · 누계 차분으로 분기 단독 · 회사 중기 목표 반찬 8%"
+  },
+  {
+   "sec": "상품·PB",
+   "t": "세이유 반찬 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "s_deli",
+     "l": "반찬",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 26.1Q~27.1Q(5부) 상품 카테고리별 매출 · 누계 차분으로 분기 단독 · 인수 후(26.1Q~)만"
+  },
+  {
+   "sec": "상품·PB",
+   "t": "PB 매출 비중",
+   "def": "자체 상표 상품 매출 ÷ 매출(연간, 마지막 = 27년 1분기)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "pb_t",
+     "l": "트라이얼",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "pb_s",
+     "l": "세이유",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "1Q27 결산설명자료 · 세이유는 27년 기준(반찬 PB 포함)으로 조정 · 중기 목표 25%"
+  },
+  {
+   "sec": "리테일 테크",
+   "t": "Skip Cart 누적 대수",
+   "def": "결제 기능 달린 스마트 카트, 그룹 밖 도입 포함",
+   "d": "q",
+   "bars": [
+    {
+     "k": "skip_units",
+     "l": "대수",
+     "u": "대",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 26.1Q~27.1Q"
+  },
+  {
+   "sec": "리테일 테크",
+   "t": "Skip Cart 도입 점포 수",
+   "d": "q",
+   "bars": [
+    {
+     "k": "skip_stores",
+     "l": "점포",
+     "u": "점",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 26.1Q~27.1Q"
+  },
+  {
+   "sec": "리테일 테크",
+   "t": "Skip Cart 연간 추이",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "skip_units",
+     "l": "누적 대수",
+     "u": "대",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 · 6월 말, 마지막 = 26년 9월 말"
+  },
+  {
+   "sec": "리테일 테크",
+   "t": "Skip Cart 월간 이용자",
+   "def": "연간 월평균 이용자 수(그룹 내)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "skip_mau",
+     "l": "이용자",
+     "u": "만 명",
+     "c": 0
+    }
+   ],
+   "src": "4Q26·3Q26 결산설명자료"
   },
   {
    "sec": "재무",
@@ -480,7 +710,13 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 1949.35,
+    "t_fresh": 529.96,
+    "t_deli": 120.49,
+    "t_deli_pct": 6.2,
+    "t_fresh_pct": 27.2,
+    "s_deli": null
    },
    {
     "q": "25.2Q",
@@ -518,7 +754,13 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 2067.9,
+    "t_fresh": 582.58,
+    "t_deli": 124.72,
+    "t_deli_pct": 6.0,
+    "t_fresh_pct": 28.2,
+    "s_deli": null
    },
    {
     "q": "25.3Q",
@@ -556,7 +798,13 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 1953.26,
+    "t_fresh": 573.95,
+    "t_deli": 124.88,
+    "t_deli_pct": 6.4,
+    "t_fresh_pct": 29.4,
+    "s_deli": null
    },
    {
     "q": "25.4Q",
@@ -594,7 +842,13 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 2027.22,
+    "t_fresh": 590.73,
+    "t_deli": 133.53,
+    "t_deli_pct": 6.6,
+    "t_fresh_pct": 29.1,
+    "s_deli": null
    },
    {
     "q": "26.1Q",
@@ -632,7 +886,17 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 2142.07,
+    "t_fresh": 627.07,
+    "t_deli": 147.78,
+    "t_deli_pct": 6.9,
+    "t_fresh_pct": 29.3,
+    "s_deli": 116.47,
+    "t_deli_yoy": 22.6,
+    "t_fresh_yoy": 18.3,
+    "skip_units": 21969,
+    "skip_stores": 266
    },
    {
     "q": "26.2Q",
@@ -670,7 +934,17 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 2275.21,
+    "t_fresh": 684.2,
+    "t_deli": 152.91,
+    "t_deli_pct": 6.7,
+    "t_fresh_pct": 30.1,
+    "s_deli": 120.22,
+    "t_deli_yoy": 22.6,
+    "t_fresh_yoy": 17.4,
+    "skip_units": 22675,
+    "skip_stores": 274
    },
    {
     "q": "26.3Q",
@@ -708,7 +982,17 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 2138.86,
+    "t_fresh": 666.66,
+    "t_deli": 153.05,
+    "t_deli_pct": 7.2,
+    "t_fresh_pct": 31.2,
+    "s_deli": 122.34,
+    "t_deli_yoy": 22.6,
+    "t_fresh_yoy": 16.2,
+    "skip_units": 23485,
+    "skip_stores": 279
    },
    {
     "q": "26.4Q",
@@ -746,7 +1030,17 @@
     "trial_sales_yoy": null,
     "seiyu_sales_yoy": null,
     "trial_op_yoy": null,
-    "seiyu_op_yoy": null
+    "seiyu_op_yoy": null,
+    "t_retail": 2260.66,
+    "t_fresh": 688.54,
+    "t_deli": 159.18,
+    "t_deli_pct": 7.0,
+    "t_fresh_pct": 30.5,
+    "s_deli": 135.71,
+    "t_deli_yoy": 19.2,
+    "t_fresh_yoy": 16.6,
+    "skip_units": 24031,
+    "skip_stores": 288
    },
    {
     "q": "27.1Q",
@@ -784,7 +1078,17 @@
     "trial_sales_yoy": 9.8,
     "seiyu_sales_yoy": 6.9,
     "trial_op_yoy": 12.6,
-    "seiyu_op_yoy": 106.5
+    "seiyu_op_yoy": 106.5,
+    "t_retail": 2347.61,
+    "t_fresh": 720.2,
+    "t_deli": 172.99,
+    "t_deli_pct": 7.4,
+    "t_fresh_pct": 30.7,
+    "s_deli": 145.65,
+    "t_deli_yoy": 17.1,
+    "t_fresh_yoy": 14.9,
+    "skip_units": 24383,
+    "skip_stores": 294
    }
   ],
   "a": [
@@ -1094,6 +1398,158 @@
     "m3": null,
     "m4": null,
     "m5": 244
+   }
+  ],
+  "ba": [
+   {
+    "x": "2023",
+    "skip_units": 17032,
+    "skip_stores": 180,
+    "pb_t": 10.3,
+    "mega": 24,
+    "sc": 181,
+    "smart": 68,
+    "small": 12
+   },
+   {
+    "x": "2024",
+    "skip_units": 19579,
+    "skip_stores": 223,
+    "pb_t": 14.9,
+    "mega": 24,
+    "sc": 187,
+    "smart": 64,
+    "small": 43
+   },
+   {
+    "x": "2025",
+    "skip_units": 21561,
+    "skip_stores": 258,
+    "pb_t": 18.4,
+    "mega": 28,
+    "sc": 207,
+    "smart": 70,
+    "small": 47,
+    "skip_mau": 450
+   },
+   {
+    "x": "2026",
+    "skip_units": 24031,
+    "skip_stores": 288,
+    "pb_t": 20.1,
+    "pb_s": 18.6,
+    "mega": 31,
+    "sc": 229,
+    "smart": 64,
+    "small": 54,
+    "hm": 69,
+    "sm": 171,
+    "ts": 3,
+    "skip_mau": 530
+   },
+   {
+    "x": "27.1Q",
+    "skip_units": 24383,
+    "skip_stores": 294,
+    "pb_t": 21.4,
+    "pb_s": 18.4,
+    "mega": 31,
+    "sc": 234,
+    "smart": 80,
+    "small": 38,
+    "hm": 67,
+    "sm": 172,
+    "ts": 5
+   }
+  ],
+  "ssm": [
+   {
+    "x": "25.01",
+    "t_ss": 3.6
+   },
+   {
+    "x": "25.02",
+    "t_ss": 1.8
+   },
+   {
+    "x": "25.03",
+    "t_ss": 5.6
+   },
+   {
+    "x": "25.04",
+    "t_ss": 3.8
+   },
+   {
+    "x": "25.05",
+    "t_ss": 3.6
+   },
+   {
+    "x": "25.06",
+    "t_ss": 1.3
+   },
+   {
+    "x": "25.07",
+    "t_ss": 1.4
+   },
+   {
+    "x": "25.08",
+    "t_ss": -1.7
+   },
+   {
+    "x": "25.09",
+    "t_ss": -0.2
+   },
+   {
+    "x": "25.10",
+    "t_ss": 5.5
+   },
+   {
+    "x": "25.11",
+    "t_ss": 1.7
+   },
+   {
+    "x": "25.12",
+    "t_ss": -0.2
+   },
+   {
+    "x": "26.01",
+    "t_ss": 5.6
+   },
+   {
+    "x": "26.02",
+    "t_ss": 2.1
+   },
+   {
+    "x": "26.03",
+    "t_ss": 0.3
+   },
+   {
+    "x": "26.04",
+    "t_ss": 2.8
+   },
+   {
+    "x": "26.05",
+    "t_ss": 7.2
+   },
+   {
+    "x": "26.06",
+    "t_ss": 1.6
+   },
+   {
+    "x": "26.07",
+    "t_ss": 4.0
+   },
+   {
+    "x": "26.08",
+    "t_ss": 3.5
+   },
+   {
+    "x": "26.09",
+    "t_ss": 3.5
+   },
+   {
+    "x": "26.10",
+    "t_ss": 3.0
    }
   ]
  }
