@@ -1,1 +1,1324 @@
-{"c": "6951", "n": "니혼덴시", "asof": "2026-11-13", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "전자현미경·분석기기(과학·계측), 반도체용 전자빔 마스크 묘화장치(산업기기). 2026년 4월 의료기기 사업 매각 — 이번 분기부터 2개 부문. 설명회 자료는 11/19 이후 게시 예정", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "재고자산", "def": "분기말 상품·제품 + 재공품(전자현미경 등 수주 생산이라 재공품이 대부분)", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 포함)"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "부문", "t": "부문별 매출(상반기)", "d": "h", "src": "2Q27 결산단신 부문 정보(상반기 누계)", "lines": [{"k": "sci", "l": "과학·계측기기", "u": "억엔", "c": 0}, {"k": "ind", "l": "산업기기", "u": "억엔", "c": 1}, {"k": "med", "l": "의료기기", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "부문 이익(상반기)", "d": "h", "src": "2Q27 결산단신 부문 정보(상반기 누계)", "lines": [{"k": "sci_op", "l": "과학·계측기기", "u": "억엔", "c": 0}, {"k": "ind_op", "l": "산업기기", "u": "억엔", "c": 1}, {"k": "med_op", "l": "의료기기", "u": "억엔", "c": 2}]}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 381.59, "op": 49.6, "ord": 39.93, "net": 26.3, "gp": 171.96, "sga": 122.36, "cogs": 209.63, "debt_total": 156.47, "equity": 1106.07, "total_assets": 2178.73, "inventory": 820.9, "cash": 234.33, "gpm": 45.1, "opm": 13.0, "debt_ratio": 14.1, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 674.59, "op": 142.8, "ord": 158.38, "net": 115.58, "gp": 290.49, "sga": 147.7, "cogs": 384.1, "debt_total": 145.27, "equity": 1255.13, "total_assets": 2302.13, "inventory": 710.49, "cash": 315.04, "gpm": 43.1, "opm": 21.2, "debt_ratio": 11.6, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 363.54, "op": 40.75, "ord": 49.43, "net": 38.96, "gp": 181.99, "sga": 141.23, "cogs": 181.55, "debt_total": 126.31, "equity": 1280.7, "total_assets": 2293.8, "inventory": 778.96, "cash": 368.18, "gpm": 50.1, "opm": 11.2, "debt_ratio": 9.9, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 508.8, "op": 117.42, "ord": 91.56, "net": 70.2, "gp": 248.98, "sga": 131.56, "cogs": 259.82, "debt_total": 107.88, "equity": 1316.42, "total_assets": 2297.07, "inventory": 763.46, "cash": 396.46, "gpm": 48.9, "opm": 23.1, "debt_ratio": 8.2, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 491.18, "op": 104.8, "ord": 123.89, "net": 90.2, "gp": 240.63, "sga": 135.84, "cogs": 250.55, "debt_total": 91.42, "equity": 1406.76, "total_assets": 2305.53, "inventory": 789.56, "cash": 328.18, "gpm": 49.0, "opm": 21.3, "debt_ratio": 6.5, "sales_yoy": 28.7, "gp_yoy": 39.9, "sga_yoy": 11.0, "op_yoy": 111.3, "ord_yoy": 210.3, "net_yoy": 243.0, "inventory_yoy": -3.8, "cash_yoy": 40.1}, {"q": "25.4Q", "x": "25.4Q", "sales": 603.43, "op": 92.04, "ord": 79.36, "net": -12.48, "gp": 252.37, "sga": 160.33, "cogs": 351.06, "debt_total": 75.83, "equity": 1366.53, "total_assets": 2224.86, "inventory": 715.31, "cash": 361.44, "gpm": 41.8, "opm": 15.3, "debt_ratio": 5.5, "sales_yoy": -10.5, "gp_yoy": -13.1, "sga_yoy": 8.6, "op_yoy": -35.5, "ord_yoy": -49.9, "net_yoy": -110.8, "inventory_yoy": 0.7, "cash_yoy": 14.7}, {"q": "26.1Q", "x": "26.1Q", "sales": 401.45, "op": 57.92, "ord": 57.82, "net": 46.69, "gp": 194.51, "sga": 136.58, "cogs": 206.94, "debt_total": 61.68, "equity": 1374.71, "total_assets": 2201.72, "inventory": 739.15, "cash": 407.63, "gpm": 48.5, "opm": 14.4, "debt_ratio": 4.5, "sales_yoy": 10.4, "gp_yoy": 6.9, "sga_yoy": -3.3, "op_yoy": 42.1, "ord_yoy": 17.0, "net_yoy": 19.8, "inventory_yoy": -5.1, "cash_yoy": 10.7}, {"q": "26.2Q", "x": "26.2Q", "sales": 419.14, "op": 61.42, "ord": 71.24, "net": 51.81, "gp": 198.26, "sga": 136.85, "cogs": 220.88, "debt_total": 51.01, "equity": 1438.03, "total_assets": 2264.63, "inventory": 744.04, "cash": 360.27, "gpm": 47.3, "opm": 14.7, "debt_ratio": 3.5, "sales_yoy": -17.6, "gp_yoy": -20.4, "sga_yoy": 4.0, "op_yoy": -47.7, "ord_yoy": -22.2, "net_yoy": -26.2, "inventory_yoy": -2.5, "cash_yoy": -9.1}, {"q": "26.3Q", "x": "26.3Q", "sales": 477.45, "op": 94.64, "ord": 107.49, "net": 76.41, "gp": 230.12, "sga": 135.47, "cogs": 247.33, "debt_total": 120.58, "equity": 1495.08, "total_assets": 2341.4, "inventory": 756.64, "cash": 380.46, "gpm": 48.2, "opm": 19.8, "debt_ratio": 8.1, "sales_yoy": -2.8, "gp_yoy": -4.4, "sga_yoy": -0.3, "op_yoy": -9.7, "ord_yoy": -13.2, "net_yoy": -15.3, "inventory_yoy": -4.2, "cash_yoy": 15.9}, {"q": "26.4Q", "x": "26.4Q", "sales": 495.49, "op": 46.19, "ord": 49.55, "net": 46.06, "gp": 207.41, "sga": 161.23, "cogs": 288.08, "debt_total": 251.7, "equity": 1448.98, "total_assets": 2420.26, "inventory": 706.34, "cash": 389.49, "gpm": 41.9, "opm": 9.3, "debt_ratio": 17.4, "sales_yoy": -17.9, "gp_yoy": -17.8, "sga_yoy": 0.6, "op_yoy": -49.8, "ord_yoy": -37.6, "net_yoy": null, "inventory_yoy": -1.3, "cash_yoy": 7.8}, {"q": "27.1Q", "x": "27.1Q", "sales": 244.65, "op": -19.61, "ord": -13.62, "net": -17.1, "gp": 117.68, "sga": 137.29, "cogs": 126.97, "debt_total": 142.8, "equity": 1408.29, "total_assets": 2261.62, "inventory": 752.12, "cash": 322.39, "gpm": 48.1, "opm": -8.0, "debt_ratio": 10.1, "sales_yoy": -39.1, "gp_yoy": -39.5, "sga_yoy": 0.5, "op_yoy": -133.9, "ord_yoy": -123.6, "net_yoy": -136.6, "inventory_yoy": 1.8, "cash_yoy": -20.9}, {"q": "27.2Q", "x": "27.2Q", "sales": 413.52, "op": 71.54, "ord": 66.62, "net": 49.24, "gp": 212.57, "sga": 141.03, "cogs": 200.95, "debt_total": 93.92, "equity": 1457.99, "total_assets": 2254.79, "inventory": 764.95, "cash": 337.7, "gpm": 51.4, "opm": 17.3, "debt_ratio": 6.4, "sales_yoy": -1.3, "gp_yoy": 7.2, "sga_yoy": 3.1, "op_yoy": 16.5, "ord_yoy": -6.5, "net_yoy": -5.0, "inventory_yoy": 2.8, "cash_yoy": -6.3}], "a": [{"year": "2022", "x": "2022", "sales": 1384.08, "op": 141.44, "ord": 163.13, "net": 122.78, "opm": 10.2, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 1626.89, "op": 241.55, "ord": 235.01, "net": 178.3, "opm": 14.8, "sales_yoy": 17.5, "op_yoy": 70.8, "net_yoy": 45.2}, {"year": "2024", "x": "2024", "sales": 1743.36, "op": 275.31, "ord": 300.23, "net": 217.04, "opm": 15.8, "sales_yoy": 7.2, "op_yoy": 14.0, "net_yoy": 21.7}, {"year": "2025", "x": "2025", "sales": 1966.95, "op": 355.01, "ord": 344.24, "net": 186.88, "opm": 18.0, "sales_yoy": 12.8, "op_yoy": 28.9, "net_yoy": -13.9}, {"year": "2026", "x": "2026", "sales": 1793.53, "op": 260.17, "ord": 286.1, "net": 220.97, "opm": 14.5, "sales_yoy": -8.8, "op_yoy": -26.7, "net_yoy": 18.2}, {"year": "2027 계획", "x": "2027 계획", "sales": 1640.0, "op": 265.0, "ord": 262.0, "net": 213.0, "opm": 16.2, "sales_yoy": -8.6, "op_yoy": 1.9, "net_yoy": -3.6, "plan": 1, "kind": "회사 계획"}], "h": [{"x": "26.상반기", "sci": 476.59, "ind": 270.15, "med": 73.85, "sci_op": 27.45, "ind_op": 116.83, "med_op": 6.96}, {"x": "27.상반기", "sci": 508.76, "ind": 149.41, "med": null, "sci_op": 49.69, "ind_op": 38.16, "med_op": null}]}}
+{
+ "c": "6951",
+ "n": "니혼덴시",
+ "asof": "2026-11-13",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "전자현미경·분석기기(과학·계측), 반도체용 전자빔 마스크 묘화장치(산업기기). 2026년 4월 의료기기 사업 매각 — 이번 분기부터 2개 부문. 설명회 자료는 11/19 이후 게시 예정",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "연간 수주고",
+   "d": "ba",
+   "def": "연결 수주고. 2027 계획은 의료기기 사업 매각으로 의료 제외",
+   "bars": [
+    {
+     "k": "orders",
+     "l": "수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료 주요 계정 추이(25·26년 3월기 결산) · 옅은 막대 = 회사 예상"
+  },
+  {
+   "sec": "key",
+   "t": "상반기 말 수주잔고",
+   "d": "bh",
+   "bars": [
+    {
+     "k": "bl_h",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "bl_h_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q 결산설명자료(26·27년 3월기) · 27년 3월기는 의료 제외"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "def": "분기말 상품·제품 + 재공품(전자현미경 등 수주 생산이라 재공품이 대부분)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 포함)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "gpm",
+     "l": "매출총이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(상반기)",
+   "d": "h",
+   "src": "2Q27 결산단신 부문 정보(상반기 누계)",
+   "lines": [
+    {
+     "k": "sci",
+     "l": "과학·계측기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ind",
+     "l": "산업기기",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "med",
+     "l": "의료기기",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문 이익(상반기)",
+   "d": "h",
+   "src": "2Q27 결산단신 부문 정보(상반기 누계)",
+   "lines": [
+    {
+     "k": "sci_op",
+     "l": "과학·계측기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ind_op",
+     "l": "산업기기",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "med_op",
+     "l": "의료기기",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "수주",
+   "t": "연간 기말 수주잔고",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료 주요 계정 추이 · 옅은 막대 = 회사 예상"
+  },
+  {
+   "sec": "수주",
+   "t": "수주/매출 비율(B/B)",
+   "d": "ba",
+   "def": "연간 수주고 ÷ 연간 매출액",
+   "lines": [
+    {
+     "k": "btb",
+     "l": "B/B",
+     "u": "배",
+     "c": 0
+    }
+   ],
+   "noplan": 1,
+   "src": "결산설명자료 · 결산단신 매출로 계산"
+  },
+  {
+   "sec": "수주",
+   "t": "수주잔고 개월 수",
+   "d": "ba",
+   "def": "기말 수주잔고 ÷ 연간 매출액 × 12",
+   "lines": [
+    {
+     "k": "bl_months",
+     "l": "잔고 개월 수",
+     "u": "개월",
+     "c": 0
+    }
+   ],
+   "noplan": 1,
+   "src": "결산설명자료 · 결산단신 매출로 계산"
+  },
+  {
+   "sec": "수주",
+   "t": "상반기 수주고",
+   "d": "bh",
+   "bars": [
+    {
+     "k": "ord_h",
+     "l": "상반기 수주고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ord_h_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q 결산설명자료 · 27년 3월기는 의료 제외"
+  },
+  {
+   "sec": "지역",
+   "t": "해외 매출 비율(연간)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "ovs",
+     "l": "해외 비율",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "noplan": 1,
+   "src": "결산설명자료 주요 계정 추이"
+  },
+  {
+   "sec": "지역",
+   "t": "해외 매출 비율(상반기)",
+   "d": "bh",
+   "lines": [
+    {
+     "k": "ovs_h",
+     "l": "해외 비율",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "2Q 결산설명자료"
+  },
+  {
+   "sec": "지역",
+   "t": "국내·해외 매출(연간)",
+   "d": "ba",
+   "def": "매출액 × 해외 매출 비율(해외), 나머지(국내)",
+   "lines": [
+    {
+     "k": "ovs_sales",
+     "l": "해외",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dom_sales",
+     "l": "국내",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "noplan": 1,
+   "src": "결산설명자료 해외 비율 · 결산단신 매출로 계산"
+  },
+  {
+   "sec": "부문 분기",
+   "t": "부문별 분기 매출",
+   "d": "b",
+   "lines": [
+    {
+     "k": "sci",
+     "l": "과학·계측기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ind",
+     "l": "산업기기(마스크 묘화장치 등)",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "med",
+     "l": "의료기기",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산설명자료(25.1Q~27.2Q, 회사 IR) 부문 누계에서 분기 차분 · 의료기기는 2026년 4월 매각"
+  },
+  {
+   "sec": "부문 분기",
+   "t": "부문별 분기 영업이익",
+   "d": "b",
+   "lines": [
+    {
+     "k": "sci_op",
+     "l": "과학·계측기기",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ind_op",
+     "l": "산업기기",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "med_op",
+     "l": "의료기기",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산설명자료(25.1Q~27.2Q, 회사 IR) 부문 누계에서 분기 차분"
+  },
+  {
+   "sec": "부문 분기",
+   "t": "부문별 분기 영업이익률",
+   "d": "b",
+   "def": "부문 영업이익 ÷ 부문 매출",
+   "lines": [
+    {
+     "k": "sci_opm",
+     "l": "과학·계측기기",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "ind_opm",
+     "l": "산업기기",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "med_opm",
+     "l": "의료기기",
+     "u": "%",
+     "c": 2
+    }
+   ],
+   "src": "결산설명자료(25.1Q~27.2Q, 회사 IR) 부문 누계에서 분기 차분"
+  },
+  {
+   "sec": "부문 분기",
+   "t": "과학·계측기기 분기 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sci",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sci_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(25.1Q~27.2Q, 회사 IR) 부문 누계에서 분기 차분"
+  },
+  {
+   "sec": "부문 분기",
+   "t": "산업기기 분기 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ind",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ind_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(25.1Q~27.2Q, 회사 IR) 부문 누계에서 분기 차분"
+  },
+  {
+   "sec": "연구·투자",
+   "t": "분기 연구개발비",
+   "d": "b",
+   "bars": [
+    {
+     "k": "rnd",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "rnd_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 손익표 누계에서 분기 차분"
+  },
+  {
+   "sec": "연구·투자",
+   "t": "연구개발비 / 매출",
+   "d": "b",
+   "def": "분기 연구개발비 ÷ 분기 매출",
+   "lines": [
+    {
+     "k": "rnd_ratio",
+     "l": "R&D 비율",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 · 결산단신 매출로 계산"
+  },
+  {
+   "sec": "연구·투자",
+   "t": "연간 연구개발비",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "rnd_a",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료 · 옅은 막대 = 회사 예상"
+  },
+  {
+   "sec": "연구·투자",
+   "t": "설비투자·감가상각비",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "capex",
+     "l": "설비투자",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dep",
+     "l": "감가상각비",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "noplan": 1,
+   "src": "결산설명자료 주요 계정 추이(27년 3월기 예상 설비투자 230·상각 65억엔)"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 381.59,
+    "op": 49.6,
+    "ord": 39.93,
+    "net": 26.3,
+    "gp": 171.96,
+    "sga": 122.36,
+    "cogs": 209.63,
+    "debt_total": 156.47,
+    "equity": 1106.07,
+    "total_assets": 2178.73,
+    "inventory": 820.9,
+    "cash": 234.33,
+    "gpm": 45.1,
+    "opm": 13.0,
+    "debt_ratio": 14.1,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 674.59,
+    "op": 142.8,
+    "ord": 158.38,
+    "net": 115.58,
+    "gp": 290.49,
+    "sga": 147.7,
+    "cogs": 384.1,
+    "debt_total": 145.27,
+    "equity": 1255.13,
+    "total_assets": 2302.13,
+    "inventory": 710.49,
+    "cash": 315.04,
+    "gpm": 43.1,
+    "opm": 21.2,
+    "debt_ratio": 11.6,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 363.54,
+    "op": 40.75,
+    "ord": 49.43,
+    "net": 38.96,
+    "gp": 181.99,
+    "sga": 141.23,
+    "cogs": 181.55,
+    "debt_total": 126.31,
+    "equity": 1280.7,
+    "total_assets": 2293.8,
+    "inventory": 778.96,
+    "cash": 368.18,
+    "gpm": 50.1,
+    "opm": 11.2,
+    "debt_ratio": 9.9,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 508.8,
+    "op": 117.42,
+    "ord": 91.56,
+    "net": 70.2,
+    "gp": 248.98,
+    "sga": 131.56,
+    "cogs": 259.82,
+    "debt_total": 107.88,
+    "equity": 1316.42,
+    "total_assets": 2297.07,
+    "inventory": 763.46,
+    "cash": 396.46,
+    "gpm": 48.9,
+    "opm": 23.1,
+    "debt_ratio": 8.2,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 491.18,
+    "op": 104.8,
+    "ord": 123.89,
+    "net": 90.2,
+    "gp": 240.63,
+    "sga": 135.84,
+    "cogs": 250.55,
+    "debt_total": 91.42,
+    "equity": 1406.76,
+    "total_assets": 2305.53,
+    "inventory": 789.56,
+    "cash": 328.18,
+    "gpm": 49.0,
+    "opm": 21.3,
+    "debt_ratio": 6.5,
+    "sales_yoy": 28.7,
+    "gp_yoy": 39.9,
+    "sga_yoy": 11.0,
+    "op_yoy": 111.3,
+    "ord_yoy": 210.3,
+    "net_yoy": 243.0,
+    "inventory_yoy": -3.8,
+    "cash_yoy": 40.1
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 603.43,
+    "op": 92.04,
+    "ord": 79.36,
+    "net": -12.48,
+    "gp": 252.37,
+    "sga": 160.33,
+    "cogs": 351.06,
+    "debt_total": 75.83,
+    "equity": 1366.53,
+    "total_assets": 2224.86,
+    "inventory": 715.31,
+    "cash": 361.44,
+    "gpm": 41.8,
+    "opm": 15.3,
+    "debt_ratio": 5.5,
+    "sales_yoy": -10.5,
+    "gp_yoy": -13.1,
+    "sga_yoy": 8.6,
+    "op_yoy": -35.5,
+    "ord_yoy": -49.9,
+    "net_yoy": -110.8,
+    "inventory_yoy": 0.7,
+    "cash_yoy": 14.7
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 401.45,
+    "op": 57.92,
+    "ord": 57.82,
+    "net": 46.69,
+    "gp": 194.51,
+    "sga": 136.58,
+    "cogs": 206.94,
+    "debt_total": 61.68,
+    "equity": 1374.71,
+    "total_assets": 2201.72,
+    "inventory": 739.15,
+    "cash": 407.63,
+    "gpm": 48.5,
+    "opm": 14.4,
+    "debt_ratio": 4.5,
+    "sales_yoy": 10.4,
+    "gp_yoy": 6.9,
+    "sga_yoy": -3.3,
+    "op_yoy": 42.1,
+    "ord_yoy": 17.0,
+    "net_yoy": 19.8,
+    "inventory_yoy": -5.1,
+    "cash_yoy": 10.7
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 419.14,
+    "op": 61.42,
+    "ord": 71.24,
+    "net": 51.81,
+    "gp": 198.26,
+    "sga": 136.85,
+    "cogs": 220.88,
+    "debt_total": 51.01,
+    "equity": 1438.03,
+    "total_assets": 2264.63,
+    "inventory": 744.04,
+    "cash": 360.27,
+    "gpm": 47.3,
+    "opm": 14.7,
+    "debt_ratio": 3.5,
+    "sales_yoy": -17.6,
+    "gp_yoy": -20.4,
+    "sga_yoy": 4.0,
+    "op_yoy": -47.7,
+    "ord_yoy": -22.2,
+    "net_yoy": -26.2,
+    "inventory_yoy": -2.5,
+    "cash_yoy": -9.1
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 477.45,
+    "op": 94.64,
+    "ord": 107.49,
+    "net": 76.41,
+    "gp": 230.12,
+    "sga": 135.47,
+    "cogs": 247.33,
+    "debt_total": 120.58,
+    "equity": 1495.08,
+    "total_assets": 2341.4,
+    "inventory": 756.64,
+    "cash": 380.46,
+    "gpm": 48.2,
+    "opm": 19.8,
+    "debt_ratio": 8.1,
+    "sales_yoy": -2.8,
+    "gp_yoy": -4.4,
+    "sga_yoy": -0.3,
+    "op_yoy": -9.7,
+    "ord_yoy": -13.2,
+    "net_yoy": -15.3,
+    "inventory_yoy": -4.2,
+    "cash_yoy": 15.9
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 495.49,
+    "op": 46.19,
+    "ord": 49.55,
+    "net": 46.06,
+    "gp": 207.41,
+    "sga": 161.23,
+    "cogs": 288.08,
+    "debt_total": 251.7,
+    "equity": 1448.98,
+    "total_assets": 2420.26,
+    "inventory": 706.34,
+    "cash": 389.49,
+    "gpm": 41.9,
+    "opm": 9.3,
+    "debt_ratio": 17.4,
+    "sales_yoy": -17.9,
+    "gp_yoy": -17.8,
+    "sga_yoy": 0.6,
+    "op_yoy": -49.8,
+    "ord_yoy": -37.6,
+    "net_yoy": null,
+    "inventory_yoy": -1.3,
+    "cash_yoy": 7.8
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 244.65,
+    "op": -19.61,
+    "ord": -13.62,
+    "net": -17.1,
+    "gp": 117.68,
+    "sga": 137.29,
+    "cogs": 126.97,
+    "debt_total": 142.8,
+    "equity": 1408.29,
+    "total_assets": 2261.62,
+    "inventory": 752.12,
+    "cash": 322.39,
+    "gpm": 48.1,
+    "opm": -8.0,
+    "debt_ratio": 10.1,
+    "sales_yoy": -39.1,
+    "gp_yoy": -39.5,
+    "sga_yoy": 0.5,
+    "op_yoy": -133.9,
+    "ord_yoy": -123.6,
+    "net_yoy": -136.6,
+    "inventory_yoy": 1.8,
+    "cash_yoy": -20.9
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 413.52,
+    "op": 71.54,
+    "ord": 66.62,
+    "net": 49.24,
+    "gp": 212.57,
+    "sga": 141.03,
+    "cogs": 200.95,
+    "debt_total": 93.92,
+    "equity": 1457.99,
+    "total_assets": 2254.79,
+    "inventory": 764.95,
+    "cash": 337.7,
+    "gpm": 51.4,
+    "opm": 17.3,
+    "debt_ratio": 6.4,
+    "sales_yoy": -1.3,
+    "gp_yoy": 7.2,
+    "sga_yoy": 3.1,
+    "op_yoy": 16.5,
+    "ord_yoy": -6.5,
+    "net_yoy": -5.0,
+    "inventory_yoy": 2.8,
+    "cash_yoy": -6.3
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 1384.08,
+    "op": 141.44,
+    "ord": 163.13,
+    "net": 122.78,
+    "opm": 10.2,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 1626.89,
+    "op": 241.55,
+    "ord": 235.01,
+    "net": 178.3,
+    "opm": 14.8,
+    "sales_yoy": 17.5,
+    "op_yoy": 70.8,
+    "net_yoy": 45.2
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 1743.36,
+    "op": 275.31,
+    "ord": 300.23,
+    "net": 217.04,
+    "opm": 15.8,
+    "sales_yoy": 7.2,
+    "op_yoy": 14.0,
+    "net_yoy": 21.7
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 1966.95,
+    "op": 355.01,
+    "ord": 344.24,
+    "net": 186.88,
+    "opm": 18.0,
+    "sales_yoy": 12.8,
+    "op_yoy": 28.9,
+    "net_yoy": -13.9
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 1793.53,
+    "op": 260.17,
+    "ord": 286.1,
+    "net": 220.97,
+    "opm": 14.5,
+    "sales_yoy": -8.8,
+    "op_yoy": -26.7,
+    "net_yoy": 18.2
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 1640.0,
+    "op": 265.0,
+    "ord": 262.0,
+    "net": 213.0,
+    "opm": 16.2,
+    "sales_yoy": -8.6,
+    "op_yoy": 1.9,
+    "net_yoy": -3.6,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "h": [
+   {
+    "x": "26.상반기",
+    "sci": 476.59,
+    "ind": 270.15,
+    "med": 73.85,
+    "sci_op": 27.45,
+    "ind_op": 116.83,
+    "med_op": 6.96
+   },
+   {
+    "x": "27.상반기",
+    "sci": 508.76,
+    "ind": 149.41,
+    "med": null,
+    "sci_op": 49.69,
+    "ind_op": 38.16,
+    "med_op": null
+   }
+  ],
+  "b": [
+   {
+    "x": "25.1Q",
+    "sci": 226,
+    "ind": 106,
+    "med": 32,
+    "sci_op": 4,
+    "ind_op": 49,
+    "med_op": 4,
+    "sci_opm": 1.8,
+    "ind_opm": 46.2,
+    "med_opm": 12.5,
+    "rnd": 36,
+    "rnd_ratio": 9.9,
+    "sci_yoy": null,
+    "ind_yoy": null,
+    "rnd_yoy": null
+   },
+   {
+    "x": "25.2Q",
+    "sci": 296,
+    "ind": 181,
+    "med": 32,
+    "sci_op": 36,
+    "ind_op": 97,
+    "med_op": 0,
+    "sci_opm": 12.2,
+    "ind_opm": 53.6,
+    "med_opm": 0.0,
+    "rnd": 25,
+    "rnd_ratio": 4.9,
+    "sci_yoy": null,
+    "ind_yoy": null,
+    "rnd_yoy": null
+   },
+   {
+    "x": "25.3Q",
+    "sci": 321,
+    "ind": 130,
+    "med": 39,
+    "sci_op": 60,
+    "ind_op": 58,
+    "med_op": 4,
+    "sci_opm": 18.7,
+    "ind_opm": 44.6,
+    "med_opm": 10.3,
+    "rnd": 26,
+    "rnd_ratio": 5.3,
+    "sci_yoy": null,
+    "ind_yoy": null,
+    "rnd_yoy": null
+   },
+   {
+    "x": "25.4Q",
+    "sci": 405,
+    "ind": 148,
+    "med": 51,
+    "sci_op": 50,
+    "ind_op": 59,
+    "med_op": -1,
+    "sci_opm": 12.3,
+    "ind_opm": 39.9,
+    "med_opm": -2.0,
+    "rnd": 33,
+    "rnd_ratio": 5.5,
+    "sci_yoy": null,
+    "ind_yoy": null,
+    "rnd_yoy": null
+   },
+   {
+    "x": "26.1Q",
+    "sci": 214,
+    "ind": 145,
+    "med": 43,
+    "sci_op": -4,
+    "ind_op": 72,
+    "med_op": 7,
+    "sci_opm": -1.9,
+    "ind_opm": 49.7,
+    "med_opm": 16.3,
+    "rnd": 31,
+    "rnd_ratio": 7.7,
+    "sci_yoy": -5.3,
+    "ind_yoy": 36.8,
+    "rnd_yoy": -13.9
+   },
+   {
+    "x": "26.2Q",
+    "sci": 263,
+    "ind": 125,
+    "med": 31,
+    "sci_op": 31,
+    "ind_op": 45,
+    "med_op": 0,
+    "sci_opm": 11.8,
+    "ind_opm": 36.0,
+    "med_opm": 0.0,
+    "rnd": 28,
+    "rnd_ratio": 6.7,
+    "sci_yoy": -11.1,
+    "ind_yoy": -30.9,
+    "rnd_yoy": 12.0
+   },
+   {
+    "x": "26.3Q",
+    "sci": 305,
+    "ind": 136,
+    "med": 36,
+    "sci_op": 49,
+    "ind_op": 61,
+    "med_op": 0,
+    "sci_opm": 16.1,
+    "ind_opm": 44.9,
+    "med_opm": 0.0,
+    "rnd": 27,
+    "rnd_ratio": 5.7,
+    "sci_yoy": -5.0,
+    "ind_yoy": 4.6,
+    "rnd_yoy": 3.8
+   },
+   {
+    "x": "26.4Q",
+    "sci": 381,
+    "ind": 75,
+    "med": 39,
+    "sci_op": 55,
+    "ind_op": 16,
+    "med_op": -6,
+    "sci_opm": 14.4,
+    "ind_opm": 21.3,
+    "med_opm": -15.4,
+    "rnd": 28,
+    "rnd_ratio": 5.7,
+    "sci_yoy": -5.9,
+    "ind_yoy": -49.3,
+    "rnd_yoy": -15.2
+   },
+   {
+    "x": "27.1Q",
+    "sci": 195,
+    "ind": 50,
+    "med": null,
+    "sci_op": -3,
+    "ind_op": 2,
+    "med_op": null,
+    "sci_opm": -1.5,
+    "ind_opm": 4.0,
+    "med_opm": null,
+    "rnd": 26,
+    "rnd_ratio": 10.6,
+    "sci_yoy": -8.9,
+    "ind_yoy": -65.5,
+    "rnd_yoy": -16.1
+   },
+   {
+    "x": "27.2Q",
+    "sci": 314,
+    "ind": 99,
+    "med": null,
+    "sci_op": 53,
+    "ind_op": 36,
+    "med_op": null,
+    "sci_opm": 16.9,
+    "ind_opm": 36.4,
+    "med_opm": null,
+    "rnd": 25,
+    "rnd_ratio": 6.0,
+    "sci_yoy": 19.4,
+    "ind_yoy": -20.8,
+    "rnd_yoy": -10.7
+   }
+  ],
+  "bh": [
+   {
+    "x": "24.상반기",
+    "ord_h": 1092,
+    "bl_h": 1361,
+    "ovs_h": 66.7,
+    "ord_h_yoy": null,
+    "bl_h_yoy": null
+   },
+   {
+    "x": "25.상반기",
+    "ord_h": 941,
+    "bl_h": 1203,
+    "ovs_h": 76.4,
+    "ord_h_yoy": -13.8,
+    "bl_h_yoy": -11.6
+   },
+   {
+    "x": "26.상반기",
+    "ord_h": 808,
+    "bl_h": 1019,
+    "ovs_h": 73.2,
+    "ord_h_yoy": -14.1,
+    "bl_h_yoy": -15.3
+   },
+   {
+    "x": "27.상반기",
+    "ord_h": 924,
+    "bl_h": 1305,
+    "ovs_h": 73.8,
+    "ord_h_yoy": 14.4,
+    "bl_h_yoy": 28.1
+   }
+  ],
+  "ba": [
+   {
+    "x": "2024",
+    "orders": 1922,
+    "backlog": 1135,
+    "ovs": 65.4,
+    "capex": 56,
+    "dep": 47,
+    "rnd_a": 103,
+    "btb": 1.1,
+    "ovs_sales": 1140.0,
+    "dom_sales": 603.0,
+    "bl_months": 7.8
+   },
+   {
+    "x": "2025",
+    "orders": 1864,
+    "backlog": 1032,
+    "ovs": 71.2,
+    "capex": 70,
+    "dep": 49,
+    "rnd_a": 120,
+    "btb": 0.95,
+    "ovs_sales": 1400.0,
+    "dom_sales": 566.0,
+    "bl_months": 6.3
+   },
+   {
+    "x": "2026",
+    "orders": 1801,
+    "backlog": 1039,
+    "ovs": 67.2,
+    "capex": 202,
+    "dep": 54,
+    "rnd_a": 114,
+    "btb": 1.0,
+    "ovs_sales": 1205.0,
+    "dom_sales": 588.0,
+    "bl_months": 7.0
+   },
+   {
+    "x": "2027 계획",
+    "orders": 1700,
+    "backlog": 1050,
+    "ovs": 68.0,
+    "capex": 230,
+    "dep": 65,
+    "rnd_a": 105,
+    "btb": 1.04,
+    "ovs_sales": 1115.0,
+    "dom_sales": 525.0,
+    "bl_months": 7.7,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ]
+ }
+}
