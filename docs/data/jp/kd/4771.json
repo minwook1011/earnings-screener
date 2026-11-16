@@ -1,1 +1,1750 @@
-{"c": "4771", "n": "F&M(에프앤엠)", "asof": "2026-10-30", "latest": "2027년 3월기 2분기", "unit": "금액 억엔, 회원 수 명·사", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "3월 결산(27.2Q = 2026년 7~9월). 차입금 없음(무차입). 컨설팅 부문 매출에 보조금 채택 보수가 분기별로 몰려 3분기(10~12월)에 실적이 튐. 2027년 3월기부터 BPO 사업을 비즈니스솔루션 부문으로 옮겨 부문 표는 26.1Q부터. 연간 계획은 10/30 상향 수정치", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "오피스스테이션 이용 사용자", "def": "인사·노무 클라우드 — 기업 + 사무소(사회보험노무사 등)", "d": "q", "lines": [{"k": "ofs_corp", "l": "기업", "u": "명", "c": 0}, {"k": "ofs_pro", "l": "사무소", "u": "명", "c": 1}, {"k": "ofs_yoy", "l": "합계 YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료 26쪽"}, {"sec": "key", "t": "F&M클럽 회원사", "def": "중소기업용 관리부문 지원 서비스(월 회비)", "d": "q", "bars": [{"k": "club", "l": "회원사", "u": "사", "c": 0}], "lines": [{"k": "club_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료 23쪽"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "사업 지표", "t": "회계 서비스(기장 대행) 회원", "def": "생명보험 영업직원 등 개인사업자 — 매년 2분기 말", "d": "q", "bars": [{"k": "acc_members", "l": "회원", "u": "명", "c": 0}], "lines": [{"k": "acc_members_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료 20쪽 · 2분기 말 숫자만 공개"}, {"sec": "사업 지표", "t": "현금과 순자산", "def": "차입금 없음", "d": "q", "bars": [{"k": "equity", "l": "순자산", "u": "억엔", "c": 0}, {"k": "cash", "l": "현금·예금", "u": "억엔", "c": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "부문", "t": "부문별 매출", "d": "seg", "src": "결산단신 부문 정보(외부 고객, 누계 차분) · 3·4분기는 새 부문 기준 숫자 없음", "lines": [{"k": "co", "l": "컨설팅", "u": "억엔", "c": 0}, {"k": "bs", "l": "비즈니스솔루션", "u": "억엔", "c": 1}, {"k": "ac", "l": "어카운팅 서비스", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "부문별 이익", "d": "seg", "lines": [{"k": "co_op", "l": "컨설팅", "u": "억엔", "c": 0}, {"k": "ac_op", "l": "어카운팅 서비스", "u": "억엔", "c": 1}, {"k": "bs_op", "l": "비즈니스솔루션", "u": "억엔", "c": 2}, {"k": "co_opm", "l": "컨설팅 이익률", "u": "%", "c": 0, "r": 1}], "src": "결산단신 부문 정보 · 전사 비용 배분 전"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 40.63, "op": 7.04, "ord": 7.07, "net": 5.26, "gp": 27.07, "sga": 20.03, "cogs": 13.56, "cash": 50.5, "equity": 111.73, "total_assets": 148.93, "gpm": 66.6, "opm": 17.3, "club": null, "ofs": null, "ofs_corp": null, "ofs_pro": null, "acc_members": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "club_yoy": null, "ofs_yoy": null, "ofs_corp_yoy": null, "ofs_pro_yoy": null, "acc_members_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 40.43, "op": 4.86, "ord": 4.89, "net": 4.49, "gp": 25.89, "sga": 21.03, "cogs": 14.54, "cash": 52.23, "equity": 116.18, "total_assets": 152.03, "gpm": 64.0, "opm": 12.0, "club": null, "ofs": null, "ofs_corp": null, "ofs_pro": null, "acc_members": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "club_yoy": null, "ofs_yoy": null, "ofs_corp_yoy": null, "ofs_pro_yoy": null, "acc_members_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 36.37, "op": 4.08, "ord": 4.15, "net": 2.44, "gp": 24.06, "sga": 19.97, "cogs": 12.31, "cash": 42.14, "equity": 115.92, "total_assets": 144.78, "gpm": 66.2, "opm": 11.2, "club": null, "ofs": null, "ofs_corp": null, "ofs_pro": null, "acc_members": null, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "club_yoy": null, "ofs_yoy": null, "ofs_corp_yoy": null, "ofs_pro_yoy": null, "acc_members_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 34.96, "op": 2.17, "ord": 2.23, "net": 1.6, "gp": 23.1, "sga": 20.93, "cogs": 11.86, "cash": 47.31, "equity": 121.1, "total_assets": 153.47, "gpm": 66.1, "opm": 6.2, "club": 12553, "ofs": 43260, "ofs_corp": 40128, "ofs_pro": 3132, "acc_members": 100794, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "club_yoy": null, "ofs_yoy": null, "ofs_corp_yoy": null, "ofs_pro_yoy": null, "acc_members_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 51.93, "op": 12.38, "ord": 12.44, "net": 8.33, "gp": 36.69, "sga": 24.31, "cogs": 15.24, "cash": 52.5, "equity": 126.52, "total_assets": 167.24, "gpm": 70.7, "opm": 23.8, "club": 13050, "ofs": 45807, "ofs_corp": 42586, "ofs_pro": 3221, "acc_members": null, "sales_yoy": 27.8, "gp_yoy": 35.5, "sga_yoy": 21.4, "op_yoy": 75.9, "ord_yoy": 76.0, "net_yoy": 58.4, "cash_yoy": 4.0, "club_yoy": null, "ofs_yoy": null, "ofs_corp_yoy": null, "ofs_pro_yoy": null, "acc_members_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 47.4, "op": 8.53, "ord": 8.59, "net": 5.77, "gp": 32.07, "sga": 23.54, "cogs": 15.33, "cash": 58.35, "equity": 132.14, "total_assets": 173.06, "gpm": 67.7, "opm": 18.0, "club": 13705, "ofs": 47189, "ofs_corp": 43862, "ofs_pro": 3327, "acc_members": null, "sales_yoy": 17.2, "gp_yoy": 23.9, "sga_yoy": 11.9, "op_yoy": 75.5, "ord_yoy": 75.7, "net_yoy": 28.5, "cash_yoy": 11.7, "club_yoy": null, "ofs_yoy": null, "ofs_corp_yoy": null, "ofs_pro_yoy": null, "acc_members_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 42.24, "op": 4.37, "ord": 4.47, "net": 2.78, "gp": 27.84, "sga": 23.47, "cogs": 14.4, "cash": 48.69, "equity": 131.96, "total_assets": 166.63, "gpm": 65.9, "opm": 10.3, "club": 14071, "ofs": 48951, "ofs_corp": 45552, "ofs_pro": 3399, "acc_members": null, "sales_yoy": 16.1, "gp_yoy": 15.7, "sga_yoy": 17.5, "op_yoy": 7.1, "ord_yoy": 7.7, "net_yoy": 13.9, "cash_yoy": 15.5, "club_yoy": null, "ofs_yoy": null, "ofs_corp_yoy": null, "ofs_pro_yoy": null, "acc_members_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 47.32, "op": 5.0, "ord": 5.11, "net": 3.69, "gp": 31.5, "sga": 26.5, "cogs": 15.82, "cash": 50.59, "equity": 135.66, "total_assets": 180.66, "gpm": 66.6, "opm": 10.6, "club": 14385, "ofs": 51391, "ofs_corp": 47905, "ofs_pro": 3486, "acc_members": 111760, "sales_yoy": 35.4, "gp_yoy": 36.4, "sga_yoy": 26.6, "op_yoy": 130.4, "ord_yoy": 129.1, "net_yoy": 130.6, "cash_yoy": 6.9, "club_yoy": 14.6, "ofs_yoy": 18.8, "ofs_corp_yoy": 19.4, "ofs_pro_yoy": 11.3, "acc_members_yoy": 10.9}, {"q": "26.3Q", "x": "26.3Q", "sales": 60.64, "op": 16.64, "ord": 16.72, "net": 11.2, "gp": 42.65, "sga": 26.0, "cogs": 17.99, "cash": 57.18, "equity": 143.68, "total_assets": 196.37, "gpm": 70.3, "opm": 27.4, "club": 14634, "ofs": 54143, "ofs_corp": 50563, "ofs_pro": 3580, "acc_members": null, "sales_yoy": 16.8, "gp_yoy": 16.2, "sga_yoy": 7.0, "op_yoy": 34.4, "ord_yoy": 34.4, "net_yoy": 34.5, "cash_yoy": 8.9, "club_yoy": 12.1, "ofs_yoy": 18.2, "ofs_corp_yoy": 18.7, "ofs_pro_yoy": 11.1, "acc_members_yoy": null}, {"q": "26.4Q", "x": "26.4Q", "sales": 57.87, "op": 12.57, "ord": 12.7, "net": 10.58, "gp": 38.75, "sga": 26.19, "cogs": 19.12, "cash": 67.41, "equity": 154.23, "total_assets": 206.42, "gpm": 67.0, "opm": 21.7, "club": 14817, "ofs": 56335, "ofs_corp": 52669, "ofs_pro": 3666, "acc_members": null, "sales_yoy": 22.1, "gp_yoy": 20.8, "sga_yoy": 11.3, "op_yoy": 47.4, "ord_yoy": 47.8, "net_yoy": 83.4, "cash_yoy": 15.5, "club_yoy": 8.1, "ofs_yoy": 19.4, "ofs_corp_yoy": 20.1, "ofs_pro_yoy": 10.2, "acc_members_yoy": null}, {"q": "27.1Q", "x": "27.1Q", "sales": 52.64, "op": 7.97, "ord": 8.13, "net": 5.14, "gp": 34.24, "sga": 26.27, "cogs": 18.4, "cash": 53.96, "equity": 154.94, "total_assets": 197.06, "gpm": 65.0, "opm": 15.1, "club": 15132, "ofs": 58054, "ofs_corp": 54314, "ofs_pro": 3740, "acc_members": null, "sales_yoy": 24.6, "gp_yoy": 23.0, "sga_yoy": 11.9, "op_yoy": 82.4, "ord_yoy": 81.9, "net_yoy": 84.9, "cash_yoy": 10.8, "club_yoy": 7.5, "ofs_yoy": 18.6, "ofs_corp_yoy": 19.2, "ofs_pro_yoy": 10.0, "acc_members_yoy": null}, {"q": "27.2Q", "x": "27.2Q", "sales": 61.94, "op": 12.0, "ord": 12.16, "net": 8.67, "gp": 40.83, "sga": 28.83, "cogs": 21.11, "cash": 62.75, "equity": 163.6, "total_assets": 219.42, "gpm": 65.9, "opm": 19.4, "club": 15764, "ofs": 60440, "ofs_corp": 56601, "ofs_pro": 3839, "acc_members": 122469, "sales_yoy": 30.9, "gp_yoy": 29.6, "sga_yoy": 8.8, "op_yoy": 140.0, "ord_yoy": 138.0, "net_yoy": 135.0, "cash_yoy": 24.0, "club_yoy": 9.6, "ofs_yoy": 17.6, "ofs_corp_yoy": 18.2, "ofs_pro_yoy": 10.1, "acc_members_yoy": 9.6}], "a": [{"year": "2022", "x": "2022", "sales": 108.75, "op": 22.43, "ord": 22.56, "net": 15.48, "opm": 20.6, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 126.99, "op": 26.02, "ord": 26.21, "net": 18.81, "opm": 20.5, "sales_yoy": 16.8, "op_yoy": 16.0, "net_yoy": 21.5}, {"year": "2024", "x": "2024", "sales": 148.61, "op": 21.28, "ord": 21.43, "net": 16.09, "opm": 14.3, "sales_yoy": 17.0, "op_yoy": -18.2, "net_yoy": -14.5}, {"year": "2025", "x": "2025", "sales": 170.66, "op": 27.16, "ord": 27.41, "net": 18.14, "opm": 15.9, "sales_yoy": 14.8, "op_yoy": 27.6, "net_yoy": 12.7}, {"year": "2026", "x": "2026", "sales": 208.07, "op": 38.58, "ord": 39.0, "net": 28.25, "opm": 18.5, "sales_yoy": 21.9, "op_yoy": 42.0, "net_yoy": 55.7}, {"year": "2027 계획", "x": "2027 계획", "sales": 256.75, "op": 49.94, "ord": 50.46, "net": 34.48, "opm": 19.5, "sales_yoy": 23.4, "op_yoy": 29.4, "net_yoy": 22.1, "plan": 1, "kind": "회사 계획"}], "seg": [{"x": "26.1Q", "ac": 10.51, "co": 18.14, "bs": 12.33, "ac_op": 2.94, "co_op": 4.94, "bs_op": -0.4, "ac_yoy": null, "co_yoy": null, "bs_yoy": null, "ac_op_yoy": null, "co_op_yoy": null, "bs_op_yoy": null, "ac_opm": 28.0, "co_opm": 27.2, "bs_opm": -3.2}, {"x": "26.2Q", "ac": 11.11, "co": 21.79, "bs": 13.42, "ac_op": 2.85, "co_op": 7.21, "bs_op": -1.21, "ac_yoy": null, "co_yoy": null, "bs_yoy": null, "ac_op_yoy": null, "co_op_yoy": null, "bs_op_yoy": null, "ac_opm": 25.7, "co_opm": 33.1, "bs_opm": -9.0}, {"x": "26.3Q", "ac": null, "co": null, "bs": null, "ac_op": null, "co_op": null, "bs_op": null, "ac_yoy": null, "co_yoy": null, "bs_yoy": null, "ac_op_yoy": null, "co_op_yoy": null, "bs_op_yoy": null, "ac_opm": null, "co_opm": null, "bs_opm": null}, {"x": "26.4Q", "ac": null, "co": null, "bs": null, "ac_op": null, "co_op": null, "bs_op": null, "ac_yoy": null, "co_yoy": null, "bs_yoy": null, "ac_op_yoy": null, "co_op_yoy": null, "bs_op_yoy": null, "ac_opm": null, "co_opm": null, "bs_opm": null}, {"x": "27.1Q", "ac": 11.77, "co": 23.43, "bs": 16.48, "ac_op": 3.49, "co_op": 7.81, "bs_op": -0.24, "ac_yoy": 12.0, "co_yoy": 29.2, "bs_yoy": 33.7, "ac_op_yoy": 18.7, "co_op_yoy": 58.1, "bs_op_yoy": null, "ac_opm": 29.7, "co_opm": 33.3, "bs_opm": -1.5}, {"x": "27.2Q", "ac": 12.11, "co": 31.3, "bs": 17.17, "ac_op": 3.46, "co_op": 13.43, "bs_op": -0.75, "ac_yoy": 9.0, "co_yoy": 43.6, "bs_yoy": 27.9, "ac_op_yoy": 21.4, "co_op_yoy": 86.3, "bs_op_yoy": null, "ac_opm": 28.6, "co_opm": 42.9, "bs_opm": -4.4}]}}
+{
+ "c": "4771",
+ "n": "F&M(에프앤엠)",
+ "asof": "2026-10-30",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔, 회원 수 명·사",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "3월 결산(27.2Q = 2026년 7~9월). 차입금 없음(무차입). 컨설팅 부문 매출에 보조금 채택 보수가 분기별로 몰려 3분기(10~12월)에 실적이 튐. 2027년 3월기부터 BPO 사업을 비즈니스솔루션 부문으로 옮겨 부문 표는 26.1Q부터. 연간 계획은 10/30 상향 수정치",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "오피스스테이션 이용 사용자",
+   "def": "인사·노무 클라우드 — 기업 + 사무소(사회보험노무사 등)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ofs_corp",
+     "l": "기업",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "ofs_pro",
+     "l": "사무소",
+     "u": "명",
+     "c": 1
+    },
+    {
+     "k": "ofs_yoy",
+     "l": "합계 YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet) · 23.1Q~24.4Q는 25.1Q 자료의 9분기 그래프 라벨"
+  },
+  {
+   "sec": "key",
+   "t": "F&M클럽 회원사",
+   "def": "중소기업용 관리부문 지원 서비스(월 회비)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "club",
+     "l": "회원사",
+     "u": "사",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "club_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet) · 23.1Q~24.4Q는 25.1Q 자료의 9분기 그래프 라벨"
+  },
+  {
+   "sec": "회계 서비스",
+   "t": "회계 서비스 회원 경로별",
+   "d": "bacc",
+   "lines": [
+    {
+     "k": "acc_life",
+     "l": "생명보험사 경로",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "acc_other",
+     "l": "기타 경로",
+     "u": "명",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 27.2Q 20쪽 · 매년 2분기 말"
+  },
+  {
+   "sec": "회계 서비스",
+   "t": "기타 경로 회계 회원",
+   "d": "bacc",
+   "bars": [
+    {
+     "k": "acc_other",
+     "l": "기타 경로",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 27.2Q 20쪽",
+   "lines": [
+    {
+     "k": "acc_other_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "회계 서비스",
+   "t": "기장 처리 AI 커버율",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ai_cover",
+     "l": "AI 처리 비율",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet)"
+  },
+  {
+   "sec": "컨설팅",
+   "t": "F&M클럽 순증",
+   "d": "b",
+   "bars": [
+    {
+     "k": "club_net",
+     "l": "전분기 대비 순증",
+     "u": "사",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 · 분기말 회원사 차이",
+   "def": "분기말 회원사 − 전분기말 회원사"
+  },
+  {
+   "sec": "컨설팅",
+   "t": "보조금 채택 보수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "subsidy",
+     "l": "채택 보수",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet) 본문 문구(해당 분기 계상액, 25.1Q·25.2Q·25.4Q는 언급 없음)",
+   "def": "중소기업 보조금 신청 지원 성공 보수"
+  },
+  {
+   "sec": "오피스스테이션",
+   "t": "오피스스테이션 사용자 합계",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ofs",
+     "l": "사용자",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet) · 23.1Q~24.4Q는 25.1Q 자료 라벨",
+   "lines": [
+    {
+     "k": "ofs_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "오피스스테이션",
+   "t": "오피스스테이션 순증",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ofs_net",
+     "l": "순증",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 · 분기말 사용자 차이",
+   "def": "분기말 사용자 − 전분기말"
+  },
+  {
+   "sec": "오피스스테이션",
+   "t": "오피스스테이션 사무소 사용자",
+   "d": "b",
+   "bars": [
+    {
+     "k": "ofs_pro",
+     "l": "사무소",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet)",
+   "def": "사회보험노무사 등 전문 사무소",
+   "lines": [
+    {
+     "k": "ofs_pro_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "오피스스테이션",
+   "t": "오피스스테이션 MRR",
+   "d": "b",
+   "bars": [
+    {
+     "k": "mrr",
+     "l": "MRR",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet) 주요 지표 쪽",
+   "def": "월간 반복 매출",
+   "lines": [
+    {
+     "k": "mrr_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "오피스스테이션",
+   "t": "오피스스테이션 ARR",
+   "d": "b",
+   "bars": [
+    {
+     "k": "arr",
+     "l": "ARR",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet) 주요 지표 쪽",
+   "def": "연간 반복 매출(MRR×12)"
+  },
+  {
+   "sec": "오피스스테이션",
+   "t": "오피스스테이션 사용자당 월 매출",
+   "d": "b",
+   "bars": [
+    {
+     "k": "arpu",
+     "l": "MRR÷사용자",
+     "u": "엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet)",
+   "def": "MRR ÷ 분기말 사용자 수"
+  },
+  {
+   "sec": "오피스스테이션",
+   "t": "오피스스테이션 해지율(월)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "ch_labor",
+     "l": "노무",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "ch_pay",
+     "l": "급여명세",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "ch_nen",
+     "l": "연말정산",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "ch_pro",
+     "l": "Pro(사무소용)",
+     "u": "%",
+     "c": 3
+    },
+    {
+     "k": "ch_kin",
+     "l": "근태",
+     "u": "%",
+     "c": 4
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(10개 분기, TDnet) 주요 지표 쪽 · 근태는 26.2Q부터 공시"
+  },
+  {
+   "sec": "회계사무소 네트워크",
+   "t": "지원기관 협의회·AI 연구회 회원",
+   "d": "b",
+   "bars": [
+    {
+     "k": "kyo_total",
+     "l": "회원 사무소",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(23.4Q~25.1Q는 25.1Q 자료, 이후 27.2Q 자료) · 26.1Q부터 AI 연구회 포함",
+   "def": "경영혁신 등 지원기관 추진협의회(회계사무소) + AI 연구회",
+   "lines": [
+    {
+     "k": "kyo_total_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "회계사무소 네트워크",
+   "t": "추진협의회와 AI 연구회",
+   "d": "b",
+   "lines": [
+    {
+     "k": "kyo",
+     "l": "추진협의회",
+     "u": "곳",
+     "c": 0
+    },
+    {
+     "k": "ai",
+     "l": "AI 연구회",
+     "u": "곳",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 27.2Q 28쪽 · AI 연구회는 추진협의회 회원이면 추진협의회로 셈"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "회계 서비스",
+   "t": "회계 서비스(기장 대행) 회원",
+   "def": "생명보험 영업직원 등 개인사업자 — 매년 2분기 말",
+   "d": "bacc",
+   "bars": [
+    {
+     "k": "acc_total",
+     "l": "회원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "acc_total_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 27.2Q 20쪽(5년 2분기 말 비교)",
+   "x": "x"
+  },
+  {
+   "sec": "재무",
+   "t": "현금",
+   "def": "차입금 없음",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출",
+   "d": "seg",
+   "src": "결산단신 부문 정보(외부 고객, 누계 차분) · 3·4분기는 새 부문 기준 숫자 없음",
+   "lines": [
+    {
+     "k": "co",
+     "l": "컨설팅",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "bs",
+     "l": "비즈니스솔루션",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "ac",
+     "l": "어카운팅 서비스",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 이익",
+   "d": "seg",
+   "lines": [
+    {
+     "k": "co_op",
+     "l": "컨설팅",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ac_op",
+     "l": "어카운팅 서비스",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "bs_op",
+     "l": "비즈니스솔루션",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "co_opm",
+     "l": "컨설팅 이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보 · 전사 비용 배분 전"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 40.63,
+    "op": 7.04,
+    "ord": 7.07,
+    "net": 5.26,
+    "gp": 27.07,
+    "sga": 20.03,
+    "cogs": 13.56,
+    "cash": 50.5,
+    "equity": 111.73,
+    "total_assets": 148.93,
+    "gpm": 66.6,
+    "opm": 17.3,
+    "club": null,
+    "ofs": null,
+    "ofs_corp": null,
+    "ofs_pro": null,
+    "acc_members": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 40.43,
+    "op": 4.86,
+    "ord": 4.89,
+    "net": 4.49,
+    "gp": 25.89,
+    "sga": 21.03,
+    "cogs": 14.54,
+    "cash": 52.23,
+    "equity": 116.18,
+    "total_assets": 152.03,
+    "gpm": 64.0,
+    "opm": 12.0,
+    "club": null,
+    "ofs": null,
+    "ofs_corp": null,
+    "ofs_pro": null,
+    "acc_members": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 36.37,
+    "op": 4.08,
+    "ord": 4.15,
+    "net": 2.44,
+    "gp": 24.06,
+    "sga": 19.97,
+    "cogs": 12.31,
+    "cash": 42.14,
+    "equity": 115.92,
+    "total_assets": 144.78,
+    "gpm": 66.2,
+    "opm": 11.2,
+    "club": null,
+    "ofs": null,
+    "ofs_corp": null,
+    "ofs_pro": null,
+    "acc_members": null,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 34.96,
+    "op": 2.17,
+    "ord": 2.23,
+    "net": 1.6,
+    "gp": 23.1,
+    "sga": 20.93,
+    "cogs": 11.86,
+    "cash": 47.31,
+    "equity": 121.1,
+    "total_assets": 153.47,
+    "gpm": 66.1,
+    "opm": 6.2,
+    "club": 12553,
+    "ofs": 43260,
+    "ofs_corp": 40128,
+    "ofs_pro": 3132,
+    "acc_members": 100794,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 51.93,
+    "op": 12.38,
+    "ord": 12.44,
+    "net": 8.33,
+    "gp": 36.69,
+    "sga": 24.31,
+    "cogs": 15.24,
+    "cash": 52.5,
+    "equity": 126.52,
+    "total_assets": 167.24,
+    "gpm": 70.7,
+    "opm": 23.8,
+    "club": 13050,
+    "ofs": 45807,
+    "ofs_corp": 42586,
+    "ofs_pro": 3221,
+    "acc_members": null,
+    "sales_yoy": 27.8,
+    "gp_yoy": 35.5,
+    "sga_yoy": 21.4,
+    "op_yoy": 75.9,
+    "ord_yoy": 76.0,
+    "net_yoy": 58.4,
+    "cash_yoy": 4.0,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 47.4,
+    "op": 8.53,
+    "ord": 8.59,
+    "net": 5.77,
+    "gp": 32.07,
+    "sga": 23.54,
+    "cogs": 15.33,
+    "cash": 58.35,
+    "equity": 132.14,
+    "total_assets": 173.06,
+    "gpm": 67.7,
+    "opm": 18.0,
+    "club": 13705,
+    "ofs": 47189,
+    "ofs_corp": 43862,
+    "ofs_pro": 3327,
+    "acc_members": null,
+    "sales_yoy": 17.2,
+    "gp_yoy": 23.9,
+    "sga_yoy": 11.9,
+    "op_yoy": 75.5,
+    "ord_yoy": 75.7,
+    "net_yoy": 28.5,
+    "cash_yoy": 11.7,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 42.24,
+    "op": 4.37,
+    "ord": 4.47,
+    "net": 2.78,
+    "gp": 27.84,
+    "sga": 23.47,
+    "cogs": 14.4,
+    "cash": 48.69,
+    "equity": 131.96,
+    "total_assets": 166.63,
+    "gpm": 65.9,
+    "opm": 10.3,
+    "club": 14071,
+    "ofs": 48951,
+    "ofs_corp": 45552,
+    "ofs_pro": 3399,
+    "acc_members": null,
+    "sales_yoy": 16.1,
+    "gp_yoy": 15.7,
+    "sga_yoy": 17.5,
+    "op_yoy": 7.1,
+    "ord_yoy": 7.7,
+    "net_yoy": 13.9,
+    "cash_yoy": 15.5,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 47.32,
+    "op": 5.0,
+    "ord": 5.11,
+    "net": 3.69,
+    "gp": 31.5,
+    "sga": 26.5,
+    "cogs": 15.82,
+    "cash": 50.59,
+    "equity": 135.66,
+    "total_assets": 180.66,
+    "gpm": 66.6,
+    "opm": 10.6,
+    "club": 14385,
+    "ofs": 51391,
+    "ofs_corp": 47905,
+    "ofs_pro": 3486,
+    "acc_members": 111760,
+    "sales_yoy": 35.4,
+    "gp_yoy": 36.4,
+    "sga_yoy": 26.6,
+    "op_yoy": 130.4,
+    "ord_yoy": 129.1,
+    "net_yoy": 130.6,
+    "cash_yoy": 6.9,
+    "club_yoy": 14.6,
+    "ofs_yoy": 18.8,
+    "ofs_corp_yoy": 19.4,
+    "ofs_pro_yoy": 11.3,
+    "acc_members_yoy": 10.9
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 60.64,
+    "op": 16.64,
+    "ord": 16.72,
+    "net": 11.2,
+    "gp": 42.65,
+    "sga": 26.0,
+    "cogs": 17.99,
+    "cash": 57.18,
+    "equity": 143.68,
+    "total_assets": 196.37,
+    "gpm": 70.3,
+    "opm": 27.4,
+    "club": 14634,
+    "ofs": 54143,
+    "ofs_corp": 50563,
+    "ofs_pro": 3580,
+    "acc_members": null,
+    "sales_yoy": 16.8,
+    "gp_yoy": 16.2,
+    "sga_yoy": 7.0,
+    "op_yoy": 34.4,
+    "ord_yoy": 34.4,
+    "net_yoy": 34.5,
+    "cash_yoy": 8.9,
+    "club_yoy": 12.1,
+    "ofs_yoy": 18.2,
+    "ofs_corp_yoy": 18.7,
+    "ofs_pro_yoy": 11.1,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 57.87,
+    "op": 12.57,
+    "ord": 12.7,
+    "net": 10.58,
+    "gp": 38.75,
+    "sga": 26.19,
+    "cogs": 19.12,
+    "cash": 67.41,
+    "equity": 154.23,
+    "total_assets": 206.42,
+    "gpm": 67.0,
+    "opm": 21.7,
+    "club": 14817,
+    "ofs": 56335,
+    "ofs_corp": 52669,
+    "ofs_pro": 3666,
+    "acc_members": null,
+    "sales_yoy": 22.1,
+    "gp_yoy": 20.8,
+    "sga_yoy": 11.3,
+    "op_yoy": 47.4,
+    "ord_yoy": 47.8,
+    "net_yoy": 83.4,
+    "cash_yoy": 15.5,
+    "club_yoy": 8.1,
+    "ofs_yoy": 19.4,
+    "ofs_corp_yoy": 20.1,
+    "ofs_pro_yoy": 10.2,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 52.64,
+    "op": 7.97,
+    "ord": 8.13,
+    "net": 5.14,
+    "gp": 34.24,
+    "sga": 26.27,
+    "cogs": 18.4,
+    "cash": 53.96,
+    "equity": 154.94,
+    "total_assets": 197.06,
+    "gpm": 65.0,
+    "opm": 15.1,
+    "club": 15132,
+    "ofs": 58054,
+    "ofs_corp": 54314,
+    "ofs_pro": 3740,
+    "acc_members": null,
+    "sales_yoy": 24.6,
+    "gp_yoy": 23.0,
+    "sga_yoy": 11.9,
+    "op_yoy": 82.4,
+    "ord_yoy": 81.9,
+    "net_yoy": 84.9,
+    "cash_yoy": 10.8,
+    "club_yoy": 7.5,
+    "ofs_yoy": 18.6,
+    "ofs_corp_yoy": 19.2,
+    "ofs_pro_yoy": 10.0,
+    "acc_members_yoy": null
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 61.94,
+    "op": 12.0,
+    "ord": 12.16,
+    "net": 8.67,
+    "gp": 40.83,
+    "sga": 28.83,
+    "cogs": 21.11,
+    "cash": 62.75,
+    "equity": 163.6,
+    "total_assets": 219.42,
+    "gpm": 65.9,
+    "opm": 19.4,
+    "club": 15764,
+    "ofs": 60440,
+    "ofs_corp": 56601,
+    "ofs_pro": 3839,
+    "acc_members": 122469,
+    "sales_yoy": 30.9,
+    "gp_yoy": 29.6,
+    "sga_yoy": 8.8,
+    "op_yoy": 140.0,
+    "ord_yoy": 138.0,
+    "net_yoy": 135.0,
+    "cash_yoy": 24.0,
+    "club_yoy": 9.6,
+    "ofs_yoy": 17.6,
+    "ofs_corp_yoy": 18.2,
+    "ofs_pro_yoy": 10.1,
+    "acc_members_yoy": 9.6
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 108.75,
+    "op": 22.43,
+    "ord": 22.56,
+    "net": 15.48,
+    "opm": 20.6,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 126.99,
+    "op": 26.02,
+    "ord": 26.21,
+    "net": 18.81,
+    "opm": 20.5,
+    "sales_yoy": 16.8,
+    "op_yoy": 16.0,
+    "net_yoy": 21.5
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 148.61,
+    "op": 21.28,
+    "ord": 21.43,
+    "net": 16.09,
+    "opm": 14.3,
+    "sales_yoy": 17.0,
+    "op_yoy": -18.2,
+    "net_yoy": -14.5
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 170.66,
+    "op": 27.16,
+    "ord": 27.41,
+    "net": 18.14,
+    "opm": 15.9,
+    "sales_yoy": 14.8,
+    "op_yoy": 27.6,
+    "net_yoy": 12.7
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 208.07,
+    "op": 38.58,
+    "ord": 39.0,
+    "net": 28.25,
+    "opm": 18.5,
+    "sales_yoy": 21.9,
+    "op_yoy": 42.0,
+    "net_yoy": 55.7
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 256.75,
+    "op": 49.94,
+    "ord": 50.46,
+    "net": 34.48,
+    "opm": 19.5,
+    "sales_yoy": 23.4,
+    "op_yoy": 29.4,
+    "net_yoy": 22.1,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "seg": [
+   {
+    "x": "26.1Q",
+    "ac": 10.51,
+    "co": 18.14,
+    "bs": 12.33,
+    "ac_op": 2.94,
+    "co_op": 4.94,
+    "bs_op": -0.4,
+    "ac_yoy": null,
+    "co_yoy": null,
+    "bs_yoy": null,
+    "ac_op_yoy": null,
+    "co_op_yoy": null,
+    "bs_op_yoy": null,
+    "ac_opm": 28.0,
+    "co_opm": 27.2,
+    "bs_opm": -3.2
+   },
+   {
+    "x": "26.2Q",
+    "ac": 11.11,
+    "co": 21.79,
+    "bs": 13.42,
+    "ac_op": 2.85,
+    "co_op": 7.21,
+    "bs_op": -1.21,
+    "ac_yoy": null,
+    "co_yoy": null,
+    "bs_yoy": null,
+    "ac_op_yoy": null,
+    "co_op_yoy": null,
+    "bs_op_yoy": null,
+    "ac_opm": 25.7,
+    "co_opm": 33.1,
+    "bs_opm": -9.0
+   },
+   {
+    "x": "26.3Q",
+    "ac": null,
+    "co": null,
+    "bs": null,
+    "ac_op": null,
+    "co_op": null,
+    "bs_op": null,
+    "ac_yoy": null,
+    "co_yoy": null,
+    "bs_yoy": null,
+    "ac_op_yoy": null,
+    "co_op_yoy": null,
+    "bs_op_yoy": null,
+    "ac_opm": null,
+    "co_opm": null,
+    "bs_opm": null
+   },
+   {
+    "x": "26.4Q",
+    "ac": null,
+    "co": null,
+    "bs": null,
+    "ac_op": null,
+    "co_op": null,
+    "bs_op": null,
+    "ac_yoy": null,
+    "co_yoy": null,
+    "bs_yoy": null,
+    "ac_op_yoy": null,
+    "co_op_yoy": null,
+    "bs_op_yoy": null,
+    "ac_opm": null,
+    "co_opm": null,
+    "bs_opm": null
+   },
+   {
+    "x": "27.1Q",
+    "ac": 11.77,
+    "co": 23.43,
+    "bs": 16.48,
+    "ac_op": 3.49,
+    "co_op": 7.81,
+    "bs_op": -0.24,
+    "ac_yoy": 12.0,
+    "co_yoy": 29.2,
+    "bs_yoy": 33.7,
+    "ac_op_yoy": 18.7,
+    "co_op_yoy": 58.1,
+    "bs_op_yoy": null,
+    "ac_opm": 29.7,
+    "co_opm": 33.3,
+    "bs_opm": -1.5
+   },
+   {
+    "x": "27.2Q",
+    "ac": 12.11,
+    "co": 31.3,
+    "bs": 17.17,
+    "ac_op": 3.46,
+    "co_op": 13.43,
+    "bs_op": -0.75,
+    "ac_yoy": 9.0,
+    "co_yoy": 43.6,
+    "bs_yoy": 27.9,
+    "ac_op_yoy": 21.4,
+    "co_op_yoy": 86.3,
+    "bs_op_yoy": null,
+    "ac_opm": 28.6,
+    "co_opm": 42.9,
+    "bs_opm": -4.4
+   }
+  ],
+  "b": [
+   {
+    "x": "23.1Q",
+    "club": 7880,
+    "ofs": 22281,
+    "ofs_corp": 20031,
+    "ofs_pro": 2250,
+    "kyo": null,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": null,
+    "arpu": null,
+    "club_net": null,
+    "ofs_net": null,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "mrr_yoy": null,
+    "kyo_total_yoy": null
+   },
+   {
+    "x": "23.2Q",
+    "club": 8258,
+    "ofs": 23372,
+    "ofs_corp": 21042,
+    "ofs_pro": 2330,
+    "kyo": null,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": null,
+    "arpu": null,
+    "club_net": 378,
+    "ofs_net": 1091,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "mrr_yoy": null,
+    "kyo_total_yoy": null
+   },
+   {
+    "x": "23.3Q",
+    "club": 8606,
+    "ofs": 25315,
+    "ofs_corp": 22919,
+    "ofs_pro": 2396,
+    "kyo": null,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": null,
+    "arpu": null,
+    "club_net": 348,
+    "ofs_net": 1943,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "mrr_yoy": null,
+    "kyo_total_yoy": null
+   },
+   {
+    "x": "23.4Q",
+    "club": 9047,
+    "ofs": 28480,
+    "ofs_corp": 26013,
+    "ofs_pro": 2467,
+    "kyo": 1678,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": 1678,
+    "arpu": null,
+    "club_net": 441,
+    "ofs_net": 3165,
+    "club_yoy": null,
+    "ofs_yoy": null,
+    "ofs_corp_yoy": null,
+    "ofs_pro_yoy": null,
+    "mrr_yoy": null,
+    "kyo_total_yoy": null
+   },
+   {
+    "x": "24.1Q",
+    "club": 9491,
+    "ofs": 30162,
+    "ofs_corp": 27504,
+    "ofs_pro": 2658,
+    "kyo": 1700,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": 1700,
+    "arpu": null,
+    "club_net": 444,
+    "ofs_net": 1682,
+    "club_yoy": 20.4,
+    "ofs_yoy": 35.4,
+    "ofs_corp_yoy": 37.3,
+    "ofs_pro_yoy": 18.1,
+    "mrr_yoy": null,
+    "kyo_total_yoy": null
+   },
+   {
+    "x": "24.2Q",
+    "club": 9829,
+    "ofs": 33432,
+    "ofs_corp": 30623,
+    "ofs_pro": 2809,
+    "kyo": 1711,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": 1711,
+    "arpu": null,
+    "club_net": 338,
+    "ofs_net": 3270,
+    "club_yoy": 19.0,
+    "ofs_yoy": 43.0,
+    "ofs_corp_yoy": 45.5,
+    "ofs_pro_yoy": 20.6,
+    "mrr_yoy": null,
+    "kyo_total_yoy": null
+   },
+   {
+    "x": "24.3Q",
+    "club": 10445,
+    "ofs": 38300,
+    "ofs_corp": 35381,
+    "ofs_pro": 2919,
+    "kyo": 1715,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": 1715,
+    "arpu": null,
+    "club_net": 616,
+    "ofs_net": 4868,
+    "club_yoy": 21.4,
+    "ofs_yoy": 51.3,
+    "ofs_corp_yoy": 54.4,
+    "ofs_pro_yoy": 21.8,
+    "mrr_yoy": null,
+    "kyo_total_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "club": 11192,
+    "ofs": 39744,
+    "ofs_corp": 36731,
+    "ofs_pro": 3013,
+    "kyo": 1708,
+    "ai": null,
+    "mrr": null,
+    "arr": null,
+    "ch_labor": null,
+    "ch_pay": null,
+    "ch_nen": null,
+    "ch_pro": null,
+    "ch_kin": null,
+    "ai_cover": null,
+    "subsidy": null,
+    "kyo_total": 1708,
+    "arpu": null,
+    "club_net": 747,
+    "ofs_net": 1444,
+    "club_yoy": 23.7,
+    "ofs_yoy": 39.6,
+    "ofs_corp_yoy": 41.2,
+    "ofs_pro_yoy": 22.1,
+    "mrr_yoy": null,
+    "kyo_total_yoy": 1.8
+   },
+   {
+    "x": "25.1Q",
+    "club": 11912,
+    "ofs": 41251,
+    "ofs_corp": 38200,
+    "ofs_pro": 3051,
+    "kyo": 1712,
+    "ai": null,
+    "mrr": 2.9,
+    "arr": 34.78,
+    "ch_labor": 0.9,
+    "ch_pay": 0.8,
+    "ch_nen": 0.6,
+    "ch_pro": 0.4,
+    "ch_kin": null,
+    "ai_cover": 90.2,
+    "subsidy": null,
+    "kyo_total": 1712,
+    "arpu": 7030,
+    "club_net": 720,
+    "ofs_net": 1507,
+    "club_yoy": 25.5,
+    "ofs_yoy": 36.8,
+    "ofs_corp_yoy": 38.9,
+    "ofs_pro_yoy": 14.8,
+    "mrr_yoy": null,
+    "kyo_total_yoy": 0.7
+   },
+   {
+    "x": "25.2Q",
+    "club": 12553,
+    "ofs": 43260,
+    "ofs_corp": 40128,
+    "ofs_pro": 3132,
+    "kyo": 1727,
+    "ai": null,
+    "mrr": 3.16,
+    "arr": 37.93,
+    "ch_labor": 1.1,
+    "ch_pay": 0.9,
+    "ch_nen": 0.6,
+    "ch_pro": 0.5,
+    "ch_kin": null,
+    "ai_cover": 91.1,
+    "subsidy": null,
+    "kyo_total": 1727,
+    "arpu": 7305,
+    "club_net": 641,
+    "ofs_net": 2009,
+    "club_yoy": 27.7,
+    "ofs_yoy": 29.4,
+    "ofs_corp_yoy": 31.0,
+    "ofs_pro_yoy": 11.5,
+    "mrr_yoy": null,
+    "kyo_total_yoy": 0.9
+   },
+   {
+    "x": "25.3Q",
+    "club": 13050,
+    "ofs": 45807,
+    "ofs_corp": 42586,
+    "ofs_pro": 3221,
+    "kyo": 1732,
+    "ai": null,
+    "mrr": 3.29,
+    "arr": 39.52,
+    "ch_labor": 1.12,
+    "ch_pay": 0.95,
+    "ch_nen": 0.62,
+    "ch_pro": 0.55,
+    "ch_kin": null,
+    "ai_cover": 92.1,
+    "subsidy": 3.16,
+    "kyo_total": 1732,
+    "arpu": 7182,
+    "club_net": 497,
+    "ofs_net": 2547,
+    "club_yoy": 24.9,
+    "ofs_yoy": 19.6,
+    "ofs_corp_yoy": 20.4,
+    "ofs_pro_yoy": 10.3,
+    "mrr_yoy": null,
+    "kyo_total_yoy": 1.0
+   },
+   {
+    "x": "25.4Q",
+    "club": 13705,
+    "ofs": 47189,
+    "ofs_corp": 43862,
+    "ofs_pro": 3327,
+    "kyo": 1714,
+    "ai": null,
+    "mrr": 3.55,
+    "arr": 42.66,
+    "ch_labor": 1.16,
+    "ch_pay": 1.08,
+    "ch_nen": 1.05,
+    "ch_pro": 0.51,
+    "ch_kin": null,
+    "ai_cover": 92.8,
+    "subsidy": null,
+    "kyo_total": 1714,
+    "arpu": 7523,
+    "club_net": 655,
+    "ofs_net": 1382,
+    "club_yoy": 22.5,
+    "ofs_yoy": 18.7,
+    "ofs_corp_yoy": 19.4,
+    "ofs_pro_yoy": 10.4,
+    "mrr_yoy": null,
+    "kyo_total_yoy": 0.4
+   },
+   {
+    "x": "26.1Q",
+    "club": 14071,
+    "ofs": 48951,
+    "ofs_corp": 45552,
+    "ofs_pro": 3399,
+    "kyo": 1725,
+    "ai": 90,
+    "mrr": 3.84,
+    "arr": 46.07,
+    "ch_labor": 1.25,
+    "ch_pay": 1.15,
+    "ch_nen": 1.05,
+    "ch_pro": 0.41,
+    "ch_kin": null,
+    "ai_cover": 93.0,
+    "subsidy": 1.51,
+    "kyo_total": 1815,
+    "arpu": 7845,
+    "club_net": 366,
+    "ofs_net": 1762,
+    "club_yoy": 18.1,
+    "ofs_yoy": 18.7,
+    "ofs_corp_yoy": 19.2,
+    "ofs_pro_yoy": 11.4,
+    "mrr_yoy": 32.4,
+    "kyo_total_yoy": 6.0
+   },
+   {
+    "x": "26.2Q",
+    "club": 14385,
+    "ofs": 51391,
+    "ofs_corp": 47905,
+    "ofs_pro": 3486,
+    "kyo": 1758,
+    "ai": 182,
+    "mrr": 4.03,
+    "arr": 48.37,
+    "ch_labor": 1.16,
+    "ch_pay": 1.22,
+    "ch_nen": 1.05,
+    "ch_pro": 0.35,
+    "ch_kin": 2.15,
+    "ai_cover": 93.2,
+    "subsidy": 4.62,
+    "kyo_total": 1940,
+    "arpu": 7842,
+    "club_net": 314,
+    "ofs_net": 2440,
+    "club_yoy": 14.6,
+    "ofs_yoy": 18.8,
+    "ofs_corp_yoy": 19.4,
+    "ofs_pro_yoy": 11.3,
+    "mrr_yoy": 27.5,
+    "kyo_total_yoy": 12.3
+   },
+   {
+    "x": "26.3Q",
+    "club": 14634,
+    "ofs": 54143,
+    "ofs_corp": 50563,
+    "ofs_pro": 3580,
+    "kyo": 1778,
+    "ai": 263,
+    "mrr": 4.21,
+    "arr": 50.51,
+    "ch_labor": 1.11,
+    "ch_pay": 1.33,
+    "ch_nen": 1.05,
+    "ch_pro": 0.35,
+    "ch_kin": 2.02,
+    "ai_cover": 93.6,
+    "subsidy": 4.21,
+    "kyo_total": 2041,
+    "arpu": 7776,
+    "club_net": 249,
+    "ofs_net": 2752,
+    "club_yoy": 12.1,
+    "ofs_yoy": 18.2,
+    "ofs_corp_yoy": 18.7,
+    "ofs_pro_yoy": 11.1,
+    "mrr_yoy": 28.0,
+    "kyo_total_yoy": 17.8
+   },
+   {
+    "x": "26.4Q",
+    "club": 14817,
+    "ofs": 56335,
+    "ofs_corp": 52669,
+    "ofs_pro": 3666,
+    "kyo": 1766,
+    "ai": 329,
+    "mrr": 4.56,
+    "arr": 54.66,
+    "ch_labor": 1.08,
+    "ch_pay": 1.29,
+    "ch_nen": 1.01,
+    "ch_pro": 0.37,
+    "ch_kin": 1.97,
+    "ai_cover": 93.4,
+    "subsidy": 2.37,
+    "kyo_total": 2095,
+    "arpu": 8094,
+    "club_net": 183,
+    "ofs_net": 2192,
+    "club_yoy": 8.1,
+    "ofs_yoy": 19.4,
+    "ofs_corp_yoy": 20.1,
+    "ofs_pro_yoy": 10.2,
+    "mrr_yoy": 28.5,
+    "kyo_total_yoy": 22.2
+   },
+   {
+    "x": "27.1Q",
+    "club": 15132,
+    "ofs": 58054,
+    "ofs_corp": 54314,
+    "ofs_pro": 3740,
+    "kyo": 1768,
+    "ai": 456,
+    "mrr": 4.89,
+    "arr": 58.72,
+    "ch_labor": 1.01,
+    "ch_pay": 1.32,
+    "ch_nen": 1.01,
+    "ch_pro": 0.32,
+    "ch_kin": 1.82,
+    "ai_cover": 93.4,
+    "subsidy": 4.4,
+    "kyo_total": 2224,
+    "arpu": 8423,
+    "club_net": 315,
+    "ofs_net": 1719,
+    "club_yoy": 7.5,
+    "ofs_yoy": 18.6,
+    "ofs_corp_yoy": 19.2,
+    "ofs_pro_yoy": 10.0,
+    "mrr_yoy": 27.3,
+    "kyo_total_yoy": 22.5
+   },
+   {
+    "x": "27.2Q",
+    "club": 15764,
+    "ofs": 60440,
+    "ofs_corp": 56601,
+    "ofs_pro": 3839,
+    "kyo": 1778,
+    "ai": 555,
+    "mrr": 5.12,
+    "arr": 61.47,
+    "ch_labor": 0.99,
+    "ch_pay": 1.2,
+    "ch_nen": 1.01,
+    "ch_pro": 0.36,
+    "ch_kin": 1.77,
+    "ai_cover": 93.1,
+    "subsidy": 12.06,
+    "kyo_total": 2333,
+    "arpu": 8471,
+    "club_net": 632,
+    "ofs_net": 2386,
+    "club_yoy": 9.6,
+    "ofs_yoy": 17.6,
+    "ofs_corp_yoy": 18.2,
+    "ofs_pro_yoy": 10.1,
+    "mrr_yoy": 27.0,
+    "kyo_total_yoy": 20.3
+   }
+  ],
+  "bacc": [
+   {
+    "x": "23.2Q",
+    "acc_life": 75903,
+    "acc_other": 8347,
+    "acc_total": 84250
+   },
+   {
+    "x": "24.2Q",
+    "acc_life": 83286,
+    "acc_other": 8587,
+    "acc_total": 91873,
+    "acc_life_yoy": 9.7,
+    "acc_other_yoy": 2.9,
+    "acc_total_yoy": 9.0
+   },
+   {
+    "x": "25.2Q",
+    "acc_life": 91747,
+    "acc_other": 9047,
+    "acc_total": 100794,
+    "acc_life_yoy": 10.2,
+    "acc_other_yoy": 5.4,
+    "acc_total_yoy": 9.7
+   },
+   {
+    "x": "26.2Q",
+    "acc_life": 102128,
+    "acc_other": 9632,
+    "acc_total": 111760,
+    "acc_life_yoy": 11.3,
+    "acc_other_yoy": 6.5,
+    "acc_total_yoy": 10.9
+   },
+   {
+    "x": "27.2Q",
+    "acc_life": 112361,
+    "acc_other": 10108,
+    "acc_total": 122469,
+    "acc_life_yoy": 10.0,
+    "acc_other_yoy": 4.9,
+    "acc_total_yoy": 9.6
+   }
+  ]
+ }
+}
