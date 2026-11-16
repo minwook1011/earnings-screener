@@ -155,3 +155,7 @@ table.kdq { border-collapse: collapse; font-size: 13px; background: var(--surfac
 .kd-tip span { display: flex; align-items: center; gap: 5px; color: var(--ink-mid); white-space: nowrap; }
 .kd-tip span .kd-sw { margin-left: 0; flex: 0 0 auto; }
 .kd-tip em { font-style: normal; font-family: var(--mono); color: var(--ink); margin-left: auto; padding-left: 10px; }
+
+/* 월차 표 가로형(2026-11-16 사용자 - 달을 가로, 항목을 세로) */
+.kd-tblh .kd-tw th { min-width: 4.2em; text-align: right; }
+.kd-tblh .kd-tw tbody th.kd-rh { position: sticky; left: 0; z-index: 1; background: var(--surface); color: var(--ink); text-align: left; font-weight: 600; min-width: 9em; max-width: 13em; padding: 4px 8px; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }

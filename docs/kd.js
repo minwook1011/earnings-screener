@@ -31,8 +31,23 @@
 
   function mtable(ch, rows) {   // 표 차트(table:1, 2026-11-16 사용자 — 월차 24개월 표) — 행 = 달(최신 위), 열 = cols[{k,l,u}]
     var cols = ch.cols || [];
-    rows = rows.filter(function (r) { return cols.some(function (c) { return n(r[c.k]) != null; }); }).slice(-(ch.last || 24)).reverse();
+    rows = rows.filter(function (r) { return cols.some(function (c) { return n(r[c.k]) != null; }); }).slice(-(ch.last || 24));
     if (!rows.length) return "";
+    function cell(c, v) {
+      var cl = c.yoy100 && v != null ? (v > 100 ? " up" : v < 100 ? " dn" : "") : c.yoy && v != null ? (v > 0 ? " up" : v < 0 ? " dn" : "") : "";
+      return '<td class="n' + cl + '">' + (v == null ? "—" : esc(c.yoy100 || c.u === "%" ? v.toFixed(1) : fmt(v, c.u))) + "</td>";
+    }
+    if (/^\d{2}\.\d{2}$/.test(rows[0].x)) {   // 월차: 달을 가로(열, 최신 오른쪽), 항목을 세로(행)로 (2026-11-16 사용자)
+      var hc = cols.filter(function (c) { return rows.some(function (r) { return n(r[c.k]) != null; }); });
+      return '<figure class="kd-fig kd-tbl kd-tblh"><figcaption><b>' + esc(ch.t) + "</b><span>" + esc(ch.cap || "최신 달 오른쪽 · " + rows.length + "개월 · " + hc.length + "개 항목") + "</span></figcaption>" +
+        (ch.def ? '<p class="kd-def">' + esc(ch.def) + "</p>" : "") +
+        '<div class="kd-tw"><table><thead><tr><th>항목</th>' + rows.map(function (r) { return "<th>" + esc(r.x) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+        hc.map(function (c) {
+          return '<tr><th class="kd-rh">' + esc(c.l) + (c.u ? "<small>" + esc(c.u) + "</small>" : "") + "</th>" + rows.map(function (r) { return cell(c, n(r[c.k])); }).join("") + "</tr>";
+        }).join("") + "</tbody></table></div>" +
+        '<p class="kd-src">출처: ' + esc(ch.src || "") + "</p></figure>";
+    }
+    rows = rows.reverse();
     return '<figure class="kd-fig kd-tbl"><figcaption><b>' + esc(ch.t) + "</b><span>" + esc(ch.cap || (/^\d{2}\.\d{2}$/.test(rows[0].x) ? "최신 달 위 · " + rows.length + "개월" : rows.length + "개 항목")) + "</span></figcaption>" +
       (ch.def ? '<p class="kd-def">' + esc(ch.def) + "</p>" : "") +
       '<div class="kd-tw"><table><thead><tr><th>' + esc(ch.xl || (/^\d{2}\.\d{2}$/.test(rows[0].x) ? "달" : "")) + '</th>' + cols.map(function (c) { return "<th>" + esc(c.l) + (c.u ? "<small>" + esc(c.u) + "</small>" : "") + "</th>"; }).join("") + "</tr></thead><tbody>" +
@@ -202,6 +217,7 @@
       }).join("") +
       '<details class="kd-rule"><summary>차트 원칙</summary><p>절댓값은 막대, 비율·성장률·비교는 꺾은선. 막대 색은 민트 → 보라 → 하늘 → 살구 → 분홍 → 버터 → 회청 순서로, 최신 값이 큰 계열부터. 꺾은선은 노랑 → 초록 → 파랑 → 빨강 → 보라 → 청록 → 회색. YoY 는 노란 선과 오른쪽 축.</p></details>';
     [keyEl, mainEl].forEach(bindTip);
+    [keyEl, mainEl].forEach(function (el) { if (el) el.querySelectorAll(".kd-tblh .kd-tw").forEach(function (w) { w.scrollLeft = w.scrollWidth; }); });   // 월차 표는 최신 달(오른쪽)부터 보이게
     mainEl.querySelectorAll(".ftw,.kdq-w").forEach(function (tw) { tw.scrollLeft = tw.scrollWidth; });
   }
 
