@@ -590,7 +590,7 @@
     var x = function (t) { return pL + (t - from) / (xEnd - from) * IW; };
     var lo = Math.min.apply(null, bars.map(function (b) { return b.l; })), hi = Math.max.apply(null, bars.map(function (b) { return b.h; }));
     var padv = (hi - lo) * 0.06; lo -= padv; hi += padv;
-    var pTop = pT + 4, pBot = it ? bot - PH * 0.27 : bot - 6;
+    var pTop = pT + 4, pBot = it ? bot - PH * 0.34 - 10 : bot - 6;
     var y = function (v) { return pTop + (1 - (v - lo) / (hi - lo)) * (pBot - pTop); };
     PC.cpr.setAttribute("x", pL); PC.cpr.setAttribute("width", IW);
     PC.M = { from: from, xEnd: xEnd, IW: IW, pL: pL, pR: pR, pTop: pTop, pBot: pBot, lo: lo, hi: hi, bars: bars, wk: wk, it: it };
@@ -605,23 +605,31 @@
     }
 
     if (it) {   // 선행지표 띠(월 막대)
-      var bandTop = bot - PH * 0.36, bandBot = bot - 2;
+      var bandTop = bot - PH * 0.34, bandBot = bot - 2;
       el("rect", { x: pL, y: bandTop, width: IW, height: bandBot - bandTop, "class": "ind-band" }, L.ind);
-      var vs = it.pts.map(function (p) { return p[1]; }), vmax = Math.max.apply(null, vs), vmin = Math.min.apply(null, vs), base = it.stack ? 0 : Math.max(0, vmin - (vmax - vmin) * 0.6);
-      var bh = function (v) { return (v - base) / ((vmax - base) || 1) * (bandBot - bandTop - 26); };
-      var bw = Math.max(2, Math.min(26, 30 * DAY / (xEnd - from) * IW * 0.62));
+      // 막대는 보이는 구간의 최소~최대로 눈금을 다시 잡아(별도 y축) 바닥에 깔리지 않게, YoY 선은 띠 위쪽 전용 줄에
       var shown = it.pts.filter(function (p) { var t = ymT(p[0]); return t >= from - 15 * DAY && t <= xEnd + 15 * DAY; });
+      var isPct = it.unit === "%";
+      var py = isPct ? [] : shown.map(function (p) { var b = mm(it)[ymAdd(p[0], -12)]; return b && b[1] ? { x: x(ymT(p[0])), v: (p[1] / b[1] - 1) * 100 } : null; }).filter(Boolean);
+      var lineH = py.length ? (bandBot - bandTop) * 0.34 : 0, barTop = bandTop + lineH + 16;
+      var vs = (shown.length ? shown : it.pts).map(function (p) { return p[1]; }), vmax = Math.max.apply(null, vs), vmin = Math.min.apply(null, vs), rng = (vmax - vmin) || Math.abs(vmax) || 1;
+      var base = vmin - rng * 0.35, top = vmax + rng * 0.05;
+      var bh = function (v) { return Math.max(0, (v - base) / ((top - base) || 1)) * (bandBot - barTop); };
+      var bw = Math.max(2, Math.min(26, 30 * DAY / (xEnd - from) * IW * 0.62));
+      var every = Math.max(1, Math.ceil(34 / Math.max(1, IW / Math.max(1, shown.length))));
       shown.forEach(function (p, i) {
         var cx = x(ymT(p[0])), h = Math.max(2, bh(p[1]));
         el("rect", { x: cx - bw / 2, y: bandBot - h, width: bw, height: h, rx: Math.min(3, bw / 4), "class": "ibar grow" }, L.ind);
-        if (cx > pL + 16 && cx < pL + IW - 12 && (shown.length <= 16 || i % 2 === shown.length % 2 || i === shown.length - 1)) txt(L.lab, cx, bandBot - h - 5, nf(p[1]), "ibar-lab fade", "middle");
+        if (cx > pL + 16 && cx < pL + IW - 12 && ((shown.length - 1 - i) % every === 0)) txt(L.lab, cx, bandBot - h - 4, isPct ? pct(p[1], 1) : nf(p[1]), "ibar-lab fade", "middle");
       });
-      var py = shown.map(function (p) { var b = mm(it)[ymAdd(p[0], -12)]; return b ? { x: x(ymT(p[0])), v: (p[1] / b[1] - 1) * 100 } : null; }).filter(Boolean);
+      [vmin, vmax].forEach(function (v) { txt(L.ax, W - pR + 8, bandBot - bh(v) + 3.5, isPct ? pct(v, 1) : nf(v), "ibar-lab"); });
       if (py.length) {
-        var pv = py.map(function (d) { return d.v; }), plo = Math.min.apply(null, pv.concat([0])), phi = Math.max.apply(null, pv.concat([1])) * 1.1;
-        var y5 = function (v) { return bandTop + 6 + (1 - (v - plo) / ((phi - plo) || 1)) * (bandBot - bandTop) * 0.3; };
+        var pv = py.map(function (d) { return d.v; }), plo = Math.min.apply(null, pv.concat([0])), phi = Math.max.apply(null, pv.concat([0])), pr = (phi - plo) || 1; plo -= pr * 0.1; phi += pr * 0.25;
+        var y5 = function (v) { return bandTop + 4 + (1 - (v - plo) / ((phi - plo) || 1)) * (lineH - 4); };
+        el("line", { x1: pL, x2: pL + IW, y1: y5(0), y2: y5(0), stroke: "var(--line)", "stroke-dasharray": "2 3" }, L.ind);
         if (py.length > 1) el("path", { d: py.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y5(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--l1)", "stroke-width": 1.8 }, L.lab);
-        py.forEach(function (d) { el("circle", { cx: d.x, cy: y5(d.v), r: 3.5, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 1.5 }, L.lab); txt(L.lab, d.x, y5(d.v) - 7, pct(d.v, 0), "ibar-lab cs", "middle"); });
+        py.forEach(function (d, i) { el("circle", { cx: d.x, cy: y5(d.v), r: 3, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 1.5 }, L.lab); if ((py.length - 1 - i) % every === 0) txt(L.lab, d.x, y5(d.v) - 6, pct(d.v, 0), "ibar-lab cs", "middle"); });
+        txt(L.ax, W - pR + 8, bandTop + 12, "YoY", "ibar-lab cs");
       }
       var ny = ymAdd(it.pts[it.pts.length - 1][0], 1), nt = ymT(ny);
       if (nt >= from && nt <= xEnd) { var gh = Math.max(8, bh(it.pts[it.pts.length - 1][1])), cx2 = x(nt); el("rect", { x: cx2 - bw / 2, y: bandBot - gh, width: bw, height: gh, rx: 3, fill: "none", stroke: "var(--gold)", "stroke-dasharray": "3 2" }, L.ind); if (bw > 14) { txt(L.lab, cx2, bandBot - gh + 14, md(nlead).slice(3), "ibar-lab cs", "middle"); } }
