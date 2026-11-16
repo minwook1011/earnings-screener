@@ -1,1 +1,2055 @@
-{"c": "369A", "n": "에이타이", "asof": "2026-10-15", "latest": "2026년 8월기 4분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "8월 결산·단독(비연결). 사원(절)과 제휴해 영대공양묘(대를 잇지 않아도 되는 묘)를 세우고 판매를 대행. 1Q·3Q 성수기, 2Q·4Q 비수기. 차입금 없음. 2025년 6월 상장이라 25.2Q 이전 경상·순이익과 재무상태표는 일부만 공시. 21~23기 경상이익은 자료 없음", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "4Q26 결산단신·결산설명자료"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "4Q26 결산단신·결산설명자료"}, {"sec": "key", "t": "성약 건수", "d": "kpi", "bars": [{"k": "deals", "l": "성약", "u": "건", "c": 0}], "lines": [{"k": "deals_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "4Q26 결산설명자료(데이터시트)", "def": "분기 중 영대공양묘 계약에 이른 이용자 수"}, {"sec": "key", "t": "개원 사원 수", "d": "kpi", "bars": [{"k": "open", "l": "개원 사원", "u": "곳", "c": 0}], "src": "4Q26 결산설명자료(데이터시트)", "def": "제휴 후 인가를 받아 묘를 세우고 판매 중인 사원 수(분기말)"}, {"sec": "사업 지표", "t": "집객·안내·성약 건수", "d": "kpi", "src": "4Q26 결산설명자료(데이터시트)", "lines": [{"k": "leads", "l": "집객(자료 청구·예약)", "u": "건", "c": 0}, {"k": "tours", "l": "현지 안내", "u": "건", "c": 1}, {"k": "deals", "l": "성약", "u": "건", "c": 2}]}, {"sec": "사업 지표", "t": "성약률", "d": "kpi", "lines": [{"k": "conv", "l": "성약률(성약÷안내)", "u": "%", "c": 0, "r": 1}], "src": "4Q26 결산설명자료(데이터시트)"}, {"sec": "사업 지표", "t": "제휴 사원과 개원 사원", "d": "kpi", "src": "4Q26 결산설명자료(데이터시트)", "lines": [{"k": "temple", "l": "제휴 사원", "u": "곳", "c": 0}, {"k": "open", "l": "개원 사원", "u": "곳", "c": 1}]}, {"sec": "사업 지표", "t": "누적 판매 구획과 공급 여력", "d": "kpi", "src": "4Q26 결산설명자료(데이터시트) · 공급 여력 = 앞으로 팔 수 있는 개별묘 구획", "lines": [{"k": "sold_k", "l": "누적 판매 구획", "u": "천 구획", "c": 0}, {"k": "room_k", "l": "공급 여력(공급−판매)", "u": "천 구획", "c": 1}]}, {"sec": "사업 지표", "t": "광고선전비(원가+판관비)", "d": "kpi", "bars": [{"k": "ad", "l": "광고선전비", "u": "억엔", "c": 0}], "lines": [{"k": "ad_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "4Q26 결산설명자료(데이터시트)"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 · 마지막 막대 = 회사 계획", "muted": "plan"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "결산단신 · 마지막 막대 = 회사 계획", "muted": "plan"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "4Q26 결산단신·결산설명자료"}, {"sec": "재무", "t": "현금·예금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}], "lines": [{"k": "cash_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "4Q26 결산단신·결산설명자료"}], "tables": {"q": [{"q": "24.1Q", "x": "24.1Q", "sales": 5.57, "op": 1.36, "gp": 3.77, "sga": 2.41, "ord": null, "net": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "cogs": 1.8, "gpm": 67.7, "opm": 24.4, "sga_ratio": 43.3, "sales_yoy": 4.5, "gp_yoy": null, "sga_yoy": null, "op_yoy": -20.5, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.2Q", "x": "24.2Q", "sales": 5.04, "op": 0.87, "gp": 3.33, "sga": 2.46, "ord": null, "net": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "cogs": 1.71, "gpm": 66.1, "opm": 17.3, "sga_ratio": 48.8, "sales_yoy": 22.3, "gp_yoy": null, "sga_yoy": null, "op_yoy": 64.2, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.3Q", "x": "24.3Q", "sales": 6.72, "op": 2.3, "gp": 4.87, "sga": 2.57, "ord": null, "net": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "cogs": 1.85, "gpm": 72.5, "opm": 34.2, "sga_ratio": 38.2, "sales_yoy": 25.1, "gp_yoy": null, "sga_yoy": null, "op_yoy": 81.1, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 6.44, "gp": 4.25, "sga": 3.71, "op": 0.54, "ord": null, "net": null, "cogs": 2.19, "cash": 19.71, "equity": 25.37, "total_assets": 32.72, "st_debt": 0.1, "lt_debt": 0, "debt_total": 0.1, "gpm": 66.0, "opm": 8.4, "sga_ratio": 57.6, "sales_yoy": 44.4, "gp_yoy": null, "sga_yoy": null, "op_yoy": 0.0, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 7.07, "op": 2.05, "gp": 4.9, "sga": 2.85, "ord": null, "net": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "cogs": 2.17, "gpm": 69.3, "opm": 29.0, "sga_ratio": 40.3, "sales_yoy": 26.9, "gp_yoy": 30.0, "sga_yoy": 18.3, "op_yoy": 50.7, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 6.94, "gp": 4.87, "sga": 2.79, "op": 2.08, "ord": null, "net": null, "cogs": 2.07, "cash": null, "equity": null, "total_assets": null, "st_debt": null, "lt_debt": null, "debt_total": null, "gpm": 70.2, "opm": 30.0, "sga_ratio": 40.2, "sales_yoy": 37.7, "gp_yoy": 46.2, "sga_yoy": 13.4, "op_yoy": 139.1, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 7.72, "gp": 5.25, "sga": 3.38, "op": 1.87, "ord": 1.82, "net": 1.27, "cogs": 2.47, "cash": 18.16, "equity": 28.32, "total_assets": 35.71, "st_debt": 0.05, "lt_debt": 0, "debt_total": 0.05, "gpm": 68.0, "opm": 24.2, "sga_ratio": 43.8, "sales_yoy": 14.9, "gp_yoy": 7.8, "sga_yoy": 31.5, "op_yoy": -18.7, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 7.57, "gp": 4.93, "sga": 3.8, "op": 1.13, "ord": 1.1, "net": 0.41, "cogs": 2.64, "cash": 20.55, "equity": 31.62, "total_assets": 38.81, "st_debt": 0, "lt_debt": 0, "debt_total": 0, "gpm": 65.1, "opm": 14.9, "sga_ratio": 50.2, "sales_yoy": 17.5, "gp_yoy": 16.0, "sga_yoy": 2.4, "op_yoy": 109.3, "ord_yoy": null, "net_yoy": null, "cash_yoy": 4.3, "debt_total_yoy": -100.0}, {"q": "26.1Q", "x": "26.1Q", "sales": 8.43, "gp": 5.71, "sga": 3.91, "op": 1.79, "ord": 2.28, "net": 1.62, "cogs": 2.72, "cash": 18.16, "equity": 31.29, "total_assets": 38.85, "st_debt": 0, "lt_debt": 0, "debt_total": 0, "gpm": 67.7, "opm": 21.2, "sga_ratio": 46.4, "sales_yoy": 19.2, "gp_yoy": 16.5, "sga_yoy": 37.2, "op_yoy": -12.7, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 8.09, "gp": 5.46, "sga": 3.38, "op": 2.07, "ord": 2.1, "net": 0.67, "cogs": 2.63, "cash": 20.07, "equity": 31.98, "total_assets": 38.57, "st_debt": 0, "lt_debt": 0, "debt_total": 0, "gpm": 67.5, "opm": 25.6, "sga_ratio": 41.8, "sales_yoy": 16.6, "gp_yoy": 12.1, "sga_yoy": 21.1, "op_yoy": -0.5, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "26.3Q", "x": "26.3Q", "sales": 9.45, "gp": 6.52, "sga": 3.93, "op": 2.6, "ord": 2.6, "net": 1.76, "cogs": 2.93, "cash": 20.92, "equity": 32.61, "total_assets": 41.04, "st_debt": 0, "lt_debt": 0, "debt_total": 0, "gpm": 69.0, "opm": 27.5, "sga_ratio": 41.6, "sales_yoy": 22.4, "gp_yoy": 24.2, "sga_yoy": 16.3, "op_yoy": 39.0, "ord_yoy": 42.9, "net_yoy": 38.6, "cash_yoy": 15.2, "debt_total_yoy": -100.0}, {"q": "26.4Q", "x": "26.4Q", "sales": 8.43, "gp": 5.7, "sga": 3.49, "op": 2.21, "ord": 2.24, "net": 1.7, "cogs": 2.73, "cash": 21.65, "equity": 34.31, "total_assets": 42.13, "st_debt": 0, "lt_debt": 0, "debt_total": 0, "gpm": 67.6, "opm": 26.2, "sga_ratio": 41.4, "sales_yoy": 11.4, "gp_yoy": 15.6, "sga_yoy": -8.2, "op_yoy": 95.6, "ord_yoy": 103.6, "net_yoy": 314.6, "cash_yoy": 5.4, "debt_total_yoy": null}], "a": [{"year": "2021", "x": "2021", "sales": 18.15, "op": 5.26, "ord": null, "net": 3.65, "opm": 29.0, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 17.82, "op": 4.1, "ord": null, "net": 2.76, "opm": 23.0, "sales_yoy": -1.8, "op_yoy": -22.1, "net_yoy": -24.4}, {"year": "2023", "x": "2023", "sales": 19.28, "op": 4.07, "ord": null, "net": 2.75, "opm": 21.1, "sales_yoy": 8.2, "op_yoy": -0.7, "net_yoy": -0.4}, {"year": "2024", "x": "2024", "sales": 23.76, "op": 5.06, "ord": 5.08, "net": 2.97, "opm": 21.3, "sales_yoy": 23.2, "op_yoy": 24.3, "net_yoy": 8.0}, {"year": "2025", "x": "2025", "sales": 29.29, "op": 7.13, "ord": 7.05, "net": 4.57, "opm": 24.3, "sales_yoy": 23.3, "op_yoy": 40.9, "net_yoy": 53.9}, {"year": "2026", "x": "2026", "sales": 34.4, "op": 8.67, "ord": 9.21, "net": 5.74, "opm": 25.2, "sales_yoy": 17.4, "op_yoy": 21.6, "net_yoy": 25.6}, {"year": "2027 계획", "x": "2027 계획", "sales": 40.0, "op": 10.0, "ord": 10.04, "net": 6.34, "opm": 25.0, "sales_yoy": 16.3, "op_yoy": 15.3, "net_yoy": 10.5, "plan": 1, "kind": "회사 계획"}], "kpi": [{"x": "24.1Q", "temple": 92, "open": 75, "supply": 34854, "sold": 13124, "room": 21730, "leads": 4751, "tours": 1845, "deals": 993, "conv": 53.8, "ad": 0.88, "sold_k": 13.12, "room_k": 21.73, "deals_yoy": null, "leads_yoy": null, "tours_yoy": null, "open_yoy": null, "ad_yoy": null}, {"x": "24.2Q", "temple": 92, "open": 76, "supply": 35682, "sold": 13634, "room": 22048, "leads": 4539, "tours": 1622, "deals": 903, "conv": 55.7, "ad": 0.84, "sold_k": 13.63, "room_k": 22.05, "deals_yoy": null, "leads_yoy": null, "tours_yoy": null, "open_yoy": null, "ad_yoy": null}, {"x": "24.3Q", "temple": 92, "open": 77, "supply": 36723, "sold": 14333, "room": 22390, "leads": 5719, "tours": 2171, "deals": 1153, "conv": 53.1, "ad": 1.02, "sold_k": 14.33, "room_k": 22.39, "deals_yoy": null, "leads_yoy": null, "tours_yoy": null, "open_yoy": null, "ad_yoy": null}, {"x": "24.4Q", "temple": 97, "open": 80, "supply": 38480, "sold": 14997, "room": 23483, "leads": 5658, "tours": 1890, "deals": 1093, "conv": 57.8, "ad": 0.94, "sold_k": 15.0, "room_k": 23.48, "deals_yoy": null, "leads_yoy": null, "tours_yoy": null, "open_yoy": null, "ad_yoy": null}, {"x": "25.1Q", "temple": 99, "open": 82, "supply": 39779, "sold": 15725, "room": 24054, "leads": 6824, "tours": 2417, "deals": 1249, "conv": 51.7, "ad": 1.2, "sold_k": 15.72, "room_k": 24.05, "deals_yoy": 25.8, "leads_yoy": 43.6, "tours_yoy": 31.0, "open_yoy": 9.3, "ad_yoy": 36.4}, {"x": "25.2Q", "temple": 104, "open": 82, "supply": 39931, "sold": 16436, "room": 23495, "leads": 6216, "tours": 2024, "deals": 1186, "conv": 58.6, "ad": 0.97, "sold_k": 16.44, "room_k": 23.5, "deals_yoy": 31.3, "leads_yoy": 36.9, "tours_yoy": 24.8, "open_yoy": 7.9, "ad_yoy": 15.5}, {"x": "25.3Q", "temple": 112, "open": 88, "supply": 43371, "sold": 17192, "room": 26179, "leads": 6852, "tours": 2532, "deals": 1307, "conv": 51.6, "ad": 1.48, "sold_k": 17.19, "room_k": 26.18, "deals_yoy": 13.4, "leads_yoy": 19.8, "tours_yoy": 16.6, "open_yoy": 14.3, "ad_yoy": 45.1}, {"x": "25.4Q", "temple": 117, "open": 92, "supply": 45479, "sold": 17931, "room": 27548, "leads": 6884, "tours": 2263, "deals": 1254, "conv": 55.4, "ad": 1.44, "sold_k": 17.93, "room_k": 27.55, "deals_yoy": 14.7, "leads_yoy": 21.7, "tours_yoy": 19.7, "open_yoy": 15.0, "ad_yoy": 53.2}, {"x": "26.1Q", "temple": 121, "open": 94, "supply": 46533, "sold": 18738, "room": 27795, "leads": 7722, "tours": 2620, "deals": 1438, "conv": 54.9, "ad": 1.96, "sold_k": 18.74, "room_k": 27.8, "deals_yoy": 15.1, "leads_yoy": 13.2, "tours_yoy": 8.4, "open_yoy": 14.6, "ad_yoy": 63.3}, {"x": "26.2Q", "temple": 124, "open": 97, "supply": 48669, "sold": 19501, "room": 29168, "leads": 7036, "tours": 2108, "deals": 1303, "conv": 61.8, "ad": 1.27, "sold_k": 19.5, "room_k": 29.17, "deals_yoy": 9.9, "leads_yoy": 13.2, "tours_yoy": 4.2, "open_yoy": 18.3, "ad_yoy": 30.9}, {"x": "26.3Q", "temple": 130, "open": 102, "supply": 50814, "sold": 20426, "room": 30388, "leads": 8209, "tours": 2923, "deals": 1582, "conv": 54.1, "ad": 1.6, "sold_k": 20.43, "room_k": 30.39, "deals_yoy": 21.0, "leads_yoy": 19.8, "tours_yoy": 15.4, "open_yoy": 15.9, "ad_yoy": 8.1}, {"x": "26.4Q", "temple": 131, "open": 105, "supply": 53003, "sold": 21244, "room": 31759, "leads": 7145, "tours": 2330, "deals": 1473, "conv": 63.2, "ad": 1.17, "sold_k": 21.24, "room_k": 31.76, "deals_yoy": 17.5, "leads_yoy": 3.8, "tours_yoy": 3.0, "open_yoy": 14.1, "ad_yoy": -18.8}]}}
+{
+ "c": "369A",
+ "n": "에이타이",
+ "asof": "2026-10-15",
+ "latest": "2026년 8월기 4분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "8월 결산·단독(비연결). 사원(절)과 제휴해 영대공양묘(대를 잇지 않아도 되는 묘)를 세우고 판매를 대행. 1Q·3Q 성수기, 2Q·4Q 비수기. 차입금 없음. 2025년 6월 상장이라 25.2Q 이전 경상·순이익과 재무상태표는 일부만 공시. 21~23기 경상이익은 자료 없음 2026년 6월부터 주요 KPI 월차 공시.",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  },
+  {
+   "sec": "key",
+   "t": "성약 건수",
+   "d": "kpi",
+   "bars": [
+    {
+     "k": "deals",
+     "l": "성약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "deals_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료(데이터시트)",
+   "def": "분기 중 영대공양묘 계약에 이른 이용자 수"
+  },
+  {
+   "sec": "key",
+   "t": "개원 사원 수",
+   "d": "kpi",
+   "bars": [
+    {
+     "k": "open",
+     "l": "개원 사원",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산설명자료(데이터시트)",
+   "def": "제휴 후 인가를 받아 묘를 세우고 판매 중인 사원 수(분기말)"
+  },
+  {
+   "sec": "공급(사원·구획)",
+   "t": "제휴 사원과 개원 사원",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "temple",
+     "l": "제휴 사원",
+     "u": "곳",
+     "c": 0
+    },
+    {
+     "k": "open",
+     "l": "개원 사원",
+     "u": "곳",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기)",
+   "def": "제휴 = 모집 대행 계약을 맺은 사원, 개원 = 인가·묘 건립 후 판매 중인 사원(분기말)"
+  },
+  {
+   "sec": "공급(사원·구획)",
+   "t": "신규 제휴·신규 개원·해지 사원",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "new_temple",
+     "l": "신규 제휴",
+     "u": "곳",
+     "c": 0
+    },
+    {
+     "k": "new_open",
+     "l": "신규 개원",
+     "u": "곳",
+     "c": 1
+    },
+    {
+     "k": "cancel_temple",
+     "l": "계약 해지",
+     "u": "곳",
+     "c": 2
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기)"
+  },
+  {
+   "sec": "공급(사원·구획)",
+   "t": "누적 공급 구획 수",
+   "d": "kpi",
+   "bars": [
+    {
+     "k": "supply",
+     "l": "공급 구획",
+     "u": "구획",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "supply_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기)",
+   "def": "지금까지 세워 공급한 개별묘 구획 누계(분기말)"
+  },
+  {
+   "sec": "공급(사원·구획)",
+   "t": "누적 판매 구획과 공급 여력",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "sold_k",
+     "l": "누적 판매 구획",
+     "u": "천 구획",
+     "c": 0
+    },
+    {
+     "k": "room_k",
+     "l": "공급 여력(공급−판매)",
+     "u": "천 구획",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기) · 공급 여력 = 앞으로 팔 수 있는 개별묘 구획"
+  },
+  {
+   "sec": "공급(사원·구획)",
+   "t": "분기 판매 구획 수",
+   "d": "kpi",
+   "bars": [
+    {
+     "k": "sold_q",
+     "l": "판매 구획",
+     "u": "구획",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sold_q_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기) · 누적 판매 구획의 분기 증가분으로 계산",
+   "def": "누적 판매 구획(분기말) − 직전 분기말"
+  },
+  {
+   "sec": "공급(사원·구획)",
+   "t": "연간 묘 판매 건수와 시장 점유율",
+   "d": "ka",
+   "bars": [
+    {
+     "k": "graves",
+     "l": "연간 묘 판매 건수",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "share",
+     "l": "시장 점유율(회사 추정)",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 겸 중기경영계획(25쪽) · 점유율 = 국내 전체 묘 수요 대비 회사 판매 건수(회사 추정)"
+  },
+  {
+   "sec": "퍼널",
+   "t": "집객·안내·성약 건수",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "leads",
+     "l": "집객(자료 청구·예약)",
+     "u": "건",
+     "c": 0
+    },
+    {
+     "k": "tours",
+     "l": "현지 안내",
+     "u": "건",
+     "c": 1
+    },
+    {
+     "k": "deals",
+     "l": "성약",
+     "u": "건",
+     "c": 2
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기)"
+  },
+  {
+   "sec": "퍼널",
+   "t": "성약률(전체·소개)",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "conv",
+     "l": "전체 성약률",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "ref_conv",
+     "l": "소개 성약률",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기)",
+   "def": "성약 ÷ 현지 안내. 소개 = 기존 이용자 소개로 온 고객"
+  },
+  {
+   "sec": "퍼널",
+   "t": "안내율(안내÷집객)",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "tour_rate",
+     "l": "안내율",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기) · 계산",
+   "def": "현지 안내 건수 ÷ 집객 건수"
+  },
+  {
+   "sec": "퍼널",
+   "t": "소개 경로 안내·성약",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "ref_tours",
+     "l": "소개 안내",
+     "u": "건",
+     "c": 0
+    },
+    {
+     "k": "ref_deals",
+     "l": "소개 성약",
+     "u": "건",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기)"
+  },
+  {
+   "sec": "퍼널",
+   "t": "소개 성약 건수",
+   "d": "kpi",
+   "bars": [
+    {
+     "k": "ref_deals",
+     "l": "소개 성약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "ref_deals_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기)"
+  },
+  {
+   "sec": "퍼널",
+   "t": "성약 중 소개 비중",
+   "d": "kpi",
+   "lines": [
+    {
+     "k": "ref_share",
+     "l": "소개 성약 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기) · 계산",
+   "def": "소개 성약 ÷ 전체 성약"
+  },
+  {
+   "sec": "단위당",
+   "t": "성약 1건당 매출",
+   "d": "kpi",
+   "bars": [
+    {
+     "k": "sales_per_deal",
+     "l": "성약 1건당 매출",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_per_deal_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(24.1Q~26.4Q 12분기) · 계산",
+   "def": "분기 매출 ÷ 분기 성약 건수(매출에 성약 외 매출도 포함되어 참고치)"
+  },
+  {
+   "sec": "단위당",
+   "t": "개원 사원 1곳당 연간 매출",
+   "d": "ka",
+   "bars": [
+    {
+     "k": "per_temple",
+     "l": "1곳당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "per_temple_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산설명자료 데이터시트(회사 산출)",
+   "def": "연간 매출 ÷ 개원 사원 수 기간 평균(회사 정의)"
+  },
+  {
+   "sec": "월차",
+   "t": "월차 최근 24개월",
+   "d": "mm",
+   "table": 1,
+   "cols": [
+    {
+     "k": "m_newt",
+     "l": "신규 제휴 사원",
+     "u": "곳"
+    },
+    {
+     "k": "m_newo",
+     "l": "신규 개원 사원",
+     "u": "곳"
+    },
+    {
+     "k": "m_temple",
+     "l": "제휴 사원 수",
+     "u": "곳"
+    },
+    {
+     "k": "m_open",
+     "l": "개원 사원 수",
+     "u": "곳"
+    },
+    {
+     "k": "m_supply",
+     "l": "누적 공급 구획",
+     "u": "구획"
+    },
+    {
+     "k": "m_sold",
+     "l": "누적 판매 구획",
+     "u": "구획"
+    },
+    {
+     "k": "m_leads",
+     "l": "집객",
+     "u": "건"
+    },
+    {
+     "k": "m_tours",
+     "l": "현지 안내",
+     "u": "건"
+    },
+    {
+     "k": "m_deals",
+     "l": "신규 성약",
+     "u": "건"
+    },
+    {
+     "k": "m_reft",
+     "l": "소개 안내",
+     "u": "건"
+    },
+    {
+     "k": "m_conv",
+     "l": "전체 성약률",
+     "u": "%"
+    },
+    {
+     "k": "m_refc",
+     "l": "소개 성약률",
+     "u": "%"
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치)"
+  },
+  {
+   "sec": "월차",
+   "t": "월간 신규 성약",
+   "d": "mm",
+   "bars": [
+    {
+     "k": "m_deals",
+     "l": "신규 성약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "m_deals_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치) · YoY 계산"
+  },
+  {
+   "sec": "월차",
+   "t": "월간 집객·안내·성약 전년 대비(%)",
+   "d": "mm",
+   "lines": [
+    {
+     "k": "m_leads_yoy",
+     "l": "집객 YoY",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "m_tours_yoy",
+     "l": "안내 YoY",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "m_deals_yoy",
+     "l": "성약 YoY",
+     "u": "%",
+     "c": 2
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치) · 계산"
+  },
+  {
+   "sec": "월차",
+   "t": "월간 성약률(전체·소개)",
+   "d": "mm",
+   "lines": [
+    {
+     "k": "m_conv",
+     "l": "전체 성약률",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "m_refc",
+     "l": "소개 성약률",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치)"
+  },
+  {
+   "sec": "월차",
+   "t": "월간 집객 건수",
+   "d": "mm",
+   "bars": [
+    {
+     "k": "m_leads",
+     "l": "집객",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치)"
+  },
+  {
+   "sec": "월차",
+   "t": "개원 사원 수(월말)",
+   "d": "mm",
+   "bars": [
+    {
+     "k": "m_open",
+     "l": "개원 사원",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치)"
+  },
+  {
+   "sec": "월차",
+   "t": "월간 판매 구획 수",
+   "d": "mm",
+   "bars": [
+    {
+     "k": "m_sold_add",
+     "l": "판매 구획",
+     "u": "구획",
+     "c": 0
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치) · 누적 판매 구획의 전월 대비 증가분",
+   "def": "누적 판매 구획(월말) − 전월말"
+  },
+  {
+   "sec": "월차",
+   "t": "소개 안내 건수",
+   "d": "mm",
+   "bars": [
+    {
+     "k": "m_reft",
+     "l": "소개 안내",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "회사 월차(주요 KPI 공시, 2026년 10월 실적 2026-11-10 TDnet — 24.11~26.10 표 그대로, 속보치)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 마지막 막대 = 회사 계획",
+   "muted": "plan"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 마지막 막대 = 회사 계획",
+   "muted": "plan"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  },
+  {
+   "sec": "재무",
+   "t": "현금·예금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cash_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산단신·결산설명자료"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 5.57,
+    "op": 1.36,
+    "gp": 3.77,
+    "sga": 2.41,
+    "ord": null,
+    "net": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cogs": 1.8,
+    "gpm": 67.7,
+    "opm": 24.4,
+    "sga_ratio": 43.3,
+    "sales_yoy": 4.5,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": -20.5,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 5.04,
+    "op": 0.87,
+    "gp": 3.33,
+    "sga": 2.46,
+    "ord": null,
+    "net": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cogs": 1.71,
+    "gpm": 66.1,
+    "opm": 17.3,
+    "sga_ratio": 48.8,
+    "sales_yoy": 22.3,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": 64.2,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 6.72,
+    "op": 2.3,
+    "gp": 4.87,
+    "sga": 2.57,
+    "ord": null,
+    "net": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cogs": 1.85,
+    "gpm": 72.5,
+    "opm": 34.2,
+    "sga_ratio": 38.2,
+    "sales_yoy": 25.1,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": 81.1,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 6.44,
+    "gp": 4.25,
+    "sga": 3.71,
+    "op": 0.54,
+    "ord": null,
+    "net": null,
+    "cogs": 2.19,
+    "cash": 19.71,
+    "equity": 25.37,
+    "total_assets": 32.72,
+    "st_debt": 0.1,
+    "lt_debt": 0,
+    "debt_total": 0.1,
+    "gpm": 66.0,
+    "opm": 8.4,
+    "sga_ratio": 57.6,
+    "sales_yoy": 44.4,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": 0.0,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 7.07,
+    "op": 2.05,
+    "gp": 4.9,
+    "sga": 2.85,
+    "ord": null,
+    "net": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "cogs": 2.17,
+    "gpm": 69.3,
+    "opm": 29.0,
+    "sga_ratio": 40.3,
+    "sales_yoy": 26.9,
+    "gp_yoy": 30.0,
+    "sga_yoy": 18.3,
+    "op_yoy": 50.7,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 6.94,
+    "gp": 4.87,
+    "sga": 2.79,
+    "op": 2.08,
+    "ord": null,
+    "net": null,
+    "cogs": 2.07,
+    "cash": null,
+    "equity": null,
+    "total_assets": null,
+    "st_debt": null,
+    "lt_debt": null,
+    "debt_total": null,
+    "gpm": 70.2,
+    "opm": 30.0,
+    "sga_ratio": 40.2,
+    "sales_yoy": 37.7,
+    "gp_yoy": 46.2,
+    "sga_yoy": 13.4,
+    "op_yoy": 139.1,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 7.72,
+    "gp": 5.25,
+    "sga": 3.38,
+    "op": 1.87,
+    "ord": 1.82,
+    "net": 1.27,
+    "cogs": 2.47,
+    "cash": 18.16,
+    "equity": 28.32,
+    "total_assets": 35.71,
+    "st_debt": 0.05,
+    "lt_debt": 0,
+    "debt_total": 0.05,
+    "gpm": 68.0,
+    "opm": 24.2,
+    "sga_ratio": 43.8,
+    "sales_yoy": 14.9,
+    "gp_yoy": 7.8,
+    "sga_yoy": 31.5,
+    "op_yoy": -18.7,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 7.57,
+    "gp": 4.93,
+    "sga": 3.8,
+    "op": 1.13,
+    "ord": 1.1,
+    "net": 0.41,
+    "cogs": 2.64,
+    "cash": 20.55,
+    "equity": 31.62,
+    "total_assets": 38.81,
+    "st_debt": 0,
+    "lt_debt": 0,
+    "debt_total": 0,
+    "gpm": 65.1,
+    "opm": 14.9,
+    "sga_ratio": 50.2,
+    "sales_yoy": 17.5,
+    "gp_yoy": 16.0,
+    "sga_yoy": 2.4,
+    "op_yoy": 109.3,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": 4.3,
+    "debt_total_yoy": -100.0
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 8.43,
+    "gp": 5.71,
+    "sga": 3.91,
+    "op": 1.79,
+    "ord": 2.28,
+    "net": 1.62,
+    "cogs": 2.72,
+    "cash": 18.16,
+    "equity": 31.29,
+    "total_assets": 38.85,
+    "st_debt": 0,
+    "lt_debt": 0,
+    "debt_total": 0,
+    "gpm": 67.7,
+    "opm": 21.2,
+    "sga_ratio": 46.4,
+    "sales_yoy": 19.2,
+    "gp_yoy": 16.5,
+    "sga_yoy": 37.2,
+    "op_yoy": -12.7,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 8.09,
+    "gp": 5.46,
+    "sga": 3.38,
+    "op": 2.07,
+    "ord": 2.1,
+    "net": 0.67,
+    "cogs": 2.63,
+    "cash": 20.07,
+    "equity": 31.98,
+    "total_assets": 38.57,
+    "st_debt": 0,
+    "lt_debt": 0,
+    "debt_total": 0,
+    "gpm": 67.5,
+    "opm": 25.6,
+    "sga_ratio": 41.8,
+    "sales_yoy": 16.6,
+    "gp_yoy": 12.1,
+    "sga_yoy": 21.1,
+    "op_yoy": -0.5,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 9.45,
+    "gp": 6.52,
+    "sga": 3.93,
+    "op": 2.6,
+    "ord": 2.6,
+    "net": 1.76,
+    "cogs": 2.93,
+    "cash": 20.92,
+    "equity": 32.61,
+    "total_assets": 41.04,
+    "st_debt": 0,
+    "lt_debt": 0,
+    "debt_total": 0,
+    "gpm": 69.0,
+    "opm": 27.5,
+    "sga_ratio": 41.6,
+    "sales_yoy": 22.4,
+    "gp_yoy": 24.2,
+    "sga_yoy": 16.3,
+    "op_yoy": 39.0,
+    "ord_yoy": 42.9,
+    "net_yoy": 38.6,
+    "cash_yoy": 15.2,
+    "debt_total_yoy": -100.0
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 8.43,
+    "gp": 5.7,
+    "sga": 3.49,
+    "op": 2.21,
+    "ord": 2.24,
+    "net": 1.7,
+    "cogs": 2.73,
+    "cash": 21.65,
+    "equity": 34.31,
+    "total_assets": 42.13,
+    "st_debt": 0,
+    "lt_debt": 0,
+    "debt_total": 0,
+    "gpm": 67.6,
+    "opm": 26.2,
+    "sga_ratio": 41.4,
+    "sales_yoy": 11.4,
+    "gp_yoy": 15.6,
+    "sga_yoy": -8.2,
+    "op_yoy": 95.6,
+    "ord_yoy": 103.6,
+    "net_yoy": 314.6,
+    "cash_yoy": 5.4,
+    "debt_total_yoy": null
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 18.15,
+    "op": 5.26,
+    "ord": null,
+    "net": 3.65,
+    "opm": 29.0,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 17.82,
+    "op": 4.1,
+    "ord": null,
+    "net": 2.76,
+    "opm": 23.0,
+    "sales_yoy": -1.8,
+    "op_yoy": -22.1,
+    "net_yoy": -24.4
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 19.28,
+    "op": 4.07,
+    "ord": null,
+    "net": 2.75,
+    "opm": 21.1,
+    "sales_yoy": 8.2,
+    "op_yoy": -0.7,
+    "net_yoy": -0.4
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 23.76,
+    "op": 5.06,
+    "ord": 5.08,
+    "net": 2.97,
+    "opm": 21.3,
+    "sales_yoy": 23.2,
+    "op_yoy": 24.3,
+    "net_yoy": 8.0
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 29.29,
+    "op": 7.13,
+    "ord": 7.05,
+    "net": 4.57,
+    "opm": 24.3,
+    "sales_yoy": 23.3,
+    "op_yoy": 40.9,
+    "net_yoy": 53.9
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 34.4,
+    "op": 8.67,
+    "ord": 9.21,
+    "net": 5.74,
+    "opm": 25.2,
+    "sales_yoy": 17.4,
+    "op_yoy": 21.6,
+    "net_yoy": 25.6
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 40.0,
+    "op": 10.0,
+    "ord": 10.04,
+    "net": 6.34,
+    "opm": 25.0,
+    "sales_yoy": 16.3,
+    "op_yoy": 15.3,
+    "net_yoy": 10.5,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "kpi": [
+   {
+    "x": "24.1Q",
+    "temple": 92,
+    "open": 75,
+    "supply": 34854,
+    "sold": 13124,
+    "room": 21730,
+    "leads": 4751,
+    "tours": 1845,
+    "deals": 993,
+    "conv": 53.8,
+    "ad": 0.88,
+    "sold_k": 13.12,
+    "room_k": 21.73,
+    "deals_yoy": null,
+    "leads_yoy": null,
+    "tours_yoy": null,
+    "open_yoy": null,
+    "ad_yoy": null,
+    "new_temple": 7,
+    "cancel_temple": 1,
+    "new_open": 2,
+    "ref_tours": 141,
+    "ref_deals": 117,
+    "ref_conv": 83.0,
+    "ref_share": 11.8,
+    "tour_rate": 38.8,
+    "sales_per_deal": 56.1,
+    "sold_q": null,
+    "supply_yoy": null,
+    "sold_q_yoy": null,
+    "ref_deals_yoy": null,
+    "sales_per_deal_yoy": null
+   },
+   {
+    "x": "24.2Q",
+    "temple": 92,
+    "open": 76,
+    "supply": 35682,
+    "sold": 13634,
+    "room": 22048,
+    "leads": 4539,
+    "tours": 1622,
+    "deals": 903,
+    "conv": 55.7,
+    "ad": 0.84,
+    "sold_k": 13.63,
+    "room_k": 22.05,
+    "deals_yoy": null,
+    "leads_yoy": null,
+    "tours_yoy": null,
+    "open_yoy": null,
+    "ad_yoy": null,
+    "new_temple": 1,
+    "cancel_temple": 1,
+    "new_open": 2,
+    "ref_tours": 146,
+    "ref_deals": 98,
+    "ref_conv": 67.1,
+    "ref_share": 10.9,
+    "tour_rate": 35.7,
+    "sales_per_deal": 55.8,
+    "sold_q": 510,
+    "supply_yoy": null,
+    "sold_q_yoy": null,
+    "ref_deals_yoy": null,
+    "sales_per_deal_yoy": null
+   },
+   {
+    "x": "24.3Q",
+    "temple": 92,
+    "open": 77,
+    "supply": 36723,
+    "sold": 14333,
+    "room": 22390,
+    "leads": 5719,
+    "tours": 2171,
+    "deals": 1153,
+    "conv": 53.1,
+    "ad": 1.02,
+    "sold_k": 14.33,
+    "room_k": 22.39,
+    "deals_yoy": null,
+    "leads_yoy": null,
+    "tours_yoy": null,
+    "open_yoy": null,
+    "ad_yoy": null,
+    "new_temple": 1,
+    "cancel_temple": 1,
+    "new_open": 2,
+    "ref_tours": 179,
+    "ref_deals": 146,
+    "ref_conv": 81.6,
+    "ref_share": 12.7,
+    "tour_rate": 38.0,
+    "sales_per_deal": 58.3,
+    "sold_q": 699,
+    "supply_yoy": null,
+    "sold_q_yoy": null,
+    "ref_deals_yoy": null,
+    "sales_per_deal_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "temple": 97,
+    "open": 80,
+    "supply": 38480,
+    "sold": 14997,
+    "room": 23483,
+    "leads": 5658,
+    "tours": 1890,
+    "deals": 1093,
+    "conv": 57.8,
+    "ad": 0.94,
+    "sold_k": 15.0,
+    "room_k": 23.48,
+    "deals_yoy": null,
+    "leads_yoy": null,
+    "tours_yoy": null,
+    "open_yoy": null,
+    "ad_yoy": null,
+    "new_temple": 5,
+    "cancel_temple": 0,
+    "new_open": 3,
+    "ref_tours": 169,
+    "ref_deals": 136,
+    "ref_conv": 80.5,
+    "ref_share": 12.4,
+    "tour_rate": 33.4,
+    "sales_per_deal": 58.9,
+    "sold_q": 664,
+    "supply_yoy": null,
+    "sold_q_yoy": null,
+    "ref_deals_yoy": null,
+    "sales_per_deal_yoy": null
+   },
+   {
+    "x": "25.1Q",
+    "temple": 99,
+    "open": 82,
+    "supply": 39779,
+    "sold": 15725,
+    "room": 24054,
+    "leads": 6824,
+    "tours": 2417,
+    "deals": 1249,
+    "conv": 51.7,
+    "ad": 1.2,
+    "sold_k": 15.72,
+    "room_k": 24.05,
+    "deals_yoy": 25.8,
+    "leads_yoy": 43.6,
+    "tours_yoy": 31.0,
+    "open_yoy": 9.3,
+    "ad_yoy": 36.4,
+    "new_temple": 2,
+    "cancel_temple": 0,
+    "new_open": 2,
+    "ref_tours": 183,
+    "ref_deals": 124,
+    "ref_conv": 67.8,
+    "ref_share": 9.9,
+    "tour_rate": 35.4,
+    "sales_per_deal": 56.6,
+    "sold_q": 728,
+    "supply_yoy": 14.1,
+    "sold_q_yoy": null,
+    "ref_deals_yoy": 6.0,
+    "sales_per_deal_yoy": 0.9
+   },
+   {
+    "x": "25.2Q",
+    "temple": 104,
+    "open": 82,
+    "supply": 39931,
+    "sold": 16436,
+    "room": 23495,
+    "leads": 6216,
+    "tours": 2024,
+    "deals": 1186,
+    "conv": 58.6,
+    "ad": 0.97,
+    "sold_k": 16.44,
+    "room_k": 23.5,
+    "deals_yoy": 31.3,
+    "leads_yoy": 36.9,
+    "tours_yoy": 24.8,
+    "open_yoy": 7.9,
+    "ad_yoy": 15.5,
+    "new_temple": 5,
+    "cancel_temple": 0,
+    "new_open": 0,
+    "ref_tours": 168,
+    "ref_deals": 138,
+    "ref_conv": 82.1,
+    "ref_share": 11.6,
+    "tour_rate": 32.6,
+    "sales_per_deal": 58.5,
+    "sold_q": 711,
+    "supply_yoy": 11.9,
+    "sold_q_yoy": 39.4,
+    "ref_deals_yoy": 40.8,
+    "sales_per_deal_yoy": 4.8
+   },
+   {
+    "x": "25.3Q",
+    "temple": 112,
+    "open": 88,
+    "supply": 43371,
+    "sold": 17192,
+    "room": 26179,
+    "leads": 6852,
+    "tours": 2532,
+    "deals": 1307,
+    "conv": 51.6,
+    "ad": 1.48,
+    "sold_k": 17.19,
+    "room_k": 26.18,
+    "deals_yoy": 13.4,
+    "leads_yoy": 19.8,
+    "tours_yoy": 16.6,
+    "open_yoy": 14.3,
+    "ad_yoy": 45.1,
+    "new_temple": 8,
+    "cancel_temple": 0,
+    "new_open": 6,
+    "ref_tours": 229,
+    "ref_deals": 154,
+    "ref_conv": 67.2,
+    "ref_share": 11.8,
+    "tour_rate": 37.0,
+    "sales_per_deal": 59.1,
+    "sold_q": 756,
+    "supply_yoy": 18.1,
+    "sold_q_yoy": 8.2,
+    "ref_deals_yoy": 5.5,
+    "sales_per_deal_yoy": 1.4
+   },
+   {
+    "x": "25.4Q",
+    "temple": 117,
+    "open": 92,
+    "supply": 45479,
+    "sold": 17931,
+    "room": 27548,
+    "leads": 6884,
+    "tours": 2263,
+    "deals": 1254,
+    "conv": 55.4,
+    "ad": 1.44,
+    "sold_k": 17.93,
+    "room_k": 27.55,
+    "deals_yoy": 14.7,
+    "leads_yoy": 21.7,
+    "tours_yoy": 19.7,
+    "open_yoy": 15.0,
+    "ad_yoy": 53.2,
+    "new_temple": 5,
+    "cancel_temple": 0,
+    "new_open": 4,
+    "ref_tours": 207,
+    "ref_deals": 177,
+    "ref_conv": 85.5,
+    "ref_share": 14.1,
+    "tour_rate": 32.9,
+    "sales_per_deal": 60.4,
+    "sold_q": 739,
+    "supply_yoy": 18.2,
+    "sold_q_yoy": 11.3,
+    "ref_deals_yoy": 30.1,
+    "sales_per_deal_yoy": 2.5
+   },
+   {
+    "x": "26.1Q",
+    "temple": 121,
+    "open": 94,
+    "supply": 46533,
+    "sold": 18738,
+    "room": 27795,
+    "leads": 7722,
+    "tours": 2620,
+    "deals": 1438,
+    "conv": 54.9,
+    "ad": 1.96,
+    "sold_k": 18.74,
+    "room_k": 27.8,
+    "deals_yoy": 15.1,
+    "leads_yoy": 13.2,
+    "tours_yoy": 8.4,
+    "open_yoy": 14.6,
+    "ad_yoy": 63.3,
+    "new_temple": 6,
+    "cancel_temple": 2,
+    "new_open": 4,
+    "ref_tours": 226,
+    "ref_deals": 162,
+    "ref_conv": 71.7,
+    "ref_share": 11.3,
+    "tour_rate": 33.9,
+    "sales_per_deal": 58.6,
+    "sold_q": 807,
+    "supply_yoy": 17.0,
+    "sold_q_yoy": 10.9,
+    "ref_deals_yoy": 30.6,
+    "sales_per_deal_yoy": 3.5
+   },
+   {
+    "x": "26.2Q",
+    "temple": 124,
+    "open": 97,
+    "supply": 48669,
+    "sold": 19501,
+    "room": 29168,
+    "leads": 7036,
+    "tours": 2108,
+    "deals": 1303,
+    "conv": 61.8,
+    "ad": 1.27,
+    "sold_k": 19.5,
+    "room_k": 29.17,
+    "deals_yoy": 9.9,
+    "leads_yoy": 13.2,
+    "tours_yoy": 4.2,
+    "open_yoy": 18.3,
+    "ad_yoy": 30.9,
+    "new_temple": 3,
+    "cancel_temple": 0,
+    "new_open": 3,
+    "ref_tours": 178,
+    "ref_deals": 168,
+    "ref_conv": 94.4,
+    "ref_share": 12.9,
+    "tour_rate": 30.0,
+    "sales_per_deal": 62.1,
+    "sold_q": 763,
+    "supply_yoy": 21.9,
+    "sold_q_yoy": 7.3,
+    "ref_deals_yoy": 21.7,
+    "sales_per_deal_yoy": 6.2
+   },
+   {
+    "x": "26.3Q",
+    "temple": 130,
+    "open": 102,
+    "supply": 50814,
+    "sold": 20426,
+    "room": 30388,
+    "leads": 8209,
+    "tours": 2923,
+    "deals": 1582,
+    "conv": 54.1,
+    "ad": 1.6,
+    "sold_k": 20.43,
+    "room_k": 30.39,
+    "deals_yoy": 21.0,
+    "leads_yoy": 19.8,
+    "tours_yoy": 15.4,
+    "open_yoy": 15.9,
+    "ad_yoy": 8.1,
+    "new_temple": 6,
+    "cancel_temple": 0,
+    "new_open": 5,
+    "ref_tours": 264,
+    "ref_deals": 205,
+    "ref_conv": 77.7,
+    "ref_share": 13.0,
+    "tour_rate": 35.6,
+    "sales_per_deal": 59.7,
+    "sold_q": 925,
+    "supply_yoy": 17.2,
+    "sold_q_yoy": 22.4,
+    "ref_deals_yoy": 33.1,
+    "sales_per_deal_yoy": 1.0
+   },
+   {
+    "x": "26.4Q",
+    "temple": 131,
+    "open": 105,
+    "supply": 53003,
+    "sold": 21244,
+    "room": 31759,
+    "leads": 7145,
+    "tours": 2330,
+    "deals": 1473,
+    "conv": 63.2,
+    "ad": 1.17,
+    "sold_k": 21.24,
+    "room_k": 31.76,
+    "deals_yoy": 17.5,
+    "leads_yoy": 3.8,
+    "tours_yoy": 3.0,
+    "open_yoy": 14.1,
+    "ad_yoy": -18.8,
+    "new_temple": 2,
+    "cancel_temple": 1,
+    "new_open": 4,
+    "ref_tours": 207,
+    "ref_deals": 197,
+    "ref_conv": 95.2,
+    "ref_share": 13.4,
+    "tour_rate": 32.6,
+    "sales_per_deal": 57.2,
+    "sold_q": 818,
+    "supply_yoy": 16.5,
+    "sold_q_yoy": 10.7,
+    "ref_deals_yoy": 11.3,
+    "sales_per_deal_yoy": -5.3
+   }
+  ],
+  "ka": [
+   {
+    "x": "2024",
+    "graves": 4144,
+    "share": 1.9,
+    "per_temple": 30.7,
+    "graves_yoy": null,
+    "per_temple_yoy": null
+   },
+   {
+    "x": "2025",
+    "graves": 4996,
+    "share": 2.3,
+    "per_temple": 34.1,
+    "graves_yoy": 20.6,
+    "per_temple_yoy": 11.1
+   },
+   {
+    "x": "2026",
+    "graves": 5797,
+    "share": 2.6,
+    "per_temple": 34.9,
+    "graves_yoy": 16.0,
+    "per_temple_yoy": 2.3
+   }
+  ],
+  "mm": [
+   {
+    "x": "24.11",
+    "m_newt": 0,
+    "m_newo": 0,
+    "m_temple": 99,
+    "m_open": 82,
+    "m_supply": 39779,
+    "m_sold": 15725,
+    "m_leads": 2203,
+    "m_tours": 820,
+    "m_deals": 443,
+    "m_reft": 67,
+    "m_conv": 54.0,
+    "m_refc": 79.1,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": null
+   },
+   {
+    "x": "24.12",
+    "m_newt": 0,
+    "m_newo": 0,
+    "m_temple": 99,
+    "m_open": 82,
+    "m_supply": 39779,
+    "m_sold": 16002,
+    "m_leads": 1931,
+    "m_tours": 643,
+    "m_deals": 424,
+    "m_reft": 70,
+    "m_conv": 65.9,
+    "m_refc": 77.1,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 277
+   },
+   {
+    "x": "25.01",
+    "m_newt": 3,
+    "m_newo": 0,
+    "m_temple": 102,
+    "m_open": 82,
+    "m_supply": 39931,
+    "m_sold": 16215,
+    "m_leads": 2272,
+    "m_tours": 687,
+    "m_deals": 377,
+    "m_reft": 46,
+    "m_conv": 54.9,
+    "m_refc": 95.7,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 213
+   },
+   {
+    "x": "25.02",
+    "m_newt": 2,
+    "m_newo": 0,
+    "m_temple": 104,
+    "m_open": 82,
+    "m_supply": 39931,
+    "m_sold": 16436,
+    "m_leads": 2013,
+    "m_tours": 694,
+    "m_deals": 385,
+    "m_reft": 52,
+    "m_conv": 55.5,
+    "m_refc": 76.9,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 221
+   },
+   {
+    "x": "25.03",
+    "m_newt": 4,
+    "m_newo": 2,
+    "m_temple": 108,
+    "m_open": 84,
+    "m_supply": 40588,
+    "m_sold": 16680,
+    "m_leads": 2187,
+    "m_tours": 833,
+    "m_deals": 425,
+    "m_reft": 70,
+    "m_conv": 51.0,
+    "m_refc": 81.4,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 244
+   },
+   {
+    "x": "25.04",
+    "m_newt": 3,
+    "m_newo": 2,
+    "m_temple": 111,
+    "m_open": 86,
+    "m_supply": 42190,
+    "m_sold": 16929,
+    "m_leads": 2211,
+    "m_tours": 813,
+    "m_deals": 437,
+    "m_reft": 83,
+    "m_conv": 53.8,
+    "m_refc": 62.7,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 249
+   },
+   {
+    "x": "25.05",
+    "m_newt": 1,
+    "m_newo": 2,
+    "m_temple": 112,
+    "m_open": 88,
+    "m_supply": 43371,
+    "m_sold": 17192,
+    "m_leads": 2454,
+    "m_tours": 886,
+    "m_deals": 445,
+    "m_reft": 76,
+    "m_conv": 50.2,
+    "m_refc": 59.2,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 263
+   },
+   {
+    "x": "25.06",
+    "m_newt": 3,
+    "m_newo": 1,
+    "m_temple": 115,
+    "m_open": 89,
+    "m_supply": 43834,
+    "m_sold": 17450,
+    "m_leads": 2214,
+    "m_tours": 804,
+    "m_deals": 454,
+    "m_reft": 80,
+    "m_conv": 56.5,
+    "m_refc": 81.2,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 258
+   },
+   {
+    "x": "25.07",
+    "m_newt": 1,
+    "m_newo": 1,
+    "m_temple": 116,
+    "m_open": 90,
+    "m_supply": 44651,
+    "m_sold": 17701,
+    "m_leads": 2127,
+    "m_tours": 702,
+    "m_deals": 408,
+    "m_reft": 62,
+    "m_conv": 58.1,
+    "m_refc": 87.1,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 251
+   },
+   {
+    "x": "25.08",
+    "m_newt": 1,
+    "m_newo": 2,
+    "m_temple": 117,
+    "m_open": 92,
+    "m_supply": 45479,
+    "m_sold": 17931,
+    "m_leads": 2543,
+    "m_tours": 757,
+    "m_deals": 392,
+    "m_reft": 65,
+    "m_conv": 51.8,
+    "m_refc": 89.2,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 230
+   },
+   {
+    "x": "25.09",
+    "m_newt": 0,
+    "m_newo": 0,
+    "m_temple": 115,
+    "m_open": 90,
+    "m_supply": 45193,
+    "m_sold": 18188,
+    "m_leads": 2480,
+    "m_tours": 794,
+    "m_deals": 448,
+    "m_reft": 65,
+    "m_conv": 56.4,
+    "m_refc": 73.8,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 257
+   },
+   {
+    "x": "25.10",
+    "m_newt": 2,
+    "m_newo": 2,
+    "m_temple": 117,
+    "m_open": 92,
+    "m_supply": 45801,
+    "m_sold": 18462,
+    "m_leads": 2610,
+    "m_tours": 911,
+    "m_deals": 499,
+    "m_reft": 78,
+    "m_conv": 54.8,
+    "m_refc": 71.8,
+    "m_deals_yoy": null,
+    "m_tours_yoy": null,
+    "m_leads_yoy": null,
+    "m_sold_add": 274
+   },
+   {
+    "x": "25.11",
+    "m_newt": 4,
+    "m_newo": 2,
+    "m_temple": 121,
+    "m_open": 94,
+    "m_supply": 46533,
+    "m_sold": 18738,
+    "m_leads": 2632,
+    "m_tours": 915,
+    "m_deals": 491,
+    "m_reft": 83,
+    "m_conv": 53.7,
+    "m_refc": 69.9,
+    "m_deals_yoy": 10.8,
+    "m_tours_yoy": 11.6,
+    "m_leads_yoy": 19.5,
+    "m_sold_add": 276
+   },
+   {
+    "x": "25.12",
+    "m_newt": 1,
+    "m_newo": 1,
+    "m_temple": 122,
+    "m_open": 95,
+    "m_supply": 48331,
+    "m_sold": 18988,
+    "m_leads": 1998,
+    "m_tours": 605,
+    "m_deals": 409,
+    "m_reft": 45,
+    "m_conv": 67.6,
+    "m_refc": 106.7,
+    "m_deals_yoy": -3.5,
+    "m_tours_yoy": -5.9,
+    "m_leads_yoy": 3.5,
+    "m_sold_add": 250
+   },
+   {
+    "x": "26.01",
+    "m_newt": 1,
+    "m_newo": 2,
+    "m_temple": 123,
+    "m_open": 97,
+    "m_supply": 48669,
+    "m_sold": 19236,
+    "m_leads": 2784,
+    "m_tours": 769,
+    "m_deals": 430,
+    "m_reft": 70,
+    "m_conv": 55.9,
+    "m_refc": 77.1,
+    "m_deals_yoy": 14.1,
+    "m_tours_yoy": 11.9,
+    "m_leads_yoy": 22.5,
+    "m_sold_add": 248
+   },
+   {
+    "x": "26.02",
+    "m_newt": 1,
+    "m_newo": 0,
+    "m_temple": 124,
+    "m_open": 97,
+    "m_supply": 48669,
+    "m_sold": 19501,
+    "m_leads": 2254,
+    "m_tours": 734,
+    "m_deals": 464,
+    "m_reft": 63,
+    "m_conv": 63.2,
+    "m_refc": 104.8,
+    "m_deals_yoy": 20.5,
+    "m_tours_yoy": 5.8,
+    "m_leads_yoy": 12.0,
+    "m_sold_add": 265
+   },
+   {
+    "x": "26.03",
+    "m_newt": 3,
+    "m_newo": 2,
+    "m_temple": 127,
+    "m_open": 99,
+    "m_supply": 49461,
+    "m_sold": 19790,
+    "m_leads": 2825,
+    "m_tours": 962,
+    "m_deals": 520,
+    "m_reft": 81,
+    "m_conv": 54.1,
+    "m_refc": 70.4,
+    "m_deals_yoy": 22.4,
+    "m_tours_yoy": 15.5,
+    "m_leads_yoy": 29.2,
+    "m_sold_add": 289
+   },
+   {
+    "x": "26.04",
+    "m_newt": 2,
+    "m_newo": 2,
+    "m_temple": 129,
+    "m_open": 101,
+    "m_supply": 49897,
+    "m_sold": 20106,
+    "m_leads": 2669,
+    "m_tours": 941,
+    "m_deals": 546,
+    "m_reft": 87,
+    "m_conv": 58.0,
+    "m_refc": 72.4,
+    "m_deals_yoy": 24.9,
+    "m_tours_yoy": 15.7,
+    "m_leads_yoy": 20.7,
+    "m_sold_add": 316
+   },
+   {
+    "x": "26.05",
+    "m_newt": 1,
+    "m_newo": 1,
+    "m_temple": 130,
+    "m_open": 102,
+    "m_supply": 50814,
+    "m_sold": 20426,
+    "m_leads": 2715,
+    "m_tours": 1020,
+    "m_deals": 516,
+    "m_reft": 96,
+    "m_conv": 50.6,
+    "m_refc": 88.5,
+    "m_deals_yoy": 16.0,
+    "m_tours_yoy": 15.1,
+    "m_leads_yoy": 10.6,
+    "m_sold_add": 320
+   },
+   {
+    "x": "26.06",
+    "m_newt": 0,
+    "m_newo": 1,
+    "m_temple": 129,
+    "m_open": 102,
+    "m_supply": 51937,
+    "m_sold": 20700,
+    "m_leads": 2223,
+    "m_tours": 765,
+    "m_deals": 504,
+    "m_reft": 70,
+    "m_conv": 65.9,
+    "m_refc": 90.0,
+    "m_deals_yoy": 11.0,
+    "m_tours_yoy": -4.9,
+    "m_leads_yoy": 0.4,
+    "m_sold_add": 274
+   },
+   {
+    "x": "26.07",
+    "m_newt": 1,
+    "m_newo": 1,
+    "m_temple": 130,
+    "m_open": 103,
+    "m_supply": 52147,
+    "m_sold": 20925,
+    "m_leads": 2338,
+    "m_tours": 746,
+    "m_deals": 440,
+    "m_reft": 51,
+    "m_conv": 59.0,
+    "m_refc": 94.1,
+    "m_deals_yoy": 7.8,
+    "m_tours_yoy": 6.3,
+    "m_leads_yoy": 9.9,
+    "m_sold_add": 225
+   },
+   {
+    "x": "26.08",
+    "m_newt": 1,
+    "m_newo": 2,
+    "m_temple": 131,
+    "m_open": 105,
+    "m_supply": 53003,
+    "m_sold": 21244,
+    "m_leads": 2584,
+    "m_tours": 819,
+    "m_deals": 529,
+    "m_reft": 86,
+    "m_conv": 64.6,
+    "m_refc": 100.0,
+    "m_deals_yoy": 34.9,
+    "m_tours_yoy": 8.2,
+    "m_leads_yoy": 1.6,
+    "m_sold_add": 319
+   },
+   {
+    "x": "26.09",
+    "m_newt": 1,
+    "m_newo": 2,
+    "m_temple": 132,
+    "m_open": 107,
+    "m_supply": 53754,
+    "m_sold": 21423,
+    "m_leads": 2716,
+    "m_tours": 761,
+    "m_deals": 366,
+    "m_reft": 64,
+    "m_conv": 48.1,
+    "m_refc": 62.5,
+    "m_deals_yoy": -18.3,
+    "m_tours_yoy": -4.2,
+    "m_leads_yoy": 9.5,
+    "m_sold_add": 179
+   },
+   {
+    "x": "26.10",
+    "m_newt": 0,
+    "m_newo": 0,
+    "m_temple": 132,
+    "m_open": 107,
+    "m_supply": 53821,
+    "m_sold": 21701,
+    "m_leads": 2714,
+    "m_tours": 930,
+    "m_deals": 528,
+    "m_reft": 80,
+    "m_conv": 56.8,
+    "m_refc": 85.0,
+    "m_deals_yoy": 5.8,
+    "m_tours_yoy": 2.1,
+    "m_leads_yoy": 4.0,
+    "m_sold_add": 278
+   }
+  ]
+ }
+}
