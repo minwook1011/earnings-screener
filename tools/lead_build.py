@@ -46,7 +46,27 @@ GROUPS = [  # 대분류 → 세부 섹터(id, 이름, 설명)
         ("lifesvc", "교육 · 관혼상제 · 의료/돌봄 · 생활 서비스", "검색 관심도·인력 흐름."),
         ("hr", "인재 · HR · 아웃소싱", "구인 통계와 인력 흐름."),
         ("b2bsvc", "기타 B2B 서비스", "인력 흐름·관련 시장 통계.")]),
-    ("semi", "반도체", "SEMICONDUCTOR", [("optic", "광", None), ("mat", "소재", None), ("sub", "기판", None), ("equip", "장비", None)]),
+    ("semi", "반도체", "SEMICONDUCTOR", [
+        ("equip", "반도체 장비", "반도체 장비 판매·수출, 세계 반도체 출하."),
+        ("mat", "반도체 소재", "웨이퍼·소재 수출입과 세계 반도체 출하."),
+        ("sub", "기판 · 패키지", "기판·패키지 부품 수출입."),
+        ("optic", "광 · 광통신", "광부품·레이저 수출입.")]),
+    ("elec", "전자 · 전기", "ELECTRONICS", [
+        ("ecomp", "전자부품", "부품 품목별 수출 물량·단가, 전자부품 출하."),
+        ("power", "중전 · 전력기기", "전력 설비 투자·수주, 품목 수출."),
+        ("emach", "전기기기 · 계측 · 정밀", "기계 수주·품목 수출입·생산.")]),
+    ("mach", "기계", "MACHINERY", [
+        ("fa", "FA · 로봇 · 공작기계", "공작기계·로봇 수주, 품목 수출."),
+        ("indmach", "산업 · 건설 · 환경 기계", "기계 수주·건설 투자·품목 수출.")]),
+    ("mats", "소재", "MATERIALS", [
+        ("chem", "화학", "제품 수출 물량·단가, 원재료(나프타 등) 가격."),
+        ("metal", "철강 · 비철 · 금속제품", "금속 가격·수출입·생산."),
+        ("ceram", "유리 · 세라믹 · 고무", "제품 수출입·원재료 가격·생산.")]),
+    ("auto", "자동차 · 운송기기", "AUTOMOTIVE", [("autop", "자동차 · 부품", "자동차 생산·판매·부품 수출.")]),
+    ("trade", "상사 · 도매", "TRADING", [("trading", "상사 · 전문 도매", "취급 품목 수출입·가격.")]),
+    ("enrg", "에너지 · 운송", "ENERGY · TRANSPORT", [
+        ("util", "전력 · 가스 · 자원", "연료 가격·전력 수요·자원 가격."),
+        ("trans", "운송 · 물류", "물동량·여객 수·운임.")]),
 ]
 SUBGROUP = {s[0]: g[0] for g in GROUPS for s in g[3]}
 WHY = {"pension": "직원을 뽑으면 그 달에 후생연금 가입자가 늘어난다. 일본연금기구가 법인별 가입자 수를 매달 공개하므로 결산보다 2~3개월 먼저 인력 증감을 본다.",
@@ -103,7 +123,7 @@ def build(code, x, ed):
             macro.append({"id": "gt:" + (L.get("term") or ""), "name": "구글 검색 관심도 「%s」(수집 대기)" % L.get("term"), "why": L.get("why", "")})
         elif k == "macro":
             macro.append({"id": L.get("id"), "name": L.get("name"), "why": L.get("why", "")})
-    if not items and corp:
+    if not items and corp and x.get("sub") in ("consult", "advisory", "think", "si"):
         items.append({"id": "pen", "kind": "pension", "t": "후생연금 가입자 수", "short": "연금 가입자", "unit": "명", "entity": (ed.get(code) or {}).get("n", ""), "corp": corp,
                       "note": "맞는 외부 지표를 찾는 중 — 우선 인력 흐름만", "why": "", "nenkin": [corp], "pts": [],
                       "src": [{"doc": "일본연금기구 適用事業所検索", "where": "법인번호 %s" % corp, "freq": "월 1회", "auto": "자동", "how": "tools/lead_update.py ②"}]})
