@@ -1,1 +1,1201 @@
-{"c": "3778", "n": "사쿠라인터넷", "asof": "2026-10-28", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "데이터센터·클라우드. 서비스별 매출은 설명회 자료(26.1Q~). 계획은 2Q 상향 수정치", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "GPU 인프라 서비스 매출", "d": "q", "bars": [{"k": "gpu", "l": "GPU 인프라", "u": "억엔", "c": 0}], "lines": [{"k": "gpu_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료 · 생성 AI용 GPU 클라우드 · 26.1Q부터 공시"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "결산단신 · 총차입금 = 단기 + 장기 차입금(리스 채무 제외)"}, {"sec": "사업 지표", "t": "서비스별 매출", "d": "q", "src": "2Q27 결산설명자료 · 기타 서비스는 26.4Q 크게 늘었다가 줄어듦", "lines": [{"k": "gpu", "l": "GPU 인프라", "u": "억엔", "c": 0}, {"k": "cloud", "l": "클라우드", "u": "억엔", "c": 1}, {"k": "other_svc", "l": "기타 서비스", "u": "억엔", "c": 2}, {"k": "phys", "l": "물리 기반(호스팅·DC)", "u": "억엔", "c": 3}]}, {"sec": "사업 지표", "t": "클라우드 서비스 내역", "d": "q", "src": "2Q27 결산설명자료", "lines": [{"k": "cloud_infra", "l": "클라우드 인프라", "u": "억엔", "c": 0}, {"k": "cloud_app", "l": "클라우드 앱", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "EBITDA", "d": "q", "bars": [{"k": "ebitda", "l": "EBITDA", "u": "억엔", "c": 0}], "lines": [{"k": "ebitda_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료"}, {"sec": "사업 지표", "t": "ARR(분기말)", "d": "q", "bars": [{"k": "arr", "l": "ARR", "u": "억엔", "c": 0}], "lines": [{"k": "arr_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료 · 단체 클라우드·VPS·렌털서버 월 반복매출×12 · 숫자 라벨 있는 두 시점만"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 · 마지막 막대 = 회사 계획", "muted": "plan"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "결산단신 · 마지막 막대 = 회사 계획", "muted": "plan"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 53.16, "gp": 13.86, "sga": 11.87, "op": 2.0, "ord": 1.47, "net": 1.29, "cogs": 39.3, "cash": 52.47, "equity": 89.35, "total_assets": 308.02, "st_debt": 12.96, "lt_debt": 21.17, "debt_total": 34.13, "gpm": 26.1, "opm": 3.8, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 61.68, "gp": 17.11, "sga": 12.74, "op": 4.36, "ord": 4.44, "net": 3.48, "cogs": 44.57, "cash": 52.58, "equity": 93.21, "total_assets": 302.24, "st_debt": 11.58, "lt_debt": 36.17, "debt_total": 47.75, "gpm": 27.7, "opm": 7.1, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 59.36, "gp": 16.99, "sga": 14.67, "op": 2.32, "ord": 0.95, "net": 0.42, "cogs": 42.37, "cash": 232.57, "equity": 272.58, "total_assets": 524.1, "st_debt": 12.34, "lt_debt": 74.47, "debt_total": 86.81, "gpm": 28.6, "opm": 3.9, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 73.36, "gp": 26.5, "sga": 15.86, "op": 10.64, "ord": 10.07, "net": 6.68, "cogs": 46.86, "cash": 296.49, "equity": 279.61, "total_assets": 622.57, "st_debt": 45.7, "lt_debt": 66.46, "debt_total": 112.16, "gpm": 36.1, "opm": 14.5, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 81.25, "gp": 29.67, "sga": 16.77, "op": 12.89, "ord": 13.86, "net": 9.32, "cogs": 51.58, "cash": 394.84, "equity": 289.09, "total_assets": 770.92, "st_debt": 96.51, "lt_debt": 58.77, "debt_total": 155.28, "gpm": 36.5, "opm": 15.9, "sales_yoy": 52.8, "gp_yoy": 114.1, "sga_yoy": 41.3, "op_yoy": 544.5, "ord_yoy": 842.9, "net_yoy": 622.5, "cash_yoy": 652.5, "debt_total_yoy": 355.0}, {"q": "25.4Q", "x": "25.4Q", "sales": 100.15, "gp": 39.14, "sga": 23.55, "op": 15.61, "ord": 15.72, "net": 12.95, "cogs": 61.01, "cash": 294.89, "equity": 302.57, "total_assets": 814.19, "st_debt": 119.11, "lt_debt": 31.54, "debt_total": 150.65, "gpm": 39.1, "opm": 15.6, "sales_yoy": 62.4, "gp_yoy": 128.8, "sga_yoy": 84.9, "op_yoy": 258.0, "ord_yoy": 254.1, "net_yoy": 272.1, "cash_yoy": 460.8, "debt_total_yoy": 215.5}, {"q": "26.1Q", "x": "26.1Q", "sales": 74.92, "gp": 15.44, "sga": 20.01, "op": -4.57, "ord": -4.38, "net": -3.24, "cogs": 59.48, "cash": 242.55, "equity": 298.19, "total_assets": 810.01, "st_debt": 94.1, "lt_debt": 25.43, "debt_total": 119.53, "gpm": 20.6, "opm": -6.1, "cloud": 36.97, "cloud_infra": 25.29, "cloud_app": 11.67, "gpu": 13.63, "phys": 8.02, "other_svc": 16.29, "ebitda": 12.05, "sales_yoy": 26.2, "gp_yoy": -9.1, "sga_yoy": 36.4, "op_yoy": -297.0, "ord_yoy": -561.1, "net_yoy": -871.4, "cash_yoy": 4.3, "gpu_yoy": null, "cloud_yoy": null, "phys_yoy": null, "other_svc_yoy": null, "ebitda_yoy": null, "debt_total_yoy": 37.7}, {"q": "26.2Q", "x": "26.2Q", "sales": 81.39, "gp": 16.05, "sga": 20.69, "op": -4.64, "ord": -3.74, "net": -3.03, "cogs": 65.34, "cash": 107.8, "equity": 296.12, "total_assets": 802.6, "st_debt": 143.34, "lt_debt": 49.17, "debt_total": 192.51, "gpm": 19.7, "opm": -5.7, "cloud": 38.09, "cloud_infra": 26.23, "cloud_app": 11.85, "gpu": 14.56, "phys": 7.75, "other_svc": 20.97, "ebitda": 14.63, "arr": 146.8, "sales_yoy": 10.9, "gp_yoy": -39.4, "sga_yoy": 30.5, "op_yoy": -143.6, "ord_yoy": -137.1, "net_yoy": -145.4, "cash_yoy": -63.6, "gpu_yoy": null, "cloud_yoy": null, "phys_yoy": null, "other_svc_yoy": null, "ebitda_yoy": null, "arr_yoy": null, "debt_total_yoy": 71.6}, {"q": "26.3Q", "x": "26.3Q", "sales": 83.94, "gp": 18.89, "sga": 20.85, "op": -1.96, "ord": 0.12, "net": 0.76, "cogs": 65.05, "cash": 122.43, "equity": 295.75, "total_assets": 826.19, "st_debt": 135.78, "lt_debt": 65.53, "debt_total": 201.31, "gpm": 22.5, "opm": -2.3, "cloud": 38.62, "cloud_infra": 26.78, "cloud_app": 11.84, "gpu": 18.18, "phys": 7.54, "other_svc": 19.58, "ebitda": 20.49, "sales_yoy": 3.3, "gp_yoy": -36.3, "sga_yoy": 24.3, "op_yoy": -115.2, "ord_yoy": -99.1, "net_yoy": -91.8, "cash_yoy": -69.0, "gpu_yoy": null, "cloud_yoy": null, "phys_yoy": null, "other_svc_yoy": null, "ebitda_yoy": null, "debt_total_yoy": 29.6}, {"q": "26.4Q", "x": "26.4Q", "sales": 112.77, "gp": 29.19, "sga": 22.05, "op": 7.13, "ord": 9.05, "net": 7.67, "cogs": 83.58, "cash": 153.91, "equity": 303.29, "total_assets": 824.51, "st_debt": 154.84, "lt_debt": 57.77, "debt_total": 212.61, "gpm": 25.9, "opm": 6.3, "cloud": 39.5, "cloud_infra": 27.69, "cloud_app": 11.81, "gpu": 35.05, "phys": 7.24, "other_svc": 30.96, "ebitda": 36.64, "sales_yoy": 12.6, "gp_yoy": -25.4, "sga_yoy": -6.4, "op_yoy": -54.3, "ord_yoy": -42.4, "net_yoy": -40.8, "cash_yoy": -47.8, "gpu_yoy": null, "cloud_yoy": null, "phys_yoy": null, "other_svc_yoy": null, "ebitda_yoy": null, "debt_total_yoy": 41.1}, {"q": "27.1Q", "x": "27.1Q", "sales": 111.35, "gp": 34.21, "sga": 21.91, "op": 12.31, "ord": 12.58, "net": 8.56, "cogs": 77.14, "cash": 172.71, "equity": 309.9, "total_assets": 875.46, "st_debt": 189.85, "lt_debt": 50.67, "debt_total": 240.52, "gpm": 30.7, "opm": 11.1, "cloud": 39.75, "cloud_infra": 28.1, "cloud_app": 11.64, "gpu": 47.18, "phys": 7.08, "other_svc": 17.32, "ebitda": 43.89, "sales_yoy": 48.6, "gp_yoy": 121.6, "sga_yoy": 9.5, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -28.8, "gpu_yoy": 246.1, "cloud_yoy": 7.5, "phys_yoy": -11.7, "other_svc_yoy": 6.3, "ebitda_yoy": 264.2, "debt_total_yoy": 101.2}, {"q": "27.2Q", "x": "27.2Q", "sales": 116.92, "gp": 38.92, "sga": 21.59, "op": 17.32, "ord": 17.56, "net": 10.48, "cogs": 78.0, "cash": 194.25, "equity": 319.69, "total_assets": 879.76, "st_debt": 134.75, "lt_debt": 64.49, "debt_total": 199.24, "gpm": 33.3, "opm": 14.8, "cloud": 40.96, "cloud_infra": 29.27, "cloud_app": 11.68, "gpu": 54.06, "phys": 6.54, "other_svc": 15.35, "ebitda": 50.59, "arr": 159.66, "sales_yoy": 43.7, "gp_yoy": 142.5, "sga_yoy": 4.3, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": 80.2, "gpu_yoy": 271.3, "cloud_yoy": 7.5, "phys_yoy": -15.6, "other_svc_yoy": -26.8, "ebitda_yoy": 245.8, "arr_yoy": 8.8, "debt_total_yoy": 3.5}], "a": [{"year": "21/3", "x": "21/3", "sales": 221.68, "op": 13.72, "ord": 10.99, "net": 7.58, "opm": 6.2, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "22/3", "x": "22/3", "sales": 200.19, "op": 7.63, "ord": 6.49, "net": 2.75, "opm": 3.8, "sales_yoy": -9.7, "op_yoy": -44.4, "net_yoy": -63.7}, {"year": "23/3", "x": "23/3", "sales": 206.22, "op": 10.93, "ord": 9.65, "net": 6.66, "opm": 5.3, "sales_yoy": 3.0, "op_yoy": 43.3, "net_yoy": 142.2}, {"year": "24/3", "x": "24/3", "sales": 218.26, "op": 8.84, "ord": 7.64, "net": 6.51, "opm": 4.1, "sales_yoy": 5.8, "op_yoy": -19.1, "net_yoy": -2.3}, {"year": "25/3", "x": "25/3", "sales": 314.12, "op": 41.45, "ord": 40.6, "net": 29.37, "opm": 13.2, "sales_yoy": 43.9, "op_yoy": 368.9, "net_yoy": 351.2}, {"year": "26/3", "x": "26/3", "sales": 353.01, "op": -4.03, "ord": 1.05, "net": 2.16, "opm": -1.1, "sales_yoy": 12.4, "op_yoy": -109.7, "net_yoy": -92.6}, {"year": "27/3 계획", "x": "27/3 계획", "sales": 466.0, "op": 41.0, "ord": 39.0, "net": 25.5, "opm": 8.8, "sales_yoy": 32.0, "op_yoy": null, "net_yoy": 1080.6, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "3778",
+ "n": "사쿠라인터넷",
+ "asof": "2026-10-28",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "데이터센터·클라우드. 서비스별 매출은 26년 3월기 새 구분(25.1Q~ 소급). 계획은 2Q 상향 수정치",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "GPU 인프라 서비스 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "gpu",
+     "l": "GPU 인프라",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "gpu_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지) · 25년 3월기 1Q 은 관공서 대형 안건 만료로 작음"
+  },
+  {
+   "sec": "key",
+   "t": "ARR(분기말)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "arr",
+     "l": "ARR",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "arr_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 ARR(새 산식: 분기 각 달 MRR 합 × 4, 단체 클라우드·VPS·렌털서버) · 25.2Q~ 라벨 있는 분기만(26.3Q 자료엔 숫자 없음)"
+  },
+  {
+   "sec": "서비스",
+   "t": "서비스별 매출",
+   "d": "q",
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)",
+   "lines": [
+    {
+     "k": "gpu",
+     "l": "GPU 인프라",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "cloud",
+     "l": "클라우드",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "other_svc",
+     "l": "기타 서비스",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "phys",
+     "l": "물리 기반(호스팅·DC)",
+     "u": "억엔",
+     "c": 3
+    }
+   ]
+  },
+  {
+   "sec": "서비스",
+   "t": "클라우드 서비스 내역",
+   "d": "q",
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)",
+   "lines": [
+    {
+     "k": "cloud_infra",
+     "l": "클라우드 인프라",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "cloud_app",
+     "l": "클라우드 앱",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "서비스",
+   "t": "클라우드 서비스 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cloud",
+     "l": "클라우드",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cloud_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)",
+   "def": "클라우드 인프라(사쿠라 클라우드·VPS·GPU 클라우드형) + 클라우드 앱(렌털서버 등)"
+  },
+  {
+   "sec": "서비스",
+   "t": "클라우드 인프라 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cloud_infra",
+     "l": "클라우드 인프라",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cloud_infra_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)",
+   "def": "사쿠라 클라우드·VPS·고화력 DOK/VRT — 거버먼트 클라우드 대상"
+  },
+  {
+   "sec": "서비스",
+   "t": "클라우드 앱 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cloud_app",
+     "l": "클라우드 앱",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cloud_app_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)",
+   "def": "렌털서버·앱 서비스"
+  },
+  {
+   "sec": "서비스",
+   "t": "물리 기반 서비스 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "phys",
+     "l": "물리 기반",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "phys_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)",
+   "def": "하우징·전용 서버"
+  },
+  {
+   "sec": "서비스",
+   "t": "기타 서비스 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "other_svc",
+     "l": "기타",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "other_svc_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)",
+   "def": "그룹사 SI·관공서 대형 안건·사쿠라 AI 등 — 분기 변동 큼"
+  },
+  {
+   "sec": "서비스",
+   "t": "매출 비중(GPU·클라우드)",
+   "d": "q",
+   "def": "서비스 매출 ÷ 연결 매출",
+   "lines": [
+    {
+     "k": "gpu_sh",
+     "l": "GPU 인프라",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "cloud_sh",
+     "l": "클라우드",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 서비스 카테고리별 매출(25.1Q~ 26년 3월기 새 구분으로 소급 조정된 숫자, 2Q27 자료까지)"
+  },
+  {
+   "sec": "GPU",
+   "t": "생성 AI 기반 투자(제공 개시 시기별)",
+   "d": "gi",
+   "def": "GPU(H100·H200·B200)와 컨테이너형 DC 투자액, 제공 개시 달 기준 · 누적은 그 둘의 합",
+   "bars": [
+    {
+     "k": "gpu_inv",
+     "l": "GPU 등",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "dc_inv",
+     "l": "컨테이너형 DC",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "cum",
+     "l": "누적",
+     "u": "억엔",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료 '생성 AI 향 서비스 투자 실적'(1억엔 미만 버림, 합계 521억엔 중 기타 7억엔 제외) · 이 밖에 26년 3월기 기타 7억엔, 27년 3월기 이후 Rubin 260억엔·발전기동 44억엔 계획"
+  },
+  {
+   "sec": "인원",
+   "t": "종업원 수(연결, 분기말)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "emp",
+     "l": "종업원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "emp_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 투자·인원수(취업 인원, 출향자 조정) · 27.2Q 감소는 Tellus 연결 제외"
+  },
+  {
+   "sec": "인원",
+   "t": "1인당 매출(분기)",
+   "d": "q",
+   "def": "분기 매출 ÷ 분기말 연결 종업원 수",
+   "bars": [
+    {
+     "k": "spe",
+     "l": "1인당 매출",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "spe_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 매출 · 결산설명자료 종업원 수"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산단신 · 총차입금 = 단기 + 장기 차입금(리스 채무 제외)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 마지막 막대 = 회사 계획",
+   "muted": "plan"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 마지막 막대 = 회사 계획",
+   "muted": "plan"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 53.16,
+    "gp": 13.86,
+    "sga": 11.87,
+    "op": 2.0,
+    "ord": 1.47,
+    "net": 1.29,
+    "cogs": 39.3,
+    "cash": 52.47,
+    "equity": 89.35,
+    "total_assets": 308.02,
+    "st_debt": 12.96,
+    "lt_debt": 21.17,
+    "debt_total": 34.13,
+    "gpm": 26.1,
+    "opm": 3.8,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "gpu_yoy": null,
+    "cloud_yoy": null,
+    "cloud_infra_yoy": null,
+    "cloud_app_yoy": null,
+    "phys_yoy": null,
+    "other_svc_yoy": null,
+    "emp_yoy": null,
+    "spe_yoy": null,
+    "arr_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 61.68,
+    "gp": 17.11,
+    "sga": 12.74,
+    "op": 4.36,
+    "ord": 4.44,
+    "net": 3.48,
+    "cogs": 44.57,
+    "cash": 52.58,
+    "equity": 93.21,
+    "total_assets": 302.24,
+    "st_debt": 11.58,
+    "lt_debt": 36.17,
+    "debt_total": 47.75,
+    "gpm": 27.7,
+    "opm": 7.1,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "emp": 839,
+    "spe": 735.0,
+    "gpu_yoy": null,
+    "cloud_yoy": null,
+    "cloud_infra_yoy": null,
+    "cloud_app_yoy": null,
+    "phys_yoy": null,
+    "other_svc_yoy": null,
+    "emp_yoy": null,
+    "spe_yoy": null,
+    "arr_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 59.36,
+    "gp": 16.99,
+    "sga": 14.67,
+    "op": 2.32,
+    "ord": 0.95,
+    "net": 0.42,
+    "cogs": 42.37,
+    "cash": 232.57,
+    "equity": 272.58,
+    "total_assets": 524.1,
+    "st_debt": 12.34,
+    "lt_debt": 74.47,
+    "debt_total": 86.81,
+    "gpm": 28.6,
+    "opm": 3.9,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "cloud": 33.68,
+    "cloud_infra": 23.46,
+    "cloud_app": 10.21,
+    "gpu": 4.97,
+    "phys": 8.25,
+    "other_svc": 12.43,
+    "emp": 906,
+    "gpu_sh": 8.4,
+    "cloud_sh": 56.7,
+    "spe": 655.0,
+    "gpu_yoy": null,
+    "cloud_yoy": null,
+    "cloud_infra_yoy": null,
+    "cloud_app_yoy": null,
+    "phys_yoy": null,
+    "other_svc_yoy": null,
+    "emp_yoy": null,
+    "spe_yoy": null,
+    "arr_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 73.36,
+    "gp": 26.5,
+    "sga": 15.86,
+    "op": 10.64,
+    "ord": 10.07,
+    "net": 6.68,
+    "cogs": 46.86,
+    "cash": 296.49,
+    "equity": 279.61,
+    "total_assets": 622.57,
+    "st_debt": 45.7,
+    "lt_debt": 66.46,
+    "debt_total": 112.16,
+    "gpm": 36.1,
+    "opm": 14.5,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "cloud": 34.44,
+    "cloud_infra": 23.7,
+    "cloud_app": 10.74,
+    "gpu": 17.42,
+    "phys": 8.2,
+    "other_svc": 13.28,
+    "emp": 927,
+    "arr": 132.87,
+    "gpu_sh": 23.7,
+    "cloud_sh": 46.9,
+    "spe": 791.0,
+    "gpu_yoy": null,
+    "cloud_yoy": null,
+    "cloud_infra_yoy": null,
+    "cloud_app_yoy": null,
+    "phys_yoy": null,
+    "other_svc_yoy": null,
+    "emp_yoy": null,
+    "spe_yoy": null,
+    "arr_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 81.25,
+    "gp": 29.67,
+    "sga": 16.77,
+    "op": 12.89,
+    "ord": 13.86,
+    "net": 9.32,
+    "cogs": 51.58,
+    "cash": 394.84,
+    "equity": 289.09,
+    "total_assets": 770.92,
+    "st_debt": 96.51,
+    "lt_debt": 58.77,
+    "debt_total": 155.28,
+    "gpm": 36.5,
+    "opm": 15.9,
+    "sales_yoy": 52.8,
+    "gp_yoy": 114.1,
+    "sga_yoy": 41.3,
+    "op_yoy": 544.5,
+    "ord_yoy": 842.9,
+    "net_yoy": 622.5,
+    "cash_yoy": 652.5,
+    "debt_total_yoy": 355.0,
+    "cloud": 35.43,
+    "cloud_infra": 24.36,
+    "cloud_app": 11.07,
+    "gpu": 18.34,
+    "phys": 8.25,
+    "other_svc": 19.22,
+    "emp": 956,
+    "gpu_sh": 22.6,
+    "cloud_sh": 43.6,
+    "spe": 850.0,
+    "gpu_yoy": null,
+    "cloud_yoy": null,
+    "cloud_infra_yoy": null,
+    "cloud_app_yoy": null,
+    "phys_yoy": null,
+    "other_svc_yoy": null,
+    "emp_yoy": null,
+    "spe_yoy": null,
+    "arr_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 100.15,
+    "gp": 39.14,
+    "sga": 23.55,
+    "op": 15.61,
+    "ord": 15.72,
+    "net": 12.95,
+    "cogs": 61.01,
+    "cash": 294.89,
+    "equity": 302.57,
+    "total_assets": 814.19,
+    "st_debt": 119.11,
+    "lt_debt": 31.54,
+    "debt_total": 150.65,
+    "gpm": 39.1,
+    "opm": 15.6,
+    "sales_yoy": 62.4,
+    "gp_yoy": 128.8,
+    "sga_yoy": 84.9,
+    "op_yoy": 258.0,
+    "ord_yoy": 254.1,
+    "net_yoy": 272.1,
+    "cash_yoy": 460.8,
+    "debt_total_yoy": 215.5,
+    "cloud": 36.5,
+    "cloud_infra": 25.06,
+    "cloud_app": 11.44,
+    "gpu": 26.97,
+    "phys": 8.22,
+    "other_svc": 28.44,
+    "emp": 997,
+    "arr": 140.82,
+    "gpu_sh": 26.9,
+    "cloud_sh": 36.4,
+    "spe": 1005.0,
+    "gpu_yoy": null,
+    "cloud_yoy": null,
+    "cloud_infra_yoy": null,
+    "cloud_app_yoy": null,
+    "phys_yoy": null,
+    "other_svc_yoy": null,
+    "emp_yoy": 18.8,
+    "spe_yoy": 36.7,
+    "arr_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 74.92,
+    "gp": 15.44,
+    "sga": 20.01,
+    "op": -4.57,
+    "ord": -4.38,
+    "net": -3.24,
+    "cogs": 59.48,
+    "cash": 242.55,
+    "equity": 298.19,
+    "total_assets": 810.01,
+    "st_debt": 94.1,
+    "lt_debt": 25.43,
+    "debt_total": 119.53,
+    "gpm": 20.6,
+    "opm": -6.1,
+    "cloud": 36.97,
+    "cloud_infra": 25.29,
+    "cloud_app": 11.67,
+    "gpu": 13.63,
+    "phys": 8.02,
+    "other_svc": 16.29,
+    "ebitda": 12.05,
+    "sales_yoy": 26.2,
+    "gp_yoy": -9.1,
+    "sga_yoy": 36.4,
+    "op_yoy": -297.0,
+    "ord_yoy": -561.1,
+    "net_yoy": -871.4,
+    "cash_yoy": 4.3,
+    "gpu_yoy": 174.2,
+    "cloud_yoy": 9.8,
+    "phys_yoy": -2.8,
+    "other_svc_yoy": 31.1,
+    "ebitda_yoy": null,
+    "debt_total_yoy": 37.7,
+    "emp": 1078,
+    "arr": 143.1,
+    "gpu_sh": 18.2,
+    "cloud_sh": 49.3,
+    "spe": 695.0,
+    "cloud_infra_yoy": 7.8,
+    "cloud_app_yoy": 14.3,
+    "emp_yoy": 19.0,
+    "spe_yoy": 6.1,
+    "arr_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 81.39,
+    "gp": 16.05,
+    "sga": 20.69,
+    "op": -4.64,
+    "ord": -3.74,
+    "net": -3.03,
+    "cogs": 65.34,
+    "cash": 107.8,
+    "equity": 296.12,
+    "total_assets": 802.6,
+    "st_debt": 143.34,
+    "lt_debt": 49.17,
+    "debt_total": 192.51,
+    "gpm": 19.7,
+    "opm": -5.7,
+    "cloud": 38.09,
+    "cloud_infra": 26.23,
+    "cloud_app": 11.85,
+    "gpu": 14.56,
+    "phys": 7.75,
+    "other_svc": 20.97,
+    "ebitda": 14.63,
+    "arr": 146.8,
+    "sales_yoy": 10.9,
+    "gp_yoy": -39.4,
+    "sga_yoy": 30.5,
+    "op_yoy": -143.6,
+    "ord_yoy": -137.1,
+    "net_yoy": -145.4,
+    "cash_yoy": -63.6,
+    "gpu_yoy": -16.4,
+    "cloud_yoy": 10.6,
+    "phys_yoy": -5.5,
+    "other_svc_yoy": 57.9,
+    "ebitda_yoy": null,
+    "arr_yoy": 10.5,
+    "debt_total_yoy": 71.6,
+    "emp": 1116,
+    "gpu_sh": 17.9,
+    "cloud_sh": 46.8,
+    "spe": 729.0,
+    "cloud_infra_yoy": 10.7,
+    "cloud_app_yoy": 10.3,
+    "emp_yoy": 20.4,
+    "spe_yoy": -7.8
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 83.94,
+    "gp": 18.89,
+    "sga": 20.85,
+    "op": -1.96,
+    "ord": 0.12,
+    "net": 0.76,
+    "cogs": 65.05,
+    "cash": 122.43,
+    "equity": 295.75,
+    "total_assets": 826.19,
+    "st_debt": 135.78,
+    "lt_debt": 65.53,
+    "debt_total": 201.31,
+    "gpm": 22.5,
+    "opm": -2.3,
+    "cloud": 38.62,
+    "cloud_infra": 26.78,
+    "cloud_app": 11.84,
+    "gpu": 18.18,
+    "phys": 7.54,
+    "other_svc": 19.58,
+    "ebitda": 20.49,
+    "sales_yoy": 3.3,
+    "gp_yoy": -36.3,
+    "sga_yoy": 24.3,
+    "op_yoy": -115.2,
+    "ord_yoy": -99.1,
+    "net_yoy": -91.8,
+    "cash_yoy": -69.0,
+    "gpu_yoy": -0.9,
+    "cloud_yoy": 9.0,
+    "phys_yoy": -8.6,
+    "other_svc_yoy": 1.9,
+    "ebitda_yoy": null,
+    "debt_total_yoy": 29.6,
+    "emp": 1138,
+    "gpu_sh": 21.7,
+    "cloud_sh": 46.0,
+    "spe": 738.0,
+    "cloud_infra_yoy": 9.9,
+    "cloud_app_yoy": 7.0,
+    "emp_yoy": 19.0,
+    "spe_yoy": -13.2,
+    "arr_yoy": null
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 112.77,
+    "gp": 29.19,
+    "sga": 22.05,
+    "op": 7.13,
+    "ord": 9.05,
+    "net": 7.67,
+    "cogs": 83.58,
+    "cash": 153.91,
+    "equity": 303.29,
+    "total_assets": 824.51,
+    "st_debt": 154.84,
+    "lt_debt": 57.77,
+    "debt_total": 212.61,
+    "gpm": 25.9,
+    "opm": 6.3,
+    "cloud": 39.5,
+    "cloud_infra": 27.69,
+    "cloud_app": 11.81,
+    "gpu": 35.05,
+    "phys": 7.24,
+    "other_svc": 30.96,
+    "ebitda": 36.64,
+    "sales_yoy": 12.6,
+    "gp_yoy": -25.4,
+    "sga_yoy": -6.4,
+    "op_yoy": -54.3,
+    "ord_yoy": -42.4,
+    "net_yoy": -40.8,
+    "cash_yoy": -47.8,
+    "gpu_yoy": 30.0,
+    "cloud_yoy": 8.2,
+    "phys_yoy": -11.9,
+    "other_svc_yoy": 8.9,
+    "ebitda_yoy": null,
+    "debt_total_yoy": 41.1,
+    "emp": 1135,
+    "arr": 153.91,
+    "gpu_sh": 31.1,
+    "cloud_sh": 35.0,
+    "spe": 994.0,
+    "cloud_infra_yoy": 10.5,
+    "cloud_app_yoy": 3.2,
+    "emp_yoy": 13.8,
+    "spe_yoy": -1.1,
+    "arr_yoy": 9.3
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 111.35,
+    "gp": 34.21,
+    "sga": 21.91,
+    "op": 12.31,
+    "ord": 12.58,
+    "net": 8.56,
+    "cogs": 77.14,
+    "cash": 172.71,
+    "equity": 309.9,
+    "total_assets": 875.46,
+    "st_debt": 189.85,
+    "lt_debt": 50.67,
+    "debt_total": 240.52,
+    "gpm": 30.7,
+    "opm": 11.1,
+    "cloud": 39.75,
+    "cloud_infra": 28.1,
+    "cloud_app": 11.64,
+    "gpu": 47.18,
+    "phys": 7.08,
+    "other_svc": 17.32,
+    "ebitda": 43.89,
+    "sales_yoy": 48.6,
+    "gp_yoy": 121.6,
+    "sga_yoy": 9.5,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -28.8,
+    "gpu_yoy": 246.1,
+    "cloud_yoy": 7.5,
+    "phys_yoy": -11.7,
+    "other_svc_yoy": 6.3,
+    "ebitda_yoy": 264.2,
+    "debt_total_yoy": 101.2,
+    "emp": 1171,
+    "arr": 155.79,
+    "gpu_sh": 42.4,
+    "cloud_sh": 35.7,
+    "spe": 951.0,
+    "cloud_infra_yoy": 11.1,
+    "cloud_app_yoy": -0.3,
+    "emp_yoy": 8.6,
+    "spe_yoy": 36.8,
+    "arr_yoy": 8.9
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 116.92,
+    "gp": 38.92,
+    "sga": 21.59,
+    "op": 17.32,
+    "ord": 17.56,
+    "net": 10.48,
+    "cogs": 78.0,
+    "cash": 194.25,
+    "equity": 319.69,
+    "total_assets": 879.76,
+    "st_debt": 134.75,
+    "lt_debt": 64.49,
+    "debt_total": 199.24,
+    "gpm": 33.3,
+    "opm": 14.8,
+    "cloud": 40.96,
+    "cloud_infra": 29.27,
+    "cloud_app": 11.68,
+    "gpu": 54.06,
+    "phys": 6.54,
+    "other_svc": 15.35,
+    "ebitda": 50.59,
+    "arr": 159.66,
+    "sales_yoy": 43.7,
+    "gp_yoy": 142.5,
+    "sga_yoy": 4.3,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": 80.2,
+    "gpu_yoy": 271.3,
+    "cloud_yoy": 7.5,
+    "phys_yoy": -15.6,
+    "other_svc_yoy": -26.8,
+    "ebitda_yoy": 245.8,
+    "arr_yoy": 8.8,
+    "debt_total_yoy": 3.5,
+    "emp": 1126,
+    "gpu_sh": 46.2,
+    "cloud_sh": 35.0,
+    "spe": 1038.0,
+    "cloud_infra_yoy": 11.6,
+    "cloud_app_yoy": -1.4,
+    "emp_yoy": 0.9,
+    "spe_yoy": 42.4
+   }
+  ],
+  "a": [
+   {
+    "year": "21/3",
+    "x": "21/3",
+    "sales": 221.68,
+    "op": 13.72,
+    "ord": 10.99,
+    "net": 7.58,
+    "opm": 6.2,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "22/3",
+    "x": "22/3",
+    "sales": 200.19,
+    "op": 7.63,
+    "ord": 6.49,
+    "net": 2.75,
+    "opm": 3.8,
+    "sales_yoy": -9.7,
+    "op_yoy": -44.4,
+    "net_yoy": -63.7
+   },
+   {
+    "year": "23/3",
+    "x": "23/3",
+    "sales": 206.22,
+    "op": 10.93,
+    "ord": 9.65,
+    "net": 6.66,
+    "opm": 5.3,
+    "sales_yoy": 3.0,
+    "op_yoy": 43.3,
+    "net_yoy": 142.2
+   },
+   {
+    "year": "24/3",
+    "x": "24/3",
+    "sales": 218.26,
+    "op": 8.84,
+    "ord": 7.64,
+    "net": 6.51,
+    "opm": 4.1,
+    "sales_yoy": 5.8,
+    "op_yoy": -19.1,
+    "net_yoy": -2.3
+   },
+   {
+    "year": "25/3",
+    "x": "25/3",
+    "sales": 314.12,
+    "op": 41.45,
+    "ord": 40.6,
+    "net": 29.37,
+    "opm": 13.2,
+    "sales_yoy": 43.9,
+    "op_yoy": 368.9,
+    "net_yoy": 351.2
+   },
+   {
+    "year": "26/3",
+    "x": "26/3",
+    "sales": 353.01,
+    "op": -4.03,
+    "ord": 1.05,
+    "net": 2.16,
+    "opm": -1.1,
+    "sales_yoy": 12.4,
+    "op_yoy": -109.7,
+    "net_yoy": -92.6
+   },
+   {
+    "year": "27/3 계획",
+    "x": "27/3 계획",
+    "sales": 466.0,
+    "op": 41.0,
+    "ord": 39.0,
+    "net": 25.5,
+    "opm": 8.8,
+    "sales_yoy": 32.0,
+    "op_yoy": null,
+    "net_yoy": 1080.6,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "gi": [
+   {
+    "x": "24.1",
+    "gpu_inv": 34,
+    "cum": 34
+   },
+   {
+    "x": "24.6",
+    "gpu_inv": 81,
+    "cum": 115
+   },
+   {
+    "x": "24.12",
+    "gpu_inv": 50,
+    "cum": 165
+   },
+   {
+    "x": "25.4",
+    "gpu_inv": 2,
+    "cum": 167
+   },
+   {
+    "x": "25.6",
+    "gpu_inv": 79,
+    "dc_inv": 30,
+    "cum": 276
+   },
+   {
+    "x": "25.8",
+    "gpu_inv": 53,
+    "cum": 329
+   },
+   {
+    "x": "26.2",
+    "gpu_inv": 135,
+    "dc_inv": 48,
+    "cum": 512
+   }
+  ]
+ }
+}
