@@ -1,1 +1,1409 @@
-{"c": "4229", "n": "군에이화학공업", "asof": "2026-10-30", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "일본 기준. 차입금 없음. 분기 숫자는 결산단신 누계 차분.", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신·과거 분기 결산단신 XBRL"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신·과거 분기 결산단신 XBRL"}, {"sec": "key", "t": "화학품 부문 이익(분기)", "d": "q", "bars": [{"k": "chem_o", "l": "화학품 이익", "u": "억엔", "c": 0}], "lines": [{"k": "chem_o_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신·과거 분기 결산단신 XBRL 부문 정보(누계 차분)", "def": "페놀수지·주물용 수지·섬유 등 — 매출의 약 85%"}, {"sec": "key", "t": "재고자산", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신·과거 분기 결산단신 XBRL · 재고 = 제품·상품 + 재공품 + 원재료·저장품"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 · 마지막 막대 = 회사 계획", "muted": "plan"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "결산단신 · 마지막 막대 = 회사 계획", "muted": "plan"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산단신·과거 분기 결산단신 XBRL"}, {"sec": "재무", "t": "현금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}], "lines": [{"k": "cash_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신·과거 분기 결산단신 XBRL · 차입금 없음"}, {"sec": "부문", "t": "부문별 매출(분기)", "d": "sq", "src": "결산단신 부문 정보(누계 차분으로 분기 단독, 내부 거래 포함)", "lines": [{"k": "chem_s", "l": "화학품", "u": "억엔", "c": 0}, {"k": "food_s", "l": "식품", "u": "억엔", "c": 1}, {"k": "re_s", "l": "부동산 활용", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "부문별 이익(분기)", "d": "sq", "src": "결산단신 부문 정보(누계 차분으로 분기 단독)", "lines": [{"k": "chem_o", "l": "화학품", "u": "억엔", "c": 0}, {"k": "food_o", "l": "식품", "u": "억엔", "c": 1}, {"k": "re_o", "l": "부동산 활용", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "부문별 이익률(분기)", "d": "sq", "lines": [{"k": "chem_opm", "l": "화학품", "u": "%", "c": 0, "r": 1}, {"k": "food_opm", "l": "식품", "u": "%", "c": 1, "r": 1}, {"k": "re_opm", "l": "부동산 활용", "u": "%", "c": 2, "r": 1}], "src": "결산단신 부문 정보"}, {"sec": "부문", "t": "화학품 매출", "d": "sq", "bars": [{"k": "chem_s", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "chem_s_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문 정보(분기 단독)"}, {"sec": "부문", "t": "식품 매출", "d": "sq", "bars": [{"k": "food_s", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "food_s_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문 정보(분기 단독)"}, {"sec": "부문", "t": "부동산 활용 매출", "d": "sq", "bars": [{"k": "re_s", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "re_s_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문 정보(분기 단독)"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 75.95, "gp": 18.1, "sga": 10.12, "op": 7.99, "ord": 8.49, "net": 5.74, "cash": 85.9, "equity": 487.17, "total_assets": 587.35, "inventory": 58.3, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 63.55, "chem_o": 8.1, "cogs": 57.85, "gpm": 23.8, "opm": 10.5, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "chem_s_yoy": null, "chem_o_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 70.97, "gp": 14.03, "sga": 10.79, "op": 3.24, "ord": 4.76, "net": 1.97, "cash": 86.34, "equity": 502.81, "total_assets": 610.1, "inventory": 58.62, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 58.51, "chem_o": 3.46, "cogs": 56.94, "gpm": 19.8, "opm": 4.6, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "inventory_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "chem_s_yoy": null, "chem_o_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 76.34, "gp": 17.09, "sga": 10.16, "op": 6.92, "ord": 8.1, "net": 5.3, "cash": 81.95, "equity": 507.31, "total_assets": 608.15, "inventory": 56.86, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 61.07, "chem_o": 5.8, "cogs": 59.25, "gpm": 22.4, "opm": 9.1, "sales_yoy": -4.0, "gp_yoy": -7.7, "sga_yoy": 0.3, "op_yoy": -17.5, "ord_yoy": -13.4, "net_yoy": -14.2, "cash_yoy": 0.4, "inventory_yoy": 1.1, "debt_total_yoy": null, "equity_yoy": 7.6, "chem_s_yoy": -3.8, "chem_o_yoy": -18.2}, {"q": "25.2Q", "x": "25.2Q", "sales": 75.48, "gp": 16.02, "sga": 10.6, "op": 5.43, "ord": 6.26, "net": 4.57, "cash": 94.75, "equity": 504.53, "total_assets": 599.64, "inventory": 54.74, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 62.69, "chem_o": 4.66, "cogs": 59.46, "gpm": 21.2, "opm": 7.2, "sales_yoy": -1.5, "gp_yoy": -11.6, "sga_yoy": 1.5, "op_yoy": -29.2, "ord_yoy": -30.6, "net_yoy": -29.8, "cash_yoy": 3.7, "inventory_yoy": -5.0, "debt_total_yoy": null, "equity_yoy": 4.5, "chem_s_yoy": 0.4, "chem_o_yoy": -33.2}, {"q": "25.3Q", "x": "25.3Q", "sales": 75.2, "gp": 15.31, "sga": 10.71, "op": 4.59, "ord": 5.42, "net": 4.07, "cash": 93.89, "equity": 510.62, "total_assets": 617.55, "inventory": 57.05, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 63.78, "chem_o": 4.57, "cogs": 59.89, "gpm": 20.4, "opm": 6.1, "sales_yoy": -1.0, "gp_yoy": -15.4, "sga_yoy": 5.8, "op_yoy": -42.6, "ord_yoy": -36.2, "net_yoy": -29.1, "cash_yoy": 9.3, "inventory_yoy": -2.1, "debt_total_yoy": null, "equity_yoy": 4.8, "chem_s_yoy": 0.4, "chem_o_yoy": -43.6}, {"q": "25.4Q", "x": "25.4Q", "sales": 78.43, "gp": 16.83, "sga": 10.85, "op": 5.99, "ord": 7.38, "net": 5.26, "cash": 92.51, "equity": 517.31, "total_assets": 630.18, "inventory": 57.55, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 67.05, "chem_o": 5.95, "cogs": 61.6, "gpm": 21.5, "opm": 7.6, "sales_yoy": 10.5, "gp_yoy": 20.0, "sga_yoy": 0.6, "op_yoy": 84.9, "ord_yoy": 55.0, "net_yoy": 167.0, "cash_yoy": 7.1, "inventory_yoy": -1.8, "debt_total_yoy": null, "equity_yoy": 2.9, "chem_s_yoy": 14.6, "chem_o_yoy": 72.0}, {"q": "26.1Q", "x": "26.1Q", "sales": 77.24, "gp": 17.31, "sga": 10.79, "op": 6.51, "ord": 7.27, "net": 4.63, "cash": 96.8, "equity": 518.88, "total_assets": 632.38, "inventory": 55.62, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 63.6, "chem_o": 5.39, "cogs": 59.93, "gpm": 22.4, "opm": 8.4, "sales_yoy": 1.2, "gp_yoy": 1.3, "sga_yoy": 6.2, "op_yoy": -5.9, "ord_yoy": -10.2, "net_yoy": -12.6, "cash_yoy": 18.1, "inventory_yoy": -2.2, "debt_total_yoy": null, "equity_yoy": 2.3, "chem_s_yoy": 4.1, "chem_o_yoy": -7.1}, {"q": "26.2Q", "x": "26.2Q", "sales": 78.41, "gp": 18.53, "sga": 11.06, "op": 7.47, "ord": 7.83, "net": 5.1, "cash": 91.81, "equity": 535.18, "total_assets": 641.15, "inventory": 54.77, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 66.48, "chem_o": 6.65, "cogs": 59.88, "gpm": 23.6, "opm": 9.5, "sales_yoy": 3.9, "gp_yoy": 15.7, "sga_yoy": 4.3, "op_yoy": 37.6, "ord_yoy": 25.1, "net_yoy": 11.6, "cash_yoy": -3.1, "inventory_yoy": 0.1, "debt_total_yoy": null, "equity_yoy": 6.1, "chem_s_yoy": 6.0, "chem_o_yoy": 42.7}, {"q": "26.3Q", "x": "26.3Q", "sales": 79.56, "gp": 19.55, "sga": 11.27, "op": 8.29, "ord": 9.75, "net": 7.21, "cash": 90.37, "equity": 549.61, "total_assets": 651.91, "inventory": 53.32, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 68.78, "chem_o": 8.31, "cogs": 60.01, "gpm": 24.6, "opm": 10.4, "sales_yoy": 5.8, "gp_yoy": 27.7, "sga_yoy": 5.2, "op_yoy": 80.6, "ord_yoy": 79.9, "net_yoy": 77.1, "cash_yoy": -3.7, "inventory_yoy": -6.5, "debt_total_yoy": null, "equity_yoy": 7.6, "chem_s_yoy": 7.8, "chem_o_yoy": 81.8}, {"q": "26.4Q", "x": "26.4Q", "sales": 77.86, "gp": 15.25, "sga": 11.84, "op": 3.4, "ord": 4.74, "net": 2.79, "cash": 101.96, "equity": 568.53, "total_assets": 680.12, "inventory": 53.56, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 66.1, "chem_o": 3.41, "cogs": 62.61, "gpm": 19.6, "opm": 4.4, "sales_yoy": -0.7, "gp_yoy": -9.4, "sga_yoy": 9.1, "op_yoy": -43.2, "ord_yoy": -35.8, "net_yoy": -47.0, "cash_yoy": 10.2, "inventory_yoy": -6.9, "debt_total_yoy": null, "equity_yoy": 9.9, "chem_s_yoy": -1.4, "chem_o_yoy": -42.7}, {"q": "27.1Q", "x": "27.1Q", "sales": 84.35, "gp": 21.86, "sga": 11.52, "op": 10.33, "ord": 11.38, "net": 3.79, "cash": 107.06, "equity": 593.77, "total_assets": 725.7, "inventory": 56.19, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 70.72, "chem_o": 9.4, "cogs": 62.49, "gpm": 25.9, "opm": 12.2, "sales_yoy": 9.2, "gp_yoy": 26.3, "sga_yoy": 6.8, "op_yoy": 58.7, "ord_yoy": 56.5, "net_yoy": -18.1, "cash_yoy": 10.6, "inventory_yoy": 1.0, "debt_total_yoy": null, "equity_yoy": 14.4, "chem_s_yoy": 11.2, "chem_o_yoy": 74.4}, {"q": "27.2Q", "x": "27.2Q", "sales": 89.34, "gp": 23.52, "sga": 12.13, "op": 11.39, "ord": 12.57, "net": 8.67, "cash": 107.89, "equity": 597.06, "total_assets": 730.67, "inventory": 59.36, "st_debt": 0.0, "lt_debt": 0.0, "debt_total": 0.0, "chem_s": 77.26, "chem_o": 10.49, "cogs": 65.82, "gpm": 26.3, "opm": 12.7, "sales_yoy": 13.9, "gp_yoy": 26.9, "sga_yoy": 9.7, "op_yoy": 52.5, "ord_yoy": 60.5, "net_yoy": 70.0, "cash_yoy": 17.5, "inventory_yoy": 8.4, "debt_total_yoy": null, "equity_yoy": 11.6, "chem_s_yoy": 16.2, "chem_o_yoy": 57.7}], "a": [{"year": "2022", "x": "2022", "sales": 294.06, "op": 24.89, "ord": 28.15, "net": 19.29, "opm": 8.5, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 313.9, "op": 16.59, "ord": 19.39, "net": 12.01, "opm": 5.3, "sales_yoy": 6.7, "op_yoy": -33.3, "net_yoy": -37.7}, {"year": "2024", "x": "2024", "sales": 303.1, "op": 27.29, "ord": 31.62, "net": 20.4, "opm": 9.0, "sales_yoy": -3.4, "op_yoy": 64.5, "net_yoy": 69.9}, {"year": "2025", "x": "2025", "sales": 305.45, "op": 22.93, "ord": 27.16, "net": 19.2, "opm": 7.5, "sales_yoy": 0.8, "op_yoy": -16.0, "net_yoy": -5.9}, {"year": "2026", "x": "2026", "sales": 313.07, "op": 25.67, "ord": 29.59, "net": 19.73, "opm": 8.2, "sales_yoy": 2.5, "op_yoy": 11.9, "net_yoy": 2.8}, {"year": "2027 계획", "x": "2027 계획", "sales": 343.0, "op": 30.0, "ord": 33.0, "net": 21.0, "opm": 8.7, "sales_yoy": 9.6, "op_yoy": 16.9, "net_yoy": 6.4, "plan": 1, "kind": "회사 계획"}], "sq": [{"x": "24.3Q", "chem_s": 63.55, "chem_o": 8.1, "chem_opm": 12.7, "food_s": 11.79, "food_o": -0.51, "food_opm": -4.3, "re_s": 0.62, "re_o": 0.39, "re_opm": 62.9, "chem_s_yoy": null, "food_s_yoy": null, "re_s_yoy": null, "chem_o_yoy": null, "food_o_yoy": null, "re_o_yoy": null}, {"x": "24.4Q", "chem_s": 58.51, "chem_o": 3.46, "chem_opm": 5.9, "food_s": 11.83, "food_o": -0.6, "food_opm": -5.1, "re_s": 0.62, "re_o": 0.38, "re_opm": 61.3, "chem_s_yoy": null, "food_s_yoy": null, "re_s_yoy": null, "chem_o_yoy": null, "food_o_yoy": null, "re_o_yoy": null}, {"x": "25.1Q", "chem_s": 61.07, "chem_o": 5.8, "chem_opm": 9.5, "food_s": 14.66, "food_o": 0.72, "food_opm": 4.9, "re_s": 0.6, "re_o": 0.39, "re_opm": 65.0, "chem_s_yoy": -3.8, "food_s_yoy": -5.1, "re_s_yoy": -1.6, "chem_o_yoy": -18.2, "food_o_yoy": -20.0, "re_o_yoy": 0.0}, {"x": "25.2Q", "chem_s": 62.69, "chem_o": 4.66, "chem_opm": 7.4, "food_s": 12.18, "food_o": 0.38, "food_opm": 3.1, "re_s": 0.62, "re_o": 0.39, "re_opm": 62.9, "chem_s_yoy": 0.4, "food_s_yoy": -10.3, "re_s_yoy": 0.0, "chem_o_yoy": -33.2, "food_o_yoy": 26.7, "re_o_yoy": -2.5}, {"x": "25.3Q", "chem_s": 63.78, "chem_o": 4.57, "chem_opm": 7.2, "food_s": 10.79, "food_o": -0.39, "food_opm": -3.6, "re_s": 0.61, "re_o": 0.41, "re_opm": 67.2, "chem_s_yoy": 0.4, "food_s_yoy": -8.5, "re_s_yoy": -1.6, "chem_o_yoy": -43.6, "food_o_yoy": null, "re_o_yoy": 5.1}, {"x": "25.4Q", "chem_s": 67.05, "chem_o": 5.95, "chem_opm": 8.9, "food_s": 10.77, "food_o": -0.37, "food_opm": -3.4, "re_s": 0.62, "re_o": 0.41, "re_opm": 66.1, "chem_s_yoy": 14.6, "food_s_yoy": -9.0, "re_s_yoy": 0.0, "chem_o_yoy": 72.0, "food_o_yoy": null, "re_o_yoy": 7.9}, {"x": "26.1Q", "chem_s": 63.6, "chem_o": 5.39, "chem_opm": 8.5, "food_s": 13.02, "food_o": 0.7, "food_opm": 5.4, "re_s": 0.62, "re_o": 0.41, "re_opm": 66.1, "chem_s_yoy": 4.1, "food_s_yoy": -11.2, "re_s_yoy": 3.3, "chem_o_yoy": -7.1, "food_o_yoy": -2.8, "re_o_yoy": 5.1}, {"x": "26.2Q", "chem_s": 66.48, "chem_o": 6.65, "chem_opm": 10.0, "food_s": 11.3, "food_o": 0.44, "food_opm": 3.9, "re_s": 0.61, "re_o": 0.39, "re_opm": 63.9, "chem_s_yoy": 6.0, "food_s_yoy": -7.2, "re_s_yoy": -1.6, "chem_o_yoy": 42.7, "food_o_yoy": 15.8, "re_o_yoy": 0.0}, {"x": "26.3Q", "chem_s": 68.78, "chem_o": 8.31, "chem_opm": 12.1, "food_s": 10.17, "food_o": -0.41, "food_opm": -4.0, "re_s": 0.62, "re_o": 0.38, "re_opm": 61.3, "chem_s_yoy": 7.8, "food_s_yoy": -5.7, "re_s_yoy": 1.6, "chem_o_yoy": 81.8, "food_o_yoy": null, "re_o_yoy": -7.3}, {"x": "26.4Q", "chem_s": 66.1, "chem_o": 3.41, "chem_opm": 5.2, "food_s": 11.15, "food_o": -0.38, "food_opm": -3.4, "re_s": 0.62, "re_o": 0.37, "re_opm": 59.7, "chem_s_yoy": -1.4, "food_s_yoy": 3.5, "re_s_yoy": 0.0, "chem_o_yoy": -42.7, "food_o_yoy": null, "re_o_yoy": -9.8}, {"x": "27.1Q", "chem_s": 70.72, "chem_o": 9.4, "chem_opm": 13.3, "food_s": 13.0, "food_o": 0.57, "food_opm": 4.4, "re_s": 0.61, "re_o": 0.36, "re_opm": 59.0, "chem_s_yoy": 11.2, "food_s_yoy": -0.2, "re_s_yoy": -1.6, "chem_o_yoy": 74.4, "food_o_yoy": -18.6, "re_o_yoy": -12.2}, {"x": "27.2Q", "chem_s": 77.26, "chem_o": 10.49, "chem_opm": 13.6, "food_s": 11.47, "food_o": 0.5, "food_opm": 4.4, "re_s": 0.62, "re_o": 0.39, "re_opm": 62.9, "chem_s_yoy": 16.2, "food_s_yoy": 1.5, "re_s_yoy": 1.6, "chem_o_yoy": 57.7, "food_o_yoy": 13.6, "re_o_yoy": 0.0}]}}
+{
+ "c": "4229",
+ "n": "군에이화학공업",
+ "asof": "2026-10-30",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "일본 기준. 차입금 없음. 분기 숫자는 결산단신 누계 차분.",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·과거 분기 결산단신 XBRL"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·과거 분기 결산단신 XBRL"
+  },
+  {
+   "sec": "key",
+   "t": "화학품 부문 이익(분기)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "chem_o",
+     "l": "화학품 이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "chem_o_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·과거 분기 결산단신 XBRL 부문 정보(누계 차분)",
+   "def": "페놀수지·주물용 수지·섬유 등 — 매출의 약 85%"
+  },
+  {
+   "sec": "key",
+   "t": "화학품 생산고(연간)",
+   "d": "ba",
+   "def": "페놀수지·전자재료용 수지·카이놀 섬유 등, 판매가격 기준",
+   "bars": [
+    {
+     "k": "prod_c",
+     "l": "화학품 생산고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "prod_c_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "유가증권보고서(22/3~26/3기) 생산·판매 실적·종업원·연구개발 항목"
+  },
+  {
+   "sec": "생산",
+   "t": "부문별 생산고(연간)",
+   "d": "ba",
+   "def": "판매가격 기준 생산 금액",
+   "lines": [
+    {
+     "k": "prod_c",
+     "l": "화학품",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "prod_f",
+     "l": "식품",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서(22/3~26/3기) 생산·판매 실적·종업원·연구개발 항목"
+  },
+  {
+   "sec": "생산",
+   "t": "식품 생산고(연간)",
+   "d": "ba",
+   "def": "이성화당·물엿 등 전분당, 판매가격 기준",
+   "bars": [
+    {
+     "k": "prod_f",
+     "l": "식품 생산고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "prod_f_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "유가증권보고서(22/3~26/3기) 생산·판매 실적·종업원·연구개발 항목"
+  },
+  {
+   "sec": "인원·개발",
+   "t": "연결 종업원 수(연말)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "emp",
+     "l": "정규 종업원",
+     "u": "명",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서(22/3~26/3기) 생산·판매 실적·종업원·연구개발 항목 · 임시직 별도"
+  },
+  {
+   "sec": "인원·개발",
+   "t": "부문별 종업원 수(연말)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "emp_c",
+     "l": "화학품",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp_f",
+     "l": "식품",
+     "u": "명",
+     "c": 1
+    },
+    {
+     "k": "emp_tmp",
+     "l": "임시직(연평균)",
+     "u": "명",
+     "c": 2
+    }
+   ],
+   "src": "유가증권보고서(22/3~26/3기) 생산·판매 실적·종업원·연구개발 항목"
+  },
+  {
+   "sec": "인원·개발",
+   "t": "화학품 1인당 매출(연간)",
+   "d": "ba",
+   "def": "화학품 부문 매출 ÷ 화학품 부문 연말 종업원 수",
+   "bars": [
+    {
+     "k": "sales_per_c",
+     "l": "1인당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서(22/3~26/3기) 생산·판매 실적·종업원·연구개발 항목"
+  },
+  {
+   "sec": "인원·개발",
+   "t": "연구개발비와 매출 대비(연간)",
+   "d": "ba",
+   "def": "연구개발비 ÷ 연결 매출",
+   "bars": [
+    {
+     "k": "rd",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "rd_ratio",
+     "l": "매출 대비",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "유가증권보고서(22/3~26/3기) 생산·판매 실적·종업원·연구개발 항목 · 연구개발비의 98% 가 화학품(26/3기)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 마지막 막대 = 회사 계획",
+   "muted": "plan"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 · 마지막 막대 = 회사 계획",
+   "muted": "plan"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·과거 분기 결산단신 XBRL"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(분기)",
+   "d": "sq",
+   "src": "결산단신 부문 정보(누계 차분으로 분기 단독, 내부 거래 포함) · 23.1Q~24.2Q 는 26/3기 결산설명자료 Appendix 분기 추이(라벨 값, 부동산 활용은 없어 비움)",
+   "lines": [
+    {
+     "k": "chem_s",
+     "l": "화학품",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "food_s",
+     "l": "식품",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "re_s",
+     "l": "부동산 활용",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 이익(분기)",
+   "d": "sq",
+   "src": "결산단신 부문 정보(누계 차분으로 분기 단독) · 23.1Q~24.2Q 는 26/3기 결산설명자료 Appendix 분기 추이(라벨 값, 부동산 활용은 없어 비움)",
+   "lines": [
+    {
+     "k": "chem_o",
+     "l": "화학품",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "food_o",
+     "l": "식품",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "re_o",
+     "l": "부동산 활용",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 이익률(분기)",
+   "d": "sq",
+   "lines": [
+    {
+     "k": "chem_opm",
+     "l": "화학품",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    },
+    {
+     "k": "food_opm",
+     "l": "식품",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    },
+    {
+     "k": "re_opm",
+     "l": "부동산 활용",
+     "u": "%",
+     "c": 2,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보 · 23.1Q~24.2Q 는 26/3기 결산설명자료 Appendix 분기 추이(라벨 값, 부동산 활용은 없어 비움)"
+  },
+  {
+   "sec": "부문",
+   "t": "화학품 매출",
+   "d": "sq",
+   "bars": [
+    {
+     "k": "chem_s",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "chem_s_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보(분기 단독) · 23.1Q~24.2Q 는 26/3기 결산설명자료 Appendix 분기 추이(라벨 값, 부동산 활용은 없어 비움)"
+  },
+  {
+   "sec": "부문",
+   "t": "식품 매출",
+   "d": "sq",
+   "bars": [
+    {
+     "k": "food_s",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "food_s_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보(분기 단독) · 23.1Q~24.2Q 는 26/3기 결산설명자료 Appendix 분기 추이(라벨 값, 부동산 활용은 없어 비움)"
+  },
+  {
+   "sec": "부문",
+   "t": "부동산 활용 매출",
+   "d": "sq",
+   "bars": [
+    {
+     "k": "re_s",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "re_s_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보(분기 단독) · 23.1Q~24.2Q 는 26/3기 결산설명자료 Appendix 분기 추이(라벨 값, 부동산 활용은 없어 비움)"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·과거 분기 결산단신 XBRL · 재고 = 제품·상품 + 재공품 + 원재료·저장품"
+  },
+  {
+   "sec": "재무",
+   "t": "현금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cash_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신·과거 분기 결산단신 XBRL · 차입금 없음"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 75.95,
+    "gp": 18.1,
+    "sga": 10.12,
+    "op": 7.99,
+    "ord": 8.49,
+    "net": 5.74,
+    "cash": 85.9,
+    "equity": 487.17,
+    "total_assets": 587.35,
+    "inventory": 58.3,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 63.55,
+    "chem_o": 8.1,
+    "cogs": 57.85,
+    "gpm": 23.8,
+    "opm": 10.5,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "chem_s_yoy": null,
+    "chem_o_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 70.97,
+    "gp": 14.03,
+    "sga": 10.79,
+    "op": 3.24,
+    "ord": 4.76,
+    "net": 1.97,
+    "cash": 86.34,
+    "equity": 502.81,
+    "total_assets": 610.1,
+    "inventory": 58.62,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 58.51,
+    "chem_o": 3.46,
+    "cogs": 56.94,
+    "gpm": 19.8,
+    "opm": 4.6,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "inventory_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "chem_s_yoy": null,
+    "chem_o_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 76.34,
+    "gp": 17.09,
+    "sga": 10.16,
+    "op": 6.92,
+    "ord": 8.1,
+    "net": 5.3,
+    "cash": 81.95,
+    "equity": 507.31,
+    "total_assets": 608.15,
+    "inventory": 56.86,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 61.07,
+    "chem_o": 5.8,
+    "cogs": 59.25,
+    "gpm": 22.4,
+    "opm": 9.1,
+    "sales_yoy": -4.0,
+    "gp_yoy": -7.7,
+    "sga_yoy": 0.3,
+    "op_yoy": -17.5,
+    "ord_yoy": -13.4,
+    "net_yoy": -14.2,
+    "cash_yoy": 0.4,
+    "inventory_yoy": 1.1,
+    "debt_total_yoy": null,
+    "equity_yoy": 7.6,
+    "chem_s_yoy": -3.8,
+    "chem_o_yoy": -18.2
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 75.48,
+    "gp": 16.02,
+    "sga": 10.6,
+    "op": 5.43,
+    "ord": 6.26,
+    "net": 4.57,
+    "cash": 94.75,
+    "equity": 504.53,
+    "total_assets": 599.64,
+    "inventory": 54.74,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 62.69,
+    "chem_o": 4.66,
+    "cogs": 59.46,
+    "gpm": 21.2,
+    "opm": 7.2,
+    "sales_yoy": -1.5,
+    "gp_yoy": -11.6,
+    "sga_yoy": 1.5,
+    "op_yoy": -29.2,
+    "ord_yoy": -30.6,
+    "net_yoy": -29.8,
+    "cash_yoy": 3.7,
+    "inventory_yoy": -5.0,
+    "debt_total_yoy": null,
+    "equity_yoy": 4.5,
+    "chem_s_yoy": 0.4,
+    "chem_o_yoy": -33.2
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 75.2,
+    "gp": 15.31,
+    "sga": 10.71,
+    "op": 4.59,
+    "ord": 5.42,
+    "net": 4.07,
+    "cash": 93.89,
+    "equity": 510.62,
+    "total_assets": 617.55,
+    "inventory": 57.05,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 63.78,
+    "chem_o": 4.57,
+    "cogs": 59.89,
+    "gpm": 20.4,
+    "opm": 6.1,
+    "sales_yoy": -1.0,
+    "gp_yoy": -15.4,
+    "sga_yoy": 5.8,
+    "op_yoy": -42.6,
+    "ord_yoy": -36.2,
+    "net_yoy": -29.1,
+    "cash_yoy": 9.3,
+    "inventory_yoy": -2.1,
+    "debt_total_yoy": null,
+    "equity_yoy": 4.8,
+    "chem_s_yoy": 0.4,
+    "chem_o_yoy": -43.6
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 78.43,
+    "gp": 16.83,
+    "sga": 10.85,
+    "op": 5.99,
+    "ord": 7.38,
+    "net": 5.26,
+    "cash": 92.51,
+    "equity": 517.31,
+    "total_assets": 630.18,
+    "inventory": 57.55,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 67.05,
+    "chem_o": 5.95,
+    "cogs": 61.6,
+    "gpm": 21.5,
+    "opm": 7.6,
+    "sales_yoy": 10.5,
+    "gp_yoy": 20.0,
+    "sga_yoy": 0.6,
+    "op_yoy": 84.9,
+    "ord_yoy": 55.0,
+    "net_yoy": 167.0,
+    "cash_yoy": 7.1,
+    "inventory_yoy": -1.8,
+    "debt_total_yoy": null,
+    "equity_yoy": 2.9,
+    "chem_s_yoy": 14.6,
+    "chem_o_yoy": 72.0
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 77.24,
+    "gp": 17.31,
+    "sga": 10.79,
+    "op": 6.51,
+    "ord": 7.27,
+    "net": 4.63,
+    "cash": 96.8,
+    "equity": 518.88,
+    "total_assets": 632.38,
+    "inventory": 55.62,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 63.6,
+    "chem_o": 5.39,
+    "cogs": 59.93,
+    "gpm": 22.4,
+    "opm": 8.4,
+    "sales_yoy": 1.2,
+    "gp_yoy": 1.3,
+    "sga_yoy": 6.2,
+    "op_yoy": -5.9,
+    "ord_yoy": -10.2,
+    "net_yoy": -12.6,
+    "cash_yoy": 18.1,
+    "inventory_yoy": -2.2,
+    "debt_total_yoy": null,
+    "equity_yoy": 2.3,
+    "chem_s_yoy": 4.1,
+    "chem_o_yoy": -7.1
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 78.41,
+    "gp": 18.53,
+    "sga": 11.06,
+    "op": 7.47,
+    "ord": 7.83,
+    "net": 5.1,
+    "cash": 91.81,
+    "equity": 535.18,
+    "total_assets": 641.15,
+    "inventory": 54.77,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 66.48,
+    "chem_o": 6.65,
+    "cogs": 59.88,
+    "gpm": 23.6,
+    "opm": 9.5,
+    "sales_yoy": 3.9,
+    "gp_yoy": 15.7,
+    "sga_yoy": 4.3,
+    "op_yoy": 37.6,
+    "ord_yoy": 25.1,
+    "net_yoy": 11.6,
+    "cash_yoy": -3.1,
+    "inventory_yoy": 0.1,
+    "debt_total_yoy": null,
+    "equity_yoy": 6.1,
+    "chem_s_yoy": 6.0,
+    "chem_o_yoy": 42.7
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 79.56,
+    "gp": 19.55,
+    "sga": 11.27,
+    "op": 8.29,
+    "ord": 9.75,
+    "net": 7.21,
+    "cash": 90.37,
+    "equity": 549.61,
+    "total_assets": 651.91,
+    "inventory": 53.32,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 68.78,
+    "chem_o": 8.31,
+    "cogs": 60.01,
+    "gpm": 24.6,
+    "opm": 10.4,
+    "sales_yoy": 5.8,
+    "gp_yoy": 27.7,
+    "sga_yoy": 5.2,
+    "op_yoy": 80.6,
+    "ord_yoy": 79.9,
+    "net_yoy": 77.1,
+    "cash_yoy": -3.7,
+    "inventory_yoy": -6.5,
+    "debt_total_yoy": null,
+    "equity_yoy": 7.6,
+    "chem_s_yoy": 7.8,
+    "chem_o_yoy": 81.8
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 77.86,
+    "gp": 15.25,
+    "sga": 11.84,
+    "op": 3.4,
+    "ord": 4.74,
+    "net": 2.79,
+    "cash": 101.96,
+    "equity": 568.53,
+    "total_assets": 680.12,
+    "inventory": 53.56,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 66.1,
+    "chem_o": 3.41,
+    "cogs": 62.61,
+    "gpm": 19.6,
+    "opm": 4.4,
+    "sales_yoy": -0.7,
+    "gp_yoy": -9.4,
+    "sga_yoy": 9.1,
+    "op_yoy": -43.2,
+    "ord_yoy": -35.8,
+    "net_yoy": -47.0,
+    "cash_yoy": 10.2,
+    "inventory_yoy": -6.9,
+    "debt_total_yoy": null,
+    "equity_yoy": 9.9,
+    "chem_s_yoy": -1.4,
+    "chem_o_yoy": -42.7
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 84.35,
+    "gp": 21.86,
+    "sga": 11.52,
+    "op": 10.33,
+    "ord": 11.38,
+    "net": 3.79,
+    "cash": 107.06,
+    "equity": 593.77,
+    "total_assets": 725.7,
+    "inventory": 56.19,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 70.72,
+    "chem_o": 9.4,
+    "cogs": 62.49,
+    "gpm": 25.9,
+    "opm": 12.2,
+    "sales_yoy": 9.2,
+    "gp_yoy": 26.3,
+    "sga_yoy": 6.8,
+    "op_yoy": 58.7,
+    "ord_yoy": 56.5,
+    "net_yoy": -18.1,
+    "cash_yoy": 10.6,
+    "inventory_yoy": 1.0,
+    "debt_total_yoy": null,
+    "equity_yoy": 14.4,
+    "chem_s_yoy": 11.2,
+    "chem_o_yoy": 74.4
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 89.34,
+    "gp": 23.52,
+    "sga": 12.13,
+    "op": 11.39,
+    "ord": 12.57,
+    "net": 8.67,
+    "cash": 107.89,
+    "equity": 597.06,
+    "total_assets": 730.67,
+    "inventory": 59.36,
+    "st_debt": 0.0,
+    "lt_debt": 0.0,
+    "debt_total": 0.0,
+    "chem_s": 77.26,
+    "chem_o": 10.49,
+    "cogs": 65.82,
+    "gpm": 26.3,
+    "opm": 12.7,
+    "sales_yoy": 13.9,
+    "gp_yoy": 26.9,
+    "sga_yoy": 9.7,
+    "op_yoy": 52.5,
+    "ord_yoy": 60.5,
+    "net_yoy": 70.0,
+    "cash_yoy": 17.5,
+    "inventory_yoy": 8.4,
+    "debt_total_yoy": null,
+    "equity_yoy": 11.6,
+    "chem_s_yoy": 16.2,
+    "chem_o_yoy": 57.7
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 294.06,
+    "op": 24.89,
+    "ord": 28.15,
+    "net": 19.29,
+    "opm": 8.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 313.9,
+    "op": 16.59,
+    "ord": 19.39,
+    "net": 12.01,
+    "opm": 5.3,
+    "sales_yoy": 6.7,
+    "op_yoy": -33.3,
+    "net_yoy": -37.7
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 303.1,
+    "op": 27.29,
+    "ord": 31.62,
+    "net": 20.4,
+    "opm": 9.0,
+    "sales_yoy": -3.4,
+    "op_yoy": 64.5,
+    "net_yoy": 69.9
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 305.45,
+    "op": 22.93,
+    "ord": 27.16,
+    "net": 19.2,
+    "opm": 7.5,
+    "sales_yoy": 0.8,
+    "op_yoy": -16.0,
+    "net_yoy": -5.9
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 313.07,
+    "op": 25.67,
+    "ord": 29.59,
+    "net": 19.73,
+    "opm": 8.2,
+    "sales_yoy": 2.5,
+    "op_yoy": 11.9,
+    "net_yoy": 2.8
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 343.0,
+    "op": 30.0,
+    "ord": 33.0,
+    "net": 21.0,
+    "opm": 8.7,
+    "sales_yoy": 9.6,
+    "op_yoy": 16.9,
+    "net_yoy": 6.4,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "sq": [
+   {
+    "x": "23.1Q",
+    "chem_s": 64.13,
+    "chem_o": 4.13,
+    "food_s": 13.87,
+    "food_o": -0.03,
+    "re_s": null,
+    "re_o": null,
+    "chem_opm": 6.4,
+    "food_opm": -0.2,
+    "re_opm": null
+   },
+   {
+    "x": "23.2Q",
+    "chem_s": 64.62,
+    "chem_o": 4.92,
+    "food_s": 14.25,
+    "food_o": -0.78,
+    "re_s": null,
+    "re_o": null,
+    "chem_opm": 7.6,
+    "food_opm": -5.5,
+    "re_opm": null
+   },
+   {
+    "x": "23.3Q",
+    "chem_s": 68.44,
+    "chem_o": 5.92,
+    "food_s": 12.72,
+    "food_o": -0.88,
+    "re_s": null,
+    "re_o": null,
+    "chem_opm": 8.6,
+    "food_opm": -6.9,
+    "re_opm": null
+   },
+   {
+    "x": "23.4Q",
+    "chem_s": 59.26,
+    "chem_o": 2.25,
+    "food_s": 14.15,
+    "food_o": -0.42,
+    "re_s": null,
+    "re_o": null,
+    "chem_opm": 3.8,
+    "food_opm": -3.0,
+    "re_opm": null
+   },
+   {
+    "x": "24.1Q",
+    "chem_s": 66.7,
+    "chem_o": 6.58,
+    "food_s": 15.46,
+    "food_o": 0.88,
+    "re_s": null,
+    "re_o": null,
+    "chem_opm": 9.9,
+    "food_opm": 5.7,
+    "re_opm": null,
+    "chem_s_yoy": 4.0,
+    "food_s_yoy": 11.5,
+    "chem_o_yoy": 59.3
+   },
+   {
+    "x": "24.2Q",
+    "chem_s": 59.2,
+    "chem_o": 7.49,
+    "food_s": 13.57,
+    "food_o": 0.32,
+    "re_s": null,
+    "re_o": null,
+    "chem_opm": 12.7,
+    "food_opm": 2.4,
+    "re_opm": null,
+    "chem_s_yoy": -8.4,
+    "food_s_yoy": -4.8,
+    "chem_o_yoy": 52.2
+   },
+   {
+    "x": "24.3Q",
+    "chem_s": 63.55,
+    "chem_o": 8.1,
+    "chem_opm": 12.7,
+    "food_s": 11.79,
+    "food_o": -0.51,
+    "food_opm": -4.3,
+    "re_s": 0.62,
+    "re_o": 0.39,
+    "re_opm": 62.9,
+    "chem_s_yoy": -7.1,
+    "food_s_yoy": -7.3,
+    "re_s_yoy": null,
+    "chem_o_yoy": 36.8,
+    "food_o_yoy": null,
+    "re_o_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "chem_s": 58.51,
+    "chem_o": 3.46,
+    "chem_opm": 5.9,
+    "food_s": 11.83,
+    "food_o": -0.6,
+    "food_opm": -5.1,
+    "re_s": 0.62,
+    "re_o": 0.38,
+    "re_opm": 61.3,
+    "chem_s_yoy": -1.3,
+    "food_s_yoy": -16.4,
+    "re_s_yoy": null,
+    "chem_o_yoy": 53.8,
+    "food_o_yoy": null,
+    "re_o_yoy": null
+   },
+   {
+    "x": "25.1Q",
+    "chem_s": 61.07,
+    "chem_o": 5.8,
+    "chem_opm": 9.5,
+    "food_s": 14.66,
+    "food_o": 0.72,
+    "food_opm": 4.9,
+    "re_s": 0.6,
+    "re_o": 0.39,
+    "re_opm": 65.0,
+    "chem_s_yoy": -3.8,
+    "food_s_yoy": -5.1,
+    "re_s_yoy": -1.6,
+    "chem_o_yoy": -18.2,
+    "food_o_yoy": -20.0,
+    "re_o_yoy": 0.0
+   },
+   {
+    "x": "25.2Q",
+    "chem_s": 62.69,
+    "chem_o": 4.66,
+    "chem_opm": 7.4,
+    "food_s": 12.18,
+    "food_o": 0.38,
+    "food_opm": 3.1,
+    "re_s": 0.62,
+    "re_o": 0.39,
+    "re_opm": 62.9,
+    "chem_s_yoy": 0.4,
+    "food_s_yoy": -10.3,
+    "re_s_yoy": 0.0,
+    "chem_o_yoy": -33.2,
+    "food_o_yoy": 26.7,
+    "re_o_yoy": -2.5
+   },
+   {
+    "x": "25.3Q",
+    "chem_s": 63.78,
+    "chem_o": 4.57,
+    "chem_opm": 7.2,
+    "food_s": 10.79,
+    "food_o": -0.39,
+    "food_opm": -3.6,
+    "re_s": 0.61,
+    "re_o": 0.41,
+    "re_opm": 67.2,
+    "chem_s_yoy": 0.4,
+    "food_s_yoy": -8.5,
+    "re_s_yoy": -1.6,
+    "chem_o_yoy": -43.6,
+    "food_o_yoy": null,
+    "re_o_yoy": 5.1
+   },
+   {
+    "x": "25.4Q",
+    "chem_s": 67.05,
+    "chem_o": 5.95,
+    "chem_opm": 8.9,
+    "food_s": 10.77,
+    "food_o": -0.37,
+    "food_opm": -3.4,
+    "re_s": 0.62,
+    "re_o": 0.41,
+    "re_opm": 66.1,
+    "chem_s_yoy": 14.6,
+    "food_s_yoy": -9.0,
+    "re_s_yoy": 0.0,
+    "chem_o_yoy": 72.0,
+    "food_o_yoy": null,
+    "re_o_yoy": 7.9
+   },
+   {
+    "x": "26.1Q",
+    "chem_s": 63.6,
+    "chem_o": 5.39,
+    "chem_opm": 8.5,
+    "food_s": 13.02,
+    "food_o": 0.7,
+    "food_opm": 5.4,
+    "re_s": 0.62,
+    "re_o": 0.41,
+    "re_opm": 66.1,
+    "chem_s_yoy": 4.1,
+    "food_s_yoy": -11.2,
+    "re_s_yoy": 3.3,
+    "chem_o_yoy": -7.1,
+    "food_o_yoy": -2.8,
+    "re_o_yoy": 5.1
+   },
+   {
+    "x": "26.2Q",
+    "chem_s": 66.48,
+    "chem_o": 6.65,
+    "chem_opm": 10.0,
+    "food_s": 11.3,
+    "food_o": 0.44,
+    "food_opm": 3.9,
+    "re_s": 0.61,
+    "re_o": 0.39,
+    "re_opm": 63.9,
+    "chem_s_yoy": 6.0,
+    "food_s_yoy": -7.2,
+    "re_s_yoy": -1.6,
+    "chem_o_yoy": 42.7,
+    "food_o_yoy": 15.8,
+    "re_o_yoy": 0.0
+   },
+   {
+    "x": "26.3Q",
+    "chem_s": 68.78,
+    "chem_o": 8.31,
+    "chem_opm": 12.1,
+    "food_s": 10.17,
+    "food_o": -0.41,
+    "food_opm": -4.0,
+    "re_s": 0.62,
+    "re_o": 0.38,
+    "re_opm": 61.3,
+    "chem_s_yoy": 7.8,
+    "food_s_yoy": -5.7,
+    "re_s_yoy": 1.6,
+    "chem_o_yoy": 81.8,
+    "food_o_yoy": null,
+    "re_o_yoy": -7.3
+   },
+   {
+    "x": "26.4Q",
+    "chem_s": 66.1,
+    "chem_o": 3.41,
+    "chem_opm": 5.2,
+    "food_s": 11.15,
+    "food_o": -0.38,
+    "food_opm": -3.4,
+    "re_s": 0.62,
+    "re_o": 0.37,
+    "re_opm": 59.7,
+    "chem_s_yoy": -1.4,
+    "food_s_yoy": 3.5,
+    "re_s_yoy": 0.0,
+    "chem_o_yoy": -42.7,
+    "food_o_yoy": null,
+    "re_o_yoy": -9.8
+   },
+   {
+    "x": "27.1Q",
+    "chem_s": 70.72,
+    "chem_o": 9.4,
+    "chem_opm": 13.3,
+    "food_s": 13.0,
+    "food_o": 0.57,
+    "food_opm": 4.4,
+    "re_s": 0.61,
+    "re_o": 0.36,
+    "re_opm": 59.0,
+    "chem_s_yoy": 11.2,
+    "food_s_yoy": -0.2,
+    "re_s_yoy": -1.6,
+    "chem_o_yoy": 74.4,
+    "food_o_yoy": -18.6,
+    "re_o_yoy": -12.2
+   },
+   {
+    "x": "27.2Q",
+    "chem_s": 77.26,
+    "chem_o": 10.49,
+    "chem_opm": 13.6,
+    "food_s": 11.47,
+    "food_o": 0.5,
+    "food_opm": 4.4,
+    "re_s": 0.62,
+    "re_o": 0.39,
+    "re_opm": 62.9,
+    "chem_s_yoy": 16.2,
+    "food_s_yoy": 1.5,
+    "re_s_yoy": 1.6,
+    "chem_o_yoy": 57.7,
+    "food_o_yoy": 13.6,
+    "re_o_yoy": 0.0
+   }
+  ],
+  "ba": [
+   {
+    "x": "2022",
+    "prod_c": 240.49,
+    "prod_f": 42.0,
+    "rd": 13.26,
+    "emp": 505,
+    "emp_c": 464,
+    "emp_f": 41,
+    "emp_tmp": 157,
+    "chem_s": 244.62,
+    "sales_per_c": 52.7,
+    "rd_ratio": 4.5
+   },
+   {
+    "x": "2023",
+    "prod_c": 255.12,
+    "prod_f": 49.29,
+    "rd": 13.71,
+    "emp": 526,
+    "emp_c": 482,
+    "emp_f": 44,
+    "emp_tmp": 146,
+    "chem_s": 256.45,
+    "sales_per_c": 53.2,
+    "rd_ratio": 4.4,
+    "prod_c_yoy": 6.1,
+    "prod_f_yoy": 17.4,
+    "rd_yoy": 3.4
+   },
+   {
+    "x": "2024",
+    "prod_c": 245.56,
+    "prod_f": 47.03,
+    "rd": 13.37,
+    "emp": 543,
+    "emp_c": 502,
+    "emp_f": 41,
+    "emp_tmp": 148,
+    "chem_s": 247.96,
+    "sales_per_c": 49.4,
+    "rd_ratio": 4.4,
+    "prod_c_yoy": -3.7,
+    "prod_f_yoy": -4.6,
+    "rd_yoy": -2.5
+   },
+   {
+    "x": "2025",
+    "prod_c": 251.32,
+    "prod_f": 42.72,
+    "rd": 13.19,
+    "emp": 537,
+    "emp_c": 504,
+    "emp_f": 33,
+    "emp_tmp": 144,
+    "chem_s": 254.59,
+    "sales_per_c": 50.5,
+    "rd_ratio": 4.3,
+    "prod_c_yoy": 2.3,
+    "prod_f_yoy": -9.2,
+    "rd_yoy": -1.3
+   },
+   {
+    "x": "2026",
+    "prod_c": 261.05,
+    "prod_f": 40.09,
+    "rd": 14.27,
+    "emp": 541,
+    "emp_c": 506,
+    "emp_f": 35,
+    "emp_tmp": 148,
+    "chem_s": 264.96,
+    "sales_per_c": 52.4,
+    "rd_ratio": 4.6,
+    "prod_c_yoy": 3.9,
+    "prod_f_yoy": -6.2,
+    "rd_yoy": 8.2
+   }
+  ]
+ }
+}
