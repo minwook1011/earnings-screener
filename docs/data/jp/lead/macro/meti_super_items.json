@@ -1,6 +1,6 @@
 {
  "id": "meti_super_items",
- "name": "商業動態統計 スーパー 商品別販売額(飲食料品・家庭用品, 全店・既存店)",
+ "name": "슈퍼 품목별 판매액",
  "src": "経済産業省 商業動態統計 百貨店・スーパー商品別販売額 時系列(e-Stat 파일 카탈로그 statsCode 00550030, 확보)",
  "url": "https://www.meti.go.jp/statistics/tyo/syoudou/",
  "freq": "월",
@@ -15,7 +15,7 @@
  "series": [
   {
    "key": "food",
-   "name": "スーパー 飲食料品 販売額(全店)",
+   "name": "슈퍼 식품 판매액",
    "unit": "億円",
    "latest": "2026-09",
    "pts": [
@@ -577,7 +577,7 @@
   },
   {
    "key": "food_existing",
-   "name": "スーパー 飲食料品 既存店 前年同月比",
+   "name": "슈퍼 식품 기존점 YoY",
    "unit": "%",
    "latest": "2026-09",
    "pts": [
@@ -861,7 +861,7 @@
   },
   {
    "key": "household",
-   "name": "スーパー 家庭用品 販売額(全店)",
+   "name": "슈퍼 생활용품 판매액",
    "unit": "億円",
    "latest": "2026-09",
    "pts": [
@@ -1423,7 +1423,7 @@
   },
   {
    "key": "household_existing",
-   "name": "スーパー 家庭用品 既存店 前年同月比",
+   "name": "슈퍼 생활용품 기존점 YoY",
    "unit": "%",
    "latest": "2026-09",
    "pts": [

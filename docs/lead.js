@@ -325,7 +325,8 @@
         return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + esc(it.short) + "<small>" + it.pts.length + "개월</small></button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
-      '<div class="lwhy"><p><b>왜 보나</b> ' + esc(co.lead.why) + '</p><p><b>주의</b> ' + esc(co.lead.caveat) + '</p><p id="lnote"></p>' + (co.lead.macro && co.lead.macro.length ? '<p><b>추가 예정 시장 통계</b> ' + co.lead.macro.map(function (m) { return esc(m.name || m.id) + (m.why ? ' <span class="how">— ' + esc(m.why) + '</span>' : ''); }).join(' · ') + '</p>' : '') + '</div></div></section>';
+      '<div class="lwhy"><p id="lnote"></p></div></div></section>';
+    var whyBlk = '<div class="card rv"><div class="card-b lwhy"><p><b>주의</b> ' + esc(co.lead.caveat || "") + '</p>' + (co.lead.macro && co.lead.macro.length ? '<p><b>지표별 이유</b> ' + co.lead.macro.map(function (m) { return esc(m.name || m.id) + (m.why ? ' <span class="how">— ' + esc(m.why) + '</span>' : ''); }).join(' · ') + '</p>' : '') + '</div></div>';
 
     var price = '<div class="sec-t rv"><span class="n">02</span><h2>주가 × 선행지표</h2><p>월간 선행지표를 주가 아래 띠에 겹쳐 보기 · 금색 점선 = 실적 발표일과 다음 날 주가 반응</p></div>' +
       '<section class="card rv" id="mc"><div class="card-h"><div class="ctl">' +
@@ -343,7 +344,7 @@
       '<a class="card rep rv" href="' + esc(co.report.html) + '" target="_blank" rel="noopener"><span class="ic">2단계</span><div><h3>' + esc(co.report.title) + ' <small class="mono">' + esc(co.report.written) + "</small></h3><p>" + esc(co.report.verdict) + '</p></div><span class="go">리포트 열기 ↗</span></a>' :
       '<div class="card rep rv none"><span class="ic">2단계</span><div><h3>아직 없음</h3><p>2단계 리포트를 쓰면 여기에 연결됩니다.</p></div></div>');
     var ir = '<div class="sec-t rv"><span class="n">05</span><h2>IR 자료</h2><p>모아 둔 결산 설명자료·단신</p></div>' + irBlock(co);
-    var map = '<div class="sec-t rv"><span class="n">06</span><h2>데이터 출처 매핑</h2><p>자동 업데이트할 때 어디서 무엇을 읽는지</p></div>' + mapBlock(co) +
+    var map = '<div class="sec-t rv"><span class="n">06</span><h2>데이터 출처 매핑</h2><p>자동 업데이트할 때 어디서 무엇을 읽는지</p></div>' + whyBlk + mapBlock(co) +
       '<div class="sec-t rv"><span class="n">07</span><h2>수정 이력</h2><p>나중에 텔레그램으로 말한 수정이 여기에 쌓입니다</p></div><div class="card rv"><div class="card-b log">' +
       co.log.map(function (l) { return '<div><span class="d">' + esc(l.d) + '</span><span class="by">' + esc(l.by) + "</span><span>" + esc(l.t) + "</span></div>"; }).join("") + "</div></div>";
 
