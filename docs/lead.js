@@ -188,7 +188,7 @@
   }
   function renderTree(active) {
     var q = (document.getElementById("q").value || "").trim().toLowerCase(), box = document.getElementById("tree"), all = Object.keys(S.idx.cos);
-    if (active && active.sec) S.open[active.sec.split("/")[0]] = true;
+    if (active && active.sec && active.sec !== S.lastSec) { S.open[active.sec.split("/")[0]] = true; S.lastSec = active.sec; }   // 섹터가 바뀔 때만 자동으로 펼침 — 접기 버튼이 다시 펼쳐지던 문제(2026-11-17)
     if (q) {
       var hit = all.filter(function (c) { var o = S.idx.cos[c]; return (o.n + " " + (o.jp || "") + " " + c + " " + secName(c)).toLowerCase().indexOf(q) >= 0; });
       box.innerHTML = '<div class="tg-h"><b>검색 결과</b><span>' + hit.length + "곳</span></div>" + (hit.length ? '<div class="clist">' + hit.slice(0, 40).map(function (c) { return coLink(c, active, true); }).join("") + "</div>" + (hit.length > 40 ? '<p class="hint">40곳까지 보임 — 더 좁혀 검색</p>' : "") : '<p class="hint">맞는 기업이 없습니다.</p>');
