@@ -1,1 +1,1132 @@
-{"c": "3687", "n": "픽스타즈", "asof": "2026-11-06", "latest": "2026년 9월기 4분기", "unit": "금액 억엔, 인원 명", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "소프트웨어 고속화(솔루션)와 SaaS. 부문 숫자는 설명자료 그래프 값. 9월 결산", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "결산단신"}, {"sec": "key", "t": "솔루션(고속화) 매출", "def": "반도체·자동차 고객용 소프트웨어 고속화 수탁 서비스", "d": "q", "bars": [{"k": "sol", "l": "솔루션 매출", "u": "억엔", "c": 0}], "lines": [{"k": "sol_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "4Q26 결산보충설명자료"}, {"sec": "key", "t": "SaaS 스톡 수익", "def": "앰플리파이·AI부스터 등 SaaS 제품의 반복 매출", "d": "q", "bars": [{"k": "stock", "l": "스톡 수익", "u": "억엔", "c": 0}], "lines": [{"k": "stock_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "4Q26 결산보충설명자료"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "결산단신"}, {"sec": "사업 지표", "t": "연구개발비", "d": "q", "bars": [{"k": "rnd", "l": "연구개발비", "u": "억엔", "c": 0}], "src": "4Q26 결산보충설명자료", "note": "보조금이 확정되는 4분기에 차감돼 작아짐(마이너스도 있음)"}, {"sec": "사업 지표", "t": "사원·엔지니어 수", "d": "emp", "src": "4Q26 결산보충설명자료 · 9월 말 기준", "lines": [{"k": "eng", "l": "엔지니어(파트너 포함)", "u": "명", "c": 0}, {"k": "emp", "l": "사원(연결)", "u": "명", "c": 1}]}, {"sec": "부문", "t": "부문 매출", "d": "q", "src": "4Q26 결산보충설명자료", "lines": [{"k": "sol", "l": "솔루션", "u": "억엔", "c": 0}, {"k": "saas", "l": "SaaS", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문 영업이익", "d": "q", "src": "4Q26 결산보충설명자료 · SaaS 는 선행 투자로 적자", "lines": [{"k": "sol_op", "l": "솔루션", "u": "억엔", "c": 0}, {"k": "saas_op", "l": "SaaS", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "솔루션 영업이익률", "d": "q", "lines": [{"k": "sol_opm", "l": "솔루션 영업이익률", "u": "%", "c": 0}], "src": "4Q26 결산보충설명자료"}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "결산단신 · 2025년 3분기부터 차입금 없음"}], "tables": {"q": [{"q": "24.1Q", "x": "24.1Q", "sales": 18.54, "op": 5.25, "net": 3.38, "ord": 5.25, "gp": 9.5, "sga": 4.26, "cogs": 9.04, "gpm": 51.3, "opm": 28.3, "sol": 17.81, "saas": 0.72, "sol_op": 5.72, "saas_op": -0.47, "sol_opm": 32.1, "rnd": 0.48, "stock": 0.42, "cash": 40.15, "debt_total": 10.98, "equity": 56.98, "total_assets": 76.63, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "sol_yoy": 7.1, "saas_yoy": 38.5, "stock_yoy": null, "rnd_yoy": -31.4}, {"q": "24.2Q", "x": "24.2Q", "sales": 20.52, "op": 6.55, "net": 4.24, "ord": 6.53, "gp": 11.21, "sga": 4.66, "cogs": 9.31, "gpm": 54.6, "opm": 31.9, "sol": 19.58, "saas": 0.93, "sol_op": 6.92, "saas_op": -0.38, "sol_opm": 35.3, "rnd": 0.61, "stock": 0.51, "cash": 44.49, "debt_total": 8.99, "equity": 62.27, "total_assets": 83.31, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "sol_yoy": 9.3, "saas_yoy": 63.2, "stock_yoy": null, "rnd_yoy": -35.8}, {"q": "24.3Q", "x": "24.3Q", "sales": 19.15, "op": 3.82, "net": 2.48, "ord": 3.81, "gp": 9.28, "sga": 5.46, "cogs": 9.87, "gpm": 48.5, "opm": 19.9, "sol": 18.57, "saas": 0.58, "sol_op": 4.87, "saas_op": -1.05, "sol_opm": 26.2, "rnd": 0.88, "stock": 0.25, "cash": 45.33, "debt_total": 7.0, "equity": 65.18, "total_assets": 83.33, "sales_yoy": 14.0, "gp_yoy": null, "sga_yoy": null, "op_yoy": 4.1, "ord_yoy": null, "net_yoy": 12.7, "cash_yoy": null, "sol_yoy": 12.5, "saas_yoy": 107.1, "stock_yoy": null, "rnd_yoy": 51.7}, {"q": "24.4Q", "x": "24.4Q", "sales": 21.73, "op": 7.43, "net": 4.83, "ord": 7.47, "gp": 11.79, "sga": 4.36, "cogs": 9.94, "gpm": 54.2, "opm": 34.2, "sol": 20.82, "saas": 0.9, "sol_op": 7.05, "saas_op": 0.39, "sol_opm": 33.9, "rnd": -0.3, "stock": 0.69, "cash": 48.56, "debt_total": 4.93, "equity": 69.43, "total_assets": 87.3, "sales_yoy": 21.3, "gp_yoy": null, "sga_yoy": null, "op_yoy": 3.1, "ord_yoy": null, "net_yoy": -15.9, "cash_yoy": 4.9, "sol_yoy": 19.7, "saas_yoy": 80.0, "stock_yoy": null, "rnd_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 23.19, "op": 7.38, "net": 4.59, "ord": 7.35, "gp": 12.7, "sga": 5.32, "cogs": 10.49, "gpm": 54.8, "opm": 31.8, "sol": 22.23, "saas": 0.96, "sol_op": 8.24, "saas_op": -0.86, "sol_opm": 37.1, "rnd": 1.12, "stock": 1.0, "cash": 41.24, "debt_total": 3.02, "equity": 68.53, "total_assets": 82.38, "sales_yoy": 25.1, "gp_yoy": 33.7, "sga_yoy": 24.9, "op_yoy": 40.6, "ord_yoy": 40.0, "net_yoy": 35.8, "cash_yoy": 2.7, "sol_yoy": 24.8, "saas_yoy": 33.3, "stock_yoy": 138.1, "rnd_yoy": 133.3}, {"q": "25.2Q", "x": "25.2Q", "sales": 24.64, "op": 7.64, "net": 7.33, "ord": 7.65, "gp": 13.44, "sga": 5.8, "cogs": 11.2, "gpm": 54.5, "opm": 31.0, "sol": 23.31, "saas": 1.32, "sol_op": 8.56, "saas_op": -0.91, "sol_opm": 36.7, "rnd": 1.26, "stock": 1.27, "cash": 46.19, "debt_total": 0.75, "equity": 76.35, "total_assets": 89.36, "sales_yoy": 20.1, "gp_yoy": 19.9, "sga_yoy": 24.5, "op_yoy": 16.6, "ord_yoy": 17.2, "net_yoy": 72.9, "cash_yoy": 3.8, "sol_yoy": 19.1, "saas_yoy": 41.9, "stock_yoy": 149.0, "rnd_yoy": 106.6}, {"q": "25.3Q", "x": "25.3Q", "sales": 22.91, "op": 5.84, "net": 4.35, "ord": 5.87, "gp": 12.09, "sga": 6.25, "cogs": 10.82, "gpm": 52.8, "opm": 25.5, "sol": 21.99, "saas": 0.9, "sol_op": 7.28, "saas_op": -1.44, "sol_opm": 33.1, "rnd": 1.25, "stock": 0.98, "cash": 52.04, "debt_total": 0.0, "equity": 81.52, "total_assets": 91.86, "sales_yoy": 19.6, "gp_yoy": 30.3, "sga_yoy": 14.5, "op_yoy": 52.9, "ord_yoy": 54.1, "net_yoy": 75.4, "cash_yoy": 14.8, "sol_yoy": 18.4, "saas_yoy": 55.2, "stock_yoy": 292.0, "rnd_yoy": 42.0}, {"q": "25.4Q", "x": "25.4Q", "sales": 25.44, "op": 4.92, "net": 3.18, "ord": 4.95, "gp": 11.83, "sga": 6.91, "cogs": 13.61, "gpm": 46.5, "opm": 19.3, "sol": 24.16, "saas": 1.27, "sol_op": 8.27, "saas_op": -1.01, "sol_opm": 34.2, "rnd": 0.85, "stock": 1.24, "cash": 51.78, "debt_total": 0.0, "equity": 85.22, "total_assets": 98.71, "sales_yoy": 17.1, "gp_yoy": 0.3, "sga_yoy": 58.5, "op_yoy": -33.8, "ord_yoy": -33.7, "net_yoy": -34.2, "cash_yoy": 6.6, "sol_yoy": 16.0, "saas_yoy": 41.1, "stock_yoy": 79.7, "rnd_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 25.35, "op": 6.64, "net": 4.49, "ord": 6.65, "gp": 14.0, "sga": 7.36, "cogs": 11.35, "gpm": 55.2, "opm": 26.2, "sol": 23.57, "saas": 1.77, "sol_op": 8.26, "saas_op": -1.61, "sol_opm": 35.0, "rnd": 1.4, "stock": 1.59, "cash": 47.65, "debt_total": 0.0, "equity": 83.23, "total_assets": 95.46, "sales_yoy": 9.3, "gp_yoy": 10.2, "sga_yoy": 38.3, "op_yoy": -10.0, "ord_yoy": -9.5, "net_yoy": -2.2, "cash_yoy": 15.5, "sol_yoy": 6.0, "saas_yoy": 84.4, "stock_yoy": 59.0, "rnd_yoy": 25.0}, {"q": "26.2Q", "x": "26.2Q", "sales": 29.08, "op": 9.72, "net": 5.16, "ord": 9.77, "gp": 16.69, "sga": 6.97, "cogs": 12.39, "gpm": 57.4, "opm": 33.4, "sol": 26.91, "saas": 2.15, "sol_op": 11.06, "saas_op": -1.34, "sol_opm": 41.1, "rnd": 1.49, "stock": 2.0, "cash": 50.85, "debt_total": 0.0, "equity": 89.6, "total_assets": 104.56, "sales_yoy": 18.0, "gp_yoy": 24.2, "sga_yoy": 20.2, "op_yoy": 27.2, "ord_yoy": 27.7, "net_yoy": -29.6, "cash_yoy": 10.1, "sol_yoy": 15.4, "saas_yoy": 62.9, "stock_yoy": 57.5, "rnd_yoy": 18.3}, {"q": "26.3Q", "x": "26.3Q", "sales": 24.75, "op": 5.87, "net": 3.51, "ord": 5.78, "gp": 13.0, "sga": 7.13, "cogs": 11.75, "gpm": 52.5, "opm": 23.7, "sol": 23.59, "saas": 1.14, "sol_op": 7.66, "saas_op": -1.78, "sol_opm": 32.5, "rnd": 1.6, "stock": 1.21, "cash": 62.9, "debt_total": 0.0, "equity": 93.25, "total_assets": 108.79, "sales_yoy": 8.0, "gp_yoy": 7.5, "sga_yoy": 14.1, "op_yoy": 0.5, "ord_yoy": -1.5, "net_yoy": -19.3, "cash_yoy": 20.9, "sol_yoy": 7.3, "saas_yoy": 26.7, "stock_yoy": 23.5, "rnd_yoy": 28.0}, {"q": "26.4Q", "x": "26.4Q", "sales": 27.34, "op": 6.79, "net": 6.39, "ord": 6.78, "gp": 14.83, "sga": 8.05, "cogs": 12.51, "gpm": 54.3, "opm": 24.8, "sol": 25.78, "saas": 1.55, "sol_op": 8.92, "saas_op": -1.66, "sol_opm": 34.6, "rnd": 1.6, "stock": 1.6, "cash": 67.08, "debt_total": 0.0, "equity": 101.27, "total_assets": 121.49, "sales_yoy": 7.5, "gp_yoy": 25.4, "sga_yoy": 16.5, "op_yoy": 38.0, "ord_yoy": 37.0, "net_yoy": 100.9, "cash_yoy": 29.5, "sol_yoy": 6.7, "saas_yoy": 22.0, "stock_yoy": 29.0, "rnd_yoy": 88.2}], "a": [{"year": "2022", "x": "2022", "sales": 63.1, "op": 16.24, "ord": 16.9, "net": 10.82, "opm": 25.7, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 70.38, "op": 20.86, "ord": 20.76, "net": 14.47, "opm": 29.6, "sales_yoy": 11.5, "op_yoy": 28.4, "net_yoy": 33.7}, {"year": "2024", "x": "2024", "sales": 79.95, "op": 23.04, "ord": 23.05, "net": 14.94, "opm": 28.8, "sales_yoy": 13.6, "op_yoy": 10.5, "net_yoy": 3.2}, {"year": "2025", "x": "2025", "sales": 96.17, "op": 25.78, "ord": 25.81, "net": 19.45, "opm": 26.8, "sales_yoy": 20.3, "op_yoy": 11.9, "net_yoy": 30.2}, {"year": "2026", "x": "2026", "sales": 106.5, "op": 29.01, "ord": 28.97, "net": 19.55, "opm": 27.2, "sales_yoy": 10.7, "op_yoy": 12.5, "net_yoy": 0.5}, {"year": "2027 계획", "x": "2027 계획", "sales": 120.0, "op": 31.0, "ord": 31.0, "net": 22.0, "opm": 25.8, "sales_yoy": 12.7, "op_yoy": 6.9, "net_yoy": 12.5, "plan": 1, "kind": "회사 계획"}], "emp": [{"x": "2018", "emp": 176, "eng": null}, {"x": "2019", "emp": 214, "eng": null}, {"x": "2020", "emp": 253, "eng": null}, {"x": "2021", "emp": 258, "eng": 315}, {"x": "2022", "emp": 263, "eng": 332}, {"x": "2023", "emp": 292, "eng": 363}, {"x": "2024", "emp": 320, "eng": 392}, {"x": "2025", "emp": 334, "eng": 431}, {"x": "2026", "emp": 352, "eng": 458}]}}
+{
+ "c": "3687",
+ "n": "픽스타즈",
+ "asof": "2026-11-06",
+ "latest": "2026년 9월기 4분기",
+ "unit": "금액 억엔, 인원 명",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "소프트웨어 고속화(솔루션)와 SaaS. 부문 숫자는 설명자료 그래프 값. 9월 결산",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "솔루션(고속화) 매출",
+   "def": "반도체·자동차 고객용 소프트웨어 고속화 수탁 서비스",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sol",
+     "l": "솔루션 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sol_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산보충설명자료"
+  },
+  {
+   "sec": "key",
+   "t": "SaaS 스톡 수익",
+   "def": "앰플리파이·AI부스터 등 SaaS 제품의 반복 매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "stock",
+     "l": "스톡 수익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "stock_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "4Q26 결산보충설명자료"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "인력·개발",
+   "t": "연구개발비",
+   "d": "q",
+   "bars": [
+    {
+     "k": "rnd",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산보충설명자료",
+   "note": "보조금이 확정되는 4분기에 차감돼 작아짐(마이너스도 있음)"
+  },
+  {
+   "sec": "인력·개발",
+   "t": "사원·엔지니어 수",
+   "d": "emp",
+   "src": "4Q26 결산보충설명자료 · 9월 말 기준",
+   "lines": [
+    {
+     "k": "eng",
+     "l": "엔지니어(파트너 포함)",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp",
+     "l": "사원(연결)",
+     "u": "명",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문 매출",
+   "d": "q",
+   "src": "4Q26 결산보충설명자료",
+   "lines": [
+    {
+     "k": "sol",
+     "l": "솔루션",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "saas",
+     "l": "SaaS",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문 영업이익",
+   "d": "q",
+   "src": "4Q26 결산보충설명자료 · SaaS 는 선행 투자로 적자",
+   "lines": [
+    {
+     "k": "sol_op",
+     "l": "솔루션",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "saas_op",
+     "l": "SaaS",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "솔루션 영업이익률",
+   "d": "q",
+   "lines": [
+    {
+     "k": "sol_opm",
+     "l": "솔루션 영업이익률",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산보충설명자료"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산단신 · 2025년 3분기부터 차입금 없음"
+  },
+  {
+   "sec": "SaaS 월별",
+   "t": "SaaS 제품별 월 매출",
+   "d": "bm",
+   "lines": [
+    {
+     "k": "amp",
+     "l": "Fixstars Amplify",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "aib",
+     "l": "AIBooster·AIStation",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "4Q26 결산보충설명자료 「SaaS 사업 월별 매출(MR) 내역」(2024.10~2026.09) · 2Q26 자료의 AIBooster 값과 일부 달이 다름(최신 자료 사용, 4Q26부터 AIStation 포함 표기)"
+  },
+  {
+   "sec": "SaaS 월별",
+   "t": "SaaS 월 매출 합계(2개 제품)",
+   "def": "Amplify + AIBooster·AIStation 월 매출",
+   "d": "bm",
+   "bars": [
+    {
+     "k": "mr",
+     "l": "월 매출 합계",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산보충설명자료 「SaaS 사업 월별 매출(MR) 내역」(2024.10~2026.09)"
+  },
+  {
+   "sec": "SaaS 월별",
+   "t": "Fixstars Amplify(양자 영감 최적화) 월 매출",
+   "d": "bm",
+   "bars": [
+    {
+     "k": "amp",
+     "l": "Amplify",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산보충설명자료 「SaaS 사업 월별 매출(MR) 내역」(2024.10~2026.09) · 매년 4월 연구 용도 계약 갱신으로 일시 감소"
+  },
+  {
+   "sec": "SaaS 월별",
+   "t": "Fixstars AIBooster·AIStation 월 매출",
+   "d": "bm",
+   "bars": [
+    {
+     "k": "aib",
+     "l": "AIBooster·AIStation",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "4Q26 결산보충설명자료 「SaaS 사업 월별 매출(MR) 내역」(2024.10~2026.09) · 26.04 대형 안건 종료로 감소"
+  },
+  {
+   "sec": "인력·개발",
+   "t": "사원 1인당 연 매출",
+   "def": "연간 매출 ÷ 9월 말 연결 사원 수",
+   "d": "emp",
+   "bars": [
+    {
+     "k": "sales_per",
+     "l": "1인당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "src": "결산단신 매출 · 4Q26 결산보충설명자료 사원 수"
+  },
+  {
+   "sec": "인력·개발",
+   "t": "엔지니어 1인당 연 매출",
+   "def": "연간 매출 ÷ 9월 말 엔지니어 수(사원 + 파트너)",
+   "d": "emp",
+   "bars": [
+    {
+     "k": "sales_per_eng",
+     "l": "엔지니어당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "src": "결산단신 매출 · 4Q26 결산보충설명자료 엔지니어 수(2021년부터 집계)"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 18.54,
+    "op": 5.25,
+    "net": 3.38,
+    "ord": 5.25,
+    "gp": 9.5,
+    "sga": 4.26,
+    "cogs": 9.04,
+    "gpm": 51.3,
+    "opm": 28.3,
+    "sol": 17.81,
+    "saas": 0.72,
+    "sol_op": 5.72,
+    "saas_op": -0.47,
+    "sol_opm": 32.1,
+    "rnd": 0.48,
+    "stock": 0.42,
+    "cash": 40.15,
+    "debt_total": 10.98,
+    "equity": 56.98,
+    "total_assets": 76.63,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "sol_yoy": 7.1,
+    "saas_yoy": 38.5,
+    "stock_yoy": null,
+    "rnd_yoy": -31.4
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 20.52,
+    "op": 6.55,
+    "net": 4.24,
+    "ord": 6.53,
+    "gp": 11.21,
+    "sga": 4.66,
+    "cogs": 9.31,
+    "gpm": 54.6,
+    "opm": 31.9,
+    "sol": 19.58,
+    "saas": 0.93,
+    "sol_op": 6.92,
+    "saas_op": -0.38,
+    "sol_opm": 35.3,
+    "rnd": 0.61,
+    "stock": 0.51,
+    "cash": 44.49,
+    "debt_total": 8.99,
+    "equity": 62.27,
+    "total_assets": 83.31,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "sol_yoy": 9.3,
+    "saas_yoy": 63.2,
+    "stock_yoy": null,
+    "rnd_yoy": -35.8
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 19.15,
+    "op": 3.82,
+    "net": 2.48,
+    "ord": 3.81,
+    "gp": 9.28,
+    "sga": 5.46,
+    "cogs": 9.87,
+    "gpm": 48.5,
+    "opm": 19.9,
+    "sol": 18.57,
+    "saas": 0.58,
+    "sol_op": 4.87,
+    "saas_op": -1.05,
+    "sol_opm": 26.2,
+    "rnd": 0.88,
+    "stock": 0.25,
+    "cash": 45.33,
+    "debt_total": 7.0,
+    "equity": 65.18,
+    "total_assets": 83.33,
+    "sales_yoy": 14.0,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": 4.1,
+    "ord_yoy": null,
+    "net_yoy": 12.7,
+    "cash_yoy": null,
+    "sol_yoy": 12.5,
+    "saas_yoy": 107.1,
+    "stock_yoy": null,
+    "rnd_yoy": 51.7
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 21.73,
+    "op": 7.43,
+    "net": 4.83,
+    "ord": 7.47,
+    "gp": 11.79,
+    "sga": 4.36,
+    "cogs": 9.94,
+    "gpm": 54.2,
+    "opm": 34.2,
+    "sol": 20.82,
+    "saas": 0.9,
+    "sol_op": 7.05,
+    "saas_op": 0.39,
+    "sol_opm": 33.9,
+    "rnd": -0.3,
+    "stock": 0.69,
+    "cash": 48.56,
+    "debt_total": 4.93,
+    "equity": 69.43,
+    "total_assets": 87.3,
+    "sales_yoy": 21.3,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": 3.1,
+    "ord_yoy": null,
+    "net_yoy": -15.9,
+    "cash_yoy": 4.9,
+    "sol_yoy": 19.7,
+    "saas_yoy": 80.0,
+    "stock_yoy": null,
+    "rnd_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 23.19,
+    "op": 7.38,
+    "net": 4.59,
+    "ord": 7.35,
+    "gp": 12.7,
+    "sga": 5.32,
+    "cogs": 10.49,
+    "gpm": 54.8,
+    "opm": 31.8,
+    "sol": 22.23,
+    "saas": 0.96,
+    "sol_op": 8.24,
+    "saas_op": -0.86,
+    "sol_opm": 37.1,
+    "rnd": 1.12,
+    "stock": 1.0,
+    "cash": 41.24,
+    "debt_total": 3.02,
+    "equity": 68.53,
+    "total_assets": 82.38,
+    "sales_yoy": 25.1,
+    "gp_yoy": 33.7,
+    "sga_yoy": 24.9,
+    "op_yoy": 40.6,
+    "ord_yoy": 40.0,
+    "net_yoy": 35.8,
+    "cash_yoy": 2.7,
+    "sol_yoy": 24.8,
+    "saas_yoy": 33.3,
+    "stock_yoy": 138.1,
+    "rnd_yoy": 133.3
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 24.64,
+    "op": 7.64,
+    "net": 7.33,
+    "ord": 7.65,
+    "gp": 13.44,
+    "sga": 5.8,
+    "cogs": 11.2,
+    "gpm": 54.5,
+    "opm": 31.0,
+    "sol": 23.31,
+    "saas": 1.32,
+    "sol_op": 8.56,
+    "saas_op": -0.91,
+    "sol_opm": 36.7,
+    "rnd": 1.26,
+    "stock": 1.27,
+    "cash": 46.19,
+    "debt_total": 0.75,
+    "equity": 76.35,
+    "total_assets": 89.36,
+    "sales_yoy": 20.1,
+    "gp_yoy": 19.9,
+    "sga_yoy": 24.5,
+    "op_yoy": 16.6,
+    "ord_yoy": 17.2,
+    "net_yoy": 72.9,
+    "cash_yoy": 3.8,
+    "sol_yoy": 19.1,
+    "saas_yoy": 41.9,
+    "stock_yoy": 149.0,
+    "rnd_yoy": 106.6
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 22.91,
+    "op": 5.84,
+    "net": 4.35,
+    "ord": 5.87,
+    "gp": 12.09,
+    "sga": 6.25,
+    "cogs": 10.82,
+    "gpm": 52.8,
+    "opm": 25.5,
+    "sol": 21.99,
+    "saas": 0.9,
+    "sol_op": 7.28,
+    "saas_op": -1.44,
+    "sol_opm": 33.1,
+    "rnd": 1.25,
+    "stock": 0.98,
+    "cash": 52.04,
+    "debt_total": 0.0,
+    "equity": 81.52,
+    "total_assets": 91.86,
+    "sales_yoy": 19.6,
+    "gp_yoy": 30.3,
+    "sga_yoy": 14.5,
+    "op_yoy": 52.9,
+    "ord_yoy": 54.1,
+    "net_yoy": 75.4,
+    "cash_yoy": 14.8,
+    "sol_yoy": 18.4,
+    "saas_yoy": 55.2,
+    "stock_yoy": 292.0,
+    "rnd_yoy": 42.0
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 25.44,
+    "op": 4.92,
+    "net": 3.18,
+    "ord": 4.95,
+    "gp": 11.83,
+    "sga": 6.91,
+    "cogs": 13.61,
+    "gpm": 46.5,
+    "opm": 19.3,
+    "sol": 24.16,
+    "saas": 1.27,
+    "sol_op": 8.27,
+    "saas_op": -1.01,
+    "sol_opm": 34.2,
+    "rnd": 0.85,
+    "stock": 1.24,
+    "cash": 51.78,
+    "debt_total": 0.0,
+    "equity": 85.22,
+    "total_assets": 98.71,
+    "sales_yoy": 17.1,
+    "gp_yoy": 0.3,
+    "sga_yoy": 58.5,
+    "op_yoy": -33.8,
+    "ord_yoy": -33.7,
+    "net_yoy": -34.2,
+    "cash_yoy": 6.6,
+    "sol_yoy": 16.0,
+    "saas_yoy": 41.1,
+    "stock_yoy": 79.7,
+    "rnd_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 25.35,
+    "op": 6.64,
+    "net": 4.49,
+    "ord": 6.65,
+    "gp": 14.0,
+    "sga": 7.36,
+    "cogs": 11.35,
+    "gpm": 55.2,
+    "opm": 26.2,
+    "sol": 23.57,
+    "saas": 1.77,
+    "sol_op": 8.26,
+    "saas_op": -1.61,
+    "sol_opm": 35.0,
+    "rnd": 1.4,
+    "stock": 1.59,
+    "cash": 47.65,
+    "debt_total": 0.0,
+    "equity": 83.23,
+    "total_assets": 95.46,
+    "sales_yoy": 9.3,
+    "gp_yoy": 10.2,
+    "sga_yoy": 38.3,
+    "op_yoy": -10.0,
+    "ord_yoy": -9.5,
+    "net_yoy": -2.2,
+    "cash_yoy": 15.5,
+    "sol_yoy": 6.0,
+    "saas_yoy": 84.4,
+    "stock_yoy": 59.0,
+    "rnd_yoy": 25.0
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 29.08,
+    "op": 9.72,
+    "net": 5.16,
+    "ord": 9.77,
+    "gp": 16.69,
+    "sga": 6.97,
+    "cogs": 12.39,
+    "gpm": 57.4,
+    "opm": 33.4,
+    "sol": 26.91,
+    "saas": 2.15,
+    "sol_op": 11.06,
+    "saas_op": -1.34,
+    "sol_opm": 41.1,
+    "rnd": 1.49,
+    "stock": 2.0,
+    "cash": 50.85,
+    "debt_total": 0.0,
+    "equity": 89.6,
+    "total_assets": 104.56,
+    "sales_yoy": 18.0,
+    "gp_yoy": 24.2,
+    "sga_yoy": 20.2,
+    "op_yoy": 27.2,
+    "ord_yoy": 27.7,
+    "net_yoy": -29.6,
+    "cash_yoy": 10.1,
+    "sol_yoy": 15.4,
+    "saas_yoy": 62.9,
+    "stock_yoy": 57.5,
+    "rnd_yoy": 18.3
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 24.75,
+    "op": 5.87,
+    "net": 3.51,
+    "ord": 5.78,
+    "gp": 13.0,
+    "sga": 7.13,
+    "cogs": 11.75,
+    "gpm": 52.5,
+    "opm": 23.7,
+    "sol": 23.59,
+    "saas": 1.14,
+    "sol_op": 7.66,
+    "saas_op": -1.78,
+    "sol_opm": 32.5,
+    "rnd": 1.6,
+    "stock": 1.21,
+    "cash": 62.9,
+    "debt_total": 0.0,
+    "equity": 93.25,
+    "total_assets": 108.79,
+    "sales_yoy": 8.0,
+    "gp_yoy": 7.5,
+    "sga_yoy": 14.1,
+    "op_yoy": 0.5,
+    "ord_yoy": -1.5,
+    "net_yoy": -19.3,
+    "cash_yoy": 20.9,
+    "sol_yoy": 7.3,
+    "saas_yoy": 26.7,
+    "stock_yoy": 23.5,
+    "rnd_yoy": 28.0
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 27.34,
+    "op": 6.79,
+    "net": 6.39,
+    "ord": 6.78,
+    "gp": 14.83,
+    "sga": 8.05,
+    "cogs": 12.51,
+    "gpm": 54.3,
+    "opm": 24.8,
+    "sol": 25.78,
+    "saas": 1.55,
+    "sol_op": 8.92,
+    "saas_op": -1.66,
+    "sol_opm": 34.6,
+    "rnd": 1.6,
+    "stock": 1.6,
+    "cash": 67.08,
+    "debt_total": 0.0,
+    "equity": 101.27,
+    "total_assets": 121.49,
+    "sales_yoy": 7.5,
+    "gp_yoy": 25.4,
+    "sga_yoy": 16.5,
+    "op_yoy": 38.0,
+    "ord_yoy": 37.0,
+    "net_yoy": 100.9,
+    "cash_yoy": 29.5,
+    "sol_yoy": 6.7,
+    "saas_yoy": 22.0,
+    "stock_yoy": 29.0,
+    "rnd_yoy": 88.2
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 63.1,
+    "op": 16.24,
+    "ord": 16.9,
+    "net": 10.82,
+    "opm": 25.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 70.38,
+    "op": 20.86,
+    "ord": 20.76,
+    "net": 14.47,
+    "opm": 29.6,
+    "sales_yoy": 11.5,
+    "op_yoy": 28.4,
+    "net_yoy": 33.7
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 79.95,
+    "op": 23.04,
+    "ord": 23.05,
+    "net": 14.94,
+    "opm": 28.8,
+    "sales_yoy": 13.6,
+    "op_yoy": 10.5,
+    "net_yoy": 3.2
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 96.17,
+    "op": 25.78,
+    "ord": 25.81,
+    "net": 19.45,
+    "opm": 26.8,
+    "sales_yoy": 20.3,
+    "op_yoy": 11.9,
+    "net_yoy": 30.2
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 106.5,
+    "op": 29.01,
+    "ord": 28.97,
+    "net": 19.55,
+    "opm": 27.2,
+    "sales_yoy": 10.7,
+    "op_yoy": 12.5,
+    "net_yoy": 0.5
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 120.0,
+    "op": 31.0,
+    "ord": 31.0,
+    "net": 22.0,
+    "opm": 25.8,
+    "sales_yoy": 12.7,
+    "op_yoy": 6.9,
+    "net_yoy": 12.5,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "emp": [
+   {
+    "x": "2018",
+    "emp": 176,
+    "eng": null,
+    "sales_per": null,
+    "sales_per_eng": null
+   },
+   {
+    "x": "2019",
+    "emp": 214,
+    "eng": null,
+    "sales_per": null,
+    "sales_per_eng": null
+   },
+   {
+    "x": "2020",
+    "emp": 253,
+    "eng": null,
+    "sales_per": null,
+    "sales_per_eng": null
+   },
+   {
+    "x": "2021",
+    "emp": 258,
+    "eng": 315,
+    "sales_per": null,
+    "sales_per_eng": null
+   },
+   {
+    "x": "2022",
+    "emp": 263,
+    "eng": 332,
+    "sales_per": 24.0,
+    "sales_per_eng": 19.0
+   },
+   {
+    "x": "2023",
+    "emp": 292,
+    "eng": 363,
+    "sales_per": 24.1,
+    "sales_per_eng": 19.4
+   },
+   {
+    "x": "2024",
+    "emp": 320,
+    "eng": 392,
+    "sales_per": 25.0,
+    "sales_per_eng": 20.4
+   },
+   {
+    "x": "2025",
+    "emp": 334,
+    "eng": 431,
+    "sales_per": 28.8,
+    "sales_per_eng": 22.3
+   },
+   {
+    "x": "2026",
+    "emp": 352,
+    "eng": 458,
+    "sales_per": 30.3,
+    "sales_per_eng": 23.3
+   }
+  ],
+  "bm": [
+   {
+    "x": "24.10",
+    "amp": 0.19,
+    "aib": 0.11,
+    "mr": 0.3
+   },
+   {
+    "x": "24.11",
+    "amp": 0.21,
+    "aib": 0.11,
+    "mr": 0.32
+   },
+   {
+    "x": "24.12",
+    "amp": 0.23,
+    "aib": 0.18,
+    "mr": 0.41
+   },
+   {
+    "x": "25.01",
+    "amp": 0.26,
+    "aib": 0.12,
+    "mr": 0.38
+   },
+   {
+    "x": "25.02",
+    "amp": 0.26,
+    "aib": 0.22,
+    "mr": 0.48
+   },
+   {
+    "x": "25.03",
+    "amp": 0.26,
+    "aib": 0.16,
+    "mr": 0.42
+   },
+   {
+    "x": "25.04",
+    "amp": 0.16,
+    "aib": 0.15,
+    "mr": 0.31
+   },
+   {
+    "x": "25.05",
+    "amp": 0.16,
+    "aib": 0.15,
+    "mr": 0.31
+   },
+   {
+    "x": "25.06",
+    "amp": 0.2,
+    "aib": 0.15,
+    "mr": 0.35
+   },
+   {
+    "x": "25.07",
+    "amp": 0.21,
+    "aib": 0.18,
+    "mr": 0.39
+   },
+   {
+    "x": "25.08",
+    "amp": 0.23,
+    "aib": 0.18,
+    "mr": 0.41
+   },
+   {
+    "x": "25.09",
+    "amp": 0.25,
+    "aib": 0.2,
+    "mr": 0.45
+   },
+   {
+    "x": "25.10",
+    "amp": 0.26,
+    "aib": 0.21,
+    "mr": 0.47
+   },
+   {
+    "x": "25.11",
+    "amp": 0.3,
+    "aib": 0.21,
+    "mr": 0.51
+   },
+   {
+    "x": "25.12",
+    "amp": 0.32,
+    "aib": 0.28,
+    "mr": 0.6
+   },
+   {
+    "x": "26.01",
+    "amp": 0.35,
+    "aib": 0.31,
+    "mr": 0.66
+   },
+   {
+    "x": "26.02",
+    "amp": 0.37,
+    "aib": 0.3,
+    "mr": 0.67
+   },
+   {
+    "x": "26.03",
+    "amp": 0.36,
+    "aib": 0.31,
+    "mr": 0.67
+   },
+   {
+    "x": "26.04",
+    "amp": 0.25,
+    "aib": 0.12,
+    "mr": 0.37
+   },
+   {
+    "x": "26.05",
+    "amp": 0.26,
+    "aib": 0.13,
+    "mr": 0.39
+   },
+   {
+    "x": "26.06",
+    "amp": 0.29,
+    "aib": 0.16,
+    "mr": 0.45
+   },
+   {
+    "x": "26.07",
+    "amp": 0.3,
+    "aib": 0.14,
+    "mr": 0.44
+   },
+   {
+    "x": "26.08",
+    "amp": 0.36,
+    "aib": 0.22,
+    "mr": 0.58
+   },
+   {
+    "x": "26.09",
+    "amp": 0.37,
+    "aib": 0.2,
+    "mr": 0.57
+   }
+  ]
+ }
+}
