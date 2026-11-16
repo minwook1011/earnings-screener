@@ -1,1 +1,1639 @@
-{"c": "4476", "n": "AI크로스", "asof": "2026-11-13", "latest": "2026년 12월기 3분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["gp", "매출총이익"], ["gpm", "매출총이익률", "pct0"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "법인용 SMS 발송 플랫폼. 2025년 말 마케팅 솔루션 회사(로우프) 인수로 부문 추가. 2026년부터 부문을 스마트 메시징·AI 트랜스포메이션·마케팅 솔루션 셋으로 나눔", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "거래 회사 수", "def": "스마트 메시징 사업 거래 회사(분기말 누계)", "d": "q", "bars": [{"k": "clients", "l": "거래 회사", "u": "곳", "c": 0}], "lines": [{"k": "clients_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "key", "t": "SMS 발송 수", "d": "q", "lines": [{"k": "sms_dom", "l": "국내", "u": "백만 통", "c": 0}, {"k": "sms_ovs", "l": "해외", "u": "백만 통", "c": 1}, {"k": "sms_dom_ratio", "l": "국내 비중", "u": "%", "c": 0, "r": 1}], "src": "3Q26 결산설명자료·결산단신 · 수익성이 높은 국내 중심으로 전환"}, {"sec": "사업 지표", "t": "SMS 발송 수 합계", "d": "q", "bars": [{"k": "sms_total", "l": "합계", "u": "백만 통", "c": 0}], "lines": [{"k": "sms_total_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "사업 지표", "t": "국내 SMS 발송 수", "d": "q", "bars": [{"k": "sms_dom", "l": "국내", "u": "백만 통", "c": 0}], "lines": [{"k": "sms_dom_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}, {"sec": "부문", "t": "부문별 매출(분기)", "d": "q", "src": "결산단신 부문 정보(누계 차분) · 25.4Q는 부문 구분 전이라 빈칸", "lines": [{"k": "seg_sm", "l": "스마트 메시징", "u": "억엔", "c": 0}, {"k": "seg_ms", "l": "마케팅 솔루션", "u": "억엔", "c": 1}, {"k": "seg_aix", "l": "AI 트랜스포메이션", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "스마트 메시징 부문 이익", "d": "q", "bars": [{"k": "segop_sm", "l": "부문 이익", "u": "억엔", "c": 0}], "src": "결산단신 부문 정보(누계 차분) · 본사 비용 배분 전"}, {"t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "3Q26 결산설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 상환분 포함)", "sec": "재무"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "3Q26 결산설명자료·결산단신"}], "tables": {"q": [{"q": "23.4Q", "x": "23.4Q", "sales": 8.01, "gp": 2.65, "sga": 2.12, "op": 0.54, "ord": 0.53, "net": 0.36, "cogs": 5.36, "cash": 12.55, "debt_total": 0.09, "equity": 16.79, "total_assets": 21.25, "clients": 6341, "sms_dom": 94.0, "sms_ovs": 58.2, "seg_sm": null, "seg_aix": null, "seg_ms": null, "segop_sm": null, "gpm": 33.1, "opm": 6.7, "sms_total": 152.2, "sms_dom_ratio": 61.8, "sales_yoy": -5.4, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "clients_yoy": 16.2, "sms_dom_yoy": 33.1, "sms_ovs_yoy": -54.1, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": -22.9}, {"q": "24.1Q", "x": "24.1Q", "sales": 8.85, "gp": 3.04, "sga": 1.85, "op": 1.18, "ord": 1.16, "net": 0.72, "cogs": 5.81, "cash": 13.36, "debt_total": 1.57, "equity": 16.09, "total_assets": 21.14, "clients": 6414, "sms_dom": 113.6, "sms_ovs": 62.9, "seg_sm": null, "seg_aix": null, "seg_ms": null, "segop_sm": null, "gpm": 34.4, "opm": 13.3, "sms_total": 176.5, "sms_dom_ratio": 64.4, "sales_yoy": 5.1, "gp_yoy": 10.5, "sga_yoy": -6.1, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "clients_yoy": 8.9, "sms_dom_yoy": 31.8, "sms_ovs_yoy": -38.0, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": -5.9}, {"q": "24.2Q", "x": "24.2Q", "sales": 8.88, "gp": 3.09, "sga": 2.13, "op": 0.97, "ord": 0.95, "net": 0.53, "cogs": 5.79, "cash": 13.38, "debt_total": 0.06, "equity": 16.71, "total_assets": 20.98, "clients": 6649, "sms_dom": 116.7, "sms_ovs": 65.0, "seg_sm": null, "seg_aix": null, "seg_ms": null, "segop_sm": null, "gpm": 34.8, "opm": 10.9, "sms_total": 181.7, "sms_dom_ratio": 64.2, "sales_yoy": 9.6, "gp_yoy": 23.1, "sga_yoy": 19.0, "op_yoy": 34.7, "ord_yoy": 33.8, "net_yoy": 103.8, "cash_yoy": null, "clients_yoy": 10.5, "sms_dom_yoy": 42.7, "sms_ovs_yoy": -31.7, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": 2.7}, {"q": "24.3Q", "x": "24.3Q", "sales": 9.48, "gp": 3.45, "sga": 2.12, "op": 1.32, "ord": 1.34, "net": 0.67, "cogs": 6.03, "cash": 14.42, "debt_total": 0.04, "equity": 17.42, "total_assets": 21.63, "clients": 6935, "sms_dom": 131.0, "sms_ovs": 65.8, "seg_sm": null, "seg_aix": null, "seg_ms": null, "segop_sm": null, "gpm": 36.4, "opm": 13.9, "sms_total": 196.8, "sms_dom_ratio": 66.6, "sales_yoy": 18.5, "gp_yoy": 32.2, "sga_yoy": 23.3, "op_yoy": 50.0, "ord_yoy": 42.6, "net_yoy": 15.5, "cash_yoy": null, "clients_yoy": 13.8, "sms_dom_yoy": 50.1, "sms_ovs_yoy": -12.7, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": 21.0}, {"q": "24.4Q", "x": "24.4Q", "sales": 9.84, "gp": 3.74, "sga": 3.87, "op": -0.12, "ord": -0.19, "net": -0.44, "cogs": 6.1, "cash": 15.64, "debt_total": 0.03, "equity": 17.09, "total_assets": 23.9, "clients": 7250, "sms_dom": 143.2, "sms_ovs": 54.6, "seg_sm": null, "seg_aix": null, "seg_ms": null, "segop_sm": null, "gpm": 38.0, "opm": -1.2, "sms_total": 197.8, "sms_dom_ratio": 72.4, "sales_yoy": 22.8, "gp_yoy": 41.1, "sga_yoy": 82.5, "op_yoy": -122.2, "ord_yoy": -135.8, "net_yoy": -222.2, "cash_yoy": 24.6, "clients_yoy": 14.3, "sms_dom_yoy": 52.3, "sms_ovs_yoy": -6.2, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": 30.0}, {"q": "25.1Q", "x": "25.1Q", "sales": 9.3, "gp": 3.77, "sga": 2.37, "op": 1.39, "ord": 1.41, "net": 0.81, "cogs": 5.53, "cash": 13.73, "debt_total": 0.01, "equity": 17.98, "total_assets": 22.26, "clients": 7467, "sms_dom": 142.9, "sms_ovs": 30.4, "seg_sm": 9.01, "seg_aix": 0.29, "seg_ms": null, "segop_sm": 2.61, "gpm": 40.5, "opm": 14.9, "sms_total": 173.3, "sms_dom_ratio": 82.5, "sales_yoy": 5.1, "gp_yoy": 24.0, "sga_yoy": 28.1, "op_yoy": 17.8, "ord_yoy": 21.6, "net_yoy": 12.5, "cash_yoy": 2.8, "clients_yoy": 16.4, "sms_dom_yoy": 25.8, "sms_ovs_yoy": -51.7, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": -1.8}, {"q": "25.2Q", "x": "25.2Q", "sales": 9.91, "gp": 3.47, "sga": 3.21, "op": 0.27, "ord": 0.27, "net": -0.13, "cogs": 6.44, "cash": 15.38, "debt_total": 0.0, "equity": 17.95, "total_assets": 23.29, "clients": 7719, "sms_dom": 168.6, "sms_ovs": 34.3, "seg_sm": 9.75, "seg_aix": 0.16, "seg_ms": null, "segop_sm": 2.49, "gpm": 35.0, "opm": 2.7, "sms_total": 202.9, "sms_dom_ratio": 83.1, "sales_yoy": 11.6, "gp_yoy": 12.3, "sga_yoy": 50.7, "op_yoy": -72.2, "ord_yoy": -71.6, "net_yoy": -124.5, "cash_yoy": 14.9, "clients_yoy": 16.1, "sms_dom_yoy": 44.5, "sms_ovs_yoy": -47.2, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": 11.7}, {"q": "25.3Q", "x": "25.3Q", "sales": 9.84, "gp": 3.75, "sga": 2.68, "op": 1.07, "ord": 1.07, "net": 0.52, "cogs": 6.09, "cash": 14.51, "debt_total": 0.0, "equity": 18.62, "total_assets": 23.52, "clients": 7999, "sms_dom": 170.6, "sms_ovs": 20.4, "seg_sm": 9.6, "seg_aix": 0.23, "seg_ms": null, "segop_sm": 2.69, "gpm": 38.1, "opm": 10.9, "sms_total": 191.0, "sms_dom_ratio": 89.3, "sales_yoy": 3.8, "gp_yoy": 8.7, "sga_yoy": 26.4, "op_yoy": -18.9, "ord_yoy": -20.1, "net_yoy": -22.4, "cash_yoy": 0.6, "clients_yoy": 15.3, "sms_dom_yoy": 30.2, "sms_ovs_yoy": -69.0, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": -2.9}, {"q": "25.4Q", "x": "25.4Q", "sales": 12.46, "gp": 4.46, "sga": 3.49, "op": 0.97, "ord": 0.91, "net": 0.45, "cogs": 8.0, "cash": 18.16, "debt_total": 4.37, "equity": 19.46, "total_assets": 30.85, "clients": 8208, "sms_dom": 187.0, "sms_ovs": 26.9, "seg_sm": null, "seg_aix": null, "seg_ms": null, "segop_sm": null, "gpm": 35.8, "opm": 7.8, "sms_total": 213.9, "sms_dom_ratio": 87.4, "sales_yoy": 26.6, "gp_yoy": 19.3, "sga_yoy": -9.8, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": 16.1, "clients_yoy": 13.2, "sms_dom_yoy": 30.6, "sms_ovs_yoy": -50.7, "seg_sm_yoy": null, "seg_aix_yoy": null, "seg_ms_yoy": null, "segop_sm_yoy": null, "sms_total_yoy": 8.1}, {"q": "26.1Q", "x": "26.1Q", "sales": 13.31, "gp": 4.79, "sga": 2.83, "op": 1.96, "ord": 1.96, "net": 1.21, "cogs": 8.52, "cash": 17.9, "debt_total": 4.14, "equity": 20.84, "total_assets": 31.62, "clients": 8801, "sms_dom": 207.9, "sms_ovs": 19.9, "seg_sm": 11.18, "seg_aix": 0.53, "seg_ms": 1.6, "segop_sm": 2.98, "gpm": 36.0, "opm": 14.7, "sms_total": 227.8, "sms_dom_ratio": 91.3, "sales_yoy": 43.1, "gp_yoy": 27.1, "sga_yoy": 19.4, "op_yoy": 41.0, "ord_yoy": 39.0, "net_yoy": 49.4, "cash_yoy": 30.4, "clients_yoy": 17.9, "sms_dom_yoy": 45.5, "sms_ovs_yoy": -34.5, "seg_sm_yoy": 24.1, "seg_aix_yoy": 82.8, "seg_ms_yoy": null, "segop_sm_yoy": 14.2, "sms_total_yoy": 31.4}, {"q": "26.2Q", "x": "26.2Q", "sales": 12.24, "gp": 4.18, "sga": 2.74, "op": 1.43, "ord": 1.42, "net": 1.05, "cogs": 8.06, "cash": 20.09, "debt_total": 3.91, "equity": 22.0, "total_assets": 31.63, "clients": 9140, "sms_dom": 200.9, "sms_ovs": 17.4, "seg_sm": 10.73, "seg_aix": 0.31, "seg_ms": 1.21, "segop_sm": 2.62, "gpm": 34.2, "opm": 11.7, "sms_total": 218.3, "sms_dom_ratio": 92.0, "sales_yoy": 23.5, "gp_yoy": 20.5, "sga_yoy": -14.6, "op_yoy": 429.6, "ord_yoy": 425.9, "net_yoy": null, "cash_yoy": 30.6, "clients_yoy": 18.4, "sms_dom_yoy": 19.2, "sms_ovs_yoy": -49.3, "seg_sm_yoy": 10.1, "seg_aix_yoy": 93.8, "seg_ms_yoy": null, "segop_sm_yoy": 5.2, "sms_total_yoy": 7.6}, {"q": "26.3Q", "x": "26.3Q", "sales": 12.91, "gp": 4.53, "sga": 2.69, "op": 1.84, "ord": 1.85, "net": 1.18, "cogs": 8.38, "cash": 20.81, "debt_total": 3.68, "equity": 23.15, "total_assets": 32.45, "clients": 9437, "sms_dom": 213.2, "sms_ovs": 13.6, "seg_sm": 11.11, "seg_aix": 0.5, "seg_ms": 1.29, "segop_sm": 2.86, "gpm": 35.1, "opm": 14.3, "sms_total": 226.8, "sms_dom_ratio": 94.0, "sales_yoy": 31.2, "gp_yoy": 20.8, "sga_yoy": 0.4, "op_yoy": 72.0, "ord_yoy": 72.9, "net_yoy": 126.9, "cash_yoy": 43.4, "clients_yoy": 18.0, "sms_dom_yoy": 25.0, "sms_ovs_yoy": -33.3, "seg_sm_yoy": 15.7, "seg_aix_yoy": 117.4, "seg_ms_yoy": null, "segop_sm_yoy": 6.3, "sms_total_yoy": 18.7}], "a": [{"year": "2021", "x": "2021", "sales": 24.22, "gp": null, "op": 2.6, "ord": 2.54, "net": 3.41, "gpm": null, "opm": 10.7, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 33.05, "gp": null, "op": 2.23, "ord": 2.18, "net": 0.95, "gpm": null, "opm": 6.7, "sales_yoy": 36.5, "op_yoy": -14.2, "net_yoy": -72.1}, {"year": "2023", "x": "2023", "sales": 32.54, "gp": 10.52, "op": 2.92, "ord": 2.91, "net": 1.56, "gpm": 32.3, "opm": 9.0, "sales_yoy": -1.5, "op_yoy": 30.9, "net_yoy": 64.2}, {"year": "2024", "x": "2024", "sales": 37.05, "gp": 13.32, "op": 3.35, "ord": 3.26, "net": 1.48, "gpm": 36.0, "opm": 9.0, "sales_yoy": 13.9, "op_yoy": 14.7, "net_yoy": -5.1}, {"year": "2025", "x": "2025", "sales": 41.51, "gp": 15.45, "op": 3.7, "ord": 3.66, "net": 1.65, "gpm": 37.2, "opm": 8.9, "sales_yoy": 12.0, "op_yoy": 10.4, "net_yoy": 11.5}, {"year": "2026 계획", "x": "2026 계획", "sales": 53.0, "gp": null, "op": 6.0, "ord": 5.9, "net": 3.6, "gpm": null, "opm": 11.3, "sales_yoy": 27.7, "op_yoy": 62.2, "net_yoy": 118.2, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "4476",
+ "n": "AI크로스",
+ "asof": "2026-11-13",
+ "latest": "2026년 12월기 3분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "gp",
+   "매출총이익"
+  ],
+  [
+   "gpm",
+   "매출총이익률",
+   "pct0"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "법인용 SMS 발송 플랫폼. 2025년 말 마케팅 솔루션 회사(로우프) 인수로 부문 추가. 2026년부터 부문을 스마트 메시징·AI 트랜스포메이션·마케팅 솔루션 셋으로 나눔",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "거래 회사 수",
+   "def": "스마트 메시징 사업 거래 회사(분기말 누계)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "clients",
+     "l": "거래 회사",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "clients_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "key",
+   "t": "국내 SMS 발송 수",
+   "def": "국내 고객 SMS 발송 수(분기)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sms_dom",
+     "l": "국내",
+     "u": "백만 통",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sms_dom_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "고객 기반",
+   "t": "직판·파트너 경유 거래 회사 수",
+   "d": "b",
+   "lines": [
+    {
+     "k": "cl_partner",
+     "l": "판매 파트너 경유",
+     "u": "곳",
+     "c": 0
+    },
+    {
+     "k": "cl_direct",
+     "l": "직판",
+     "u": "곳",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "고객 기반",
+   "t": "판매 파트너 경유 거래 회사",
+   "d": "b",
+   "bars": [
+    {
+     "k": "cl_partner",
+     "l": "파트너 경유",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cl_partner_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "고객 기반",
+   "t": "직판 거래 회사",
+   "d": "b",
+   "bars": [
+    {
+     "k": "cl_direct",
+     "l": "직판",
+     "u": "곳",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cl_direct_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "고객 기반",
+   "t": "파트너 경유 비중",
+   "def": "판매 파트너 경유 거래 회사 ÷ 전체 거래 회사(계산)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "partner_ratio",
+     "l": "파트너 경유 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "발송량",
+   "t": "SMS 발송 수 합계",
+   "def": "국내 + 해외(분기)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sms_total",
+     "l": "합계",
+     "u": "백만 통",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sms_total_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "발송량",
+   "t": "국내·해외 SMS 발송 수",
+   "d": "b",
+   "lines": [
+    {
+     "k": "sms_dom",
+     "l": "국내",
+     "u": "백만 통",
+     "c": 0
+    },
+    {
+     "k": "sms_ovs",
+     "l": "해외",
+     "u": "백만 통",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q) · 수익성 높은 국내 중심으로 전환"
+  },
+  {
+   "sec": "발송량",
+   "t": "국내 발송 비중",
+   "d": "b",
+   "lines": [
+    {
+     "k": "sms_dom_ratio",
+     "l": "국내 비중",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "발송량",
+   "t": "거래 회사당 SMS 발송 수",
+   "def": "분기 SMS 발송 수 합계 ÷ 분기말 거래 회사 수(계산)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sms_per_client",
+     "l": "회사당",
+     "u": "천 통",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "단가·생산성",
+   "t": "ARPU(거래 회사당 매출)",
+   "def": "분기 스마트 메시징 매출 ÷ 분기말 거래 회사 수(회사 산출)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "arpu",
+     "l": "ARPU",
+     "u": "천 엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "arpu_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료(26.3Q, 분기 추이 22.1Q~26.3Q)"
+  },
+  {
+   "sec": "단가·생산성",
+   "t": "1인당 매출(연간)",
+   "def": "매출 ÷ 기말 정사원 수(회사 산출) · 2025년부터 로우프 인원 포함 · 계획 = 2026 회사 예상, 2027 중기계획",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "sales_per_emp",
+     "l": "1인당 매출",
+     "u": "백만 엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료(26.3Q·25.4Q) 1인당 매출 추이"
+  },
+  {
+   "sec": "서비스별",
+   "t": "메시징 서비스 매출(연간)",
+   "def": "계획 = 2026 회사 예상, 2027 중기계획(AIX2027)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "msg_sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료(25.4Q) 중기계획 진척"
+  },
+  {
+   "sec": "서비스별",
+   "t": "메시징 서비스 공헌이익(연간)",
+   "def": "공헌이익 = 서비스 매출 − 직접 원가·판관비",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "msg_cp",
+     "l": "공헌이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료(25.4Q) 중기계획 진척"
+  },
+  {
+   "sec": "서비스별",
+   "t": "AI 서비스 매출(연간)",
+   "def": "Deep Predictor 등",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "ai_sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료(25.4Q) 중기계획 진척"
+  },
+  {
+   "sec": "서비스별",
+   "t": "서비스별 공헌이익률(실적)",
+   "d": "ba",
+   "noplan": 1,
+   "lines": [
+    {
+     "k": "msg_cpm",
+     "l": "메시징",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "ai_cpm",
+     "l": "AI",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료(25.4Q) · 2026 예상 메시징 23.0%, AI 0.8%"
+  },
+  {
+   "sec": "산업",
+   "t": "일본 A2P-SMS 시장 규모",
+   "def": "기업→개인 SMS 시장 매출 · 2025년 이후 예측",
+   "d": "mk",
+   "bars": [
+    {
+     "k": "mkt",
+     "l": "시장 규모",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료(26.3Q) 부록 · 원출처 데로이트 토마쓰 MIC 경제연구소"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(분기)",
+   "d": "q",
+   "src": "결산단신 부문 정보(누계 차분) · 25.4Q는 부문 구분 전이라 빈칸",
+   "lines": [
+    {
+     "k": "seg_sm",
+     "l": "스마트 메시징",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_ms",
+     "l": "마케팅 솔루션",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "seg_aix",
+     "l": "AI 트랜스포메이션",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "스마트 메시징 부문 이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "segop_sm",
+     "l": "부문 이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산단신 부문 정보(누계 차분) · 본사 비용 배분 전"
+  },
+  {
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 상환분 포함)",
+   "sec": "재무"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "3Q26 결산설명자료·결산단신"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "23.4Q",
+    "x": "23.4Q",
+    "sales": 8.01,
+    "gp": 2.65,
+    "sga": 2.12,
+    "op": 0.54,
+    "ord": 0.53,
+    "net": 0.36,
+    "cogs": 5.36,
+    "cash": 12.55,
+    "debt_total": 0.09,
+    "equity": 16.79,
+    "total_assets": 21.25,
+    "clients": 6341,
+    "sms_dom": 94.0,
+    "sms_ovs": 58.2,
+    "seg_sm": null,
+    "seg_aix": null,
+    "seg_ms": null,
+    "segop_sm": null,
+    "gpm": 33.1,
+    "opm": 6.7,
+    "sms_total": 152.2,
+    "sms_dom_ratio": 61.8,
+    "sales_yoy": -5.4,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "clients_yoy": 16.2,
+    "sms_dom_yoy": 33.1,
+    "sms_ovs_yoy": -54.1,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": -22.9
+   },
+   {
+    "q": "24.1Q",
+    "x": "24.1Q",
+    "sales": 8.85,
+    "gp": 3.04,
+    "sga": 1.85,
+    "op": 1.18,
+    "ord": 1.16,
+    "net": 0.72,
+    "cogs": 5.81,
+    "cash": 13.36,
+    "debt_total": 1.57,
+    "equity": 16.09,
+    "total_assets": 21.14,
+    "clients": 6414,
+    "sms_dom": 113.6,
+    "sms_ovs": 62.9,
+    "seg_sm": null,
+    "seg_aix": null,
+    "seg_ms": null,
+    "segop_sm": null,
+    "gpm": 34.4,
+    "opm": 13.3,
+    "sms_total": 176.5,
+    "sms_dom_ratio": 64.4,
+    "sales_yoy": 5.1,
+    "gp_yoy": 10.5,
+    "sga_yoy": -6.1,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "clients_yoy": 8.9,
+    "sms_dom_yoy": 31.8,
+    "sms_ovs_yoy": -38.0,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": -5.9
+   },
+   {
+    "q": "24.2Q",
+    "x": "24.2Q",
+    "sales": 8.88,
+    "gp": 3.09,
+    "sga": 2.13,
+    "op": 0.97,
+    "ord": 0.95,
+    "net": 0.53,
+    "cogs": 5.79,
+    "cash": 13.38,
+    "debt_total": 0.06,
+    "equity": 16.71,
+    "total_assets": 20.98,
+    "clients": 6649,
+    "sms_dom": 116.7,
+    "sms_ovs": 65.0,
+    "seg_sm": null,
+    "seg_aix": null,
+    "seg_ms": null,
+    "segop_sm": null,
+    "gpm": 34.8,
+    "opm": 10.9,
+    "sms_total": 181.7,
+    "sms_dom_ratio": 64.2,
+    "sales_yoy": 9.6,
+    "gp_yoy": 23.1,
+    "sga_yoy": 19.0,
+    "op_yoy": 34.7,
+    "ord_yoy": 33.8,
+    "net_yoy": 103.8,
+    "cash_yoy": null,
+    "clients_yoy": 10.5,
+    "sms_dom_yoy": 42.7,
+    "sms_ovs_yoy": -31.7,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": 2.7
+   },
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 9.48,
+    "gp": 3.45,
+    "sga": 2.12,
+    "op": 1.32,
+    "ord": 1.34,
+    "net": 0.67,
+    "cogs": 6.03,
+    "cash": 14.42,
+    "debt_total": 0.04,
+    "equity": 17.42,
+    "total_assets": 21.63,
+    "clients": 6935,
+    "sms_dom": 131.0,
+    "sms_ovs": 65.8,
+    "seg_sm": null,
+    "seg_aix": null,
+    "seg_ms": null,
+    "segop_sm": null,
+    "gpm": 36.4,
+    "opm": 13.9,
+    "sms_total": 196.8,
+    "sms_dom_ratio": 66.6,
+    "sales_yoy": 18.5,
+    "gp_yoy": 32.2,
+    "sga_yoy": 23.3,
+    "op_yoy": 50.0,
+    "ord_yoy": 42.6,
+    "net_yoy": 15.5,
+    "cash_yoy": null,
+    "clients_yoy": 13.8,
+    "sms_dom_yoy": 50.1,
+    "sms_ovs_yoy": -12.7,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": 21.0
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 9.84,
+    "gp": 3.74,
+    "sga": 3.87,
+    "op": -0.12,
+    "ord": -0.19,
+    "net": -0.44,
+    "cogs": 6.1,
+    "cash": 15.64,
+    "debt_total": 0.03,
+    "equity": 17.09,
+    "total_assets": 23.9,
+    "clients": 7250,
+    "sms_dom": 143.2,
+    "sms_ovs": 54.6,
+    "seg_sm": null,
+    "seg_aix": null,
+    "seg_ms": null,
+    "segop_sm": null,
+    "gpm": 38.0,
+    "opm": -1.2,
+    "sms_total": 197.8,
+    "sms_dom_ratio": 72.4,
+    "sales_yoy": 22.8,
+    "gp_yoy": 41.1,
+    "sga_yoy": 82.5,
+    "op_yoy": -122.2,
+    "ord_yoy": -135.8,
+    "net_yoy": -222.2,
+    "cash_yoy": 24.6,
+    "clients_yoy": 14.3,
+    "sms_dom_yoy": 52.3,
+    "sms_ovs_yoy": -6.2,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": 30.0
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 9.3,
+    "gp": 3.77,
+    "sga": 2.37,
+    "op": 1.39,
+    "ord": 1.41,
+    "net": 0.81,
+    "cogs": 5.53,
+    "cash": 13.73,
+    "debt_total": 0.01,
+    "equity": 17.98,
+    "total_assets": 22.26,
+    "clients": 7467,
+    "sms_dom": 142.9,
+    "sms_ovs": 30.4,
+    "seg_sm": 9.01,
+    "seg_aix": 0.29,
+    "seg_ms": null,
+    "segop_sm": 2.61,
+    "gpm": 40.5,
+    "opm": 14.9,
+    "sms_total": 173.3,
+    "sms_dom_ratio": 82.5,
+    "sales_yoy": 5.1,
+    "gp_yoy": 24.0,
+    "sga_yoy": 28.1,
+    "op_yoy": 17.8,
+    "ord_yoy": 21.6,
+    "net_yoy": 12.5,
+    "cash_yoy": 2.8,
+    "clients_yoy": 16.4,
+    "sms_dom_yoy": 25.8,
+    "sms_ovs_yoy": -51.7,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": -1.8
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 9.91,
+    "gp": 3.47,
+    "sga": 3.21,
+    "op": 0.27,
+    "ord": 0.27,
+    "net": -0.13,
+    "cogs": 6.44,
+    "cash": 15.38,
+    "debt_total": 0.0,
+    "equity": 17.95,
+    "total_assets": 23.29,
+    "clients": 7719,
+    "sms_dom": 168.6,
+    "sms_ovs": 34.3,
+    "seg_sm": 9.75,
+    "seg_aix": 0.16,
+    "seg_ms": null,
+    "segop_sm": 2.49,
+    "gpm": 35.0,
+    "opm": 2.7,
+    "sms_total": 202.9,
+    "sms_dom_ratio": 83.1,
+    "sales_yoy": 11.6,
+    "gp_yoy": 12.3,
+    "sga_yoy": 50.7,
+    "op_yoy": -72.2,
+    "ord_yoy": -71.6,
+    "net_yoy": -124.5,
+    "cash_yoy": 14.9,
+    "clients_yoy": 16.1,
+    "sms_dom_yoy": 44.5,
+    "sms_ovs_yoy": -47.2,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": 11.7
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 9.84,
+    "gp": 3.75,
+    "sga": 2.68,
+    "op": 1.07,
+    "ord": 1.07,
+    "net": 0.52,
+    "cogs": 6.09,
+    "cash": 14.51,
+    "debt_total": 0.0,
+    "equity": 18.62,
+    "total_assets": 23.52,
+    "clients": 7999,
+    "sms_dom": 170.6,
+    "sms_ovs": 20.4,
+    "seg_sm": 9.6,
+    "seg_aix": 0.23,
+    "seg_ms": null,
+    "segop_sm": 2.69,
+    "gpm": 38.1,
+    "opm": 10.9,
+    "sms_total": 191.0,
+    "sms_dom_ratio": 89.3,
+    "sales_yoy": 3.8,
+    "gp_yoy": 8.7,
+    "sga_yoy": 26.4,
+    "op_yoy": -18.9,
+    "ord_yoy": -20.1,
+    "net_yoy": -22.4,
+    "cash_yoy": 0.6,
+    "clients_yoy": 15.3,
+    "sms_dom_yoy": 30.2,
+    "sms_ovs_yoy": -69.0,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": -2.9
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 12.46,
+    "gp": 4.46,
+    "sga": 3.49,
+    "op": 0.97,
+    "ord": 0.91,
+    "net": 0.45,
+    "cogs": 8.0,
+    "cash": 18.16,
+    "debt_total": 4.37,
+    "equity": 19.46,
+    "total_assets": 30.85,
+    "clients": 8208,
+    "sms_dom": 187.0,
+    "sms_ovs": 26.9,
+    "seg_sm": null,
+    "seg_aix": null,
+    "seg_ms": null,
+    "segop_sm": null,
+    "gpm": 35.8,
+    "opm": 7.8,
+    "sms_total": 213.9,
+    "sms_dom_ratio": 87.4,
+    "sales_yoy": 26.6,
+    "gp_yoy": 19.3,
+    "sga_yoy": -9.8,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": 16.1,
+    "clients_yoy": 13.2,
+    "sms_dom_yoy": 30.6,
+    "sms_ovs_yoy": -50.7,
+    "seg_sm_yoy": null,
+    "seg_aix_yoy": null,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": null,
+    "sms_total_yoy": 8.1
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 13.31,
+    "gp": 4.79,
+    "sga": 2.83,
+    "op": 1.96,
+    "ord": 1.96,
+    "net": 1.21,
+    "cogs": 8.52,
+    "cash": 17.9,
+    "debt_total": 4.14,
+    "equity": 20.84,
+    "total_assets": 31.62,
+    "clients": 8801,
+    "sms_dom": 207.9,
+    "sms_ovs": 19.9,
+    "seg_sm": 11.18,
+    "seg_aix": 0.53,
+    "seg_ms": 1.6,
+    "segop_sm": 2.98,
+    "gpm": 36.0,
+    "opm": 14.7,
+    "sms_total": 227.8,
+    "sms_dom_ratio": 91.3,
+    "sales_yoy": 43.1,
+    "gp_yoy": 27.1,
+    "sga_yoy": 19.4,
+    "op_yoy": 41.0,
+    "ord_yoy": 39.0,
+    "net_yoy": 49.4,
+    "cash_yoy": 30.4,
+    "clients_yoy": 17.9,
+    "sms_dom_yoy": 45.5,
+    "sms_ovs_yoy": -34.5,
+    "seg_sm_yoy": 24.1,
+    "seg_aix_yoy": 82.8,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": 14.2,
+    "sms_total_yoy": 31.4
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 12.24,
+    "gp": 4.18,
+    "sga": 2.74,
+    "op": 1.43,
+    "ord": 1.42,
+    "net": 1.05,
+    "cogs": 8.06,
+    "cash": 20.09,
+    "debt_total": 3.91,
+    "equity": 22.0,
+    "total_assets": 31.63,
+    "clients": 9140,
+    "sms_dom": 200.9,
+    "sms_ovs": 17.4,
+    "seg_sm": 10.73,
+    "seg_aix": 0.31,
+    "seg_ms": 1.21,
+    "segop_sm": 2.62,
+    "gpm": 34.2,
+    "opm": 11.7,
+    "sms_total": 218.3,
+    "sms_dom_ratio": 92.0,
+    "sales_yoy": 23.5,
+    "gp_yoy": 20.5,
+    "sga_yoy": -14.6,
+    "op_yoy": 429.6,
+    "ord_yoy": 425.9,
+    "net_yoy": null,
+    "cash_yoy": 30.6,
+    "clients_yoy": 18.4,
+    "sms_dom_yoy": 19.2,
+    "sms_ovs_yoy": -49.3,
+    "seg_sm_yoy": 10.1,
+    "seg_aix_yoy": 93.8,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": 5.2,
+    "sms_total_yoy": 7.6
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 12.91,
+    "gp": 4.53,
+    "sga": 2.69,
+    "op": 1.84,
+    "ord": 1.85,
+    "net": 1.18,
+    "cogs": 8.38,
+    "cash": 20.81,
+    "debt_total": 3.68,
+    "equity": 23.15,
+    "total_assets": 32.45,
+    "clients": 9437,
+    "sms_dom": 213.2,
+    "sms_ovs": 13.6,
+    "seg_sm": 11.11,
+    "seg_aix": 0.5,
+    "seg_ms": 1.29,
+    "segop_sm": 2.86,
+    "gpm": 35.1,
+    "opm": 14.3,
+    "sms_total": 226.8,
+    "sms_dom_ratio": 94.0,
+    "sales_yoy": 31.2,
+    "gp_yoy": 20.8,
+    "sga_yoy": 0.4,
+    "op_yoy": 72.0,
+    "ord_yoy": 72.9,
+    "net_yoy": 126.9,
+    "cash_yoy": 43.4,
+    "clients_yoy": 18.0,
+    "sms_dom_yoy": 25.0,
+    "sms_ovs_yoy": -33.3,
+    "seg_sm_yoy": 15.7,
+    "seg_aix_yoy": 117.4,
+    "seg_ms_yoy": null,
+    "segop_sm_yoy": 6.3,
+    "sms_total_yoy": 18.7
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 24.22,
+    "gp": null,
+    "op": 2.6,
+    "ord": 2.54,
+    "net": 3.41,
+    "gpm": null,
+    "opm": 10.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 33.05,
+    "gp": null,
+    "op": 2.23,
+    "ord": 2.18,
+    "net": 0.95,
+    "gpm": null,
+    "opm": 6.7,
+    "sales_yoy": 36.5,
+    "op_yoy": -14.2,
+    "net_yoy": -72.1
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 32.54,
+    "gp": 10.52,
+    "op": 2.92,
+    "ord": 2.91,
+    "net": 1.56,
+    "gpm": 32.3,
+    "opm": 9.0,
+    "sales_yoy": -1.5,
+    "op_yoy": 30.9,
+    "net_yoy": 64.2
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 37.05,
+    "gp": 13.32,
+    "op": 3.35,
+    "ord": 3.26,
+    "net": 1.48,
+    "gpm": 36.0,
+    "opm": 9.0,
+    "sales_yoy": 13.9,
+    "op_yoy": 14.7,
+    "net_yoy": -5.1
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 41.51,
+    "gp": 15.45,
+    "op": 3.7,
+    "ord": 3.66,
+    "net": 1.65,
+    "gpm": 37.2,
+    "opm": 8.9,
+    "sales_yoy": 12.0,
+    "op_yoy": 10.4,
+    "net_yoy": 11.5
+   },
+   {
+    "year": "2026 계획",
+    "x": "2026 계획",
+    "sales": 53.0,
+    "gp": null,
+    "op": 6.0,
+    "ord": 5.9,
+    "net": 3.6,
+    "gpm": null,
+    "opm": 11.3,
+    "sales_yoy": 27.7,
+    "op_yoy": 62.2,
+    "net_yoy": 118.2,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "b": [
+   {
+    "x": "22.1Q",
+    "cl_direct": 1090,
+    "cl_partner": 3518,
+    "clients": 4608,
+    "clients_yoy": null,
+    "cl_direct_yoy": null,
+    "cl_partner_yoy": null,
+    "partner_ratio": 76.3,
+    "sms_dom": 62.2,
+    "sms_ovs": 101.9,
+    "sms_total": 164.1,
+    "sms_dom_ratio": 37.9,
+    "sms_dom_yoy": null,
+    "arpu": 162.1,
+    "arpu_yoy": null,
+    "sms_per_client": 35.61,
+    "sms_total_yoy": null
+   },
+   {
+    "x": "22.2Q",
+    "cl_direct": 1114,
+    "cl_partner": 3777,
+    "clients": 4891,
+    "clients_yoy": null,
+    "cl_direct_yoy": null,
+    "cl_partner_yoy": null,
+    "partner_ratio": 77.2,
+    "sms_dom": 63.2,
+    "sms_ovs": 106.1,
+    "sms_total": 169.3,
+    "sms_dom_ratio": 37.4,
+    "sms_dom_yoy": null,
+    "arpu": 155.5,
+    "arpu_yoy": null,
+    "sms_per_client": 34.61,
+    "sms_total_yoy": null
+   },
+   {
+    "x": "22.3Q",
+    "cl_direct": 1174,
+    "cl_partner": 3996,
+    "clients": 5170,
+    "clients_yoy": null,
+    "cl_direct_yoy": null,
+    "cl_partner_yoy": null,
+    "partner_ratio": 77.3,
+    "sms_dom": 70.3,
+    "sms_ovs": 152.6,
+    "sms_total": 222.9,
+    "sms_dom_ratio": 31.6,
+    "sms_dom_yoy": null,
+    "arpu": 182.5,
+    "arpu_yoy": null,
+    "sms_per_client": 43.11,
+    "sms_total_yoy": null
+   },
+   {
+    "x": "22.4Q",
+    "cl_direct": 1190,
+    "cl_partner": 4268,
+    "clients": 5458,
+    "clients_yoy": null,
+    "cl_direct_yoy": null,
+    "cl_partner_yoy": null,
+    "partner_ratio": 78.2,
+    "sms_dom": 70.6,
+    "sms_ovs": 126.8,
+    "sms_total": 197.4,
+    "sms_dom_ratio": 35.8,
+    "sms_dom_yoy": null,
+    "arpu": 154.8,
+    "arpu_yoy": null,
+    "sms_per_client": 36.17,
+    "sms_total_yoy": null
+   },
+   {
+    "x": "23.1Q",
+    "cl_direct": 1229,
+    "cl_partner": 4663,
+    "clients": 5892,
+    "clients_yoy": 27.9,
+    "cl_direct_yoy": 12.8,
+    "cl_partner_yoy": 32.5,
+    "partner_ratio": 79.1,
+    "sms_dom": 86.2,
+    "sms_ovs": 101.4,
+    "sms_total": 187.6,
+    "sms_dom_ratio": 45.9,
+    "sms_dom_yoy": 38.6,
+    "arpu": 142.3,
+    "arpu_yoy": -12.2,
+    "sms_per_client": 31.84,
+    "sms_total_yoy": 14.3
+   },
+   {
+    "x": "23.2Q",
+    "cl_direct": 1267,
+    "cl_partner": 4752,
+    "clients": 6019,
+    "clients_yoy": 23.1,
+    "cl_direct_yoy": 13.7,
+    "cl_partner_yoy": 25.8,
+    "partner_ratio": 78.9,
+    "sms_dom": 81.8,
+    "sms_ovs": 95.2,
+    "sms_total": 177.0,
+    "sms_dom_ratio": 46.2,
+    "sms_dom_yoy": 29.4,
+    "arpu": 134.5,
+    "arpu_yoy": -13.5,
+    "sms_per_client": 29.41,
+    "sms_total_yoy": 4.5
+   },
+   {
+    "x": "23.3Q",
+    "cl_direct": 1285,
+    "cl_partner": 4811,
+    "clients": 6096,
+    "clients_yoy": 17.9,
+    "cl_direct_yoy": 9.5,
+    "cl_partner_yoy": 20.4,
+    "partner_ratio": 78.9,
+    "sms_dom": 87.3,
+    "sms_ovs": 75.4,
+    "sms_total": 162.7,
+    "sms_dom_ratio": 53.7,
+    "sms_dom_yoy": 24.2,
+    "arpu": 131.1,
+    "arpu_yoy": -28.2,
+    "sms_per_client": 26.69,
+    "sms_total_yoy": -27.0
+   },
+   {
+    "x": "23.4Q",
+    "cl_direct": 1303,
+    "cl_partner": 5038,
+    "clients": 6341,
+    "clients_yoy": 16.2,
+    "cl_direct_yoy": 9.5,
+    "cl_partner_yoy": 18.0,
+    "partner_ratio": 79.5,
+    "sms_dom": 94.0,
+    "sms_ovs": 58.2,
+    "sms_total": 152.2,
+    "sms_dom_ratio": 61.8,
+    "sms_dom_yoy": 33.1,
+    "arpu": 125.9,
+    "arpu_yoy": -18.7,
+    "sms_per_client": 24.0,
+    "sms_total_yoy": -22.9
+   },
+   {
+    "x": "24.1Q",
+    "cl_direct": 1299,
+    "cl_partner": 5115,
+    "clients": 6414,
+    "clients_yoy": 8.9,
+    "cl_direct_yoy": 5.7,
+    "cl_partner_yoy": 9.7,
+    "partner_ratio": 79.7,
+    "sms_dom": 113.6,
+    "sms_ovs": 62.9,
+    "sms_total": 176.5,
+    "sms_dom_ratio": 64.3,
+    "sms_dom_yoy": 31.8,
+    "arpu": 137.0,
+    "arpu_yoy": -3.8,
+    "sms_per_client": 27.52,
+    "sms_total_yoy": -5.9
+   },
+   {
+    "x": "24.2Q",
+    "cl_direct": 1404,
+    "cl_partner": 5245,
+    "clients": 6649,
+    "clients_yoy": 10.5,
+    "cl_direct_yoy": 10.8,
+    "cl_partner_yoy": 10.4,
+    "partner_ratio": 78.9,
+    "sms_dom": 116.7,
+    "sms_ovs": 65.0,
+    "sms_total": 181.7,
+    "sms_dom_ratio": 64.2,
+    "sms_dom_yoy": 42.7,
+    "arpu": 132.3,
+    "arpu_yoy": -1.6,
+    "sms_per_client": 27.33,
+    "sms_total_yoy": 2.7
+   },
+   {
+    "x": "24.3Q",
+    "cl_direct": 1420,
+    "cl_partner": 5515,
+    "clients": 6935,
+    "clients_yoy": 13.8,
+    "cl_direct_yoy": 10.5,
+    "cl_partner_yoy": 14.6,
+    "partner_ratio": 79.5,
+    "sms_dom": 131.0,
+    "sms_ovs": 65.8,
+    "sms_total": 196.8,
+    "sms_dom_ratio": 66.6,
+    "sms_dom_yoy": 50.1,
+    "arpu": 135.1,
+    "arpu_yoy": 3.1,
+    "sms_per_client": 28.38,
+    "sms_total_yoy": 21.0
+   },
+   {
+    "x": "24.4Q",
+    "cl_direct": 1440,
+    "cl_partner": 5810,
+    "clients": 7250,
+    "clients_yoy": 14.3,
+    "cl_direct_yoy": 10.5,
+    "cl_partner_yoy": 15.3,
+    "partner_ratio": 80.1,
+    "sms_dom": 143.2,
+    "sms_ovs": 54.6,
+    "sms_total": 197.8,
+    "sms_dom_ratio": 72.4,
+    "sms_dom_yoy": 52.3,
+    "arpu": 133.0,
+    "arpu_yoy": 5.6,
+    "sms_per_client": 27.28,
+    "sms_total_yoy": 30.0
+   },
+   {
+    "x": "25.1Q",
+    "cl_direct": 1470,
+    "cl_partner": 5997,
+    "clients": 7467,
+    "clients_yoy": 16.4,
+    "cl_direct_yoy": 13.2,
+    "cl_partner_yoy": 17.2,
+    "partner_ratio": 80.3,
+    "sms_dom": 142.9,
+    "sms_ovs": 30.4,
+    "sms_total": 173.3,
+    "sms_dom_ratio": 82.4,
+    "sms_dom_yoy": 25.8,
+    "arpu": 120.7,
+    "arpu_yoy": -11.9,
+    "sms_per_client": 23.21,
+    "sms_total_yoy": -1.8
+   },
+   {
+    "x": "25.2Q",
+    "cl_direct": 1492,
+    "cl_partner": 6227,
+    "clients": 7719,
+    "clients_yoy": 16.1,
+    "cl_direct_yoy": 6.3,
+    "cl_partner_yoy": 18.7,
+    "partner_ratio": 80.7,
+    "sms_dom": 168.6,
+    "sms_ovs": 34.3,
+    "sms_total": 202.9,
+    "sms_dom_ratio": 83.1,
+    "sms_dom_yoy": 44.5,
+    "arpu": 126.3,
+    "arpu_yoy": -4.6,
+    "sms_per_client": 26.29,
+    "sms_total_yoy": 11.7
+   },
+   {
+    "x": "25.3Q",
+    "cl_direct": 1507,
+    "cl_partner": 6492,
+    "clients": 7999,
+    "clients_yoy": 15.3,
+    "cl_direct_yoy": 6.1,
+    "cl_partner_yoy": 17.7,
+    "partner_ratio": 81.2,
+    "sms_dom": 170.6,
+    "sms_ovs": 20.4,
+    "sms_total": 191.0,
+    "sms_dom_ratio": 89.3,
+    "sms_dom_yoy": 30.2,
+    "arpu": 120.0,
+    "arpu_yoy": -11.2,
+    "sms_per_client": 23.88,
+    "sms_total_yoy": -2.9
+   },
+   {
+    "x": "25.4Q",
+    "cl_direct": 1523,
+    "cl_partner": 6685,
+    "clients": 8208,
+    "clients_yoy": 13.2,
+    "cl_direct_yoy": 5.8,
+    "cl_partner_yoy": 15.1,
+    "partner_ratio": 81.4,
+    "sms_dom": 187.0,
+    "sms_ovs": 26.9,
+    "sms_total": 213.9,
+    "sms_dom_ratio": 87.4,
+    "sms_dom_yoy": 30.6,
+    "arpu": 131.4,
+    "arpu_yoy": -1.2,
+    "sms_per_client": 26.06,
+    "sms_total_yoy": 8.1
+   },
+   {
+    "x": "26.1Q",
+    "cl_direct": 1542,
+    "cl_partner": 7259,
+    "clients": 8801,
+    "clients_yoy": 17.9,
+    "cl_direct_yoy": 4.9,
+    "cl_partner_yoy": 21.0,
+    "partner_ratio": 82.5,
+    "sms_dom": 207.9,
+    "sms_ovs": 19.9,
+    "sms_total": 227.8,
+    "sms_dom_ratio": 91.2,
+    "sms_dom_yoy": 45.5,
+    "arpu": 127.1,
+    "arpu_yoy": 5.3,
+    "sms_per_client": 25.88,
+    "sms_total_yoy": 31.4
+   },
+   {
+    "x": "26.2Q",
+    "cl_direct": 1573,
+    "cl_partner": 7567,
+    "clients": 9140,
+    "clients_yoy": 18.4,
+    "cl_direct_yoy": 5.4,
+    "cl_partner_yoy": 21.5,
+    "partner_ratio": 82.8,
+    "sms_dom": 200.9,
+    "sms_ovs": 17.4,
+    "sms_total": 218.3,
+    "sms_dom_ratio": 92.0,
+    "sms_dom_yoy": 19.2,
+    "arpu": 117.3,
+    "arpu_yoy": -7.1,
+    "sms_per_client": 23.88,
+    "sms_total_yoy": 7.6
+   },
+   {
+    "x": "26.3Q",
+    "cl_direct": 1595,
+    "cl_partner": 7842,
+    "clients": 9437,
+    "clients_yoy": 18.0,
+    "cl_direct_yoy": 5.8,
+    "cl_partner_yoy": 20.8,
+    "partner_ratio": 83.1,
+    "sms_dom": 213.2,
+    "sms_ovs": 13.6,
+    "sms_total": 226.8,
+    "sms_dom_ratio": 94.0,
+    "sms_dom_yoy": 25.0,
+    "arpu": 117.7,
+    "arpu_yoy": -1.9,
+    "sms_per_client": 24.03,
+    "sms_total_yoy": 18.7
+   }
+  ],
+  "ba": [
+   {
+    "x": "2019",
+    "sales_per_emp": 41.4
+   },
+   {
+    "x": "2020",
+    "sales_per_emp": 46.5
+   },
+   {
+    "x": "2021",
+    "sales_per_emp": 53.8
+   },
+   {
+    "x": "2022",
+    "sales_per_emp": 59.0
+   },
+   {
+    "x": "2023",
+    "sales_per_emp": 65.0
+   },
+   {
+    "x": "2024",
+    "sales_per_emp": 66.1,
+    "msg_sales": 36.59,
+    "msg_cp": 9.59,
+    "msg_cpm": 26.2,
+    "ai_sales": 0.46,
+    "ai_cp": -0.83,
+    "ai_cpm": -179.9
+   },
+   {
+    "x": "2025",
+    "sales_per_emp": 63.1,
+    "msg_sales": 39.14,
+    "msg_cp": 10.87,
+    "msg_cpm": 27.8,
+    "ai_sales": 0.99,
+    "ai_cp": -0.37,
+    "ai_cpm": -37.0
+   },
+   {
+    "x": "2026 계획",
+    "plan": 1,
+    "sales_per_emp": 46.9,
+    "msg_sales": 45.0,
+    "msg_cp": 10.35,
+    "msg_cpm": 23.0,
+    "ai_sales": 1.7,
+    "ai_cp": 0.01,
+    "ai_cpm": 0.8
+   },
+   {
+    "x": "2027 계획",
+    "plan": 1,
+    "sales_per_emp": 86.9,
+    "msg_sales": 70.1,
+    "msg_cp": 22.0,
+    "msg_cpm": 31.4,
+    "ai_sales": 2.9,
+    "ai_cp": 1.0,
+    "ai_cpm": 34.5
+   }
+  ],
+  "mk": [
+   {
+    "x": "2019",
+    "mkt": 58.4
+   },
+   {
+    "x": "2020",
+    "mkt": 83.2
+   },
+   {
+    "x": "2021",
+    "mkt": 122.2
+   },
+   {
+    "x": "2022",
+    "mkt": 165.6
+   },
+   {
+    "x": "2023",
+    "mkt": 179.8
+   },
+   {
+    "x": "2024",
+    "mkt": 211.8
+   },
+   {
+    "x": "2025 예측",
+    "mkt": 256.2,
+    "plan": 1
+   },
+   {
+    "x": "2026 예측",
+    "mkt": 305.9,
+    "plan": 1
+   },
+   {
+    "x": "2027 예측",
+    "mkt": 361.2,
+    "plan": 1
+   },
+   {
+    "x": "2028 예측",
+    "mkt": 425.9,
+    "plan": 1
+   },
+   {
+    "x": "2029 예측",
+    "mkt": 498.1,
+    "plan": 1
+   },
+   {
+    "x": "2030 예측",
+    "mkt": 576.6,
+    "plan": 1
+   }
+  ]
+ }
+}
