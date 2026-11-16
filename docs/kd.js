@@ -49,6 +49,8 @@
     if (ch.table) return mtable(ch, rows);
     var xk = ch.x || "x", bars = ch.bars || [], lines = ch.lines || [];
     if (ch.noplan) rows = rows.filter(function (r) { return !r.plan; });
+    if (lines.length && rows.some(function (r) { return r.plan; }))   // 회사 계획 행에는 꺾은선을 잇지 않는다(실적만 선, 계획은 옅은 막대 — 2026-11-16 사용자)
+      rows = rows.map(function (r) { if (!r.plan) return r; var o = {}; for (var k in r) o[k] = r[k]; lines.forEach(function (l) { if (!l.plan) o[l.k] = null; }); return o; });
     rows = rows.filter(function (r) { return bars.concat(lines).some(function (s) { return n(r[s.k]) != null; }); });
     var W = 440, H = 200, L = 34, R = lines.some(function (s) { return s.r; }) ? 36 : 10, T = 22, B = 24, nn = rows.length;
     if (!nn) return "";
@@ -100,19 +102,25 @@
         });
       });
     }
-    var labelAll = bw >= 26;
+    var lastLab = [];   // 꺾은선은 최신 값만 글자로(2026-11-16 사용자) - 나머지는 마우스를 올리면 값 상자로
     lines.forEach(function (s) {
       var y = s.r ? yr : yl, pts = [];
       rows.forEach(function (r, i) { var v = n(r[s.k]); if (v != null) pts.push([x(i), v, i]); });
       if (pts.length > 1) g += '<polyline class="kd-l c' + s.c + '" points="' + pts.map(function (p) { return p[0].toFixed(1) + "," + y(p[1]).toFixed(1); }).join(" ") + '"/>';
       pts.forEach(function (p, k) {
         g += '<circle class="kd-d c' + s.c + '" cx="' + p[0].toFixed(1) + '" cy="' + y(p[1]).toFixed(1) + '" r="3.2"/>';
-        if (labelAll || k === pts.length - 1) g += '<text class="kd-lt c' + s.c + '" x="' + p[0].toFixed(1) + '" y="' + (y(p[1]) - 7).toFixed(1) + '">' + esc(s.yoy ? yoyTxt(p[1]) : fmt(p[1], s.u) + (s.u === "%" ? "%" : "")) + "</text>";
+        if (k === pts.length - 1) lastLab.push({ c: s.c, x: p[0], y: y(p[1]) - 7, t: s.yoy ? yoyTxt(p[1]) : fmt(p[1], s.u) + (s.u === "%" ? "%" : "") });
       });
     });
-    rows.forEach(function (r, i) {   // 칸마다 마우스 올리면 값
-      var t = String(r[xk]) + (ch.xs || "") + bars.concat(lines).map(function (s) { var v = n(r[s.k]); return v == null ? "" : "\n" + s.l + " " + (s.yoy ? yoyTxt(v) : fmt(v, s.u) + (s.u ? " " + s.u : "")); }).join("");
-      g += '<rect class="kd-hit" x="' + (L + bw * i).toFixed(1) + '" y="' + T + '" width="' + bw.toFixed(1) + '" height="' + (H - T - B) + '"><title>' + esc(t) + "</title></rect>";
+    lastLab.sort(function (a, b) { return a.y - b.y; });   // 끝 글자끼리 겹치지 않게 11px 씩 벌린다
+    for (var li = 1; li < lastLab.length; li++) if (lastLab[li].y - lastLab[li - 1].y < 11) lastLab[li].y = lastLab[li - 1].y + 11;
+    lastLab.forEach(function (o) { g += '<text class="kd-lt c' + o.c + '" x="' + o.x.toFixed(1) + '" y="' + Math.max(9, o.y).toFixed(1) + '">' + esc(o.t) + "</text>"; });
+    rows.forEach(function (r, i) {   // 칸마다 마우스 올리면 값 상자(kd-tip) - 계열마다 한 줄씩 색 표시와 함께
+      var t = "<b>" + esc(String(r[xk]) + (ch.xs || "")) + "</b>" + bars.map(function (s) { return [s, 0]; }).concat(lines.map(function (s) { return [s, 1]; })).map(function (z) {
+        var s = z[0], v = n(r[s.k]); if (v == null) return "";
+        return '<span><i class="kd-sw ' + (z[1] ? "ln " : "") + "c" + s.c + '"></i>' + esc(s.l) + " <em>" + esc(s.yoy ? yoyTxt(v) : fmt(v, s.u) + (s.u ? " " + s.u : "")) + "</em></span>";
+      }).join("");
+      g += '<rect class="kd-hit" x="' + (L + bw * i).toFixed(1) + '" y="' + T + '" width="' + bw.toFixed(1) + '" height="' + (H - T - B) + '" data-tip="' + esc(t) + '"/>';
     });
     var leg = bars.map(function (b) { return '<i class="kd-sw c' + b.c + (b.f ? " m" : "") + '"></i>' + esc(b.l) + (b.u ? "(" + esc(b.u) + ")" : ""); })
       .concat(lines.map(function (s) { return '<i class="kd-sw ln c' + s.c + '"></i>' + esc(s.l) + (s.u && !s.yoy ? "(" + esc(s.u) + ")" : s.yoy ? "(%)" : ""); }));
@@ -164,9 +172,25 @@
       '<p class="kd-src">출처: ' + esc(doc.annual_src || "") + "</p>";
   }
 
+  function bindTip(root) {   // 마우스를 올린 칸의 값 - 차트 위에 뜨는 작은 상자(글자가 겹치지 않게)
+    if (!root) return;
+    root.querySelectorAll(".kd-fig").forEach(function (fig) {
+      var tip = document.createElement("div"); tip.className = "kd-tip"; fig.appendChild(tip);
+      fig.querySelectorAll(".kd-hit").forEach(function (h) {
+        h.addEventListener("mouseenter", function () { tip.innerHTML = h.getAttribute("data-tip"); tip.style.display = "block"; });
+        h.addEventListener("mousemove", function (e) {
+          var r = fig.getBoundingClientRect(), x = e.clientX - r.left, w = tip.offsetWidth;
+          tip.style.left = Math.max(4, Math.min(r.width - w - 4, x + 14 + w > r.width ? x - w - 14 : x + 14)) + "px";
+          tip.style.top = Math.max(4, e.clientY - r.top - tip.offsetHeight - 10) + "px";
+        });
+        h.addEventListener("mouseleave", function () { tip.style.display = "none"; });
+      });
+    });
+  }
   function draw(doc, keyEl, mainEl) {
     var T = doc.tables || {}, charts = doc.charts || [];
     var rows = function (ch) { return T[ch.d] || []; };
+    var fsc = document.getElementById("fsc"); if (fsc && keyEl && charts.some(function (c) { return c.sec === "key"; })) fsc.remove();   // 데이터 차트에 매출·영업이익이 있으면 위쪽 같은 차트는 지운다(중복, 2026-11-16 사용자)
     if (keyEl) keyEl.innerHTML = charts.filter(function (c) { return c.sec === "key"; }).map(function (c) { return chart(c, rows(c)); }).join("");
     if (!mainEl) return;
     var secs = [];
@@ -177,6 +201,7 @@
         return '<div class="kd-sec">' + esc(s) + '</div><div class="kd-grid">' + charts.filter(function (c) { return c.sec === s; }).map(function (c) { return chart(c, rows(c)); }).join("") + "</div>";
       }).join("") +
       '<details class="kd-rule"><summary>차트 원칙</summary><p>절댓값은 막대, 비율·성장률·비교는 꺾은선. 막대 색은 민트 → 보라 → 하늘 → 살구 → 분홍 → 버터 → 회청 순서로, 최신 값이 큰 계열부터. 꺾은선은 노랑 → 초록 → 파랑 → 빨강 → 보라 → 청록 → 회색. YoY 는 노란 선과 오른쪽 축.</p></details>';
+    [keyEl, mainEl].forEach(bindTip);
     mainEl.querySelectorAll(".ftw,.kdq-w").forEach(function (tw) { tw.scrollLeft = tw.scrollWidth; });
   }
 

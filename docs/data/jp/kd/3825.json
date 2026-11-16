@@ -1,1 +1,1192 @@
-{"c": "3825", "n": "리믹스포인트", "asof": "2026-11-13", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적)", "note": "비트코인 평가손익을 매출로 잡아 분기 실적이 크게 출렁임. 전력 소매(에너지 사업)는 2026년 10월 1일 51% 양도 → 3분기부터 지분법. 회사 계획은 범위(매출 300.5~373.9억엔)라 연간표에 넣지 않음", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산보충설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산보충설명자료·결산단신"}, {"sec": "key", "t": "에너지 사업(전력 소매) 매출", "def": "고압·저압 전력 소매 분기 매출. 2026년 10월부터 연결 제외", "d": "q", "bars": [{"k": "energy", "l": "에너지 매출", "u": "억엔", "c": 0}], "lines": [{"k": "energy_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산보충설명자료·결산단신"}, {"sec": "key", "t": "디지털자산 보유액", "def": "분기말 자기보유 + 대여 암호자산(시가)", "d": "q", "bars": [{"k": "crypto", "l": "보유 암호자산(대여분 포함)", "u": "억엔", "c": 0}], "lines": [{"k": "crypto_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산보충설명자료·결산단신"}, {"sec": "사업 지표", "t": "전력 소매 2분기 비교", "def": "7~9월 판매전력량. JEPX 시스템가격(엔/kWh)이 54.5% 올라 조달비용 급증", "d": "kpi2q", "lines": [{"k": "hv", "l": "고압 판매전력량", "u": "만 kWh", "c": 0}, {"k": "lv", "l": "저압 판매전력량", "u": "만 kWh", "c": 1}, {"k": "jepx", "l": "JEPX 가격(엔)", "u": "", "c": 0, "r": 1}], "src": "2Q27 결산보충설명자료·결산단신"}, {"sec": "사업 지표", "t": "계통용 축전지 수주잔고·파이프라인", "def": "고압 계통용 축전지 판매 수주잔고와 파이프라인(수주잔고 + 수주 예상), 자사 보유 축전소 누적 투자", "d": "bat", "src": "2Q27 결산보충설명자료·결산단신 · 자사 보유 축전소 10→12곳(중기 목표 25곳)", "lines": [{"k": "pipe", "l": "파이프라인 총액", "u": "억엔", "c": 0}, {"k": "inv", "l": "자사 축전소 누적 투자", "u": "억엔", "c": 1}, {"k": "backlog", "l": "수주잔고", "u": "억엔", "c": 2}]}, {"sec": "사업 지표", "t": "비트코인 보유", "def": "2026년 9월말 1,508.7 BTC, 장부가 161.4억엔·시가 198.6억엔(평가익 37.2억엔). 알트코인은 9월 전량 매각", "d": "q", "bars": [{"k": "crypto", "l": "암호자산", "u": "억엔", "c": 0}], "src": "2Q27 결산보충설명자료·결산단신"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산보충설명자료·결산단신"}, {"sec": "부문", "t": "부문별 매출(2분기 누계)", "d": "seg", "src": "2Q27 결산보충설명자료·결산단신", "lines": [{"k": "en", "l": "에너지", "u": "억엔", "c": 0}, {"k": "da", "l": "디지털자산", "u": "억엔", "c": 1}, {"k": "ss", "l": "축전 솔루션", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "부문별 영업이익(2분기 누계)", "d": "seg", "src": "2Q27 결산보충설명자료·결산단신 · 조정액(−8.57억엔) 별도", "lines": [{"k": "da_op", "l": "디지털자산", "u": "억엔", "c": 0}, {"k": "ss_op", "l": "축전 솔루션", "u": "억엔", "c": 1}, {"k": "en_op", "l": "에너지", "u": "억엔", "c": 2}]}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산보충설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 47.81, "op": 4.02, "ord": 4.65, "net": 4.39, "gp": 7.61, "sga": 3.59, "cogs": 40.2, "cash": 131.32, "debt_total": 5.46, "equity": 182.38, "total_assets": 196.93, "crypto": 0.56, "gpm": 15.9, "opm": 8.4, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "crypto_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 55.51, "op": 4.73, "ord": 4.64, "net": -2.69, "gp": 12.76, "sga": 8.03, "cogs": 42.75, "cash": 135.73, "debt_total": 6.15, "equity": 179.69, "total_assets": 197.14, "crypto": 0.68, "gpm": 23.0, "opm": 8.5, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "crypto_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 43.07, "op": 0.53, "ord": 0.41, "net": 0.19, "gp": 7.15, "sga": 6.62, "cogs": 35.92, "cash": 132.71, "debt_total": 4.83, "equity": 179.91, "total_assets": 201.47, "crypto": 0.43, "gpm": 16.6, "opm": 1.2, "energy": 37.98, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "crypto_yoy": null, "energy_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 69.62, "op": 4.98, "ord": 4.67, "net": 4.08, "gp": 12.48, "sga": 7.5, "cogs": 57.14, "cash": 121.88, "debt_total": 4.56, "equity": 183.99, "total_assets": 210.14, "crypto": 7.62, "gpm": 17.9, "opm": 7.2, "energy": 63.5, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "crypto_yoy": null, "energy_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 55.2, "op": 2.26, "ord": 9.51, "net": 9.27, "gp": 9.69, "sga": 7.43, "cogs": 45.51, "cash": 94.86, "debt_total": 1.19, "equity": 193.3, "total_assets": 213.81, "crypto": 58.1, "gpm": 17.6, "opm": 4.1, "energy": 48.04, "sales_yoy": 15.5, "gp_yoy": 27.3, "sga_yoy": 107.0, "op_yoy": -43.8, "ord_yoy": 104.5, "net_yoy": 111.2, "cash_yoy": -27.8, "debt_total_yoy": -78.2, "crypto_yoy": 10275.0, "energy_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 43.4, "op": -19.88, "ord": -20.0, "net": -19.47, "gp": -9.98, "sga": 9.9, "cogs": 53.38, "cash": 51.03, "debt_total": 3.19, "equity": 179.11, "total_assets": 205.43, "crypto": 86.74, "gpm": -23.0, "opm": -45.8, "energy": 57.1, "sales_yoy": -21.8, "gp_yoy": -178.2, "sga_yoy": 23.3, "op_yoy": -520.3, "ord_yoy": -531.0, "net_yoy": null, "cash_yoy": -62.4, "debt_total_yoy": -48.1, "crypto_yoy": 12655.9, "energy_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 64.94, "op": 17.41, "ord": 17.6, "net": 22.83, "gp": 26.81, "sga": 9.4, "cogs": 38.13, "cash": 50.13, "debt_total": 2.0, "equity": 261.92, "total_assets": 284.8, "crypto": 173.76, "gpm": 41.3, "opm": 26.8, "energy": 41.39, "sales_yoy": 50.8, "gp_yoy": 275.0, "sga_yoy": 42.0, "op_yoy": 3184.9, "ord_yoy": 4192.7, "net_yoy": 11915.8, "cash_yoy": -62.2, "debt_total_yoy": -58.6, "crypto_yoy": 40309.3, "energy_yoy": 9.0}, {"q": "26.2Q", "x": "26.2Q", "sales": 85.19, "op": 21.9, "ord": 21.77, "net": 18.28, "gp": 29.49, "sga": 7.59, "cogs": 55.7, "cash": 32.11, "debt_total": 2.0, "equity": 322.93, "total_assets": 358.92, "crypto": 242.89, "gpm": 34.6, "opm": 25.7, "energy": 63.61, "sales_yoy": 22.4, "gp_yoy": 136.3, "sga_yoy": 1.2, "op_yoy": 339.8, "ord_yoy": 366.2, "net_yoy": 348.0, "cash_yoy": -73.7, "debt_total_yoy": -56.1, "crypto_yoy": 3087.5, "energy_yoy": 0.2}, {"q": "26.3Q", "x": "26.3Q", "sales": 5.11, "op": -46.85, "ord": -47.14, "net": -41.09, "gp": -40.2, "sga": 6.65, "cogs": 45.31, "cash": 22.78, "debt_total": 2.0, "equity": 287.34, "total_assets": 316.35, "crypto": 206.12, "gpm": -786.7, "opm": -916.8, "energy": 48.4, "sales_yoy": -90.7, "gp_yoy": -514.9, "sga_yoy": -10.5, "op_yoy": -2173.0, "ord_yoy": -595.7, "net_yoy": -543.3, "cash_yoy": -76.0, "debt_total_yoy": 68.1, "crypto_yoy": 254.8, "energy_yoy": 0.7}, {"q": "26.4Q", "x": "26.4Q", "sales": 22.27, "op": -47.23, "ord": -47.24, "net": -47.42, "gp": -38.95, "sga": 8.28, "cogs": 61.22, "cash": 19.93, "debt_total": 5.0, "equity": 239.88, "total_assets": 277.21, "crypto": 157.41, "gpm": -174.9, "opm": -212.1, "energy": 57.5, "sales_yoy": -48.7, "gp_yoy": null, "sga_yoy": -16.4, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "cash_yoy": -60.9, "debt_total_yoy": 56.7, "crypto_yoy": 81.5, "energy_yoy": 0.7}, {"q": "27.1Q", "x": "27.1Q", "sales": 60.35, "op": -17.17, "ord": -17.75, "net": -17.74, "gp": -7.53, "sga": 9.64, "cogs": 67.88, "cash": 27.84, "debt_total": 35.0, "equity": 234.74, "total_assets": 326.42, "crypto": 148.77, "gpm": -12.5, "opm": -28.5, "energy": 76.27, "sales_yoy": -7.1, "gp_yoy": -128.1, "sga_yoy": 2.6, "op_yoy": -198.6, "ord_yoy": -200.9, "net_yoy": -177.7, "cash_yoy": -44.5, "debt_total_yoy": 1650.0, "crypto_yoy": -14.4, "energy_yoy": 84.3}, {"q": "27.2Q", "x": "27.2Q", "sales": 177.48, "op": 50.11, "ord": 49.31, "net": 44.43, "gp": 59.86, "sga": 9.75, "cogs": 117.62, "cash": 30.2, "debt_total": 30.0, "equity": 279.33, "total_assets": 403.55, "crypto": 198.68, "gpm": 33.7, "opm": 28.2, "energy": 114.73, "sales_yoy": 108.3, "gp_yoy": 103.0, "sga_yoy": 28.5, "op_yoy": 128.8, "ord_yoy": 126.5, "net_yoy": 143.1, "cash_yoy": -5.9, "debt_total_yoy": 1400.0, "crypto_yoy": -18.2, "energy_yoy": 80.4}], "a": [{"year": "2022", "x": "2022", "sales": 287.53, "op": 82.05, "ord": 81.73, "net": 69.13, "opm": 28.5, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 327.89, "op": -18.5, "ord": -17.22, "net": 32.67, "opm": -5.6, "sales_yoy": 14.0, "op_yoy": -122.5, "net_yoy": -52.7}, {"year": "2024", "x": "2024", "sales": 204.87, "op": 17.43, "ord": 17.58, "net": 10.7, "opm": 8.5, "sales_yoy": -37.5, "op_yoy": null, "net_yoy": -67.2}, {"year": "2025", "x": "2025", "sales": 211.29, "op": -12.11, "ord": -5.41, "net": -5.93, "opm": -5.7, "sales_yoy": 3.1, "op_yoy": -169.5, "net_yoy": -155.4}, {"year": "2026", "x": "2026", "sales": 177.51, "op": -54.77, "ord": -55.01, "net": -47.4, "opm": -30.9, "sales_yoy": -16.0, "op_yoy": null, "net_yoy": null}], "seg": [{"x": "26.2Q 누계", "ss": 6.19, "en": 105.0, "da": 37.39, "ss_op": 1.24, "en_op": 7.72, "da_op": 37.39}, {"x": "27.2Q 누계", "ss": 7.08, "en": 191.01, "da": 39.71, "ss_op": 1.2, "en_op": 0.58, "da_op": 39.71}], "kpi2q": [{"x": "26.2Q", "jepx": 12.12, "hv": 18122, "lv": 5874}, {"x": "27.2Q", "jepx": 18.72, "hv": 34547, "lv": 7717}], "bat": [{"x": "26/8/14", "backlog": 16.8, "pipe": 32.9, "sites": 10, "online": 5, "inv": 43.5}, {"x": "26/10/31", "backlog": 28.1, "pipe": 52.8, "sites": 12, "online": 6, "inv": 50.5}]}}
+{
+ "c": "3825",
+ "n": "리믹스포인트",
+ "asof": "2026-11-13",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적)",
+ "note": "비트코인 평가손익을 매출로 잡아 분기 실적이 크게 출렁임. 전력 소매(에너지 사업)는 2026년 10월 1일 51% 양도 → 3분기부터 지분법. 회사 계획은 범위(매출 300.5~373.9억엔)라 연간표에 넣지 않음",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산보충설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산보충설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "에너지 사업(전력 소매) 매출",
+   "def": "고압·저압 전력 소매 분기 매출. 2026년 10월부터 연결 제외",
+   "d": "q",
+   "bars": [
+    {
+     "k": "energy",
+     "l": "에너지 매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "energy_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산보충설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "디지털자산 보유액",
+   "def": "분기말 자기보유 + 대여 암호자산(시가)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "crypto",
+     "l": "보유 암호자산(대여분 포함)",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "crypto_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산보충설명자료·결산단신"
+  },
+  {
+   "sec": "축전 솔루션",
+   "t": "계통용 축전지 수주잔고·파이프라인",
+   "def": "고압 계통용 축전지 판매 수주잔고와 파이프라인(수주잔고 + 수주 예상), 자사 보유 축전소 누적 투자",
+   "d": "bat",
+   "src": "2Q27 결산보충설명자료·결산단신 · 자사 보유 축전소 10→12곳(중기 목표 25곳)",
+   "lines": [
+    {
+     "k": "pipe",
+     "l": "파이프라인 총액",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "inv",
+     "l": "자사 축전소 누적 투자",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "디지털자산",
+   "t": "비트코인 보유",
+   "def": "2026년 9월말 1,508.7 BTC, 장부가 161.4억엔·시가 198.6억엔(평가익 37.2억엔). 알트코인은 9월 전량 매각",
+   "d": "q",
+   "bars": [
+    {
+     "k": "crypto",
+     "l": "암호자산",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27 결산보충설명자료·결산단신"
+  },
+  {
+   "sec": "전력 소매",
+   "t": "고압 판매전력량",
+   "def": "분기(3개월) 고압 판매전력량",
+   "d": "b",
+   "bars": [
+    {
+     "k": "hv",
+     "l": "고압",
+     "u": "만 kWh",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26·3Q26·4Q26·1Q27·2Q27(각 자료의 전년 동기 대비 막대 라벨)",
+   "lines": [
+    {
+     "k": "hv_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "전력 소매",
+   "t": "저압 판매전력량",
+   "def": "분기(3개월) 저압 판매전력량",
+   "d": "b",
+   "bars": [
+    {
+     "k": "lv",
+     "l": "저압",
+     "u": "만 kWh",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26·3Q26·4Q26·1Q27·2Q27(각 자료의 전년 동기 대비 막대 라벨)",
+   "lines": [
+    {
+     "k": "lv_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "전력 소매",
+   "t": "JEPX 시스템가격",
+   "def": "분기 평균 JEPX 시스템프라이스(엔/kWh) — 조달비용 지표",
+   "d": "b",
+   "lines": [
+    {
+     "k": "jepx",
+     "l": "JEPX",
+     "u": "엔/kWh",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26·3Q26·4Q26·1Q27·2Q27(각 자료의 전년 동기 대비 막대 라벨)"
+  },
+  {
+   "sec": "전력 소매",
+   "t": "고압 계약 건수",
+   "def": "분기말 고압 계약 구수",
+   "d": "b",
+   "bars": [
+    {
+     "k": "hv_n",
+     "l": "계약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26~2Q27 고압·저압 수요가 획득 현황 문장",
+   "lines": [
+    {
+     "k": "hv_n_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "전력 소매",
+   "t": "고압 계약전력",
+   "def": "분기말 고압 계약전력(회사 표기 \"程度\")",
+   "d": "b",
+   "bars": [
+    {
+     "k": "hv_kw",
+     "l": "계약전력",
+     "u": "만 kW",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26~2Q27 고압·저압 수요가 획득 현황 문장"
+  },
+  {
+   "sec": "전력 소매",
+   "t": "저압 법인 계약 건수",
+   "def": "분기말 저압 법인 계약 구수(회사 표기 \"約\")",
+   "d": "b",
+   "bars": [
+    {
+     "k": "lvc_n",
+     "l": "계약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26~2Q27 고압·저압 수요가 획득 현황 문장",
+   "lines": [
+    {
+     "k": "lvc_n_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "전력 소매",
+   "t": "저압 일반가정 계약 건수",
+   "def": "분기말 저압 일반가정 계약 구수(회사 표기 \"約\"). 2026년 10월부터 에너지 사업은 지분법 관계사(리믹스 전기)로 이관",
+   "d": "b",
+   "bars": [
+    {
+     "k": "lvh_n",
+     "l": "계약",
+     "u": "건",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26~2Q27 고압·저압 수요가 획득 현황 문장",
+   "lines": [
+    {
+     "k": "lvh_n_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "축전 솔루션",
+   "t": "자사 보유 축전소",
+   "def": "자사 보유 축전소 수, 수전 개시, 수급조정시장 참여 시설 수(중기 목표 25곳)",
+   "d": "bat",
+   "lines": [
+    {
+     "k": "sites",
+     "l": "보유",
+     "u": "곳",
+     "c": 0
+    },
+    {
+     "k": "online",
+     "l": "수전 개시",
+     "u": "곳",
+     "c": 1
+    },
+    {
+     "k": "mkt",
+     "l": "수급조정시장 참여",
+     "u": "곳",
+     "c": 2
+    }
+   ],
+   "src": "결산보충설명자료 1Q27(26/8/14)·2Q27(26/10/31) 계통용 축전지 KPI"
+  },
+  {
+   "sec": "축전 솔루션",
+   "t": "자사 축전소 총정격용량",
+   "def": "자사 보유 축전소 총정격용량(약)",
+   "d": "bat",
+   "bars": [
+    {
+     "k": "mwh",
+     "l": "총정격용량",
+     "u": "MWh",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 1Q27·2Q27 계통용 축전지 KPI"
+  },
+  {
+   "sec": "디지털자산",
+   "t": "비트코인 보유 수량",
+   "def": "분기말 보유 수량(대여분·렌딩 보수 포함)",
+   "d": "b",
+   "bars": [
+    {
+     "k": "btc",
+     "l": "BTC",
+     "u": "BTC",
+     "c": 0
+    }
+   ],
+   "src": "결산보충설명자료 2Q26~2Q27 암호자산 보유 내역"
+  },
+  {
+   "sec": "디지털자산",
+   "t": "비트코인 장부가와 시가",
+   "def": "분기말 BTC 장부가·시가",
+   "d": "b",
+   "lines": [
+    {
+     "k": "btc_mv",
+     "l": "시가",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "btc_bv",
+     "l": "장부가",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산보충설명자료 2Q26~2Q27 암호자산 보유 내역"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산보충설명자료·결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출(2분기 누계)",
+   "d": "seg",
+   "src": "2Q27 결산보충설명자료·결산단신",
+   "lines": [
+    {
+     "k": "en",
+     "l": "에너지",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "da",
+     "l": "디지털자산",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "ss",
+     "l": "축전 솔루션",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익(2분기 누계)",
+   "d": "seg",
+   "src": "2Q27 결산보충설명자료·결산단신 · 조정액(−8.57억엔) 별도",
+   "lines": [
+    {
+     "k": "da_op",
+     "l": "디지털자산",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ss_op",
+     "l": "축전 솔루션",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "en_op",
+     "l": "에너지",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산보충설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 47.81,
+    "op": 4.02,
+    "ord": 4.65,
+    "net": 4.39,
+    "gp": 7.61,
+    "sga": 3.59,
+    "cogs": 40.2,
+    "cash": 131.32,
+    "debt_total": 5.46,
+    "equity": 182.38,
+    "total_assets": 196.93,
+    "crypto": 0.56,
+    "gpm": 15.9,
+    "opm": 8.4,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "crypto_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 55.51,
+    "op": 4.73,
+    "ord": 4.64,
+    "net": -2.69,
+    "gp": 12.76,
+    "sga": 8.03,
+    "cogs": 42.75,
+    "cash": 135.73,
+    "debt_total": 6.15,
+    "equity": 179.69,
+    "total_assets": 197.14,
+    "crypto": 0.68,
+    "gpm": 23.0,
+    "opm": 8.5,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "crypto_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 43.07,
+    "op": 0.53,
+    "ord": 0.41,
+    "net": 0.19,
+    "gp": 7.15,
+    "sga": 6.62,
+    "cogs": 35.92,
+    "cash": 132.71,
+    "debt_total": 4.83,
+    "equity": 179.91,
+    "total_assets": 201.47,
+    "crypto": 0.43,
+    "gpm": 16.6,
+    "opm": 1.2,
+    "energy": 37.98,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "crypto_yoy": null,
+    "energy_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 69.62,
+    "op": 4.98,
+    "ord": 4.67,
+    "net": 4.08,
+    "gp": 12.48,
+    "sga": 7.5,
+    "cogs": 57.14,
+    "cash": 121.88,
+    "debt_total": 4.56,
+    "equity": 183.99,
+    "total_assets": 210.14,
+    "crypto": 7.62,
+    "gpm": 17.9,
+    "opm": 7.2,
+    "energy": 63.5,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "crypto_yoy": null,
+    "energy_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 55.2,
+    "op": 2.26,
+    "ord": 9.51,
+    "net": 9.27,
+    "gp": 9.69,
+    "sga": 7.43,
+    "cogs": 45.51,
+    "cash": 94.86,
+    "debt_total": 1.19,
+    "equity": 193.3,
+    "total_assets": 213.81,
+    "crypto": 58.1,
+    "gpm": 17.6,
+    "opm": 4.1,
+    "energy": 48.04,
+    "sales_yoy": 15.5,
+    "gp_yoy": 27.3,
+    "sga_yoy": 107.0,
+    "op_yoy": -43.8,
+    "ord_yoy": 104.5,
+    "net_yoy": 111.2,
+    "cash_yoy": -27.8,
+    "debt_total_yoy": -78.2,
+    "crypto_yoy": 10275.0,
+    "energy_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 43.4,
+    "op": -19.88,
+    "ord": -20.0,
+    "net": -19.47,
+    "gp": -9.98,
+    "sga": 9.9,
+    "cogs": 53.38,
+    "cash": 51.03,
+    "debt_total": 3.19,
+    "equity": 179.11,
+    "total_assets": 205.43,
+    "crypto": 86.74,
+    "gpm": -23.0,
+    "opm": -45.8,
+    "energy": 57.1,
+    "sales_yoy": -21.8,
+    "gp_yoy": -178.2,
+    "sga_yoy": 23.3,
+    "op_yoy": -520.3,
+    "ord_yoy": -531.0,
+    "net_yoy": null,
+    "cash_yoy": -62.4,
+    "debt_total_yoy": -48.1,
+    "crypto_yoy": 12655.9,
+    "energy_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 64.94,
+    "op": 17.41,
+    "ord": 17.6,
+    "net": 22.83,
+    "gp": 26.81,
+    "sga": 9.4,
+    "cogs": 38.13,
+    "cash": 50.13,
+    "debt_total": 2.0,
+    "equity": 261.92,
+    "total_assets": 284.8,
+    "crypto": 173.76,
+    "gpm": 41.3,
+    "opm": 26.8,
+    "energy": 41.39,
+    "sales_yoy": 50.8,
+    "gp_yoy": 275.0,
+    "sga_yoy": 42.0,
+    "op_yoy": 3184.9,
+    "ord_yoy": 4192.7,
+    "net_yoy": 11915.8,
+    "cash_yoy": -62.2,
+    "debt_total_yoy": -58.6,
+    "crypto_yoy": 40309.3,
+    "energy_yoy": 9.0
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 85.19,
+    "op": 21.9,
+    "ord": 21.77,
+    "net": 18.28,
+    "gp": 29.49,
+    "sga": 7.59,
+    "cogs": 55.7,
+    "cash": 32.11,
+    "debt_total": 2.0,
+    "equity": 322.93,
+    "total_assets": 358.92,
+    "crypto": 242.89,
+    "gpm": 34.6,
+    "opm": 25.7,
+    "energy": 63.61,
+    "sales_yoy": 22.4,
+    "gp_yoy": 136.3,
+    "sga_yoy": 1.2,
+    "op_yoy": 339.8,
+    "ord_yoy": 366.2,
+    "net_yoy": 348.0,
+    "cash_yoy": -73.7,
+    "debt_total_yoy": -56.1,
+    "crypto_yoy": 3087.5,
+    "energy_yoy": 0.2
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 5.11,
+    "op": -46.85,
+    "ord": -47.14,
+    "net": -41.09,
+    "gp": -40.2,
+    "sga": 6.65,
+    "cogs": 45.31,
+    "cash": 22.78,
+    "debt_total": 2.0,
+    "equity": 287.34,
+    "total_assets": 316.35,
+    "crypto": 206.12,
+    "gpm": -786.7,
+    "opm": -916.8,
+    "energy": 48.4,
+    "sales_yoy": -90.7,
+    "gp_yoy": -514.9,
+    "sga_yoy": -10.5,
+    "op_yoy": -2173.0,
+    "ord_yoy": -595.7,
+    "net_yoy": -543.3,
+    "cash_yoy": -76.0,
+    "debt_total_yoy": 68.1,
+    "crypto_yoy": 254.8,
+    "energy_yoy": 0.7
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 22.27,
+    "op": -47.23,
+    "ord": -47.24,
+    "net": -47.42,
+    "gp": -38.95,
+    "sga": 8.28,
+    "cogs": 61.22,
+    "cash": 19.93,
+    "debt_total": 5.0,
+    "equity": 239.88,
+    "total_assets": 277.21,
+    "crypto": 157.41,
+    "gpm": -174.9,
+    "opm": -212.1,
+    "energy": 57.5,
+    "sales_yoy": -48.7,
+    "gp_yoy": null,
+    "sga_yoy": -16.4,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "cash_yoy": -60.9,
+    "debt_total_yoy": 56.7,
+    "crypto_yoy": 81.5,
+    "energy_yoy": 0.7
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 60.35,
+    "op": -17.17,
+    "ord": -17.75,
+    "net": -17.74,
+    "gp": -7.53,
+    "sga": 9.64,
+    "cogs": 67.88,
+    "cash": 27.84,
+    "debt_total": 35.0,
+    "equity": 234.74,
+    "total_assets": 326.42,
+    "crypto": 148.77,
+    "gpm": -12.5,
+    "opm": -28.5,
+    "energy": 76.27,
+    "sales_yoy": -7.1,
+    "gp_yoy": -128.1,
+    "sga_yoy": 2.6,
+    "op_yoy": -198.6,
+    "ord_yoy": -200.9,
+    "net_yoy": -177.7,
+    "cash_yoy": -44.5,
+    "debt_total_yoy": 1650.0,
+    "crypto_yoy": -14.4,
+    "energy_yoy": 84.3
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 177.48,
+    "op": 50.11,
+    "ord": 49.31,
+    "net": 44.43,
+    "gp": 59.86,
+    "sga": 9.75,
+    "cogs": 117.62,
+    "cash": 30.2,
+    "debt_total": 30.0,
+    "equity": 279.33,
+    "total_assets": 403.55,
+    "crypto": 198.68,
+    "gpm": 33.7,
+    "opm": 28.2,
+    "energy": 114.73,
+    "sales_yoy": 108.3,
+    "gp_yoy": 103.0,
+    "sga_yoy": 28.5,
+    "op_yoy": 128.8,
+    "ord_yoy": 126.5,
+    "net_yoy": 143.1,
+    "cash_yoy": -5.9,
+    "debt_total_yoy": 1400.0,
+    "crypto_yoy": -18.2,
+    "energy_yoy": 80.4
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 287.53,
+    "op": 82.05,
+    "ord": 81.73,
+    "net": 69.13,
+    "opm": 28.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 327.89,
+    "op": -18.5,
+    "ord": -17.22,
+    "net": 32.67,
+    "opm": -5.6,
+    "sales_yoy": 14.0,
+    "op_yoy": -122.5,
+    "net_yoy": -52.7
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 204.87,
+    "op": 17.43,
+    "ord": 17.58,
+    "net": 10.7,
+    "opm": 8.5,
+    "sales_yoy": -37.5,
+    "op_yoy": null,
+    "net_yoy": -67.2
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 211.29,
+    "op": -12.11,
+    "ord": -5.41,
+    "net": -5.93,
+    "opm": -5.7,
+    "sales_yoy": 3.1,
+    "op_yoy": -169.5,
+    "net_yoy": -155.4
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 177.51,
+    "op": -54.77,
+    "ord": -55.01,
+    "net": -47.4,
+    "opm": -30.9,
+    "sales_yoy": -16.0,
+    "op_yoy": null,
+    "net_yoy": null
+   }
+  ],
+  "seg": [
+   {
+    "x": "26.2Q 누계",
+    "ss": 6.19,
+    "en": 105.0,
+    "da": 37.39,
+    "ss_op": 1.24,
+    "en_op": 7.72,
+    "da_op": 37.39
+   },
+   {
+    "x": "27.2Q 누계",
+    "ss": 7.08,
+    "en": 191.01,
+    "da": 39.71,
+    "ss_op": 1.2,
+    "en_op": 0.58,
+    "da_op": 39.71
+   }
+  ],
+  "bat": [
+   {
+    "x": "26/8/14",
+    "backlog": 16.8,
+    "pipe": 32.9,
+    "sites": 10,
+    "online": 5,
+    "inv": 43.5,
+    "mkt": 2,
+    "mwh": 80
+   },
+   {
+    "x": "26/10/31",
+    "backlog": 28.1,
+    "pipe": 52.8,
+    "sites": 12,
+    "online": 6,
+    "inv": 50.5,
+    "mkt": 5,
+    "mwh": 97
+   }
+  ],
+  "b": [
+   {
+    "x": "25.2Q",
+    "hv": 16152,
+    "hv_yoy": null,
+    "lv": 4755,
+    "lv_yoy": null,
+    "jepx": 14.2,
+    "hv_n": null,
+    "hv_n_yoy": null,
+    "hv_kw": null,
+    "lvc_n": null,
+    "lvc_n_yoy": null,
+    "lvh_n": null,
+    "lvh_n_yoy": null,
+    "btc": null,
+    "btc_yoy": null,
+    "btc_bv": null,
+    "btc_mv": null
+   },
+   {
+    "x": "25.3Q",
+    "hv": 13256,
+    "hv_yoy": null,
+    "lv": 3692,
+    "lv_yoy": null,
+    "jepx": 12.45,
+    "hv_n": null,
+    "hv_n_yoy": null,
+    "hv_kw": null,
+    "lvc_n": null,
+    "lvc_n_yoy": null,
+    "lvh_n": null,
+    "lvh_n_yoy": null,
+    "btc": null,
+    "btc_yoy": null,
+    "btc_bv": null,
+    "btc_mv": null
+   },
+   {
+    "x": "25.4Q",
+    "hv": 15344,
+    "hv_yoy": null,
+    "lv": 4891,
+    "lv_yoy": null,
+    "jepx": 12.56,
+    "hv_n": null,
+    "hv_n_yoy": null,
+    "hv_kw": null,
+    "lvc_n": null,
+    "lvc_n_yoy": null,
+    "lvh_n": null,
+    "lvh_n_yoy": null,
+    "btc": null,
+    "btc_yoy": null,
+    "btc_bv": null,
+    "btc_mv": null
+   },
+   {
+    "x": "26.1Q",
+    "hv": 14095,
+    "hv_yoy": null,
+    "lv": 3561,
+    "lv_yoy": null,
+    "jepx": 9.87,
+    "hv_n": null,
+    "hv_n_yoy": null,
+    "hv_kw": null,
+    "lvc_n": null,
+    "lvc_n_yoy": null,
+    "lvh_n": null,
+    "lvh_n_yoy": null,
+    "btc": null,
+    "btc_yoy": null,
+    "btc_bv": null,
+    "btc_mv": null
+   },
+   {
+    "x": "26.2Q",
+    "hv": 18122,
+    "hv_yoy": 12.2,
+    "lv": 5874,
+    "lv_yoy": 23.5,
+    "jepx": 12.12,
+    "hv_n": 2034,
+    "hv_n_yoy": null,
+    "hv_kw": 23.6,
+    "lvc_n": 24300,
+    "lvc_n_yoy": null,
+    "lvh_n": 19300,
+    "lvh_n_yoy": null,
+    "btc": 1350.27,
+    "btc_yoy": null,
+    "btc_bv": 195.71,
+    "btc_mv": 226.98
+   },
+   {
+    "x": "26.3Q",
+    "hv": 14900,
+    "hv_yoy": 12.4,
+    "lv": 4947,
+    "lv_yoy": 34.0,
+    "jepx": 10.93,
+    "hv_n": 2198,
+    "hv_n_yoy": null,
+    "hv_kw": 25.0,
+    "lvc_n": 29400,
+    "lvc_n_yoy": null,
+    "lvh_n": 21800,
+    "lvh_n_yoy": null,
+    "btc": 1411.3,
+    "btc_yoy": null,
+    "btc_bv": 206.41,
+    "btc_mv": 194.99
+   },
+   {
+    "x": "26.4Q",
+    "hv": 16989,
+    "hv_yoy": 10.7,
+    "lv": 6651,
+    "lv_yoy": 36.0,
+    "jepx": 11.28,
+    "hv_n": 2312,
+    "hv_n_yoy": null,
+    "hv_kw": 27.1,
+    "lvc_n": 31500,
+    "lvc_n_yoy": null,
+    "lvh_n": 23500,
+    "lvh_n_yoy": null,
+    "btc": 1414.05,
+    "btc_yoy": null,
+    "btc_bv": 206.71,
+    "btc_mv": 149.7
+   },
+   {
+    "x": "27.1Q",
+    "hv": 22820,
+    "hv_yoy": 61.9,
+    "lv": 5199,
+    "lv_yoy": 46.0,
+    "jepx": 14.64,
+    "hv_n": 3625,
+    "hv_n_yoy": null,
+    "hv_kw": 41.4,
+    "lvc_n": 34500,
+    "lvc_n_yoy": null,
+    "lvh_n": 26900,
+    "lvh_n_yoy": null,
+    "btc": 1501.27,
+    "btc_yoy": null,
+    "btc_bv": 160.52,
+    "btc_mv": 142.42
+   },
+   {
+    "x": "27.2Q",
+    "hv": 34547,
+    "hv_yoy": 90.6,
+    "lv": 7717,
+    "lv_yoy": 31.4,
+    "jepx": 18.72,
+    "hv_n": 3723,
+    "hv_n_yoy": 83.0,
+    "hv_kw": 43.5,
+    "lvc_n": 36500,
+    "lvc_n_yoy": 50.2,
+    "lvh_n": 26200,
+    "lvh_n_yoy": 35.8,
+    "btc": 1508.72,
+    "btc_yoy": 11.7,
+    "btc_bv": 161.36,
+    "btc_mv": 198.55
+   }
+  ]
+ }
+}

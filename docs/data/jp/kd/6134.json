@@ -1,1 +1,1702 @@
-{"c": "6134", "n": "후지", "asof": "2026-11-05", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "전자부품 실장 로봇(마운터) 중심. 차입금 없음. 재고 = 상품·제품 + 재공품 + 원재료. 26.4Q 순이익 적자는 특별손실 영향", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "수주액", "d": "q", "bars": [{"k": "orders", "l": "수주", "u": "억엔", "c": 0}], "lines": [{"k": "orders_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(분기 실적 추이)"}, {"sec": "key", "t": "수주잔고", "d": "q", "bars": [{"k": "backlog", "l": "분기말 수주잔고", "u": "억엔", "c": 0}], "lines": [{"k": "backlog_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(분기 실적 추이)"}, {"sec": "부문", "t": "부문별 매출", "d": "q", "src": "2Q27 결산설명자료(분기 실적 추이)", "lines": [{"k": "sales_rs", "l": "로봇 솔루션", "u": "억엔", "c": 0}, {"k": "sales_mt", "l": "공작기계", "u": "억엔", "c": 1}, {"k": "sales_etc", "l": "기타", "u": "억엔", "c": 2}]}, {"sec": "부문", "t": "로봇 솔루션 영업이익", "d": "q", "bars": [{"k": "op_rs", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm_rs", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "2Q27 결산설명자료(분기 실적 추이)"}, {"sec": "부문", "t": "공작기계 영업이익", "d": "q", "bars": [{"k": "op_mt", "l": "영업이익", "u": "억엔", "c": 0}], "src": "2Q27 결산설명자료(분기 실적 추이)"}, {"sec": "사업 지표", "t": "부문별 수주", "d": "q", "src": "2Q27 결산설명자료(분기 실적 추이)", "lines": [{"k": "orders_rs", "l": "로봇 솔루션", "u": "억엔", "c": 0}, {"k": "orders_mt", "l": "공작기계", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "부문별 수주잔고", "d": "q", "src": "2Q27 결산설명자료(분기 실적 추이)", "lines": [{"k": "backlog_rs", "l": "로봇 솔루션", "u": "억엔", "c": 0}, {"k": "backlog_mt", "l": "공작기계", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "수주÷매출", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "bb_ratio", "l": "수주÷매출(배)", "u": "배", "c": 0}], "src": "2Q27 결산설명자료로 계산"}, {"sec": "재무", "t": "현금·예금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}], "lines": [{"k": "cash_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "memo": "차입금 없음", "src": "2Q27 결산설명자료·결산단신"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 331.11, "op": 39.75, "ord": 41.5, "net": 29.61, "gp": 124.64, "sga": 84.89, "cogs": 206.47, "cash": 534.03, "inventory": 608.31, "equity": 2225.87, "total_assets": 2465.52, "gpm": 37.6, "opm": 12.0, "orders": 289.54, "orders_rs": 260.93, "orders_mt": 23.45, "sales_rs": 300.06, "sales_mt": 25.82, "sales_etc": 5.22, "backlog": 420.48, "backlog_rs": 345.05, "backlog_mt": 72.19, "op_rs": 53.42, "op_mt": -2.91, "bb_ratio": 0.87, "opm_rs": 17.8, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "orders_yoy": 7.6, "orders_rs_yoy": 13.5, "orders_mt_yoy": -26.1, "sales_rs_yoy": -11.5, "sales_mt_yoy": 24.5, "sales_etc_yoy": -35.2, "backlog_yoy": -33.0, "backlog_rs_yoy": -36.8, "backlog_mt_yoy": -6.1, "op_rs_yoy": -28.7, "op_mt_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 313.91, "op": 28.08, "ord": 30.45, "net": 22.34, "gp": 108.87, "sga": 80.79, "cogs": 205.04, "cash": 618.12, "inventory": 571.16, "equity": 2282.78, "total_assets": 2509.37, "gpm": 34.7, "opm": 8.9, "orders": 311.87, "orders_rs": 281.04, "orders_mt": 24.63, "sales_rs": 280.73, "sales_mt": 26.64, "sales_etc": 6.53, "backlog": 418.45, "backlog_rs": 345.36, "backlog_mt": 70.18, "op_rs": 38.75, "op_mt": -0.68, "bb_ratio": 0.99, "opm_rs": 13.8, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": -7.6, "cash_yoy": null, "orders_yoy": 12.2, "orders_rs_yoy": 12.6, "orders_mt_yoy": 4.5, "sales_rs_yoy": -18.5, "sales_mt_yoy": -6.9, "sales_etc_yoy": 20.0, "backlog_yoy": -20.6, "backlog_rs_yoy": -23.5, "backlog_mt_yoy": -2.2, "op_rs_yoy": -51.7, "op_mt_yoy": -1800.0}, {"q": "25.1Q", "x": "25.1Q", "sales": 310.51, "op": 32.18, "ord": 39.43, "net": 26.39, "gp": 113.11, "sga": 80.93, "cogs": 197.4, "cash": 689.87, "inventory": 567.89, "equity": 2283.98, "total_assets": 2570.51, "gpm": 36.4, "opm": 10.4, "orders": 247.77, "orders_rs": 219.76, "orders_mt": 24.29, "sales_rs": 282.57, "sales_mt": 24.2, "sales_etc": 3.73, "backlog": 355.71, "backlog_rs": 282.55, "backlog_mt": 70.28, "op_rs": 39.86, "op_mt": 0.34, "bb_ratio": 0.8, "opm_rs": 14.1, "sales_yoy": -6.1, "gp_yoy": -8.2, "sga_yoy": -1.5, "op_yoy": -21.6, "ord_yoy": -21.5, "net_yoy": -22.3, "inventory_yoy": null, "cash_yoy": null, "orders_yoy": -10.3, "orders_rs_yoy": -13.9, "orders_mt_yoy": 37.6, "sales_rs_yoy": -7.3, "sales_mt_yoy": 11.1, "sales_etc_yoy": -6.8, "backlog_yoy": -24.8, "backlog_rs_yoy": -29.7, "backlog_mt_yoy": 3.9, "op_rs_yoy": -25.1, "op_mt_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 319.07, "op": 32.79, "ord": 32.91, "net": 25.82, "gp": 117.89, "sga": 85.09, "cogs": 201.18, "cash": 666.28, "inventory": 530.2, "equity": 2234.4, "total_assets": 2496.02, "gpm": 36.9, "opm": 10.3, "orders": 257.6, "orders_rs": 228.69, "orders_mt": 22.87, "sales_rs": 284.06, "sales_mt": 29.62, "sales_etc": 5.38, "backlog": 294.25, "backlog_rs": 227.19, "backlog_mt": 63.53, "op_rs": 39.96, "op_mt": 1.81, "bb_ratio": 0.81, "opm_rs": 14.1, "sales_yoy": 8.1, "gp_yoy": 11.6, "sga_yoy": 6.0, "op_yoy": 29.5, "ord_yoy": 17.9, "net_yoy": 39.8, "inventory_yoy": null, "cash_yoy": null, "orders_yoy": -9.4, "orders_rs_yoy": -5.8, "orders_mt_yoy": -38.5, "sales_rs_yoy": 9.1, "sales_mt_yoy": -2.2, "sales_etc_yoy": 24.8, "backlog_yoy": -36.3, "backlog_rs_yoy": -40.9, "backlog_mt_yoy": -14.8, "op_rs_yoy": 5.7, "op_mt_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 306.07, "op": 32.91, "ord": 39.4, "net": 32.28, "gp": 112.29, "sga": 79.38, "cogs": 193.78, "cash": 633.46, "inventory": 538.58, "equity": 2208.46, "total_assets": 2495.61, "gpm": 36.7, "opm": 10.8, "orders": 327.55, "orders_rs": 294.45, "orders_mt": 25.55, "sales_rs": 276.44, "sales_mt": 22.59, "sales_etc": 7.03, "backlog": 315.73, "backlog_rs": 245.2, "backlog_mt": 66.5, "op_rs": 38.88, "op_mt": 1.22, "bb_ratio": 1.07, "opm_rs": 14.1, "sales_yoy": -7.6, "gp_yoy": -9.9, "sga_yoy": -6.5, "op_yoy": -17.2, "ord_yoy": -5.1, "net_yoy": 9.0, "inventory_yoy": -11.5, "cash_yoy": 18.6, "orders_yoy": 13.1, "orders_rs_yoy": 12.8, "orders_mt_yoy": 9.0, "sales_rs_yoy": -7.9, "sales_mt_yoy": -12.5, "sales_etc_yoy": 34.7, "backlog_yoy": -24.9, "backlog_rs_yoy": -28.9, "backlog_mt_yoy": -7.9, "op_rs_yoy": -27.2, "op_mt_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 338.22, "op": 39.93, "ord": 41.54, "net": 24.57, "gp": 123.07, "sga": 83.15, "cogs": 215.15, "cash": 575.8, "inventory": 531.9, "equity": 2186.82, "total_assets": 2442.89, "gpm": 36.4, "opm": 11.8, "orders": 405.94, "orders_rs": 385.75, "orders_mt": 16.27, "sales_rs": 298.49, "sales_mt": 34.51, "sales_etc": 5.2, "backlog": 383.46, "backlog_rs": 332.46, "backlog_mt": 48.25, "op_rs": 44.78, "op_mt": 4.0, "bb_ratio": 1.2, "opm_rs": 15.0, "sales_yoy": 7.7, "gp_yoy": 13.0, "sga_yoy": 2.9, "op_yoy": 42.2, "ord_yoy": 36.4, "net_yoy": 10.0, "inventory_yoy": -6.9, "cash_yoy": -6.8, "orders_yoy": 30.2, "orders_rs_yoy": 37.3, "orders_mt_yoy": -33.9, "sales_rs_yoy": 6.3, "sales_mt_yoy": 29.5, "sales_etc_yoy": -20.4, "backlog_yoy": -8.4, "backlog_rs_yoy": -3.7, "backlog_mt_yoy": -31.2, "op_rs_yoy": 15.6, "op_mt_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 415.21, "op": 51.99, "ord": 56.31, "net": 56.83, "gp": 137.3, "sga": 85.3, "cogs": 277.91, "cash": 577.21, "inventory": 520.71, "equity": 2166.57, "total_assets": 2456.68, "gpm": 33.1, "opm": 12.5, "orders": 436.4, "orders_rs": 406.18, "orders_mt": 24.64, "sales_rs": 384.48, "sales_mt": 26.3, "sales_etc": 4.42, "backlog": 404.65, "backlog_rs": 354.16, "backlog_mt": 46.59, "op_rs": 61.78, "op_mt": 1.22, "bb_ratio": 1.05, "opm_rs": 16.1, "sales_yoy": 33.7, "gp_yoy": 21.4, "sga_yoy": 5.4, "op_yoy": 61.6, "ord_yoy": 42.8, "net_yoy": 115.3, "inventory_yoy": -8.3, "cash_yoy": -16.3, "orders_yoy": 76.1, "orders_rs_yoy": 84.8, "orders_mt_yoy": 1.4, "sales_rs_yoy": 36.1, "sales_mt_yoy": 8.7, "sales_etc_yoy": 18.5, "backlog_yoy": 13.8, "backlog_rs_yoy": 25.3, "backlog_mt_yoy": -33.7, "op_rs_yoy": 55.0, "op_mt_yoy": 258.8}, {"q": "26.2Q", "x": "26.2Q", "sales": 380.21, "op": 43.92, "ord": 45.97, "net": 33.05, "gp": 131.21, "sga": 87.3, "cogs": 249.0, "cash": 583.66, "inventory": 557.48, "equity": 2224.47, "total_assets": 2538.35, "gpm": 34.5, "opm": 11.6, "orders": 431.19, "orders_rs": 407.72, "orders_mt": 18.01, "sales_rs": 350.28, "sales_mt": 25.75, "sales_etc": 4.17, "backlog": 455.63, "backlog_rs": 411.6, "backlog_mt": 38.85, "op_rs": 54.19, "op_mt": 0.93, "bb_ratio": 1.13, "opm_rs": 15.5, "sales_yoy": 19.2, "gp_yoy": 11.3, "sga_yoy": 2.6, "op_yoy": 33.9, "ord_yoy": 39.7, "net_yoy": 28.0, "inventory_yoy": 5.1, "cash_yoy": -12.4, "orders_yoy": 67.4, "orders_rs_yoy": 78.3, "orders_mt_yoy": -21.3, "sales_rs_yoy": 23.3, "sales_mt_yoy": -13.1, "sales_etc_yoy": -22.5, "backlog_yoy": 54.8, "backlog_rs_yoy": 81.2, "backlog_mt_yoy": -38.8, "op_rs_yoy": 35.6, "op_mt_yoy": -48.6}, {"q": "26.3Q", "x": "26.3Q", "sales": 477.49, "op": 92.56, "ord": 98.51, "net": 70.84, "gp": 184.62, "sga": 92.06, "cogs": 292.87, "cash": 458.01, "inventory": 600.78, "equity": 2302.24, "total_assets": 2678.92, "gpm": 38.7, "opm": 19.4, "orders": 565.23, "orders_rs": 539.25, "orders_mt": 19.86, "sales_rs": 450.84, "sales_mt": 20.7, "sales_etc": 5.92, "backlog": 543.38, "backlog_rs": 500.01, "backlog_mt": 38.01, "op_rs": 103.37, "op_mt": -0.55, "bb_ratio": 1.18, "opm_rs": 22.9, "sales_yoy": 56.0, "gp_yoy": 64.4, "sga_yoy": 16.0, "op_yoy": 181.3, "ord_yoy": 150.0, "net_yoy": 119.5, "inventory_yoy": 11.5, "cash_yoy": -27.7, "orders_yoy": 72.6, "orders_rs_yoy": 83.1, "orders_mt_yoy": -22.3, "sales_rs_yoy": 63.1, "sales_mt_yoy": -8.4, "sales_etc_yoy": -15.8, "backlog_yoy": 72.1, "backlog_rs_yoy": 103.9, "backlog_mt_yoy": -42.8, "op_rs_yoy": 165.9, "op_mt_yoy": -145.1}, {"q": "26.4Q", "x": "26.4Q", "sales": 533.51, "op": 104.35, "ord": 112.12, "net": -3.39, "gp": 209.62, "sga": 105.27, "cogs": 323.89, "cash": 537.41, "inventory": 641.03, "equity": 2324.54, "total_assets": 2783.56, "gpm": 39.3, "opm": 19.6, "orders": 641.46, "orders_rs": 618.33, "orders_mt": 17.71, "sales_rs": 501.75, "sales_mt": 24.29, "sales_etc": 7.47, "backlog": 651.33, "backlog_rs": 616.6, "backlog_mt": 31.43, "op_rs": 116.86, "op_mt": -2.68, "bb_ratio": 1.2, "opm_rs": 23.3, "sales_yoy": 57.7, "gp_yoy": 70.3, "sga_yoy": 26.6, "op_yoy": 161.3, "ord_yoy": 169.9, "net_yoy": -113.8, "inventory_yoy": 20.5, "cash_yoy": -6.7, "orders_yoy": 58.0, "orders_rs_yoy": 60.3, "orders_mt_yoy": 8.9, "sales_rs_yoy": 68.1, "sales_mt_yoy": -29.6, "sales_etc_yoy": 43.7, "backlog_yoy": 69.9, "backlog_rs_yoy": 85.5, "backlog_mt_yoy": -34.9, "op_rs_yoy": 161.0, "op_mt_yoy": -167.0}, {"q": "27.1Q", "x": "27.1Q", "sales": 605.97, "op": 152.12, "ord": 158.83, "net": 126.22, "gp": 251.64, "sga": 99.51, "cogs": 354.33, "cash": 628.44, "inventory": 692.55, "equity": 2429.72, "total_assets": 2912.03, "gpm": 41.5, "opm": 25.1, "orders": 857.84, "orders_rs": 828.41, "orders_mt": 23.05, "sales_rs": 586.24, "sales_mt": 13.51, "sales_etc": 6.21, "backlog": 903.2, "backlog_rs": 858.77, "backlog_mt": 40.98, "op_rs": 165.08, "op_mt": -1.84, "bb_ratio": 1.42, "opm_rs": 28.2, "sales_yoy": 45.9, "gp_yoy": 83.3, "sga_yoy": 16.7, "op_yoy": 192.6, "ord_yoy": 182.1, "net_yoy": 122.1, "inventory_yoy": 33.0, "cash_yoy": 8.9, "orders_yoy": 96.6, "orders_rs_yoy": 104.0, "orders_mt_yoy": -6.5, "sales_rs_yoy": 52.5, "sales_mt_yoy": -48.6, "sales_etc_yoy": 40.5, "backlog_yoy": 123.2, "backlog_rs_yoy": 142.5, "backlog_mt_yoy": -12.0, "op_rs_yoy": 167.2, "op_mt_yoy": -250.8}, {"q": "27.2Q", "x": "27.2Q", "sales": 672.41, "op": 184.19, "ord": 184.91, "net": 130.86, "gp": 285.3, "sga": 101.12, "cogs": 387.11, "cash": 602.67, "inventory": 699.97, "equity": 2546.1, "total_assets": 3079.93, "gpm": 42.4, "opm": 27.4, "orders": 573.92, "orders_rs": 538.19, "orders_mt": 26.15, "sales_rs": 649.1, "sales_mt": 14.97, "sales_etc": 8.33, "backlog": 804.72, "backlog_rs": 747.86, "backlog_mt": 52.16, "op_rs": 195.59, "op_mt": 0.47, "bb_ratio": 0.85, "opm_rs": 30.1, "sales_yoy": 76.9, "gp_yoy": 117.4, "sga_yoy": 15.8, "op_yoy": 319.4, "ord_yoy": 302.2, "net_yoy": 295.9, "inventory_yoy": 25.6, "cash_yoy": 3.3, "orders_yoy": 33.1, "orders_rs_yoy": 32.0, "orders_mt_yoy": 45.2, "sales_rs_yoy": 85.3, "sales_mt_yoy": -41.9, "sales_etc_yoy": 99.8, "backlog_yoy": 76.6, "backlog_rs_yoy": 81.7, "backlog_mt_yoy": 34.3, "op_rs_yoy": 260.9, "op_mt_yoy": -49.5}], "a": [{"year": "2021", "x": "2021", "sales": 1361.61, "op": 219.04, "ord": 232.24, "net": 171.67, "opm": 16.1, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 1481.28, "op": 284.72, "ord": 299.43, "net": 211.88, "opm": 19.2, "sales_yoy": 8.8, "op_yoy": 30.0, "net_yoy": 23.4}, {"year": "2023", "x": "2023", "sales": 1533.26, "op": 271.08, "ord": 290.16, "net": 204.54, "opm": 17.7, "sales_yoy": 3.5, "op_yoy": -4.8, "net_yoy": -3.5}, {"year": "2024", "x": "2024", "sales": 1270.59, "op": 134.21, "ord": 150.1, "net": 104.38, "opm": 10.6, "sales_yoy": -17.1, "op_yoy": -50.5, "net_yoy": -49.0}, {"year": "2025", "x": "2025", "sales": 1273.87, "op": 137.81, "ord": 153.28, "net": 109.06, "opm": 10.8, "sales_yoy": 0.3, "op_yoy": 2.7, "net_yoy": 4.5}, {"year": "2026", "x": "2026", "sales": 1806.42, "op": 292.82, "ord": 312.91, "net": 157.33, "opm": 16.2, "sales_yoy": 41.8, "op_yoy": 112.5, "net_yoy": 44.3}, {"year": "2027 계획", "x": "2027 계획", "sales": 2540.0, "op": 655.0, "ord": 662.0, "net": 482.0, "opm": 25.8, "sales_yoy": 40.6, "op_yoy": 123.7, "net_yoy": 206.4, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "6134",
+ "n": "후지",
+ "asof": "2026-11-05",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "전자부품 실장 로봇(마운터) 중심. 차입금 없음. 재고 = 상품·제품 + 재공품 + 원재료. 26.4Q 순이익 적자는 특별손실 영향",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "수주액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "orders",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "orders_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료(분기 실적 추이)"
+  },
+  {
+   "sec": "key",
+   "t": "수주잔고",
+   "d": "q",
+   "bars": [
+    {
+     "k": "backlog",
+     "l": "분기말 수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "backlog_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료(분기 실적 추이)"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출",
+   "d": "q",
+   "src": "2Q27 결산설명자료(분기 실적 추이)",
+   "lines": [
+    {
+     "k": "sales_rs",
+     "l": "로봇 솔루션",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "sales_mt",
+     "l": "공작기계",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "sales_etc",
+     "l": "기타",
+     "u": "억엔",
+     "c": 2
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "로봇 솔루션 영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op_rs",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm_rs",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료(분기 실적 추이)"
+  },
+  {
+   "sec": "부문",
+   "t": "공작기계 영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op_mt",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "2Q27 결산설명자료(분기 실적 추이)"
+  },
+  {
+   "sec": "수주",
+   "t": "부문별 수주",
+   "d": "q",
+   "src": "2Q27 결산설명자료(분기 실적 추이)",
+   "lines": [
+    {
+     "k": "orders_rs",
+     "l": "로봇 솔루션",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "orders_mt",
+     "l": "공작기계",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "수주",
+   "t": "부문별 수주잔고",
+   "d": "q",
+   "src": "2Q27 결산설명자료(분기 실적 추이)",
+   "lines": [
+    {
+     "k": "backlog_rs",
+     "l": "로봇 솔루션",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "backlog_mt",
+     "l": "공작기계",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "수주",
+   "t": "수주÷매출",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "bb_ratio",
+     "l": "수주÷매출(배)",
+     "u": "배",
+     "c": 0
+    }
+   ],
+   "src": "2Q27 결산설명자료로 계산"
+  },
+  {
+   "sec": "수주",
+   "t": "로봇 솔루션 수주액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "orders_rs",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "orders_rs_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료(분기 실적 추이)"
+  },
+  {
+   "sec": "수주",
+   "t": "로봇 솔루션 수주잔고",
+   "d": "q",
+   "bars": [
+    {
+     "k": "backlog_rs",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "backlog_rs_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료(분기 실적 추이)"
+  },
+  {
+   "sec": "수주",
+   "t": "공작기계 수주액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "orders_mt",
+     "l": "수주",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "orders_mt_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료(분기 실적 추이)"
+  },
+  {
+   "sec": "지역",
+   "t": "로봇 솔루션 지역별 매출 비중",
+   "d": "b",
+   "lines": [
+    {
+     "k": "r_as",
+     "l": "기타 아시아",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "r_cn",
+     "l": "중국",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "r_na",
+     "l": "북미",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "r_eu",
+     "l": "유럽",
+     "u": "%",
+     "c": 3
+    },
+    {
+     "k": "r_jp",
+     "l": "일본",
+     "u": "%",
+     "c": 4
+    },
+    {
+     "k": "r_ot",
+     "l": "기타",
+     "u": "%",
+     "c": 5
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%) · 25.4Q 까지 북미 = 미국 + 기타 북미(두 비중 합)"
+  },
+  {
+   "sec": "지역",
+   "t": "중국 매출 비중",
+   "d": "b",
+   "bars": [
+    {
+     "k": "r_cn",
+     "l": "중국",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%)"
+  },
+  {
+   "sec": "지역",
+   "t": "북미 매출 비중",
+   "d": "b",
+   "bars": [
+    {
+     "k": "r_na",
+     "l": "북미",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%) · 25.4Q 까지 미국 + 기타 북미"
+  },
+  {
+   "sec": "업종",
+   "t": "업종별 매출 비중 ① IT·서버",
+   "d": "b",
+   "lines": [
+    {
+     "k": "i_srv",
+     "l": "서버",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "i_com",
+     "l": "통신",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "i_pc",
+     "l": "컴퓨터",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "i_pow",
+     "l": "전원",
+     "u": "%",
+     "c": 3
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%) · 전원(서버용 포함)은 26.1Q 부터 기타에서 분리 공개"
+  },
+  {
+   "sec": "업종",
+   "t": "업종별 매출 비중 ② 차량·반도체·기타",
+   "d": "b",
+   "lines": [
+    {
+     "k": "i_car",
+     "l": "차량",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "i_semi",
+     "l": "반도체(FUJI 마운터)",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "i_fft",
+     "l": "반도체(FFT 다이본더)",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "i_ind",
+     "l": "산업기계",
+     "u": "%",
+     "c": 3
+    },
+    {
+     "k": "i_ce",
+     "l": "가전",
+     "u": "%",
+     "c": 4
+    },
+    {
+     "k": "i_oth",
+     "l": "기타",
+     "u": "%",
+     "c": 5
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%) · 기타는 26.1Q 부터 전원 제외(기준 바뀜)"
+  },
+  {
+   "sec": "업종",
+   "t": "서버 업종 비중",
+   "def": "로봇 솔루션 매출 중 서버 업종 비율",
+   "d": "b",
+   "bars": [
+    {
+     "k": "i_srv",
+     "l": "서버",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%)"
+  },
+  {
+   "sec": "기종",
+   "t": "기종별 매출 비중",
+   "d": "b",
+   "lines": [
+    {
+     "k": "m_nxtr",
+     "l": "고속 장착기 NXTR",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "m_nxt",
+     "l": "고속 장착기 NXT",
+     "u": "%",
+     "c": 1
+    },
+    {
+     "k": "m_parts",
+     "l": "부품·개조·수리",
+     "u": "%",
+     "c": 2
+    },
+    {
+     "k": "m_oeq",
+     "l": "기타 장치",
+     "u": "%",
+     "c": 3
+    },
+    {
+     "k": "m_aimex",
+     "l": "범용 장착기 AIMEX",
+     "u": "%",
+     "c": 4
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%) · NXT 는 2026년 3월 판매 종료, NXTR 로 일원화"
+  },
+  {
+   "sec": "기종",
+   "t": "신형 NXTR 매출 비중",
+   "d": "b",
+   "bars": [
+    {
+     "k": "m_nxtr",
+     "l": "NXTR",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 FY25 4Q(24.1Q~25.4Q)·FY26 4Q·FY27 2Q(26.1Q~27.2Q) 로봇 솔루션 사업 구성비(%)"
+  },
+  {
+   "sec": "재무",
+   "t": "현금·예금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "cash_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "memo": "차입금 없음",
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 331.11,
+    "op": 39.75,
+    "ord": 41.5,
+    "net": 29.61,
+    "gp": 124.64,
+    "sga": 84.89,
+    "cogs": 206.47,
+    "cash": 534.03,
+    "inventory": 608.31,
+    "equity": 2225.87,
+    "total_assets": 2465.52,
+    "gpm": 37.6,
+    "opm": 12.0,
+    "orders": 289.54,
+    "orders_rs": 260.93,
+    "orders_mt": 23.45,
+    "sales_rs": 300.06,
+    "sales_mt": 25.82,
+    "sales_etc": 5.22,
+    "backlog": 420.48,
+    "backlog_rs": 345.05,
+    "backlog_mt": 72.19,
+    "op_rs": 53.42,
+    "op_mt": -2.91,
+    "bb_ratio": 0.87,
+    "opm_rs": 17.8,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "orders_yoy": 7.6,
+    "orders_rs_yoy": 13.5,
+    "orders_mt_yoy": -26.1,
+    "sales_rs_yoy": -11.5,
+    "sales_mt_yoy": 24.5,
+    "sales_etc_yoy": -35.2,
+    "backlog_yoy": -33.0,
+    "backlog_rs_yoy": -36.8,
+    "backlog_mt_yoy": -6.1,
+    "op_rs_yoy": -28.7,
+    "op_mt_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 313.91,
+    "op": 28.08,
+    "ord": 30.45,
+    "net": 22.34,
+    "gp": 108.87,
+    "sga": 80.79,
+    "cogs": 205.04,
+    "cash": 618.12,
+    "inventory": 571.16,
+    "equity": 2282.78,
+    "total_assets": 2509.37,
+    "gpm": 34.7,
+    "opm": 8.9,
+    "orders": 311.87,
+    "orders_rs": 281.04,
+    "orders_mt": 24.63,
+    "sales_rs": 280.73,
+    "sales_mt": 26.64,
+    "sales_etc": 6.53,
+    "backlog": 418.45,
+    "backlog_rs": 345.36,
+    "backlog_mt": 70.18,
+    "op_rs": 38.75,
+    "op_mt": -0.68,
+    "bb_ratio": 0.99,
+    "opm_rs": 13.8,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": -7.6,
+    "cash_yoy": null,
+    "orders_yoy": 12.2,
+    "orders_rs_yoy": 12.6,
+    "orders_mt_yoy": 4.5,
+    "sales_rs_yoy": -18.5,
+    "sales_mt_yoy": -6.9,
+    "sales_etc_yoy": 20.0,
+    "backlog_yoy": -20.6,
+    "backlog_rs_yoy": -23.5,
+    "backlog_mt_yoy": -2.2,
+    "op_rs_yoy": -51.7,
+    "op_mt_yoy": -1800.0
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 310.51,
+    "op": 32.18,
+    "ord": 39.43,
+    "net": 26.39,
+    "gp": 113.11,
+    "sga": 80.93,
+    "cogs": 197.4,
+    "cash": 689.87,
+    "inventory": 567.89,
+    "equity": 2283.98,
+    "total_assets": 2570.51,
+    "gpm": 36.4,
+    "opm": 10.4,
+    "orders": 247.77,
+    "orders_rs": 219.76,
+    "orders_mt": 24.29,
+    "sales_rs": 282.57,
+    "sales_mt": 24.2,
+    "sales_etc": 3.73,
+    "backlog": 355.71,
+    "backlog_rs": 282.55,
+    "backlog_mt": 70.28,
+    "op_rs": 39.86,
+    "op_mt": 0.34,
+    "bb_ratio": 0.8,
+    "opm_rs": 14.1,
+    "sales_yoy": -6.1,
+    "gp_yoy": -8.2,
+    "sga_yoy": -1.5,
+    "op_yoy": -21.6,
+    "ord_yoy": -21.5,
+    "net_yoy": -22.3,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "orders_yoy": -10.3,
+    "orders_rs_yoy": -13.9,
+    "orders_mt_yoy": 37.6,
+    "sales_rs_yoy": -7.3,
+    "sales_mt_yoy": 11.1,
+    "sales_etc_yoy": -6.8,
+    "backlog_yoy": -24.8,
+    "backlog_rs_yoy": -29.7,
+    "backlog_mt_yoy": 3.9,
+    "op_rs_yoy": -25.1,
+    "op_mt_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 319.07,
+    "op": 32.79,
+    "ord": 32.91,
+    "net": 25.82,
+    "gp": 117.89,
+    "sga": 85.09,
+    "cogs": 201.18,
+    "cash": 666.28,
+    "inventory": 530.2,
+    "equity": 2234.4,
+    "total_assets": 2496.02,
+    "gpm": 36.9,
+    "opm": 10.3,
+    "orders": 257.6,
+    "orders_rs": 228.69,
+    "orders_mt": 22.87,
+    "sales_rs": 284.06,
+    "sales_mt": 29.62,
+    "sales_etc": 5.38,
+    "backlog": 294.25,
+    "backlog_rs": 227.19,
+    "backlog_mt": 63.53,
+    "op_rs": 39.96,
+    "op_mt": 1.81,
+    "bb_ratio": 0.81,
+    "opm_rs": 14.1,
+    "sales_yoy": 8.1,
+    "gp_yoy": 11.6,
+    "sga_yoy": 6.0,
+    "op_yoy": 29.5,
+    "ord_yoy": 17.9,
+    "net_yoy": 39.8,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "orders_yoy": -9.4,
+    "orders_rs_yoy": -5.8,
+    "orders_mt_yoy": -38.5,
+    "sales_rs_yoy": 9.1,
+    "sales_mt_yoy": -2.2,
+    "sales_etc_yoy": 24.8,
+    "backlog_yoy": -36.3,
+    "backlog_rs_yoy": -40.9,
+    "backlog_mt_yoy": -14.8,
+    "op_rs_yoy": 5.7,
+    "op_mt_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 306.07,
+    "op": 32.91,
+    "ord": 39.4,
+    "net": 32.28,
+    "gp": 112.29,
+    "sga": 79.38,
+    "cogs": 193.78,
+    "cash": 633.46,
+    "inventory": 538.58,
+    "equity": 2208.46,
+    "total_assets": 2495.61,
+    "gpm": 36.7,
+    "opm": 10.8,
+    "orders": 327.55,
+    "orders_rs": 294.45,
+    "orders_mt": 25.55,
+    "sales_rs": 276.44,
+    "sales_mt": 22.59,
+    "sales_etc": 7.03,
+    "backlog": 315.73,
+    "backlog_rs": 245.2,
+    "backlog_mt": 66.5,
+    "op_rs": 38.88,
+    "op_mt": 1.22,
+    "bb_ratio": 1.07,
+    "opm_rs": 14.1,
+    "sales_yoy": -7.6,
+    "gp_yoy": -9.9,
+    "sga_yoy": -6.5,
+    "op_yoy": -17.2,
+    "ord_yoy": -5.1,
+    "net_yoy": 9.0,
+    "inventory_yoy": -11.5,
+    "cash_yoy": 18.6,
+    "orders_yoy": 13.1,
+    "orders_rs_yoy": 12.8,
+    "orders_mt_yoy": 9.0,
+    "sales_rs_yoy": -7.9,
+    "sales_mt_yoy": -12.5,
+    "sales_etc_yoy": 34.7,
+    "backlog_yoy": -24.9,
+    "backlog_rs_yoy": -28.9,
+    "backlog_mt_yoy": -7.9,
+    "op_rs_yoy": -27.2,
+    "op_mt_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 338.22,
+    "op": 39.93,
+    "ord": 41.54,
+    "net": 24.57,
+    "gp": 123.07,
+    "sga": 83.15,
+    "cogs": 215.15,
+    "cash": 575.8,
+    "inventory": 531.9,
+    "equity": 2186.82,
+    "total_assets": 2442.89,
+    "gpm": 36.4,
+    "opm": 11.8,
+    "orders": 405.94,
+    "orders_rs": 385.75,
+    "orders_mt": 16.27,
+    "sales_rs": 298.49,
+    "sales_mt": 34.51,
+    "sales_etc": 5.2,
+    "backlog": 383.46,
+    "backlog_rs": 332.46,
+    "backlog_mt": 48.25,
+    "op_rs": 44.78,
+    "op_mt": 4.0,
+    "bb_ratio": 1.2,
+    "opm_rs": 15.0,
+    "sales_yoy": 7.7,
+    "gp_yoy": 13.0,
+    "sga_yoy": 2.9,
+    "op_yoy": 42.2,
+    "ord_yoy": 36.4,
+    "net_yoy": 10.0,
+    "inventory_yoy": -6.9,
+    "cash_yoy": -6.8,
+    "orders_yoy": 30.2,
+    "orders_rs_yoy": 37.3,
+    "orders_mt_yoy": -33.9,
+    "sales_rs_yoy": 6.3,
+    "sales_mt_yoy": 29.5,
+    "sales_etc_yoy": -20.4,
+    "backlog_yoy": -8.4,
+    "backlog_rs_yoy": -3.7,
+    "backlog_mt_yoy": -31.2,
+    "op_rs_yoy": 15.6,
+    "op_mt_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 415.21,
+    "op": 51.99,
+    "ord": 56.31,
+    "net": 56.83,
+    "gp": 137.3,
+    "sga": 85.3,
+    "cogs": 277.91,
+    "cash": 577.21,
+    "inventory": 520.71,
+    "equity": 2166.57,
+    "total_assets": 2456.68,
+    "gpm": 33.1,
+    "opm": 12.5,
+    "orders": 436.4,
+    "orders_rs": 406.18,
+    "orders_mt": 24.64,
+    "sales_rs": 384.48,
+    "sales_mt": 26.3,
+    "sales_etc": 4.42,
+    "backlog": 404.65,
+    "backlog_rs": 354.16,
+    "backlog_mt": 46.59,
+    "op_rs": 61.78,
+    "op_mt": 1.22,
+    "bb_ratio": 1.05,
+    "opm_rs": 16.1,
+    "sales_yoy": 33.7,
+    "gp_yoy": 21.4,
+    "sga_yoy": 5.4,
+    "op_yoy": 61.6,
+    "ord_yoy": 42.8,
+    "net_yoy": 115.3,
+    "inventory_yoy": -8.3,
+    "cash_yoy": -16.3,
+    "orders_yoy": 76.1,
+    "orders_rs_yoy": 84.8,
+    "orders_mt_yoy": 1.4,
+    "sales_rs_yoy": 36.1,
+    "sales_mt_yoy": 8.7,
+    "sales_etc_yoy": 18.5,
+    "backlog_yoy": 13.8,
+    "backlog_rs_yoy": 25.3,
+    "backlog_mt_yoy": -33.7,
+    "op_rs_yoy": 55.0,
+    "op_mt_yoy": 258.8
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 380.21,
+    "op": 43.92,
+    "ord": 45.97,
+    "net": 33.05,
+    "gp": 131.21,
+    "sga": 87.3,
+    "cogs": 249.0,
+    "cash": 583.66,
+    "inventory": 557.48,
+    "equity": 2224.47,
+    "total_assets": 2538.35,
+    "gpm": 34.5,
+    "opm": 11.6,
+    "orders": 431.19,
+    "orders_rs": 407.72,
+    "orders_mt": 18.01,
+    "sales_rs": 350.28,
+    "sales_mt": 25.75,
+    "sales_etc": 4.17,
+    "backlog": 455.63,
+    "backlog_rs": 411.6,
+    "backlog_mt": 38.85,
+    "op_rs": 54.19,
+    "op_mt": 0.93,
+    "bb_ratio": 1.13,
+    "opm_rs": 15.5,
+    "sales_yoy": 19.2,
+    "gp_yoy": 11.3,
+    "sga_yoy": 2.6,
+    "op_yoy": 33.9,
+    "ord_yoy": 39.7,
+    "net_yoy": 28.0,
+    "inventory_yoy": 5.1,
+    "cash_yoy": -12.4,
+    "orders_yoy": 67.4,
+    "orders_rs_yoy": 78.3,
+    "orders_mt_yoy": -21.3,
+    "sales_rs_yoy": 23.3,
+    "sales_mt_yoy": -13.1,
+    "sales_etc_yoy": -22.5,
+    "backlog_yoy": 54.8,
+    "backlog_rs_yoy": 81.2,
+    "backlog_mt_yoy": -38.8,
+    "op_rs_yoy": 35.6,
+    "op_mt_yoy": -48.6
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 477.49,
+    "op": 92.56,
+    "ord": 98.51,
+    "net": 70.84,
+    "gp": 184.62,
+    "sga": 92.06,
+    "cogs": 292.87,
+    "cash": 458.01,
+    "inventory": 600.78,
+    "equity": 2302.24,
+    "total_assets": 2678.92,
+    "gpm": 38.7,
+    "opm": 19.4,
+    "orders": 565.23,
+    "orders_rs": 539.25,
+    "orders_mt": 19.86,
+    "sales_rs": 450.84,
+    "sales_mt": 20.7,
+    "sales_etc": 5.92,
+    "backlog": 543.38,
+    "backlog_rs": 500.01,
+    "backlog_mt": 38.01,
+    "op_rs": 103.37,
+    "op_mt": -0.55,
+    "bb_ratio": 1.18,
+    "opm_rs": 22.9,
+    "sales_yoy": 56.0,
+    "gp_yoy": 64.4,
+    "sga_yoy": 16.0,
+    "op_yoy": 181.3,
+    "ord_yoy": 150.0,
+    "net_yoy": 119.5,
+    "inventory_yoy": 11.5,
+    "cash_yoy": -27.7,
+    "orders_yoy": 72.6,
+    "orders_rs_yoy": 83.1,
+    "orders_mt_yoy": -22.3,
+    "sales_rs_yoy": 63.1,
+    "sales_mt_yoy": -8.4,
+    "sales_etc_yoy": -15.8,
+    "backlog_yoy": 72.1,
+    "backlog_rs_yoy": 103.9,
+    "backlog_mt_yoy": -42.8,
+    "op_rs_yoy": 165.9,
+    "op_mt_yoy": -145.1
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 533.51,
+    "op": 104.35,
+    "ord": 112.12,
+    "net": -3.39,
+    "gp": 209.62,
+    "sga": 105.27,
+    "cogs": 323.89,
+    "cash": 537.41,
+    "inventory": 641.03,
+    "equity": 2324.54,
+    "total_assets": 2783.56,
+    "gpm": 39.3,
+    "opm": 19.6,
+    "orders": 641.46,
+    "orders_rs": 618.33,
+    "orders_mt": 17.71,
+    "sales_rs": 501.75,
+    "sales_mt": 24.29,
+    "sales_etc": 7.47,
+    "backlog": 651.33,
+    "backlog_rs": 616.6,
+    "backlog_mt": 31.43,
+    "op_rs": 116.86,
+    "op_mt": -2.68,
+    "bb_ratio": 1.2,
+    "opm_rs": 23.3,
+    "sales_yoy": 57.7,
+    "gp_yoy": 70.3,
+    "sga_yoy": 26.6,
+    "op_yoy": 161.3,
+    "ord_yoy": 169.9,
+    "net_yoy": -113.8,
+    "inventory_yoy": 20.5,
+    "cash_yoy": -6.7,
+    "orders_yoy": 58.0,
+    "orders_rs_yoy": 60.3,
+    "orders_mt_yoy": 8.9,
+    "sales_rs_yoy": 68.1,
+    "sales_mt_yoy": -29.6,
+    "sales_etc_yoy": 43.7,
+    "backlog_yoy": 69.9,
+    "backlog_rs_yoy": 85.5,
+    "backlog_mt_yoy": -34.9,
+    "op_rs_yoy": 161.0,
+    "op_mt_yoy": -167.0
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 605.97,
+    "op": 152.12,
+    "ord": 158.83,
+    "net": 126.22,
+    "gp": 251.64,
+    "sga": 99.51,
+    "cogs": 354.33,
+    "cash": 628.44,
+    "inventory": 692.55,
+    "equity": 2429.72,
+    "total_assets": 2912.03,
+    "gpm": 41.5,
+    "opm": 25.1,
+    "orders": 857.84,
+    "orders_rs": 828.41,
+    "orders_mt": 23.05,
+    "sales_rs": 586.24,
+    "sales_mt": 13.51,
+    "sales_etc": 6.21,
+    "backlog": 903.2,
+    "backlog_rs": 858.77,
+    "backlog_mt": 40.98,
+    "op_rs": 165.08,
+    "op_mt": -1.84,
+    "bb_ratio": 1.42,
+    "opm_rs": 28.2,
+    "sales_yoy": 45.9,
+    "gp_yoy": 83.3,
+    "sga_yoy": 16.7,
+    "op_yoy": 192.6,
+    "ord_yoy": 182.1,
+    "net_yoy": 122.1,
+    "inventory_yoy": 33.0,
+    "cash_yoy": 8.9,
+    "orders_yoy": 96.6,
+    "orders_rs_yoy": 104.0,
+    "orders_mt_yoy": -6.5,
+    "sales_rs_yoy": 52.5,
+    "sales_mt_yoy": -48.6,
+    "sales_etc_yoy": 40.5,
+    "backlog_yoy": 123.2,
+    "backlog_rs_yoy": 142.5,
+    "backlog_mt_yoy": -12.0,
+    "op_rs_yoy": 167.2,
+    "op_mt_yoy": -250.8
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 672.41,
+    "op": 184.19,
+    "ord": 184.91,
+    "net": 130.86,
+    "gp": 285.3,
+    "sga": 101.12,
+    "cogs": 387.11,
+    "cash": 602.67,
+    "inventory": 699.97,
+    "equity": 2546.1,
+    "total_assets": 3079.93,
+    "gpm": 42.4,
+    "opm": 27.4,
+    "orders": 573.92,
+    "orders_rs": 538.19,
+    "orders_mt": 26.15,
+    "sales_rs": 649.1,
+    "sales_mt": 14.97,
+    "sales_etc": 8.33,
+    "backlog": 804.72,
+    "backlog_rs": 747.86,
+    "backlog_mt": 52.16,
+    "op_rs": 195.59,
+    "op_mt": 0.47,
+    "bb_ratio": 0.85,
+    "opm_rs": 30.1,
+    "sales_yoy": 76.9,
+    "gp_yoy": 117.4,
+    "sga_yoy": 15.8,
+    "op_yoy": 319.4,
+    "ord_yoy": 302.2,
+    "net_yoy": 295.9,
+    "inventory_yoy": 25.6,
+    "cash_yoy": 3.3,
+    "orders_yoy": 33.1,
+    "orders_rs_yoy": 32.0,
+    "orders_mt_yoy": 45.2,
+    "sales_rs_yoy": 85.3,
+    "sales_mt_yoy": -41.9,
+    "sales_etc_yoy": 99.8,
+    "backlog_yoy": 76.6,
+    "backlog_rs_yoy": 81.7,
+    "backlog_mt_yoy": 34.3,
+    "op_rs_yoy": 260.9,
+    "op_mt_yoy": -49.5
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 1361.61,
+    "op": 219.04,
+    "ord": 232.24,
+    "net": 171.67,
+    "opm": 16.1,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 1481.28,
+    "op": 284.72,
+    "ord": 299.43,
+    "net": 211.88,
+    "opm": 19.2,
+    "sales_yoy": 8.8,
+    "op_yoy": 30.0,
+    "net_yoy": 23.4
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 1533.26,
+    "op": 271.08,
+    "ord": 290.16,
+    "net": 204.54,
+    "opm": 17.7,
+    "sales_yoy": 3.5,
+    "op_yoy": -4.8,
+    "net_yoy": -3.5
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 1270.59,
+    "op": 134.21,
+    "ord": 150.1,
+    "net": 104.38,
+    "opm": 10.6,
+    "sales_yoy": -17.1,
+    "op_yoy": -50.5,
+    "net_yoy": -49.0
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 1273.87,
+    "op": 137.81,
+    "ord": 153.28,
+    "net": 109.06,
+    "opm": 10.8,
+    "sales_yoy": 0.3,
+    "op_yoy": 2.7,
+    "net_yoy": 4.5
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 1806.42,
+    "op": 292.82,
+    "ord": 312.91,
+    "net": 157.33,
+    "opm": 16.2,
+    "sales_yoy": 41.8,
+    "op_yoy": 112.5,
+    "net_yoy": 44.3
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 2540.0,
+    "op": 655.0,
+    "ord": 662.0,
+    "net": 482.0,
+    "opm": 25.8,
+    "sales_yoy": 40.6,
+    "op_yoy": 123.7,
+    "net_yoy": 206.4,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "b": [
+   {
+    "x": "24.1Q",
+    "r_jp": 8,
+    "r_cn": 34,
+    "r_as": 22,
+    "r_us": 12,
+    "r_ona": 4,
+    "r_na": 16,
+    "r_eu": 17,
+    "r_ot": 3,
+    "i_com": 22,
+    "i_pc": 7,
+    "i_srv": 2,
+    "i_pow": null,
+    "i_ind": 11,
+    "i_ce": 4,
+    "i_car": 16,
+    "i_semi": 8,
+    "i_fft": 6,
+    "i_oth": 24,
+    "m_nxt": 47,
+    "m_nxtr": 3,
+    "m_aimex": 9,
+    "m_oeq": 19,
+    "m_parts": 22
+   },
+   {
+    "x": "24.2Q",
+    "r_jp": 8,
+    "r_cn": 31,
+    "r_as": 26,
+    "r_us": 11,
+    "r_ona": 4,
+    "r_na": 15,
+    "r_eu": 19,
+    "r_ot": 1,
+    "i_com": 10,
+    "i_pc": 5,
+    "i_srv": 2,
+    "i_pow": null,
+    "i_ind": 14,
+    "i_ce": 3,
+    "i_car": 28,
+    "i_semi": 9,
+    "i_fft": 14,
+    "i_oth": 15,
+    "m_nxt": 34,
+    "m_nxtr": 7,
+    "m_aimex": 6,
+    "m_oeq": 29,
+    "m_parts": 24
+   },
+   {
+    "x": "24.3Q",
+    "r_jp": 10,
+    "r_cn": 28,
+    "r_as": 22,
+    "r_us": 14,
+    "r_ona": 4,
+    "r_na": 18,
+    "r_eu": 20,
+    "r_ot": 2,
+    "i_com": 14,
+    "i_pc": 7,
+    "i_srv": 2,
+    "i_pow": null,
+    "i_ind": 7,
+    "i_ce": 4,
+    "i_car": 27,
+    "i_semi": 6,
+    "i_fft": 7,
+    "i_oth": 26,
+    "m_nxt": 39,
+    "m_nxtr": 11,
+    "m_aimex": 5,
+    "m_oeq": 22,
+    "m_parts": 23
+   },
+   {
+    "x": "24.4Q",
+    "r_jp": 7,
+    "r_cn": 32,
+    "r_as": 27,
+    "r_us": 13,
+    "r_ona": 2,
+    "r_na": 15,
+    "r_eu": 17,
+    "r_ot": 2,
+    "i_com": 16,
+    "i_pc": 8,
+    "i_srv": 1,
+    "i_pow": null,
+    "i_ind": 10,
+    "i_ce": 4,
+    "i_car": 20,
+    "i_semi": 10,
+    "i_fft": 10,
+    "i_oth": 21,
+    "m_nxt": 37,
+    "m_nxtr": 11,
+    "m_aimex": 4,
+    "m_oeq": 24,
+    "m_parts": 24
+   },
+   {
+    "x": "25.1Q",
+    "r_jp": 8,
+    "r_cn": 39,
+    "r_as": 22,
+    "r_us": 13,
+    "r_ona": 4,
+    "r_na": 17,
+    "r_eu": 12,
+    "r_ot": 2,
+    "i_com": 22,
+    "i_pc": 6,
+    "i_srv": 2,
+    "i_pow": null,
+    "i_ind": 4,
+    "i_ce": 10,
+    "i_car": 20,
+    "i_semi": 11,
+    "i_fft": 7,
+    "i_oth": 18,
+    "m_nxt": 44,
+    "m_nxtr": 11,
+    "m_aimex": 4,
+    "m_oeq": 19,
+    "m_parts": 22
+   },
+   {
+    "x": "25.2Q",
+    "r_jp": 6,
+    "r_cn": 32,
+    "r_as": 30,
+    "r_us": 9,
+    "r_ona": 1,
+    "r_na": 10,
+    "r_eu": 18,
+    "r_ot": 4,
+    "i_com": 8,
+    "i_pc": 15,
+    "i_srv": 4,
+    "i_pow": null,
+    "i_ind": 5,
+    "i_ce": 5,
+    "i_car": 18,
+    "i_semi": 11,
+    "i_fft": 15,
+    "i_oth": 19,
+    "m_nxt": 30,
+    "m_nxtr": 11,
+    "m_aimex": 7,
+    "m_oeq": 26,
+    "m_parts": 26
+   },
+   {
+    "x": "25.3Q",
+    "r_jp": 7,
+    "r_cn": 35,
+    "r_as": 29,
+    "r_us": 10,
+    "r_ona": 5,
+    "r_na": 15,
+    "r_eu": 11,
+    "r_ot": 3,
+    "i_com": 21,
+    "i_pc": 9,
+    "i_srv": 5,
+    "i_pow": null,
+    "i_ind": 3,
+    "i_ce": 5,
+    "i_car": 17,
+    "i_semi": 10,
+    "i_fft": 6,
+    "i_oth": 24,
+    "m_nxt": 49,
+    "m_nxtr": 6,
+    "m_aimex": 4,
+    "m_oeq": 16,
+    "m_parts": 25
+   },
+   {
+    "x": "25.4Q",
+    "r_jp": 7,
+    "r_cn": 29,
+    "r_as": 35,
+    "r_us": 15,
+    "r_ona": 1,
+    "r_na": 16,
+    "r_eu": 11,
+    "r_ot": 2,
+    "i_com": 17,
+    "i_pc": 12,
+    "i_srv": 6,
+    "i_pow": null,
+    "i_ind": 5,
+    "i_ce": 6,
+    "i_car": 17,
+    "i_semi": 12,
+    "i_fft": 3,
+    "i_oth": 22,
+    "m_nxt": 36,
+    "m_nxtr": 16,
+    "m_aimex": 6,
+    "m_oeq": 17,
+    "m_parts": 25
+   },
+   {
+    "x": "26.1Q",
+    "r_jp": 6,
+    "r_cn": 39,
+    "r_as": 39,
+    "r_us": null,
+    "r_ona": null,
+    "r_na": 7,
+    "r_eu": 6,
+    "r_ot": 3,
+    "i_com": 28,
+    "i_pc": 8,
+    "i_srv": 6,
+    "i_pow": 3,
+    "i_ind": 4,
+    "i_ce": 6,
+    "i_car": 19,
+    "i_semi": 10,
+    "i_fft": 4,
+    "i_oth": 12,
+    "m_nxt": 30,
+    "m_nxtr": 30,
+    "m_aimex": 4,
+    "m_oeq": 16,
+    "m_parts": 20
+   },
+   {
+    "x": "26.2Q",
+    "r_jp": 8,
+    "r_cn": 30,
+    "r_as": 45,
+    "r_us": null,
+    "r_ona": null,
+    "r_na": 9,
+    "r_eu": 6,
+    "r_ot": 2,
+    "i_com": 14,
+    "i_pc": 19,
+    "i_srv": 6,
+    "i_pow": 9,
+    "i_ind": 5,
+    "i_ce": 6,
+    "i_car": 12,
+    "i_semi": 8,
+    "i_fft": 10,
+    "i_oth": 11,
+    "m_nxt": 22,
+    "m_nxtr": 30,
+    "m_aimex": 4,
+    "m_oeq": 20,
+    "m_parts": 24
+   },
+   {
+    "x": "26.3Q",
+    "r_jp": 6,
+    "r_cn": 22,
+    "r_as": 52,
+    "r_us": null,
+    "r_ona": null,
+    "r_na": 10,
+    "r_eu": 8,
+    "r_ot": 2,
+    "i_com": 13,
+    "i_pc": 5,
+    "i_srv": 23,
+    "i_pow": 10,
+    "i_ind": 6,
+    "i_ce": 3,
+    "i_car": 14,
+    "i_semi": 11,
+    "i_fft": 3,
+    "i_oth": 12,
+    "m_nxt": 17,
+    "m_nxtr": 36,
+    "m_aimex": 5,
+    "m_oeq": 17,
+    "m_parts": 25
+   },
+   {
+    "x": "26.4Q",
+    "r_jp": 5,
+    "r_cn": 26,
+    "r_as": 45,
+    "r_us": null,
+    "r_ona": null,
+    "r_na": 14,
+    "r_eu": 8,
+    "r_ot": 2,
+    "i_com": 6,
+    "i_pc": 6,
+    "i_srv": 22,
+    "i_pow": 14,
+    "i_ind": 2,
+    "i_ce": 2,
+    "i_car": 8,
+    "i_semi": 16,
+    "i_fft": 10,
+    "i_oth": 14,
+    "m_nxt": 7,
+    "m_nxtr": 44,
+    "m_aimex": 4,
+    "m_oeq": 23,
+    "m_parts": 22
+   },
+   {
+    "x": "27.1Q",
+    "r_jp": 3,
+    "r_cn": 30,
+    "r_as": 43,
+    "r_us": null,
+    "r_ona": null,
+    "r_na": 17,
+    "r_eu": 6,
+    "r_ot": 1,
+    "i_com": 21,
+    "i_pc": 3,
+    "i_srv": 9,
+    "i_pow": 18,
+    "i_ind": 4,
+    "i_ce": 4,
+    "i_car": 11,
+    "i_semi": 11,
+    "i_fft": 6,
+    "i_oth": 13,
+    "m_nxt": 0,
+    "m_nxtr": 54,
+    "m_aimex": 3,
+    "m_oeq": 21,
+    "m_parts": 22
+   },
+   {
+    "x": "27.2Q",
+    "r_jp": 7,
+    "r_cn": 22,
+    "r_as": 49,
+    "r_us": null,
+    "r_ona": null,
+    "r_na": 14,
+    "r_eu": 7,
+    "r_ot": 1,
+    "i_com": 7,
+    "i_pc": 4,
+    "i_srv": 28,
+    "i_pow": 14,
+    "i_ind": 3,
+    "i_ce": 4,
+    "i_car": 11,
+    "i_semi": 12,
+    "i_fft": 6,
+    "i_oth": 11,
+    "m_nxt": 0,
+    "m_nxtr": 54,
+    "m_aimex": 4,
+    "m_oeq": 20,
+    "m_parts": 22
+   }
+  ]
+ }
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src https://cdn.jsdelivr.net https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>선행지표 트래킹</title>
+<meta name="description" content="2단계 리포트에서 고른 기업별 선행지표를 주가와 겹쳐 보고, 다음 실적 전에 확인할 기준을 모아 둔 화면">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap">
+<link rel="stylesheet" href="lead.css?v=6">
+<script src="gate.js?v=1"></script>
+<script src="lead-theme.js?v=1"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23141a26'/%3E%3Cpath d='M7 22h4v-5H7zM14 22h4v-9h-4zM21 22h4V9h-4z' fill='%2322b07f'/%3E%3C/svg%3E">
+</head>
+<body>
+<header id="topnav">
+  <div class="nav-in">
+    <a class="brand" href="index.html#jp">일본 리포트<span>아카이빙</span></a>
+    <nav class="market" aria-label="시장">
+      <a href="index.html#jp">일본</a>
+      <a href="lead.html" class="on" aria-current="page">선행지표</a>
+      <a href="index.html#jps">일본 스크리닝</a>
+      <a href="index.html#jpa">일본 주요 전 종목</a>
+      <a href="index.html#jpc">일본 소비재</a>
+      <a href="index.html#us">미국</a>
+      <a href="usre.html">미국 부동산</a>
+      <a href="index.html#kr">한국</a>
+      <a href="index.html#room">리서치룸</a>
+    </nav>
+    <button type="button" class="theme-btn" id="themeBtn" aria-label="밝게/어둡게 전환"><span class="t-d">☾</span><span class="t-l">☀</span></button>
+  </div>
+</header>
+
+<div class="ld">
+  <aside class="side" id="side" aria-label="섹터">
+    <a class="side-brand" href="#">
+      <span class="eyebrow">LEADING INDICATORS · JP</span>
+      <b>선행지표 트래킹</b>
+      <small>실적 전에 먼저 움직이는 숫자</small>
+    </a>
+    <button type="button" class="side-tg" id="sideTg" aria-expanded="false">섹터 · 기업 목록 <span>▾</span></button>
+    <label class="side-q"><span class="sr">기업 검색</span><input id="q" type="search" placeholder="기업 · 코드 검색" autocomplete="off"></label>
+    <nav id="tree" class="tree"></nav>
+    <div class="side-foot">2단계 리포트의 선행지표를 가져와 출처까지 매핑합니다. 값 수정은 이후 텔레그램 명령으로 반영됩니다.</div>
+  </aside>
+  <main id="main" class="main" tabindex="-1"><div class="boot"><i></i><i></i><i></i></div></main>
+</div>
+
+<div class="tip" id="tip" role="status" aria-live="polite"></div>
+<div class="lightbox" id="lb" hidden><button type="button" class="lb-x" id="lbx" aria-label="닫기">×</button><figure><img id="lbimg" alt=""><figcaption id="lbcap"></figcaption></figure></div>
+
+<script src="lead.js?v=6"></script>
+</body>
+</html>

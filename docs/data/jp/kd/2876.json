@@ -1,1 +1,1085 @@
-{"c": "2876", "n": "델소레", "asof": "2026-11-13", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "단독(비연결). 피자·난 등 냉동 빵 제조(식품)와 인도 요리 식당(외식). 2024년 공장 화재 뒤 생산 복구로 식품 매출 회복. 2027년 계획 순이익 7억엔(11/13 상향)", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "재고자산", "def": "분기말 상품·제품(피자·난 등 냉동식품)", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산단신"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 상환분 포함)"}, {"sec": "부문", "t": "부문별 매출", "d": "q", "src": "2Q27 결산단신 · 누계 차분 · 부문 이익 = 세전이익 기준(회사 정의). 25.3Q 식품 부문은 공장 화재 손실 반영", "lines": [{"k": "seg_food", "l": "식품 사업", "u": "억엔", "c": 0}, {"k": "seg_rest", "l": "외식 사업", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 이익", "d": "q", "src": "2Q27 결산단신 · 누계 차분 · 부문 이익 = 세전이익 기준(회사 정의). 25.3Q 식품 부문은 공장 화재 손실 반영", "lines": [{"k": "segp_food", "l": "식품 사업 이익", "u": "억엔", "c": 0}, {"k": "segp_rest", "l": "외식 사업 이익", "u": "억엔", "c": 1}]}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산단신"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 48.65, "op": 4.22, "ord": 4.21, "net": 2.82, "gp": 18.02, "sga": 13.8, "cogs": 30.63, "debt_total": 2.25, "equity": 69.1, "total_assets": 114.07, "inventory": 8.91, "cash": 13.82, "seg_food": null, "seg_rest": null, "segp_food": null, "segp_rest": null, "gpm": 37.0, "opm": 8.7, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "seg_food_yoy": null, "seg_rest_yoy": null, "segp_food_yoy": null, "segp_rest_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 36.62, "op": -1.02, "ord": -0.7, "net": -2.89, "gp": 13.14, "sga": 14.16, "cogs": 23.48, "debt_total": 2.1, "equity": 66.32, "total_assets": 107.37, "inventory": 8.46, "cash": 22.57, "seg_food": 29.24, "seg_rest": 7.37, "segp_food": null, "segp_rest": null, "gpm": 35.9, "opm": -2.8, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "seg_food_yoy": null, "seg_rest_yoy": null, "segp_food_yoy": null, "segp_rest_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 39.74, "op": 1.5, "ord": 2.53, "net": 2.41, "gp": 14.93, "sga": 13.43, "cogs": 24.81, "debt_total": 1.95, "equity": 67.83, "total_assets": 105.64, "inventory": 10.67, "cash": 15.97, "seg_food": 32.21, "seg_rest": 7.53, "segp_food": 4.56, "segp_rest": 0.36, "gpm": 37.6, "opm": 3.8, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "seg_food_yoy": null, "seg_rest_yoy": null, "segp_food_yoy": null, "segp_rest_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 41.64, "op": 2.68, "ord": 3.0, "net": 2.48, "gp": 15.86, "sga": 13.17, "cogs": 25.78, "debt_total": 1.8, "equity": 70.14, "total_assets": 108.8, "inventory": 10.57, "cash": 24.78, "seg_food": 34.27, "seg_rest": 7.38, "segp_food": 4.26, "segp_rest": 1.2, "gpm": 38.1, "opm": 6.4, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "seg_food_yoy": null, "seg_rest_yoy": null, "segp_food_yoy": null, "segp_rest_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 42.1, "op": 2.7, "ord": 2.03, "net": -6.22, "gp": 15.46, "sga": 12.76, "cogs": 26.64, "debt_total": 1.65, "equity": 64.06, "total_assets": 109.2, "inventory": 7.52, "cash": 20.6, "seg_food": 33.61, "seg_rest": 8.49, "segp_food": -7.94, "segp_rest": 0.68, "gpm": 36.7, "opm": 6.4, "sales_yoy": -13.5, "gp_yoy": -14.2, "sga_yoy": -7.5, "op_yoy": -36.0, "ord_yoy": -51.8, "net_yoy": -320.6, "inventory_yoy": -15.6, "cash_yoy": 49.1, "seg_food_yoy": null, "seg_rest_yoy": null, "segp_food_yoy": null, "segp_rest_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 30.55, "op": -1.27, "ord": -2.17, "net": -2.89, "gp": 10.72, "sga": 12.0, "cogs": 19.83, "debt_total": 1.5, "equity": 61.2, "total_assets": 102.45, "inventory": 7.94, "cash": 27.37, "seg_food": 23.01, "seg_rest": 7.54, "segp_food": -2.82, "segp_rest": 0.3, "gpm": 35.1, "opm": -4.2, "sales_yoy": -16.6, "gp_yoy": -18.4, "sga_yoy": -15.3, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": -6.1, "cash_yoy": 21.3, "seg_food_yoy": -21.3, "seg_rest_yoy": 2.3, "segp_food_yoy": null, "segp_rest_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 34.11, "op": 0.49, "ord": 0.14, "net": -0.09, "gp": 12.53, "sga": 12.03, "cogs": 21.58, "debt_total": 1.35, "equity": 59.78, "total_assets": 97.11, "inventory": 8.53, "cash": 19.61, "seg_food": 26.65, "seg_rest": 7.47, "segp_food": 0.91, "segp_rest": 0.36, "gpm": 36.7, "opm": 1.4, "sales_yoy": -14.2, "gp_yoy": -16.1, "sga_yoy": -10.4, "op_yoy": -67.3, "ord_yoy": -94.5, "net_yoy": -103.7, "inventory_yoy": -20.1, "cash_yoy": 22.8, "seg_food_yoy": -17.3, "seg_rest_yoy": -0.8, "segp_food_yoy": -80.0, "segp_rest_yoy": 0.0}, {"q": "26.2Q", "x": "26.2Q", "sales": 33.72, "op": 0.15, "ord": -0.16, "net": -0.11, "gp": 12.31, "sga": 12.16, "cogs": 21.41, "debt_total": 1.2, "equity": 59.84, "total_assets": 97.8, "inventory": 9.3, "cash": 13.16, "seg_food": 26.29, "seg_rest": 7.43, "segp_food": 1.37, "segp_rest": 0.5, "gpm": 36.5, "opm": 0.4, "sales_yoy": -19.0, "gp_yoy": -22.4, "sga_yoy": -7.7, "op_yoy": -94.4, "ord_yoy": -105.3, "net_yoy": -104.4, "inventory_yoy": -12.0, "cash_yoy": -46.9, "seg_food_yoy": -23.3, "seg_rest_yoy": 0.7, "segp_food_yoy": -67.8, "segp_rest_yoy": -58.3}, {"q": "26.3Q", "x": "26.3Q", "sales": 42.78, "op": 3.44, "ord": 3.53, "net": 2.54, "gp": 16.04, "sga": 12.61, "cogs": 26.74, "debt_total": 6.05, "equity": 62.45, "total_assets": 108.24, "inventory": 8.21, "cash": 13.65, "seg_food": 34.32, "seg_rest": 8.45, "segp_food": 4.27, "segp_rest": 0.85, "gpm": 37.5, "opm": 8.0, "sales_yoy": 1.6, "gp_yoy": 3.8, "sga_yoy": -1.2, "op_yoy": 27.4, "ord_yoy": 73.9, "net_yoy": null, "inventory_yoy": 9.2, "cash_yoy": -33.7, "seg_food_yoy": 2.1, "seg_rest_yoy": -0.5, "segp_food_yoy": null, "segp_rest_yoy": 25.0}, {"q": "26.4Q", "x": "26.4Q", "sales": 35.59, "op": 0.22, "ord": 0.24, "net": -0.22, "gp": 13.46, "sga": 13.24, "cogs": 22.13, "debt_total": 0.9, "equity": 62.3, "total_assets": 102.46, "inventory": 9.91, "cash": 17.16, "seg_food": 28.53, "seg_rest": 7.06, "segp_food": 2.31, "segp_rest": -0.21, "gpm": 37.8, "opm": 0.6, "sales_yoy": 16.5, "gp_yoy": 25.6, "sga_yoy": 10.3, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": 24.8, "cash_yoy": -37.3, "seg_food_yoy": 24.0, "seg_rest_yoy": -6.4, "segp_food_yoy": null, "segp_rest_yoy": -170.0}, {"q": "27.1Q", "x": "27.1Q", "sales": 39.63, "op": 2.47, "ord": 2.78, "net": 2.06, "gp": 15.15, "sga": 12.68, "cogs": 24.48, "debt_total": 0.75, "equity": 63.53, "total_assets": 103.25, "inventory": 10.7, "cash": 18.35, "seg_food": 32.26, "seg_rest": 7.38, "segp_food": 3.84, "segp_rest": 0.43, "gpm": 38.2, "opm": 6.2, "sales_yoy": 16.2, "gp_yoy": 20.9, "sga_yoy": 5.4, "op_yoy": 404.1, "ord_yoy": 1885.7, "net_yoy": null, "inventory_yoy": 25.4, "cash_yoy": -6.4, "seg_food_yoy": 21.1, "seg_rest_yoy": -1.2, "segp_food_yoy": 322.0, "segp_rest_yoy": 19.4}, {"q": "27.2Q", "x": "27.2Q", "sales": 39.29, "op": 1.5, "ord": 1.54, "net": 0.96, "gp": 14.56, "sga": 13.05, "cogs": 24.73, "debt_total": 0.6, "equity": 64.65, "total_assets": 106.09, "inventory": 10.99, "cash": 21.15, "seg_food": 31.81, "seg_rest": 7.47, "segp_food": 2.8, "segp_rest": 0.29, "gpm": 37.1, "opm": 3.8, "sales_yoy": 16.5, "gp_yoy": 18.3, "sga_yoy": 7.3, "op_yoy": 900.0, "ord_yoy": null, "net_yoy": null, "inventory_yoy": 18.2, "cash_yoy": 60.7, "seg_food_yoy": 21.0, "seg_rest_yoy": 0.5, "segp_food_yoy": 104.4, "segp_rest_yoy": -42.0}], "a": [{"year": "2022", "x": "2022", "sales": 154.58, "op": 5.38, "ord": 9.98, "net": 6.41, "opm": 3.5, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 168.93, "op": 4.17, "ord": 5.15, "net": 3.02, "opm": 2.5, "sales_yoy": 9.3, "op_yoy": -22.5, "net_yoy": -52.9}, {"year": "2024", "x": "2024", "sales": 177.84, "op": 12.2, "ord": 12.67, "net": 5.99, "opm": 6.9, "sales_yoy": 5.3, "op_yoy": 192.6, "net_yoy": 98.3}, {"year": "2025", "x": "2025", "sales": 154.03, "op": 5.61, "ord": 5.39, "net": -4.22, "opm": 3.6, "sales_yoy": -13.4, "op_yoy": -54.0, "net_yoy": -170.5}, {"year": "2026", "x": "2026", "sales": 146.2, "op": 4.3, "ord": 3.75, "net": 2.12, "opm": 2.9, "sales_yoy": -5.1, "op_yoy": -23.4, "net_yoy": null}, {"year": "2027 계획", "x": "2027 계획", "sales": 160.0, "op": 7.0, "ord": 7.0, "net": 7.0, "opm": 4.4, "sales_yoy": 9.4, "op_yoy": 62.8, "net_yoy": 230.2, "plan": 1, "kind": "회사 계획"}]}}
+{
+ "c": "2876",
+ "n": "델소레",
+ "asof": "2026-11-13",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "단독(비연결). 피자·난 등 냉동 빵 제조(식품)와 인도 요리 식당(외식). 2024년 공장 화재 뒤 생산 복구로 식품 매출 회복. 2027년 계획 순이익 7억엔(11/13 상향)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "식품 생산고",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "production",
+     "l": "생산고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서 FY3/24~FY3/26 생산·판매 실적",
+   "def": "식품 공장 생산 실적, 제조원가 기준. YoY = 회사 공시 전년比",
+   "lines": [
+    {
+     "k": "production_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ]
+  },
+  {
+   "sec": "key",
+   "t": "외식 직영 점포 수(기말)",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "stores",
+     "l": "점포",
+     "u": "개",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서 주요 설비 현황",
+   "def": "외식 사업 직영 점포"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "def": "분기말 상품·제품(피자·난 등 냉동식품)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산단신 · 총차입금 = 단기 + 장기 차입금(1년 내 상환분 포함)"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출",
+   "d": "q",
+   "src": "2Q27 결산단신 · 누계 차분 · 부문 이익 = 세전이익 기준(회사 정의). 25.3Q 식품 부문은 공장 화재 손실 반영",
+   "lines": [
+    {
+     "k": "seg_food",
+     "l": "식품 사업",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "seg_rest",
+     "l": "외식 사업",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 이익",
+   "d": "q",
+   "src": "2Q27 결산단신 · 누계 차분 · 부문 이익 = 세전이익 기준(회사 정의). 25.3Q 식품 부문은 공장 화재 손실 반영",
+   "lines": [
+    {
+     "k": "segp_food",
+     "l": "식품 사업 이익",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "segp_rest",
+     "l": "외식 사업 이익",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산단신"
+  },
+  {
+   "sec": "식품",
+   "t": "식품·외식 매출(연간)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "food",
+     "l": "식품 사업",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "rest",
+     "l": "외식 사업",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서 FY3/24~FY3/26 생산·판매 실적",
+   "def": "외부 고객 판매 실적",
+   "noplan": 1
+  },
+  {
+   "sec": "식품",
+   "t": "생산고 ÷ 식품 매출",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "prod_ratio",
+     "l": "생산고 ÷ 식품 매출",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서 FY3/24~FY3/26 생산·판매 실적",
+   "def": "제조원가 기준 생산고 ÷ 식품 사업 매출",
+   "noplan": 1
+  },
+  {
+   "sec": "고객",
+   "t": "주요 거래처 비중",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "access_pct",
+     "l": "일본액세스",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "domino_pct",
+     "l": "도미노피자 재팬",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서 주요 판매처",
+   "def": "매출 10% 이상 거래처만 공시(도미노는 FY3/25부터 미공시)",
+   "noplan": 1
+  },
+  {
+   "sec": "고객",
+   "t": "일본액세스 매출",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "access",
+     "l": "일본액세스향",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서 주요 판매처",
+   "def": "최대 거래처(식품 도매)"
+  },
+  {
+   "sec": "점포",
+   "t": "출점·폐점(연간)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "opened",
+     "l": "출점",
+     "u": "개",
+     "c": 0
+    },
+    {
+     "k": "closed",
+     "l": "폐점",
+     "u": "개",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서 경영성적 서술",
+   "def": "직영 기준. FY3/26 폐점 10 = 오메데타이야키 5 + 상하이익스프레스 전점 5. FY3/27 상반기 출점 4·폐점 3(2Q 결산단신)",
+   "noplan": 1
+  },
+  {
+   "sec": "점포",
+   "t": "점포당 외식 매출",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "rest_per_store",
+     "l": "점포당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서",
+   "def": "외식 매출 ÷ 기말 직영 점포 수",
+   "noplan": 1
+  },
+  {
+   "sec": "인력",
+   "t": "정사원 수(부문별)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "emp_food",
+     "l": "식품",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "emp_rest",
+     "l": "외식",
+     "u": "명",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서 종업원 현황",
+   "def": "기말 정사원(집행임원 포함)",
+   "noplan": 1
+  },
+  {
+   "sec": "인력",
+   "t": "임시직 평균 인원",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "tmp_food",
+     "l": "식품",
+     "u": "명",
+     "c": 0
+    },
+    {
+     "k": "tmp_rest",
+     "l": "외식",
+     "u": "명",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서 종업원 현황",
+   "noplan": 1
+  },
+  {
+   "sec": "인력",
+   "t": "식품 정사원 1인당 매출",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "food_per_emp",
+     "l": "1인당 매출",
+     "u": "백만엔",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서",
+   "def": "식품 매출 ÷ 식품 정사원",
+   "noplan": 1
+  },
+  {
+   "sec": "인력",
+   "t": "평균 연간 급여",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "pay",
+     "l": "평균 급여",
+     "u": "만엔",
+     "c": 0
+    }
+   ],
+   "src": "유가증권보고서 종업원 현황"
+  },
+  {
+   "sec": "설비",
+   "t": "설비투자(부문별)",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "capex_food",
+     "l": "식품",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "capex_rest",
+     "l": "외식",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "유가증권보고서 설비투자 개요",
+   "def": "FY3/25~26 식품은 지바공장 화재 복구 중심",
+   "noplan": 1
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 48.65,
+    "op": 4.22,
+    "ord": 4.21,
+    "net": 2.82,
+    "gp": 18.02,
+    "sga": 13.8,
+    "cogs": 30.63,
+    "debt_total": 2.25,
+    "equity": 69.1,
+    "total_assets": 114.07,
+    "inventory": 8.91,
+    "cash": 13.82,
+    "seg_food": null,
+    "seg_rest": null,
+    "segp_food": null,
+    "segp_rest": null,
+    "gpm": 37.0,
+    "opm": 8.7,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "seg_food_yoy": null,
+    "seg_rest_yoy": null,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 36.62,
+    "op": -1.02,
+    "ord": -0.7,
+    "net": -2.89,
+    "gp": 13.14,
+    "sga": 14.16,
+    "cogs": 23.48,
+    "debt_total": 2.1,
+    "equity": 66.32,
+    "total_assets": 107.37,
+    "inventory": 8.46,
+    "cash": 22.57,
+    "seg_food": 29.24,
+    "seg_rest": 7.37,
+    "segp_food": null,
+    "segp_rest": null,
+    "gpm": 35.9,
+    "opm": -2.8,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "seg_food_yoy": null,
+    "seg_rest_yoy": null,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 39.74,
+    "op": 1.5,
+    "ord": 2.53,
+    "net": 2.41,
+    "gp": 14.93,
+    "sga": 13.43,
+    "cogs": 24.81,
+    "debt_total": 1.95,
+    "equity": 67.83,
+    "total_assets": 105.64,
+    "inventory": 10.67,
+    "cash": 15.97,
+    "seg_food": 32.21,
+    "seg_rest": 7.53,
+    "segp_food": 4.56,
+    "segp_rest": 0.36,
+    "gpm": 37.6,
+    "opm": 3.8,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "seg_food_yoy": null,
+    "seg_rest_yoy": null,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 41.64,
+    "op": 2.68,
+    "ord": 3.0,
+    "net": 2.48,
+    "gp": 15.86,
+    "sga": 13.17,
+    "cogs": 25.78,
+    "debt_total": 1.8,
+    "equity": 70.14,
+    "total_assets": 108.8,
+    "inventory": 10.57,
+    "cash": 24.78,
+    "seg_food": 34.27,
+    "seg_rest": 7.38,
+    "segp_food": 4.26,
+    "segp_rest": 1.2,
+    "gpm": 38.1,
+    "opm": 6.4,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "seg_food_yoy": null,
+    "seg_rest_yoy": null,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 42.1,
+    "op": 2.7,
+    "ord": 2.03,
+    "net": -6.22,
+    "gp": 15.46,
+    "sga": 12.76,
+    "cogs": 26.64,
+    "debt_total": 1.65,
+    "equity": 64.06,
+    "total_assets": 109.2,
+    "inventory": 7.52,
+    "cash": 20.6,
+    "seg_food": 33.61,
+    "seg_rest": 8.49,
+    "segp_food": -7.94,
+    "segp_rest": 0.68,
+    "gpm": 36.7,
+    "opm": 6.4,
+    "sales_yoy": -13.5,
+    "gp_yoy": -14.2,
+    "sga_yoy": -7.5,
+    "op_yoy": -36.0,
+    "ord_yoy": -51.8,
+    "net_yoy": -320.6,
+    "inventory_yoy": -15.6,
+    "cash_yoy": 49.1,
+    "seg_food_yoy": null,
+    "seg_rest_yoy": null,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 30.55,
+    "op": -1.27,
+    "ord": -2.17,
+    "net": -2.89,
+    "gp": 10.72,
+    "sga": 12.0,
+    "cogs": 19.83,
+    "debt_total": 1.5,
+    "equity": 61.2,
+    "total_assets": 102.45,
+    "inventory": 7.94,
+    "cash": 27.37,
+    "seg_food": 23.01,
+    "seg_rest": 7.54,
+    "segp_food": -2.82,
+    "segp_rest": 0.3,
+    "gpm": 35.1,
+    "opm": -4.2,
+    "sales_yoy": -16.6,
+    "gp_yoy": -18.4,
+    "sga_yoy": -15.3,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": -6.1,
+    "cash_yoy": 21.3,
+    "seg_food_yoy": -21.3,
+    "seg_rest_yoy": 2.3,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 34.11,
+    "op": 0.49,
+    "ord": 0.14,
+    "net": -0.09,
+    "gp": 12.53,
+    "sga": 12.03,
+    "cogs": 21.58,
+    "debt_total": 1.35,
+    "equity": 59.78,
+    "total_assets": 97.11,
+    "inventory": 8.53,
+    "cash": 19.61,
+    "seg_food": 26.65,
+    "seg_rest": 7.47,
+    "segp_food": 0.91,
+    "segp_rest": 0.36,
+    "gpm": 36.7,
+    "opm": 1.4,
+    "sales_yoy": -14.2,
+    "gp_yoy": -16.1,
+    "sga_yoy": -10.4,
+    "op_yoy": -67.3,
+    "ord_yoy": -94.5,
+    "net_yoy": -103.7,
+    "inventory_yoy": -20.1,
+    "cash_yoy": 22.8,
+    "seg_food_yoy": -17.3,
+    "seg_rest_yoy": -0.8,
+    "segp_food_yoy": -80.0,
+    "segp_rest_yoy": 0.0
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 33.72,
+    "op": 0.15,
+    "ord": -0.16,
+    "net": -0.11,
+    "gp": 12.31,
+    "sga": 12.16,
+    "cogs": 21.41,
+    "debt_total": 1.2,
+    "equity": 59.84,
+    "total_assets": 97.8,
+    "inventory": 9.3,
+    "cash": 13.16,
+    "seg_food": 26.29,
+    "seg_rest": 7.43,
+    "segp_food": 1.37,
+    "segp_rest": 0.5,
+    "gpm": 36.5,
+    "opm": 0.4,
+    "sales_yoy": -19.0,
+    "gp_yoy": -22.4,
+    "sga_yoy": -7.7,
+    "op_yoy": -94.4,
+    "ord_yoy": -105.3,
+    "net_yoy": -104.4,
+    "inventory_yoy": -12.0,
+    "cash_yoy": -46.9,
+    "seg_food_yoy": -23.3,
+    "seg_rest_yoy": 0.7,
+    "segp_food_yoy": -67.8,
+    "segp_rest_yoy": -58.3
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 42.78,
+    "op": 3.44,
+    "ord": 3.53,
+    "net": 2.54,
+    "gp": 16.04,
+    "sga": 12.61,
+    "cogs": 26.74,
+    "debt_total": 6.05,
+    "equity": 62.45,
+    "total_assets": 108.24,
+    "inventory": 8.21,
+    "cash": 13.65,
+    "seg_food": 34.32,
+    "seg_rest": 8.45,
+    "segp_food": 4.27,
+    "segp_rest": 0.85,
+    "gpm": 37.5,
+    "opm": 8.0,
+    "sales_yoy": 1.6,
+    "gp_yoy": 3.8,
+    "sga_yoy": -1.2,
+    "op_yoy": 27.4,
+    "ord_yoy": 73.9,
+    "net_yoy": null,
+    "inventory_yoy": 9.2,
+    "cash_yoy": -33.7,
+    "seg_food_yoy": 2.1,
+    "seg_rest_yoy": -0.5,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": 25.0
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 35.59,
+    "op": 0.22,
+    "ord": 0.24,
+    "net": -0.22,
+    "gp": 13.46,
+    "sga": 13.24,
+    "cogs": 22.13,
+    "debt_total": 0.9,
+    "equity": 62.3,
+    "total_assets": 102.46,
+    "inventory": 9.91,
+    "cash": 17.16,
+    "seg_food": 28.53,
+    "seg_rest": 7.06,
+    "segp_food": 2.31,
+    "segp_rest": -0.21,
+    "gpm": 37.8,
+    "opm": 0.6,
+    "sales_yoy": 16.5,
+    "gp_yoy": 25.6,
+    "sga_yoy": 10.3,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": 24.8,
+    "cash_yoy": -37.3,
+    "seg_food_yoy": 24.0,
+    "seg_rest_yoy": -6.4,
+    "segp_food_yoy": null,
+    "segp_rest_yoy": -170.0
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 39.63,
+    "op": 2.47,
+    "ord": 2.78,
+    "net": 2.06,
+    "gp": 15.15,
+    "sga": 12.68,
+    "cogs": 24.48,
+    "debt_total": 0.75,
+    "equity": 63.53,
+    "total_assets": 103.25,
+    "inventory": 10.7,
+    "cash": 18.35,
+    "seg_food": 32.26,
+    "seg_rest": 7.38,
+    "segp_food": 3.84,
+    "segp_rest": 0.43,
+    "gpm": 38.2,
+    "opm": 6.2,
+    "sales_yoy": 16.2,
+    "gp_yoy": 20.9,
+    "sga_yoy": 5.4,
+    "op_yoy": 404.1,
+    "ord_yoy": 1885.7,
+    "net_yoy": null,
+    "inventory_yoy": 25.4,
+    "cash_yoy": -6.4,
+    "seg_food_yoy": 21.1,
+    "seg_rest_yoy": -1.2,
+    "segp_food_yoy": 322.0,
+    "segp_rest_yoy": 19.4
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 39.29,
+    "op": 1.5,
+    "ord": 1.54,
+    "net": 0.96,
+    "gp": 14.56,
+    "sga": 13.05,
+    "cogs": 24.73,
+    "debt_total": 0.6,
+    "equity": 64.65,
+    "total_assets": 106.09,
+    "inventory": 10.99,
+    "cash": 21.15,
+    "seg_food": 31.81,
+    "seg_rest": 7.47,
+    "segp_food": 2.8,
+    "segp_rest": 0.29,
+    "gpm": 37.1,
+    "opm": 3.8,
+    "sales_yoy": 16.5,
+    "gp_yoy": 18.3,
+    "sga_yoy": 7.3,
+    "op_yoy": 900.0,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": 18.2,
+    "cash_yoy": 60.7,
+    "seg_food_yoy": 21.0,
+    "seg_rest_yoy": 0.5,
+    "segp_food_yoy": 104.4,
+    "segp_rest_yoy": -42.0
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 154.58,
+    "op": 5.38,
+    "ord": 9.98,
+    "net": 6.41,
+    "opm": 3.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 168.93,
+    "op": 4.17,
+    "ord": 5.15,
+    "net": 3.02,
+    "opm": 2.5,
+    "sales_yoy": 9.3,
+    "op_yoy": -22.5,
+    "net_yoy": -52.9
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 177.84,
+    "op": 12.2,
+    "ord": 12.67,
+    "net": 5.99,
+    "opm": 6.9,
+    "sales_yoy": 5.3,
+    "op_yoy": 192.6,
+    "net_yoy": 98.3
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 154.03,
+    "op": 5.61,
+    "ord": 5.39,
+    "net": -4.22,
+    "opm": 3.6,
+    "sales_yoy": -13.4,
+    "op_yoy": -54.0,
+    "net_yoy": -170.5
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 146.2,
+    "op": 4.3,
+    "ord": 3.75,
+    "net": 2.12,
+    "opm": 2.9,
+    "sales_yoy": -5.1,
+    "op_yoy": -23.4,
+    "net_yoy": null
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 160.0,
+    "op": 7.0,
+    "ord": 7.0,
+    "net": 7.0,
+    "opm": 4.4,
+    "sales_yoy": 9.4,
+    "op_yoy": 62.8,
+    "net_yoy": 230.2,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "ba": [
+   {
+    "x": "2023",
+    "food": null,
+    "rest": null,
+    "production": null,
+    "production_yoy": null,
+    "stores": null,
+    "opened": null,
+    "closed": null,
+    "access": 23.01,
+    "access_pct": 13.6,
+    "domino_pct": 10.8,
+    "emp_food": null,
+    "emp_rest": null,
+    "tmp_food": null,
+    "tmp_rest": null,
+    "pay": null,
+    "capex_food": null,
+    "capex_rest": null,
+    "rest_per_store": null,
+    "food_per_emp": null,
+    "prod_ratio": null
+   },
+   {
+    "x": "2024",
+    "food": 147.5,
+    "rest": 30.34,
+    "production": 84.16,
+    "production_yoy": -2.6,
+    "stores": 45,
+    "opened": null,
+    "closed": null,
+    "access": 23.36,
+    "access_pct": 13.1,
+    "domino_pct": 6.0,
+    "emp_food": 158,
+    "emp_rest": 74,
+    "tmp_food": 483,
+    "tmp_rest": 226,
+    "pay": 506.1,
+    "capex_food": 2.4,
+    "capex_rest": 0.92,
+    "rest_per_store": 67.4,
+    "food_per_emp": 93.4,
+    "prod_ratio": 57.1
+   },
+   {
+    "x": "2025",
+    "food": 123.1,
+    "rest": 30.94,
+    "production": 72.25,
+    "production_yoy": -14.2,
+    "stores": 44,
+    "opened": 6,
+    "closed": 1,
+    "access": 18.93,
+    "access_pct": 12.3,
+    "domino_pct": null,
+    "emp_food": 163,
+    "emp_rest": 71,
+    "tmp_food": 443,
+    "tmp_rest": 230,
+    "pay": 526.6,
+    "capex_food": 4.13,
+    "capex_rest": 0.41,
+    "rest_per_store": 70.3,
+    "food_per_emp": 75.5,
+    "prod_ratio": 58.7
+   },
+   {
+    "x": "2026",
+    "food": 115.79,
+    "rest": 30.41,
+    "production": 67.95,
+    "production_yoy": -5.9,
+    "stores": 42,
+    "opened": 3,
+    "closed": 10,
+    "access": 15.51,
+    "access_pct": 10.6,
+    "domino_pct": null,
+    "emp_food": 157,
+    "emp_rest": 68,
+    "tmp_food": 443,
+    "tmp_rest": 222,
+    "pay": 544.9,
+    "capex_food": 7.45,
+    "capex_rest": 0.22,
+    "rest_per_store": 72.4,
+    "food_per_emp": 73.8,
+    "prod_ratio": 58.7
+   }
+  ]
+ }
+}
