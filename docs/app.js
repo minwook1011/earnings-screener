@@ -24,7 +24,7 @@
   var NOTE = {
     1: "텔레그램 1단계 카드에 올라온 회사를 이름과 티커만 모았습니다. 누르면 주가와 실적이 열립니다. 텔레그램 1단계 카드에서 [볼 후보]를 누르면 2단계로 올라갑니다.",
     2: "텔레 2단계에 올라온 회사마다 실적 브리프를 바로 써서 붙입니다(3·4단계로 간 회사도 여기 남음). 둘째 줄은 최근 10개 분기의 매출액·영업이익(억엔)과 YoY(전년 같은 분기 대비 %)입니다. 분기 이름 위 노란 '인수' = 그 분기부터 인수한 회사가 실적에 더해짐.",
-    3: "텔레 3단계로 간 회사 기록입니다. 리포트는 2단계 실적 브리프를 봅니다.",
+    3: "텔레 3단계로 간 회사와 팀 대시보드 3단계 종목(오프라인 스터디 탭과 같은 목록)입니다. 리포트는 2단계 실적 브리프를 봅니다.",
     4: "텔레 4단계로 간 회사 기록입니다. 다 같이 보고 살지 말지 정합니다."
   };
   var EMPTY = {
@@ -79,6 +79,19 @@
         o.tn = o.n;
       }
       if (o.stage < 2) o.stage = 2;
+    });
+    /* 팀 대시보드 3단계 종목(data/jp/study.json)을 3단계 탭으로(2026-11-16 사용자) — 사이트에 없던 회사는 새로 만든다 */
+    ((S.study || {}).items || []).forEach(function (x) {
+      var o = cos[x.c];
+      if (!o) {
+        var v = vt[x.c] || {}, sx = ((S.scr || {}).items || {})[x.c] || {}, q = ((S.qy || {})[x.c] || []).slice(-1)[0] || {};
+        o = cos[x.c] = Object.assign({}, v, { c: x.c, n: x.n, d: v.d || (x.pub || "").slice(0, 10) || null, stage: 3, card: {}, pre: false,
+          mc: v.mc != null ? v.mc : sx.mc, per: v.per != null ? v.per : sx.per, rev: v.rev != null ? v.rev : q.r, op: v.op != null ? v.op : q.o, bm: x.bm || "" });
+        o.tn = o.n;
+      }
+      if (!(o.stage >= 3)) o.stage = 3;
+      if (!o.by) o.by = x.by || null;
+      o.study = x;
     });
     Object.keys(cos).forEach(function (c) { var o = cos[c]; o.res = (res.items || {})[c] || {}; o.up = o.lens ? o.lens.up : null; });
     return cos;
@@ -1653,8 +1666,10 @@
     getJSON("data/jp/ircall.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/scr.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/px/index.json").catch(function () { return { items: {} }; }),
-    getJSON("data/jp/pdf.json").catch(function () { return { items: {} }; })
+    getJSON("data/jp/pdf.json").catch(function () { return { items: {} }; }),
+    getJSON("data/jp/study.json").catch(function () { return { items: [] }; })
   ]).then(function (r) {
+    S.study = r[14];
     S.scr = r[11]; S.px = r[12]; S.pdf = r[13]; S.s1rows = {}; (r[0].rows || []).forEach(function (x) { S.s1rows[x.c] = x; });
     S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.irc = r[10]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
