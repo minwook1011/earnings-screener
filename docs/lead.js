@@ -381,7 +381,6 @@
         else el("rect", { x: x(i) - bwr / 2, y: y1(p[1]), width: bwr, height: y1(lo) - y1(p[1]), rx: Math.min(4, bwr / 4), fill: "url(#gLI)", "class": "grow" }, gB);
         var prev = mm(it)[ymAdd(m, -1)], yy = mm(it)[ymAdd(m, -12)];
         txt(gT, x(i), y1(p[1]) - 6, nf(p[1]), "ibar-lab fade", "middle");
-        if (yy) { var yv1 = (p[1] / yy[1] - 1) * 100; txt(gT, x(i), y1(p[1]) - 19, pct(yv1, 1), "mom " + ud(yv1) + " fade", "middle"); }
         hits.push({ a: i, b: i, up: 1, h: "<h5>" + ymLab(m) + " 무렵<span>" + esc(it.short) + "</span></h5>" + row("가입자 수", nf(p[1]) + "명", "ind") + (prev ? row("전월 대비", sgn(p[1] - prev[1]) + "명") : "") + (yy ? row("전년 대비", pct((p[1] / yy[1] - 1) * 100)) : "") +
           (p[3] && it.stack ? "<hr>" + it.stack.map(function (sk) { return row(sk[1], nf(p[3][sk[0]]) + "명"); }).join("") : "") + "<hr>" + row("분기", q + " (" + qMonths(co, q) + ")") + row("출처", esc(co.refs[p[2]] ? co.refs[p[2]].t.split(" — ")[0] : p[2])) });
       } else if (m > last) {
@@ -393,6 +392,16 @@
       } else hits.push({ a: i, b: i, up: 1, h: "<h5>" + ymLab(m) + "<span>기록 전</span></h5>" + row(it.short, "이 달부터 쌓는 중 아님") });
       if (n <= 18 || i % 2 === 0) txt(ga, x(i), H - 6, ymLab(m), null, "middle");
     });
+
+    // 가입자 YoY — 월 막대 위에 겹친 꺾은선(l1, 2026-11-16 사용자: 절댓값 막대엔 웬만하면 YoY 를 같이)
+    var iy = months.map(function (m, i) { var p = mm(it)[m], b = mm(it)[ymAdd(m, -12)]; return p && b ? { x: x(i), v: (p[1] / b[1] - 1) * 100 } : null; }).filter(Boolean);
+    if (iy.length) {
+      var iv = iy.map(function (d) { return d.v; }), ilo = Math.min.apply(null, iv.concat([0])), ihi = Math.max.apply(null, iv.concat([1])) * 1.1;
+      var y4 = function (v) { return top + 12 + (1 - (v - ilo) / ((ihi - ilo) || 1)) * (h1 * 0.3); };
+      var gi4 = el("g", {}, svg);
+      if (iy.length > 1) el("path", { d: iy.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y4(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--l1)", "stroke-width": 2, "class": "draw" }, gi4);
+      iy.forEach(function (d) { el("circle", { cx: d.x, cy: y4(d.v), r: 4, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 2, "class": "fade" }, gi4); txt(gi4, d.x, y4(d.v) - 8, pct(d.v, 1), "ibar-lab cs fade", "middle"); });
+    } else txt(gT, pL + 8, top + 8, "가입자 YoY: 1년 전 값이 쌓이면 표시", "apr", "start");
 
     // 아래: 분기 매출(회사 발표 결과) + 이번 분기 추정
     var sv2 = Qs.map(function (Q) { return sv(co, "sales", Q.q); }).filter(function (v) { return v != null; });
@@ -439,7 +448,7 @@
     host.innerHTML = ""; host.appendChild(svg);
     if (anim) animate(svg);
     document.getElementById("llg").innerHTML = (it.stack ? it.stack.map(function (sk, j) { return '<span><i class="lg-s' + j + '"></i>' + esc(sk[1]) + "</span>"; }).join("") : '<span><i class="lg-ind"></i>' + esc(it.short) + " (월)</span>") +
-      '<span><i class="lg-ghost"></i>미발표 달</span><span><b class="lg-pct">+%</b>막대 위 = 전년 같은 달 대비</span><span><i class="lg-ys"></i>매출 YoY(막대 위 겹침)</span><span><i class="lg-sales"></i>분기 매출(회사 발표 결과)</span>' + (main1 ? '<span><i class="lg-est2"></i>이번 분기 매출 추정(가입자 기준)</span>' : "") + (co.consensus ? '<span><i class="lg-cs"></i>컨센서스</span>' : "");
+      '<span><i class="lg-ghost"></i>미발표 달</span><span><i class="lg-l1"></i>가입자 YoY · 매출 YoY(각 막대 위 겹침)</span><span><i class="lg-sales"></i>분기 매출(회사 발표 결과)</span>' + (main1 ? '<span><i class="lg-est2"></i>이번 분기 매출 추정(가입자 기준)</span>' : "") + (co.consensus ? '<span><i class="lg-cs"></i>컨센서스</span>' : "");
     drawStats(co, it, s);
   }
 
@@ -578,6 +587,13 @@
         el("rect", { x: cx - bw / 2, y: bandBot - h, width: bw, height: h, rx: Math.min(3, bw / 4), "class": "ibar grow" }, L.ind);
         if (cx > pL + 16 && cx < pL + IW - 12 && (shown.length <= 16 || i % 2 === shown.length % 2 || i === shown.length - 1)) txt(L.lab, cx, bandBot - h - 5, nf(p[1]), "ibar-lab fade", "middle");
       });
+      var py = shown.map(function (p) { var b = mm(it)[ymAdd(p[0], -12)]; return b ? { x: x(ymT(p[0])), v: (p[1] / b[1] - 1) * 100 } : null; }).filter(Boolean);
+      if (py.length) {
+        var pv = py.map(function (d) { return d.v; }), plo = Math.min.apply(null, pv.concat([0])), phi = Math.max.apply(null, pv.concat([1])) * 1.1;
+        var y5 = function (v) { return bandTop + 6 + (1 - (v - plo) / ((phi - plo) || 1)) * (bandBot - bandTop) * 0.3; };
+        if (py.length > 1) el("path", { d: py.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y5(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--l1)", "stroke-width": 1.8 }, L.lab);
+        py.forEach(function (d) { el("circle", { cx: d.x, cy: y5(d.v), r: 3.5, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 1.5 }, L.lab); txt(L.lab, d.x, y5(d.v) - 7, pct(d.v, 0), "ibar-lab cs", "middle"); });
+      }
       var ny = ymAdd(it.pts[it.pts.length - 1][0], 1), nt = ymT(ny);
       if (nt >= from && nt <= xEnd) { var gh = Math.max(8, bh(it.pts[it.pts.length - 1][1])), cx2 = x(nt); el("rect", { x: cx2 - bw / 2, y: bandBot - gh, width: bw, height: gh, rx: 3, fill: "none", stroke: "var(--gold)", "stroke-dasharray": "3 2" }, L.ind); if (bw > 14) { txt(L.lab, cx2, bandBot - gh + 14, md(nlead).slice(3), "ibar-lab cs", "middle"); } }
     }

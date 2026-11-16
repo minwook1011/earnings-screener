@@ -11,12 +11,15 @@
 
   python tools/lead_update.py            전부
   python tools/lead_update.py 6088 9168  일부
+  python tools/lead_update.py --push     갱신 뒤 사이트로 올림(작업 스케줄러 매일 실행 — 연금기구 값은 갱신일이 바뀐 날만 새로 조회)
+  --force  같은 달 값이 있어도 다시 조회
 """
 import datetime as dt
 import json
 import os
 import re
 import sys
+import subprocess
 import time
 
 import requests
@@ -93,7 +96,7 @@ def px(s, code):
     for i, t in enumerate(r["timestamp"]):
         if q["close"][i] is None:
             continue
-        d = dt.datetime.utcfromtimestamp(t + 9 * 3600).date().isoformat()
+        d = dt.datetime.fromtimestamp(t + 9 * 3600, dt.timezone.utc).date().isoformat()
         rows.append([d] + [round(q[k][i], 1) if q[k][i] is not None else None for k in ("open", "high", "low", "close")] + [int(q["volume"][i] or 0)])
     with open(p, "w", encoding="utf-8") as f:
         f.write("[\n" + ",\n".join(json.dumps(x, ensure_ascii=False) for x in rows) + "\n]\n")
@@ -112,8 +115,13 @@ def put(pts, ym, v, ref, extra=None):
     pts.sort(key=lambda p: p[0])
 
 
+FORCE = False
+
+
 def main():
-    only = set(sys.argv[1:])
+    global FORCE
+    FORCE = "--force" in sys.argv
+    only = {a for a in sys.argv[1:] if not a.startswith("--")}
     idx = json.load(open(os.path.join(LEAD, "index.json"), encoding="utf-8"))
     codes = [c for c in idx["cos"] if not only or c in only]
     s = requests.Session()
@@ -133,7 +141,7 @@ def main():
                 for m, v in zip(months, lks[it["lk"]]):
                     if v is not None:
                         put(it["pts"], m, v, "lk")
-            if it.get("nenkin"):
+            if it.get("nenkin") and (FORCE or not any(p[0] == ym and p[2] == "nk" for p in it["pts"])):
                 parts = {}
                 for h in it["nenkin"]:
                     parts[h] = nk_lookup(s, h)
@@ -158,6 +166,9 @@ def main():
             pr = f"실패 {e}"
         last = [it["pts"][-1][:2] for it in d["lead"]["items"]]
         print(f"  {c} {d['n']} 지표 {last} · 주가 {pr}")
+    if "--push" in sys.argv:
+        paths = ["docs/data/jp/lead"] + [f"docs/data/jp/px/{c}.json" for c in codes if os.path.exists(os.path.join(PX, f"{c}.json"))]
+        subprocess.run([sys.executable, os.path.join(ROOT, "tools", "gpush.py"), f"data: 선행지표 갱신 {dt.date.today()}"] + paths, cwd=ROOT)
 
 
 if __name__ == "__main__":
