@@ -260,6 +260,11 @@
   }
   /* 메모 — 2단계 목록 시총·PER 아래 작은 글씨 메모 칸, 이 브라우저에 저장(es-memo, 2026-11-12 사용자) */
   var MEMO = load("es-memo");
+  (function () {   // 오프라인 스터디 내 코멘트를 2단계 메모와 한 칸으로(2026-11-16 사용자) — 따로 쓴 "o:<코드>" 는 합쳐 옮김
+    var ch = false;
+    Object.keys(MEMO).forEach(function (k) { if (k.indexOf("o:") !== 0) return; var c = k.slice(2); MEMO[c] = MEMO[c] ? MEMO[c] + "<br>" + MEMO[k] : MEMO[k]; delete MEMO[k]; ch = true; });
+    if (ch) try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
+  })();
   (function memoBackup() {   // 메모 날짜별 사본(es-memo-bak-YYYY-MM-DD, 최근 14일) — 사라져도 되살릴 수 있게(2026-11-15 사용자)
     try {
       var raw = localStorage.getItem("es-memo"); if (!raw || raw === "{}") return;
@@ -1242,7 +1247,7 @@
         return '<button data-v="' + o[0] + '" aria-pressed="' + (key === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div></div>" +
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커 · 섹터 · 담당" value="' + esc(S.q) + '"></div>' +
       '<div class="count">팀 대시보드 ' + esc(S.study.updated || "") + " 기준 · <b>" + rows.length + "</b>개 기업</div></div>" +
-      '<p class="stage-note">팀 대시보드 3단계에 올라온 회사입니다. 맨 앞 칸이 팀 점수(평균)와 코멘트, 1·2·3·4는 내 분류(2단계와 같이 저장, 1부터 위로), 아래 칸은 내 코멘트(이 브라우저에 저장)입니다. 이름을 누르면 재무·주가가 열립니다.</p>';
+      '<p class="stage-note">팀 대시보드 3단계에 올라온 회사입니다. 맨 앞 칸이 팀 점수(평균)와 코멘트, 1·2·3·4는 내 분류(2단계와 같이 저장, 1부터 위로), 아래 칸은 내 코멘트(2단계 목록 메모와 같은 칸 — 어느 쪽에 써도 양쪽에 보임)입니다. 이름을 누르면 재무·주가가 열립니다.</p>';
     if (!rows.length) return ctl + '<div class="empty">' + (q ? "검색과 맞는 기업이 없습니다." : "가져온 종목이 없습니다.") + "</div>";
     function scoreCls(v) { return v == null ? "" : v >= 7 ? " hi" : v >= 5 ? " mid" : " lo"; }
     function cms(x) {
@@ -1274,7 +1279,7 @@
         ((x.lb || []).length ? '<div class="st-lb">' + x.lb.map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join("") + "</div>" : "") +
         (links.length ? '<div class="st-lb">' + links.join("") + "</div>" : "") +
         (S.qy[x.c] && S.qy[x.c].length ? '<div class="st-q">' + qline(x.c) + "</div>" : "") +
-        '<div class="st-my"><span class="st-myh">내 코멘트</span>' + memoBox("o:" + x.c) + "</div></div></article>";
+        '<div class="st-my"><span class="st-myh">내 코멘트</span>' + memoBox(x.c) + "</div></div></article>";
     }).join("") + "</div>";
   }
   function body() { return S.mode === "jps" ? scrView() : S.stage === 1 ? stage1() : S.stage === "m" ? moView() : S.stage === "o" ? studyView() : stageN(S.stage); }
