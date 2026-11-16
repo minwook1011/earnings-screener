@@ -123,6 +123,11 @@
    "date": "2026-11-04",
    "t": "100억 사이트 — 연금기구 피보험자 기록(headcount.json)",
    "url": "https://raw.githubusercontent.com/minwook1011/vantage-0910/main/docs/data/tracking/headcount.json"
+  },
+  "nk": {
+   "date": "2026-11-04",
+   "t": "일본연금기구 厚生年金保険・健康保険 適用事業所検索(법인번호 직접 조회)",
+   "url": "https://www.nenkin.go.jp/do/search_section/"
   }
  },
  "series": {
@@ -644,7 +649,7 @@
   "next": {
    "date": "2026-12-02",
    "basis": "2026-11-20",
-   "note": "일본연금기구 데이터 갱신일(매달 둘째 영업일 무렵) — 11월 20일 무렵 기준 값이 나옴"
+   "note": "일본연금기구 데이터 갱신일(매달 둘째 영업일 무렵) — 그 전달 20일 무렵 기준 값이 나옴"
   },
   "items": [
    {
@@ -742,6 +747,10 @@
       "auto": "자동",
       "how": "100억 fetch_headcount.py 가 갱신일마다 법인번호로 조회·기록 → 이 원장으로 옮김"
      }
+    ],
+    "lk": "baycurrent",
+    "nenkin": [
+     "2010401180207"
     ]
    },
    {
@@ -796,6 +805,11 @@
       "auto": "자동",
       "how": "100억 fetch_headcount.py 가 갱신일마다 법인번호로 조회·기록 → 이 원장으로 옮김"
      }
+    ],
+    "nenkin": [
+     "2010401180207",
+     "1010401180208",
+     "7010401111553"
     ]
    }
   ]

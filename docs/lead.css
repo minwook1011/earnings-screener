@@ -237,10 +237,10 @@ a.chip:hover { border-color: var(--acc); color: var(--ink); }
 .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-3); margin-top: 12px; align-items: center; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { display: inline-block; width: 12px; height: 8px; border-radius: 2px; }
-.lg-up { background: var(--up); } .lg-dn { background: var(--down); } .lg-ind { background: var(--ind); } .lg-est { background: repeating-linear-gradient(135deg, var(--ind) 0 2px, transparent 2px 4px); outline: 1px solid var(--ind); }
+.lg-up { background: var(--up); } .lg-dn { background: var(--down); } .lg-ind { background: var(--b1); } .lg-est { background: repeating-linear-gradient(135deg, var(--ind) 0 2px, transparent 2px 4px); outline: 1px solid var(--ind); }
 .lg-rel { width: 2px !important; height: 12px !important; background: var(--gold); }
 .lg-line { height: 2px !important; background: var(--acc-2); }
-.lg-sales { background: var(--acc); }
+.lg-sales { background: var(--b2); }
 .nav-wrap { margin-top: 6px; }
 .hint { font-size: 11.5px; color: var(--ink-4); margin-top: 8px; }
 
@@ -467,8 +467,8 @@ a.chip:hover { border-color: var(--acc); color: var(--ink); }
 .sub-ax { fill: var(--ink-3) !important; font: 600 10px "Pretendard Variable", sans-serif !important; }
 .ibar-lab.est2 { fill: var(--acc-2); }
 .lg-ghost { background: transparent; outline: 1px dashed var(--gold); }
-.lg-est2 { background: repeating-linear-gradient(135deg, var(--acc) 0 2px, transparent 2px 4px); outline: 1px solid var(--acc); }
-.lg-s0 { background: var(--ind); } .lg-s1 { background: var(--acc); } .lg-s2 { background: var(--gold); }
+.lg-est2 { background: repeating-linear-gradient(135deg, var(--b2) 0 2px, transparent 2px 4px); outline: 1px solid var(--b2); }
+.lg-s0 { background: var(--b1); } .lg-s1 { background: var(--b2); } .lg-s2 { background: var(--b3); }
 .qv.ind-next { background: linear-gradient(135deg, var(--ind-soft), transparent), var(--panel-2); border-color: var(--ind-fade); }
 .qv.ind-next b { color: var(--ind-2); }
 .qv.ind-next small { display: block; margin: 2px 0 0; }
@@ -499,5 +499,22 @@ a.chip:hover { border-color: var(--acc); color: var(--ink); }
 @media (max-width: 1100px) { .lead-grid { grid-template-columns: 1fr; } .lstats { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
 
 .lg-yi { height: 3px !important; background: var(--ind); border-radius: 2px; }
-.lg-ys { height: 3px !important; background: var(--acc-2); border-radius: 2px; }
+.lg-ys { height: 3px !important; background: var(--l1); border-radius: 2px; }
 .ibar-lab.indl { fill: var(--ind-2); }
+.lg-pct { color: var(--up); font: 600 11px "IBM Plex Mono", monospace; }
+.ibar-lab.in { fill: var(--ink); }
+.lg-cs { height: 0 !important; border-top: 2px dashed var(--ink); background: none !important; }
+
+/* ===== 차트 색 순서(2026-11-16 사용자) — 한 그래프 안에서 큰 계열(예: BM 비중 높은 순)부터 1, 2, 3 … 을 쓴다.
+ * 막대(절댓값) b1~b10, 꺾은선(YoY·비율) l1~l10. 매출 하나만 나오면 b1, YoY 하나면 l1. 사이트 전체에서 같은 순서. */
+:root, :root[data-theme="dark"] {
+  --b1: #22b07f; --b2: #9085e9; --b3: #4fa3e0; --b4: #e8955a; --b5: #e07aa5; --b6: #d9c35a; --b7: #7d8fb3; --b8: #3cc4c4; --b9: #c4795d; --b10: #8fb35a;
+  --l1: #e6b23c; --l2: #3fc98a; --l3: #5b9bf0; --l4: #ef5f67; --l5: #b48cf2; --l6: #3cc4c4; --l7: #9aa3b5; --l8: #f28c38; --l9: #a8d04a; --l10: #e66fc2;
+}
+:root[data-theme="light"] {
+  --b1: #12976a; --b2: #6250d6; --b3: #2a7fc4; --b4: #d27330; --b5: #c9558a; --b6: #b39a1e; --b7: #5d6f96; --b8: #149b9b; --b9: #a5583b; --b10: #6d9130;
+  --l1: #c48a0c; --l2: #18915a; --l3: #2f6fd8; --l4: #e0434a; --l5: #8a5bd6; --l6: #128f8f; --l7: #66718a; --l8: #d86a14; --l9: #7ea320; --l10: #c4459f;
+}
+.lg-b1 { background: var(--b1); } .lg-b2 { background: var(--b2); } .lg-b3 { background: var(--b3); }
+.lg-l1 { height: 3px !important; background: var(--l1); border-radius: 2px; }
+.rep.none { opacity: .7; } .rep.none .ic { background: var(--panel-3); color: var(--ink-3); }

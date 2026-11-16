@@ -3,32 +3,168 @@
   "note": "선행지표 탭 섹터 트리. 회사 파일은 data/jp/lead/<코드>.json, 주가는 data/jp/px/<코드>.json(build_px.py 가 매일 갱신).",
   "tree": [
     {
-      "id": "it", "n": "IT·서비스", "en": "IT SERVICES",
+      "id": "it",
+      "n": "IT·서비스",
+      "en": "IT SERVICES",
       "kids": [
-        { "id": "consult", "n": "컨설팅 · 인력형 DX/AI", "desc": "매출 = 컨설턴트 수 × 1인당 매출. 분기말 인원이 다음 분기 매출의 바닥을 먼저 보여 준다.", "cos": ["6532", "446A"] },
-        { "id": "si", "n": "SI · 테스트", "desc": "", "cos": [], "soon": true },
-        { "id": "saas", "n": "SaaS · 인터넷", "desc": "", "cos": [], "soon": true }
+        {
+          "id": "consult",
+          "n": "컨설팅 · 인력형 DX/AI",
+          "desc": "대기업 프로젝트에 컨설턴트를 상주시키고 인원 × 단가로 버는 회사. 매달 공개되는 연금 가입자 수가 매출을 먼저 보여 준다.",
+          "cos": [
+            "6532",
+            "446A",
+            "6088",
+            "7033",
+            "6560",
+            "9168",
+            "9225"
+          ]
+        },
+        {
+          "id": "freelance",
+          "n": "컨설팅 · 프리랜서 매칭형",
+          "desc": "INTLOOP 등 — 외부 프리랜서를 쓰므로 연금 가입자 대신 다른 선행지표가 필요",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "strategy",
+          "n": "전략 컨설팅",
+          "desc": "글로빙 · 리브 컨설팅 · 드림 인큐베이터",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "sme",
+          "n": "중소기업 경영 컨설팅",
+          "desc": "후나이 총연 · 다나베 컨설팅",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "mna",
+          "n": "M&A · 재무 자문",
+          "desc": "프론티어 매니지먼트 · 야마다 컨설팅",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "fee",
+          "n": "성과보수형 비용 절감",
+          "desc": "프로레드 파트너즈",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "think",
+          "n": "싱크탱크 · SI",
+          "desc": "노무라총연 · 미쓰비시총연",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "si",
+          "n": "SI · 테스트",
+          "desc": "",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "saas",
+          "n": "SaaS · 인터넷",
+          "desc": "",
+          "cos": [],
+          "soon": true
+        }
       ]
     },
     {
-      "id": "semi", "n": "반도체", "en": "SEMICONDUCTOR",
+      "id": "semi",
+      "n": "반도체",
+      "en": "SEMICONDUCTOR",
       "kids": [
-        { "id": "optic", "n": "광", "cos": [], "soon": true },
-        { "id": "mat", "n": "소재", "cos": [], "soon": true },
-        { "id": "sub", "n": "기판", "cos": [], "soon": true },
-        { "id": "equip", "n": "장비", "cos": [], "soon": true }
+        {
+          "id": "optic",
+          "n": "광",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "mat",
+          "n": "소재",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "sub",
+          "n": "기판",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "equip",
+          "n": "장비",
+          "cos": [],
+          "soon": true
+        }
       ]
     },
     {
-      "id": "cons", "n": "소비재", "en": "CONSUMER",
+      "id": "cons",
+      "n": "소비재",
+      "en": "CONSUMER",
       "kids": [
-        { "id": "retail", "n": "소매 · 월차", "cos": [], "soon": true },
-        { "id": "food", "n": "외식", "cos": [], "soon": true }
+        {
+          "id": "retail",
+          "n": "소매 · 월차",
+          "cos": [],
+          "soon": true
+        },
+        {
+          "id": "food",
+          "n": "외식",
+          "cos": [],
+          "soon": true
+        }
       ]
     }
   ],
   "cos": {
-    "6532": { "n": "베이커런트", "jp": "ベイカレント", "sec": "it/consult" },
-    "446A": { "n": "노스샌드", "jp": "ノースサンド", "sec": "it/consult" }
+    "6532": {
+      "n": "베이커런트",
+      "jp": "ベイカレント",
+      "sec": "it/consult"
+    },
+    "446A": {
+      "n": "노스샌드",
+      "jp": "ノースサンド",
+      "sec": "it/consult"
+    },
+    "6088": {
+      "n": "시그마크시스",
+      "jp": "シグマクシス・ホールディングス",
+      "sec": "it/consult"
+    },
+    "9168": {
+      "n": "라이즈 컨설팅 그룹",
+      "jp": "ライズ・コンサルティング・グループ",
+      "sec": "it/consult"
+    },
+    "7033": {
+      "n": "매니지먼트 솔루션즈",
+      "jp": "マネジメントソリューションズ",
+      "sec": "it/consult"
+    },
+    "6560": {
+      "n": "엘티에스",
+      "jp": "エル・ティー・エス",
+      "sec": "it/consult"
+    },
+    "9225": {
+      "n": "브리지 컨설팅 그룹",
+      "jp": "ブリッジコンサルティンググループ",
+      "sec": "it/consult"
+    }
   }
 }
