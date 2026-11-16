@@ -803,7 +803,7 @@
         if (co.lead.items.some(function (x) { return x.id === "m" + i; })) return;
         var useY = n.at.yoy && se.yoy && se.yoy.length;
         if (d.next) { var nx = /(\d{4}-\d{2}-\d{2})/.exec(d.next); if (nx && dday(nx[1]) >= 0 && (!co._lnx || nx[1] < co._lnx)) co._lnx = nx[1]; }
-        co.lead.items.push({ id: "m" + i, rank: n.m.rank, kind: "macro", t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (se.name || d.name).slice(0, 16) + (useY ? " YoY" : ""), nm: (se.name || d.name).slice(0, 14), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
+        co.lead.items.push({ id: "m" + i, rank: n.m.rank, kind: "macro", t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (n.m.name || se.name || d.name).slice(0, 26) + (useY ? " YoY" : ""), nm: (n.m.name || se.name || d.name).slice(0, 18), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
           pts: (useY ? se.yoy : se.pts).filter(function (p) { return p && p[1] != null; }).map(function (p) { return [p[0], p[1], "mc"]; }), src: [{ doc: d.src || d.name, where: (se.name || "") + " · " + (d.url || ""), freq: d.freq || "월", auto: "반자동", how: "공용 시장 통계 data/jp/lead/macro/" + n.at.file + " — 다음 공표 " + (d.next || "") }] });
         co.refs.mc = { date: "", t: d.src || d.name, url: d.url || "" };
       });

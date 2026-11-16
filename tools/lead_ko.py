@@ -6,6 +6,7 @@ LEAD = os.path.join(ROOT, "docs", "data", "jp", "lead")
 MAC = os.path.join(LEAD, "macro")
 MON = os.path.join(ROOT, "docs", "data", "jp", "monthly")
 KO = json.load(open(os.path.join(ROOT, "tools", "lead_ko.json"), encoding="utf-8"))
+GEN = {"합계", "전세계", "전체", "계", "총계", "total", "금액", "수출액", "수입액", "value"}
 JP = re.compile("[぀-ヿ一-鿿]")
 
 
@@ -22,7 +23,14 @@ def tr(s):
         return tr(s2)
     if " — " in s:
         parts = [tr(p) for p in s.split(" — ")]
-        return parts[-1] if not JP.search(parts[-1]) else " — ".join(parts)
+        if JP.search(parts[-1]):
+            return " — ".join(parts)
+        last, first = parts[-1], re.sub(r"\(.*?\)", "", parts[0]).strip()
+        if last in GEN or last in first:
+            return first
+        if len(last) <= 5 or last.endswith("행") or last.endswith("산"):
+            return "%s(%s)" % (first, last)
+        return last
     return s
 
 
@@ -38,6 +46,40 @@ for f in glob.glob(os.path.join(MAC, "*.json")):
     for s in d.get("series") or []:
         s["name"] = tr(s.get("name"))
     dump(f, d)
+
+AL = json.load(open(os.path.join(MAC, "index.json"), encoding="utf-8"))["alias"]
+_mc = {}
+
+
+def mfile(fn):
+    if fn not in _mc:
+        _mc[fn] = json.load(open(os.path.join(MAC, fn), encoding="utf-8"))
+    return _mc[fn]
+
+
+def label(mid):
+    """공용 통계 표시 이름 — 시리즈 이름만으로 뜻이 서면 그것, 아니면 「파일: 시리즈」"""
+    a = AL.get(mid)
+    if not a:
+        return None
+    d = mfile(a["file"])
+    se = [x for x in d.get("series") or [] if x.get("key") == a["key"]]
+    F = tr(d.get("name") or "")
+    S = tr(se[0].get("name") or "") if se else ""
+    F0 = re.sub(r"\(.*?\)", "", F).strip()
+    if not S or S in GEN or S == F or S in F0:
+        return F0 or F
+    if ":" in S:
+        return S
+    if F0.endswith("기종별") or F0 == "기종별":
+        return "기계 수주: " + S
+    if len(S) <= 5 or S.endswith("행") or S.endswith("산"):
+        return "%s(%s)" % (F0, S)
+    tri = lambda t: {t[i:i + 3] for i in range(len(t) - 2)}
+    if tri(S) & tri(F0):
+        return S
+    return "%s: %s" % (F0, S)
+
 
 left = set()
 for f in glob.glob(os.path.join(LEAD, "*.json")):
@@ -57,8 +99,12 @@ for f in glob.glob(os.path.join(LEAD, "*.json")):
         elif it.get("short"):
             names.append(it["short"])
     for m in co["lead"].get("macro") or []:
-        m["name"] = tr(m.get("name"))
-        names.append("구글트렌드(브랜드)" if m["name"].startswith("구글트렌드") else m["name"])
+        lb = label(m.get("id"))
+        m["name"] = lb or tr(m.get("name"))
+        if m["name"].startswith("구글트렌드") or str(m.get("id", "")).startswith("gt:"):
+            names.append("구글트렌드(브랜드)")
+        elif lb:   # 데이터 있는 것만 핵심지표에
+            names.append(lb)
     for n in names:
         if n and JP.search(n):
             left.add(n)
