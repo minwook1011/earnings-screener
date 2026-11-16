@@ -1,0 +1,34 @@
+{
+  "updated": "2026-11-16",
+  "note": "선행지표 탭 섹터 트리. 회사 파일은 data/jp/lead/<코드>.json, 주가는 data/jp/px/<코드>.json(build_px.py 가 매일 갱신).",
+  "tree": [
+    {
+      "id": "it", "n": "IT·서비스", "en": "IT SERVICES",
+      "kids": [
+        { "id": "consult", "n": "컨설팅 · 인력형 DX/AI", "desc": "매출 = 컨설턴트 수 × 1인당 매출. 분기말 인원이 다음 분기 매출의 바닥을 먼저 보여 준다.", "cos": ["6532", "446A"] },
+        { "id": "si", "n": "SI · 테스트", "desc": "", "cos": [], "soon": true },
+        { "id": "saas", "n": "SaaS · 인터넷", "desc": "", "cos": [], "soon": true }
+      ]
+    },
+    {
+      "id": "semi", "n": "반도체", "en": "SEMICONDUCTOR",
+      "kids": [
+        { "id": "optic", "n": "광", "cos": [], "soon": true },
+        { "id": "mat", "n": "소재", "cos": [], "soon": true },
+        { "id": "sub", "n": "기판", "cos": [], "soon": true },
+        { "id": "equip", "n": "장비", "cos": [], "soon": true }
+      ]
+    },
+    {
+      "id": "cons", "n": "소비재", "en": "CONSUMER",
+      "kids": [
+        { "id": "retail", "n": "소매 · 월차", "cos": [], "soon": true },
+        { "id": "food", "n": "외식", "cos": [], "soon": true }
+      ]
+    }
+  ],
+  "cos": {
+    "6532": { "n": "베이커런트", "jp": "ベイカレント", "sec": "it/consult" },
+    "446A": { "n": "노스샌드", "jp": "ノースサンド", "sec": "it/consult" }
+  }
+}
