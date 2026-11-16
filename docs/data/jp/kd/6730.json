@@ -1,1 +1,1099 @@
-{"c": "6730", "n": "악셀", "asof": "2026-11-06", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "파친코·파치슬롯 기기용 그래픽 LSI·메모리 모듈이 매출의 대부분. 차입금 없음. 연도 = 결산기(3월 끝)", "charts": [{"sec": "key", "t": "매출액", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "LSI 부문 매출", "def": "파친코·파치슬롯 기기용 그래픽 LSI·메모리 모듈", "d": "q", "bars": [{"k": "lsi_sales", "l": "LSI 부문", "u": "억엔", "c": 0}], "lines": [{"k": "lsi_sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신 부문 정보(누계 차분) · 9월 말 LSI 수주잔고 199.71억엔"}, {"sec": "key", "t": "재고자산", "def": "분기말 상품·제품(메모리 모듈 포함)", "d": "q", "bars": [{"k": "inventory", "l": "분기말 재고", "u": "억엔", "c": 0}], "lines": [{"k": "inventory_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "결산단신"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "이익률", "d": "q", "bars": [{"k": "sales", "l": "매출액", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "gpm", "l": "매출총이익률", "u": "%", "c": 0, "r": 1}, {"k": "opm", "l": "영업이익률", "u": "%", "c": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "사업 지표", "t": "판매 수량(상반기)", "d": "kh", "src": "2Q27 결산설명자료·결산단신 p5 · 분기 수량은 공개 안 함", "lines": [{"k": "mem_units", "l": "메모리 모듈", "u": "만 개", "c": 0}, {"k": "lsi_units", "l": "그래픽 LSI", "u": "만 개", "c": 1}]}, {"sec": "사업 지표", "t": "판매 수량(연간)", "d": "ka", "muted": "plan", "src": "2Q27 결산설명자료·결산단신 p14 · 2027 = 9월 28일 수정 계획", "lines": [{"k": "mem_units", "l": "메모리 모듈", "u": "만 개", "c": 0}, {"k": "lsi_units", "l": "그래픽 LSI", "u": "만 개", "c": 1}]}, {"sec": "사업 지표", "t": "신기종 판매 대수(시장 규모)", "def": "회사가 보는 파친코·파치슬롯 신규 기기 판매 대수", "d": "ka", "bars": [{"k": "machines", "l": "신기종 판매", "u": "만 대", "c": 0}], "muted": "plan", "src": "2Q27 결산설명자료·결산단신 p14"}, {"sec": "사업 지표", "t": "연구개발비(상반기)", "d": "kh", "bars": [{"k": "rnd", "l": "연구개발비", "u": "억엔", "c": 0}], "src": "2Q27 결산설명자료·결산단신 p4 · 차세대 제품 개발비를 하반기에서 앞당김"}, {"sec": "부문", "t": "부문별 매출", "d": "q", "src": "결산단신 부문 정보(누계 차분) · 26.3Q 까지 이름은 LSI 개발판매·신규사업", "lines": [{"k": "lsi_sales", "l": "LSI", "u": "억엔", "c": 0}, {"k": "ai_sales", "l": "AI", "u": "억엔", "c": 1}]}, {"sec": "부문", "t": "부문별 영업이익", "d": "q", "src": "결산단신 부문 정보 · 본사 비용 배분 전", "lines": [{"k": "lsi_op", "l": "LSI", "u": "억엔", "c": 0}, {"k": "ai_op", "l": "AI", "u": "억엔", "c": 1}]}, {"sec": "재무", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "결산단신 · 차입금 없음(총차입금 0)"}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 45.32, "op": 6.44, "ord": 6.53, "net": 4.64, "gp": 13.79, "sga": 7.36, "cogs": 31.53, "debt_total": 0, "equity": 126.41, "total_assets": 151.56, "inventory": 21.29, "cash": 78.81, "lsi_sales": 44.25, "ai_sales": 1.06, "lsi_op": 9.43, "ai_op": -1.12, "gpm": 30.4, "opm": 14.2, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "lsi_sales_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 38.12, "op": 3.06, "ord": 3.22, "net": 2.54, "gp": 12.23, "sga": 9.17, "cogs": 25.89, "debt_total": 0, "equity": 128.91, "total_assets": 155.74, "inventory": 24.31, "cash": 83.16, "lsi_sales": 35.5, "ai_sales": 2.62, "lsi_op": 6.77, "ai_op": -0.65, "gpm": 32.1, "opm": 8.0, "sales_yoy": null, "gp_yoy": null, "sga_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "inventory_yoy": null, "cash_yoy": null, "lsi_sales_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 40.61, "op": 5.28, "ord": 5.21, "net": 3.67, "gp": 12.16, "sga": 6.87, "cogs": 28.45, "debt_total": 0, "equity": 122.65, "total_assets": 143.3, "inventory": 29.22, "cash": 55.95, "lsi_sales": 39.25, "ai_sales": 1.36, "lsi_op": 7.96, "ai_op": -0.99, "gpm": 29.9, "opm": 13.0, "sales_yoy": -9.3, "gp_yoy": -17.3, "sga_yoy": -0.9, "op_yoy": -32.0, "ord_yoy": null, "net_yoy": -36.8, "inventory_yoy": null, "cash_yoy": null, "lsi_sales_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 40.81, "op": 4.09, "ord": 4.74, "net": 3.25, "gp": 11.1, "sga": 7.02, "cogs": 29.71, "debt_total": 0, "equity": 128.01, "total_assets": 151.53, "inventory": 33.68, "cash": 59.82, "lsi_sales": 39.96, "ai_sales": 0.85, "lsi_op": 7.44, "ai_op": -1.63, "gpm": 27.2, "opm": 10.0, "sales_yoy": -14.1, "gp_yoy": -27.2, "sga_yoy": -14.9, "op_yoy": -41.5, "ord_yoy": null, "net_yoy": -31.1, "inventory_yoy": null, "cash_yoy": null, "lsi_sales_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 37.39, "op": 3.63, "ord": 3.34, "net": 1.4, "gp": 11.18, "sga": 7.55, "cogs": 26.21, "debt_total": 0, "equity": 130.53, "total_assets": 148.07, "inventory": 37.71, "cash": 47.6, "lsi_sales": 36.2, "ai_sales": 1.19, "lsi_op": 6.28, "ai_op": -1.15, "gpm": 29.9, "opm": 9.7, "sales_yoy": -17.5, "gp_yoy": -18.9, "sga_yoy": 2.6, "op_yoy": -43.6, "ord_yoy": -48.9, "net_yoy": -69.8, "inventory_yoy": 77.1, "cash_yoy": -39.6, "lsi_sales_yoy": -18.2}, {"q": "25.4Q", "x": "25.4Q", "sales": 33.63, "op": 1.61, "ord": 2.13, "net": 1.46, "gp": 9.44, "sga": 7.82, "cogs": 24.19, "debt_total": 0, "equity": 130.15, "total_assets": 150.42, "inventory": 39.08, "cash": 50.0, "lsi_sales": 32.63, "ai_sales": 1.0, "lsi_op": 4.42, "ai_op": -1.18, "gpm": 28.1, "opm": 4.8, "sales_yoy": -11.8, "gp_yoy": -22.8, "sga_yoy": -14.7, "op_yoy": -47.4, "ord_yoy": -33.9, "net_yoy": -42.5, "inventory_yoy": 60.8, "cash_yoy": -39.9, "lsi_sales_yoy": -8.1}, {"q": "26.1Q", "x": "26.1Q", "sales": 40.27, "op": 8.07, "ord": 8.39, "net": 5.85, "gp": 14.62, "sga": 6.55, "cogs": 25.65, "debt_total": 0, "equity": 133.11, "total_assets": 151.03, "inventory": 43.51, "cash": 43.6, "lsi_sales": 38.57, "ai_sales": 1.69, "lsi_op": 10.29, "ai_op": -0.72, "gpm": 36.3, "opm": 20.0, "sales_yoy": -0.8, "gp_yoy": 20.2, "sga_yoy": -4.7, "op_yoy": 52.8, "ord_yoy": 61.0, "net_yoy": 59.4, "inventory_yoy": 48.9, "cash_yoy": -22.1, "lsi_sales_yoy": -1.7}, {"q": "26.2Q", "x": "26.2Q", "sales": 36.08, "op": 3.41, "ord": 3.88, "net": 2.73, "gp": 11.08, "sga": 7.66, "cogs": 25.0, "debt_total": 0, "equity": 137.34, "total_assets": 159.55, "inventory": 41.61, "cash": 50.93, "lsi_sales": 33.79, "ai_sales": 2.3, "lsi_op": 5.42, "ai_op": -0.36, "gpm": 30.7, "opm": 9.5, "sales_yoy": -11.6, "gp_yoy": -0.2, "sga_yoy": 9.1, "op_yoy": -16.6, "ord_yoy": -18.1, "net_yoy": -16.0, "inventory_yoy": 23.5, "cash_yoy": -14.9, "lsi_sales_yoy": -15.4}, {"q": "26.3Q", "x": "26.3Q", "sales": 33.43, "op": 3.24, "ord": 3.51, "net": 2.47, "gp": 9.95, "sga": 6.71, "cogs": 23.48, "debt_total": 0, "equity": 138.7, "total_assets": 161.07, "inventory": 53.98, "cash": 30.77, "lsi_sales": 31.4, "ai_sales": 2.02, "lsi_op": 5.48, "ai_op": -0.34, "gpm": 29.8, "opm": 9.7, "sales_yoy": -10.6, "gp_yoy": -11.0, "sga_yoy": -11.1, "op_yoy": -10.7, "ord_yoy": 5.1, "net_yoy": 76.4, "inventory_yoy": 43.1, "cash_yoy": -35.4, "lsi_sales_yoy": -13.3}, {"q": "26.4Q", "x": "26.4Q", "sales": 36.78, "op": 1.92, "ord": 2.14, "net": 1.25, "gp": 11.44, "sga": 9.52, "cogs": 25.34, "debt_total": 0, "equity": 137.32, "total_assets": 161.09, "inventory": 48.59, "cash": 41.7, "lsi_sales": 34.17, "ai_sales": 2.61, "lsi_op": 4.47, "ai_op": -0.26, "gpm": 31.1, "opm": 5.2, "sales_yoy": 9.4, "gp_yoy": 21.2, "sga_yoy": 21.7, "op_yoy": 19.3, "ord_yoy": 0.5, "net_yoy": -14.4, "inventory_yoy": 24.3, "cash_yoy": -16.6, "lsi_sales_yoy": 4.7}, {"q": "27.1Q", "x": "27.1Q", "sales": 46.79, "op": 7.6, "ord": 7.8, "net": 5.46, "gp": 14.93, "sga": 7.32, "cogs": 31.86, "debt_total": 0, "equity": 141.03, "total_assets": 165.26, "inventory": 45.13, "cash": 34.08, "lsi_sales": 45.26, "ai_sales": 1.52, "lsi_op": 9.9, "ai_op": -0.59, "gpm": 31.9, "opm": 16.2, "sales_yoy": 16.2, "gp_yoy": 2.1, "sga_yoy": 11.8, "op_yoy": -5.8, "ord_yoy": -7.0, "net_yoy": -6.7, "inventory_yoy": 3.7, "cash_yoy": -21.8, "lsi_sales_yoy": 17.3}, {"q": "27.2Q", "x": "27.2Q", "sales": 49.6, "op": 5.37, "ord": 5.2, "net": 4.18, "gp": 13.9, "sga": 8.53, "cogs": 35.7, "debt_total": 0, "equity": 158.79, "total_assets": 192.54, "inventory": 38.85, "cash": 62.11, "lsi_sales": 47.82, "ai_sales": 1.78, "lsi_op": 7.73, "ai_op": -0.48, "gpm": 28.0, "opm": 10.8, "sales_yoy": 37.5, "gp_yoy": 25.5, "sga_yoy": 11.4, "op_yoy": 57.5, "ord_yoy": 34.0, "net_yoy": 53.1, "inventory_yoy": -6.6, "cash_yoy": 22.0, "lsi_sales_yoy": 41.5}], "a": [{"year": "2022", "x": "2022", "sales": 106.66, "op": 8.39, "ord": 10.01, "net": 8.65, "opm": 7.9, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 144.74, "op": 16.14, "ord": 18.13, "net": 13.53, "opm": 11.2, "sales_yoy": 35.7, "op_yoy": 92.4, "net_yoy": 56.4}, {"year": "2024", "x": "2024", "sales": 175.7, "op": 24.26, "ord": 24.49, "net": 17.71, "opm": 13.8, "sales_yoy": 21.4, "op_yoy": 50.3, "net_yoy": 30.9}, {"year": "2025", "x": "2025", "sales": 152.44, "op": 14.61, "ord": 15.42, "net": 9.78, "opm": 9.6, "sales_yoy": -13.2, "op_yoy": -39.8, "net_yoy": -44.8}, {"year": "2026", "x": "2026", "sales": 146.56, "op": 16.64, "ord": 17.92, "net": 12.3, "opm": 11.4, "sales_yoy": -3.9, "op_yoy": 13.9, "net_yoy": 25.8}, {"year": "2027 계획", "x": "2027 계획", "sales": 204.0, "op": 22.9, "ord": 23.5, "net": 17.0, "opm": 11.2, "sales_yoy": 39.2, "op_yoy": 37.6, "net_yoy": 38.2, "plan": 1, "kind": "회사 계획"}], "kh": [{"x": "26 상반기", "lsi_units": 26, "mem_units": 35, "rnd": 7.48}, {"x": "27 상반기", "lsi_units": 21, "mem_units": 37, "rnd": 9.03}], "ka": [{"x": "2026 실적", "lsi_units": 46, "mem_units": 65, "machines": 148}, {"x": "2027 계획", "lsi_units": 35, "mem_units": 74, "machines": 145, "plan": 1}]}}
+{
+ "c": "6730",
+ "n": "악셀",
+ "asof": "2026-11-06",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "파친코·파치슬롯 기기용 그래픽 LSI·메모리 모듈이 매출의 대부분. 차입금 없음. 연도 = 결산기(3월 끝)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "매출액",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "LSI 사업 수주잔고",
+   "d": "b",
+   "bars": [
+    {
+     "k": "backlog",
+     "l": "수주잔고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "backlog_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산설명자료 25.2Q~27.2Q(진척 표의 분기 말 수주잔고, 백만엔→억엔)",
+   "def": "분기 말 LSI(파친코·파치슬롯용) 사업 수주잔고"
+  },
+  {
+   "sec": "key",
+   "t": "분기 판매 수량",
+   "d": "b",
+   "lines": [
+    {
+     "k": "mem_u",
+     "l": "메모리 모듈",
+     "u": "만 개",
+     "c": 0
+    },
+    {
+     "k": "lsi_u",
+     "l": "그래픽 LSI",
+     "u": "만 개",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 25.2Q~27.2Q 각 분기(누계 판매 수량 그래프 라벨, 만 개)",
+   "def": "누계 판매 수량의 분기 차분(만 개 단위 반올림이라 ±1만 개 오차)"
+  },
+  {
+   "sec": "부문",
+   "t": "LSI 부문 매출",
+   "def": "파친코·파치슬롯 기기용 그래픽 LSI·메모리 모듈",
+   "d": "q",
+   "bars": [
+    {
+     "k": "lsi_sales",
+     "l": "LSI 부문",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "lsi_sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신 부문 정보(누계 차분) · 9월 말 LSI 수주잔고 199.71억엔"
+  },
+  {
+   "sec": "재무",
+   "t": "재고자산",
+   "def": "분기말 상품·제품(메모리 모듈 포함)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "inventory",
+     "l": "분기말 재고",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "inventory_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산단신"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출액",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 매출",
+   "d": "q",
+   "src": "결산단신 부문 정보(누계 차분) · 26.3Q 까지 이름은 LSI 개발판매·신규사업",
+   "lines": [
+    {
+     "k": "lsi_sales",
+     "l": "LSI",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ai_sales",
+     "l": "AI",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익",
+   "d": "q",
+   "src": "결산단신 부문 정보 · 본사 비용 배분 전",
+   "lines": [
+    {
+     "k": "lsi_op",
+     "l": "LSI",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "ai_op",
+     "l": "AI",
+     "u": "억엔",
+     "c": 1
+    }
+   ]
+  },
+  {
+   "sec": "재무",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산단신 · 차입금 없음(총차입금 0)"
+  },
+  {
+   "sec": "판매 수량",
+   "t": "판매 수량(상반기)",
+   "d": "kh",
+   "lines": [
+    {
+     "k": "mem_units",
+     "l": "메모리 모듈",
+     "u": "만 개",
+     "c": 0
+    },
+    {
+     "k": "lsi_units",
+     "l": "그래픽 LSI",
+     "u": "만 개",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 25.2Q·26.2Q·27.2Q p5(상반기 판매 수량)"
+  },
+  {
+   "sec": "판매 수량",
+   "t": "그래픽 LSI 판매 수량(연간)",
+   "d": "ka",
+   "bars": [
+    {
+     "k": "lsi_units",
+     "l": "그래픽 LSI",
+     "u": "만 개",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료 4Q25·4Q26·2Q27 p14 · 2027 = 9월 28일 수정 계획(약 35만 개)"
+  },
+  {
+   "sec": "판매 수량",
+   "t": "메모리 모듈 판매 수량(연간)",
+   "d": "ka",
+   "bars": [
+    {
+     "k": "mem_units",
+     "l": "메모리 모듈",
+     "u": "만 개",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료 4Q25·4Q26·2Q27 p14 · 2027 = 9월 28일 수정 계획"
+  },
+  {
+   "sec": "시장",
+   "t": "신기종 판매 대수(시장 규모)",
+   "d": "ka",
+   "bars": [
+    {
+     "k": "machines",
+     "l": "신기종 판매",
+     "u": "만 대",
+     "c": 0
+    }
+   ],
+   "muted": "plan",
+   "src": "결산설명자료 4Q25 p9·4Q26·2Q27 p14 · 2027 = 9월 28일 수정 추정",
+   "def": "회사가 보는 파친코·파치슬롯 신규 기기 판매 대수(비액정기 포함)"
+  },
+  {
+   "sec": "시장",
+   "t": "재사용률",
+   "d": "ka",
+   "noplan": 1,
+   "lines": [
+    {
+     "k": "lsi_reuse",
+     "l": "그래픽 LSI",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "mem_reuse",
+     "l": "메모리 모듈",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 4Q25·4Q26(시장 환경 보충)",
+   "def": "회수한 기기에서 자사 제품을 다시 쓰는 비율(높을수록 신규 판매 수량 감소)"
+  },
+  {
+   "sec": "시장",
+   "t": "시장 점유율",
+   "d": "ka",
+   "noplan": 1,
+   "lines": [
+    {
+     "k": "mem_share",
+     "l": "메모리 모듈",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "lsi_share",
+     "l": "그래픽 LSI",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 4Q25·4Q26(시장 환경 보충, 약 수치)",
+   "def": "회사 추정 '약' 값"
+  },
+  {
+   "sec": "연구개발",
+   "t": "분기 연구개발비",
+   "d": "b",
+   "bars": [
+    {
+     "k": "rnd_q",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.1Q~27.2Q(판관비 내 연구개발비 누계)",
+   "def": "누계 연구개발비의 분기 차분"
+  },
+  {
+   "sec": "연구개발",
+   "t": "연구개발비(상반기)",
+   "d": "kh",
+   "bars": [
+    {
+     "k": "rnd",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산설명자료 25.2Q·26.2Q·27.2Q p4·p6 · 27년은 차세대 개발비를 하반기에서 앞당김"
+  },
+  {
+   "sec": "연구개발",
+   "t": "연구개발비와 순개발비(연간)",
+   "d": "ka",
+   "noplan": 1,
+   "lines": [
+    {
+     "k": "rnd",
+     "l": "연구개발비",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "net_dev",
+     "l": "순개발비",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산설명자료 4Q25·4Q26(판관비 내역)",
+   "def": "순개발비 = 회사가 연구개발비 안에서 따로 밝힌 LSI 사업 순수 개발 비용"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 45.32,
+    "op": 6.44,
+    "ord": 6.53,
+    "net": 4.64,
+    "gp": 13.79,
+    "sga": 7.36,
+    "cogs": 31.53,
+    "debt_total": 0,
+    "equity": 126.41,
+    "total_assets": 151.56,
+    "inventory": 21.29,
+    "cash": 78.81,
+    "lsi_sales": 44.25,
+    "ai_sales": 1.06,
+    "lsi_op": 9.43,
+    "ai_op": -1.12,
+    "gpm": 30.4,
+    "opm": 14.2,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "lsi_sales_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 38.12,
+    "op": 3.06,
+    "ord": 3.22,
+    "net": 2.54,
+    "gp": 12.23,
+    "sga": 9.17,
+    "cogs": 25.89,
+    "debt_total": 0,
+    "equity": 128.91,
+    "total_assets": 155.74,
+    "inventory": 24.31,
+    "cash": 83.16,
+    "lsi_sales": 35.5,
+    "ai_sales": 2.62,
+    "lsi_op": 6.77,
+    "ai_op": -0.65,
+    "gpm": 32.1,
+    "opm": 8.0,
+    "sales_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "lsi_sales_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 40.61,
+    "op": 5.28,
+    "ord": 5.21,
+    "net": 3.67,
+    "gp": 12.16,
+    "sga": 6.87,
+    "cogs": 28.45,
+    "debt_total": 0,
+    "equity": 122.65,
+    "total_assets": 143.3,
+    "inventory": 29.22,
+    "cash": 55.95,
+    "lsi_sales": 39.25,
+    "ai_sales": 1.36,
+    "lsi_op": 7.96,
+    "ai_op": -0.99,
+    "gpm": 29.9,
+    "opm": 13.0,
+    "sales_yoy": -9.3,
+    "gp_yoy": -17.3,
+    "sga_yoy": -0.9,
+    "op_yoy": -32.0,
+    "ord_yoy": null,
+    "net_yoy": -36.8,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "lsi_sales_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 40.81,
+    "op": 4.09,
+    "ord": 4.74,
+    "net": 3.25,
+    "gp": 11.1,
+    "sga": 7.02,
+    "cogs": 29.71,
+    "debt_total": 0,
+    "equity": 128.01,
+    "total_assets": 151.53,
+    "inventory": 33.68,
+    "cash": 59.82,
+    "lsi_sales": 39.96,
+    "ai_sales": 0.85,
+    "lsi_op": 7.44,
+    "ai_op": -1.63,
+    "gpm": 27.2,
+    "opm": 10.0,
+    "sales_yoy": -14.1,
+    "gp_yoy": -27.2,
+    "sga_yoy": -14.9,
+    "op_yoy": -41.5,
+    "ord_yoy": null,
+    "net_yoy": -31.1,
+    "inventory_yoy": null,
+    "cash_yoy": null,
+    "lsi_sales_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 37.39,
+    "op": 3.63,
+    "ord": 3.34,
+    "net": 1.4,
+    "gp": 11.18,
+    "sga": 7.55,
+    "cogs": 26.21,
+    "debt_total": 0,
+    "equity": 130.53,
+    "total_assets": 148.07,
+    "inventory": 37.71,
+    "cash": 47.6,
+    "lsi_sales": 36.2,
+    "ai_sales": 1.19,
+    "lsi_op": 6.28,
+    "ai_op": -1.15,
+    "gpm": 29.9,
+    "opm": 9.7,
+    "sales_yoy": -17.5,
+    "gp_yoy": -18.9,
+    "sga_yoy": 2.6,
+    "op_yoy": -43.6,
+    "ord_yoy": -48.9,
+    "net_yoy": -69.8,
+    "inventory_yoy": 77.1,
+    "cash_yoy": -39.6,
+    "lsi_sales_yoy": -18.2
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 33.63,
+    "op": 1.61,
+    "ord": 2.13,
+    "net": 1.46,
+    "gp": 9.44,
+    "sga": 7.82,
+    "cogs": 24.19,
+    "debt_total": 0,
+    "equity": 130.15,
+    "total_assets": 150.42,
+    "inventory": 39.08,
+    "cash": 50.0,
+    "lsi_sales": 32.63,
+    "ai_sales": 1.0,
+    "lsi_op": 4.42,
+    "ai_op": -1.18,
+    "gpm": 28.1,
+    "opm": 4.8,
+    "sales_yoy": -11.8,
+    "gp_yoy": -22.8,
+    "sga_yoy": -14.7,
+    "op_yoy": -47.4,
+    "ord_yoy": -33.9,
+    "net_yoy": -42.5,
+    "inventory_yoy": 60.8,
+    "cash_yoy": -39.9,
+    "lsi_sales_yoy": -8.1
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 40.27,
+    "op": 8.07,
+    "ord": 8.39,
+    "net": 5.85,
+    "gp": 14.62,
+    "sga": 6.55,
+    "cogs": 25.65,
+    "debt_total": 0,
+    "equity": 133.11,
+    "total_assets": 151.03,
+    "inventory": 43.51,
+    "cash": 43.6,
+    "lsi_sales": 38.57,
+    "ai_sales": 1.69,
+    "lsi_op": 10.29,
+    "ai_op": -0.72,
+    "gpm": 36.3,
+    "opm": 20.0,
+    "sales_yoy": -0.8,
+    "gp_yoy": 20.2,
+    "sga_yoy": -4.7,
+    "op_yoy": 52.8,
+    "ord_yoy": 61.0,
+    "net_yoy": 59.4,
+    "inventory_yoy": 48.9,
+    "cash_yoy": -22.1,
+    "lsi_sales_yoy": -1.7
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 36.08,
+    "op": 3.41,
+    "ord": 3.88,
+    "net": 2.73,
+    "gp": 11.08,
+    "sga": 7.66,
+    "cogs": 25.0,
+    "debt_total": 0,
+    "equity": 137.34,
+    "total_assets": 159.55,
+    "inventory": 41.61,
+    "cash": 50.93,
+    "lsi_sales": 33.79,
+    "ai_sales": 2.3,
+    "lsi_op": 5.42,
+    "ai_op": -0.36,
+    "gpm": 30.7,
+    "opm": 9.5,
+    "sales_yoy": -11.6,
+    "gp_yoy": -0.2,
+    "sga_yoy": 9.1,
+    "op_yoy": -16.6,
+    "ord_yoy": -18.1,
+    "net_yoy": -16.0,
+    "inventory_yoy": 23.5,
+    "cash_yoy": -14.9,
+    "lsi_sales_yoy": -15.4
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 33.43,
+    "op": 3.24,
+    "ord": 3.51,
+    "net": 2.47,
+    "gp": 9.95,
+    "sga": 6.71,
+    "cogs": 23.48,
+    "debt_total": 0,
+    "equity": 138.7,
+    "total_assets": 161.07,
+    "inventory": 53.98,
+    "cash": 30.77,
+    "lsi_sales": 31.4,
+    "ai_sales": 2.02,
+    "lsi_op": 5.48,
+    "ai_op": -0.34,
+    "gpm": 29.8,
+    "opm": 9.7,
+    "sales_yoy": -10.6,
+    "gp_yoy": -11.0,
+    "sga_yoy": -11.1,
+    "op_yoy": -10.7,
+    "ord_yoy": 5.1,
+    "net_yoy": 76.4,
+    "inventory_yoy": 43.1,
+    "cash_yoy": -35.4,
+    "lsi_sales_yoy": -13.3
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 36.78,
+    "op": 1.92,
+    "ord": 2.14,
+    "net": 1.25,
+    "gp": 11.44,
+    "sga": 9.52,
+    "cogs": 25.34,
+    "debt_total": 0,
+    "equity": 137.32,
+    "total_assets": 161.09,
+    "inventory": 48.59,
+    "cash": 41.7,
+    "lsi_sales": 34.17,
+    "ai_sales": 2.61,
+    "lsi_op": 4.47,
+    "ai_op": -0.26,
+    "gpm": 31.1,
+    "opm": 5.2,
+    "sales_yoy": 9.4,
+    "gp_yoy": 21.2,
+    "sga_yoy": 21.7,
+    "op_yoy": 19.3,
+    "ord_yoy": 0.5,
+    "net_yoy": -14.4,
+    "inventory_yoy": 24.3,
+    "cash_yoy": -16.6,
+    "lsi_sales_yoy": 4.7
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 46.79,
+    "op": 7.6,
+    "ord": 7.8,
+    "net": 5.46,
+    "gp": 14.93,
+    "sga": 7.32,
+    "cogs": 31.86,
+    "debt_total": 0,
+    "equity": 141.03,
+    "total_assets": 165.26,
+    "inventory": 45.13,
+    "cash": 34.08,
+    "lsi_sales": 45.26,
+    "ai_sales": 1.52,
+    "lsi_op": 9.9,
+    "ai_op": -0.59,
+    "gpm": 31.9,
+    "opm": 16.2,
+    "sales_yoy": 16.2,
+    "gp_yoy": 2.1,
+    "sga_yoy": 11.8,
+    "op_yoy": -5.8,
+    "ord_yoy": -7.0,
+    "net_yoy": -6.7,
+    "inventory_yoy": 3.7,
+    "cash_yoy": -21.8,
+    "lsi_sales_yoy": 17.3
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 49.6,
+    "op": 5.37,
+    "ord": 5.2,
+    "net": 4.18,
+    "gp": 13.9,
+    "sga": 8.53,
+    "cogs": 35.7,
+    "debt_total": 0,
+    "equity": 158.79,
+    "total_assets": 192.54,
+    "inventory": 38.85,
+    "cash": 62.11,
+    "lsi_sales": 47.82,
+    "ai_sales": 1.78,
+    "lsi_op": 7.73,
+    "ai_op": -0.48,
+    "gpm": 28.0,
+    "opm": 10.8,
+    "sales_yoy": 37.5,
+    "gp_yoy": 25.5,
+    "sga_yoy": 11.4,
+    "op_yoy": 57.5,
+    "ord_yoy": 34.0,
+    "net_yoy": 53.1,
+    "inventory_yoy": -6.6,
+    "cash_yoy": 22.0,
+    "lsi_sales_yoy": 41.5
+   }
+  ],
+  "a": [
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 106.66,
+    "op": 8.39,
+    "ord": 10.01,
+    "net": 8.65,
+    "opm": 7.9,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 144.74,
+    "op": 16.14,
+    "ord": 18.13,
+    "net": 13.53,
+    "opm": 11.2,
+    "sales_yoy": 35.7,
+    "op_yoy": 92.4,
+    "net_yoy": 56.4
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 175.7,
+    "op": 24.26,
+    "ord": 24.49,
+    "net": 17.71,
+    "opm": 13.8,
+    "sales_yoy": 21.4,
+    "op_yoy": 50.3,
+    "net_yoy": 30.9
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 152.44,
+    "op": 14.61,
+    "ord": 15.42,
+    "net": 9.78,
+    "opm": 9.6,
+    "sales_yoy": -13.2,
+    "op_yoy": -39.8,
+    "net_yoy": -44.8
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 146.56,
+    "op": 16.64,
+    "ord": 17.92,
+    "net": 12.3,
+    "opm": 11.4,
+    "sales_yoy": -3.9,
+    "op_yoy": 13.9,
+    "net_yoy": 25.8
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 204.0,
+    "op": 22.9,
+    "ord": 23.5,
+    "net": 17.0,
+    "opm": 11.2,
+    "sales_yoy": 39.2,
+    "op_yoy": 37.6,
+    "net_yoy": 38.2,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "kh": [
+   {
+    "x": "24 상반기",
+    "lsi_units": 36,
+    "mem_units": 53,
+    "rnd": 7.81
+   },
+   {
+    "x": "25 상반기",
+    "lsi_units": 29,
+    "mem_units": 41,
+    "rnd": 6.97
+   },
+   {
+    "x": "26 상반기",
+    "lsi_units": 26,
+    "mem_units": 35,
+    "rnd": 7.48
+   },
+   {
+    "x": "27 상반기",
+    "lsi_units": 21,
+    "mem_units": 37,
+    "rnd": 9.03
+   }
+  ],
+  "ka": [
+   {
+    "x": "2024",
+    "lsi_units": 64,
+    "mem_units": 99,
+    "machines": 161,
+    "lsi_reuse": 20,
+    "mem_reuse": 20,
+    "lsi_share": 50,
+    "mem_share": 80,
+    "rnd": 15.79,
+    "net_dev": 2.97
+   },
+   {
+    "x": "2025",
+    "lsi_units": 51,
+    "mem_units": 82,
+    "machines": 153,
+    "lsi_reuse": 40,
+    "mem_reuse": 30,
+    "lsi_share": 55,
+    "mem_share": 80,
+    "rnd": 15.47,
+    "net_dev": 3.11
+   },
+   {
+    "x": "2026",
+    "lsi_units": 46,
+    "mem_units": 65,
+    "machines": 148,
+    "lsi_reuse": 35,
+    "mem_reuse": 45,
+    "lsi_share": 55,
+    "mem_share": 80,
+    "rnd": 16.41,
+    "net_dev": 3.97
+   },
+   {
+    "x": "2027 계획",
+    "lsi_units": 35,
+    "mem_units": 74,
+    "machines": 145,
+    "lsi_reuse": null,
+    "mem_reuse": null,
+    "lsi_share": null,
+    "mem_share": null,
+    "rnd": null,
+    "net_dev": null,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "b": [
+   {
+    "x": "25.1Q",
+    "lsi_u": 17,
+    "mem_u": 18,
+    "rnd_q": 3.48,
+    "backlog": null,
+    "backlog_yoy": null
+   },
+   {
+    "x": "25.2Q",
+    "lsi_u": 12,
+    "mem_u": 23,
+    "rnd_q": 3.49,
+    "backlog": 119.76,
+    "backlog_yoy": null
+   },
+   {
+    "x": "25.3Q",
+    "lsi_u": 11,
+    "mem_u": 19,
+    "rnd_q": 4.22,
+    "backlog": 123.6,
+    "backlog_yoy": null
+   },
+   {
+    "x": "25.4Q",
+    "lsi_u": 11,
+    "mem_u": 22,
+    "rnd_q": 4.28,
+    "backlog": 109.92,
+    "backlog_yoy": null
+   },
+   {
+    "x": "26.1Q",
+    "lsi_u": 13,
+    "mem_u": 21,
+    "rnd_q": 3.18,
+    "backlog": 101.82,
+    "backlog_yoy": null
+   },
+   {
+    "x": "26.2Q",
+    "lsi_u": 13,
+    "mem_u": 14,
+    "rnd_q": 4.3,
+    "backlog": 101.35,
+    "backlog_yoy": -15.4
+   },
+   {
+    "x": "26.3Q",
+    "lsi_u": 10,
+    "mem_u": 13,
+    "rnd_q": 3.32,
+    "backlog": 127.19,
+    "backlog_yoy": 2.9
+   },
+   {
+    "x": "26.4Q",
+    "lsi_u": 10,
+    "mem_u": 17,
+    "rnd_q": 5.61,
+    "backlog": 149.29,
+    "backlog_yoy": 35.8
+   },
+   {
+    "x": "27.1Q",
+    "lsi_u": 11,
+    "mem_u": 19,
+    "rnd_q": 4.06,
+    "backlog": 160.3,
+    "backlog_yoy": 57.4
+   },
+   {
+    "x": "27.2Q",
+    "lsi_u": 10,
+    "mem_u": 18,
+    "rnd_q": 4.97,
+    "backlog": 199.71,
+    "backlog_yoy": 97.0
+   }
+  ]
+ }
+}
