@@ -1,1 +1,2304 @@
-{"c": "9045", "n": "게이한홀딩스", "asof": "2026-11-09", "latest": "2027년 3월기 2분기", "unit": "금액 억엔", "annual_rows": [["sales", "매출액"], ["sales_yoy", "YoY", "pct"], ["op", "영업이익"], ["opm", "영업이익률", "pct0"], ["op_yoy", "영업이익 YoY", "pct"], ["ord", "경상이익"], ["net", "순이익"], ["net_yoy", "순이익 YoY", "pct"]], "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획", "note": "철도·버스(운수)와 부동산(분양·임대)이 이익의 80%대. 매출 = 영업수익. 4분기에 맨션 인도가 몰려 매출이 커짐. 총차입금 = 차입금 + 사채(단기사채 포함)", "charts": [{"sec": "key", "t": "영업수익(매출)", "d": "q", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "영업이익", "d": "q", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "op_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "key", "t": "게이한전철 여객 수입", "def": "정기 + 정기 외 운수 수입", "d": "q", "bars": [{"k": "kpi_pax", "l": "여객 수입", "u": "억엔", "c": 0}], "lines": [{"k": "kpi_pax_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(운수 성적)", "m": "2025년 10월 운임 인상"}, {"sec": "key", "t": "현금과 총차입금", "d": "q", "bars": [{"k": "cash", "l": "현금·예금", "u": "억엔", "c": 0}, {"k": "debt_total", "l": "총차입금", "u": "억엔", "c": 1}], "src": "2Q27 결산설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금(사채 포함)"}, {"sec": "실적 추이", "t": "연간 매출액", "d": "a", "bars": [{"k": "sales", "l": "매출", "u": "억엔", "c": 0}], "lines": [{"k": "sales_yoy", "l": "YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "연간 영업이익", "d": "a", "bars": [{"k": "op", "l": "영업이익", "u": "억엔", "c": 0}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "muted": "plan", "src": "결산단신 · 마지막 막대 = 회사 계획"}, {"sec": "실적 추이", "t": "영업이익률", "d": "q", "bars": [{"k": "sales", "l": "영업수익", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "opm", "l": "영업이익률", "u": "%", "c": 0, "r": 1}], "src": "2Q27 결산설명자료·결산단신"}, {"sec": "사업 지표", "t": "게이한전철 정기·정기 외 수입", "d": "q", "src": "2Q27 결산설명자료(운수 성적)", "lines": [{"k": "kpi_teikigai", "l": "정기 외", "u": "억엔", "c": 0}, {"k": "kpi_teiki", "l": "정기", "u": "억엔", "c": 1}]}, {"sec": "사업 지표", "t": "정기·정기 외 수입 YoY", "d": "q", "bars": [{"k": "kpi_teikigai", "l": "정기 외 수입", "u": "억엔", "c": 0, "f": 1}], "lines": [{"k": "kpi_teikigai_yoy", "l": "정기 외 YoY", "u": "%", "c": 0, "yoy": 1, "r": 1}, {"k": "kpi_teiki_yoy", "l": "정기 YoY", "u": "%", "c": 1, "yoy": 1, "r": 1}], "src": "2Q27 결산설명자료(운수 성적)", "m": "정기 외 = 관광·일반 승객. 2026년 3월기 1분기는 오사카 엑스포 효과"}, {"sec": "부문", "t": "부문별 영업수익(27년 3월기)", "d": "seg", "x": "x", "xs": "분기", "src": "2Q27 결산설명자료(부문 분기 추이)", "lines": [{"k": "re_s", "l": "부동산", "u": "억엔", "c": 0}, {"k": "trn_s", "l": "운수", "u": "억엔", "c": 1}, {"k": "ret_s", "l": "유통", "u": "억엔", "c": 2}, {"k": "lei_s", "l": "레저·서비스", "u": "억엔", "c": 3}]}, {"sec": "부문", "t": "부문별 영업이익(27년 3월기)", "d": "seg", "x": "x", "xs": "분기", "src": "2Q27 결산설명자료(부문 분기 추이)", "lines": [{"k": "re_o", "l": "부동산", "u": "억엔", "c": 0}, {"k": "trn_o", "l": "운수", "u": "억엔", "c": 1}, {"k": "lei_o", "l": "레저·서비스", "u": "억엔", "c": 2}, {"k": "ret_o", "l": "유통", "u": "억엔", "c": 3}]}], "tables": {"q": [{"q": "24.3Q", "x": "24.3Q", "sales": 716.63, "op": 109.09, "ord": 107.08, "net": 71.29, "gp": null, "sga": null, "cogs": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "gpm": null, "opm": 15.2, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null}, {"q": "24.4Q", "x": "24.4Q", "sales": 966.17, "op": 58.23, "ord": 55.58, "net": 32.77, "gp": null, "sga": null, "cogs": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "gpm": null, "opm": 6.0, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null}, {"q": "25.1Q", "x": "25.1Q", "sales": 809.52, "op": 127.13, "ord": 128.22, "net": 90.85, "gp": null, "sga": null, "cogs": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "gpm": null, "opm": 15.7, "sales_yoy": null, "op_yoy": null, "ord_yoy": null, "net_yoy": null, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null}, {"q": "25.2Q", "x": "25.2Q", "sales": 774.22, "op": 100.44, "ord": 96.63, "net": 65.34, "gp": null, "sga": null, "cogs": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "gpm": null, "opm": 13.0, "kpi_teiki": 40.09, "kpi_teikigai": 79.45, "kpi_pax": 119.54, "sales_yoy": 13.1, "op_yoy": 23.8, "ord_yoy": 23.0, "net_yoy": 15.8, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "kpi_teiki_yoy": null, "kpi_teikigai_yoy": null, "kpi_pax_yoy": null}, {"q": "25.3Q", "x": "25.3Q", "sales": 756.23, "op": 138.04, "ord": 134.09, "net": 92.78, "gp": null, "sga": null, "cogs": null, "cash": null, "debt_total": null, "equity": null, "total_assets": null, "gpm": null, "opm": 18.3, "kpi_teiki": 40.73, "kpi_teikigai": 87.65, "kpi_pax": 128.38, "sales_yoy": 5.5, "op_yoy": 26.5, "ord_yoy": 25.2, "net_yoy": 30.1, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "kpi_teiki_yoy": null, "kpi_teikigai_yoy": null, "kpi_pax_yoy": null}, {"q": "25.4Q", "x": "25.4Q", "sales": 795.49, "op": 55.1, "ord": 50.11, "net": 33.69, "gp": null, "sga": null, "cogs": null, "cash": 138.36, "debt_total": 3711.99, "equity": 3145.08, "total_assets": 8598.6, "gpm": null, "opm": 6.9, "kpi_teiki": 38.36, "kpi_teikigai": 82.75, "kpi_pax": 121.11, "sales_yoy": -17.7, "op_yoy": -5.4, "ord_yoy": -9.8, "net_yoy": 2.8, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "kpi_teiki_yoy": null, "kpi_teikigai_yoy": null, "kpi_pax_yoy": null}, {"q": "26.1Q", "x": "26.1Q", "sales": 728.27, "op": 129.6, "ord": 126.36, "net": 93.54, "gp": null, "sga": null, "cogs": null, "cash": 169.57, "debt_total": 3916.03, "equity": 3176.95, "total_assets": 8685.03, "gpm": null, "opm": 17.8, "kpi_teiki": 41.65, "kpi_teikigai": 87.94, "kpi_pax": 129.59, "sales_yoy": -10.0, "op_yoy": 1.9, "ord_yoy": -1.5, "net_yoy": 3.0, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "kpi_teiki_yoy": null, "kpi_teikigai_yoy": null, "kpi_pax_yoy": null}, {"q": "26.2Q", "x": "26.2Q", "sales": 715.38, "op": 91.59, "ord": 84.87, "net": 64.48, "gp": null, "sga": null, "cogs": null, "cash": 134.17, "debt_total": 3876.08, "equity": 3257.39, "total_assets": 8794.05, "gpm": null, "opm": 12.8, "kpi_teiki": 41.09, "kpi_teikigai": 83.86, "kpi_pax": 124.95, "sales_yoy": -7.6, "op_yoy": -8.8, "ord_yoy": -12.2, "net_yoy": -1.3, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "kpi_teiki_yoy": 2.5, "kpi_teikigai_yoy": 5.6, "kpi_pax_yoy": 4.5}, {"q": "26.3Q", "x": "26.3Q", "sales": 813.76, "op": 141.31, "ord": 139.88, "net": 97.61, "gp": null, "sga": null, "cogs": null, "cash": 167.85, "debt_total": 3929.91, "equity": 3375.89, "total_assets": 8946.1, "gpm": null, "opm": 17.4, "kpi_teiki": 44.3, "kpi_teikigai": 97.24, "kpi_pax": 141.54, "sales_yoy": 7.6, "op_yoy": 2.4, "ord_yoy": 4.3, "net_yoy": 5.2, "gp_yoy": null, "sga_yoy": null, "cash_yoy": null, "debt_total_yoy": null, "equity_yoy": null, "total_assets_yoy": null, "kpi_teiki_yoy": 8.8, "kpi_teikigai_yoy": 10.9, "kpi_pax_yoy": 10.3}, {"q": "26.4Q", "x": "26.4Q", "sales": 1067.3, "op": 129.02, "ord": 118.2, "net": 80.18, "gp": null, "sga": null, "cogs": null, "cash": 147.59, "debt_total": 3827.85, "equity": 3495.63, "total_assets": 9095.45, "gpm": null, "opm": 12.1, "kpi_teiki": 43.3, "kpi_teikigai": 92.23, "kpi_pax": 135.53, "sales_yoy": 34.2, "op_yoy": 134.2, "ord_yoy": 135.9, "net_yoy": 138.0, "gp_yoy": null, "sga_yoy": null, "cash_yoy": 6.7, "debt_total_yoy": 3.1, "equity_yoy": 11.1, "total_assets_yoy": 5.8, "kpi_teiki_yoy": 12.9, "kpi_teikigai_yoy": 11.5, "kpi_pax_yoy": 11.9}, {"q": "27.1Q", "x": "27.1Q", "sales": 751.63, "op": 131.28, "ord": 132.23, "net": 93.55, "gp": null, "sga": null, "cogs": null, "cash": 231.48, "debt_total": 4203.89, "equity": 3507.64, "total_assets": 9421.88, "gpm": null, "opm": 17.5, "kpi_teiki": 47.57, "kpi_teikigai": 94.23, "kpi_pax": 141.8, "sales_yoy": 3.2, "op_yoy": 1.3, "ord_yoy": 4.6, "net_yoy": 0.0, "gp_yoy": null, "sga_yoy": null, "cash_yoy": 36.5, "debt_total_yoy": 7.4, "equity_yoy": 10.4, "total_assets_yoy": 8.5, "kpi_teiki_yoy": 14.2, "kpi_teikigai_yoy": 7.2, "kpi_pax_yoy": 9.4}, {"q": "27.2Q", "x": "27.2Q", "sales": 817.84, "op": 114.7, "ord": 103.58, "net": 76.88, "gp": null, "sga": null, "cogs": null, "cash": 128.03, "debt_total": 4353.64, "equity": 3601.79, "total_assets": 9630.05, "gpm": null, "opm": 14.0, "kpi_teiki": 47.06, "kpi_teikigai": 90.88, "kpi_pax": 137.94, "sales_yoy": 14.3, "op_yoy": 25.2, "ord_yoy": 22.0, "net_yoy": 19.2, "gp_yoy": null, "sga_yoy": null, "cash_yoy": -4.6, "debt_total_yoy": 12.3, "equity_yoy": 10.6, "total_assets_yoy": 9.5, "kpi_teiki_yoy": 14.5, "kpi_teikigai_yoy": 8.4, "kpi_pax_yoy": 10.4}], "a": [{"year": "2021", "x": "2021", "sales": 2534.19, "op": -12.65, "ord": 2.38, "net": -45.74, "opm": -0.5, "sales_yoy": null, "op_yoy": null, "net_yoy": null}, {"year": "2022", "x": "2022", "sales": 2581.18, "op": 134.08, "ord": 164.85, "net": 95.89, "opm": 5.2, "sales_yoy": 1.9, "op_yoy": null, "net_yoy": null}, {"year": "2023", "x": "2023", "sales": 2600.7, "op": 204.91, "ord": 204.58, "net": 176.21, "opm": 7.9, "sales_yoy": 0.8, "op_yoy": 52.8, "net_yoy": 83.8}, {"year": "2024", "x": "2024", "sales": 3021.47, "op": 339.04, "ord": 331.11, "net": 248.9, "opm": 11.2, "sales_yoy": 16.2, "op_yoy": 65.5, "net_yoy": 41.3}, {"year": "2025", "x": "2025", "sales": 3135.46, "op": 420.71, "ord": 409.05, "net": 282.66, "opm": 13.4, "sales_yoy": 3.8, "op_yoy": 24.1, "net_yoy": 13.6}, {"year": "2026", "x": "2026", "sales": 3324.71, "op": 491.52, "ord": 469.31, "net": 335.81, "opm": 14.8, "sales_yoy": 6.0, "op_yoy": 16.8, "net_yoy": 18.8}, {"year": "2027 계획", "x": "2027 계획", "sales": 3181.0, "op": 439.0, "ord": 401.0, "net": 300.0, "opm": 13.8, "sales_yoy": -4.3, "op_yoy": -10.7, "net_yoy": -10.7, "plan": 1, "kind": "회사 계획"}], "seg": [{"x": "27.1Q", "trn_s": 251.54, "trn_o": 50.45, "re_s": 285.56, "re_o": 55.48, "ret_s": 137.64, "ret_o": 7.08, "lei_s": 109.96, "lei_o": 17.72}, {"x": "27.2Q", "trn_s": 251.69, "trn_o": 40.16, "re_s": 363.5, "re_o": 60.65, "ret_s": 137.69, "ret_o": 6.53, "lei_s": 100.9, "lei_o": 8.13}]}}
+{
+ "c": "9045",
+ "n": "게이한홀딩스",
+ "asof": "2026-11-09",
+ "latest": "2027년 3월기 2분기",
+ "unit": "금액 억엔",
+ "annual_rows": [
+  [
+   "sales",
+   "매출액"
+  ],
+  [
+   "sales_yoy",
+   "YoY",
+   "pct"
+  ],
+  [
+   "op",
+   "영업이익"
+  ],
+  [
+   "opm",
+   "영업이익률",
+   "pct0"
+  ],
+  [
+   "op_yoy",
+   "영업이익 YoY",
+   "pct"
+  ],
+  [
+   "ord",
+   "경상이익"
+  ],
+  [
+   "net",
+   "순이익"
+  ],
+  [
+   "net_yoy",
+   "순이익 YoY",
+   "pct"
+  ]
+ ],
+ "annual_src": "결산단신(연간 실적), 마지막 행은 회사 계획",
+ "note": "철도·버스(운수)와 부동산(분양·임대)이 이익의 80%대. 매출 = 영업수익. 4분기에 맨션 인도가 몰려 매출이 커짐. 총차입금 = 차입금 + 사채(단기사채 포함)",
+ "charts": [
+  {
+   "sec": "key",
+   "t": "영업수익(매출)",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "영업이익",
+   "d": "q",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "op_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "key",
+   "t": "게이한전철 여객 수입",
+   "def": "정기 + 정기 외 운수 수입",
+   "d": "q",
+   "bars": [
+    {
+     "k": "kpi_pax",
+     "l": "여객 수입",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "kpi_pax_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료(운수 성적)",
+   "m": "2025년 10월 운임 인상"
+  },
+  {
+   "sec": "key",
+   "t": "부동산 판매업 수익",
+   "def": "맨션 등 분양. 4분기·인도 시점에 몰림",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sale_s",
+     "l": "부동산 판매",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "현금과 총차입금",
+   "d": "q",
+   "bars": [
+    {
+     "k": "cash",
+     "l": "현금·예금",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "debt_total",
+     "l": "총차입금",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신 · 총차입금 = 단기 + 장기 차입금(사채 포함)"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 매출액",
+   "d": "a",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "매출",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "sales_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "연간 영업이익",
+   "d": "a",
+   "bars": [
+    {
+     "k": "op",
+     "l": "영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산단신 · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "실적 추이",
+   "t": "영업이익률",
+   "d": "q",
+   "bars": [
+    {
+     "k": "sales",
+     "l": "영업수익",
+     "u": "억엔",
+     "c": 0,
+     "f": 1
+    }
+   ],
+   "lines": [
+    {
+     "k": "opm",
+     "l": "영업이익률",
+     "u": "%",
+     "c": 0,
+     "r": 1
+    }
+   ],
+   "src": "2Q27 결산설명자료·결산단신"
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업수익(분기)",
+   "d": "seg",
+   "x": "x",
+   "xs": "분기",
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 부문 실적 누계 차감",
+   "lines": [
+    {
+     "k": "re_s",
+     "l": "부동산",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "trn_s",
+     "l": "운수",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "ret_s",
+     "l": "유통",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "lei_s",
+     "l": "레저·서비스",
+     "u": "억엔",
+     "c": 3
+    }
+   ]
+  },
+  {
+   "sec": "부문",
+   "t": "부문별 영업이익(분기)",
+   "d": "seg",
+   "x": "x",
+   "xs": "분기",
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 부문 실적 누계 차감",
+   "lines": [
+    {
+     "k": "re_o",
+     "l": "부동산",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "trn_o",
+     "l": "운수",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "lei_o",
+     "l": "레저·서비스",
+     "u": "억엔",
+     "c": 2
+    },
+    {
+     "k": "ret_o",
+     "l": "유통",
+     "u": "억엔",
+     "c": 3
+    }
+   ]
+  },
+  {
+   "sec": "철도",
+   "t": "게이한전철 정기·정기 외 여객 수입",
+   "d": "b",
+   "lines": [
+    {
+     "k": "rev_k",
+     "l": "정기 외",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "rev_t",
+     "l": "정기",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 운수 성적 그래프 라벨값",
+   "m": "2025년 10월 운임 인상"
+  },
+  {
+   "sec": "철도",
+   "t": "정기·정기 외 여객 수입 YoY",
+   "d": "b",
+   "lines": [
+    {
+     "k": "rev_k_yoy",
+     "l": "정기 외",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "rev_t_yoy",
+     "l": "정기",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 운수 성적 그래프 라벨값"
+  },
+  {
+   "sec": "철도",
+   "t": "게이한전철 여객 수(분기)",
+   "d": "b",
+   "lines": [
+    {
+     "k": "pax_t",
+     "l": "정기",
+     "u": "천 명",
+     "c": 0
+    },
+    {
+     "k": "pax_k",
+     "l": "정기 외",
+     "u": "천 명",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "철도",
+   "t": "여객 수 YoY",
+   "d": "b",
+   "lines": [
+    {
+     "k": "pax_k_yoy",
+     "l": "정기 외",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "pax_t_yoy",
+     "l": "정기",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "철도",
+   "t": "1인당 여객 수입",
+   "def": "분기 여객 수입 ÷ 분기 여객 수",
+   "d": "b",
+   "lines": [
+    {
+     "k": "up_k",
+     "l": "정기 외",
+     "u": "엔",
+     "c": 0
+    },
+    {
+     "k": "up_t",
+     "l": "정기",
+     "u": "엔",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "철도",
+   "t": "연간 여객 수입",
+   "d": "ba",
+   "bars": [
+    {
+     "k": "rev",
+     "l": "여객 수입",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "rev_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "muted": "plan",
+   "src": "결산보충자료 운수 성적(업적 예상) · 마지막 막대 = 회사 계획"
+  },
+  {
+   "sec": "철도",
+   "t": "연간 정기·정기 외 여객 수입",
+   "d": "ba",
+   "lines": [
+    {
+     "k": "rev_k",
+     "l": "정기 외",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "rev_t",
+     "l": "정기",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료 운수 성적(업적 예상) · 계획 행은 선 끊김"
+  },
+  {
+   "sec": "철도",
+   "t": "철도·버스 영업수익",
+   "d": "b",
+   "lines": [
+    {
+     "k": "rail_s",
+     "l": "철도",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "bus_s",
+     "l": "버스",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "철도",
+   "t": "철도·버스 영업이익률",
+   "def": "사업별 영업이익 ÷ 영업수익",
+   "d": "b",
+   "lines": [
+    {
+     "k": "rail_m",
+     "l": "철도",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "bus_m",
+     "l": "버스",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "부동산",
+   "t": "부동산 판매·임대·건설 수익",
+   "d": "b",
+   "lines": [
+    {
+     "k": "sale_s",
+     "l": "판매",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "rent_s",
+     "l": "임대",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "cons_s",
+     "l": "건설",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "부동산",
+   "t": "부동산 판매·임대 영업이익",
+   "d": "b",
+   "lines": [
+    {
+     "k": "rent_o",
+     "l": "임대",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "sale_o",
+     "l": "판매",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "부동산",
+   "t": "부동산 임대 수익",
+   "d": "b",
+   "bars": [
+    {
+     "k": "rent_s",
+     "l": "임대 수익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "rent_s_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "부동산",
+   "t": "판매·임대 영업이익률",
+   "d": "b",
+   "lines": [
+    {
+     "k": "rent_m",
+     "l": "임대",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "sale_m",
+     "l": "판매",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "유통·호텔",
+   "t": "백화점·스토어·쇼핑몰 수익",
+   "d": "b",
+   "lines": [
+    {
+     "k": "dept_s",
+     "l": "백화점",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "store_s",
+     "l": "스토어",
+     "u": "억엔",
+     "c": 1
+    },
+    {
+     "k": "sm_s",
+     "l": "쇼핑몰",
+     "u": "억엔",
+     "c": 2
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "유통·호텔",
+   "t": "쇼핑몰 영업이익",
+   "d": "b",
+   "bars": [
+    {
+     "k": "sm_o",
+     "l": "쇼핑몰 영업이익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "유통·호텔",
+   "t": "호텔 사업 수익",
+   "d": "b",
+   "bars": [
+    {
+     "k": "hotel_s",
+     "l": "호텔 수익",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "lines": [
+    {
+     "k": "hotel_s_yoy",
+     "l": "YoY",
+     "u": "%",
+     "c": 0,
+     "yoy": 1,
+     "r": 1
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "유통·호텔",
+   "t": "호텔 사업 영업이익률",
+   "d": "b",
+   "lines": [
+    {
+     "k": "hotel_m",
+     "l": "호텔",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "결산보충자료(2025년 3월기 2분기~2027년 3월기 2분기) 누계 차감"
+  },
+  {
+   "sec": "유통·호텔",
+   "t": "호텔 월별 가동률",
+   "def": "27년 3월기 상반기 ADR: 호텔 게이한 17,827엔, 게이한 호텔즈&리조츠 24,702엔",
+   "d": "hm",
+   "lines": [
+    {
+     "k": "hk",
+     "l": "호텔 게이한",
+     "u": "%",
+     "c": 0
+    },
+    {
+     "k": "hr",
+     "l": "게이한 호텔즈&리조츠",
+     "u": "%",
+     "c": 1
+    }
+   ],
+   "src": "2027년 3월기 2분기 결산보충자료(호텔 사업 성적, 라벨값)"
+  },
+  {
+   "sec": "월차",
+   "t": "월차 최근 24개월",
+   "d": "mm",
+   "table": 1,
+   "cols": [
+    {
+     "k": "m0",
+     "l": "여객 운수 수입 합계",
+     "u": "억엔"
+    },
+    {
+     "k": "m1",
+     "l": "합계 전년 대비",
+     "u": "전년=100",
+     "yoy100": 1
+    },
+    {
+     "k": "m2",
+     "l": "정기",
+     "u": "억엔"
+    },
+    {
+     "k": "m3",
+     "l": "정기 외",
+     "u": "억엔"
+    }
+   ],
+   "src": "회사 IR 월차(게이한전철 여객 운수 수입, jp_monthly 원장)"
+  },
+  {
+   "sec": "월차",
+   "t": "여객 운수 수입 전년 대비",
+   "d": "mm",
+   "lines": [
+    {
+     "k": "m1",
+     "l": "합계 전년 대비(전년=100)",
+     "u": "%",
+     "c": 0
+    }
+   ],
+   "src": "회사 IR 월차(게이한전철 여객 운수 수입, jp_monthly 원장)"
+  },
+  {
+   "sec": "월차",
+   "t": "월별 여객 운수 수입",
+   "d": "mm",
+   "bars": [
+    {
+     "k": "m0",
+     "l": "합계",
+     "u": "억엔",
+     "c": 0
+    }
+   ],
+   "src": "회사 IR 월차(게이한전철 여객 운수 수입, jp_monthly 원장)"
+  },
+  {
+   "sec": "월차",
+   "t": "월별 정기·정기 외 수입",
+   "d": "mm",
+   "lines": [
+    {
+     "k": "m3",
+     "l": "정기 외",
+     "u": "억엔",
+     "c": 0
+    },
+    {
+     "k": "m2",
+     "l": "정기",
+     "u": "억엔",
+     "c": 1
+    }
+   ],
+   "src": "회사 IR 월차(게이한전철 여객 운수 수입, jp_monthly 원장)"
+  }
+ ],
+ "tables": {
+  "q": [
+   {
+    "q": "24.3Q",
+    "x": "24.3Q",
+    "sales": 716.63,
+    "op": 109.09,
+    "ord": 107.08,
+    "net": 71.29,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "gpm": null,
+    "opm": 15.2,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null
+   },
+   {
+    "q": "24.4Q",
+    "x": "24.4Q",
+    "sales": 966.17,
+    "op": 58.23,
+    "ord": 55.58,
+    "net": 32.77,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "gpm": null,
+    "opm": 6.0,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null
+   },
+   {
+    "q": "25.1Q",
+    "x": "25.1Q",
+    "sales": 809.52,
+    "op": 127.13,
+    "ord": 128.22,
+    "net": 90.85,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "gpm": null,
+    "opm": 15.7,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "ord_yoy": null,
+    "net_yoy": null,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null
+   },
+   {
+    "q": "25.2Q",
+    "x": "25.2Q",
+    "sales": 774.22,
+    "op": 100.44,
+    "ord": 96.63,
+    "net": 65.34,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "gpm": null,
+    "opm": 13.0,
+    "kpi_teiki": 40.09,
+    "kpi_teikigai": 79.45,
+    "kpi_pax": 119.54,
+    "sales_yoy": 13.1,
+    "op_yoy": 23.8,
+    "ord_yoy": 23.0,
+    "net_yoy": 15.8,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "kpi_teiki_yoy": null,
+    "kpi_teikigai_yoy": null,
+    "kpi_pax_yoy": null
+   },
+   {
+    "q": "25.3Q",
+    "x": "25.3Q",
+    "sales": 756.23,
+    "op": 138.04,
+    "ord": 134.09,
+    "net": 92.78,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": null,
+    "debt_total": null,
+    "equity": null,
+    "total_assets": null,
+    "gpm": null,
+    "opm": 18.3,
+    "kpi_teiki": 40.73,
+    "kpi_teikigai": 87.65,
+    "kpi_pax": 128.38,
+    "sales_yoy": 5.5,
+    "op_yoy": 26.5,
+    "ord_yoy": 25.2,
+    "net_yoy": 30.1,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "kpi_teiki_yoy": null,
+    "kpi_teikigai_yoy": null,
+    "kpi_pax_yoy": null
+   },
+   {
+    "q": "25.4Q",
+    "x": "25.4Q",
+    "sales": 795.49,
+    "op": 55.1,
+    "ord": 50.11,
+    "net": 33.69,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 138.36,
+    "debt_total": 3711.99,
+    "equity": 3145.08,
+    "total_assets": 8598.6,
+    "gpm": null,
+    "opm": 6.9,
+    "kpi_teiki": 38.36,
+    "kpi_teikigai": 82.75,
+    "kpi_pax": 121.11,
+    "sales_yoy": -17.7,
+    "op_yoy": -5.4,
+    "ord_yoy": -9.8,
+    "net_yoy": 2.8,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "kpi_teiki_yoy": null,
+    "kpi_teikigai_yoy": null,
+    "kpi_pax_yoy": null
+   },
+   {
+    "q": "26.1Q",
+    "x": "26.1Q",
+    "sales": 728.27,
+    "op": 129.6,
+    "ord": 126.36,
+    "net": 93.54,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 169.57,
+    "debt_total": 3916.03,
+    "equity": 3176.95,
+    "total_assets": 8685.03,
+    "gpm": null,
+    "opm": 17.8,
+    "kpi_teiki": 41.65,
+    "kpi_teikigai": 87.94,
+    "kpi_pax": 129.59,
+    "sales_yoy": -10.0,
+    "op_yoy": 1.9,
+    "ord_yoy": -1.5,
+    "net_yoy": 3.0,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "kpi_teiki_yoy": null,
+    "kpi_teikigai_yoy": null,
+    "kpi_pax_yoy": null
+   },
+   {
+    "q": "26.2Q",
+    "x": "26.2Q",
+    "sales": 715.38,
+    "op": 91.59,
+    "ord": 84.87,
+    "net": 64.48,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 134.17,
+    "debt_total": 3876.08,
+    "equity": 3257.39,
+    "total_assets": 8794.05,
+    "gpm": null,
+    "opm": 12.8,
+    "kpi_teiki": 41.09,
+    "kpi_teikigai": 83.86,
+    "kpi_pax": 124.95,
+    "sales_yoy": -7.6,
+    "op_yoy": -8.8,
+    "ord_yoy": -12.2,
+    "net_yoy": -1.3,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "kpi_teiki_yoy": 2.5,
+    "kpi_teikigai_yoy": 5.6,
+    "kpi_pax_yoy": 4.5
+   },
+   {
+    "q": "26.3Q",
+    "x": "26.3Q",
+    "sales": 813.76,
+    "op": 141.31,
+    "ord": 139.88,
+    "net": 97.61,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 167.85,
+    "debt_total": 3929.91,
+    "equity": 3375.89,
+    "total_assets": 8946.1,
+    "gpm": null,
+    "opm": 17.4,
+    "kpi_teiki": 44.3,
+    "kpi_teikigai": 97.24,
+    "kpi_pax": 141.54,
+    "sales_yoy": 7.6,
+    "op_yoy": 2.4,
+    "ord_yoy": 4.3,
+    "net_yoy": 5.2,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": null,
+    "debt_total_yoy": null,
+    "equity_yoy": null,
+    "total_assets_yoy": null,
+    "kpi_teiki_yoy": 8.8,
+    "kpi_teikigai_yoy": 10.9,
+    "kpi_pax_yoy": 10.3
+   },
+   {
+    "q": "26.4Q",
+    "x": "26.4Q",
+    "sales": 1067.3,
+    "op": 129.02,
+    "ord": 118.2,
+    "net": 80.18,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 147.59,
+    "debt_total": 3827.85,
+    "equity": 3495.63,
+    "total_assets": 9095.45,
+    "gpm": null,
+    "opm": 12.1,
+    "kpi_teiki": 43.3,
+    "kpi_teikigai": 92.23,
+    "kpi_pax": 135.53,
+    "sales_yoy": 34.2,
+    "op_yoy": 134.2,
+    "ord_yoy": 135.9,
+    "net_yoy": 138.0,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": 6.7,
+    "debt_total_yoy": 3.1,
+    "equity_yoy": 11.1,
+    "total_assets_yoy": 5.8,
+    "kpi_teiki_yoy": 12.9,
+    "kpi_teikigai_yoy": 11.5,
+    "kpi_pax_yoy": 11.9
+   },
+   {
+    "q": "27.1Q",
+    "x": "27.1Q",
+    "sales": 751.63,
+    "op": 131.28,
+    "ord": 132.23,
+    "net": 93.55,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 231.48,
+    "debt_total": 4203.89,
+    "equity": 3507.64,
+    "total_assets": 9421.88,
+    "gpm": null,
+    "opm": 17.5,
+    "kpi_teiki": 47.57,
+    "kpi_teikigai": 94.23,
+    "kpi_pax": 141.8,
+    "sales_yoy": 3.2,
+    "op_yoy": 1.3,
+    "ord_yoy": 4.6,
+    "net_yoy": 0.0,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": 36.5,
+    "debt_total_yoy": 7.4,
+    "equity_yoy": 10.4,
+    "total_assets_yoy": 8.5,
+    "kpi_teiki_yoy": 14.2,
+    "kpi_teikigai_yoy": 7.2,
+    "kpi_pax_yoy": 9.4
+   },
+   {
+    "q": "27.2Q",
+    "x": "27.2Q",
+    "sales": 817.84,
+    "op": 114.7,
+    "ord": 103.58,
+    "net": 76.88,
+    "gp": null,
+    "sga": null,
+    "cogs": null,
+    "cash": 128.03,
+    "debt_total": 4353.64,
+    "equity": 3601.79,
+    "total_assets": 9630.05,
+    "gpm": null,
+    "opm": 14.0,
+    "kpi_teiki": 47.06,
+    "kpi_teikigai": 90.88,
+    "kpi_pax": 137.94,
+    "sales_yoy": 14.3,
+    "op_yoy": 25.2,
+    "ord_yoy": 22.0,
+    "net_yoy": 19.2,
+    "gp_yoy": null,
+    "sga_yoy": null,
+    "cash_yoy": -4.6,
+    "debt_total_yoy": 12.3,
+    "equity_yoy": 10.6,
+    "total_assets_yoy": 9.5,
+    "kpi_teiki_yoy": 14.5,
+    "kpi_teikigai_yoy": 8.4,
+    "kpi_pax_yoy": 10.4
+   }
+  ],
+  "a": [
+   {
+    "year": "2021",
+    "x": "2021",
+    "sales": 2534.19,
+    "op": -12.65,
+    "ord": 2.38,
+    "net": -45.74,
+    "opm": -0.5,
+    "sales_yoy": null,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2022",
+    "x": "2022",
+    "sales": 2581.18,
+    "op": 134.08,
+    "ord": 164.85,
+    "net": 95.89,
+    "opm": 5.2,
+    "sales_yoy": 1.9,
+    "op_yoy": null,
+    "net_yoy": null
+   },
+   {
+    "year": "2023",
+    "x": "2023",
+    "sales": 2600.7,
+    "op": 204.91,
+    "ord": 204.58,
+    "net": 176.21,
+    "opm": 7.9,
+    "sales_yoy": 0.8,
+    "op_yoy": 52.8,
+    "net_yoy": 83.8
+   },
+   {
+    "year": "2024",
+    "x": "2024",
+    "sales": 3021.47,
+    "op": 339.04,
+    "ord": 331.11,
+    "net": 248.9,
+    "opm": 11.2,
+    "sales_yoy": 16.2,
+    "op_yoy": 65.5,
+    "net_yoy": 41.3
+   },
+   {
+    "year": "2025",
+    "x": "2025",
+    "sales": 3135.46,
+    "op": 420.71,
+    "ord": 409.05,
+    "net": 282.66,
+    "opm": 13.4,
+    "sales_yoy": 3.8,
+    "op_yoy": 24.1,
+    "net_yoy": 13.6
+   },
+   {
+    "year": "2026",
+    "x": "2026",
+    "sales": 3324.71,
+    "op": 491.52,
+    "ord": 469.31,
+    "net": 335.81,
+    "opm": 14.8,
+    "sales_yoy": 6.0,
+    "op_yoy": 16.8,
+    "net_yoy": 18.8
+   },
+   {
+    "year": "2027 계획",
+    "x": "2027 계획",
+    "sales": 3181.0,
+    "op": 439.0,
+    "ord": 401.0,
+    "net": 300.0,
+    "opm": 13.8,
+    "sales_yoy": -4.3,
+    "op_yoy": -10.7,
+    "net_yoy": -10.7,
+    "plan": 1,
+    "kind": "회사 계획"
+   }
+  ],
+  "seg": [
+   {
+    "x": "24.3Q",
+    "trn_s": 235.89,
+    "trn_o": 40.8,
+    "re_s": 271.93,
+    "re_o": 43.44,
+    "ret_s": 143.74,
+    "ret_o": 11.08,
+    "lei_s": 98.95,
+    "lei_o": 16.27
+   },
+   {
+    "x": "24.4Q",
+    "trn_s": 218.69,
+    "trn_o": -10.56,
+    "re_s": 568.12,
+    "re_o": 68.03,
+    "ret_s": 136.32,
+    "ret_o": 5.84,
+    "lei_s": 82.6,
+    "lei_o": 0.89
+   },
+   {
+    "x": "25.1Q",
+    "trn_s": 229.36,
+    "trn_o": 44.52,
+    "re_s": 387.97,
+    "re_o": 64.2,
+    "ret_s": 129.26,
+    "ret_o": 5.51,
+    "lei_s": 95.15,
+    "lei_o": 12.82
+   },
+   {
+    "x": "25.2Q",
+    "trn_s": 223.77,
+    "trn_o": 27.27,
+    "re_s": 346.54,
+    "re_o": 58.28,
+    "ret_s": 141.93,
+    "ret_o": 5.58,
+    "lei_s": 97.22,
+    "lei_o": 10.81
+   },
+   {
+    "x": "25.3Q",
+    "trn_s": 237.39,
+    "trn_o": 44.93,
+    "re_s": 286.17,
+    "re_o": 57.94,
+    "ret_s": 153.33,
+    "ret_o": 11.5,
+    "lei_s": 114.12,
+    "lei_o": 24.32
+   },
+   {
+    "x": "25.4Q",
+    "trn_s": 223.29,
+    "trn_o": 6.51,
+    "re_s": 370.26,
+    "re_o": 43.0,
+    "ret_s": 146.07,
+    "ret_o": 5.87,
+    "lei_s": 93.29,
+    "lei_o": 1.21
+   },
+   {
+    "x": "26.1Q",
+    "trn_s": 237.91,
+    "trn_o": 44.35,
+    "re_s": 263.8,
+    "re_o": 49.56,
+    "ret_s": 137.03,
+    "ret_o": 5.31,
+    "lei_s": 116.29,
+    "lei_o": 25.88
+   },
+   {
+    "x": "26.2Q",
+    "trn_s": 235.7,
+    "trn_o": 28.54,
+    "re_s": 263.05,
+    "re_o": 42.34,
+    "ret_s": 139.98,
+    "ret_o": 5.23,
+    "lei_s": 110.29,
+    "lei_o": 17.22
+   },
+   {
+    "x": "26.3Q",
+    "trn_s": 257.3,
+    "trn_o": 49.89,
+    "re_s": 311.17,
+    "re_o": 51.72,
+    "ret_s": 155.21,
+    "ret_o": 11.59,
+    "lei_s": 125.77,
+    "lei_o": 29.43
+   },
+   {
+    "x": "26.4Q",
+    "trn_s": 244.31,
+    "trn_o": 16.99,
+    "re_s": 624.35,
+    "re_o": 117.0,
+    "ret_s": 147.63,
+    "ret_o": 6.05,
+    "lei_s": 92.56,
+    "lei_o": -4.94
+   },
+   {
+    "x": "27.1Q",
+    "trn_s": 251.54,
+    "trn_o": 50.45,
+    "re_s": 285.56,
+    "re_o": 55.48,
+    "ret_s": 137.64,
+    "ret_o": 7.08,
+    "lei_s": 109.96,
+    "lei_o": 17.72
+   },
+   {
+    "x": "27.2Q",
+    "trn_s": 251.69,
+    "trn_o": 40.16,
+    "re_s": 363.51,
+    "re_o": 60.66,
+    "ret_s": 137.7,
+    "ret_o": 6.53,
+    "lei_s": 100.91,
+    "lei_o": 8.14
+   }
+  ],
+  "b": [
+   {
+    "x": "23.2Q",
+    "rev_t": 36.78,
+    "rev_k": 65.61
+   },
+   {
+    "x": "23.3Q",
+    "rev_t": 37.42,
+    "rev_k": 74.48
+   },
+   {
+    "x": "23.4Q",
+    "rev_t": 35.23,
+    "rev_k": 74.12
+   },
+   {
+    "x": "24.1Q",
+    "rev_t": 39.36,
+    "rev_k": 80.31
+   },
+   {
+    "x": "24.2Q",
+    "rev_t": 39.14,
+    "rev_k": 77.59,
+    "rev_t_yoy": 6.4,
+    "rev_k_yoy": 18.3,
+    "pax_k_yoy": null,
+    "pax_t_yoy": null,
+    "hotel_s_yoy": null,
+    "rent_s_yoy": null,
+    "dept_s_yoy": null,
+    "sm_s_yoy": null,
+    "store_s_yoy": null,
+    "up_k_yoy": null
+   },
+   {
+    "x": "24.3Q",
+    "rev_t": 39.9,
+    "rev_k": 84.2,
+    "trn_s": 235.89,
+    "re_s": 271.93,
+    "ret_s": 143.74,
+    "lei_s": 98.95,
+    "trn_o": 40.8,
+    "re_o": 43.44,
+    "ret_o": 11.08,
+    "lei_o": 16.27,
+    "rail_s": 194.51,
+    "bus_s": 61.78,
+    "rail_o": 32.97,
+    "bus_o": 7.8,
+    "sale_s": 157.8,
+    "rent_s": 69.18,
+    "cons_s": 52.55,
+    "sale_o": 10.13,
+    "rent_o": 29.84,
+    "dept_s": 61.48,
+    "store_s": 41.26,
+    "sm_s": 33.68,
+    "sm_o": 5.0,
+    "hotel_s": 89.23,
+    "hotel_o": 15.08,
+    "pax_k": 33203,
+    "pax_t": 34389,
+    "up_k": 254,
+    "up_t": 116,
+    "rail_m": 17.0,
+    "bus_m": 12.6,
+    "sale_m": 6.4,
+    "rent_m": 43.1,
+    "hotel_m": 16.9,
+    "rev_t_yoy": 6.6,
+    "rev_k_yoy": 13.1,
+    "pax_k_yoy": null,
+    "pax_t_yoy": null,
+    "hotel_s_yoy": null,
+    "rent_s_yoy": null,
+    "dept_s_yoy": null,
+    "sm_s_yoy": null,
+    "store_s_yoy": null,
+    "up_k_yoy": null
+   },
+   {
+    "x": "24.4Q",
+    "rev_t": 37.72,
+    "rev_k": 80.94,
+    "trn_s": 218.69,
+    "re_s": 568.12,
+    "ret_s": 136.32,
+    "lei_s": 82.6,
+    "trn_o": -10.56,
+    "re_o": 68.03,
+    "ret_o": 5.84,
+    "lei_o": 0.89,
+    "rail_s": 185.27,
+    "bus_s": 55.82,
+    "rail_o": -7.97,
+    "bus_o": -2.86,
+    "sale_s": 424.27,
+    "rent_s": 66.56,
+    "cons_s": 91.54,
+    "sale_o": 35.97,
+    "rent_o": 23.34,
+    "dept_s": 56.41,
+    "store_s": 38.79,
+    "sm_s": 34.78,
+    "sm_o": 4.3,
+    "hotel_s": 75.68,
+    "hotel_o": 2.89,
+    "pax_k": 31606,
+    "pax_t": 30818,
+    "up_k": 256,
+    "up_t": 122,
+    "rail_m": -4.3,
+    "bus_m": -5.1,
+    "sale_m": 8.5,
+    "rent_m": 35.1,
+    "hotel_m": 3.8,
+    "rev_t_yoy": 7.1,
+    "rev_k_yoy": 9.2,
+    "pax_k_yoy": null,
+    "pax_t_yoy": null,
+    "hotel_s_yoy": null,
+    "rent_s_yoy": null,
+    "dept_s_yoy": null,
+    "sm_s_yoy": null,
+    "store_s_yoy": null,
+    "up_k_yoy": null
+   },
+   {
+    "x": "25.1Q",
+    "rev_t": 40.78,
+    "rev_k": 84.94,
+    "trn_s": 229.36,
+    "re_s": 387.97,
+    "ret_s": 129.26,
+    "lei_s": 95.15,
+    "trn_o": 44.52,
+    "re_o": 64.2,
+    "ret_o": 5.51,
+    "lei_o": 12.82,
+    "rail_s": 188.07,
+    "bus_s": 60.36,
+    "rail_o": 37.07,
+    "bus_o": 7.32,
+    "sale_s": 275.37,
+    "rent_s": 72.3,
+    "cons_s": 50.04,
+    "sale_o": 32.14,
+    "rent_o": 30.87,
+    "dept_s": 49.0,
+    "store_s": 39.05,
+    "sm_s": 33.47,
+    "sm_o": 4.57,
+    "hotel_s": 84.83,
+    "hotel_o": 11.19,
+    "pax_k": 33345,
+    "pax_t": 34959,
+    "up_k": 255,
+    "up_t": 117,
+    "rail_m": 19.7,
+    "bus_m": 12.1,
+    "sale_m": 11.7,
+    "rent_m": 42.7,
+    "hotel_m": 13.2,
+    "rev_t_yoy": 3.6,
+    "rev_k_yoy": 5.8,
+    "pax_k_yoy": null,
+    "pax_t_yoy": null,
+    "hotel_s_yoy": null,
+    "rent_s_yoy": null,
+    "dept_s_yoy": null,
+    "sm_s_yoy": null,
+    "store_s_yoy": null,
+    "up_k_yoy": null
+   },
+   {
+    "x": "25.2Q",
+    "rev_t": 40.09,
+    "rev_k": 79.45,
+    "trn_s": 223.77,
+    "re_s": 346.54,
+    "ret_s": 141.93,
+    "lei_s": 97.22,
+    "trn_o": 27.27,
+    "re_o": 58.28,
+    "ret_o": 5.58,
+    "lei_o": 10.81,
+    "rail_s": 185.46,
+    "bus_s": 58.85,
+    "rail_o": 25.22,
+    "bus_o": 1.99,
+    "sale_s": 232.27,
+    "rent_s": 69.85,
+    "cons_s": 52.91,
+    "sale_o": 26.48,
+    "rent_o": 27.59,
+    "dept_s": 60.95,
+    "store_s": 39.26,
+    "sm_s": 34.34,
+    "sm_o": 4.3,
+    "hotel_s": 87.05,
+    "hotel_o": 9.58,
+    "pax_k": 31210,
+    "pax_t": 33872,
+    "up_k": 255,
+    "up_t": 118,
+    "rail_m": 13.6,
+    "bus_m": 3.4,
+    "sale_m": 11.4,
+    "rent_m": 39.5,
+    "hotel_m": 11.0,
+    "rev_t_yoy": 2.4,
+    "rev_k_yoy": 2.4,
+    "pax_k_yoy": null,
+    "pax_t_yoy": null,
+    "hotel_s_yoy": null,
+    "rent_s_yoy": null,
+    "dept_s_yoy": null,
+    "sm_s_yoy": null,
+    "store_s_yoy": null,
+    "up_k_yoy": null
+   },
+   {
+    "x": "25.3Q",
+    "rev_t": 40.73,
+    "rev_k": 87.65,
+    "trn_s": 237.39,
+    "re_s": 286.17,
+    "ret_s": 153.33,
+    "lei_s": 114.12,
+    "trn_o": 44.93,
+    "re_o": 57.94,
+    "ret_o": 11.5,
+    "lei_o": 24.32,
+    "rail_s": 195.95,
+    "bus_s": 62.15,
+    "rail_o": 37.96,
+    "bus_o": 6.91,
+    "sale_s": 164.43,
+    "rent_s": 75.7,
+    "cons_s": 51.72,
+    "sale_o": 23.1,
+    "rent_o": 30.05,
+    "dept_s": 68.78,
+    "store_s": 43.15,
+    "sm_s": 35.13,
+    "sm_o": 6.08,
+    "hotel_s": 103.99,
+    "hotel_o": 22.81,
+    "pax_k": 34306,
+    "pax_t": 35080,
+    "up_k": 255,
+    "up_t": 116,
+    "rail_m": 19.4,
+    "bus_m": 11.1,
+    "sale_m": 14.0,
+    "rent_m": 39.7,
+    "hotel_m": 21.9,
+    "rev_t_yoy": 2.1,
+    "rev_k_yoy": 4.1,
+    "pax_k_yoy": 3.3,
+    "pax_t_yoy": 2.0,
+    "hotel_s_yoy": 16.5,
+    "rent_s_yoy": 9.4,
+    "dept_s_yoy": 11.9,
+    "sm_s_yoy": 4.3,
+    "store_s_yoy": 4.6,
+    "up_k_yoy": 0.4
+   },
+   {
+    "x": "25.4Q",
+    "rev_t": 38.36,
+    "rev_k": 82.75,
+    "trn_s": 223.29,
+    "re_s": 370.26,
+    "ret_s": 146.07,
+    "lei_s": 93.29,
+    "trn_o": 6.51,
+    "re_o": 43.0,
+    "ret_o": 5.87,
+    "lei_o": 1.21,
+    "rail_s": 189.68,
+    "bus_s": 56.5,
+    "rail_o": 7.81,
+    "bus_o": -1.4,
+    "sale_s": 226.51,
+    "rent_s": 73.91,
+    "cons_s": 77.8,
+    "sale_o": 17.11,
+    "rent_o": 20.07,
+    "dept_s": 65.35,
+    "store_s": 40.01,
+    "sm_s": 36.6,
+    "sm_o": 5.0,
+    "hotel_s": 85.8,
+    "hotel_o": 2.96,
+    "pax_k": 32188,
+    "pax_t": 31361,
+    "up_k": 257,
+    "up_t": 122,
+    "rail_m": 4.1,
+    "bus_m": -2.5,
+    "sale_m": 7.6,
+    "rent_m": 27.2,
+    "hotel_m": 3.4,
+    "rev_t_yoy": 1.7,
+    "rev_k_yoy": 2.2,
+    "pax_k_yoy": 1.8,
+    "pax_t_yoy": 1.8,
+    "hotel_s_yoy": 13.4,
+    "rent_s_yoy": 11.0,
+    "dept_s_yoy": 15.8,
+    "sm_s_yoy": 5.2,
+    "store_s_yoy": 3.1,
+    "up_k_yoy": 0.4
+   },
+   {
+    "x": "26.1Q",
+    "rev_t": 41.65,
+    "rev_k": 87.94,
+    "trn_s": 237.91,
+    "re_s": 263.8,
+    "ret_s": 137.03,
+    "lei_s": 116.29,
+    "trn_o": 44.35,
+    "re_o": 49.56,
+    "ret_o": 5.31,
+    "lei_o": 25.88,
+    "rail_s": 195.38,
+    "bus_s": 61.81,
+    "rail_o": 36.62,
+    "bus_o": 7.59,
+    "sale_s": 143.53,
+    "rent_s": 77.0,
+    "cons_s": 41.98,
+    "sale_o": 14.54,
+    "rent_o": 34.02,
+    "dept_s": 50.81,
+    "store_s": 41.9,
+    "sm_s": 34.97,
+    "sm_o": 5.33,
+    "hotel_s": 105.31,
+    "hotel_o": 23.91,
+    "pax_k": 34229,
+    "pax_t": 35661,
+    "up_k": 257,
+    "up_t": 117,
+    "rail_m": 18.7,
+    "bus_m": 12.3,
+    "sale_m": 10.1,
+    "rent_m": 44.2,
+    "hotel_m": 22.7,
+    "rev_t_yoy": 2.1,
+    "rev_k_yoy": 3.5,
+    "pax_k_yoy": 2.7,
+    "pax_t_yoy": 2.0,
+    "hotel_s_yoy": 24.1,
+    "rent_s_yoy": 6.5,
+    "dept_s_yoy": 3.7,
+    "sm_s_yoy": 4.5,
+    "store_s_yoy": 7.3,
+    "up_k_yoy": 0.8
+   },
+   {
+    "x": "26.2Q",
+    "rev_t": 41.09,
+    "rev_k": 83.86,
+    "trn_s": 235.7,
+    "re_s": 263.05,
+    "ret_s": 139.98,
+    "lei_s": 110.29,
+    "trn_o": 28.54,
+    "re_o": 42.34,
+    "ret_o": 5.23,
+    "lei_o": 17.22,
+    "rail_s": 194.56,
+    "bus_s": 61.38,
+    "rail_o": 24.85,
+    "bus_o": 3.7,
+    "sale_s": 143.71,
+    "rent_s": 75.4,
+    "cons_s": 50.53,
+    "sale_o": 11.64,
+    "rent_o": 28.13,
+    "dept_s": 55.39,
+    "store_s": 40.82,
+    "sm_s": 35.04,
+    "sm_o": 5.45,
+    "hotel_s": 99.12,
+    "hotel_o": 15.16,
+    "pax_k": 32593,
+    "pax_t": 34707,
+    "up_k": 257,
+    "up_t": 118,
+    "rail_m": 12.8,
+    "bus_m": 6.0,
+    "sale_m": 8.1,
+    "rent_m": 37.3,
+    "hotel_m": 15.3,
+    "rev_t_yoy": 2.5,
+    "rev_k_yoy": 5.6,
+    "pax_k_yoy": 4.4,
+    "pax_t_yoy": 2.5,
+    "hotel_s_yoy": 13.9,
+    "rent_s_yoy": 7.9,
+    "dept_s_yoy": -9.1,
+    "sm_s_yoy": 2.0,
+    "store_s_yoy": 4.0,
+    "up_k_yoy": 0.8
+   },
+   {
+    "x": "26.3Q",
+    "rev_t": 44.3,
+    "rev_k": 97.24,
+    "trn_s": 257.3,
+    "re_s": 311.17,
+    "ret_s": 155.21,
+    "lei_s": 125.77,
+    "trn_o": 49.89,
+    "re_o": 51.72,
+    "ret_o": 11.59,
+    "lei_o": 29.43,
+    "rail_s": 215.27,
+    "bus_s": 62.64,
+    "rail_o": 43.53,
+    "bus_o": 6.23,
+    "sale_s": 186.05,
+    "rent_s": 78.09,
+    "cons_s": 51.12,
+    "sale_o": 18.24,
+    "rent_o": 31.12,
+    "dept_s": 64.78,
+    "store_s": 44.03,
+    "sm_s": 36.95,
+    "sm_o": 6.55,
+    "hotel_s": 114.65,
+    "hotel_o": 27.6,
+    "pax_k": 33824,
+    "pax_t": 36456,
+    "up_k": 287,
+    "up_t": 122,
+    "rail_m": 20.2,
+    "bus_m": 9.9,
+    "sale_m": 9.8,
+    "rent_m": 39.9,
+    "hotel_m": 24.1,
+    "rev_t_yoy": 8.8,
+    "rev_k_yoy": 10.9,
+    "pax_k_yoy": -1.4,
+    "pax_t_yoy": 3.9,
+    "hotel_s_yoy": 10.3,
+    "rent_s_yoy": 3.2,
+    "dept_s_yoy": -5.8,
+    "sm_s_yoy": 5.2,
+    "store_s_yoy": 2.0,
+    "up_k_yoy": 12.5
+   },
+   {
+    "x": "26.4Q",
+    "rev_t": 43.3,
+    "rev_k": 92.23,
+    "trn_s": 244.31,
+    "re_s": 624.35,
+    "ret_s": 147.63,
+    "lei_s": 92.56,
+    "trn_o": 16.99,
+    "re_o": 117.0,
+    "ret_o": 6.05,
+    "lei_o": -4.94,
+    "rail_s": 208.81,
+    "bus_s": 58.15,
+    "rail_o": 18.21,
+    "bus_o": -1.33,
+    "sale_s": 470.04,
+    "rent_s": 77.09,
+    "cons_s": 90.4,
+    "sale_o": 85.34,
+    "rent_o": 21.53,
+    "dept_s": 62.51,
+    "store_s": 41.05,
+    "sm_s": 38.41,
+    "sm_o": 6.04,
+    "hotel_s": 85.0,
+    "hotel_o": -2.28,
+    "pax_k": 31883,
+    "pax_t": 32549,
+    "up_k": 289,
+    "up_t": 133,
+    "rail_m": 8.7,
+    "bus_m": -2.3,
+    "sale_m": 18.2,
+    "rent_m": 27.9,
+    "hotel_m": -2.7,
+    "rev_t_yoy": 12.9,
+    "rev_k_yoy": 11.5,
+    "pax_k_yoy": -0.9,
+    "pax_t_yoy": 3.8,
+    "hotel_s_yoy": -0.9,
+    "rent_s_yoy": 4.3,
+    "dept_s_yoy": -4.3,
+    "sm_s_yoy": 4.9,
+    "store_s_yoy": 2.6,
+    "up_k_yoy": 12.5
+   },
+   {
+    "x": "27.1Q",
+    "rev_t": 47.57,
+    "rev_k": 94.23,
+    "trn_s": 251.54,
+    "re_s": 285.56,
+    "ret_s": 137.64,
+    "lei_s": 109.96,
+    "trn_o": 50.45,
+    "re_o": 55.48,
+    "ret_o": 7.08,
+    "lei_o": 17.72,
+    "rail_s": 209.79,
+    "bus_s": 60.7,
+    "rail_o": 43.33,
+    "bus_o": 7.05,
+    "sale_s": 165.36,
+    "rent_s": 81.32,
+    "cons_s": 38.71,
+    "sale_o": 20.41,
+    "rent_o": 34.28,
+    "dept_s": 50.04,
+    "store_s": 42.39,
+    "sm_s": 36.35,
+    "sm_o": 6.24,
+    "hotel_s": 98.34,
+    "hotel_o": 15.81,
+    "pax_k": 32827,
+    "pax_t": 36380,
+    "up_k": 287,
+    "up_t": 131,
+    "rail_m": 20.7,
+    "bus_m": 11.6,
+    "sale_m": 12.3,
+    "rent_m": 42.2,
+    "hotel_m": 16.1,
+    "rev_t_yoy": 14.2,
+    "rev_k_yoy": 7.2,
+    "pax_k_yoy": -4.1,
+    "pax_t_yoy": 2.0,
+    "hotel_s_yoy": -6.6,
+    "rent_s_yoy": 5.6,
+    "dept_s_yoy": -1.5,
+    "sm_s_yoy": 3.9,
+    "store_s_yoy": 1.2,
+    "up_k_yoy": 11.7
+   },
+   {
+    "x": "27.2Q",
+    "rev_t": 47.06,
+    "rev_k": 90.88,
+    "trn_s": 251.69,
+    "re_s": 363.51,
+    "ret_s": 137.7,
+    "lei_s": 100.91,
+    "trn_o": 40.16,
+    "re_o": 60.66,
+    "ret_o": 6.53,
+    "lei_o": 8.14,
+    "rail_s": 213.83,
+    "bus_s": 59.81,
+    "rail_o": 36.85,
+    "bus_o": 3.37,
+    "sale_s": 242.32,
+    "rent_s": 79.56,
+    "cons_s": 43.92,
+    "sale_o": 28.33,
+    "rent_o": 30.44,
+    "dept_s": 50.98,
+    "store_s": 42.28,
+    "sm_s": 35.98,
+    "sm_o": 5.85,
+    "hotel_s": 89.34,
+    "hotel_o": 6.24,
+    "pax_k": 31649,
+    "pax_t": 35516,
+    "up_k": 287,
+    "up_t": 133,
+    "rail_m": 17.2,
+    "bus_m": 5.6,
+    "sale_m": 11.7,
+    "rent_m": 38.3,
+    "hotel_m": 7.0,
+    "rev_t_yoy": 14.5,
+    "rev_k_yoy": 8.4,
+    "pax_k_yoy": -2.9,
+    "pax_t_yoy": 2.3,
+    "hotel_s_yoy": -9.9,
+    "rent_s_yoy": 5.5,
+    "dept_s_yoy": -8.0,
+    "sm_s_yoy": 2.7,
+    "store_s_yoy": 3.6,
+    "up_k_yoy": 11.7
+   }
+  ],
+  "ba": [
+   {
+    "x": "2019",
+    "rev_t": 168.66,
+    "rev_k": 351.87,
+    "rev": 520.53,
+    "pax_t": null,
+    "pax_k": null
+   },
+   {
+    "x": "2020",
+    "rev_t": 171.02,
+    "rev_k": 343.79,
+    "rev": 514.81,
+    "pax_t": null,
+    "pax_k": null,
+    "rev_yoy": -1.1
+   },
+   {
+    "x": "2021",
+    "rev_t": 139.74,
+    "rev_k": 215.66,
+    "rev": 355.4,
+    "pax_t": null,
+    "pax_k": null,
+    "rev_yoy": -31.0
+   },
+   {
+    "x": "2022",
+    "rev_t": 140.96,
+    "rev_k": 237.38,
+    "rev": 378.34,
+    "pax_t": null,
+    "pax_k": null,
+    "rev_yoy": 6.5
+   },
+   {
+    "x": "2023",
+    "rev_t": 146.63,
+    "rev_k": 284.21,
+    "rev": 430.84,
+    "pax_t": null,
+    "pax_k": null,
+    "rev_yoy": 13.9
+   },
+   {
+    "x": "2024",
+    "rev_t": 156.12,
+    "rev_k": 323.04,
+    "rev": 479.16,
+    "pax_t": 132988,
+    "pax_k": 127155,
+    "rev_yoy": 11.2
+   },
+   {
+    "x": "2025",
+    "rev_t": 159.97,
+    "rev_k": 334.81,
+    "rev": 494.78,
+    "pax_t": 135272,
+    "pax_k": 131049,
+    "rev_yoy": 3.3
+   },
+   {
+    "x": "2026",
+    "rev_t": 170.34,
+    "rev_k": 361.28,
+    "rev": 531.62,
+    "pax_t": 139373,
+    "pax_k": 132529,
+    "rev_yoy": 7.4
+   },
+   {
+    "x": "2027 계획",
+    "rev_t": 184.99,
+    "rev_k": 374.71,
+    "rev": 559.7,
+    "pax_t": 139269,
+    "pax_k": 129389,
+    "plan": 1,
+    "rev_yoy": 5.3
+   }
+  ],
+  "mm": [
+   {
+    "x": "24.10",
+    "m0": 42.53,
+    "m1": 103.4,
+    "m2": 13.67,
+    "m3": 28.86
+   },
+   {
+    "x": "24.11",
+    "m0": 42.96,
+    "m1": 102.9,
+    "m2": 13.66,
+    "m3": 29.29
+   },
+   {
+    "x": "24.12",
+    "m0": 42.88,
+    "m1": 104.1,
+    "m2": 13.39,
+    "m3": 29.49
+   },
+   {
+    "x": "25.01",
+    "m0": 40.36,
+    "m1": 102.6,
+    "m2": 12.88,
+    "m3": 27.47
+   },
+   {
+    "x": "25.02",
+    "m0": 38.37,
+    "m1": 100.8,
+    "m2": 12.91,
+    "m3": 25.45
+   },
+   {
+    "x": "25.03",
+    "m0": 42.39,
+    "m1": 102.7,
+    "m2": 12.56,
+    "m3": 29.82
+   },
+   {
+    "x": "25.04",
+    "m0": 43.96,
+    "m1": 103.3,
+    "m2": 13.45,
+    "m3": 30.5
+   },
+   {
+    "x": "25.05",
+    "m0": 43.67,
+    "m1": 103.4,
+    "m2": 13.98,
+    "m3": 29.68
+   },
+   {
+    "x": "25.06",
+    "m0": 41.95,
+    "m1": 102.5,
+    "m2": 14.2,
+    "m3": 27.74
+   },
+   {
+    "x": "25.07",
+    "m0": 42.66,
+    "m1": 104.2,
+    "m2": 14.13,
+    "m3": 28.53
+   },
+   {
+    "x": "25.08",
+    "m0": 41.25,
+    "m1": 105.9,
+    "m2": 13.4,
+    "m3": 27.85
+   },
+   {
+    "x": "25.09",
+    "m0": 41.03,
+    "m1": 103.5,
+    "m2": 13.55,
+    "m3": 27.47
+   },
+   {
+    "x": "25.10",
+    "m0": 46.98,
+    "m1": 110.5,
+    "m2": 14.58,
+    "m3": 32.39
+   },
+   {
+    "x": "25.11",
+    "m0": 47.69,
+    "m1": 111.0,
+    "m2": 14.88,
+    "m3": 32.8
+   },
+   {
+    "x": "25.12",
+    "m0": 46.87,
+    "m1": 109.3,
+    "m2": 14.82,
+    "m3": 32.04
+   },
+   {
+    "x": "26.01",
+    "m0": 45.6,
+    "m1": 113.0,
+    "m2": 14.47,
+    "m3": 31.13
+   },
+   {
+    "x": "26.02",
+    "m0": 42.34,
+    "m1": 110.4,
+    "m2": 14.55,
+    "m3": 27.78
+   },
+   {
+    "x": "26.03",
+    "m0": 47.58,
+    "m1": 112.3,
+    "m2": 14.26,
+    "m3": 33.32
+   },
+   {
+    "x": "26.04",
+    "m0": 47.73,
+    "m1": 108.6,
+    "m2": 15.32,
+    "m3": 32.4
+   },
+   {
+    "x": "26.05",
+    "m0": 48.74,
+    "m1": 111.6,
+    "m2": 15.96,
+    "m3": 32.78
+   },
+   {
+    "x": "26.06",
+    "m0": 45.33,
+    "m1": 108.0,
+    "m2": 16.28,
+    "m3": 29.04
+   },
+   {
+    "x": "26.07",
+    "m0": 47.18,
+    "m1": 110.6,
+    "m2": 16.2,
+    "m3": 30.97
+   },
+   {
+    "x": "26.08",
+    "m0": 45.48,
+    "m1": 110.3,
+    "m2": 15.42,
+    "m3": 30.06
+   },
+   {
+    "x": "26.09",
+    "m0": 45.27,
+    "m1": 110.3,
+    "m2": 15.43,
+    "m3": 29.84
+   }
+  ],
+  "hm": [
+   {
+    "x": "25.04",
+    "hk": 87.2,
+    "hr": 88.4
+   },
+   {
+    "x": "25.05",
+    "hk": 87.2,
+    "hr": 87.7
+   },
+   {
+    "x": "25.06",
+    "hk": 86.1,
+    "hr": 80.8
+   },
+   {
+    "x": "25.07",
+    "hk": 86.4,
+    "hr": 75.0
+   },
+   {
+    "x": "25.08",
+    "hk": 86.5,
+    "hr": 72.7
+   },
+   {
+    "x": "25.09",
+    "hk": 87.9,
+    "hr": 83.5
+   },
+   {
+    "x": "25.10",
+    "hk": 91.0,
+    "hr": 90.3
+   },
+   {
+    "x": "25.11",
+    "hk": 87.9,
+    "hr": 88.5
+   },
+   {
+    "x": "25.12",
+    "hk": 81.3,
+    "hr": 80.9
+   },
+   {
+    "x": "26.01",
+    "hk": 72.1,
+    "hr": 52.6
+   },
+   {
+    "x": "26.02",
+    "hk": 78.7,
+    "hr": 54.8
+   },
+   {
+    "x": "26.03",
+    "hk": 81.4,
+    "hr": 79.5
+   },
+   {
+    "x": "26.04",
+    "hk": 86.0,
+    "hr": 83.5
+   },
+   {
+    "x": "26.05",
+    "hk": 86.0,
+    "hr": 88.6
+   },
+   {
+    "x": "26.06",
+    "hk": 80.8,
+    "hr": 80.2
+   },
+   {
+    "x": "26.07",
+    "hk": 83.5,
+    "hr": 79.7
+   },
+   {
+    "x": "26.08",
+    "hk": 83.9,
+    "hr": 78.3
+   },
+   {
+    "x": "26.09",
+    "hk": 83.7,
+    "hr": 80.2
+   }
+  ]
+ }
+}
