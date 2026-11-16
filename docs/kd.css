@@ -147,3 +147,11 @@ table.kdq { border-collapse: collapse; font-size: 13px; background: var(--surfac
 .kd-tw th:first-child { background: #e7ebf0; z-index: 1; }
 .kd-tw td { padding: 4px 8px; border-bottom: 1px solid var(--line-soft); font-family: var(--mono); white-space: nowrap; }
 .kd-tw td.up { color: #d6336c; } .kd-tw td.dn { color: #1c7ed6; }
+
+/* 마우스를 올린 칸의 값 상자(2026-11-16 사용자 - 꺾은선은 최신 값만 글자, 나머지는 여기서) */
+.kd-fig { position: relative; }
+.kd-tip { display: none; position: absolute; z-index: 5; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 20px rgba(0,0,0,.12); padding: 7px 10px; font-size: 11.5px; line-height: 1.55; max-width: 280px; }
+.kd-tip b { display: block; font: 700 11.5px var(--mono); color: var(--ink); margin-bottom: 2px; }
+.kd-tip span { display: flex; align-items: center; gap: 5px; color: var(--ink-mid); white-space: nowrap; }
+.kd-tip span .kd-sw { margin-left: 0; flex: 0 0 auto; }
+.kd-tip em { font-style: normal; font-family: var(--mono); color: var(--ink); margin-left: auto; padding-left: 10px; }
