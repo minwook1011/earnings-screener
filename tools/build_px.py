@@ -119,6 +119,11 @@ def main():
     idx["updated"] = datetime.now(KST).strftime("%Y-%m-%d %H:%M")
     json.dump(idx, open(idx_p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     it = idx["items"].values()
+    try:   # 3Q26 일본 스크리닝 판(px/q3.json) — 3년 주가·분기 실적을 같이 새로(2026-11-17)
+        import build_q3
+        build_q3.main()
+    except Exception as e:
+        print("  [q3] 실패", e)
     print(f"주가 {ok}개 받음 · 실패 {bad} · 신고가 {sum(1 for x in it if x.get('new'))} · 근접 {sum(1 for x in it if x.get('near'))} · 턴어라운드 {sum(1 for x in it if x.get('turn'))}")
 
 

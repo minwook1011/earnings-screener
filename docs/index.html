@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap">
 <link rel="stylesheet" href="app.css?v=68">
 <link rel="stylesheet" href="kd.css?v=12">
+<link rel="stylesheet" href="lk.css?v=1">
 <script src="gate.js?v=1"></script>
+<script src="lk-boot.js?v=1"></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232563eb'/%3E%3Cpath d='M8 22l5-6 4 3 7-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 </head>
 <body>
@@ -31,8 +33,13 @@
       <a href="#kr" data-m="kr">한국</a>
       <a href="#room" data-m="room">리서치룸</a>
     </nav>
+    <button type="button" class="theme-btn" id="themeBtn" aria-label="밝게/어둡게 전환"><span class="t-d">☾</span><span class="t-l">☀</span></button>
   </div>
 </header>
+<svg class="lkdefs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+  <linearGradient id="lkUp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ef5f67" stop-opacity=".30"/><stop offset="1" stop-color="#ef5f67" stop-opacity="0"/></linearGradient>
+  <linearGradient id="lkDn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b8ff0" stop-opacity=".30"/><stop offset="1" stop-color="#4b8ff0" stop-opacity="0"/></linearGradient>
+</defs></svg>
 
 <main id="app"><div class="loading">불러오는 중…</div></main>
 
@@ -45,6 +52,6 @@
 </footer>
 <script src="pxchart.js?v=3"></script>
 <script src="kd.js?v=15"></script>
-<script src="app.js?v=104"></script>
+<script src="app.js?v=105"></script>
 </body>
 </html>
