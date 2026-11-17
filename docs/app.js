@@ -889,9 +889,11 @@
     if (o.vr) kv.push(["거래량(평소 대비)", o.vr.toFixed(1) + "배"]);
     var bm = S.bm[o.c], sum = (bm && bm.sum) || (d.note && d.note.about) || o.bm || "";
     var fr = fsRows(o, d);
+    var moDone = o.res.m && o.res.m.status === "완료" && o.res.m.html ? o.res.m : null;
     pin.innerHTML = head0 +
       (sum ? '<div class="dsec">기업 개요</div><div class="box"><p>' + esc(sum) + "</p></div>" : "") +
-      (o.res["2"] || (o.stage >= 2 && !o.study && !o.res.m) ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
+      (o.res["2"] || (o.stage >= 2 && !o.study && !o.res.m) || moDone ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' +
+        (moDone ? '<div class="box"><p><b>월차 리포트</b> · <a href="' + esc(ver(moDone.html, moDone.written)) + '" target="_blank" rel="noopener">리포트 전문 열기 ↗</a></p></div>' : "") : "") +   // 월차 리포트도 2단계 리서치 아래(2026-11-17 사용자)
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d) +   // 순서: 주가 → 재무제표 → 데이터(2026-11-13 사용자)
       '<div class="dsec"><span>분기 재무제표' + (S.xl[o.c] ? ' <a class="xl" href="data/jp/xlsx/' + esc(o.c) + '.xlsx?v=' + encodeURIComponent(S.xl[o.c]) + '" download>xlsx 다운로드</a>' : '') + '</span><span class="hint">억엔 · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
       (fr.length > 1 ? '<div class="charts" id="fsc">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
