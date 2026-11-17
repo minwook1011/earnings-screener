@@ -525,7 +525,7 @@
     var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank || 9) - (b.rank || 9); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
-      return "<li><b>" + esc(i.t || i.short) + "</b>" + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+      return "<li><b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
     }).join("") + "</ol></div>";
   }
   function mapBlock(co) {

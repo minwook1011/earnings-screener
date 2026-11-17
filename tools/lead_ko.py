@@ -115,6 +115,8 @@ for f in glob.glob(os.path.join(LEAD, "*.json")):
     if f.endswith("index.json"):
         continue
     co = json.load(open(f, encoding="utf-8"))
+    if "lead" not in co:
+        continue
     names = []
     if os.path.exists(os.path.join(MON, os.path.basename(f))):
         names.append("월차데이터")
