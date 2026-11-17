@@ -130,6 +130,32 @@ def spark(code):
             "c1": round((v[-1] / base1 - 1) * 100, 1) if base1 else None, "px": v[-1], "pd": rows[-1][0], "p0": pick[0][0]}
 
 
+def shares(code):
+    """결산단신(xbrl_cache 최신 zip) 서머리의 기말 발행주식수 − 자기주식 수. 시총이 없는 회사용(2026-11-18)."""
+    import glob
+    import zipfile
+    zs = sorted(glob.glob(os.path.join(ROOT, "tools", "xbrl_cache", code, "*.zip")))
+    for zp in reversed(zs):
+        try:
+            z = zipfile.ZipFile(zp)
+        except (OSError, zipfile.BadZipFile):
+            continue
+        for n in z.namelist():
+            if "Summary" in n and n.endswith("-ixbrl.htm"):
+                t = z.read(n).decode("utf-8", "ignore")
+
+                def pick(el):
+                    for m in re.finditer(r'<ix:nonFraction[^>]*name="[^"]*:' + el + r'"[^>]*>([\d,]+)<', t):
+                        tag = m.group(0)
+                        if "Current" in tag:
+                            return int(m.group(1).replace(",", ""))
+                    return None
+                iss = pick("NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock")
+                if iss:
+                    return iss - (pick("NumberOfTreasuryStockAtTheEndOfFiscalYear") or 0)
+    return None
+
+
 def main():
     res = (load(os.path.join(J, "research", "index.json"), {}) or {}).get("items", {})
     qh = load(QH, {}) or {}
@@ -163,6 +189,10 @@ def main():
         sp = spark(c)
         if sp:
             o.update(sp)
+        if o.get("mc") is None and sp and sp.get("px"):
+            sh = shares(c)
+            if sh:
+                o["mc"] = round(sp["px"] * sh / 1e8)   # 억엔 = 주가 × (발행 − 자기주식) 주식수
         items[c] = {k: v for k, v in o.items() if v is not None}
     out = {"updated": datetime.now(KST).strftime("%Y-%m-%d %H:%M"), "cq": TARGET, "items": items}
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))

@@ -71,7 +71,7 @@ def judge(b):
         if prev and h[i] >= max(prev):
             new = True
     off = round((c[-1] / hi - 1) * 100, 1)
-    m20, m60, m120 = ma(c, 20), ma(c, 60), ma(c, 120)
+    m10, m20, m60, m120 = ma(c, 10), ma(c, 20), ma(c, 60), ma(c, 120)
     up = lambda i: None not in (m20[i], m60[i], m120[i]) and m20[i] > m60[i] > m120[i]
     dn = lambda i: None not in (m20[i], m60[i], m120[i]) and m20[i] < m60[i] < m120[i]
     turn = None
@@ -88,10 +88,12 @@ def judge(b):
     if turn:
         out["tix"] = next(k for k, i in enumerate(step) if d[i] >= turn)
         out["m20"], out["m60"], out["m120"] = [r(m20[i]) for i in step], [r(m60[i]) for i in step], [r(m120[i]) for i in step]
+        out["m10"] = [r(m10[i]) for i in step]
         # 턴어라운드 판은 카드를 두 칸 폭으로 크게 → 2년치(3거래일 간격, 2026-11-18 사용자)
         st2 = list(range(n - 1, max(0, n - 2 * Y52) - 1, -3))[::-1]
         out["d02"], out["cl2"] = d[st2[0]], [r(c[i]) for i in st2]
         out["a20"], out["a60"], out["a120"] = [r(m20[i]) for i in st2], [r(m60[i]) for i in st2], [r(m120[i]) for i in st2]
+        out["a10"] = [r(m10[i]) for i in st2]
         out["tix2"] = next(k for k, i in enumerate(st2) if d[i] >= turn)
     return out
 

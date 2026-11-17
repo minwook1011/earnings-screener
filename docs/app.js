@@ -227,7 +227,7 @@
       esc(d ? p[0] : t === "없음" ? "없음" : "날짜 미확인") + "</b>" + (d && p[1] ? "<small>" + esc(p.slice(1).join(" · ")) + "</small>" : "") + "</div>";
   }
   function qline(c) {
-    var q = S.qy[c];
+    var q = (S.qy[c] || []).slice(-10);
     if (!q || !q.length) return '<div class="ql-empty">분기 성장률 자료 없음 — 다음 갱신 때 채웁니다</div>';
     var pad = []; for (var i = q.length; i < 10; i++) pad.push(null);
     var cells = pad.concat(q);
@@ -432,7 +432,7 @@
     { k: "tbl", t: "스크리닝 표" },
     { k: "new", t: "신고가", f: function (p) { return p && p.new; }, note: "최근 5거래일 안에 52주 신고가(고가 기준)를 새로 쓴 종목." },
     { k: "near", t: "신고가 근접", f: function (p) { return p && p.near; }, note: "52주 최고가에서 15% 이내까지 올라온 종목(신고가 종목 제외)." },
-    { k: "turn", t: "턴어라운드", f: function (p) { return p && p.turn; }, note: "최근 52주 안에 이동평균 20·60·120일이 역배열이었다가 지금 정배열로 바뀐 종목. 세로 점선이 바뀐 날. 차트는 2년치." },
+    { k: "turn", t: "턴어라운드", f: function (p) { return p && p.turn; }, note: "최근 52주 안에 이동평균 20·60·120일이 역배열이었다가 지금 정배열로 바뀐 종목. 세로 점선이 바뀐 날. 차트는 2년치, 10일선도 함께." },
     { k: "fav", t: "★ 즐겨찾기 목록" }
   ];
   /* 즐겨찾기 목록 — ★ 종목을 내가 만든 목록에 나눠 담고 끌어서 옮김(2026-10-29 사용자). 이 브라우저에 저장(es-favg) */
@@ -505,7 +505,7 @@
   /* 카드 차트 — 1년 종가(2거래일 간격). 신고가·근접 = 52주 고가 점선, 턴어라운드 = 20·60·120일선 + 바뀐 날 */
   function pchart(p, B) {
     var c = p.cl || [], W = 300, H = 200, all = c.slice();
-    if (B === "turn") all = all.concat((p.m20 || []).filter(Boolean), (p.m60 || []).filter(Boolean), (p.m120 || []).filter(Boolean));
+    if (B === "turn") all = all.concat((p.m10 || []).filter(Boolean), (p.m20 || []).filter(Boolean), (p.m60 || []).filter(Boolean), (p.m120 || []).filter(Boolean));
     if (B !== "turn") all.push(p.hi);
     var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all), k = hi > lo ? hi - lo : 1;
     function X(i) { return (i * W / Math.max(1, c.length - 1)).toFixed(1); }
@@ -515,7 +515,7 @@
     g += '<polygon class="pa" points="0,' + H + " " + c.map(function (v, i) { return X(i) + "," + Y(v); }).join(" ") + " " + W + "," + H + '"/>';
     if (B !== "turn") g += '<line class="phi" vector-effect="non-scaling-stroke" x1="0" x2="' + W + '" y1="' + Y(p.hi) + '" y2="' + Y(p.hi) + '"/>';
     if (B === "turn") {
-      g += line(p.m120 || [], "pm120") + line(p.m60 || [], "pm60") + line(p.m20 || [], "pm20");
+      g += line(p.m120 || [], "pm120") + line(p.m60 || [], "pm60") + line(p.m20 || [], "pm20") + line(p.m10 || [], "pm10");
       if (p.tix != null) g += '<line class="ptx" vector-effect="non-scaling-stroke" x1="' + X(p.tix) + '" x2="' + X(p.tix) + '" y1="0" y2="' + H + '"/>';
     }
     g += line(c, "pl");
@@ -538,10 +538,10 @@
     var y = +e.slice(0, 4), m = +e.slice(5, 7), i = y * 12 + m - 1 - 2, y0 = Math.floor(i / 12), m0 = i % 12 + 1;
     return String(y0 % 100).padStart(2, "0") + "." + String(m0).padStart(2, "0") + "-" + String(m).padStart(2, "0");
   }
-  function qyc(c, p) {   // 카드 아래 — 최근 10분기 YoY(결산기 분기, 같은 간격). 칸 아래 = 그 분기 기간, 띠 = 위 주가 차트 기간
-    var q = (S.qy[c] || []).slice(-10);
+  function qyc(c, p, wide) {   // 카드 아래 — 최근 10분기(턴어라운드 넓은 카드는 16분기) YoY, 결산기 분기 같은 간격. 띠 = 위 주가 차트 기간
+    var q = (S.qy[c] || []).slice(wide ? -16 : -10);
     if (!QYC_ON[c] || q.length < 3) return "";
-    var W = 300, H = 118, L = 14, R = 34, T = 10, Bm = 30, CL = 120;
+    var W = wide ? 600 : 300, H = wide ? 78 : 96, L = 14, R = 34, T = 12, Bm = 26, CL = 120;
     function cl(v) { return v == null ? null : Math.max(-CL, Math.min(CL, v)); }
     var vs = [0];
     q.forEach(function (x) { if (x.r != null) vs.push(cl(x.r)); if (x.o != null) vs.push(cl(x.o)); });
@@ -609,13 +609,13 @@
   function pcard(o) {
     var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
     var tag = B === "turn" ? "정배열 전환 " + md(p.turn) : B === "new" ? "52주 신고가 " + md(p.hid) : "고점 대비 " + pctTxt(p.off);
-    if (B === "turn" && p.cl2) p = Object.assign({}, p, { cl: p.cl2, m20: p.a20, m60: p.a60, m120: p.a120, tix: p.tix2, d0: p.d02 });
-    var mal = B === "turn" ? '<span class="pc-mal"><em class="m20">20일선</em><em class="m60">60일선</em><em class="m120">120일선</em></span>' : "";
+    if (B === "turn" && p.cl2) p = Object.assign({}, p, { cl: p.cl2, m10: p.a10, m20: p.a20, m60: p.a60, m120: p.a120, tix: p.tix2, d0: p.d02 });
+    var mal = B === "turn" ? '<span class="pc-mal"><em class="m10">10일선</em><em class="m20">20일선</em><em class="m60">60일선</em><em class="m120">120일선</em></span>' : "";
     return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button"><button type="button" class="star pc-star' + (FAV[o.c] ? " on" : "") + '" data-fav="' + esc(o.c) + '" aria-pressed="' + !!FAV[o.c] + '" title="즐겨찾기">' + (FAV[o.c] ? "★" : "☆") + "</button>" +
       '<div class="pc-ch">' + pchart(p, B) + mal + '<span class="pc-tag">' + esc(tag) + "</span></div>" + pcDx(p) +
       '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + (q.e ? " <u>" + esc(qper(q.e)) + "</u>" : "") + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
-      "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c, p) + "</div>";
+      "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c, p, B === "turn") + "</div>";
   }
   /* ---------- 일본 주요 전 종목 — 100억 사이트 일본 종목 전부(2026-10-29 사용자). data/jp/pxall/index.json(build_pxall.py, 10:00·15:30 · 상한가는 19:00 카부탄도) ---------- */
   var ABOARDS = [

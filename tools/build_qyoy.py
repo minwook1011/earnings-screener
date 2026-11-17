@@ -17,7 +17,7 @@ EVT = os.path.join(ROOT, "tools", "qhist", "events.json")   # 합병·인수로 
 GP = os.path.join(ROOT, "tools", "qhist", "gp.json")         # 분기 매출총이익·판관비(qhist_gp.py)
 EXTRA = os.path.join(ROOT, "tools", "qhist", "extra.json")   # 결산단신에 없는 분기(상장 전 등) — 설명자료에서 손으로 보탬
 OUT = os.path.join(ROOT, "docs", "data", "jp", "qyoy.json")
-N = 10
+N = 16   # 2026-11-18: 카드 아래 분기 YoY(넓은 카드 16분기). 표의 10칸 상자는 화면에서 뒤 10개만
 FS_N = 12
 FS_OUT = os.path.join(ROOT, "docs", "data", "jp", "fs.json")
 

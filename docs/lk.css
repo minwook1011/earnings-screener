@@ -320,3 +320,21 @@ html.lk .pc-ch .pm20 { stroke: var(--qy-r); } html.lk .pc-ch .pm60 { stroke: #4c
 .pgrid.wide { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 .pgrid.wide .pc-ch { height: 250px; }
 @media (max-width: 640px) { .pgrid.wide { grid-template-columns: 1fr !important; } .pgrid.wide .pc-ch { height: 180px; } .pc-mal { top: 34px; left: 10px; right: auto; } }
+/* 3Q26 판 주가 수익률 칸 크게(2026-11-18) */
+@media (min-width: 761px) {
+  .q3-t td.rt .hx { min-width: 58px; font-size: 12.5px; padding: 5px 6px; }
+  .q3-t td.rt { padding-left: 3px; padding-right: 3px; }
+}
+@media (min-width: 761px) {
+  html.lk .wrap, html.lk .jhd { max-width: 1640px; }
+  .q3h i.hx, .q3h .ql em { width: 27px; }
+  .q3h .lb { width: 46px; }
+  .q3-t td.nmc { min-width: 118px; }
+  .q3sp svg { width: 62px; }
+}
+
+/* 10일선(하늘색) + 넓은 카드 차트 높이 줄임(2026-11-18) */
+.pc-ch .pm10 { fill: none; stroke: #5ec8f2; stroke-width: 1.1; }
+.pc-mal .m10 { color: #5ec8f2; }
+.pgrid.wide .pc-ch { height: 190px; }
+@media (max-width: 640px) { .pgrid.wide .pc-ch { height: 150px; } }
