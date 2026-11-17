@@ -194,3 +194,15 @@ html.lk .plast-d { display: block; position: absolute; right: -4px; width: 8px; 
 html.lk svg.dn + .plast-d { background: var(--down); box-shadow: 0 0 0 2px var(--surface), 0 0 10px color-mix(in srgb, var(--down) 70%, transparent); }
 html.lk .pc-st i { font: 500 10.5px var(--jsans); color: var(--ink-mute); }
 html.lk .pc-st i small { font: 500 9.5px var(--mono); margin-left: 2px; }
+
+/* 폰(2026-11-17): 보기 버튼 줄은 옆으로 밀어 보기, 표는 머리글 고정 끔 + 종목 칸 왼쪽 고정 */
+@media (max-width: 760px) {
+  html.lk .ctl > .fld { min-width: 0; max-width: 100%; }
+  html.lk .ctl .seg { max-width: 100%; overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap; }
+  html.lk .ctl .seg button { flex: 0 0 auto; }
+  html.lk .ctl .seg::-webkit-scrollbar { display: none; }
+  .q3-t thead th { position: static; }
+  .q3-t td.nmc, .q3-t thead th:nth-child(2) { position: sticky; left: 0; z-index: 1; background: var(--surface); min-width: 120px; max-width: 140px; }
+  .q3-t td.rk { display: none; } .q3-t thead th:first-child { display: none; }
+  .q3n b { font-size: 13px; }
+}
