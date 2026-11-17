@@ -280,18 +280,22 @@
   function drawMini(co, host) {
     var px = S.px[co.c] || []; if (!px.length) return;
     if (!bestIt(co) || !bestIt(co).pts.length) return;
-    var it = bestIt(co), W = host.clientWidth || 360, H = 110, L = px[px.length - 1].t, F = Math.min(ymT(it.pts[0][0]) - 20 * DAY, L - 365 * DAY);
+    // 위 = 주가 선(6~58), 아래 = 지표 막대(70~H) — 서로 겹치지 않게 칸을 나누고, 막대는 보이는 2년의 최소~최대로 눈금을 다시 잡는다
+    var it = bestIt(co), W = host.clientWidth || 360, H = 118, L = px[px.length - 1].t, F = L - 730 * DAY;
     var rows = px.filter(function (r) { return r.t >= F; });
+    var pts = it.pts.filter(function (p) { return ymT(p[0]) >= F - 10 * DAY && p[1] != null; });
+    if (!rows.length || !pts.length) return;
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, preserveAspectRatio: "none" });
     host.innerHTML = ""; host.appendChild(svg);
     var x = function (t) { return (t - F) / (L + 15 * DAY - F) * W; };
-    var vs = it.pts.map(function (p) { return p[1]; }), mx = Math.max.apply(null, vs), mn = Math.min.apply(null, vs) * 0.9;
+    var vs = pts.map(function (p) { return p[1]; }), mx = Math.max.apply(null, vs), mn0 = Math.min.apply(null, vs), rg = (mx - mn0) || Math.abs(mx) || 1, mn = mn0 - rg * 0.3;
     var defs = el("defs", {}, svg), gr = el("linearGradient", { id: "gm" + co.c, x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
-    el("stop", { offset: "0", "stop-color": "var(--b1)", "stop-opacity": ".6" }, gr); el("stop", { offset: "1", "stop-color": "var(--b1)", "stop-opacity": ".08" }, gr);
-    var bw = W / 16 * 0.62;
-    it.pts.forEach(function (p) { var h = (p[1] - mn) / (mx - mn) * 44 + 4; el("rect", { x: x(ymT(p[0])) - bw / 2, y: H - h, width: bw, height: h, rx: 2, fill: "url(#gm" + co.c + ")", "class": "grow" }, svg); });
+    el("stop", { offset: "0", "stop-color": "var(--b1)", "stop-opacity": ".75" }, gr); el("stop", { offset: "1", "stop-color": "var(--b1)", "stop-opacity": ".15" }, gr);
+    var BT = 70, bw = Math.max(2, W / 25 * 0.62);
+    el("line", { x1: 0, x2: W, y1: BT - 5, y2: BT - 5, stroke: "var(--line)", "stroke-dasharray": "2 3" }, svg);
+    pts.forEach(function (p) { var h = Math.max(2, (p[1] - mn) / (mx - mn || 1) * (H - BT)); el("rect", { x: x(ymT(p[0])) - bw / 2, y: H - h, width: bw, height: h, rx: 2, fill: "url(#gm" + co.c + ")", "class": "grow" }, svg); });
     var lo = Math.min.apply(null, rows.map(function (r) { return r.c; })), hi = Math.max.apply(null, rows.map(function (r) { return r.c; }));
-    var y = function (v) { return 6 + (1 - (v - lo) / (hi - lo || 1)) * (H - 40); };
+    var y = function (v) { return 6 + (1 - (v - lo) / (hi - lo || 1)) * 52; };
     el("path", { d: rows.map(function (r, i) { return (i ? "L" : "M") + x(r.t).toFixed(1) + "," + y(r.c).toFixed(1); }).join(""), "class": "pline draw", "vector-effect": "non-scaling-stroke" }, svg);
     animate(svg);
   }
