@@ -15,6 +15,13 @@ def tr(s):
         return s
     if s in KO:
         return KO[s]
+    m = re.match(r"(?:구글 )?검색 관심도 — 「?([^」(（]+)", s)
+    if m:
+        return "구글트렌드: " + m.group(1).strip()
+    if JP.search(s):   # 일본어 괄호 설명은 떼어 낸다
+        s3 = re.sub(r"\s*[（(][^()（）]*[぀-ヿ一-鿿][^()（）]*(?:[)）]|$)", "", s).strip()
+        if s3 and s3 != s:
+            return tr(s3)
     m = re.match(r"구글 검색 관심도 「(.+?)」", s)
     if m:
         return "구글트렌드: " + m.group(1)
@@ -32,6 +39,28 @@ def tr(s):
             return "%s(%s)" % (first, last)
         return last
     return s
+
+
+def clean(s):
+    """잘린 괄호·HS 코드 조각 정리"""
+    if not isinstance(s, str):
+        return s
+    s = re.sub(r"[·,]?\s*(?:HS ?)?\d{4}(?:\.\d+)?\)", ")", s)
+    s = re.sub(r"\(\)", "", s)
+    out, depth = [], 0
+    for ch in s:   # 짝 없는 닫는 괄호 제거
+        if ch == ")":
+            if depth == 0:
+                continue
+            depth -= 1
+        elif ch == "(":
+            depth += 1
+        out.append(ch)
+    s = "".join(out)
+    while s.count("(") > s.count(")"):
+        i = s.rfind("(")
+        s = s[:i].rstrip(" ·,—-")
+    return s.strip()
 
 
 def dump(p, d):
@@ -91,20 +120,20 @@ for f in glob.glob(os.path.join(LEAD, "*.json")):
         names.append("월차데이터")
     for it in co["lead"]["items"]:
         for k in ("t", "short", "nm"):
-            it[k] = tr(it.get(k))
+            it[k] = clean(tr(it.get(k)))
         if it.get("kind") == "pension":
             names.append("연금 가입자 수")
-        elif it.get("kind") == "trends" or (it.get("short") or "").startswith("구글"):
+        elif it.get("kind") == "trends" or (it.get("short") or "").startswith("구글") or (it.get("t") or "").startswith("구글트렌드"):
             names.append("구글트렌드(브랜드)")
         elif it.get("short"):
             names.append(it["short"])
     for m in co["lead"].get("macro") or []:
         lb = label(m.get("id"))
-        m["name"] = lb or tr(m.get("name"))
+        m["name"] = clean(lb or tr(m.get("name")))
         if m["name"].startswith("구글트렌드") or str(m.get("id", "")).startswith("gt:"):
             names.append("구글트렌드(브랜드)")
         elif lb:   # 데이터 있는 것만 핵심지표에
-            names.append(lb)
+            names.append(m["name"])
     for n in names:
         if n and JP.search(n):
             left.add(n)

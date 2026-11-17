@@ -32,5 +32,6 @@ py = sys.executable
 subprocess.run([py, os.path.join(T, "lead_build.py"), "--edinet", ed, tmp], check=True)
 subprocess.run([py, os.path.join(T, "lead_apply.py")] + (["--report", rep] if rep else []) + outs, check=True)
 subprocess.run([py, os.path.join(T, "lead_ko.py")], check=True)
+subprocess.run([py, os.path.join(T, "lead_overview.py")], check=True)
 subprocess.run([py, os.path.join(T, "lead_update.py")] + codes, check=False)
 print("완료", len(codes), "곳")
