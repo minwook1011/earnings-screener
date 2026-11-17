@@ -99,7 +99,34 @@ def spark(code):
     k = (hi - lo) or 1
     y1 = (last - timedelta(days=365)).isoformat()
     base1 = next((r[4] for r in rows if r[0] >= y1), None)
-    return {"sp": [round((x - lo) / k * 100) for x in v], "c3": round((v[-1] / v[0] - 1) * 100, 1),
+    # 주가 수익률(2026-11-18 사용자): 1D·3D = 거래일, 1W·1M·3M = 달력, YTD = 작년 마지막 종가 대비
+    cl = [r for r in px if r[4]]
+    lc, ld = cl[-1][4], datetime.strptime(cl[-1][0], "%Y-%m-%d").date()
+
+    def back(d):
+        b = None
+        for r in cl:
+            if r[0] <= d.isoformat():
+                b = r[4]
+            else:
+                break
+        return b
+
+    def mago(n):
+        i = ld.year * 12 + ld.month - 1 - n
+        y, m = i // 12, i % 12 + 1
+        for dd in (ld.day, 30, 29, 28):
+            try:
+                return date(y, m, dd)
+            except ValueError:
+                continue
+
+    def rr(b):
+        return round((lc / b - 1) * 100, 1) if b else None
+    rt = {"t1": rr(cl[-2][4]) if len(cl) > 1 else None, "t3": rr(cl[-4][4]) if len(cl) > 3 else None,
+          "tw": rr(back(ld - timedelta(days=7))), "tm": rr(back(mago(1))), "t3m": rr(back(mago(3))),
+          "ty": rr(back(date(ld.year - 1, 12, 31)))}
+    return {**rt, "sp": [round((x - lo) / k * 100) for x in v], "c3": round((v[-1] / v[0] - 1) * 100, 1),
             "c1": round((v[-1] / base1 - 1) * 100, 1) if base1 else None, "px": v[-1], "pd": rows[-1][0], "p0": pick[0][0]}
 
 

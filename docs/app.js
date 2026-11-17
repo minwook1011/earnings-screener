@@ -525,44 +525,51 @@
   }
   /* 카드 아래 분기 매출·영업이익 YoY 꺾은선(점선 + 동그라미) — 2026-11-18 사용자, 우선 반다이남코(7832)만 */
   var QYC_ON = { "7832": 1 };
-  function qyc(c) {
-    var q = (S.qy[c] || []).slice(-10);
-    if (!QYC_ON[c] || q.length < 3) return "";
-    var W = 300, H = 96, L = 6, R = 34, T = 10, Bm = 16, CL = 120;
+  function ymd2(d) { return d ? d.slice(2, 4) + "." + d.slice(5, 7) + "." + d.slice(8, 10) : ""; }
+  function pxSpan(p) {   // 카드 주가 차트 기간 — 처음 · 가운데 · 끝 날짜
+    if (!p.d0 || !p.d) return null;
+    var t0 = Date.parse(p.d0), t1 = Date.parse(p.d);
+    return { t0: t0, t1: t1, a: p.d0, m: new Date((t0 + t1) / 2).toISOString().slice(0, 10), b: p.d };
+  }
+  function pcDx(p) { var sp = pxSpan(p); return sp ? '<div class="pc-dx"><span>' + ymd2(sp.a) + "</span><span>" + ymd2(sp.m) + "</span><span>" + ymd2(sp.b) + "</span></div>" : ""; }
+  function qyc(c, p) {   // 위 주가 차트와 같은 기간 · 같은 날짜 축. 점 = 분기가 끝난 달 말
+    var sp = pxSpan(p || {});
+    if (!QYC_ON[c] || !sp) return "";
+    var q = (S.qy[c] || []).filter(function (x) { if (!x.e) return false; var t = Date.parse(x.e + "-28"); x._t = t; return t >= sp.t0 && t <= sp.t1; });
+    if (q.length < 2) return "";
+    var W = 300, H = 100, L = 2, R = 2, T = 14, Bm = 14, CL = 120;
     function cl(v) { return v == null ? null : Math.max(-CL, Math.min(CL, v)); }
     var vs = [0];
     q.forEach(function (x) { if (x.r != null) vs.push(cl(x.r)); if (x.o != null) vs.push(cl(x.o)); });
     var lo = Math.min.apply(null, vs), hi = Math.max.apply(null, vs), k = (hi - lo) || 1;
-    function X(i) { return L + i * (W - L - R) / (q.length - 1); }
+    function X(t) { return L + (t - sp.t0) / (sp.t1 - sp.t0) * (W - L - R); }
     function Y(v) { return T + (hi - cl(v)) / k * (H - T - Bm); }
     function ser(key, cls) {
       var pts = [], dots = "";
-      q.forEach(function (x, i) {
+      q.forEach(function (x) {
         var v = x[key];
         if (v == null) return;
-        pts.push(X(i).toFixed(1) + "," + Y(v).toFixed(1));
-        var out = Math.abs(v) > CL;
-        dots += '<circle class="' + (out ? "out" : "") + '" cx="' + X(i).toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="2.6"><title>' + esc(x.p) + (key === "r" ? " 매출 YoY " : " 영업이익 YoY ") + esc(pctTxt(v)) + "</title></circle>";
+        var xx = X(x._t).toFixed(1), yy = Y(v).toFixed(1);
+        pts.push(xx + "," + yy);
+        dots += '<circle class="' + (Math.abs(v) > CL ? "out" : "") + '" cx="' + xx + '" cy="' + yy + '" r="2.8"><title>' + esc(x.p) + " (" + esc(x.e.replace("-", ".")) + "월 끝)" + (key === "r" ? " 매출 YoY " : " 영업이익 YoY ") + esc(pctTxt(v)) + "</title></circle>";
+        var other = x[key === "r" ? "o" : "r"], up = other == null || cl(v) >= cl(other);
+        dots += '<text text-anchor="middle" x="' + xx + '" y="' + (up ? Y(v) - 6 : Y(v) + 12).toFixed(1) + '">' + esc((v > 0 ? "+" : "") + (Math.abs(v) >= 1000 ? Math.round(v / 100) / 10 + "k" : Math.round(v))) + "</text>";
       });
-      var last = q[q.length - 1][key], ly = last == null ? 0 : Y(last) + 3.5, oth = q[q.length - 1][key === "r" ? "o" : "r"];
-      if (last != null && oth != null && Math.abs(Y(last) - Y(oth)) < 10) ly += (cl(last) >= cl(oth) ? -5 : 5) * (key === "r" && cl(last) === cl(oth) ? -1 : 1);
-      var lab = last == null ? "" : '<text x="' + (W - R + 5) + '" y="' + ly.toFixed(1) + '">' + esc((last > 0 ? "+" : "") + (Math.abs(last) >= 1000 ? Math.round(last / 100) / 10 + "k" : Math.round(last)) + "%") + "</text>";
-      return '<g class="' + cls + '"><polyline points="' + pts.join(" ") + '"/>' + dots + lab + "</g>";
+      return '<g class="' + cls + '"><polyline points="' + pts.join(" ") + '"/>' + dots + "</g>";
     }
     var z = Y(0).toFixed(1);
-    return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>±' + CL + '% 밖은 빈 점</small></div>' +
-      '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true"><line class="z" x1="' + L + '" x2="' + (W - R) + '" y1="' + z + '" y2="' + z + '"/>' +
-      ser("r", "r") + ser("o", "o") +
-      '<text class="ax" x="' + L + '" y="' + (H - 3) + '">' + esc(q[0].p) + '</text><text class="ax" text-anchor="end" x="' + (W - R) + '" y="' + (H - 3) + '">' + esc(q[q.length - 1].p) + "</text></svg></div>";
+    return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>위 주가와 같은 기간 · %</small></div>' +
+      '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true"><line class="z" x1="0" x2="' + W + '" y1="' + z + '" y2="' + z + '"/>' +
+      ser("r", "r") + ser("o", "o") + "</svg>" + pcDx(p) + "</div>";
   }
   function pcard(o) {
     var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
     var tag = B === "turn" ? "정배열 전환 " + md(p.turn) : B === "new" ? "52주 신고가 " + md(p.hid) : "고점 대비 " + pctTxt(p.off);
     return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button"><button type="button" class="star pc-star' + (FAV[o.c] ? " on" : "") + '" data-fav="' + esc(o.c) + '" aria-pressed="' + !!FAV[o.c] + '" title="즐겨찾기">' + (FAV[o.c] ? "★" : "☆") + "</button>" +
-      '<div class="pc-ch">' + pchart(p, B) + '<span class="pc-tag">' + esc(tag) + "</span></div>" +
+      '<div class="pc-ch">' + pchart(p, B) + '<span class="pc-tag">' + esc(tag) + "</span></div>" + pcDx(p) +
       '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
-      "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c) + "</div>";
+      "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c, p) + "</div>";
   }
   /* ---------- 일본 주요 전 종목 — 100억 사이트 일본 종목 전부(2026-10-29 사용자). data/jp/pxall/index.json(build_pxall.py, 10:00·15:30 · 상한가는 19:00 카부탄도) ---------- */
   var ABOARDS = [
@@ -808,7 +815,7 @@
   function inScr(o) { var r = (o.res || {})["2"]; return o.stage >= 2 || !!(r && r.status === "완료" && r.html); }
   /* ---------- 3Q26 일본 스크리닝 — 2단계 리포트를 쓴 회사 전부를 빠르게 훑는 표(2026-11-17 사용자). data/jp/px/q3.json(tools/build_q3.py) ---------- */
   // 성장률 칸 색 — 7단계, 클수록 진한 빨강·작을수록 진한 파랑. 매출과 영업이익은 기준이 다름(영업이익이 더 크게 움직임)
-  var HX = { r: [3, 7, 12, 20, 30, 50], o: [5, 15, 30, 50, 80, 150] };
+  var HX = { r: [3, 7, 12, 20, 30, 50], o: [5, 15, 30, 50, 80, 150], t1: [1, 2, 3, 5, 8, 12], t3: [2, 4, 6, 9, 13, 20], tw: [2, 4, 7, 10, 15, 25], tm: [3, 6, 10, 15, 25, 40], t3m: [5, 10, 15, 25, 40, 60], ty: [5, 10, 20, 35, 60, 100] };
   function hx(v, t, kind) {
     if (t) return '<span class="hx ' + (t === "흑전" ? "p7" : t === "적전" ? "n7" : "n3") + '">' + t + "</span>";
     if (v == null) return '<span class="hx na">—</span>';
@@ -833,9 +840,9 @@
       else if (v != null) { var a = Math.abs(v), l = 1; HX[k].forEach(function (y) { if (a >= y) l++; }); lv = (v > 0 ? "p" : v < 0 ? "n" : "z") + (v ? l : ""); }
       var tx = t || (v == null ? "·" : Math.abs(v) >= 1000 ? (v > 0 ? "+1k↑" : "−1k") : (Math.round(v) > 0 ? "+" : Math.round(v) < 0 ? "−" : "") + Math.round(Math.abs(v)));
       return '<i class="hx ' + lv + '" title="' + esc(x[0]) + (k === "r" ? " 매출 " : " 영업이익 ") + esc(t || pctTxt(v)) + '">' + esc(tx) + '</i>'; }
-    return '<span class="q3h"><span class="ql">' + h.map(function (x) { return "<em>" + esc(x[0]) + "</em>"; }).join("") + '</span><span>' + h.map(function (x) { return cell(x, 1, "r"); }).join("") + "</span><span>" + h.map(function (x) { return cell(x, 2, "o"); }).join("") + "</span></span>";
+    return '<span class="q3h"><span class="ql"><b class="lb"></b>' + h.map(function (x) { return "<em>" + esc(x[0]) + "</em>"; }).join("") + '</span><span><b class="lb">매출 YoY</b>' + h.map(function (x) { return cell(x, 1, "r"); }).join("") + '</span><span><b class="lb">영업이익 YoY</b>' + h.map(function (x) { return cell(x, 2, "o"); }).join("") + "</span></span>";
   }
-  var Q3C = [["d", "발표"], ["s", "매출(억엔)"], ["r", "매출 YoY"], ["op", "영업이익(억엔)"], ["o", "영업이익 YoY"], ["opm", "OPM"], ["mc", "시총(억엔)"], ["c3", "3년 주가"]];
+  var Q3C = [["mc", "시총(억엔)"], ["t1", "1D"], ["t3", "3D"], ["tw", "1W"], ["tm", "1M"], ["t3m", "3M"], ["ty", "YTD"], ["opm", "OPM"], ["d", "발표"], ["c3", "3년 주가"]];
   S.q3s = "d"; S.q3d = -1; S.q3f = "all";
   function q3View() {
     if (!S.q3) {
@@ -860,9 +867,9 @@
       '<div class="ctl"><div class="fld"><span>보기</span><div class="seg" id="q3f">' + [["all", "전체 " + all.length], ["q3", CQ + " 분기만 " + nq], ["up", "매출·이익 둘 다 ↑"], ["hot", "매출 10%↑ · 이익 30%↑"], ["dn", "어느 쪽이든 ↓"]].map(function (v) { return '<button data-v="' + v[0] + '" aria-pressed="' + (S.q3f === v[0]) + '">' + v[1] + "</button>"; }).join("") + "</div></div>" +
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="종목명 · 코드 · 업종" value="' + esc(S.q) + '"></div>' +
       '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>개 종목</div></div>" +
-      '<p class="stage-note">2단계 리포트를 쓴 회사 전부입니다. 숫자는 가장 최근 분기 단독 실적(억엔)과 전년 같은 분기 대비 YoY — 칸이 진한 빨강일수록 크게 늘고, 진한 파랑일수록 크게 줄었습니다. ' +
-      '‘최근 12분기’는 위 줄 매출 · 아래 줄 영업이익 YoY(%)입니다. 3년 주가는 10거래일 간격 종가. 머리칸을 누르면 정렬, 줄을 누르면 재무·리포트가 열립니다.</p>' +
-      '<div class="q3leg"><span>YoY</span><i class="hx n7"></i><i class="hx n5"></i><i class="hx n3"></i><i class="hx n1"></i><i class="hx p1"></i><i class="hx p3"></i><i class="hx p5"></i><i class="hx p7"></i><em>감소 ← → 증가</em><small>주가 ' + esc(S.q3.updated || "") + " 기준</small></div>";
+      '<p class="stage-note">2단계 리포트를 쓴 회사 전부입니다. 1D·3D·1W·1M·3M·YTD 는 주가 수익률(1D·3D 는 거래일, YTD 는 작년 마지막 종가 대비) — 칸이 진한 빨강일수록 크게 오르고, 진한 파랑일수록 크게 내렸습니다. ' +
+      '‘최근 12분기’는 분기 단독 매출·영업이익의 전년 같은 분기 대비 YoY(%)입니다. 3년 주가는 10거래일 간격 종가. 머리칸을 누르면 정렬, 줄을 누르면 재무·리포트가 열립니다.</p>' +
+      '<div class="q3leg"><span>색</span><i class="hx n7"></i><i class="hx n5"></i><i class="hx n3"></i><i class="hx n1"></i><i class="hx p1"></i><i class="hx p3"></i><i class="hx p5"></i><i class="hx p7"></i><em>감소 ← → 증가</em><small>주가 ' + esc(S.q3.updated || "") + " 기준</small></div>";
     if (!rows.length) return head + '<div class="empty">조건에 맞는 종목이 없습니다.</div>';
     var th = '<tr><th class="l ns">#</th><th class="l ns">종목</th>' + Q3C.map(function (x) { return '<th data-q3="' + x[0] + '"' + (k === x[0] ? ' class="on"' : "") + ">" + x[1] + (k === x[0] ? '<span class="ar">' + (dir < 0 ? "▼" : "▲") + "</span>" : "") + "</th>"; }).join("").replace('<th data-q3="opm"', '<th class="ns c">최근 12분기</th><th data-q3="opm"') + '<th class="ns"></th></tr>';
     var body = rows.map(function (o, i) {
@@ -871,12 +878,12 @@
       return "<tr" + go + ' tabindex="0"><td class="l rk">' + (i + 1) + "</td>" +
         '<td class="l nmc"><div class="nmw"><button type="button" class="star' + (FAV[o.c] ? " on" : "") + '" data-fav="' + esc(o.c) + '" aria-pressed="' + !!FAV[o.c] + '" title="즐겨찾기">' + (FAV[o.c] ? "★" : "☆") + "</button>" +
         '<span class="q3n"><b>' + esc(o.nm) + '</b><small><span class="tkc">' + esc(o.c) + "</span>" + (o.cat ? " · " + esc(o.cat) : "") + "</small></span></div></td>" +
-        '<td class="dd"><b>' + (o.d ? esc(dlab(o.d)) : "—") + "</b>" + (o.cq ? '<small class="cq' + (other ? " ot" : "") + '">' + esc(o.cq) + (o.per ? " · " + esc(o.per) : "") + "</small>" : o.p ? '<small class="cq ot">' + esc(o.p) + " · 카부탄</small>" : "") + "</td>" +
-        '<td class="v">' + (o.s == null ? "—" : num(o.s, o.s < 100 ? 1 : 0)) + "</td><td>" + hx(o.r, null, "r") + "</td>" +
-        '<td class="v">' + (o.op == null ? "—" : num(o.op, Math.abs(o.op) < 100 ? 1 : 0)) + "</td><td>" + hx(o.o, o.ot, "o") + (o.m ? '<i class="mgh" title="' + esc(o.m) + '">인수</i>' : "") + "</td>" +
-        "<td>" + q3hist(o) + "</td>" +
+        '<td class="v mc">' + mcap(o.mc) + "</td>" +
+        ["t1", "t3", "tw", "tm", "t3m", "ty"].map(function (t) { return '<td class="rt" data-l="' + { t1: "1D", t3: "3D", tw: "1W", tm: "1M", t3m: "3M", ty: "YTD" }[t] + '">' + hx(o[t], null, t) + "</td>"; }).join("") +
+        "<td>" + q3hist(o) + (o.m ? '<i class="mgh" title="' + esc(o.m) + '">인수</i>' : "") + "</td>" +
         '<td class="v">' + (o.opm == null ? "—" : o.opm.toFixed(1) + "%") + (dpp == null ? "" : '<small class="' + (dpp > 0 ? "up" : dpp < 0 ? "dn" : "na") + '">' + (dpp > 0 ? "+" : dpp < 0 ? "−" : "") + Math.abs(dpp).toFixed(1) + "%p</small>") + "</td>" +
-        '<td class="v">' + mcap(o.mc) + "</td><td>" + q3spark(o) + "</td>" +
+        '<td class="dd"><b>' + (o.d ? esc(dlab(o.d)) : "—") + "</b>" + (o.cq ? '<small class="cq' + (other ? " ot" : "") + '">' + esc(o.cq) + (o.per ? " · " + esc(o.per) : "") + "</small>" : o.p ? '<small class="cq ot">' + esc(o.p) + " · 카부탄</small>" : "") + "</td>" +
+        "<td>" + q3spark(o) + "</td>" +
         "<td>" + (r2.html ? '<a class="q3r" href="' + esc(ver(r2.html, r2.written)) + '" target="_blank" rel="noopener noreferrer" title="' + esc(r2.verdict || "") + '">리포트</a>' : "") + "</td></tr>";
     }).join("");
     return head + '<div class="tblwrap"><table class="q3-t"><thead>' + th + "</thead><tbody>" + body + "</tbody></table></div>";

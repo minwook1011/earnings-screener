@@ -218,38 +218,6 @@ html.lk .pc-st i small { font: 500 9.5px var(--mono); margin-left: 2px; }
   .q3sp svg { width: 80px; }
 }
 
-/* 폰(2026-11-17 사용자 "폰이라 안 보이나"): 표 대신 회사마다 카드 — 이름·3년 주가 / 발표·매출·영업이익 / 12분기 숫자 */
-@media (max-width: 760px) {
-  .q3-t, .q3-t tbody { display: block; width: 100%; }
-  .q3-t thead { display: none; }
-  .q3-t tbody tr { display: grid; grid-template-columns: 1fr auto auto auto auto; grid-template-areas: "nm nm nm sp sp" "dd s r op o" "h h h h h"; gap: 6px 6px; align-items: center; padding: 11px 8px; border-bottom: 1px solid var(--line); }
-  .q3-t td { display: block; padding: 0; border: 0; white-space: nowrap; }
-  .q3-t td:nth-child(1), .q3-t td:nth-child(9), .q3-t td:nth-child(10), .q3-t td:nth-child(12) { display: none; }
-  .q3-t td.nmc { grid-area: nm; position: static; min-width: 0; max-width: none; background: none; }
-  .q3-t td:nth-child(3) { grid-area: dd; }
-  .q3-t td:nth-child(4) { grid-area: s; } .q3-t td:nth-child(5) { grid-area: r; }
-  .q3-t td:nth-child(6) { grid-area: op; } .q3-t td:nth-child(7) { grid-area: o; }
-  .q3-t td:nth-child(8) { grid-area: h; }
-  .q3-t td:nth-child(11) { grid-area: sp; justify-self: end; }
-  .q3-t td:nth-child(4)::before { content: "매출"; display: block; font: 500 9.5px var(--jsans); color: var(--ink-mute); text-align: right; }
-  .q3-t td:nth-child(6)::before { content: "영업이익"; display: block; font: 500 9.5px var(--jsans); color: var(--ink-mute); text-align: right; }
-  .q3-t td.v { font-size: 12px; }
-  .q3-t .hx { min-width: 50px; padding: 3px 5px; font-size: 11px; }
-  .q3-t td.dd b { font-size: 11px; } .q3-t td.dd .cq { font-size: 9.5px; }
-  .q3sp svg { width: 70px; height: 22px; } .q3sp { font-size: 11px; }
-  .q3h { display: flex; width: 100%; }
-  .q3h > span { width: 100%; }
-  .q3h i.hx, .q3h .ql em { flex: 1 1 0; width: auto; min-width: 0; }
-  .q3h i.hx { font-size: 9px; padding: 2px 0; }
-  .q3h .ql em { font-size: 8px; }
-}
-@media (max-width: 760px) {
-  .q3-t tbody tr { grid-template-columns: minmax(0, 1fr) repeat(4, auto); }
-  .q3-t td { min-width: 0; }
-  .q3-t td:nth-child(8) { overflow: hidden; }
-  html.lk .q3-t { min-width: 0 !important; table-layout: auto; }
-}
-
 /* 신고가 카드 — 분기 매출·영업이익 YoY 꺾은선(2026-11-18) */
 .pc-qy { margin-top: 12px; padding: 10px 10px 4px; border-radius: 12px; background: var(--surface-2); }
 .pc-qyh { display: flex; align-items: center; gap: 10px; font: 600 11px var(--jsans); color: var(--ink-mid); }
@@ -269,3 +237,51 @@ html.lk .pc-st i small { font: 500 9.5px var(--mono); margin-left: 2px; }
 html.lk[data-theme=dark] { --qy-r: #f2c14e; --qy-o: #a78bfa; }
 .pc-qyh { white-space: nowrap; }
 .pc-qyh b { font: 700 11px var(--jsans); color: var(--ink); }
+
+/* 3Q26 판 칸 바꿈(2026-11-18 사용자): 시총 · 주가 수익률 6칸 · 12분기(왼쪽 이름표) · OPM · 발표 · 3년 주가 */
+.q3h .lb { flex: 0 0 auto; width: 58px; padding-right: 5px; text-align: right; font: 600 9.5px/1.9 var(--jsans); color: var(--ink-mute); white-space: nowrap; }
+.q3h .ql .lb { line-height: 1; }
+.q3-t td.rt .hx { min-width: 54px; font-size: 11.5px; padding: 3px 5px; }
+.q3-t td.dd { text-align: right; }
+@media (max-width: 760px) {
+  .q3-t, .q3-t tbody { display: block; width: 100%; }
+  .q3-t thead { display: none; }
+  .q3-t tbody tr { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-areas: "nm nm nm nm sp sp" "dd dd dd mc mc mc" "a b c d e f" "h h h h h h"; gap: 6px 4px; align-items: center; padding: 11px 8px; border-bottom: 1px solid var(--line); }
+  .q3-t td { display: block; padding: 0; border: 0; white-space: nowrap; min-width: 0; }
+  .q3-t td:nth-child(1), .q3-t td:nth-child(11), .q3-t td:nth-child(14) { display: none; }
+  .q3-t td.nmc { grid-area: nm; position: static; min-width: 0; max-width: none; background: none; }
+  .q3-t td.mc { grid-area: mc; font-size: 12px; } .q3-t td.mc::before { content: "시총(억엔) "; font: 500 9.5px var(--jsans); color: var(--ink-mute); }
+  .q3-t td.dd { grid-area: dd; text-align: left; } .q3-t td.dd b, .q3-t td.dd .cq { display: inline; margin-right: 6px; }
+  .q3-t td:nth-child(4) { grid-area: a; } .q3-t td:nth-child(5) { grid-area: b; } .q3-t td:nth-child(6) { grid-area: c; }
+  .q3-t td:nth-child(7) { grid-area: d; } .q3-t td:nth-child(8) { grid-area: e; } .q3-t td:nth-child(9) { grid-area: f; }
+  .q3-t td.rt { text-align: center; } .q3-t td.rt::before { content: attr(data-l); display: block; font: 500 9px var(--mono); color: var(--ink-mute); margin-bottom: 2px; }
+  .q3-t td.rt .hx { min-width: 0; width: 100%; font-size: 10.5px; padding: 3px 0; text-align: center; }
+  .q3-t td:nth-child(10) { grid-area: h; overflow: hidden; }
+  .q3-t td:nth-child(13) { grid-area: sp; justify-self: end; }
+  .q3sp svg { width: 70px; height: 22px; } .q3sp { font-size: 11px; }
+  .q3h { display: flex; width: 100%; }
+  .q3h > span { width: 100%; }
+  .q3h .lb { width: 46px; font-size: 8.5px; }
+  .q3h i.hx, .q3h .ql em { flex: 1 1 0; width: auto; min-width: 0; }
+  .q3h i.hx { font-size: 8.5px; padding: 2px 0; }
+  .q3h .ql em { font-size: 7.5px; }
+}
+
+/* 카드 차트 날짜(처음·가운데·끝) + YoY 꺾은선을 주가 차트와 같은 기간에 맞춤(2026-11-18) */
+.pc-dx { display: flex; justify-content: space-between; margin-top: 3px; font: 500 9.5px var(--mono); color: var(--ink-mute); }
+.pc-qy { padding: 10px 0 4px; background: none; border-top: 1px dashed var(--line); border-radius: 0; }
+.pc-qyh { padding: 0 2px; }
+.pc-qy text { font: 700 8.5px var(--mono); }
+@media (min-width: 761px) {
+  .q3-t td.rt .hx { min-width: 46px; font-size: 10.5px; padding: 3px 4px; }
+  .q3-t td.rt { padding-left: 2px; padding-right: 2px; }
+  .q3-t td.nmc { min-width: 128px; }
+  .q3h .lb { width: 52px; }
+  .q3h i.hx, .q3h .ql em { width: 29px; }
+}
+@media (min-width: 761px) {
+  .q3-t td.rt .hx { min-width: 42px; }
+  .q3sp svg { width: 70px; }
+}
+@media (min-width: 761px) { .q3-t td.rk, .q3-t thead th:first-child { display: none; } }
+@media (max-width: 760px) { html.lk .q3-t { min-width: 0 !important; width: 100% !important; } .q3-t tbody tr { width: 100%; box-sizing: border-box; } }

@@ -102,7 +102,8 @@ def main():
             o, ot = growth(op, prev[1])
             if prev[1] > 0 and op <= 0:
                 o, ot = None, "적전"
-            it = {"p": label(p), "r": r, "o": o, "ot": ot, "s": round(s / 100, 1), "op": round(op / 100, 1)}
+            ei = y * 12 + (mo - 1) - (4 - q) * 3
+            it = {"p": label(p), "e": f"{ei // 12}-{ei % 12 + 1:02d}", "r": r, "o": o, "ot": ot, "s": round(s / 100, 1), "op": round(op / 100, 1)}
             for e in evt.get(c, []) if not c.startswith("_") else []:
                 if e.get("at") == it["p"]:
                     it["m"] = e["note"]
