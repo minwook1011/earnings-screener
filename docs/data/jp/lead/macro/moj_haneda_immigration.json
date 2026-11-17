@@ -1,6 +1,6 @@
 {
  "id": "moj_haneda_immigration",
- "name": "하네다공항 출입국자 수 — 출입국관리통계 항구별",
+ "name": "출입국관리통계 항구별",
  "src": "出入国在留管理庁 出入国管理統計 出入(帰)国者数 総括 港別 出入国者(e-Stat 0003449063, 港=東京都_羽田（空港）)",
  "url": "https://www.moj.go.jp/isa/policies/statistics/toukei_ichiran_nyukan.html",
  "freq": "월",
@@ -15,7 +15,7 @@
  "series": [
   {
    "key": "foreign_in",
-   "name": "외국인 입국자 — 하네다공항",
+   "name": "외국인 입국자(하네다공항)",
    "unit": "千人",
    "pts": [
     [
@@ -198,7 +198,7 @@
   },
   {
    "key": "japanese_out",
-   "name": "일본인 출국자 — 하네다공항",
+   "name": "일본인 출국자(하네다공항)",
    "unit": "千人",
    "pts": [
     [
@@ -381,7 +381,7 @@
   },
   {
    "key": "total",
-   "name": "출입국자 합계(입국+출국, 일본인·외국인) — 하네다공항",
+   "name": "출입국자 합계(하네다공항)",
    "unit": "千人",
    "pts": [
     [

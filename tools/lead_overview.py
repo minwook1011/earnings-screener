@@ -49,21 +49,23 @@ order = [(g["id"], k["id"]) for g in ix["tree"] for k in g["kids"]]
 for c, co in sorted(cos.items(), key=lambda kv: (order.index(tuple(kv[1]["sec"].split("/"))) if tuple(kv[1]["sec"].split("/")) in order else 999, kv[0])):
     g, k = co["sec"].split("/")
     ind = []
-    if os.path.exists(os.path.join(MON, c + ".json")):
+    if os.path.exists(os.path.join(MON, c + ".json")) and not any(i.get("kind") == "monthly" for i in co["lead"]["items"]):
         ind.append(["월차데이터", "월차", None, None])
     for it in sorted(co["lead"]["items"], key=lambda i: i.get("rank") or 9):
         n, last = span(it.get("pts") or [])
         if it.get("kind") == "pension":
             ind.append(["연금 가입자 수", "연금", n, last])
+        elif it.get("kind") == "monthly":
+            ind.append([it.get("t"), "월차", n, last])
         else:
-            ind.append([it.get("t") or it.get("short"), "고유" if n else "대기", n, last])
+            ind.append([it.get("t") or it.get("short"), "고유" if n else "대기", n, last, 1 if it.get("volatile") else 0])
     for m in sorted(co["lead"].get("macro") or [], key=lambda i: i.get("rank") or 9):
         s = series(m["id"])
         if s:
             n, last = span(s[1])
-            ind.append([m.get("name") or m["id"], "고유" if use[s[0]] <= 2 else "공통", n, last])
+            ind.append([m.get("name") or m["id"], "고유" if use[s[0]] <= 2 else "공통", n, last, 1 if m.get("volatile") else 0])
         else:
-            ind.append([m.get("name") or m["id"], "대기", 0, ""])
+            ind.append([m.get("name") or m["id"], "대기", 0, "", 1 if m.get("volatile") else 0])
     rows.append([c, co["n"], grp.get(g, ("", {}))[0], grp.get(g, ("", {}))[1].get(k, k), ind, co["lead"].get("pick_note") or ""])
 json.dump({"updated": ix.get("updated"), "rows": rows}, open(os.path.join(LEAD, "overview.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 print("overview", len(rows), "곳")
