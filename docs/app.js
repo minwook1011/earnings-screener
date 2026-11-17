@@ -432,7 +432,7 @@
     { k: "tbl", t: "스크리닝 표" },
     { k: "new", t: "신고가", f: function (p) { return p && p.new; }, note: "최근 5거래일 안에 52주 신고가(고가 기준)를 새로 쓴 종목." },
     { k: "near", t: "신고가 근접", f: function (p) { return p && p.near; }, note: "52주 최고가에서 15% 이내까지 올라온 종목(신고가 종목 제외)." },
-    { k: "turn", t: "턴어라운드", f: function (p) { return p && p.turn; }, note: "최근 52주 안에 이동평균 20·60·120일이 역배열이었다가 지금 정배열로 바뀐 종목. 세로 점선이 바뀐 날." },
+    { k: "turn", t: "턴어라운드", f: function (p) { return p && p.turn; }, note: "최근 52주 안에 이동평균 20·60·120일이 역배열이었다가 지금 정배열로 바뀐 종목. 세로 점선이 바뀐 날. 차트는 2년치." },
     { k: "fav", t: "★ 즐겨찾기 목록" }
   ];
   /* 즐겨찾기 목록 — ★ 종목을 내가 만든 목록에 나눠 담고 끌어서 옮김(2026-10-29 사용자). 이 브라우저에 저장(es-favg) */
@@ -570,11 +570,12 @@
         band = '<rect class="bd" x="' + bx0.toFixed(1) + '" y="2" width="' + (bx1 - bx0).toFixed(1) + '" height="' + (H - Bm + 2) + '" rx="4"/><text class="bdt" x="' + ((bx0 + bx1) / 2).toFixed(1) + '" y="9" text-anchor="middle">위 주가 차트 기간</text>';
       }
     }
-    var ax = q.map(function (x, i) {
-      return '<text class="ax" text-anchor="middle" x="' + X(i).toFixed(1) + '" y="' + (H - 16) + '">' + esc(x.p) + '</text><text class="ax2" text-anchor="middle" x="' + X(i).toFixed(1) + '" y="' + (H - 6) + '">' + esc(x.e ? x.e.slice(2, 4) + "." + x.e.slice(5, 7) : "") + "</text>";
+    var ax = [0, q.length - 1].map(function (i) {
+      var x = q[i], an = i ? "end" : "start", xx = (i ? X(i) + 4 : X(i) - 4).toFixed(1);
+      return '<text class="ax" text-anchor="' + an + '" x="' + xx + '" y="' + (H - 16) + '">' + esc(x.p) + '</text><text class="ax2" text-anchor="' + an + '" x="' + xx + '" y="' + (H - 6) + '">' + esc(qper(x.e)) + "</text>";
     }).join("");
     var z = Y(0).toFixed(1);
-    return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>결산기 분기 · 아래 = 분기 끝 달</small></div>' +
+    return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>결산기 분기 · ±' + CL + '% 밖은 빈 점</small></div>' +
       '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true">' + band + '<line class="z" x1="' + (L - 8) + '" x2="' + (W - R) + '" y1="' + z + '" y2="' + z + '"/>' +
       ser("r", "r") + ser("o", "o") + ax + "</svg></div>";
   }
@@ -608,8 +609,10 @@
   function pcard(o) {
     var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
     var tag = B === "turn" ? "정배열 전환 " + md(p.turn) : B === "new" ? "52주 신고가 " + md(p.hid) : "고점 대비 " + pctTxt(p.off);
+    if (B === "turn" && p.cl2) p = Object.assign({}, p, { cl: p.cl2, m20: p.a20, m60: p.a60, m120: p.a120, tix: p.tix2, d0: p.d02 });
+    var mal = B === "turn" ? '<span class="pc-mal"><em class="m20">20일선</em><em class="m60">60일선</em><em class="m120">120일선</em></span>' : "";
     return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button"><button type="button" class="star pc-star' + (FAV[o.c] ? " on" : "") + '" data-fav="' + esc(o.c) + '" aria-pressed="' + !!FAV[o.c] + '" title="즐겨찾기">' + (FAV[o.c] ? "★" : "☆") + "</button>" +
-      '<div class="pc-ch">' + pchart(p, B) + '<span class="pc-tag">' + esc(tag) + "</span></div>" + pcDx(p) +
+      '<div class="pc-ch">' + pchart(p, B) + mal + '<span class="pc-tag">' + esc(tag) + "</span></div>" + pcDx(p) +
       '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + (q.e ? " <u>" + esc(qper(q.e)) + "</u>" : "") + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
       "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c, p) + "</div>";
@@ -963,7 +966,7 @@
       '<div class="smart-hint">' + (sm ? "적용: " + sm.conds.map(function (c) { var x = SC.filter(function (y) { return y.k === c.k; })[0]; return "<b>" + esc(x.t) + " " + c.v + (c.lo ? " 이하" : " 이상") + "</b>"; }).join(" · ") + (sm.sort ? " · " + esc(SC.filter(function (y) { return y.k === sm.sort; })[0].t) + " 순" : "") : "시총·매출·매출성장·주가 상승률(1년·YTD)·PER·ROE·영업이익률 조건을 알아듣습니다. “~순”을 붙이면 그 기준으로 정렬합니다.") + "</div></div>" +
       '<p class="stage-note">' + (bd.f ? bd.note + " 주가 " + esc(md(S.px.updated)) + " " + esc((S.px.updated || "").slice(11)) + " 기준 · 카드를 누르면 큰 차트가 열립니다(Alt+H 수평선 · Alt+T 추세선)." : '텔레 2단계에 올라온 회사와 2단계 리포트를 쓴 회사를 모두 쌓아 둔 스크리너입니다. 매출·이익은 최근 4개 분기 합(TTM), ROE = 최근 4개 분기 순이익 ÷ 분기말 자기자본. 둘째 줄은 1년 주가와 분기별 매출액·영업이익 YoY — 노란 네모가 최근 실적발표 분기입니다. 회사를 누르면 리포트·재무제표·주가가 열립니다.') + "</p>";
     if (!rows.length) return head + '<div class="empty">조건에 맞는 종목이 없습니다.</div>';
-    if (bd.f) return head + '<div class="pgrid">' + rows.map(pcard).join("") + "</div>";
+    if (bd.f) return head + '<div class="pgrid' + (bd.k === "turn" ? " wide" : "") + '">' + rows.map(pcard).join("") + "</div>";
     var maxmc = Math.max.apply(null, rows.map(function (o) { return scv(o, "mc") || 0; })) || 1;
     var th = '<tr><th class="ns"></th><th class="l ns">#</th><th class="l ns">코드</th><th class="l ns">종목</th>' + SC.map(function (c) {
       return '<th data-sk="' + c.k + '"' + (k === c.k ? ' class="on"' : "") + ">" + c.t + (k === c.k ? '<span class="ar">' + (dir < 0 ? "▼" : "▲") + "</span>" : "") + "</th>";

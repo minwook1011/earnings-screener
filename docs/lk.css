@@ -311,3 +311,12 @@ html.lk[data-theme=dark] { --qy-r: #f2c14e; --qy-o: #a78bfa; }
 .pc-qy rect.bd { fill: color-mix(in srgb, var(--ink-mute) 10%, transparent); stroke: color-mix(in srgb, var(--ink-mute) 30%, transparent); stroke-dasharray: 2 2; stroke-width: .8; }
 .pc-qy text.bdt { fill: var(--ink-mute); font: 500 7px var(--jsans); }
 .pc-st small u { text-decoration: none; font-size: 9px; color: var(--ink-mute); margin-left: 2px; }
+
+/* 턴어라운드(2026-11-18 사용자): 20일선 노랑 + 이평선 이름표, 카드 두 칸 폭 · 2년치 */
+html.lk .pc-ch .pm20 { stroke: var(--qy-r); } html.lk .pc-ch .pm60 { stroke: #4cc27a; } html.lk .pc-ch .pm120 { stroke: #a99cf5; }
+.pc-mal { position: absolute; right: 34px; top: 10px; display: flex; gap: 9px; font: 600 10px var(--jsans); pointer-events: none; }
+.pc-mal em { font-style: normal; } .pc-mal em::before { content: ""; display: inline-block; width: 12px; border-top: 2px solid currentColor; vertical-align: middle; margin-right: 4px; }
+.pc-mal .m20 { color: var(--qy-r); } .pc-mal .m60 { color: #4cc27a; } .pc-mal .m120 { color: #a99cf5; }
+.pgrid.wide { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.pgrid.wide .pc-ch { height: 250px; }
+@media (max-width: 640px) { .pgrid.wide { grid-template-columns: 1fr !important; } .pgrid.wide .pc-ch { height: 180px; } .pc-mal { top: 34px; left: 10px; right: auto; } }
