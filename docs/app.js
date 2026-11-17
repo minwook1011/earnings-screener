@@ -891,7 +891,7 @@
     var fr = fsRows(o, d);
     pin.innerHTML = head0 +
       (sum ? '<div class="dsec">기업 개요</div><div class="box"><p>' + esc(sum) + "</p></div>" : "") +
-      (o.stage >= 2 || o.res["2"] ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
+      (o.res["2"] || (o.stage >= 2 && !o.study && !o.res.m) ? '<div class="dsec">2단계 리서치</div><div id="r2"></div>' : "") +
       '<div class="dsec">주가 · 1년<span class="hint">점선 = 실적 발표일</span></div>' + chart(d.px, o.pre ? null : o.d) +   // 순서: 주가 → 재무제표 → 데이터(2026-11-13 사용자)
       '<div class="dsec"><span>분기 재무제표' + (S.xl[o.c] ? ' <a class="xl" href="data/jp/xlsx/' + esc(o.c) + '.xlsx?v=' + encodeURIComponent(S.xl[o.c]) + '" download>xlsx 다운로드</a>' : '') + '</span><span class="hint">억엔 · 오른쪽이 최근</span></div>' + fsGrid(o, d) +
       (fr.length > 1 ? '<div class="charts" id="fsc">' + barLine(fr, 0, "매출액") + barLine(fr, 1, "영업이익") + "</div>" : "") +
@@ -915,7 +915,8 @@
     bindChart(pin);
     if (window.KD) KD.mount(o.c, document.getElementById("kd-key"), document.getElementById("kd-main"));
     var fw = pin.querySelector(".fswrap"); if (fw) fw.scrollLeft = fw.scrollWidth;
-    if (o.stage >= 2 || o.res["2"]) research(o, 2, document.getElementById("r2"));
+    /* 2단계 요청이 없는 회사(오프라인 스터디로만 들어왔거나 월차만 있는 곳)는 「2단계 리서치 대기」를 띄우지 않음(2026-11-17 사용자) */
+    if (o.res["2"] || (o.stage >= 2 && !o.study && !o.res.m)) research(o, 2, document.getElementById("r2"));
     if (S.mo[o.c]) monthly(o.c);
   }
   /* 월차 — 접어 두고, 펼치면 최근 13개월 표(전년 대비 칸은 100 기준 색) */
