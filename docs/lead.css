@@ -543,3 +543,21 @@ a.chip:hover { border-color: var(--acc); color: var(--ink); }
 .chip.dim { opacity: .55; border-style: dashed; }
 .ovn { margin: 4px 0 0; font-size: 11.5px; color: var(--ink-4); line-height: 1.5; }
 @media (max-width: 720px) { .ovt td:nth-child(2) { display: none; } .ovt th:nth-child(2) { display: none; } }
+
+/* 고른 이유 · 접는 섹션 */
+.whyl { margin-top: 14px; padding: 14px 16px; border-radius: 12px; background: var(--panel-2); border: 1px solid var(--line); }
+.whyl h4 { margin: 0 0 8px; font-size: 13.5px; color: var(--ink); }
+.whyl .pn { margin: 0 0 10px; font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+.whyl ol { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+.whyl li { font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+.whyl li b { color: var(--ink); margin-right: 6px; }
+.whyl li span { color: var(--ink-3); }
+details.fold { margin: 34px 0 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+details.fold > summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 10px; padding: 14px 18px; flex-wrap: wrap; }
+details.fold > summary::-webkit-details-marker { display: none; }
+details.fold > summary .n { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--acc-2); }
+details.fold > summary b { font-size: 16px; color: var(--ink); }
+details.fold > summary small { color: var(--ink-4); font-size: 12px; }
+details.fold > summary i { margin-left: auto; font-style: normal; color: var(--ink-3); transition: transform .2s; }
+details.fold[open] > summary i { transform: rotate(180deg); }
+details.fold > .card, details.fold > .card-b, details.fold > div { margin: 0 12px 12px; }

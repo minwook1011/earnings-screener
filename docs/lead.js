@@ -325,8 +325,8 @@
         return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + esc(it.short) + "<small>" + it.pts.length + "개월</small></button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
-      '<div class="lwhy"><p id="lnote"></p></div></div></section>';
-    var whyBlk = '<div class="card rv"><div class="card-b lwhy"><p><b>주의</b> ' + esc(co.lead.caveat || "") + '</p>' + (co.lead.macro && co.lead.macro.length ? '<p><b>지표별 이유</b> ' + co.lead.macro.map(function (m) { return esc(m.name || m.id) + (m.why ? ' <span class="how">— ' + esc(m.why) + '</span>' : ''); }).join(' · ') + '</p>' : '') + '</div></div>';
+      '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
+    var whyBlk = '<div class="card-b lwhy"><p><b>주의</b> ' + esc(co.lead.caveat || "") + '</p></div>';
 
     var price = '<div class="sec-t rv"><span class="n">02</span><h2>주가 × 선행지표</h2><p>월간 선행지표를 주가 아래 띠에 겹쳐 보기 · 금색 점선 = 실적 발표일과 다음 날 주가 반응</p></div>' +
       '<section class="card rv" id="mc"><div class="card-h"><div class="ctl">' +
@@ -344,7 +344,7 @@
       '<a class="card rep rv" href="' + esc(co.report.html) + '" target="_blank" rel="noopener"><span class="ic">2단계</span><div><h3>' + esc(co.report.title) + ' <small class="mono">' + esc(co.report.written) + "</small></h3><p>" + esc(co.report.verdict) + '</p></div><span class="go">리포트 열기 ↗</span></a>' :
       '<div class="card rep rv none"><span class="ic">2단계</span><div><h3>아직 없음</h3><p>2단계 리포트를 쓰면 여기에 연결됩니다.</p></div></div>');
     var ir = '<div class="sec-t rv"><span class="n">05</span><h2>IR 자료</h2><p>모아 둔 결산 설명자료·단신</p></div>' + irBlock(co);
-    var map = '<div class="sec-t rv"><span class="n">06</span><h2>데이터 출처 매핑</h2><p>자동 업데이트할 때 어디서 무엇을 읽는지</p></div>' + whyBlk + mapBlock(co) +
+    var map = '<details class="fold rv"><summary><span class="n">06</span><b>데이터 출처 매핑</b><small>자동 업데이트할 때 어디서 무엇을 읽는지 · 눌러서 펼치기</small><i>▾</i></summary>' + whyBlk + mapBlock(co) + '</details>' +
       '<div class="sec-t rv"><span class="n">07</span><h2>수정 이력</h2><p>나중에 텔레그램으로 말한 수정이 여기에 쌓입니다</p></div><div class="card rv"><div class="card-b log">' +
       co.log.map(function (l) { return '<div><span class="d">' + esc(l.d) + '</span><span class="by">' + esc(l.by) + "</span><span>" + esc(l.t) + "</span></div>"; }).join("") + "</div></div>";
 
@@ -366,7 +366,7 @@
     var st = S.st[co.c], it = item(co, st.li), s = stat(co, it), nd = dday(co.lead.next.date), main1 = it.id === co.lead.items[0].id;
     if (!it.pts.length) { host.innerHTML = '<div class="empty">아직 수집 전입니다 — 다음 갱신(' + md(tOf(co.lead.next.date)) + ')부터 쌓입니다.</div>'; document.getElementById("ls").innerHTML = ""; return; }
     document.getElementById("lnext").textContent = "다음 발표 " + md(tOf(co.lead.next.date)) + " (" + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + ") · " + (co.lead.next.basis ? co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준" : "공표 예정");
-    document.getElementById("lnote").innerHTML = "<b>대상</b> " + esc(it.entity) + ' <span class="mono">' + esc(it.corp) + "</span> — " + esc(it.note);
+    document.getElementById("lnote").innerHTML = it.why || it.note ? "<b>" + esc(it.short) + "</b> — " + esc(it.why || it.note) : "";
     var last = it.pts[it.pts.length - 1][0], pq = co.next.q, endYm = qMonthsList(co, pq)[2], first = it.pts[0][0];
     if (endYm <= last) endYm = ymAdd(last, 1);
     if (ymAdd(first, 24) < endYm) first = ymAdd(endYm, -24);
@@ -520,6 +520,14 @@
   }
 
   function autoTag(a) { return '<span class="auto ' + (a === "자동" ? "a" : a === "반자동" ? "s" : "m") + '">' + esc(a) + "</span>"; }
+
+  function whyList(co) {   // 이 회사에 이 지표를 고른 이유
+    var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank || 9) - (b.rank || 9); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
+    if (!rows.length && !co.lead.pick_note) return "";
+    return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
+      return "<li><b>" + esc(i.t || i.short) + "</b>" + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+    }).join("") + "</ol></div>";
+  }
   function mapBlock(co) {
     var rows = [];
     co.lead.items.forEach(function (it) {
