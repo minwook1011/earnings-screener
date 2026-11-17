@@ -96,11 +96,11 @@ def main():
                 continue
             co = json.load(open(p, encoding="utf-8"))
             sub = co["sec"].split("/")[1]
-            items = [i for i in co["lead"]["items"] if i.get("kind") == "pension" and sub in KEEP_PENSION]
+            items = [dict(i, kind="pension") for i in co["lead"]["items"] if (i.get("kind") == "pension" or i.get("nenkin") or i.get("lk")) and sub in KEEP_PENSION]
             macro, out = [], []
             old_items = {i.get("id"): i for i in co["lead"]["items"]}
             for L in sorted(x.get("lead") or [], key=lambda l: l.get("rank") or 9):
-                if L.get("kind") == "keep" and L.get("item") in old_items and old_items[L["item"]].get("kind") != "pension":
+                if L.get("kind") == "keep" and L.get("item") in old_items and old_items[L["item"]].get("kind") != "pension" and not old_items[L["item"]].get("nenkin"):
                     it = dict(old_items[L["item"]])
                     it["id"] = "x%d" % len(items)
                     it["rank"] = L.get("rank")
@@ -147,7 +147,7 @@ def main():
         p = os.path.join(LEAD, c + ".json")
         co = json.load(open(p, encoding="utf-8"))
         n0 = len(co["lead"]["items"])
-        co["lead"]["items"] = [i for i in co["lead"]["items"] if i.get("kind") != "pension"]
+        co["lead"]["items"] = [i for i in co["lead"]["items"] if i.get("kind") != "pension" and not i.get("nenkin") and not i.get("lk")]
         if len(co["lead"]["items"]) != n0:
             json.dump(co, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     if rep:

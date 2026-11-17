@@ -526,7 +526,7 @@
   function autoTag(a) { return '<span class="auto ' + (a === "자동" ? "a" : a === "반자동" ? "s" : "m") + '">' + esc(a) + "</span>"; }
 
   function whyList(co) {   // 이 회사에 이 지표를 고른 이유
-    var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank || 9) - (b.rank || 9); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
+    var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank == null ? 9 : a.rank) - (b.rank == null ? 9 : b.rank); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
       return "<li><b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
@@ -820,7 +820,7 @@
         co.refs.mc = { date: "", t: d.src || d.name, url: d.url || "" };
       });
       co.lead.macro = co.lead.macro.filter(function (m) { return !ix[m.id]; });
-      co.lead.items.sort(function (a, b) { return (a.rank || 9) - (b.rank || 9); });
+      co.lead.items.sort(function (a, b) { return (a.rank == null ? 9 : a.rank) - (b.rank == null ? 9 : b.rank); });
       if (co._lnx && !co.lead.items.some(function (x) { return x.kind === "pension"; })) co.lead.next = { date: co._lnx, basis: "", note: "공용 시장 통계 다음 공표(예상)" };
     });
   }
