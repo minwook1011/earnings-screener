@@ -217,3 +217,35 @@ html.lk .pc-st i small { font: 500 9.5px var(--mono); margin-left: 2px; }
   .q3h i.hx { font-size: 9.5px; padding: 2px 0; min-width: 0; }
   .q3sp svg { width: 80px; }
 }
+
+/* 폰(2026-11-17 사용자 "폰이라 안 보이나"): 표 대신 회사마다 카드 — 이름·3년 주가 / 발표·매출·영업이익 / 12분기 숫자 */
+@media (max-width: 760px) {
+  .q3-t, .q3-t tbody { display: block; width: 100%; }
+  .q3-t thead { display: none; }
+  .q3-t tbody tr { display: grid; grid-template-columns: 1fr auto auto auto auto; grid-template-areas: "nm nm nm sp sp" "dd s r op o" "h h h h h"; gap: 6px 6px; align-items: center; padding: 11px 8px; border-bottom: 1px solid var(--line); }
+  .q3-t td { display: block; padding: 0; border: 0; white-space: nowrap; }
+  .q3-t td:nth-child(1), .q3-t td:nth-child(9), .q3-t td:nth-child(10), .q3-t td:nth-child(12) { display: none; }
+  .q3-t td.nmc { grid-area: nm; position: static; min-width: 0; max-width: none; background: none; }
+  .q3-t td:nth-child(3) { grid-area: dd; }
+  .q3-t td:nth-child(4) { grid-area: s; } .q3-t td:nth-child(5) { grid-area: r; }
+  .q3-t td:nth-child(6) { grid-area: op; } .q3-t td:nth-child(7) { grid-area: o; }
+  .q3-t td:nth-child(8) { grid-area: h; }
+  .q3-t td:nth-child(11) { grid-area: sp; justify-self: end; }
+  .q3-t td:nth-child(4)::before { content: "매출"; display: block; font: 500 9.5px var(--jsans); color: var(--ink-mute); text-align: right; }
+  .q3-t td:nth-child(6)::before { content: "영업이익"; display: block; font: 500 9.5px var(--jsans); color: var(--ink-mute); text-align: right; }
+  .q3-t td.v { font-size: 12px; }
+  .q3-t .hx { min-width: 50px; padding: 3px 5px; font-size: 11px; }
+  .q3-t td.dd b { font-size: 11px; } .q3-t td.dd .cq { font-size: 9.5px; }
+  .q3sp svg { width: 70px; height: 22px; } .q3sp { font-size: 11px; }
+  .q3h { display: flex; width: 100%; }
+  .q3h > span { width: 100%; }
+  .q3h i.hx, .q3h .ql em { flex: 1 1 0; width: auto; min-width: 0; }
+  .q3h i.hx { font-size: 9px; padding: 2px 0; }
+  .q3h .ql em { font-size: 8px; }
+}
+@media (max-width: 760px) {
+  .q3-t tbody tr { grid-template-columns: minmax(0, 1fr) repeat(4, auto); }
+  .q3-t td { min-width: 0; }
+  .q3-t td:nth-child(8) { overflow: hidden; }
+  html.lk .q3-t { min-width: 0 !important; table-layout: auto; }
+}
