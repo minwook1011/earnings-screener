@@ -265,6 +265,17 @@
     Object.keys(MEMO).forEach(function (k) { if (k.indexOf("o:") !== 0) return; var c = k.slice(2); MEMO[c] = MEMO[c] ? MEMO[c] + "<br>" + MEMO[k] : MEMO[k]; delete MEMO[k]; ch = true; });
     if (ch) try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
   })();
+  window.addEventListener("storage", function (e) { if (e.key === "es-memo") MEMO = load("es-memo"); });   // 다른 탭에서 쓴 메모를 바로 받음
+  (function memoRestore() {   // 한 번만: 날짜별 사본에는 있는데 지금 없는 회사 메모를 되살림(덮어쓰기 버그로 사라진 것, 2026-11-17)
+    try {
+      if (localStorage.getItem("es-memo-restored-1117")) return;
+      var ks = []; for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (/^es-memo-bak-/.test(k)) ks.push(k); }
+      ks.sort().reverse(); var n = 0;
+      ks.forEach(function (k) { var b = {}; try { b = JSON.parse(localStorage.getItem(k)) || {}; } catch (e) {} Object.keys(b).forEach(function (c) { if (!MEMO[c] && b[c]) { MEMO[c] = b[c]; n++; } }); });
+      if (n) localStorage.setItem("es-memo", JSON.stringify(MEMO));
+      localStorage.setItem("es-memo-restored-1117", String(n));
+    } catch (e) {}
+  })();
   (function memoBackup() {   // 메모 날짜별 사본(es-memo-bak-YYYY-MM-DD, 최근 14일) — 사라져도 되살릴 수 있게(2026-11-15 사용자)
     try {
       var raw = localStorage.getItem("es-memo"); if (!raw || raw === "{}") return;
@@ -1317,6 +1328,7 @@
         e.preventDefault(); var x = (e.clipboardData || window.clipboardData).getData("text"); document.execCommand("insertText", false, x);
       };
       t.oninput = function () {
+        MEMO = load("es-memo");   // 저장 직전에 최신을 다시 읽고 이 회사 칸만 바꿈 — 다른 탭·오래 열린 탭이 남의 메모를 덮어쓰지 않게(2026-11-17 메모 사라짐 수정)
         var v = memoClean(t); if (v.replace(/<[^>]+>/g, "").trim()) MEMO[t.dataset.memo] = v; else { delete MEMO[t.dataset.memo]; if (!t.textContent && !t.querySelector("br,div")) t.innerHTML = ""; }   // 탭·빈칸만 있는 줄은 지우지 않는다(빈 칸에서 Tab 먼저 누를 때)
         try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
       };
