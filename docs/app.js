@@ -276,6 +276,44 @@
       localStorage.setItem("es-memo-restored-1117", String(n));
     } catch (e) {}
   })();
+  /* 저장할 때마다 사본(es-memo-hist, 최근 200개 · 2분 안 연속 입력은 한 개로) + 파일 내보내기/불러오기(2026-11-17 사용자 — 메모는 절대 사라지면 안 됨) */
+  function memoHist() {
+    try {
+      var h = JSON.parse(localStorage.getItem("es-memo-hist") || "[]"), now = Date.now(), raw = JSON.stringify(MEMO);
+      if (h.length && h[h.length - 1].m === raw) return;
+      if (h.length && now - h[h.length - 1].t < 120000) h[h.length - 1] = { t: now, m: raw }; else h.push({ t: now, m: raw });
+      while (h.length > 200) h.shift();
+      localStorage.setItem("es-memo-hist", JSON.stringify(h));
+    } catch (e) {}
+  }
+  function memoAll() {   // 지금 메모 + 모든 사본에서 회사마다 가장 최근 글(지운 것도 남김 — 내보내기용)
+    var all = {}, add = function (m) { Object.keys(m || {}).forEach(function (c) { if (m[c] && !all[c]) all[c] = m[c]; }); };
+    add(load("es-memo"));
+    try { JSON.parse(localStorage.getItem("es-memo-hist") || "[]").reverse().forEach(function (x) { add(JSON.parse(x.m)); }); } catch (e) {}
+    try { var ks = []; for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (/^es-memo-bak-/.test(k)) ks.push(k); } ks.sort().reverse().forEach(function (k) { add(JSON.parse(localStorage.getItem(k))); }); } catch (e) {}
+    return all;
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-memoio]"); if (!b) return;
+    if (b.dataset.memoio === "out") {
+      var t = new Date(), d = t.getFullYear() + ("0" + (t.getMonth() + 1)).slice(-2) + ("0" + t.getDate()).slice(-2);
+      var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify({ memo: load("es-memo"), all: memoAll(), grade: GRADE }, null, 1)], { type: "application/json" }));
+      a.download = "메모백업-" + d + ".json"; document.body.appendChild(a); a.click(); a.remove();
+    } else {
+      var f = document.createElement("input"); f.type = "file"; f.accept = ".json,application/json";
+      f.onchange = function () {
+        var r = new FileReader(); r.onload = function () {
+          try {
+            var j = JSON.parse(r.result), src = j.memo || j, cur = load("es-memo"), n = 0;
+            Object.keys(src).forEach(function (c) { if (src[c] && !cur[c]) { cur[c] = src[c]; n++; } });   // 비어 있는 칸만 채움 — 지금 메모는 안 덮어씀
+            localStorage.setItem("es-memo", JSON.stringify(cur)); MEMO = cur; memoHist();
+            alert("메모 " + n + "개를 불러왔습니다(이미 있는 메모는 그대로 둠)."); location.reload();
+          } catch (x) { alert("메모 파일을 읽지 못했습니다."); }
+        }; r.readAsText(f.files[0]);
+      };
+      f.click();
+    }
+  });
   (function memoBackup() {   // 메모 날짜별 사본(es-memo-bak-YYYY-MM-DD, 최근 14일) — 사라져도 되살릴 수 있게(2026-11-15 사용자)
     try {
       var raw = localStorage.getItem("es-memo"); if (!raw || raw === "{}") return;
@@ -810,7 +848,7 @@
       COLS.filter(function (c) { return !/ns/.test(c.cls || ""); }).map(function (c) { return '<option value="' + c.k + '"' + (S.sort === c.k ? " selected" : "") + ">" + c.t + "</option>"; }).join("") +
       "</select></div>") + '<div class="fld"><span>순서</span><div class="seg" id="dir"><button data-v="-1" aria-pressed="' + (S.dir === -1) + '">' + (all ? "최근 발표 먼저" : "큰 순") + '</button><button data-v="1" aria-pressed="' + (S.dir === 1) + '">' + (all ? "오래된 발표 먼저" : "작은 순") + "</button></div></div>" +
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커" value="' + esc(S.q) + '"></div>' +
-      '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>개 기업</div></div>" + '<p class="stage-note">' + NOTE[st] + "</p>" + nav;
+      '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>개 기업 · <button type=\"button\" class=\"chip\" data-memoio=\"out\">메모 내보내기</button> <button type=\"button\" class=\"chip\" data-memoio=\"in\">메모 불러오기</button></div></div>" + '<p class="stage-note">' + NOTE[st] + "</p>" + nav;
     if (!rows.length) return head + (q ? '<div class="empty">검색과 맞는 기업이 없습니다.</div>' : '<div class="empty-stage"><b>아직 ' + st + "단계 기업이 없습니다</b>" + EMPTY[st] + "</div>");
     var th = COLS.map(function (c) {
       var ar = S.sort === c.k ? '<span class="ar">' + (S.dir < 0 ? "▼" : "▲") + "</span>" : "";
@@ -1260,7 +1298,7 @@
     var ctl = '<div class="ctl"><div class="fld"><span>정렬</span><div class="seg" id="stsort">' + [["at", "최근 올린 순"], ["avg", "팀 점수 높은 순"], ["mc", "시총 큰 순"]].map(function (o) {
         return '<button data-v="' + o[0] + '" aria-pressed="' + (key === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div></div>" +
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커 · 섹터 · 담당" value="' + esc(S.q) + '"></div>' +
-      '<div class="count">팀 대시보드 ' + esc(S.study.updated || "") + " 기준 · <b>" + rows.length + "</b>개 기업</div></div>" +
+      '<div class="count">팀 대시보드 ' + esc(S.study.updated || "") + " 기준 · <b>" + rows.length + "</b>개 기업 · <button type=\"button\" class=\"chip\" data-memoio=\"out\">메모 내보내기</button> <button type=\"button\" class=\"chip\" data-memoio=\"in\">메모 불러오기</button></div></div>" +
       '<p class="stage-note">팀 대시보드 3단계에 올라온 회사입니다. 맨 앞 칸이 팀 점수(평균)와 코멘트, 1·2·3·4는 내 분류(2단계와 같이 저장, 1부터 위로), 아래 칸은 내 코멘트(2단계 목록 메모와 같은 칸 — 어느 쪽에 써도 양쪽에 보임)입니다. 이름을 누르면 재무·주가가 열립니다.</p>';
     if (!rows.length) return ctl + '<div class="empty">' + (q ? "검색과 맞는 기업이 없습니다." : "가져온 종목이 없습니다.") + "</div>";
     function scoreCls(v) { return v == null ? "" : v >= 7 ? " hi" : v >= 5 ? " mid" : " lo"; }
@@ -1331,6 +1369,7 @@
         MEMO = load("es-memo");   // 저장 직전에 최신을 다시 읽고 이 회사 칸만 바꿈 — 다른 탭·오래 열린 탭이 남의 메모를 덮어쓰지 않게(2026-11-17 메모 사라짐 수정)
         var v = memoClean(t); if (v.replace(/<[^>]+>/g, "").trim()) MEMO[t.dataset.memo] = v; else { delete MEMO[t.dataset.memo]; if (!t.textContent && !t.querySelector("br,div")) t.innerHTML = ""; }   // 탭·빈칸만 있는 줄은 지우지 않는다(빈 칸에서 Tab 먼저 누를 때)
         try { localStorage.setItem("es-memo", JSON.stringify(MEMO)); } catch (e) {}
+        memoHist();
       };
     });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
