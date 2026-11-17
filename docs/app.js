@@ -98,7 +98,7 @@
   }
 
   /* ---------- 머리·레일 ---------- */
-  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0, m: S.res ? moDocs().length : 0, o: S.study ? S.study.items.length : "" }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (stOf(o) >= 3) n[stOf(o)]++; }); return n; }
+  function counts() { var n = { 1: 0, 2: 0, 3: 0, 4: 0, m: S.res ? moDocs().length : 0, o: S.study ? S.study.items.length : "" }; S.list.forEach(function (o) { if (!o.pre) n[1]++; if (o.stage >= 2) n[2]++; if (stOf(o) >= 3) n[stOf(o)]++; }); if (S.res && S.res.items) n[2] = Object.keys(S.res.items).filter(function (c) { var r = S.res.items[c]["2"]; return r && r.status === "완료" && r.html; }).length; return n; }   /* 2단계 숫자 = 올라간 2단계 리포트 수(= 전체 리포트 수, 2026-11-17 사용자). 리포트 없는 회사는 세지 않음 */
   function head() {
     var n = counts();
     return '<header class="jhd"><div class="hd"><div class="jbrand">' +
