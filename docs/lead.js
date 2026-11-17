@@ -232,7 +232,7 @@
       "<p>회사가 내는 숫자와 가이던스는 결과 확인용입니다. 여기서는 매달 외부에서 나오는 데이터(연금 가입자 수 · 수출입 통계 · 공공 구인 건수 등) 중 실적과 상관(R)이 높은 것을 골라 쌓고, 주가와 겹쳐 봅니다.</p>" +
       '<div class="hstats"><div class="hstat"><b class="mono" data-count="' + Object.keys(S.idx.cos).length + '">0</b><span>추적 기업</span></div><div class="hstat"><b class="mono" data-count="' + nPts + '">0</b><span>세부 섹터</span></div>' +
       (nextLead ? '<div class="hstat"><b class="mono">' + esc(dlab(nextLead.d)) + "</b><span>다음 지표 발표 " + esc(md(tOf(nextLead.d))) + "</span></div>" : "") + "</div>" +
-      '<div class="flow"><b>외부 월간 데이터</b><i>→</i><b>분기로 묶어 매출과 R</b><i>→</i><b>이번 분기 매출 추정</b><i>→</i><b>주가와 겹쳐 보기</b><i>→</i><b>실적 전 판단</b></div></section>' +
+      '<div class="flow"><b>외부 월간 데이터</b><i>→</i><b>분기로 묶어 매출과 R</b><i>→</i><b>이번 분기 매출 추정</b><i>→</i><b>주가와 겹쳐 보기</b><i>→</i><b>실적 전 판단</b></div><p><a class="chip acc" href="#all">기업별 선행지표 한눈에 보기 →</a></p></section>' +
       '<div class="sec-t rv"><span class="n">01</span><h2>다가오는 일정</h2><p>지표 갱신일과 45일 안 실적 발표(최대 30곳)</p></div>' +
       '<div class="timeline">' + ev.map(function (e) {
         return '<a class="tl rv" href="' + (e.co.c ? "#c/" + e.co.c : "#") + '"><div class="d"><b>' + dlab(e.d) + "</b><span>" + md(tOf(e.d)) + '</span></div><div><h4>' + esc(e.co.n) + ' <small class="mono">' + e.co.c + "</small></h4><p>" + esc(e.t) + '</p></div><div><span class="chip ' + (e.k === "지표" ? "ind" : "gold") + '">' + e.k + "</span></div></a>";
@@ -325,8 +325,8 @@
         return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + esc(it.short) + "<small>" + it.pts.length + "개월</small></button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
-      '<div class="lwhy"><p id="lnote"></p></div></div></section>';
-    var whyBlk = '<div class="card rv"><div class="card-b lwhy"><p><b>주의</b> ' + esc(co.lead.caveat || "") + '</p>' + (co.lead.macro && co.lead.macro.length ? '<p><b>지표별 이유</b> ' + co.lead.macro.map(function (m) { return esc(m.name || m.id) + (m.why ? ' <span class="how">— ' + esc(m.why) + '</span>' : ''); }).join(' · ') + '</p>' : '') + '</div></div>';
+      '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
+    var whyBlk = '<div class="card-b lwhy"><p><b>주의</b> ' + esc(co.lead.caveat || "") + '</p></div>';
 
     var price = '<div class="sec-t rv"><span class="n">02</span><h2>주가 × 선행지표</h2><p>월간 선행지표를 주가 아래 띠에 겹쳐 보기 · 금색 점선 = 실적 발표일과 다음 날 주가 반응</p></div>' +
       '<section class="card rv" id="mc"><div class="card-h"><div class="ctl">' +
@@ -344,7 +344,7 @@
       '<a class="card rep rv" href="' + esc(co.report.html) + '" target="_blank" rel="noopener"><span class="ic">2단계</span><div><h3>' + esc(co.report.title) + ' <small class="mono">' + esc(co.report.written) + "</small></h3><p>" + esc(co.report.verdict) + '</p></div><span class="go">리포트 열기 ↗</span></a>' :
       '<div class="card rep rv none"><span class="ic">2단계</span><div><h3>아직 없음</h3><p>2단계 리포트를 쓰면 여기에 연결됩니다.</p></div></div>');
     var ir = '<div class="sec-t rv"><span class="n">05</span><h2>IR 자료</h2><p>모아 둔 결산 설명자료·단신</p></div>' + irBlock(co);
-    var map = '<div class="sec-t rv"><span class="n">06</span><h2>데이터 출처 매핑</h2><p>자동 업데이트할 때 어디서 무엇을 읽는지</p></div>' + whyBlk + mapBlock(co) +
+    var map = '<details class="fold rv"><summary><span class="n">06</span><b>데이터 출처 매핑</b><small>자동 업데이트할 때 어디서 무엇을 읽는지 · 눌러서 펼치기</small><i>▾</i></summary>' + whyBlk + mapBlock(co) + '</details>' +
       '<div class="sec-t rv"><span class="n">07</span><h2>수정 이력</h2><p>나중에 텔레그램으로 말한 수정이 여기에 쌓입니다</p></div><div class="card rv"><div class="card-b log">' +
       co.log.map(function (l) { return '<div><span class="d">' + esc(l.d) + '</span><span class="by">' + esc(l.by) + "</span><span>" + esc(l.t) + "</span></div>"; }).join("") + "</div></div>";
 
@@ -366,7 +366,7 @@
     var st = S.st[co.c], it = item(co, st.li), s = stat(co, it), nd = dday(co.lead.next.date), main1 = it.id === co.lead.items[0].id;
     if (!it.pts.length) { host.innerHTML = '<div class="empty">아직 수집 전입니다 — 다음 갱신(' + md(tOf(co.lead.next.date)) + ')부터 쌓입니다.</div>'; document.getElementById("ls").innerHTML = ""; return; }
     document.getElementById("lnext").textContent = "다음 발표 " + md(tOf(co.lead.next.date)) + " (" + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + ") · " + (co.lead.next.basis ? co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준" : "공표 예정");
-    document.getElementById("lnote").innerHTML = "<b>대상</b> " + esc(it.entity) + ' <span class="mono">' + esc(it.corp) + "</span> — " + esc(it.note);
+    document.getElementById("lnote").innerHTML = it.why || it.note ? "<b>" + esc(it.short) + "</b> — " + esc(it.why || it.note) : "";
     var last = it.pts[it.pts.length - 1][0], pq = co.next.q, endYm = qMonthsList(co, pq)[2], first = it.pts[0][0];
     if (endYm <= last) endYm = ymAdd(last, 1);
     if (ymAdd(first, 24) < endYm) first = ymAdd(endYm, -24);
@@ -520,6 +520,14 @@
   }
 
   function autoTag(a) { return '<span class="auto ' + (a === "자동" ? "a" : a === "반자동" ? "s" : "m") + '">' + esc(a) + "</span>"; }
+
+  function whyList(co) {   // 이 회사에 이 지표를 고른 이유
+    var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank || 9) - (b.rank || 9); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
+    if (!rows.length && !co.lead.pick_note) return "";
+    return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
+      return "<li><b>" + esc(i.t || i.short) + "</b>" + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+    }).join("") + "</ol></div>";
+  }
   function mapBlock(co) {
     var rows = [];
     co.lead.items.forEach(function (it) {
@@ -813,12 +821,50 @@
     });
   }
 
+  /* ---------- 기업별 지표 한눈에 ---------- */
+  function viewAll() {
+    main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>';
+    (S.ov ? Promise.resolve(S.ov) : getJSON("data/jp/lead/overview.json").then(function (d) { S.ov = d; return d; })).then(function (d) {
+      if (location.hash !== "#all") return;
+      var groups = []; d.rows.forEach(function (r) { if (groups.indexOf(r[2]) < 0) groups.push(r[2]); });
+      var cnt = { "고유": 0, "공통": 0 }; d.rows.forEach(function (r) { var u = r[4].some(function (x) { return x[1] === "고유"; }); cnt[u ? "고유" : "공통"]++; });
+      main.innerHTML = '<div class="crumb rv"><a href="#">선행지표</a><i>›</i><b>기업별 지표 한눈에</b></div>' +
+        '<div class="sec-t rv"><span class="n">ALL</span><h2>기업별 선행지표 한눈에</h2><p>' + d.rows.length + '곳 · 회사 고유 데이터 있는 곳 ' + cnt["고유"] + '곳 · 공통 지표만 ' + cnt["공통"] + '곳</p></div>' +
+        '<div class="card rv"><div class="card-h ovf"><input id="ovq" type="search" placeholder="기업·코드·지표 이름 검색" autocomplete="off"><div class="seg" id="ovg"><button data-v="" aria-pressed="true">전체</button>' + groups.map(function (g) { return '<button data-v="' + esc(g) + '" aria-pressed="false">' + esc(g) + "</button>"; }).join("") + '</div>' +
+        '<label class="ovchk"><input type="checkbox" id="ovw"> 고유 데이터 없는 곳만</label></div>' +
+        '<div class="ovleg"><span class="chip acc">고유</span> 이 회사(또는 두 곳까지)만 쓰는 데이터 <span class="chip">공통</span> 세 곳 이상 같이 쓰는 시장 통계 <span class="chip gold">월차</span> 회사 월차(선확인) <span class="chip ind">연금</span> 후생연금 가입자 <span class="chip dim">대기</span> 이름만 있고 데이터 없음</div>' +
+        '<div class="card-b ovwrap"><table class="ovt"><thead><tr><th>기업</th><th>섹터</th><th>선행지표 (개월 · 마지막 달)</th></tr></thead><tbody id="ovb"></tbody></table></div></div>';
+      var st = { q: "", g: "", w: false };
+      function draw() {
+        var q = st.q.toLowerCase();
+        var rs = d.rows.filter(function (r) {
+          if (st.g && r[2] !== st.g) return false;
+          if (st.w && r[4].some(function (x) { return x[1] === "고유"; })) return false;
+          if (!q) return true;
+          return (r[0] + " " + r[1] + " " + r[3] + " " + r[4].map(function (x) { return x[0]; }).join(" ")).toLowerCase().indexOf(q) >= 0;
+        });
+        document.getElementById("ovb").innerHTML = rs.map(function (r) {
+          return '<tr><td><a href="#c/' + r[0] + '"><b>' + esc(r[1]) + '</b><small class="mono">' + r[0] + '</small></a></td><td><span class="ovs">' + esc(r[2]) + "</span>" + esc(r[3]) + "</td><td>" +
+            (r[4].length ? r[4].map(function (x) {
+              var cls = { "고유": "acc", "공통": "", "월차": "gold", "연금": "ind", "대기": "dim" }[x[1]] || "";
+              return '<span class="chip ' + cls + '" title="' + esc(x[1]) + '">' + esc(x[0]) + (x[2] ? "<small>" + x[2] + "개월 · " + esc(String(x[3]).slice(2).replace("-", ".")) + "</small>" : "") + "</span>";
+            }).join(" ") : '<span class="chip dim">아직 없음</span>') + (r[5] ? '<p class="ovn">' + esc(r[5]) + "</p>" : "") + "</td></tr>";
+        }).join("") || '<tr><td colspan="3" class="empty">맞는 기업이 없습니다</td></tr>';
+      }
+      document.getElementById("ovq").addEventListener("input", function () { st.q = this.value.trim(); draw(); });
+      document.querySelectorAll("#ovg button").forEach(function (b) { b.onclick = function () { st.g = b.dataset.v; document.querySelectorAll("#ovg button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); draw(); }; });
+      document.getElementById("ovw").onchange = function () { st.w = this.checked; draw(); };
+      draw(); reveal(main);
+    }).catch(function () { main.innerHTML = '<div class="empty">목록을 불러오지 못했습니다.</div>'; });
+  }
+
   /* ---------- 라우팅 ---------- */
   function cur() { var m = /^#c\/(\w+)/.exec(location.hash); return m ? m[1] : null; }
   function route() {
     hideTip();
     var h = location.hash.replace(/^#\/?/, ""), p = h.split("/");
     if (p[0] === "c" && p[1] && S.idx.cos[p[1]]) { renderTree({ sec: S.idx.cos[p[1]].sec, c: p[1] }); main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>'; ensureCo([p[1]], true).then(function () { return attachMacro(S.co[p[1]]); }).then(function () { if (cur() === p[1]) viewCompany(p[1]); }); }
+    else if (p[0] === "all") { renderTree(null); viewAll(); }
     else if (p[0] === "s" && p[2]) { renderTree({ sec: p[1] + "/" + p[2] }); viewSector(p[1], p[2]); }
     else { renderTree(null); viewHome(); }
     window.scrollTo(0, 0);

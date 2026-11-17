@@ -98,8 +98,18 @@ def main():
             sub = co["sec"].split("/")[1]
             items = [i for i in co["lead"]["items"] if i.get("kind") == "pension" and sub in KEEP_PENSION]
             macro, out = [], []
+            old_items = {i.get("id"): i for i in co["lead"]["items"]}
             for L in sorted(x.get("lead") or [], key=lambda l: l.get("rank") or 9):
-                if L.get("kind") == "series" and L.get("pts"):
+                if L.get("kind") == "keep" and L.get("item") in old_items and old_items[L["item"]].get("kind") != "pension":
+                    it = dict(old_items[L["item"]])
+                    it["id"] = "x%d" % len(items)
+                    it["rank"] = L.get("rank")
+                    if L.get("why"):
+                        it["why"] = it["note"] = L["why"]
+                    items.append(it)
+                    r, n = r_value(co, it["pts"], (it.get("unit") or "") == "%")
+                    out.append((L.get("rank"), it.get("t") or it.get("short"), it.get("why", ""), r, n, len(it["pts"])))
+                elif L.get("kind") == "series" and L.get("pts"):
                     pts = [[q[0], q[1], "ext"] for q in L["pts"] if q and q[1] is not None]
                     it = {"id": "x%d" % len(items), "kind": "ext", "rank": L.get("rank"), "t": L["name"], "short": L["name"][:22], "nm": L["name"][:16], "unit": L.get("unit") or "",
                           "entity": L.get("src", ""), "corp": "", "note": L.get("why", ""), "why": L.get("why", ""), "pts": pts,
