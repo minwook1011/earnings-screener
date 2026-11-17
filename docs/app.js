@@ -523,6 +523,38 @@
     return '<svg class="' + (up ? "up" : "dn") + '" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" aria-hidden="true">' + gr + g + "</svg>" +
       '<i class="plast-d" data-y="' + (Y(c[c.length - 1]) / H * 100).toFixed(1) + '"></i>';
   }
+  /* 카드 아래 분기 매출·영업이익 YoY 꺾은선(점선 + 동그라미) — 2026-11-18 사용자, 우선 반다이남코(7832)만 */
+  var QYC_ON = { "7832": 1 };
+  function qyc(c) {
+    var q = (S.qy[c] || []).slice(-10);
+    if (!QYC_ON[c] || q.length < 3) return "";
+    var W = 300, H = 96, L = 6, R = 34, T = 10, Bm = 16, CL = 120;
+    function cl(v) { return v == null ? null : Math.max(-CL, Math.min(CL, v)); }
+    var vs = [0];
+    q.forEach(function (x) { if (x.r != null) vs.push(cl(x.r)); if (x.o != null) vs.push(cl(x.o)); });
+    var lo = Math.min.apply(null, vs), hi = Math.max.apply(null, vs), k = (hi - lo) || 1;
+    function X(i) { return L + i * (W - L - R) / (q.length - 1); }
+    function Y(v) { return T + (hi - cl(v)) / k * (H - T - Bm); }
+    function ser(key, cls) {
+      var pts = [], dots = "";
+      q.forEach(function (x, i) {
+        var v = x[key];
+        if (v == null) return;
+        pts.push(X(i).toFixed(1) + "," + Y(v).toFixed(1));
+        var out = Math.abs(v) > CL;
+        dots += '<circle class="' + (out ? "out" : "") + '" cx="' + X(i).toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="2.6"><title>' + esc(x.p) + (key === "r" ? " 매출 YoY " : " 영업이익 YoY ") + esc(pctTxt(v)) + "</title></circle>";
+      });
+      var last = q[q.length - 1][key], ly = last == null ? 0 : Y(last) + 3.5, oth = q[q.length - 1][key === "r" ? "o" : "r"];
+      if (last != null && oth != null && Math.abs(Y(last) - Y(oth)) < 10) ly += (cl(last) >= cl(oth) ? -5 : 5) * (key === "r" && cl(last) === cl(oth) ? -1 : 1);
+      var lab = last == null ? "" : '<text x="' + (W - R + 5) + '" y="' + ly.toFixed(1) + '">' + esc((last > 0 ? "+" : "") + (Math.abs(last) >= 1000 ? Math.round(last / 100) / 10 + "k" : Math.round(last)) + "%") + "</text>";
+      return '<g class="' + cls + '"><polyline points="' + pts.join(" ") + '"/>' + dots + lab + "</g>";
+    }
+    var z = Y(0).toFixed(1);
+    return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>±' + CL + '% 밖은 빈 점</small></div>' +
+      '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true"><line class="z" x1="' + L + '" x2="' + (W - R) + '" y1="' + z + '" y2="' + z + '"/>' +
+      ser("r", "r") + ser("o", "o") +
+      '<text class="ax" x="' + L + '" y="' + (H - 3) + '">' + esc(q[0].p) + '</text><text class="ax" text-anchor="end" x="' + (W - R) + '" y="' + (H - 3) + '">' + esc(q[q.length - 1].p) + "</text></svg></div>";
+  }
   function pcard(o) {
     var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
     var tag = B === "turn" ? "정배열 전환 " + md(p.turn) : B === "new" ? "52주 신고가 " + md(p.hid) : "고점 대비 " + pctTxt(p.off);
@@ -530,7 +562,7 @@
       '<div class="pc-ch">' + pchart(p, B) + '<span class="pc-tag">' + esc(tag) + "</span></div>" +
       '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
-      "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div></div>";
+      "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c) + "</div>";
   }
   /* ---------- 일본 주요 전 종목 — 100억 사이트 일본 종목 전부(2026-10-29 사용자). data/jp/pxall/index.json(build_pxall.py, 10:00·15:30 · 상한가는 19:00 카부탄도) ---------- */
   var ABOARDS = [

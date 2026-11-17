@@ -249,3 +249,23 @@ html.lk .pc-st i small { font: 500 9.5px var(--mono); margin-left: 2px; }
   .q3-t td:nth-child(8) { overflow: hidden; }
   html.lk .q3-t { min-width: 0 !important; table-layout: auto; }
 }
+
+/* 신고가 카드 — 분기 매출·영업이익 YoY 꺾은선(2026-11-18) */
+.pc-qy { margin-top: 12px; padding: 10px 10px 4px; border-radius: 12px; background: var(--surface-2); }
+.pc-qyh { display: flex; align-items: center; gap: 10px; font: 600 11px var(--jsans); color: var(--ink-mid); }
+.pc-qyh span::before { content: ""; display: inline-block; width: 14px; border-top: 2px dashed currentColor; vertical-align: middle; margin-right: 5px; }
+.pc-qyh .r { color: var(--qy-r); } .pc-qyh .o { color: var(--qy-o); }
+.pc-qyh small { margin-left: auto; font: 500 9.5px var(--jsans); color: var(--ink-mute); }
+.pc-qy svg { display: block; width: 100%; height: auto; margin-top: 4px; overflow: visible; }
+.pc-qy polyline { fill: none; stroke-width: 1.6; stroke-dasharray: 4 3; stroke-linejoin: round; }
+.pc-qy .r polyline, .pc-qy .r circle { stroke: var(--qy-r); } .pc-qy .r circle { fill: var(--qy-r); } .pc-qy .r text { fill: var(--qy-r); }
+.pc-qy .o polyline, .pc-qy .o circle { stroke: var(--qy-o); } .pc-qy .o circle { fill: var(--qy-o); } .pc-qy .o text { fill: var(--qy-o); }
+.pc-qy circle { stroke-width: 1.2; }
+.pc-qy circle.out { fill: var(--surface-2) !important; stroke-width: 1.6; }
+.pc-qy text { font: 700 9.5px var(--mono); }
+.pc-qy text.ax { fill: var(--ink-mute); font-weight: 500; font-size: 8.5px; }
+.pc-qy line.z { stroke: var(--line); stroke-width: 1; }
+:root { --qy-r: #c7881a; --qy-o: #7c5cff; }
+html.lk[data-theme=dark] { --qy-r: #f2c14e; --qy-o: #a78bfa; }
+.pc-qyh { white-space: nowrap; }
+.pc-qyh b { font: 700 11px var(--jsans); color: var(--ink); }
