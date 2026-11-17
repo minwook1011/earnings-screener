@@ -146,8 +146,9 @@ html.lk .star.on { color: var(--gold); }
 .q3-t .mgh { display: block; text-align: right; margin: 2px 0 0; }
 .q3h { display: inline-flex; flex-direction: column; gap: 2px; vertical-align: middle; }
 .q3h > span { display: flex; gap: 1px; }
-.q3h i.hx { min-width: 0; width: 9px; height: 11px; padding: 0; border-radius: 2px; }
-.q3h i.hx.na { background: var(--line-soft); }
+.q3h i.hx { min-width: 0; width: 34px; padding: 2px 0; border-radius: 3px; font: 600 10px/1.2 var(--mono); text-align: center; font-style: normal; letter-spacing: -.3px; }
+.q3h .ql em { width: 34px; text-align: center; font: 500 8.5px var(--mono); color: var(--ink-mute); font-style: normal; }
+.q3h i.hx.na { background: var(--line-soft); color: var(--ink-mute); }
 .q3sp { display: inline-flex; align-items: center; gap: 7px; }
 .q3sp svg { width: 96px; height: 26px; display: block; overflow: visible; }
 .q3sp polyline { fill: none; stroke-width: 1.4; stroke-linejoin: round; }
@@ -205,4 +206,14 @@ html.lk .pc-st i small { font: 500 9.5px var(--mono); margin-left: 2px; }
   .q3-t td.nmc, .q3-t thead th:nth-child(2) { position: sticky; left: 0; z-index: 1; background: var(--surface); min-width: 120px; max-width: 140px; }
   .q3-t td.rk { display: none; } .q3-t thead th:first-child { display: none; }
   .q3n b { font-size: 13px; }
+}
+
+/* 12분기 숫자 칸이 들어가도 1440 화면에 표가 한 번에 보이게(2026-11-17) */
+@media (min-width: 761px) {
+  .q3-t th, .q3-t td { padding-left: 5px; padding-right: 5px; }
+  .q3-t td.nmc { min-width: 150px; }
+  .q3-t .hx { min-width: 56px; padding: 4px 5px; }
+  .q3h i.hx, .q3h .ql em { width: 31px; }
+  .q3h i.hx { font-size: 9.5px; padding: 2px 0; min-width: 0; }
+  .q3sp svg { width: 80px; }
 }

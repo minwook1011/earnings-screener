@@ -794,12 +794,14 @@
   }
   function q3hist(o) {   // 직전 11개 분기 + 이번 분기 = 12칸, 위 매출 · 아래 영업이익
     var h = (o.h || []).concat(o.cq ? [[o.cq, o.r, o.o, o.ot]] : []);
+    while (h.length && h[0][1] == null && h[0][2] == null && !h[0][3]) h.shift();   // YoY 못 구한 앞 분기는 뺌
     if (!h.length) return '<span class="na">—</span>';
     function cell(x, i, k) { var v = x[i], t = k === "o" ? x[3] : null, lv = "na";
       if (t) lv = t === "흑전" ? "p7" : t === "적전" ? "n7" : "n3";
       else if (v != null) { var a = Math.abs(v), l = 1; HX[k].forEach(function (y) { if (a >= y) l++; }); lv = (v > 0 ? "p" : v < 0 ? "n" : "z") + (v ? l : ""); }
-      return '<i class="hx ' + lv + '" title="' + esc(x[0]) + (k === "r" ? " 매출 " : " 영업이익 ") + esc(t || pctTxt(v)) + '"></i>'; }
-    return '<span class="q3h"><span>' + h.map(function (x) { return cell(x, 1, "r"); }).join("") + "</span><span>" + h.map(function (x) { return cell(x, 2, "o"); }).join("") + "</span></span>";
+      var tx = t || (v == null ? "·" : Math.abs(v) >= 1000 ? (v > 0 ? "+1k↑" : "−1k") : (Math.round(v) > 0 ? "+" : Math.round(v) < 0 ? "−" : "") + Math.round(Math.abs(v)));
+      return '<i class="hx ' + lv + '" title="' + esc(x[0]) + (k === "r" ? " 매출 " : " 영업이익 ") + esc(t || pctTxt(v)) + '">' + esc(tx) + '</i>'; }
+    return '<span class="q3h"><span class="ql">' + h.map(function (x) { return "<em>" + esc(x[0]) + "</em>"; }).join("") + '</span><span>' + h.map(function (x) { return cell(x, 1, "r"); }).join("") + "</span><span>" + h.map(function (x) { return cell(x, 2, "o"); }).join("") + "</span></span>";
   }
   var Q3C = [["d", "발표"], ["s", "매출(억엔)"], ["r", "매출 YoY"], ["op", "영업이익(억엔)"], ["o", "영업이익 YoY"], ["opm", "OPM"], ["mc", "시총(억엔)"], ["c3", "3년 주가"]];
   S.q3s = "d"; S.q3d = -1; S.q3f = "all";
@@ -827,7 +829,7 @@
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="종목명 · 코드 · 업종" value="' + esc(S.q) + '"></div>' +
       '<div class="count"><span class="today">' + todayKo() + "</span> · <b>" + rows.length + "</b>개 종목</div></div>" +
       '<p class="stage-note">2단계 리포트를 쓴 회사 전부입니다. 숫자는 가장 최근 분기 단독 실적(억엔)과 전년 같은 분기 대비 YoY — 칸이 진한 빨강일수록 크게 늘고, 진한 파랑일수록 크게 줄었습니다. ' +
-      '‘최근 12분기’는 위 줄 매출 · 아래 줄 영업이익 YoY 색입니다. 3년 주가는 10거래일 간격 종가. 머리칸을 누르면 정렬, 줄을 누르면 재무·리포트가 열립니다.</p>' +
+      '‘최근 12분기’는 위 줄 매출 · 아래 줄 영업이익 YoY(%)입니다. 3년 주가는 10거래일 간격 종가. 머리칸을 누르면 정렬, 줄을 누르면 재무·리포트가 열립니다.</p>' +
       '<div class="q3leg"><span>YoY</span><i class="hx n7"></i><i class="hx n5"></i><i class="hx n3"></i><i class="hx n1"></i><i class="hx p1"></i><i class="hx p3"></i><i class="hx p5"></i><i class="hx p7"></i><em>감소 ← → 증가</em><small>주가 ' + esc(S.q3.updated || "") + " 기준</small></div>";
     if (!rows.length) return head + '<div class="empty">조건에 맞는 종목이 없습니다.</div>';
     var th = '<tr><th class="l ns">#</th><th class="l ns">종목</th>' + Q3C.map(function (x) { return '<th data-q3="' + x[0] + '"' + (k === x[0] ? ' class="on"' : "") + ">" + x[1] + (k === x[0] ? '<span class="ar">' + (dir < 0 ? "▼" : "▲") + "</span>" : "") + "</th>"; }).join("").replace('<th data-q3="opm"', '<th class="ns c">최근 12분기</th><th data-q3="opm"') + '<th class="ns"></th></tr>';
