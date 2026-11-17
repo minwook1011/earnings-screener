@@ -304,3 +304,10 @@ html.lk[data-theme=dark] { --qy-r: #f2c14e; --qy-o: #a78bfa; }
 .pc-ovl em { font-style: normal; } .pc-ovl em::before { content: ""; display: inline-block; width: 10px; border-top: 2px dashed currentColor; vertical-align: middle; margin-right: 3px; }
 .pc-ovl .r { color: var(--qy-r); } .pc-ovl .o { color: var(--qy-o); }
 .pc-ovl { top: 34px; bottom: auto; left: 10px; }
+
+/* 아래 분기 YoY: 칸마다 결산기 분기 + 분기 시작 달, 위 주가 차트 기간 띠(2026-11-18) */
+.pc-qy text.ax { fill: var(--ink-mid); font: 600 7.5px var(--mono); }
+.pc-qy text.ax2 { fill: var(--ink-mute); font: 500 7px var(--mono); }
+.pc-qy rect.bd { fill: color-mix(in srgb, var(--ink-mute) 10%, transparent); stroke: color-mix(in srgb, var(--ink-mute) 30%, transparent); stroke-dasharray: 2 2; stroke-width: .8; }
+.pc-qy text.bdt { fill: var(--ink-mute); font: 500 7px var(--jsans); }
+.pc-st small u { text-decoration: none; font-size: 9px; color: var(--ink-mute); margin-left: 2px; }
