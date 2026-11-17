@@ -2,7 +2,7 @@
 """「3Q26 일본 스크리닝」 판 자료 — 2026-11-17 사용자. 2단계 리포트를 쓴 회사 전부를 한 표에.
 
   결과  docs/data/jp/px/q3.json
-        {"updated", "cq": "3Q26", "items": {코드: {n, d, p, cq, per, s, op, r, o, ot, m, opm, opm0, h:[[분기, 매출YoY, 영업이익YoY, 글자]…], mc, pe, sp:[0~100 …], c3, c1}}}
+        {"updated", "cq": "3Q26", "items": {코드: {n, d, p, cq, per, s, op, r, o, ot, m, opm, opm0, h:[[분기(직전 11개), 매출YoY, 영업이익YoY, 글자]…], mc, pe, sp:[0~100 …], c3, c1}}}
   분기  qhist(단독 분기, 백만엔)의 가장 최근 분기. cq = 그 분기가 끝난 달의 달력 분기(7~9월 끝 = 3Q26).
         qhist 에 없으면 stage1(카부탄 결산 요약)의 매출·영업이익 YoY 만.
   주가  px/<코드>.json(5년 일봉)에서 최근 3년 · 10거래일 간격 종가 → 0~100 으로 눌러 작게(카드가 아닌 표 안 작은 차트용).
@@ -126,7 +126,7 @@ def main():
                       "opm": round(q["op"] / q["s"] * 100, 1) if q["s"] else None, "opm0": q["opm0"]})
             if q.get("m"):
                 o["m"] = q["m"]
-            o["h"] = [[cal_q(x["k"]), x["r"], x["o"], x["ot"]] for x in qs[-5:-1]]
+            o["h"] = [[cal_q(x["k"]), x["r"], x["o"], x["ot"]] for x in qs[-12:-1]]
         elif s1.get("rev") is not None or s1.get("op") is not None:
             o.update({"p": (s1.get("fy", "")[2:4] + "." + s1.get("p", "")) if s1.get("fy") else s1.get("p"), "r": s1.get("rev"), "o": s1.get("op"), "src": "kabutan"})
         x = scr.get(c, {})
