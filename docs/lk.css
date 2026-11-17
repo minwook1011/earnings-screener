@@ -285,3 +285,22 @@ html.lk[data-theme=dark] { --qy-r: #f2c14e; --qy-o: #a78bfa; }
 }
 @media (min-width: 761px) { .q3-t td.rk, .q3-t thead th:first-child { display: none; } }
 @media (max-width: 760px) { html.lk .q3-t { min-width: 0 !important; width: 100% !important; } .q3-t tbody tr { width: 100%; box-sizing: border-box; } }
+
+/* 주가 차트 위 분기 YoY 겹침(2026-11-18) + 아래 YoY 차트는 예전 모양으로 */
+.pc-qy { padding: 10px 10px 4px; background: var(--surface-2); border-top: 0; border-radius: 12px; }
+.pc-qy text { font: 700 9.5px var(--mono); }
+.pc-ov { position: absolute; inset: 0; pointer-events: none; }
+.pc-ov svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pc-ov polyline { fill: none; stroke-width: 1.6; stroke-dasharray: 4 3; }
+.pc-ov polyline.r { stroke: var(--qy-r); } .pc-ov polyline.o { stroke: var(--qy-o); }
+.pc-ov line { stroke: color-mix(in srgb, var(--ink-mute) 45%, transparent); stroke-width: 1; stroke-dasharray: 2 3; }
+.ovd { position: absolute; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; pointer-events: auto; }
+.ovd.r { background: var(--qy-r); } .ovd.o { background: var(--qy-o); }
+.ovd.out { background: var(--surface); border: 1.6px solid; } .ovd.out.r { border-color: var(--qy-r); } .ovd.out.o { border-color: var(--qy-o); }
+.ovd b { position: absolute; left: 50%; transform: translateX(-50%); font: 700 9px var(--mono); white-space: nowrap; text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface); }
+.ovd.up b { bottom: 8px; } .ovd.dn b { top: 8px; }
+.ovd.r b { color: var(--qy-r); } .ovd.o b { color: var(--qy-o); }
+.pc-ovl { position: absolute; left: 8px; bottom: 4px; display: flex; gap: 8px; font: 600 9px var(--jsans); }
+.pc-ovl em { font-style: normal; } .pc-ovl em::before { content: ""; display: inline-block; width: 10px; border-top: 2px dashed currentColor; vertical-align: middle; margin-right: 3px; }
+.pc-ovl .r { color: var(--qy-r); } .pc-ovl .o { color: var(--qy-o); }
+.pc-ovl { top: 34px; bottom: auto; left: 10px; }
