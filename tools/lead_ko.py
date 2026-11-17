@@ -118,15 +118,18 @@ for f in glob.glob(os.path.join(LEAD, "*.json")):
     if "lead" not in co:
         continue
     names = []
-    if os.path.exists(os.path.join(MON, os.path.basename(f))):
+    if os.path.exists(os.path.join(MON, os.path.basename(f))) or any(i.get("kind") == "monthly" for i in co["lead"]["items"]):
         names.append("월차데이터")
     for it in co["lead"]["items"]:
         for k in ("t", "short", "nm"):
             it[k] = clean(tr(it.get(k)))
+        if it.get("kind") == "monthly":
+            continue
         if it.get("kind") == "pension":
             names.append("연금 가입자 수")
         elif it.get("kind") == "trends" or (it.get("short") or "").startswith("구글") or (it.get("t") or "").startswith("구글트렌드"):
-            names.append("구글트렌드(브랜드)")
+            tm = re.sub(r"^구글트렌드:\s*", "", it.get("short") or it.get("t") or "")
+            names.append("구글트렌드: " + re.sub(r"\(.*?\)", "", tm).strip())
         elif it.get("short"):
             names.append(it["short"])
     for m in co["lead"].get("macro") or []:

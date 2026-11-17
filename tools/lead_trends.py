@@ -23,18 +23,23 @@ for f in sys.argv[1:]:
             continue
         co = json.load(open(p, encoding="utf-8"))
         co["lead"]["macro"] = [m for m in co["lead"].get("macro") or [] if not str(m.get("id", "")).startswith("gt:")]
-        co["lead"]["items"] = [i for i in co["lead"]["items"] if i.get("kind") != "trends"]
-        term = x.get("term")
-        if x.get("pts"):
+        terms = x.get("terms") or [x]
+        have = {i.get("term") for i in co["lead"]["items"] if i.get("kind") == "trends"}
+        for k, x in enumerate(terms):
+          term = x.get("term")
+          if not term or term in have:
+            continue
+          gid = "gt" if not have and k == 0 else "gt%d" % (len(have) + k + 1)
+          if x.get("pts"):
             pts = [[q[0], round(q[1], 1), "gt"] for q in x["pts"] if q and q[1] is not None]
-            co["lead"]["items"].append({"id": "gt", "kind": "trends", "rank": 0.5, "t": "구글트렌드: " + term, "short": "구글트렌드: " + term, "nm": term[:14], "unit": "지수",
+            co["lead"]["items"].append({"id": gid, "kind": "trends", "rank": 0.5 + k * 0.1, "t": "구글트렌드: " + term, "short": "구글트렌드: " + term, "nm": term[:14], "unit": "지수",
                                         "term": term, "entity": "구글 트렌드(%s)" % ("일본" if x.get("region", "JP") == "JP" else "전 세계"), "corp": term,
                                         "note": "0~100 상대 지수(5년 중 최고 = 100). 주별 값을 월평균으로", "why": x.get("why", ""), "pts": pts,
                                         "src": [{"doc": "Google Trends (region=%s, 5년)" % x.get("region", "JP"), "where": "검색어 「%s」 주별 → 월평균" % term, "freq": "주 단위(월로 묶음)", "auto": "반자동", "how": "월 1회 다시 받기"}]})
             co["refs"]["gt"] = {"date": "2026-11-17", "t": "Google Trends", "url": "https://trends.google.com/"}
             n_ok += 1
-        elif term:
-            co["lead"].setdefault("macro", []).append({"id": "gt:" + term, "name": "구글트렌드: %s(수집 대기)" % term, "why": x.get("why", "")})
+          else:
+            co["lead"].setdefault("macro", []).append({"id": "gt:" + term, "name": "구글트렌드: %s(수집 대기)" % term, "why": x.get("why", ""), "region": x.get("region", "world")})
             n_wait += 1
         json.dump(co, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print("트렌드 붙임", n_ok, "· 수집 대기", n_wait)

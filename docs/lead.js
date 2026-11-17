@@ -326,7 +326,7 @@
 
     var lead = '<div class="sec-t rv"><span class="n">01</span><h2>선행지표</h2><p>회사 발표가 아닌 외부 월간 데이터 — 실적보다 먼저 나옴</p></div>' +
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
-        return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + esc(it.short) + "<small>" + it.pts.length + "개월</small></button>";
+        return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + "<small>" + it.pts.length + "개월</small></button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
@@ -529,8 +529,8 @@
     var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank == null ? 9 : a.rank) - (b.rank == null ? 9 : b.rank); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
-      return "<li><b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
-    }).join("") + "</ol></div>";
+      return "<li><b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+    }).join("") + "</ol>" + ((co.lead.macro || []).filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).length ? '<p class="pn wait"><b>수집 대기</b> ' + co.lead.macro.filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).map(function (m) { return esc(m.name) + (m.volatile ? ' <em class="vol">변동 가능</em>' : ""); }).join(" · ") + "</p>" : "") + "</div>";
   }
   function mapBlock(co) {
     var rows = [];
@@ -815,7 +815,7 @@
         if (co.lead.items.some(function (x) { return x.id === "m" + i; })) return;
         var useY = n.at.yoy && se.yoy && se.yoy.length;
         if (d.next) { var nx = /(\d{4}-\d{2}-\d{2})/.exec(d.next); if (nx && dday(nx[1]) >= 0 && (!co._lnx || nx[1] < co._lnx)) co._lnx = nx[1]; }
-        co.lead.items.push({ id: "m" + i, rank: n.m.rank, kind: "macro", t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (n.m.name || se.name || d.name).slice(0, 26) + (useY ? " YoY" : ""), nm: (n.m.name || se.name || d.name).slice(0, 18), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
+        co.lead.items.push({ id: "m" + i, rank: n.m.rank, kind: "macro", volatile: !!n.m.volatile, t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (n.m.name || se.name || d.name).slice(0, 26) + (useY ? " YoY" : ""), nm: (n.m.name || se.name || d.name).slice(0, 18), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
           pts: (useY ? se.yoy : se.pts).filter(function (p) { return p && p[1] != null; }).map(function (p) { return [p[0], p[1], "mc"]; }), src: [{ doc: d.src || d.name, where: (se.name || "") + " · " + (d.url || ""), freq: d.freq || "월", auto: "반자동", how: "공용 시장 통계 data/jp/lead/macro/" + n.at.file + " — 다음 공표 " + (d.next || "") }] });
         co.refs.mc = { date: "", t: d.src || d.name, url: d.url || "" };
       });
@@ -851,7 +851,7 @@
           return '<tr><td><a href="#c/' + r[0] + '"><b>' + esc(r[1]) + '</b><small class="mono">' + r[0] + '</small></a></td><td><span class="ovs">' + esc(r[2]) + "</span>" + esc(r[3]) + "</td><td>" +
             (r[4].length ? r[4].map(function (x) {
               var cls = { "고유": "acc", "공통": "", "월차": "gold", "연금": "ind", "대기": "dim" }[x[1]] || "";
-              return '<span class="chip ' + cls + '" title="' + esc(x[1]) + '">' + esc(x[0]) + (x[2] ? "<small>" + x[2] + "개월 · " + esc(String(x[3]).slice(2).replace("-", ".")) + "</small>" : "") + "</span>";
+              return '<span class="chip ' + cls + '" title="' + esc(x[1]) + '">' + esc(x[0]) + (x[4] ? '<em class="vol">변동</em>' : "") + (x[2] ? "<small>" + x[2] + "개월 · " + esc(String(x[3]).slice(2).replace("-", ".")) + "</small>" : "") + "</span>";
             }).join(" ") : '<span class="chip dim">아직 없음</span>') + (r[5] ? '<p class="ovn">' + esc(r[5]) + "</p>" : "") + "</td></tr>";
         }).join("") || '<tr><td colspan="3" class="empty">맞는 기업이 없습니다</td></tr>';
       }

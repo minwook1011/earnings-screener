@@ -561,3 +561,7 @@ details.fold > summary small { color: var(--ink-4); font-size: 12px; }
 details.fold > summary i { margin-left: auto; font-style: normal; color: var(--ink-3); transition: transform .2s; }
 details.fold[open] > summary i { transform: rotate(180deg); }
 details.fold > .card, details.fold > .card-b, details.fold > div { margin: 0 12px 12px; }
+
+/* 변동 가능(IP·인물) 표시 */
+em.vol { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--gold); border: 1px solid rgba(214,160,58,.45); background: var(--gold-soft); border-radius: 6px; padding: 0 5px; margin-left: 6px; }
+.whyl .pn.wait { margin: 10px 0 0; color: var(--ink-3); }
