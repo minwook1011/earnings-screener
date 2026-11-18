@@ -609,7 +609,7 @@
     var th = q.map(function (r, i) { return '<th class="' + (i === last ? "cur" : "") + '"><b>' + esc(r.p) + "</b><small>" + (r.pub ? (i === last ? "✓ " : "") + r.pub.slice(5).replace("-", "/") + " 발표" : "") + "</small></th>"; }).join("");
     var row = function (lab, k, fmt, cls) { return "<tr class=\"" + (cls || "") + "\"><th>" + lab + "</th>" + q.map(function (r, i) { var v = r[k]; return '<td class="' + (i === last ? "cur" : "") + (fmt === fy ? cy(v) : "") + '">' + fmt(v) + "</td>"; }).join("") + "</tr>"; };
     host.innerHTML = '<div class="fin-tw"><table class="fin-t"><thead><tr><th>억 엔</th>' + th + "</tr></thead><tbody>" +
-      row("매출액", "s", f1, "k") + row("YoY", "sy", fy, "s") + row("영업이익", "o", f1, "k") + row("OPM", "om", function (v) { return v == null ? "—" : nf(v, 1) + "%"; }, "s") + row("YoY", "oy", fy, "s") + row("순이익", "n", f1, "k") +
+      row("매출액", "s", f1, "k") + row("YoY", "sy", fy, "s yy") + row("영업이익", "o", f1, "k") + row("OPM", "om", function (v) { return v == null ? "—" : nf(v, 1) + "%"; }, "s") + row("YoY", "oy", fy, "s yy") + row("순이익", "n", f1, "k") +
       "</tbody></table></div>" + '<div class="fin-g"><div id="fg1"></div><div id="fg2"></div></div>' +
       '<p class="hint">분기는 결산기 기준(27.2Q = 2027년에 끝나는 결산기의 2분기). 칸 아래 날짜 = 그 분기 결산단신 발표일. 원천: 결산단신.</p>';
     var tw = host.querySelector(".fin-tw"); if (tw) tw.scrollLeft = tw.scrollWidth;
@@ -647,17 +647,17 @@
     var vis = q.filter(function (r) { return r.t && r.t >= from - 20 * DAY && r.t <= xEnd; }); if (!vis.length) return;
     var mid = (top + bot) / 2, rows = [{ k: "sy", lab: "매출 YoY", t: top, b: mid - 3 }, { k: "oy", lab: "영업이익 YoY", t: mid + 3, b: bot }];
     el("rect", { x: pL, y: top - 4, width: IW, height: bot - top + 8, "class": "fin-band" }, L.ind);
-    var bw = Math.max(6, Math.min(30, 80 * DAY / (xEnd - from) * IW * 0.45));
-    rows.forEach(function (rw) {
+    rows.forEach(function (rw) {   // 꺾은선(점선) — 발표일마다 점, 값 표시
       var c0 = (rw.t + rw.b) / 2, hh = (rw.b - rw.t) / 2 - 2;
       var mx = Math.max.apply(null, vis.map(function (r) { return r[rw.k] == null ? 0 : Math.min(200, Math.abs(r[rw.k])); }).concat([10]));
       el("line", { x1: pL, x2: pL + IW, y1: c0, y2: c0, stroke: "var(--line)", "stroke-dasharray": "2 3" }, L.ind);
       txt(L.ax, W - pR + 8, c0 + 3.5, rw.lab, "fin-bl");
-      vis.forEach(function (r) {
-        var v = r[rw.k]; if (v == null) return;
-        var h = Math.max(1.5, Math.min(200, Math.abs(v)) / mx * hh), cx = x(r.t);
-        el("rect", { x: cx - bw / 2, y: v >= 0 ? c0 - h : c0, width: bw, height: h, rx: 2, "class": v >= 0 ? "fin-up" : "fin-dn" }, L.ind);
-        if (bw >= 14) txt(L.lab, cx, v >= 0 ? c0 - h - 3 : c0 + h + 10, (v > 0 ? "+" : "") + (Math.abs(v) >= 1000 ? "1k↑" : nf(v, 0)), "fin-v", "middle");
+      var pts = vis.filter(function (r) { return r[rw.k] != null; }).map(function (r) { var v = r[rw.k]; return [x(r.t), c0 - Math.max(-200, Math.min(200, v)) / mx * hh, v]; });
+      if (pts.length > 1) el("path", { d: pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(""), "class": "fin-ln" }, L.ind);
+      var sp = pts.length > 1 ? (pts[pts.length - 1][0] - pts[0][0]) / (pts.length - 1) : 99;
+      pts.forEach(function (p) {
+        el("circle", { cx: p[0], cy: p[1], r: 3, "class": p[2] >= 0 ? "fin-up" : "fin-dn" }, L.ind);
+        if (sp >= 26) txt(L.lab, p[0], p[2] >= 0 ? p[1] - 6 : p[1] + 13, (p[2] > 0 ? "+" : "") + (Math.abs(p[2]) >= 1000 ? "1k↑" : nf(p[2], 0)), "fin-v", "middle");
       });
     });
   }

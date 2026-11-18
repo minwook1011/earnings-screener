@@ -632,3 +632,8 @@ em.rv small { font-weight: 400; color: var(--ink-4); }
 em.rv.hi { color: #ef5b5b; border-color: rgba(229,72,77,.45); } em.rv.mid { color: var(--gold); border-color: rgba(214,160,58,.45); } em.rv.na { font-family: inherit; color: var(--ink-4); }
 .whyl small.tko { color: var(--ink-4); font-size: 11.5px; margin-left: 6px; }
 .ichip { flex-wrap: wrap; } .ichip .tko { flex-basis: 100%; font-size: 11px; font-weight: 500; color: var(--ink-4); margin-top: -2px; padding-left: 14px; text-align: left; }
+
+/* 재무 YoY 빨강 · 주가 아래 YoY 점선 꺾은선 */
+.fin-t tr.yy td { color: #ef5b5b; font-weight: 600; }
+.fin-ln { fill: none; stroke: #ef5b5b; stroke-width: 1.6; stroke-dasharray: 5 4; }
+.fin-v { fill: #ef5b5b; }
