@@ -69,6 +69,8 @@ def fragment(code):
 def insert(code, src):
     """재무제표 표 바로 아래(첫 토글 앞)에 넣는다. 이미 있으면 바꾼다. 월차가 없는 회사는 그대로."""
     src = re.sub(r'<details class="tg mo" id="es-monthly".*?</details>', "", src, flags=re.S)
+    if 'id="mopub"' in src:   # 맨 위 「월차 데이터 발표」 토글이 이미 있으면 겹치지 않게(2026-11-18 사용자: 월차를 2단계 안에)
+        return src
     fr = fragment(code)
     m = re.search(r'<details class="tg (?!prof)', src)
     if not fr or not m:
