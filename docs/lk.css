@@ -338,3 +338,13 @@ html.lk .pc-ch .pm20 { stroke: var(--qy-r); } html.lk .pc-ch .pm60 { stroke: #4c
 .pc-mal .m10 { color: #5ec8f2; }
 .pgrid.wide .pc-ch { height: 190px; }
 @media (max-width: 640px) { .pgrid.wide .pc-ch { height: 150px; } }
+
+/* 분기 YoY 마우스 올리면 값(2026-11-18 사용자) */
+.pc-qy .hv .hit { fill: transparent; cursor: crosshair; }
+.pc-qy .hv .gl, .pc-qy .hv .hd, .pc-qy .hv .tp { opacity: 0; pointer-events: none; transition: opacity .12s; }
+.pc-qy .hv:hover .gl, .pc-qy .hv:hover .hd, .pc-qy .hv:hover .tp { opacity: 1; }
+.pc-qy .hv .gl { stroke: var(--ink-mute); stroke-width: .8; stroke-dasharray: 2 2; }
+.pc-qy .hv .hd { fill: none; stroke-width: 1.6; } .pc-qy .hv .hd.r { stroke: var(--qy-r); } .pc-qy .hv .hd.o { stroke: var(--qy-o); }
+.pc-qy .hv .tp rect { fill: var(--surface); stroke: var(--line); stroke-width: .8; }
+.pc-qy .hv .tp text { font: 700 9.5px var(--mono); } .pc-qy .hv .tp text.hq { fill: var(--ink-mid); font-weight: 600; }
+.pc-qy .hv .tp text.r { fill: var(--qy-r); } .pc-qy .hv .tp text.o { fill: var(--qy-o); }

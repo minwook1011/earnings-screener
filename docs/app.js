@@ -540,7 +540,7 @@
   }
   function qyc(c, p, wide) {   // 카드 아래 — 최근 10분기(턴어라운드 넓은 카드는 16분기) YoY, 결산기 분기 같은 간격. 띠 = 위 주가 차트 기간
     var q = (S.qy[c] || []).slice(wide ? -16 : -10);
-    if (!QYC_ON[c] || q.length < 3) return "";
+    if (q.length < 3) return "";   // 2026-11-18 사용자: 모든 카드에
     var W = wide ? 600 : 300, H = wide ? 78 : 96, L = 14, R = 34, T = 12, Bm = 26, CL = 120;
     function cl(v) { return v == null ? null : Math.max(-CL, Math.min(CL, v)); }
     var vs = [0];
@@ -575,9 +575,17 @@
       return '<text class="ax" text-anchor="' + an + '" x="' + xx + '" y="' + (H - 16) + '">' + esc(x.p) + '</text><text class="ax2" text-anchor="' + an + '" x="' + xx + '" y="' + (H - 6) + '">' + esc(qper(x.e)) + "</text>";
     }).join("");
     var z = Y(0).toFixed(1);
+    // 마우스 올리면 그 분기 매출·영업이익 YoY(2026-11-18 사용자)
+    var hv = q.map(function (x, i) {
+      var xx = X(i), rx = Math.max(0, xx - st / 2), rw = Math.min(W, xx + st / 2) - rx, left = xx > W / 2, tx = left ? xx - 112 : xx + 6;
+      function ln(key, lab, y) { var v = x[key]; return '<text class="' + key + '" x="' + (tx + 6) + '" y="' + y + '">' + lab + " " + esc(v == null ? "—" : pctTxt(v)) + "</text>"; }
+      var dt = ["r", "o"].map(function (key) { var v = x[key]; return v == null ? "" : '<circle class="hd ' + key + '" cx="' + xx.toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="4.2"/>'; }).join("");
+      return '<g class="hv"><rect class="hit" x="' + rx.toFixed(1) + '" y="0" width="' + rw.toFixed(1) + '" height="' + H + '"/><line class="gl" x1="' + xx.toFixed(1) + '" x2="' + xx.toFixed(1) + '" y1="2" y2="' + (H - Bm + 2) + '"/>' + dt +
+        '<g class="tp"><rect x="' + tx.toFixed(1) + '" y="2" width="106" height="42" rx="4"/><text class="hq" x="' + (tx + 6) + '" y="14">' + esc(x.p) + " · " + esc(qper(x.e)) + "</text>" + ln("r", "매출", 26) + ln("o", "영업이익", 38) + "</g></g>";
+    }).join("");
     return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>결산기 분기 · ±' + CL + '% 밖은 빈 점</small></div>' +
       '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true">' + band + '<line class="z" x1="' + (L - 8) + '" x2="' + (W - R) + '" y1="' + z + '" y2="' + z + '"/>' +
-      ser("r", "r") + ser("o", "o") + ax + "</svg></div>";
+      ser("r", "r") + ser("o", "o") + ax + hv + "</svg></div>";
   }
   function qyov(c, p) {   // 주가 차트 위에 겹침 — 차트 기간 안에 끝난 분기만, 점 = 분기가 끝난 달 말, 차트 아래쪽 띠(45~92%)에 따로 눈금
     var sp = pxSpan(p || {});
