@@ -565,3 +565,32 @@ details.fold > .card, details.fold > .card-b, details.fold > div { margin: 0 12p
 /* 변동 가능(IP·인물) 표시 */
 em.vol { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--gold); border: 1px solid rgba(214,160,58,.45); background: var(--gold-soft); border-radius: 6px; padding: 0 5px; margin-left: 6px; }
 .whyl .pn.wait { margin: 10px 0 0; color: var(--ink-3); }
+
+/* 키 데이터 표시 */
+.pc-key { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; margin-top: 12px; font-size: 13px; color: var(--ink-2); }
+.pc-key b { color: var(--ink); font-weight: 600; }
+.pc-key small { margin-left: auto; color: var(--ink-4); font-size: 11px; display: inline-flex; align-items: center; gap: 4px; }
+.pc-key .kb { display: inline-block; width: 8px; height: 10px; background: var(--b1); border-radius: 2px; opacity: .8; }
+.pc-key .kl { display: inline-block; width: 12px; height: 2px; background: var(--ink); margin-left: 6px; }
+.kd { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--ind-2); border: 1px solid var(--ind-fade); background: var(--ind-soft); border-radius: 6px; padding: 0 6px; margin-right: 6px; white-space: nowrap; }
+
+/* 즐겨찾기 */
+.fav { margin: 12px 0 6px; padding: 10px 10px 8px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.fav-h { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--ink); }
+.fav-h span { font-size: 11px; color: var(--ink-4); }
+.fav-u { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0 6px; }
+.fav-u button { border: 1px solid var(--line-2); background: var(--panel-2); color: var(--ink-3); border-radius: 999px; padding: 3px 10px; font: inherit; font-size: 12px; cursor: pointer; }
+.fav-u button[aria-pressed="true"] { color: var(--ink); border-color: var(--gold); background: var(--gold-soft); font-weight: 700; }
+.fav-u button.add { padding: 3px 8px; color: var(--acc-2); }
+.fav-l { display: grid; gap: 2px; max-height: 260px; overflow: auto; }
+.fav-l a { display: flex; align-items: center; gap: 6px; padding: 5px 6px; border-radius: 8px; color: var(--ink-2); text-decoration: none; font-size: 13px; }
+.fav-l a:hover, .fav-l a.on { background: var(--panel-2); color: var(--ink); }
+.fav-l a span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fav-l a small { color: var(--ink-4); font-size: 11px; }
+.fav-e { margin: 4px 2px 2px; font-size: 11.5px; color: var(--ink-4); line-height: 1.5; }
+.star { border: 0; background: transparent; color: var(--ink-4); cursor: pointer; font-size: 15px; line-height: 1; padding: 2px 4px; margin-left: 6px; vertical-align: middle; transition: transform .12s, color .12s; }
+.star:hover { transform: scale(1.2); color: var(--gold); }
+.star[aria-pressed="true"] { color: var(--gold); }
+.star.big { font-size: 26px; margin-left: 10px; }
+.fav-l .star { margin-left: 0; font-size: 13px; }
+.tip.toast { left: 50% !important; top: auto !important; bottom: 28px; transform: translateX(-50%); }

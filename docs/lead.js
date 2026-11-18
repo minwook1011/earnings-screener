@@ -69,7 +69,11 @@
   function U(it) { return it && it.unit ? it.unit : "명"; }
   function NM(it) { return !it ? "지표" : it.kind === "trends" ? "검색 관심도" : it.kind === "pension" || !it.kind ? "가입자" : (it.nm || it.short || "지표"); }
   function DG(it) { return it && it.kind !== "pension" && it.kind ? 1 : 0; }
-  function bestIt(co) { return co.lead.items.filter(function (x) { return x.pts.length >= 12; })[0] || co.lead.items[0]; }
+  function bestIt(co) {   // 키 데이터 = 순위(rank)가 가장 높은 지표 중 데이터가 6개월 이상 쌓인 것
+    if (co._key && co.lead.items.indexOf(co._key) >= 0) return co._key;
+    var its = co.lead.items.slice().sort(function (a, b) { return (a.rank == null ? 9 : a.rank) - (b.rank == null ? 9 : b.rank); });
+    return (co._key = its.filter(function (x) { return x.pts.length >= 6; })[0] || its[0]);
+  }
   function item(co, id) { return co.lead.items.filter(function (x) { return x.id === id; })[0] || co.lead.items[0]; }
   function mm(it) { if (!it._m) { it._m = {}; it.pts.forEach(function (p) { it._m[p[0]] = p; }); } return it._m; }
   function mv(it, ym) { var p = mm(it)[ym]; return p ? p[1] : null; }
@@ -261,9 +265,9 @@
       '<header class="sec-head rv"><span class="eyebrow">' + esc(g.en) + " · PEER GROUP</span><h1>" + esc(k.n) + "</h1><p>" + esc(k.desc || "") + "</p></header>" +
       '<div class="pgrid">' + cos.map(function (co) {
         var q = quote(co.c), it = bestIt(co), s = stat(co, it);
-        return '<a class="card pc rv" href="#c/' + co.c + '"><div class="pc-top"><div><h3>' + esc(co.n) + '</h3><span class="jp">' + esc(co.jp) + " · " + co.c + " · " + esc(co.market) + "</span></div>" +
+        return '<a class="card pc rv" href="#c/' + co.c + '"><div class="pc-top"><div><h3>' + esc(co.n) + starBtn(co.c) + '</h3><span class="jp">' + esc(co.jp) + " · " + co.c + " · " + esc(co.market) + "</span></div>" +
           (q ? '<div class="px"><b>' + nf(q.last) + '</b><span class="mono ' + ud(q.chg) + '">' + pct(q.chg) + "</span></div>" : "") + "</div>" +
-          '<div class="pc-mini" data-lazy="mini:' + co.c + '"></div>' +
+          '<div class="pc-key"><span class="kd">키 데이터</span><b>' + esc(it.short) + '</b><small><i class="kb"></i>막대 = 키 데이터(월) <i class="kl"></i>선 = 주가</small></div>' + '<div class="pc-mini" data-lazy="mini:' + co.c + '"></div>' +
           '<div class="pc-kv"><div><span>' + esc(it.short) + " " + ymLab(s.last[0]) + "</span><b>" + nf(s.last[1]) + '</b></div><div><span>전년 대비</span><b class="' + ud(s.yoy) + '">' + pct(s.yoy) + "</b></div><div><span>다음 지표 발표</span><b>" + dlab(co.lead.next.date) + "</b></div></div></a>";
       }).join("") + "</div>" +
       '<div class="sec-t rv"><span class="n">PEER</span><h2>선행지표 나란히</h2><p>같은 원천 · 같은 계산</p></div>' +
@@ -306,13 +310,13 @@
     var g = co.sec.split("/"), G = S.idx.tree.filter(function (x) { return x.id === g[0]; })[0], K = G.kids.filter(function (x) { return x.id === g[1]; })[0];
     if (!co.lead.items.length) co.lead.items.push({ id: "none", kind: "none", t: "외부 지표 없음", short: "외부 지표 없음", unit: "", entity: "", corp: "", note: co.lead.pick_note || "맞는 외부 월간 데이터를 찾는 중", pts: [], src: [] });
     var q = quote(c), d = dday(co.next.date), it0 = co.lead.items[0];
-    var best = co.lead.items.filter(function (x) { return x.pts.length >= 12; })[0] || it0;
+    var best = bestIt(co) || it0;
     var st = S.st[c] = S.st[c] || { li: best.id, ov: best.id, mode: "candle", range: "1Y", rel: true };
     var ringC = 2 * Math.PI * 19, ringP = Math.max(0, Math.min(1, 1 - d / 92)), nd = dday(co.lead.next.date);
 
     var hero = '<div class="crumb rv"><a href="#">선행지표</a><i>›</i><span>' + esc(G.n) + '</span><i>›</i><a href="#s/' + co.sec + '">' + esc(K.n) + "</a><i>›</i><b>" + esc(co.n) + "</b></div>" +
       '<section class="hero rv"><div><span class="eyebrow">' + esc(co.en.toUpperCase()) + " · " + c + " · TSE " + esc(co.market) + "</span>" +
-      "<h1>" + esc(co.n) + '<span class="jp">' + esc(co.jp) + "</span></h1>" +
+      "<h1>" + esc(co.n) + '<span class="jp">' + esc(co.jp) + "</span>" + starBtn(co.c, true) + "</h1>" +
       '<div class="codes"><span class="chip">' + esc(co.fy.label) + '</span><span class="chip acc">' + esc(K.n) + "</span>" + co.tags.map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join("") + "</div>" +
       '<p class="about">' + esc(co.about) + '</p><div class="thesis">' + esc(co.thesis) + "</div></div>" +
       '<div class="qbox">' + (q ? '<div class="price"><b data-count="' + q.last + '">' + nf(q.last) + '</b><span class="chg ' + ud(q.chg) + '">' + pct(q.chg, 2) + "</span><small>엔 · " + md(q.t) + " 종가 · 1년 " + pct(q.y1) + "</small></div>" +
@@ -326,7 +330,7 @@
 
     var lead = '<div class="sec-t rv"><span class="n">01</span><h2>선행지표</h2><p>회사 발표가 아닌 외부 월간 데이터 — 실적보다 먼저 나옴</p></div>' +
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
-        return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + "<small>" + it.pts.length + "개월</small></button>";
+        return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + "<small>" + it.pts.length + "개월</small></button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
@@ -529,7 +533,7 @@
     var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank == null ? 9 : a.rank) - (b.rank == null ? 9 : b.rank); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
-      return "<li><b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
     }).join("") + "</ol>" + ((co.lead.macro || []).filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).length ? '<p class="pn wait"><b>수집 대기</b> ' + co.lead.macro.filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).map(function (m) { return esc(m.name) + (m.volatile ? ' <em class="vol">변동 가능</em>' : ""); }).join(" · ") + "</p>" : "") + "</div>";
   }
   function mapBlock(co) {
@@ -825,6 +829,55 @@
     });
   }
 
+  /* ---------- 즐겨찾기(사람별, 이 브라우저에 저장) ---------- */
+  var FAV = (function () {
+    var K = "leadFav.v1", d = null;
+    function load() {
+      if (d) return d;
+      try { d = JSON.parse(localStorage.getItem(K) || "null"); } catch (e) { d = null; }
+      if (!d || !d.users) d = { users: ["민욱", "제현", "민용"], cur: "민욱", lists: {} };
+      d.users.forEach(function (u) { d.lists[u] = d.lists[u] || []; });
+      if (d.users.indexOf(d.cur) < 0) d.cur = d.users[0];
+      return d;
+    }
+    function save() { try { localStorage.setItem(K, JSON.stringify(d)); } catch (e) {} }
+    return {
+      list: function () { return load().lists[load().cur] || []; },
+      has: function (c) { return this.list().indexOf(c) >= 0; },
+      toggle: function (c) { var l = this.list(), i = l.indexOf(c); if (i >= 0) l.splice(i, 1); else l.unshift(c); save(); return i < 0; },
+      users: function () { return load().users; },
+      cur: function () { return load().cur; },
+      use: function (u) { load().cur = u; save(); },
+      add: function (u) { u = String(u || "").trim().slice(0, 12); if (!u || load().users.indexOf(u) >= 0) return false; d.users.push(u); d.lists[u] = []; d.cur = u; save(); return true; },
+      remove: function (u) { var x = load(); if (x.users.length <= 1) return; x.users = x.users.filter(function (v) { return v !== u; }); delete x.lists[u]; if (x.cur === u) x.cur = x.users[0]; save(); }
+    };
+  })();
+  function starBtn(c, big) { var on = FAV.has(c); return '<button type="button" class="star' + (big ? " big" : "") + '" data-fav="' + c + '" aria-pressed="' + on + '" title="' + (on ? "즐겨찾기에서 빼기" : "즐겨찾기에 넣기") + " (" + esc(FAV.cur()) + ')">' + (on ? "★" : "☆") + "</button>"; }
+  function renderFav() {
+    var host = document.getElementById("fav"); if (!host || !S.idx) return;
+    var cur = FAV.cur(), l = FAV.list().filter(function (c) { return S.idx.cos[c]; });
+    host.innerHTML = '<div class="fav-h"><b>즐겨찾기</b><span>' + l.length + "곳</span></div>" +
+      '<div class="fav-u">' + FAV.users().map(function (u) { return '<button type="button" data-fu="' + esc(u) + '" aria-pressed="' + (u === cur) + '">' + esc(u) + "</button>"; }).join("") +
+      '<button type="button" class="add" data-fadd="1" title="이름 추가">＋</button></div>' +
+      (l.length ? '<div class="fav-l">' + l.map(function (c) { var o = S.idx.cos[c]; return '<a href="#c/' + c + '"' + (cur && location.hash === "#c/" + c ? ' class="on"' : "") + '><span>' + esc(o.n) + '</span><small class="mono">' + c + "</small>" + starBtn(c) + "</a>"; }).join("") + "</div>"
+        : '<p class="fav-e">' + esc(cur) + "님 즐겨찾기가 비어 있습니다. 기업 화면이나 카드의 ☆을 누르면 여기에 모입니다.</p>");
+  }
+  function syncStars() {
+    document.querySelectorAll("[data-fav]").forEach(function (b) { var on = FAV.has(b.dataset.fav); b.setAttribute("aria-pressed", on); b.textContent = on ? "★" : "☆"; b.title = (on ? "즐겨찾기에서 빼기" : "즐겨찾기에 넣기") + " (" + FAV.cur() + ")"; });
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-fav]");
+    if (b) { e.preventDefault(); e.stopPropagation(); var on = FAV.toggle(b.dataset.fav); renderFav(); syncStars(); toast((on ? "★ " : "☆ ") + FAV.cur() + " 즐겨찾기" + (on ? "에 넣음" : "에서 뺌")); return; }
+    var u = e.target.closest("[data-fu]");
+    if (u) { e.preventDefault(); if (e.detail === 2 || e.altKey) return; FAV.use(u.dataset.fu); renderFav(); syncStars(); return; }
+    if (e.target.closest("[data-fadd]")) { e.preventDefault(); var n = window.prompt("즐겨찾기에 추가할 이름"); if (n && FAV.add(n)) { renderFav(); syncStars(); } return; }
+  }, true);
+  document.addEventListener("contextmenu", function (e) {
+    var u = e.target.closest("[data-fu]"); if (!u) return;
+    e.preventDefault(); if (window.confirm("「" + u.dataset.fu + "」 이름과 그 즐겨찾기를 지울까요?")) { FAV.remove(u.dataset.fu); renderFav(); syncStars(); }
+  });
+  function toast(msg) { var tp = document.getElementById("tip"); if (!tp) return; tp.textContent = msg; tp.classList.add("on", "toast"); clearTimeout(toast._t); toast._t = setTimeout(function () { tp.classList.remove("on", "toast"); }, 1400); }
+
   /* ---------- 기업별 지표 한눈에 ---------- */
   function viewAll() {
     main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>';
@@ -865,7 +918,7 @@
   /* ---------- 라우팅 ---------- */
   function cur() { var m = /^#c\/(\w+)/.exec(location.hash); return m ? m[1] : null; }
   function route() {
-    hideTip();
+    hideTip(); renderFav();
     var h = location.hash.replace(/^#\/?/, ""), p = h.split("/");
     if (p[0] === "c" && p[1] && S.idx.cos[p[1]]) { renderTree({ sec: S.idx.cos[p[1]].sec, c: p[1] }); main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>'; ensureCo([p[1]], true).then(function () { return attachMacro(S.co[p[1]]); }).then(function () { if (cur() === p[1]) viewCompany(p[1]); }); }
     else if (p[0] === "all") { renderTree(null); viewAll(); }
