@@ -96,6 +96,13 @@
     it._st = { rows: rows, full: full, r: r, n: full.length, est: pc ? null : est, last: L, mom: P ? L[1] - P[1] : null, yoy: Y && !pc ? (L[1] / Y[1] - 1) * 100 : null, g3: Y3 && !pc ? (Math.pow(L[1] / Y3[1], 4) - 1) * 100 : null };
     return it._st;
   }
+  function rLv(co, it) {   // R 정도 — |R| 0.5↑ 1단, 0.65↑ 2단, 0.8↑ 3단(분기 6개 이상일 때만)
+    if (!it.pts || !it.pts.length) return null;
+    var s = stat(co, it); if (s.r == null || isNaN(s.r)) return null;
+    var a = Math.abs(s.r); return { r: s.r, n: s.n, lv: s.n < 6 ? 0 : a >= 0.8 ? 3 : a >= 0.65 ? 2 : a >= 0.5 ? 1 : 0 };
+  }
+  function rChip(co, it) { var x = rLv(co, it); return x ? '<em class="rc r' + x.lv + '" title="분기 평균 지표와 분기 매출의 상관 · ' + x.n + '개 분기' + (x.n < 6 ? " (분기가 적어 참고만)" : "") + '">R ' + nf(x.r, 2) + "</em>" : ""; }
+  function rCls(co, it) { var x = rLv(co, it); return x && x.lv ? " rg" + x.lv : ""; }
   function refLink(co, id, label) {
     var r = co.refs[id]; if (!r) return "";
     var u = r.url || (r.local ? r.local : r.doc ? co.ir.tdnet + r.doc + ".pdf" : null);
@@ -240,7 +247,7 @@
       "<p>회사가 내는 숫자와 가이던스는 결과 확인용입니다. 여기서는 매달 외부에서 나오는 데이터(연금 가입자 수 · 수출입 통계 · 공공 구인 건수 등) 중 실적과 상관(R)이 높은 것을 골라 쌓고, 주가와 겹쳐 봅니다.</p>" +
       '<div class="hstats"><div class="hstat"><b class="mono" data-count="' + Object.keys(S.idx.cos).length + '">0</b><span>추적 기업</span></div><div class="hstat"><b class="mono" data-count="' + nPts + '">0</b><span>세부 섹터</span></div>' +
       (nextLead ? '<div class="hstat"><b class="mono">' + esc(dlab(nextLead.d)) + "</b><span>다음 지표 발표 " + esc(md(tOf(nextLead.d))) + "</span></div>" : "") + "</div>" +
-      '<div class="flow"><b>외부 월간 데이터</b><i>→</i><b>분기로 묶어 매출과 R</b><i>→</i><b>이번 분기 매출 추정</b><i>→</i><b>주가와 겹쳐 보기</b><i>→</i><b>실적 전 판단</b></div><p><a class="chip acc" href="#all">기업별 선행지표 한눈에 보기 →</a></p></section>' +
+      '<div class="flow"><b>외부 월간 데이터</b><i>→</i><b>분기로 묶어 매출과 R</b><i>→</i><b>이번 분기 매출 추정</b><i>→</i><b>주가와 겹쳐 보기</b><i>→</i><b>실적 전 판단</b></div><p><a class="chip acc" href="#all">기업별 선행지표 한눈에 보기 →</a> <a class="chip gold" href="#spike">튄 지표 모아 보기 →</a></p></section>' +
       '<div class="sec-t rv"><span class="n">01</span><h2>다가오는 일정</h2><p>지표 갱신일과 45일 안 실적 발표(최대 30곳)</p></div>' +
       '<div class="timeline">' + ev.map(function (e) {
         return '<a class="tl rv" href="' + (e.co.c ? "#c/" + e.co.c : "#") + '"><div class="d"><b>' + dlab(e.d) + "</b><span>" + md(tOf(e.d)) + '</span></div><div><h4>' + esc(e.co.n) + ' <small class="mono">' + e.co.c + "</small></h4><p>" + esc(e.t) + '</p></div><div><span class="chip ' + (e.k === "지표" ? "ind" : "gold") + '">' + e.k + "</span></div></a>";
@@ -333,6 +340,8 @@
     if (!co.lead.items.length) co.lead.items.push({ id: "none", kind: "none", t: "외부 지표 없음", short: "외부 지표 없음", unit: "", entity: "", corp: "", note: co.lead.pick_note || "맞는 외부 월간 데이터를 찾는 중", pts: [], src: [] });
     var q = quote(c), d = dday(co.next.date), it0 = co.lead.items[0];
     var best = bestIt(co) || it0;
+    var pick = null; try { var pk = (sessionStorage.getItem("leadPick") || "").split(":"); if (pk[0] === c) pick = pk[1]; sessionStorage.removeItem("leadPick"); } catch (e) {}
+    if (pick && co.lead.items.some(function (x) { return x.id === pick; })) { S.st[c] = S.st[c] || { mode: "candle", range: "3Y", rel: true }; S.st[c].li = S.st[c].ov = pick; }
     var st = S.st[c] = S.st[c] || { li: best.id, ov: best.id, mode: "candle", range: "1Y", rel: true };
     var ringC = 2 * Math.PI * 19, ringP = Math.max(0, Math.min(1, 1 - d / 92)), nd = dday(co.lead.next.date);
 
@@ -352,7 +361,7 @@
 
     var lead = '<div class="sec-t rv"><span class="n">01</span><h2>선행지표</h2><p>회사 발표가 아닌 외부 월간 데이터 — 실적보다 먼저 나옴</p></div>' +
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
-        return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + "<small>" + it.pts.length + "개월</small>" + (it.term_ko ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
+        return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
@@ -563,7 +572,7 @@
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
       var sr = i.pts && i.pts.length ? stat(co, i) : null, rTag = sr && sr.r != null ? '<em class="rv' + (Math.abs(sr.r) >= 0.6 && sr.n >= 6 ? " hi" : Math.abs(sr.r) >= 0.4 ? " mid" : "") + '" title="분기 평균 지표 vs 분기 매출 상관 · ' + sr.n + '개 분기">R ' + nf(sr.r, 2) + "<small> n=" + sr.n + "</small></em>" : (i.pts && i.pts.length ? '<em class="rv na">R 계산 중(분기 부족)</em>' : "");
-      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + rTag + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
     }).join("") + "</ol>" + ((co.lead.macro || []).filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).length ? '<p class="pn wait"><b>수집 대기</b> ' + co.lead.macro.filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).map(function (m) { return esc(m.name) + (m.volatile ? ' <em class="vol">변동 가능</em>' : ""); }).join(" · ") + "</p>" : "") + "</div>";
   }
   function mapBlock(co) {
@@ -1037,6 +1046,82 @@
     }).catch(function () { main.innerHTML = '<div class="empty">목록을 불러오지 못했습니다.</div>'; });
   }
 
+  /* ---------- 튄 지표(2026-11-18 사용자) ---------- */
+  var LANE = { fast: ["⚡", "빠른 신호", "원값이 평소의 3배 넘게 튐"], conf: ["✅", "확인 신호", "3개월선 기울기가 평소의 2배 넘게 꺾임"], cross: ["🔄", "추세 전환", "3개월선이 12개월선을 뚫음"] };
+  function spkSvg(sp, up) {
+    var w = 150, h = 40, v = []; sp.forEach(function (p) { v.push(p[1], p[2]); });
+    var lo = Math.min.apply(null, v), hi = Math.max.apply(null, v), rg = (hi - lo) || 1;
+    var X = function (i) { return 2 + i / Math.max(1, sp.length - 1) * (w - 4); }, Y = function (x) { return h - 3 - (x - lo) / rg * (h - 6); };
+    var path = function (k) { return sp.map(function (p, i) { return (i ? "L" : "M") + X(i).toFixed(1) + "," + Y(p[k]).toFixed(1); }).join(""); };
+    var n = sp.length - 1;
+    return '<svg class="spk" viewBox="0 0 ' + w + " " + h + '" width="' + w + '" height="' + h + '"><path d="' + path(1) + '" class="spk-raw"/><path d="' + path(2) + '" class="spk-ma ' + (up ? "up" : "dn") + '"/><circle cx="' + X(n).toFixed(1) + '" cy="' + Y(sp[n][2]).toFixed(1) + '" r="3" class="spk-pt ' + (up ? "up" : "dn") + '"/></svg>';
+  }
+  function viewSpike() {
+    main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>';
+    getJSON("data/jp/lead/alerts.json").then(function (d) {
+      if (location.hash !== "#spike") return;
+      var st = { side: "up", lane: "", r3: false, fav: false, q: "" };
+      try { var sv = JSON.parse(localStorage.getItem("leadSpikeF") || "null"); if (sv) { st.lane = sv.lane || ""; st.r3 = !!sv.r3; } } catch (e) {}
+      var COND = { fast: "원값 기울기 z ≥ 3 · 전월비 + · YoY ≥ 0", conf: "3개월선 기울기 z ≥ 2 · 3개월선 상승 · YoY(3개월선) ≥ 0", cross: "3개월선이 12개월선을 아래→위로 뚫음 · YoY ≥ 0" };
+      var MEAN = { fast: "이번 달 크게 튐 — 빨리 아는 게 가치", conf: "오름세가 자리 잡음 — 가격·단가처럼 들쭉날쭉한 지표의 기본", cross: "바닥 찍고 돌아섬(주가 골든크로스와 같은 개념)" };
+      var APPLY = { fast: "월차 · 구글트렌드만", conf: "전부", cross: "전부" };
+      var lanesTbl = Object.keys(LANE).map(function (k) { return "<tr><td>" + LANE[k][0] + " <b>" + LANE[k][1] + "</b></td><td>" + COND[k] + "</td><td>" + MEAN[k] + "</td><td>" + APPLY[k] + "</td></tr>"; }).join("");
+      main.innerHTML = '<div class="crumb rv"><a href="#">선행지표</a><i>›</i><b>튄 지표</b></div>' +
+        '<div class="sec-t rv"><span class="n">SPIKE</span><h2>튄 지표</h2><p>' + esc(d.updated) + " 기준 · 선행지표가 회사에 좋은 쪽으로 의미 있게 꺾여 오른 것(개선)과 나빠진 것(경고)</p></div>" +
+        '<details class="card rv spk-rule" open><summary class="card-h"><b>기준</b><span class="hint">눌러서 접기·펴기</span></summary><div class="card-b">' +
+        "<ol>" +
+        "<li><b>기울기</b> = 전월 대비 변화율. 이미 %·전년비인 지표(월차 기존점 YoY 등)는 %p 차이.</li>" +
+        "<li><b>계절 제거</b> — 같은 달의 과거 전월비 중앙값을 뺍니다. 12월 외식처럼 원래 오르는 달은 그만큼 빼고 봅니다(전년비 지표는 이미 계절이 빠져 있어 안 뺌).</li>" +
+        "<li><b>z = 평소의 몇 배</b> — (이번 달 기울기 − 평소 기울기) ÷ 평소 흔들림 폭. 그 지표 자신의 지난 36개월 기울기로 잽니다(중앙값·MAD). 강판 물가처럼 평소 ±0.5% 움직이는 지표가 +5% 오르면 z≈10, 구글트렌드처럼 평소 ±20% 움직이는 지표가 +20% 오르면 z≈1. 같은 %라도 지표마다 뜻이 달라 「자기 평소 대비」로 잽니다.</li>" +
+        '<li><b>세 갈래</b><table class="spk-lane"><thead><tr><th>갈래</th><th>조건</th><th>뜻</th><th>적용</th></tr></thead><tbody>' + lanesTbl + "</tbody></table>" +
+        "3개월선 = 최근 3개월 평균. 가격·단가는 계단식으로 움직이고 수출입 단가는 금액÷물량이라 품목 구성만 바뀌어도 튀어서 3개월선으로 봅니다. 월차·트렌드는 빨리 아는 게 가치라 원값도 봅니다(⚡).</li>" +
+        "<li><b>최소 크기</b> — 기울기가 이보다 작으면 z가 커도 무시: 구글트렌드 15% · 수출입 금액·물량 20% · 그 밖 지표 3% · %·전년비 지표 2%p (3개월선은 그 절반).</li>" +
+        "<li><b>거름</b> — 자료 25개월 미만 · 마지막 값이 4개월보다 오래됨 · 최근 13개월에 0 이하 값(기저가 0 근처라 +600% 같은 착시) · 대수·척·건 단위인데 12개월 평균 20 미만.</li>" +
+        "<li><b>원가 지표는 개선에서 뺌</b> — 같은 지표라도 회사마다 역할이 다릅니다(냉연 강판 물가는 제철사엔 판가, 자동차엔 원가). 기업×지표마다 ① 직접 지정한 역할 ② 지표 YoY와 매출 YoY 상관 ≤ −0.3 ③ 단가·물가류인데 영업이익 YoY 상관 ≤ −0.3(전력·가스처럼 원가를 판가에 넘겨 매출과는 같이 오르는 경우) ④ 이름 단서(수입 단가·원료·연료·운임·임금) 순서로 판정. 원가 지표가 튀어 오르면 경고로 갑니다.</li>" +
+        "<li><b>경고</b> — 위 규칙을 뒤집은 것: 수요·판가 지표가 z ≤ −2(⚡는 −3)로 꺾이고 YoY < 0, 3개월선이 12개월선 아래로 뚫림, 원가 지표 급등.</li>" +
+        "<li><b>점수(정렬)</b> = min(z, 10) × 갈래 가중(🔄 1.2 · ✅ 1.0 · ⚡ 0.8) × R 가중(|R| ≥ 0.6 1.5 · ≥ 0.3 1.0 · 그 밖 0.5) × 키 데이터 1.3.</li>" +
+        '<li><b>R</b> = 분기 평균 지표와 분기 매출의 상관(기업 화면 칩과 같은 값). <em class="rc r1">0.5↑</em> <em class="rc r2">0.65↑</em> <em class="rc r3">0.8↑</em> 분기 6개 미만은 참고만.</li>' +
+        "<li><b>갱신</b> — 지표가 새로 들어오면 다시 계산합니다. 같은 지표·같은 달은 한 번만 알림(텔레그램 연결 예정).</li>" +
+        "</ol></div></details>" +
+        '<div class="card rv"><div class="card-h ovf"><div class="seg" id="spside"><button data-v="up">개선 신호 <small>' + d.up.length + '</small></button><button data-v="down">경고 <small>' + d.down.length + "</small></button></div>" +
+        '<div class="seg" id="splane"><button data-v="">전체</button>' + Object.keys(LANE).map(function (k) { return '<button data-v="' + k + '">' + LANE[k][0] + " " + LANE[k][1] + "</button>"; }).join("") + "</div>" +
+        '<label class="ovchk"><input type="checkbox" id="spr3"> R 0.3 이상만</label><label class="ovchk"><input type="checkbox" id="spfav"> 즐겨찾기만</label><input id="spq" type="search" placeholder="지표·기업 검색" autocomplete="off"></div>' +
+        '<div class="card-b" id="splist"></div></div>';
+      function fmt(g, v) { return g.kind === "level" ? (v == null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + nf(Math.abs(v), 1) + "%p") : pct(v, 1); }
+      function dd(g, k, v) { return "<div><dt>" + k + '</dt><dd class="' + ((v || 0) >= 0 ? "u" : "d") + '">' + fmt(g, v) + "</dd></div>"; }
+      function draw() {
+        try { localStorage.setItem("leadSpikeF", JSON.stringify({ lane: st.lane, r3: st.r3 })); } catch (e) {}
+        document.querySelectorAll("#spside button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.v === st.side); });
+        document.querySelectorAll("#splane button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.v === st.lane); });
+        var fav = st.fav ? FAV.list() : null, q = st.q.toLowerCase(), up = st.side === "up";
+        var rows = (d[st.side] || []).map(function (g) {
+          var cos = g.cos.filter(function (x) { return S.idx.cos[x.c] && (!st.r3 || (x.r != null && Math.abs(x.r) >= 0.3)) && (!fav || fav.indexOf(x.c) >= 0); });
+          if (!cos.length || (st.lane && g.lanes.indexOf(st.lane) < 0)) return null;
+          if (q && (g.name + " " + cos.map(function (x) { return x.c + " " + x.n; }).join(" ")).toLowerCase().indexOf(q) < 0) return null;
+          return { g: g, cos: cos };
+        }).filter(Boolean);
+        document.getElementById("splist").innerHTML = rows.length ? rows.map(function (x) {
+          var g = x.g, zz = Math.max(g.lanes.indexOf("fast") >= 0 ? Math.abs(g.z1) : 0, Math.abs(g.z3)), rising = g.d3 >= 0;
+          return '<div class="spr' + (up ? "" : " warn") + '"><div class="spr-h"><div><b>' + esc(g.name) + "</b>" + (g.cost ? '<em class="chip dim">원가 지표</em>' : "") + '<small class="mono">' + esc(g.ym.replace("-", ".")) + "</small></div>" +
+            '<div class="spr-l">' + g.lanes.map(function (k) { return '<span class="lane" title="' + esc(LANE[k][2]) + '">' + LANE[k][0] + " " + LANE[k][1] + "</span>"; }).join("") + "</div></div>" +
+            '<div class="spr-b">' + spkSvg(g.spark, rising) +
+            "<dl>" + dd(g, "전월비", g.d1) + dd(g, "3개월선", g.d3) + dd(g, "YoY", g.yoy3) + "<div><dt>평소의</dt><dd>" + (zz >= 99 ? "99+" : nf(zz, 1)) + "배</dd></div></dl>" +
+            '<div class="spr-c">' + x.cos.map(function (o) {
+              var a = o.r == null ? 0 : Math.abs(o.r), lv = o.rn < 6 ? 0 : a >= 0.8 ? 3 : a >= 0.65 ? 2 : a >= 0.5 ? 1 : 0;
+              return '<a class="spco" href="#c/' + o.c + '" data-pick="' + o.c + ":" + esc(o.id) + '">' + (o.key ? '<em class="kd">키</em>' : "") + "<b>" + esc(o.n) + '</b><small class="mono">' + o.c + "</small>" + (o.r != null ? '<em class="rc r' + lv + '">R ' + nf(o.r, 2) + "</em>" : "") + "</a>";
+            }).join("") + "</div></div></div>";
+        }).join("") : '<div class="empty">조건에 맞는 지표가 없습니다</div>';
+      }
+      document.getElementById("spside").onclick = function (e) { var b = e.target.closest("button"); if (b) { st.side = b.dataset.v; draw(); } };
+      document.getElementById("splane").onclick = function (e) { var b = e.target.closest("button"); if (b) { st.lane = b.dataset.v; draw(); } };
+      var r3 = document.getElementById("spr3"); r3.checked = st.r3; r3.onchange = function () { st.r3 = this.checked; draw(); };
+      document.getElementById("spfav").onchange = function () { st.fav = this.checked; draw(); };
+      document.getElementById("spq").addEventListener("input", function () { st.q = this.value.trim(); draw(); });
+      document.getElementById("splist").addEventListener("click", function (e) { var a = e.target.closest("[data-pick]"); if (a) { try { sessionStorage.setItem("leadPick", a.dataset.pick); } catch (er) {} } });
+      draw(); reveal(main);
+    }).catch(function () { main.innerHTML = '<div class="empty">튄 지표 목록을 불러오지 못했습니다.</div>'; });
+  }
+
   /* ---------- 라우팅 ---------- */
   function cur() { var m = /^#c\/(\w+)/.exec(location.hash); return m ? m[1] : null; }
   function route() {
@@ -1044,6 +1129,7 @@
     var h = location.hash.replace(/^#\/?/, ""), p = h.split("/");
     if (p[0] === "c" && p[1] && S.idx.cos[p[1]]) { renderTree({ sec: S.idx.cos[p[1]].sec, c: p[1] }); main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>'; ensureCo([p[1]], true).then(function () { return attachMacro(S.co[p[1]]); }).then(function () { if (cur() === p[1]) viewCompany(p[1]); }); }
     else if (p[0] === "all") { renderTree(null); viewAll(); }
+    else if (p[0] === "spike") { renderTree(null); viewSpike(); }
     else if (p[0] === "s" && p[2]) { renderTree({ sec: p[1] + "/" + p[2] }); viewSector(p[1], p[2]); }
     else { renderTree(null); viewHome(); }
     window.scrollTo(0, 0);

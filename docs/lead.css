@@ -642,3 +642,38 @@ text.fin-v { font: 600 10.5px "IBM Plex Mono", monospace; paint-order: stroke; s
 text.fin-v.fin-s { fill: #f5c542; } text.fin-v.fin-o { fill: #a78bfa; }
 .fin-0 { stroke: var(--ink-4); stroke-dasharray: 2 4; opacity: .5; } text.fin-0t { font-size: 10px; fill: var(--ink-4); }
 .lg-fs { color: #f5c542; } .lg-fo { color: #a78bfa; }
+
+/* R 정도(칩) · 튄 지표 */
+em.rc { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 10.5px; font-weight: 600; border-radius: 6px; padding: 0 5px; color: var(--ink-4); border: 1px solid var(--line-2); white-space: nowrap; }
+em.rc.r1 { color: #6fd3a0; border-color: rgba(52,199,125,.35); }
+em.rc.r2 { color: #4fe09a; border-color: rgba(52,199,125,.6); background: rgba(52,199,125,.10); }
+em.rc.r3 { color: #0b1a12; background: #34c77d; border-color: #34c77d; }
+.ichip.rg1 { border-color: rgba(52,199,125,.35); }
+.ichip.rg2 { border-color: rgba(52,199,125,.6); box-shadow: 0 0 0 1px rgba(52,199,125,.15); }
+.ichip.rg3 { border-color: #34c77d; box-shadow: 0 0 0 2px rgba(52,199,125,.22); }
+.spk-rule summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.spk-rule summary::-webkit-details-marker { display: none; }
+.spk-rule ol { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 13px; line-height: 1.65; color: var(--ink-2); }
+.spk-rule b { color: var(--ink); }
+.spk-lane { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 12.5px; }
+.spk-lane th, .spk-lane td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.spk-lane th { color: var(--ink-4); font-weight: 500; }
+#splist { display: grid; gap: 10px; }
+#spq { margin-left: auto; }
+.spr { border: 1px solid var(--line); border-left: 3px solid #34c77d; border-radius: 12px; padding: 12px 14px; background: var(--panel-2); }
+.spr.warn { border-left-color: #e5484d; }
+.spr-h { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: baseline; }
+.spr-h b { font-size: 14.5px; margin-right: 6px; } .spr-h small { color: var(--ink-4); margin-left: 6px; } .spr-h .chip { margin-left: 4px; }
+.spr-l { display: flex; gap: 6px; flex-wrap: wrap; }
+.spr-l .lane { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-2); color: var(--ink-2); }
+.spr-b { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+.spr-b dl { display: flex; gap: 14px; margin: 0; }
+.spr-b dt { font-size: 10.5px; color: var(--ink-4); } .spr-b dd { margin: 0; font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 13px; }
+.spr-b dd.u { color: #ef5b5b; } .spr-b dd.d { color: #5b8def; }
+.spr-c { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; min-width: 200px; }
+.spco { display: inline-flex; gap: 6px; align-items: center; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line-2); text-decoration: none; color: var(--ink-2); font-size: 12.5px; }
+.spco:hover { border-color: var(--acc); color: var(--ink); } .spco small { color: var(--ink-4); }
+.spk .spk-raw { fill: none; stroke: var(--ink-4); stroke-width: 1; opacity: .6; }
+.spk .spk-ma { fill: none; stroke-width: 2; } .spk .spk-ma.up { stroke: #34c77d; } .spk .spk-ma.dn { stroke: #e5484d; }
+.spk .spk-pt.up { fill: #34c77d; } .spk .spk-pt.dn { fill: #e5484d; }
+@media (max-width: 640px) { .spr-b dl { gap: 10px; } #spq { margin-left: 0; width: 100%; } }
