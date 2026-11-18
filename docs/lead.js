@@ -366,7 +366,7 @@
       '<div class="seg"><button id="zin" aria-label="확대" title="확대">＋</button><button id="zout" aria-label="축소" title="축소">－</button></div>' +
       '<div class="seg"><button data-v="rel" id="prel" aria-pressed="' + st.rel + '">발표일</button></div></div></div>' +
       '<div class="card-b"><div class="chart-wrap pan" id="cw"></div><div class="nav-wrap" id="nw"></div>' +
-      '<div class="legend"><span><i class="lg-up"></i>상승</span><span><i class="lg-dn"></i>하락</span><span><i class="lg-ind"></i><b id="lgname"></b> (월, 띠 안 막대)</span><span><i class="lg-ghost"></i>다음 지표 발표 자리</span><span><i class="lg-rel"></i>실적 발표일</span></div>' +
+      '<div class="legend"><span><i class="lg-up"></i>상승</span><span><i class="lg-dn"></i>하락</span><span><i class="lg-ind"></i><b id="lgname"></b> (월, 띠 안 막대)</span><span><i class="lg-ghost"></i>다음 지표 발표 자리</span><span><i class="lg-rel"></i>실적 발표일</span><span class="lg-fs">╌● 매출 YoY</span><span class="lg-fo">╌● 영업이익 YoY</span><span class="hint">(6개월 넘는 기간에서 표시)</span></div>' +
       '<p class="hint">차트 위에서 <b>마우스 휠</b> = 확대·축소, <b>끌기</b> = 앞뒤 이동, <b>두 번 클릭</b> = 1년으로. 아래 작은 차트는 아무 데나 누르면 그 자리로, 보라 상자는 끌어서 이동, 양 끝을 잡으면 넓히기·좁히기. 1년 넘는 기간은 주봉.</p></div></section>';
 
     var ref = '<div class="sec-t rv"><span class="n">04</span><h2>참고 — 회사 발표 숫자</h2><p>결과 확인용 · 선행지표 아님</p></div>' + refTable(co);
@@ -642,22 +642,24 @@
     pts.forEach(function (p, i) { el("circle", { cx: p[0], cy: p[1], r: 2.6, fill: "var(--l1)" }, svg); if (i === pts.length - 1) txt(svg, p[0], p[1] - 7, (p[2] > 0 ? "+" : "") + nf(p[2], 0) + "%", "fg-v", "middle"); });
     txt(svg, W - pR + 6, yy(ymax) + 4, nf(ymax, 0) + "%", "fg-a"); txt(svg, W - pR + 6, yy(ymin) + 4, nf(ymin, 0) + "%", "fg-a");
   }
-  function finBand(co, L, x, from, xEnd, top, bot, pL, IW, W, pR) {   // 주가 아래 매출·영업이익 YoY 띠(결산 발표일 위치)
+  function finBand(co, L, x, from, xEnd, top, bot, pL, IW) {   // 주가 위에 매출 YoY(노랑)·영업이익 YoY(보라) 점선 겹치기 — 결산 발표일 위치
     var q = (S.fin && S.fin[co.c]) || []; if (!q.length) return;
     var vis = q.filter(function (r) { return r.t && r.t >= from - 20 * DAY && r.t <= xEnd; }); if (!vis.length) return;
-    var mid = (top + bot) / 2, rows = [{ k: "sy", lab: "매출 YoY", t: top, b: mid - 3 }, { k: "oy", lab: "영업이익 YoY", t: mid + 3, b: bot }];
-    el("rect", { x: pL, y: top - 4, width: IW, height: bot - top + 8, "class": "fin-band" }, L.ind);
-    rows.forEach(function (rw) {   // 꺾은선(점선) — 발표일마다 점, 값 표시
-      var c0 = (rw.t + rw.b) / 2, hh = (rw.b - rw.t) / 2 - 2;
-      var mx = Math.max.apply(null, vis.map(function (r) { return r[rw.k] == null ? 0 : Math.min(200, Math.abs(r[rw.k])); }).concat([10]));
-      el("line", { x1: pL, x2: pL + IW, y1: c0, y2: c0, stroke: "var(--line)", "stroke-dasharray": "2 3" }, L.ind);
-      txt(L.ax, W - pR + 8, c0 + 3.5, rw.lab, "fin-bl");
-      var pts = vis.filter(function (r) { return r[rw.k] != null; }).map(function (r) { var v = r[rw.k]; return [x(r.t), c0 - Math.max(-200, Math.min(200, v)) / mx * hh, v]; });
-      if (pts.length > 1) el("path", { d: pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(""), "class": "fin-ln" }, L.ind);
+    var CL = function (v) { return Math.max(-100, Math.min(150, v)); };
+    var all = []; vis.forEach(function (r) { ["sy", "oy"].forEach(function (k) { if (r[k] != null) all.push(CL(r[k])); }); });
+    if (!all.length) return;
+    var lo = Math.min.apply(null, all.concat([0])), hi = Math.max.apply(null, all.concat([0])), rg = (hi - lo) || 10; lo -= rg * 0.12; hi += rg * 0.12;
+    var yy = function (v) { return top + (1 - (CL(v) - lo) / (hi - lo)) * (bot - top); };
+    el("line", { x1: pL, x2: pL + IW, y1: yy(0), y2: yy(0), "class": "fin-0" }, L.ind);
+    txt(L.lab, pL + 4, yy(0) - 4, "YoY 0%", "fin-0t");
+    var rows = [{ k: "sy", c: "fin-s", up: true }, { k: "oy", c: "fin-o", up: false }];
+    rows.forEach(function (rw) {
+      var pts = vis.filter(function (r) { return r[rw.k] != null; }).map(function (r) { return [x(r.t), yy(r[rw.k]), r[rw.k]]; });
+      if (pts.length > 1) el("path", { d: pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(""), "class": "fin-ln " + rw.c }, L.lab);
       var sp = pts.length > 1 ? (pts[pts.length - 1][0] - pts[0][0]) / (pts.length - 1) : 99;
       pts.forEach(function (p) {
-        el("circle", { cx: p[0], cy: p[1], r: 3, "class": p[2] >= 0 ? "fin-up" : "fin-dn" }, L.ind);
-        if (sp >= 26) txt(L.lab, p[0], p[2] >= 0 ? p[1] - 6 : p[1] + 13, (p[2] > 0 ? "+" : "") + (Math.abs(p[2]) >= 1000 ? "1k↑" : nf(p[2], 0)), "fin-v", "middle");
+        el("circle", { cx: p[0], cy: p[1], r: 3.2, "class": "fin-pt " + rw.c }, L.lab);
+        if (sp >= 34 && p[0] > pL + 18) txt(L.lab, p[0], rw.up ? p[1] - 7 : p[1] + 14, (p[2] > 0 ? "+" : "") + (Math.abs(p[2]) >= 1000 ? "999+" : nf(p[2], Math.abs(p[2]) < 10 ? 1 : 0)) + "%", "fin-v " + rw.c, "middle");
       });
     });
   }
@@ -702,7 +704,7 @@
     var lo = Math.min.apply(null, bars.map(function (b) { return b.l; })), hi = Math.max.apply(null, bars.map(function (b) { return b.h; }));
     var padv = (hi - lo) * 0.06; lo -= padv; hi += padv;
     var spanD = (xEnd - from) / DAY, hasFin = S.fin && S.fin[co.c] && S.fin[co.c].length;
-    var finH = hasFin && spanD >= 170 ? Math.round(Math.min(0.24, 0.1 + (spanD - 170) / 1600) * PH) : 0;   // 넓은 기간일수록 크게
+    var finH = 0, finOn = hasFin && spanD >= 170;   // 실적 YoY는 주가 위에 겹침(넓은 기간일 때)
     var ibot = bot - (finH ? finH + 10 : 0), iPH = ibot - pT;
     var pTop = pT + 4, pBot = it ? ibot - iPH * 0.34 - 10 : ibot - 6;
     var y = function (v) { return pTop + (1 - (v - lo) / (hi - lo)) * (pBot - pTop); };
@@ -749,7 +751,7 @@
       if (nt >= from && nt <= xEnd) { var gh = Math.max(8, bh(it.pts[it.pts.length - 1][1])), cx2 = x(nt); el("rect", { x: cx2 - bw / 2, y: bandBot - gh, width: bw, height: gh, rx: 3, fill: "none", stroke: "var(--gold)", "stroke-dasharray": "3 2" }, L.ind); if (bw > 14) { txt(L.lab, cx2, bandBot - gh + 14, md(nlead).slice(3), "ibar-lab cs", "middle"); } }
     }
 
-    if (finH) finBand(co, L, x, from, xEnd, bot - finH, bot - 4, pL, IW, W, pR);
+    if (finOn) finBand(co, L, x, from, xEnd, pTop + 6, pBot - 4, pL, IW);
     if (st.rel) {
       Object.keys(co.rel).forEach(function (q) {
         var t = tOf(co.rel[q]); if (t < from || t > xEnd) return;

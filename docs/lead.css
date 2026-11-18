@@ -635,5 +635,10 @@ em.rv.hi { color: #ef5b5b; border-color: rgba(229,72,77,.45); } em.rv.mid { colo
 
 /* 재무 YoY 빨강 · 주가 아래 YoY 점선 꺾은선 */
 .fin-t tr.yy td { color: #ef5b5b; font-weight: 600; }
-.fin-ln { fill: none; stroke: #ef5b5b; stroke-width: 1.6; stroke-dasharray: 5 4; }
-.fin-v { fill: #ef5b5b; }
+.fin-ln { fill: none; stroke-width: 2; stroke-dasharray: 6 4; opacity: .9; }
+.fin-ln.fin-s { stroke: #f5c542; } .fin-ln.fin-o { stroke: #a78bfa; }
+.fin-pt { stroke: var(--panel); stroke-width: 1.5; } .fin-pt.fin-s { fill: #f5c542; } .fin-pt.fin-o { fill: #a78bfa; }
+text.fin-v { font: 600 10.5px "IBM Plex Mono", monospace; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; }
+text.fin-v.fin-s { fill: #f5c542; } text.fin-v.fin-o { fill: #a78bfa; }
+.fin-0 { stroke: var(--ink-4); stroke-dasharray: 2 4; opacity: .5; } text.fin-0t { font-size: 10px; fill: var(--ink-4); }
+.lg-fs { color: #f5c542; } .lg-fo { color: #a78bfa; }
