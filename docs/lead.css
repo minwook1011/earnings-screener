@@ -601,3 +601,34 @@ em.vol { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--g
 .soon-box .soon-btn { width: 100%; }
 .soon-box:not(.open) .soon-btn i { transform: rotate(-90deg); display: inline-block; }
 .soon-list { max-height: 360px; overflow: auto; }
+
+/* 재무제표 20분기 · 실적 YoY */
+.fin-tw { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; }
+.fin-t { border-collapse: collapse; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; min-width: 100%; }
+.fin-t th, .fin-t td { padding: 6px 9px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--line); }
+.fin-t thead th { color: var(--acc-2); font-weight: 600; vertical-align: bottom; }
+.fin-t thead th small { display: block; font-size: 10px; color: var(--ink-4); font-weight: 400; font-family: "Pretendard Variable", sans-serif; }
+.fin-t thead th:first-child, .fin-t tbody th { text-align: left; position: sticky; left: 0; background: var(--panel); color: var(--ink-3); font-family: "Pretendard Variable", sans-serif; z-index: 1; }
+.fin-t tr.k td, .fin-t tr.k th { color: var(--ink); font-weight: 700; }
+.fin-t tr.s td { color: var(--ink-4); font-size: 11.5px; }
+.fin-t tr.s th { padding-left: 18px; font-weight: 400; }
+.fin-t td.up { color: #ef5b5b; } .fin-t td.dn { color: #5b8def; }
+.fin-t .cur { box-shadow: inset 2px 0 0 #e5484d, inset -2px 0 0 #e5484d; background: rgba(229,72,77,.06); }
+.fin-t thead th.cur { box-shadow: inset 2px 0 0 #e5484d, inset -2px 0 0 #e5484d, inset 0 2px 0 #e5484d; }
+.fin-t thead th.cur small { color: #ef5b5b; font-weight: 700; }
+.fin-t tr:last-child td.cur { box-shadow: inset 2px 0 0 #e5484d, inset -2px 0 0 #e5484d, inset 0 -2px 0 #e5484d; }
+.fin-g { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.fin-g > div { border: 1px solid var(--line); border-radius: 12px; padding: 4px 6px; background: var(--panel-2); min-width: 0; }
+@media (max-width: 760px) { .fin-g { grid-template-columns: 1fr; } }
+.fg-t { font-size: 13px; font-weight: 700; fill: var(--ink); } .fg-l, .fg-x, .fg-a { font-size: 10.5px; fill: var(--ink-4); } .fg-v { font-size: 11px; font-weight: 700; fill: var(--l1); }
+.fin-band { fill: var(--panel-2); opacity: .55; }
+.fin-up { fill: #e5484d; opacity: .8; } .fin-dn { fill: #4b7fe0; opacity: .8; }
+.fin-bl { font-size: 10px; fill: var(--ink-3); } .fin-v { font-size: 10px; fill: var(--ink-3); font-family: "IBM Plex Mono", monospace; }
+#ovsel button { white-space: nowrap; }
+
+/* 고른 이유 R값 · 한국어 검색어 */
+em.rv { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; color: var(--ink-3); border: 1px solid var(--line-2); border-radius: 6px; padding: 0 6px; margin-left: 6px; white-space: nowrap; }
+em.rv small { font-weight: 400; color: var(--ink-4); }
+em.rv.hi { color: #ef5b5b; border-color: rgba(229,72,77,.45); } em.rv.mid { color: var(--gold); border-color: rgba(214,160,58,.45); } em.rv.na { font-family: inherit; color: var(--ink-4); }
+.whyl small.tko { color: var(--ink-4); font-size: 11.5px; margin-left: 6px; }
+.ichip { flex-wrap: wrap; } .ichip .tko { flex-basis: 100%; font-size: 11px; font-weight: 500; color: var(--ink-4); margin-top: -2px; padding-left: 14px; text-align: left; }
