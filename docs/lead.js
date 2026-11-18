@@ -96,6 +96,13 @@
     it._st = { rows: rows, full: full, r: r, n: full.length, est: pc ? null : est, last: L, mom: P ? L[1] - P[1] : null, yoy: Y && !pc ? (L[1] / Y[1] - 1) * 100 : null, g3: Y3 && !pc ? (Math.pow(L[1] / Y3[1], 4) - 1) * 100 : null };
     return it._st;
   }
+  function rLv(co, it) {   // R 정도 — |R| 0.5↑ 1단, 0.65↑ 2단, 0.8↑ 3단(분기 6개 이상일 때만)
+    if (!it.pts || !it.pts.length) return null;
+    var s = stat(co, it); if (s.r == null || isNaN(s.r)) return null;
+    var a = Math.abs(s.r); return { r: s.r, n: s.n, lv: s.n < 6 ? 0 : a >= 0.8 ? 3 : a >= 0.65 ? 2 : a >= 0.5 ? 1 : 0 };
+  }
+  function rChip(co, it) { var x = rLv(co, it); return x ? '<em class="rc r' + x.lv + '" title="분기 평균 지표와 분기 매출의 상관 · ' + x.n + '개 분기' + (x.n < 6 ? " (분기가 적어 참고만)" : "") + '">R ' + nf(x.r, 2) + "</em>" : ""; }
+  function rCls(co, it) { var x = rLv(co, it); return x && x.lv ? " rg" + x.lv : ""; }
   function refLink(co, id, label) {
     var r = co.refs[id]; if (!r) return "";
     var u = r.url || (r.local ? r.local : r.doc ? co.ir.tdnet + r.doc + ".pdf" : null);
@@ -185,10 +192,10 @@
    * 검색어가 있으면 트리 대신 맞는 기업만 평평하게(최대 40) — 이름·일본명·코드·섹터 이름.
    * 검색어가 없으면: 「지표 발표 임박」 몇 곳 + 대분류(접힘) → 세부 섹터(기업 수) → 펼친 섹터의 기업(많으면 안에서 스크롤). */
   function secName(c) { var o = S.idx.cos[c], p = (o.sec || "").split("/"), g = S.idx.tree.filter(function (x) { return x.id === p[0]; })[0], k = g && g.kids.filter(function (x) { return x.id === p[1]; })[0]; return k ? k.n : ""; }
-  function coLink(c, active, showSec) {
-    var co = S.co[c], o = S.idx.cos[c], ln = co && co.lead ? co.lead.next.date : o.ln, d = ln ? dday(ln) : null;
+  function coLink(c, active, showSec, earn) {   // earn = 실적 발표까지 남은 날(실적 발표 임박 목록)
+    var co = S.co[c], o = S.idx.cos[c], ln = co && co.lead ? co.lead.next.date : o.ln, d = earn != null ? earn : ln ? dday(ln) : null;
     return '<a class="tco' + (active && active.c === c ? " on" : "") + '" href="#c/' + c + '"><span class="nm">' + esc(o.n) + (showSec ? "<small>" + esc(secName(c)) + "</small>" : "") + "</span>" +
-      (d != null && d >= 0 ? '<span class="dd" title="다음 선행지표 발표">' + (d === 0 ? "오늘" : "D-" + d) + "</span>" : "") + '<span class="mono">' + c + "</span></a>";
+      (d != null && d >= 0 ? '<span class="dd" title="' + (earn != null ? "실적 발표까지" : "다음 선행지표 발표") + '">' + (earn != null ? "실적 " : "") + (d === 0 ? "오늘" : "D-" + d) + "</span>" : "") + '<span class="mono">' + c + "</span></a>";
   }
   function renderTree(active) {
     var q = (document.getElementById("q").value || "").trim().toLowerCase(), box = document.getElementById("tree"), all = Object.keys(S.idx.cos);
@@ -199,7 +206,9 @@
       return;
     }
     var soon = all.filter(function (c) { return S.idx.cos[c].nd; }).map(function (c) { return { c: c, d: dday(S.idx.cos[c].nd) }; }).filter(function (x) { return x.d >= 0 && x.d <= 30; }).sort(function (a, b) { return a.d - b.d; });
-    var h = '<div class="tg soon-box"><div class="tg-h"><b>실적 발표 임박</b><span>30일 안 ' + soon.length + "곳</span></div>" + (soon.length ? '<div class="clist">' + soon.slice(0, 6).map(function (x) { return coLink(x.c, active, true); }).join("") + "</div>" : '<p class="hint">없음</p>') + "</div>";
+    var soonOpen = (function () { try { return localStorage.getItem("leadSoonOpen") !== "0"; } catch (e) { return true; } })();
+    var h = '<div class="tg soon-box' + (soonOpen ? " open" : "") + '"><button type="button" class="tg-h tg-btn soon-btn" aria-expanded="' + soonOpen + '"><b>실적 발표 임박</b><span>30일 안 ' + soon.length + "곳 <i>▾</i></span></button>" +
+      (soonOpen ? (soon.length ? '<div class="clist soon-list">' + soon.map(function (x) { return coLink(x.c, active, true, x.d); }).join("") + "</div>" : '<p class="hint">없음</p>') : "") + "</div>";
     h += S.idx.tree.map(function (g) {
       var n = g.kids.reduce(function (s, k) { return s + k.cos.length; }, 0), open = !!S.open[g.id];
       return '<div class="tg' + (open ? " open" : "") + '"><button type="button" class="tg-h tg-btn" data-g="' + g.id + '" aria-expanded="' + open + '"><b>' + esc(g.n) + '</b><span>' + n + "곳 <i>▾</i></span></button>" +
@@ -210,7 +219,9 @@
         }).join("") : "") + "</div>";
     }).join("");
     box.innerHTML = h;
-    box.querySelectorAll(".tg-btn").forEach(function (b) { b.onclick = function () { S.open[b.dataset.g] = !S.open[b.dataset.g]; renderTree(active); }; });
+    box.querySelectorAll(".tg-btn:not(.soon-btn)").forEach(function (b) { b.onclick = function () { S.open[b.dataset.g] = !S.open[b.dataset.g]; renderTree(active); }; });
+    var sb = box.querySelector(".soon-btn");
+    if (sb) sb.onclick = function () { var o = sb.getAttribute("aria-expanded") !== "true"; try { localStorage.setItem("leadSoonOpen", o ? "1" : "0"); } catch (e) {} renderTree(active); };
     box.querySelectorAll(".tsub").forEach(function (a2) {   // 펼친 세부 섹터를 다시 누르면 기업 목록 접기(2026-11-16 사용자)
       a2.onclick = function (e) {
         var sec = a2.getAttribute("href").slice(3);
@@ -236,7 +247,7 @@
       "<p>회사가 내는 숫자와 가이던스는 결과 확인용입니다. 여기서는 매달 외부에서 나오는 데이터(연금 가입자 수 · 수출입 통계 · 공공 구인 건수 등) 중 실적과 상관(R)이 높은 것을 골라 쌓고, 주가와 겹쳐 봅니다.</p>" +
       '<div class="hstats"><div class="hstat"><b class="mono" data-count="' + Object.keys(S.idx.cos).length + '">0</b><span>추적 기업</span></div><div class="hstat"><b class="mono" data-count="' + nPts + '">0</b><span>세부 섹터</span></div>' +
       (nextLead ? '<div class="hstat"><b class="mono">' + esc(dlab(nextLead.d)) + "</b><span>다음 지표 발표 " + esc(md(tOf(nextLead.d))) + "</span></div>" : "") + "</div>" +
-      '<div class="flow"><b>외부 월간 데이터</b><i>→</i><b>분기로 묶어 매출과 R</b><i>→</i><b>이번 분기 매출 추정</b><i>→</i><b>주가와 겹쳐 보기</b><i>→</i><b>실적 전 판단</b></div><p><a class="chip acc" href="#all">기업별 선행지표 한눈에 보기 →</a></p></section>' +
+      '<div class="flow"><b>외부 월간 데이터</b><i>→</i><b>분기로 묶어 매출과 R</b><i>→</i><b>이번 분기 매출 추정</b><i>→</i><b>주가와 겹쳐 보기</b><i>→</i><b>실적 전 판단</b></div><p><a class="chip acc" href="#all">기업별 선행지표 한눈에 보기 →</a> <a class="chip gold" href="#spike">튄 지표 모아 보기 →</a></p></section>' +
       '<div class="sec-t rv"><span class="n">01</span><h2>다가오는 일정</h2><p>지표 갱신일과 45일 안 실적 발표(최대 30곳)</p></div>' +
       '<div class="timeline">' + ev.map(function (e) {
         return '<a class="tl rv" href="' + (e.co.c ? "#c/" + e.co.c : "#") + '"><div class="d"><b>' + dlab(e.d) + "</b><span>" + md(tOf(e.d)) + '</span></div><div><h4>' + esc(e.co.n) + ' <small class="mono">' + e.co.c + "</small></h4><p>" + esc(e.t) + '</p></div><div><span class="chip ' + (e.k === "지표" ? "ind" : "gold") + '">' + e.k + "</span></div></a>";
@@ -254,7 +265,25 @@
   function ensureCo(codes, px) {   // 원장·주가를 필요할 때만 받음(기업 수백 곳)
     return Promise.all(codes.map(function (c) { return S.co[c] ? null : getJSON("data/jp/lead/" + c + ".json").then(function (d) { S.co[c] = d; }).catch(function () {}); }))
       .then(function () { return Promise.all(codes.map(function (c) { return attachMacro(S.co[c]); })); })
-      .then(function () { return px ? Promise.all(codes.map(loadPx)) : null; });
+      .then(function () { return px ? Promise.all(codes.map(loadPx)) : null; })
+      .then(function () { return px && codes.length === 1 ? loadFin(codes[0]) : null; });
+  }
+  function loadFin(c) {   // 분기 실적 20개 + 분기별 실제 결산 발표일(2026-11-18 사용자)
+    S.fin = S.fin || {};
+    if (S.fin[c]) return Promise.resolve(S.fin[c]);
+    return getJSON("data/jp/lead/fin/" + c + ".json").then(function (d) {
+      var q = (d.q || []).filter(function (r) { return r && r.p; }), by = {};
+      q.forEach(function (r) { if (r.end) by[r.end] = r; });
+      q.forEach(function (r) {   // YoY = 1년 전 같은 달에 끝난 분기(결산월을 바꿔 라벨이 겹치는 회사도 맞게)
+        var pv = r.end ? by[(+r.end.slice(0, 4) - 1) + r.end.slice(4)] : null;
+        if (pv && r.end_m && pv.end_m && r.end_m !== pv.end_m) pv = null;
+        r.sy = pv && r.s != null && pv.s ? (r.s / pv.s - 1) * 100 : null;
+        r.oy = pv && r.o != null && pv.o && pv.o > 0 && r.o != null ? (r.o / pv.o - 1) * 100 : null;
+        r.om = r.s ? (r.o != null ? r.o / r.s * 100 : null) : null;
+        r.t = r.pub ? tOf(r.pub) : null;
+      });
+      return (S.fin[c] = q);
+    }).catch(function () { return (S.fin[c] = []); });
   }
   function viewSector(gid, kid) {
     var g = S.idx.tree.filter(function (x) { return x.id === gid; })[0], k = g && g.kids.filter(function (x) { return x.id === kid; })[0];
@@ -311,6 +340,8 @@
     if (!co.lead.items.length) co.lead.items.push({ id: "none", kind: "none", t: "외부 지표 없음", short: "외부 지표 없음", unit: "", entity: "", corp: "", note: co.lead.pick_note || "맞는 외부 월간 데이터를 찾는 중", pts: [], src: [] });
     var q = quote(c), d = dday(co.next.date), it0 = co.lead.items[0];
     var best = bestIt(co) || it0;
+    var pick = null; try { var pk = (sessionStorage.getItem("leadPick") || "").split(":"); if (pk[0] === c) pick = pk[1]; sessionStorage.removeItem("leadPick"); } catch (e) {}
+    if (pick && co.lead.items.some(function (x) { return x.id === pick; })) { S.st[c] = S.st[c] || { mode: "candle", range: "3Y", rel: true }; S.st[c].li = S.st[c].ov = pick; }
     var st = S.st[c] = S.st[c] || { li: best.id, ov: best.id, mode: "candle", range: "1Y", rel: true };
     var ringC = 2 * Math.PI * 19, ringP = Math.max(0, Math.min(1, 1 - d / 92)), nd = dday(co.lead.next.date);
 
@@ -330,7 +361,7 @@
 
     var lead = '<div class="sec-t rv"><span class="n">01</span><h2>선행지표</h2><p>회사 발표가 아닌 외부 월간 데이터 — 실적보다 먼저 나옴</p></div>' +
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
-        return '<button type="button" class="ichip" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + "<small>" + it.pts.length + "개월</small></button>";
+        return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
@@ -338,30 +369,32 @@
 
     var price = '<div class="sec-t rv"><span class="n">02</span><h2>주가 × 선행지표</h2><p>월간 선행지표를 주가 아래 띠에 겹쳐 보기 · 금색 점선 = 실적 발표일과 다음 날 주가 반응</p></div>' +
       '<section class="card rv" id="mc"><div class="card-h"><div class="ctl">' +
-      '<span class="lab">겹칠 지표</span><div class="seg" id="ovsel">' + co.lead.items.map(function (it) { return '<button data-v="' + it.id + '" aria-pressed="' + (st.ov === it.id) + '">' + esc(it.short.replace("연금 가입자 · ", "")) + "</button>"; }).join("") + '<button data-v="" aria-pressed="' + (!st.ov) + '">끄기</button></div></div><span class="sp"></span>' +
+      '<span class="lab">겹칠 지표</span><div class="seg" id="ovsel">' + co.lead.items.map(function (it) { return '<button data-v="' + it.id + '" aria-pressed="' + (st.ov === it.id) + '">' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short.replace("연금 가입자 · ", "")) + "</button>"; }).join("") + '<button data-v="" aria-pressed="' + (!st.ov) + '">끄기</button></div></div><span class="sp"></span>' +
       '<div class="ctl">' +
       '<div class="seg" id="prange" role="group" aria-label="기간">' + ["3M", "6M", "1Y", "2Y", "3Y", "ALL"].map(function (r) { return '<button data-v="' + r + '" aria-pressed="' + (st.range === r) + '">' + (r === "ALL" ? "전체" : r) + "</button>"; }).join("") + "</div>" +
       '<div class="seg"><button id="zin" aria-label="확대" title="확대">＋</button><button id="zout" aria-label="축소" title="축소">－</button></div>' +
       '<div class="seg"><button data-v="rel" id="prel" aria-pressed="' + st.rel + '">발표일</button></div></div></div>' +
       '<div class="card-b"><div class="chart-wrap pan" id="cw"></div><div class="nav-wrap" id="nw"></div>' +
-      '<div class="legend"><span><i class="lg-up"></i>상승</span><span><i class="lg-dn"></i>하락</span><span><i class="lg-ind"></i><b id="lgname"></b> (월, 띠 안 막대)</span><span><i class="lg-ghost"></i>다음 지표 발표 자리</span><span><i class="lg-rel"></i>실적 발표일</span></div>' +
+      '<div class="legend"><span><i class="lg-up"></i>상승</span><span><i class="lg-dn"></i>하락</span><span><i class="lg-ind"></i><b id="lgname"></b> (월, 띠 안 막대)</span><span><i class="lg-ghost"></i>다음 지표 발표 자리</span><span><i class="lg-rel"></i>실적 발표일</span><span class="lg-fs">╌● 매출 YoY</span><span class="lg-fo">╌● 영업이익 YoY</span><span class="hint">(6개월 넘는 기간에서 표시)</span></div>' +
       '<p class="hint">차트 위에서 <b>마우스 휠</b> = 확대·축소, <b>끌기</b> = 앞뒤 이동, <b>두 번 클릭</b> = 1년으로. 아래 작은 차트는 아무 데나 누르면 그 자리로, 보라 상자는 끌어서 이동, 양 끝을 잡으면 넓히기·좁히기. 1년 넘는 기간은 주봉.</p></div></section>';
 
-    var ref = '<div class="sec-t rv"><span class="n">03</span><h2>참고 — 회사 발표 숫자</h2><p>결과 확인용 · 선행지표 아님</p></div>' + refTable(co);
-    var rep = '<div class="sec-t rv"><span class="n">04</span><h2>2단계 리포트</h2><p>기업 분석 원본</p></div>' + (co.report ?
+    var ref = '<div class="sec-t rv"><span class="n">04</span><h2>참고 — 회사 발표 숫자</h2><p>결과 확인용 · 선행지표 아님</p></div>' + refTable(co);
+    var rep = '<div class="sec-t rv"><span class="n">05</span><h2>2단계 리포트</h2><p>기업 분석 원본</p></div>' + (co.report ?
       '<a class="card rep rv" href="' + esc(co.report.html) + '" target="_blank" rel="noopener"><span class="ic">2단계</span><div><h3>' + esc(co.report.title) + ' <small class="mono">' + esc(co.report.written) + "</small></h3><p>" + esc(co.report.verdict) + '</p></div><span class="go">리포트 열기 ↗</span></a>' :
       '<div class="card rep rv none"><span class="ic">2단계</span><div><h3>아직 없음</h3><p>2단계 리포트를 쓰면 여기에 연결됩니다.</p></div></div>');
-    var ir = '<div class="sec-t rv"><span class="n">05</span><h2>IR 자료</h2><p>모아 둔 결산 설명자료·단신</p></div>' + irBlock(co);
-    var map = '<details class="fold rv"><summary><span class="n">06</span><b>데이터 출처 매핑</b><small>자동 업데이트할 때 어디서 무엇을 읽는지 · 눌러서 펼치기</small><i>▾</i></summary>' + whyBlk + mapBlock(co) + '</details>' +
-      '<div class="sec-t rv"><span class="n">07</span><h2>수정 이력</h2><p>나중에 텔레그램으로 말한 수정이 여기에 쌓입니다</p></div><div class="card rv"><div class="card-b log">' +
+    var ir = '<div class="sec-t rv"><span class="n">06</span><h2>IR 자료</h2><p>모아 둔 결산 설명자료·단신</p></div>' + irBlock(co);
+    var map = '<details class="fold rv"><summary><span class="n">07</span><b>데이터 출처 매핑</b><small>자동 업데이트할 때 어디서 무엇을 읽는지 · 눌러서 펼치기</small><i>▾</i></summary>' + whyBlk + mapBlock(co) + '</details>' +
+      '<div class="sec-t rv"><span class="n">08</span><h2>수정 이력</h2><p>나중에 텔레그램으로 말한 수정이 여기에 쌓입니다</p></div><div class="card rv"><div class="card-b log">' +
       co.log.map(function (l) { return '<div><span class="d">' + esc(l.d) + '</span><span class="by">' + esc(l.by) + "</span><span>" + esc(l.t) + "</span></div>"; }).join("") + "</div></div>";
 
-    main.innerHTML = hero + lead + price + ref + rep + ir + map;
+    var fin = '<div class="sec-t rv"><span class="n">03</span><h2>재무제표 · 최근 20분기</h2><p>결산단신 분기 단독 · 억 엔 · 오른쪽이 최신 · 빨간 칸 = 가장 최근 발표</p></div><section class="card rv" id="fin"><div class="card-b"><div class="empty">불러오는 중…</div></div></section>';
+    main.innerHTML = hero + lead + price + fin + ref + rep + ir + map;
+    finSection(co);
     if (q) setTimeout(function () { var r = document.getElementById("r52"); if (r) r.style.left = ((q.last - q.lo) / (q.hi - q.lo || 1) * 100).toFixed(1) + "%"; }, 120);
     setTimeout(function () { var f = document.getElementById("ringfg"); if (f) f.style.strokeDashoffset = (ringC * (1 - ringP)).toFixed(1); }, 200);
     countUp(main);
     drawLead(co, true);
-    document.querySelectorAll("#lchips .ichip").forEach(function (b) { b.onclick = function () { st.li = b.dataset.li; document.querySelectorAll("#lchips .ichip").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); drawLead(co, true); }; });
+    document.querySelectorAll("#lchips .ichip").forEach(function (b) { b.onclick = function () { st.li = st.ov = b.dataset.li; syncSel(); drawLead(co, true); drawMain(co, true); }; });
     if (st.from == null) setRange(co, st.range);
     PC.co = null; NV.co = null; drawMain(co, true); bindMain(co);
     main.querySelectorAll("[data-pv]").forEach(function (b) { b.onclick = function () { openLb(b.getAttribute("data-pv"), b.getAttribute("data-cap")); }; });
@@ -369,6 +402,11 @@
   }
 
   /* 선행지표 패널 — 위 월 막대 + 아래 분기 매출(같은 시간축) */
+  function syncSel() {   // 위 선행지표 칩과 아래 「겹칠 지표」를 같은 지표로
+    var c = (location.hash.match(/^#c\/(\w+)/) || [])[1], st = c && S.st[c]; if (!st) return;
+    document.querySelectorAll("#lchips .ichip").forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.li === st.li); });
+    document.querySelectorAll("#ovsel button").forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.v === (st.ov || "")); });
+  }
   function drawLead(co, anim) {
     var host = document.getElementById("lw"); if (!host) return;
     var st = S.st[co.c], it = item(co, st.li), s = stat(co, it), nd = dday(co.lead.next.date), main1 = it.id === co.lead.items[0].id;
@@ -533,7 +571,8 @@
     var seen = {}, rows = co.lead.items.slice().sort(function (a, b) { return (a.rank == null ? 9 : a.rank) - (b.rank == null ? 9 : b.rank); }).filter(function (i) { var k = i.t || i.short; if (seen[k]) return false; seen[k] = 1; return true; });
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
-      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+      var sr = i.pts && i.pts.length ? stat(co, i) : null, rTag = sr && sr.r != null ? '<em class="rv' + (Math.abs(sr.r) >= 0.6 && sr.n >= 6 ? " hi" : Math.abs(sr.r) >= 0.4 ? " mid" : "") + '" title="분기 평균 지표 vs 분기 매출 상관 · ' + sr.n + '개 분기">R ' + nf(sr.r, 2) + "<small> n=" + sr.n + "</small></em>" : (i.pts && i.pts.length ? '<em class="rv na">R 계산 중(분기 부족)</em>' : "");
+      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
     }).join("") + "</ol>" + ((co.lead.macro || []).filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).length ? '<p class="pn wait"><b>수집 대기</b> ' + co.lead.macro.filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).map(function (m) { return esc(m.name) + (m.volatile ? ' <em class="vol">변동 가능</em>' : ""); }).join(" · ") + "</p>" : "") + "</div>";
   }
   function mapBlock(co) {
@@ -566,6 +605,73 @@
     return [f, f + span];
   }
 
+
+  function finSection(co) {
+    var host = document.querySelector("#fin .card-b"); if (!host) return;
+    var q = (S.fin && S.fin[co.c]) || [];
+    if (!q.length) { host.innerHTML = '<div class="empty">분기 실적 자료를 아직 받지 못했습니다.</div>'; return; }
+    q = q.slice(-20);
+    var f1 = function (v) { return v == null ? "—" : Math.abs(v) >= 100 ? nf(v) : nf(v, 1); };
+    var fy = function (v) { return v == null ? "—" : (v > 0 ? "+" : "") + (Math.abs(v) >= 1000 ? nf(v) : nf(v, 1)) + "%"; };
+    var cy = function (v) { return v == null ? "" : v > 0 ? " up" : v < 0 ? " dn" : ""; };
+    var last = q.length - 1;
+    var th = q.map(function (r, i) { return '<th class="' + (i === last ? "cur" : "") + '"><b>' + esc(r.p) + "</b><small>" + (r.pub ? (i === last ? "✓ " : "") + r.pub.slice(5).replace("-", "/") + " 발표" : "") + "</small></th>"; }).join("");
+    var row = function (lab, k, fmt, cls) { return "<tr class=\"" + (cls || "") + "\"><th>" + lab + "</th>" + q.map(function (r, i) { var v = r[k]; return '<td class="' + (i === last ? "cur" : "") + (fmt === fy ? cy(v) : "") + '">' + fmt(v) + "</td>"; }).join("") + "</tr>"; };
+    host.innerHTML = '<div class="fin-tw"><table class="fin-t"><thead><tr><th>억 엔</th>' + th + "</tr></thead><tbody>" +
+      row("매출액", "s", f1, "k") + row("YoY", "sy", fy, "s yy") + row("영업이익", "o", f1, "k") + row("OPM", "om", function (v) { return v == null ? "—" : nf(v, 1) + "%"; }, "s") + row("YoY", "oy", fy, "s yy") + row("순이익", "n", f1, "k") +
+      "</tbody></table></div>" + '<div class="fin-g"><div id="fg1"></div><div id="fg2"></div></div>' +
+      '<p class="hint">분기는 결산기 기준(27.2Q = 2027년에 끝나는 결산기의 2분기). 칸 아래 날짜 = 그 분기 결산단신 발표일. 원천: 결산단신.</p>';
+    var tw = host.querySelector(".fin-tw"); if (tw) tw.scrollLeft = tw.scrollWidth;
+    finChart(document.getElementById("fg1"), q, "s", "sy", "매출액");
+    finChart(document.getElementById("fg2"), q, "o", "oy", "영업이익");
+  }
+  function finChart(host, q, k, ky, name) {   // 막대 = 금액(b1), 꺾은선 = YoY(l1, 오른쪽 축)
+    if (!host) return;
+    var W = Math.max(300, host.clientWidth || 520), H = 220, pL = 8, pR = 44, pT = 30, pB = 26, IW = W - pL - pR, IH = H - pT - pB;
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H, role: "img", "aria-label": name + " 분기 금액과 YoY" });
+    host.innerHTML = ""; host.appendChild(svg);
+    txt(svg, pL, 16, name, "fg-t");
+    var lg = el("g", {}, svg); el("rect", { x: W - 168, y: 7, width: 10, height: 10, rx: 2, fill: "var(--b1)" }, lg); txt(lg, W - 154, 16, "금액(억 엔)", "fg-l");
+    el("line", { x1: W - 82, x2: W - 68, y1: 12, y2: 12, stroke: "var(--l1)", "stroke-width": 2 }, lg); txt(lg, W - 64, 16, "YoY(%)", "fg-l");
+    var vs = q.map(function (r) { return r[k]; }).filter(function (v) { return v != null; }), ys = q.map(function (r) { return r[ky]; }).filter(function (v) { return v != null; });
+    if (!vs.length) return;
+    var vmax = Math.max.apply(null, vs.concat([0])), vmin = Math.min.apply(null, vs.concat([0]));
+    var yv = function (v) { return pT + (1 - (v - vmin) / ((vmax - vmin) || 1)) * IH; };
+    var yc = ys.map(function (v) { return Math.max(-150, Math.min(300, v)); }), ymax = Math.max.apply(null, yc.concat([10])), ymin = Math.min.apply(null, yc.concat([-10]));
+    var yy = function (v) { return pT + (1 - (Math.max(-150, Math.min(300, v)) - ymin) / ((ymax - ymin) || 1)) * IH; };
+    var step = IW / q.length, bw = Math.max(4, step * 0.58);
+    el("line", { x1: pL, x2: pL + IW, y1: yv(0), y2: yv(0), stroke: "var(--line-2)" }, svg);
+    q.forEach(function (r, i) {
+      var cx = pL + step * (i + 0.5);
+      if (r[k] != null) { var y0 = yv(0), y1 = yv(r[k]); el("rect", { x: cx - bw / 2, y: Math.min(y0, y1), width: bw, height: Math.max(1, Math.abs(y1 - y0)), rx: 2, fill: "var(--b1)", opacity: i === q.length - 1 ? 1 : 0.75 }, svg); }
+      if (i % Math.ceil(q.length / 10) === (q.length - 1) % Math.ceil(q.length / 10)) txt(svg, cx, H - 8, r.p, "fg-x", "middle");
+    });
+    var pts = q.map(function (r, i) { return r[ky] == null ? null : [pL + step * (i + 0.5), yy(r[ky]), r[ky]]; }).filter(Boolean);
+    if (pts.length > 1) el("path", { d: pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(""), fill: "none", stroke: "var(--l1)", "stroke-width": 2 }, svg);
+    pts.forEach(function (p, i) { el("circle", { cx: p[0], cy: p[1], r: 2.6, fill: "var(--l1)" }, svg); if (i === pts.length - 1) txt(svg, p[0], p[1] - 7, (p[2] > 0 ? "+" : "") + nf(p[2], 0) + "%", "fg-v", "middle"); });
+    txt(svg, W - pR + 6, yy(ymax) + 4, nf(ymax, 0) + "%", "fg-a"); txt(svg, W - pR + 6, yy(ymin) + 4, nf(ymin, 0) + "%", "fg-a");
+  }
+  function finBand(co, L, x, from, xEnd, top, bot, pL, IW) {   // 주가 위에 매출 YoY(노랑)·영업이익 YoY(보라) 점선 겹치기 — 결산 발표일 위치
+    var q = (S.fin && S.fin[co.c]) || []; if (!q.length) return;
+    var vis = q.filter(function (r) { return r.t && r.t >= from - 20 * DAY && r.t <= xEnd; }); if (!vis.length) return;
+    var CL = function (v) { return Math.max(-100, Math.min(150, v)); };
+    var all = []; vis.forEach(function (r) { ["sy", "oy"].forEach(function (k) { if (r[k] != null) all.push(CL(r[k])); }); });
+    if (!all.length) return;
+    var lo = Math.min.apply(null, all.concat([0])), hi = Math.max.apply(null, all.concat([0])), rg = (hi - lo) || 10; lo -= rg * 0.12; hi += rg * 0.12;
+    var yy = function (v) { return top + (1 - (CL(v) - lo) / (hi - lo)) * (bot - top); };
+    el("line", { x1: pL, x2: pL + IW, y1: yy(0), y2: yy(0), "class": "fin-0" }, L.ind);
+    txt(L.lab, pL + 4, yy(0) - 4, "YoY 0%", "fin-0t");
+    var rows = [{ k: "sy", c: "fin-s", up: true }, { k: "oy", c: "fin-o", up: false }];
+    rows.forEach(function (rw) {
+      var pts = vis.filter(function (r) { return r[rw.k] != null; }).map(function (r) { return [x(r.t), yy(r[rw.k]), r[rw.k]]; });
+      if (pts.length > 1) el("path", { d: pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }).join(""), "class": "fin-ln " + rw.c }, L.lab);
+      var sp = pts.length > 1 ? (pts[pts.length - 1][0] - pts[0][0]) / (pts.length - 1) : 99;
+      pts.forEach(function (p) {
+        el("circle", { cx: p[0], cy: p[1], r: 3.2, "class": "fin-pt " + rw.c }, L.lab);
+        if (sp >= 34 && p[0] > pL + 18) txt(L.lab, p[0], rw.up ? p[1] - 7 : p[1] + 14, (p[2] > 0 ? "+" : "") + (Math.abs(p[2]) >= 1000 ? "999+" : nf(p[2], Math.abs(p[2]) < 10 ? 1 : 0)) + "%", "fin-v " + rw.c, "middle");
+      });
+    });
+  }
   function buildMain(co) {
     var host = document.getElementById("cw");
     var W = Math.max(320, host.clientWidth), H = W < 600 ? 360 : 450;
@@ -606,7 +712,10 @@
     var x = function (t) { return pL + (t - from) / (xEnd - from) * IW; };
     var lo = Math.min.apply(null, bars.map(function (b) { return b.l; })), hi = Math.max.apply(null, bars.map(function (b) { return b.h; }));
     var padv = (hi - lo) * 0.06; lo -= padv; hi += padv;
-    var pTop = pT + 4, pBot = it ? bot - PH * 0.34 - 10 : bot - 6;
+    var spanD = (xEnd - from) / DAY, hasFin = S.fin && S.fin[co.c] && S.fin[co.c].length;
+    var finH = 0, finOn = hasFin && spanD >= 170;   // 실적 YoY는 주가 위에 겹침(넓은 기간일 때)
+    var ibot = bot - (finH ? finH + 10 : 0), iPH = ibot - pT;
+    var pTop = pT + 4, pBot = it ? ibot - iPH * 0.34 - 10 : ibot - 6;
     var y = function (v) { return pTop + (1 - (v - lo) / (hi - lo)) * (pBot - pTop); };
     PC.cpr.setAttribute("x", pL); PC.cpr.setAttribute("width", IW);
     PC.M = { from: from, xEnd: xEnd, IW: IW, pL: pL, pR: pR, pTop: pTop, pBot: pBot, lo: lo, hi: hi, bars: bars, wk: wk, it: it };
@@ -621,7 +730,7 @@
     }
 
     if (it) {   // 선행지표 띠(월 막대)
-      var bandTop = bot - PH * 0.34, bandBot = bot - 2;
+      var bandTop = ibot - iPH * 0.34, bandBot = ibot - 2;
       el("rect", { x: pL, y: bandTop, width: IW, height: bandBot - bandTop, "class": "ind-band" }, L.ind);
       // 막대는 보이는 구간의 최소~최대로 눈금을 다시 잡아(별도 y축) 바닥에 깔리지 않게, YoY 선은 띠 위쪽 전용 줄에
       var shown = it.pts.filter(function (p) { var t = ymT(p[0]); return t >= from - 15 * DAY && t <= xEnd + 15 * DAY; });
@@ -651,6 +760,7 @@
       if (nt >= from && nt <= xEnd) { var gh = Math.max(8, bh(it.pts[it.pts.length - 1][1])), cx2 = x(nt); el("rect", { x: cx2 - bw / 2, y: bandBot - gh, width: bw, height: gh, rx: 3, fill: "none", stroke: "var(--gold)", "stroke-dasharray": "3 2" }, L.ind); if (bw > 14) { txt(L.lab, cx2, bandBot - gh + 14, md(nlead).slice(3), "ibar-lab cs", "middle"); } }
     }
 
+    if (finOn) finBand(co, L, x, from, xEnd, pTop + 6, pBot - 4, pL, IW);
     if (st.rel) {
       Object.keys(co.rel).forEach(function (q) {
         var t = tOf(co.rel[q]); if (t < from || t > xEnd) return;
@@ -787,7 +897,7 @@
 
   function bindMain(co) {
     var st = S.st[co.c];
-    document.querySelectorAll("#ovsel button").forEach(function (b) { b.onclick = function () { st.ov = b.dataset.v; document.querySelectorAll("#ovsel button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); drawMain(co, true); }; });
+    document.querySelectorAll("#ovsel button").forEach(function (b) { b.onclick = function () { st.ov = b.dataset.v; if (st.ov) st.li = st.ov; syncSel(); if (st.ov) drawLead(co, true); drawMain(co, true); }; });
     document.querySelectorAll("#prange button").forEach(function (b) { b.onclick = function () { setRange(co, b.dataset.v); markRange(co); drawMain(co, true); }; });
     var rb = document.getElementById("prel"); rb.onclick = function () { st.rel = !st.rel; rb.setAttribute("aria-pressed", st.rel); drawMain(co, false); };
     document.getElementById("zin").onclick = function () { zoomAt(co, st.to, 1 / 1.4); };
@@ -834,13 +944,29 @@
     var K = "leadFav.v1", d = null;
     function load() {
       if (d) return d;
-      try { d = JSON.parse(localStorage.getItem(K) || "null"); } catch (e) { d = null; }
+      var cands = [];
+      try { cands.push(localStorage.getItem(K)); } catch (e) {}
+      try { cands.push(localStorage.getItem(K + ".bak")); } catch (e) {}
+      try { var m = document.cookie.match(/(?:^|; )leadFav=([^;]*)/); if (m) cands.push(decodeURIComponent(m[1])); } catch (e) {}
+      d = null;
+      cands.forEach(function (s) {   // 가장 많이 담긴 사본을 쓴다(한 곳이 지워져도 복구)
+        try { var x = JSON.parse(s || "null"); if (!x || !x.users) return;
+          var n = Object.keys(x.lists || {}).reduce(function (a, k) { return a + (x.lists[k] || []).length; }, 0);
+          if (!d || n > d._n) { x._n = n; d = x; } } catch (e) {}
+      });
+      if (d) delete d._n;
+      try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
       if (!d || !d.users) d = { users: ["민욱", "제현", "민용"], cur: "민욱", lists: {} };
       d.users.forEach(function (u) { d.lists[u] = d.lists[u] || []; });
       if (d.users.indexOf(d.cur) < 0) d.cur = d.users[0];
       return d;
     }
-    function save() { try { localStorage.setItem(K, JSON.stringify(d)); } catch (e) {} }
+    function save() {
+      var s = JSON.stringify(d);
+      try { localStorage.setItem(K, s); } catch (e) {}
+      try { localStorage.setItem(K + ".bak", s); } catch (e) {}
+      try { if (s.length < 3800) document.cookie = "leadFav=" + encodeURIComponent(s) + "; max-age=315360000; path=/; SameSite=Lax"; } catch (e) {}
+    }
     return {
       list: function () { return load().lists[load().cur] || []; },
       has: function (c) { return this.list().indexOf(c) >= 0; },
@@ -849,6 +975,8 @@
       cur: function () { return load().cur; },
       use: function (u) { load().cur = u; save(); },
       add: function (u) { u = String(u || "").trim().slice(0, 12); if (!u || load().users.indexOf(u) >= 0) return false; d.users.push(u); d.lists[u] = []; d.cur = u; save(); return true; },
+      dump: function () { return btoa(unescape(encodeURIComponent(JSON.stringify(load())))); },
+      restore: function (code) { try { var x = JSON.parse(decodeURIComponent(escape(atob(String(code).trim())))); if (!x || !x.users || !x.lists) return false; d = x; load(); save(); return true; } catch (e) { return false; } },
       remove: function (u) { var x = load(); if (x.users.length <= 1) return; x.users = x.users.filter(function (v) { return v !== u; }); delete x.lists[u]; if (x.cur === u) x.cur = x.users[0]; save(); }
     };
   })();
@@ -859,6 +987,7 @@
     host.innerHTML = '<div class="fav-h"><b>즐겨찾기</b><span>' + l.length + "곳</span></div>" +
       '<div class="fav-u">' + FAV.users().map(function (u) { return '<button type="button" data-fu="' + esc(u) + '" aria-pressed="' + (u === cur) + '">' + esc(u) + "</button>"; }).join("") +
       '<button type="button" class="add" data-fadd="1" title="이름 추가">＋</button></div>' +
+      '<div class="fav-bk"><button type="button" data-fexp="1" title="즐겨찾기 전체를 코드로 복사 — 다른 기기·브라우저에서 불러오기에 붙여 넣기">백업 복사</button><button type="button" data-fimp="1" title="백업 코드 붙여 넣어 되살리기">불러오기</button></div>' +
       (l.length ? '<div class="fav-l">' + l.map(function (c) { var o = S.idx.cos[c]; return '<a href="#c/' + c + '"' + (cur && location.hash === "#c/" + c ? ' class="on"' : "") + '><span>' + esc(o.n) + '</span><small class="mono">' + c + "</small>" + starBtn(c) + "</a>"; }).join("") + "</div>"
         : '<p class="fav-e">' + esc(cur) + "님 즐겨찾기가 비어 있습니다. 기업 화면이나 카드의 ☆을 누르면 여기에 모입니다.</p>");
   }
@@ -870,11 +999,13 @@
     if (b) { e.preventDefault(); e.stopPropagation(); var on = FAV.toggle(b.dataset.fav); renderFav(); syncStars(); toast((on ? "★ " : "☆ ") + FAV.cur() + " 즐겨찾기" + (on ? "에 넣음" : "에서 뺌")); return; }
     var u = e.target.closest("[data-fu]");
     if (u) { e.preventDefault(); if (e.detail === 2 || e.altKey) return; FAV.use(u.dataset.fu); renderFav(); syncStars(); return; }
+    if (e.target.closest("[data-fexp]")) { e.preventDefault(); var code = FAV.dump(); (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject()).then(function () { toast("백업 코드를 복사했습니다 — 메모장 등에 보관하세요"); }, function () { window.prompt("이 코드를 복사해 보관하세요", code); }); return; }
+    if (e.target.closest("[data-fimp]")) { e.preventDefault(); var cd = window.prompt("백업 코드를 붙여 넣으세요 (지금 즐겨찾기를 이 코드 내용으로 바꿉니다)"); if (cd) { if (FAV.restore(cd)) { renderFav(); syncStars(); toast("즐겨찾기를 되살렸습니다"); } else toast("코드가 맞지 않습니다"); } return; }
     if (e.target.closest("[data-fadd]")) { e.preventDefault(); var n = window.prompt("즐겨찾기에 추가할 이름"); if (n && FAV.add(n)) { renderFav(); syncStars(); } return; }
   }, true);
   document.addEventListener("contextmenu", function (e) {
     var u = e.target.closest("[data-fu]"); if (!u) return;
-    e.preventDefault(); if (window.confirm("「" + u.dataset.fu + "」 이름과 그 즐겨찾기를 지울까요?")) { FAV.remove(u.dataset.fu); renderFav(); syncStars(); }
+    e.preventDefault(); if (window.confirm("「" + u.dataset.fu + "」 이름과 그 즐겨찾기를 지울까요?") && window.prompt("정말 지우려면 이름을 그대로 입력하세요: " + u.dataset.fu) === u.dataset.fu) { FAV.remove(u.dataset.fu); renderFav(); syncStars(); }
   });
   function toast(msg) { var tp = document.getElementById("tip"); if (!tp) return; tp.textContent = msg; tp.classList.add("on", "toast"); clearTimeout(toast._t); toast._t = setTimeout(function () { tp.classList.remove("on", "toast"); }, 1400); }
 
@@ -915,6 +1046,86 @@
     }).catch(function () { main.innerHTML = '<div class="empty">목록을 불러오지 못했습니다.</div>'; });
   }
 
+  /* ---------- 튄 지표(2026-11-18 사용자) ---------- */
+  var LANE = { fast: ["⚡", "빠른 신호", "원값이 평소의 3배 넘게 튐"], conf: ["✅", "확인 신호", "3개월선 기울기가 평소의 2배 넘게 꺾임"], cross: ["🔄", "추세 전환", "3개월선이 12개월선을 뚫음"] };
+  function spkSvg(sp, up) {
+    var w = 150, h = 40, v = []; sp.forEach(function (p) { v.push(p[1], p[2]); });
+    var lo = Math.min.apply(null, v), hi = Math.max.apply(null, v), rg = (hi - lo) || 1;
+    var X = function (i) { return 2 + i / Math.max(1, sp.length - 1) * (w - 4); }, Y = function (x) { return h - 3 - (x - lo) / rg * (h - 6); };
+    var path = function (k) { return sp.map(function (p, i) { return (i ? "L" : "M") + X(i).toFixed(1) + "," + Y(p[k]).toFixed(1); }).join(""); };
+    var n = sp.length - 1;
+    return '<svg class="spk" viewBox="0 0 ' + w + " " + h + '" width="' + w + '" height="' + h + '"><path d="' + path(1) + '" class="spk-raw"/><path d="' + path(2) + '" class="spk-ma ' + (up ? "up" : "dn") + '"/><circle cx="' + X(n).toFixed(1) + '" cy="' + Y(sp[n][2]).toFixed(1) + '" r="3" class="spk-pt ' + (up ? "up" : "dn") + '"/></svg>';
+  }
+  function viewSpike() {
+    main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>';
+    getJSON("data/jp/lead/alerts.json").then(function (d) {
+      if (location.hash !== "#spike") return;
+      var st = { side: "up", lane: "", r3: false, fav: false, q: "" };
+      try { var sv = JSON.parse(localStorage.getItem("leadSpikeF") || "null"); if (sv) { st.lane = sv.lane || ""; st.r3 = !!sv.r3; } } catch (e) {}
+      var COND = { fast: "원값 기울기 z ≥ 3 · 전월비 + · YoY ≥ 0", conf: "3개월선 기울기 z ≥ 1.5(원가 경고는 2.5) · 3개월선 상승 · YoY(3개월선) ≥ 0(원가 경고는 +5%)", cross: "3개월선이 12개월선을 아래→위로 뚫음 · YoY ≥ 0" };
+      var MEAN = { fast: "이번 달 원값이 확 튐 — 백테스트에서 오히려 주가가 빠져 「과열 주의」로 따로 모음", conf: "오름세가 자리 잡음 — 가격·단가처럼 들쭉날쭉한 지표의 기본", cross: "바닥 찍고 돌아섬(주가 골든크로스와 같은 개념)" };
+      var APPLY = { fast: "월차 · 구글트렌드만 → 과열 주의", conf: "개선 · 원가 경고", cross: "개선 · 원가 경고" };
+      var SIDE = { up: ["개선 신호", "R ≥ +0.6 지표가 ✅·🔄로 오름"], cost: ["원가 급등 경고", "원가 지표가 z ≥ 2.5 · YoY ≥ +5%로 오름 — 백테스트에서 가장 확실"], hot: ["⚡ 과열 주의", "원값이 평소의 3배 넘게 튐 — 이미 주가에 반영된 경우가 많았음"], dem: ["수요 하락(참고)", "수요·판가 지표가 꺾임 — 백테스트 효과 없음, 참고만"] };
+      var BT = [["개선 신호(지금 기준)", "+1.4% · t 1.6", "+0.7% · t 0.4", "중앙 +2.1%p · 승률 +5.3%p"], ["원가 급등 경고", "−2.2% · t −2.8", "−2.6% · t −2.5", "평균 −7.8% · 승률 −7.0%p"], ["⚡ 과열 주의", "−0.3% · t 0.0", "−5.1% · t −1.8", "평균 −10.0% · 승률 −7.3%p"], ["수요 하락(참고)", "−0.5% · t −0.1", "−0.5% · t −0.7", "평균 −1.8%"], ["처음 기준(R 조건 없음·⚡ 포함)", "+0.1% · t 0.4", "+0.5% · t 0.1", "평균 0.0%"]];
+      var lanesTbl = Object.keys(LANE).map(function (k) { return "<tr><td>" + LANE[k][0] + " <b>" + LANE[k][1] + "</b></td><td>" + COND[k] + "</td><td>" + MEAN[k] + "</td><td>" + APPLY[k] + "</td></tr>"; }).join("");
+      main.innerHTML = '<div class="crumb rv"><a href="#">선행지표</a><i>›</i><b>튄 지표</b></div>' +
+        '<div class="sec-t rv"><span class="n">SPIKE</span><h2>튄 지표</h2><p>' + esc(d.updated) + " 기준 · 선행지표가 회사에 좋은 쪽으로 의미 있게 꺾여 오른 것(개선)과 나빠진 것(경고)</p></div>" +
+        '<details class="card rv spk-rule" open><summary class="card-h"><b>기준</b><span class="hint">눌러서 접기·펴기</span></summary><div class="card-b">' +
+        "<ol>" +
+        "<li><b>기울기</b> = 전월 대비 변화율. 이미 %·전년비인 지표(월차 기존점 YoY 등)는 %p 차이.</li>" +
+        "<li><b>계절 제거</b> — 같은 달의 과거 전월비 중앙값을 뺍니다. 12월 외식처럼 원래 오르는 달은 그만큼 빼고 봅니다(전년비 지표는 이미 계절이 빠져 있어 안 뺌).</li>" +
+        "<li><b>z = 평소의 몇 배</b> — (이번 달 기울기 − 평소 기울기) ÷ 평소 흔들림 폭. 그 지표 자신의 지난 36개월 기울기로 잽니다(중앙값·MAD). 강판 물가처럼 평소 ±0.5% 움직이는 지표가 +5% 오르면 z≈10, 구글트렌드처럼 평소 ±20% 움직이는 지표가 +20% 오르면 z≈1. 같은 %라도 지표마다 뜻이 달라 「자기 평소 대비」로 잽니다.</li>" +
+        '<li><b>세 갈래</b><table class="spk-lane"><thead><tr><th>갈래</th><th>조건</th><th>뜻</th><th>적용</th></tr></thead><tbody>' + lanesTbl + "</tbody></table>" +
+        "3개월선 = 최근 3개월 평균. 가격·단가는 계단식으로 움직이고 수출입 단가는 금액÷물량이라 품목 구성만 바뀌어도 튀어서 3개월선으로 봅니다. 월차·트렌드는 빨리 아는 게 가치라 원값도 봅니다(⚡).</li>" +
+        "<li><b>최소 크기</b> — 기울기가 이보다 작으면 z가 커도 무시: 구글트렌드 15% · 수출입 금액·물량 20% · 그 밖 지표 3% · %·전년비 지표 2%p (3개월선은 그 절반).</li>" +
+        "<li><b>거름</b> — 자료 25개월 미만 · 마지막 값이 4개월보다 오래됨 · 최근 13개월에 0 이하 값(기저가 0 근처라 +600% 같은 착시) · 대수·척·건 단위인데 12개월 평균 20 미만.</li>" +
+        "<li><b>원가 지표는 개선에서 뺌</b> — 같은 지표라도 회사마다 역할이 다릅니다(냉연 강판 물가는 제철사엔 판가, 자동차엔 원가). 기업×지표마다 ① 직접 지정한 역할 ② 지표 YoY와 매출 YoY 상관 ≤ −0.3 ③ 단가·물가류인데 영업이익 YoY 상관 ≤ −0.3(전력·가스처럼 원가를 판가에 넘겨 매출과는 같이 오르는 경우) ④ 이름 단서(수입 단가·원료·연료·운임·임금) 순서로 판정. 원가 지표가 튀어 오르면 경고로 갑니다.</li>" +
+        "<li><b>네 묶음</b> — " + Object.keys(SIDE).map(function (k) { return "<b>" + SIDE[k][0] + "</b>: " + SIDE[k][1]; }).join(" · ") + ". 수요 하락은 위 규칙을 뒤집은 것(z ≤ −2, ⚡는 −3, YoY < 0, 3개월선이 12개월선 아래로 뚫림).</li>" +
+        '<li><b>백테스트</b>(2026-11-18, 3번 수정) — 매달 그때까지 나온 지표·실적만으로 신호를 다시 내고(R·원가 판정도 그 시점 실적으로), 데이터 달 다음 달 25일에 샀다고 보고 668곳 평균 대비 초과수익을 쟀습니다. 기준은 2023-08~2025-06(조정용)에서만 고치고 2025-07~2026-07(검증용)로 확인. t = 달별 평균으로 낸 값, 대략 2 넘어야 우연이 아님.<table class="spk-lane"><thead><tr><th>묶음</th><th>조정용 60일</th><th>검증용 60일</th><th>검증용 120일</th></tr></thead><tbody>' + BT.map(function (r) { return "<tr><td>" + r.join("</td><td>") + "</td></tr>"; }).join("") + "</tbody></table>" +
+        "읽는 법: 원가 급등 경고는 두 기간 모두 뚜렷하게 맞았고(빠짐), 개선 신호는 플러스지만 아직 통계적으로 확실하지는 않습니다. 신호 전 주가가 이미 오른 종목 거르기·같은 회사 지표 여러 개 동시 조건은 검증용에서 나아지지 않아 넣지 않았습니다. 한계: 지표 고르기 자체는 지금 리포트 기준(미래 정보 일부) · 발표일 일괄 25일 가정 · 거래비용 없음.</li>" +
+        "<li><b>점수(정렬)</b> = min(z, 10) × 갈래 가중(🔄 1.2 · ✅ 1.0 · ⚡ 0.8) × R 가중(|R| ≥ 0.6 1.5 · ≥ 0.3 1.0 · 그 밖 0.5) × 키 데이터 1.3.</li>" +
+        '<li><b>R</b> = 분기 평균 지표와 분기 매출의 상관(기업 화면 칩과 같은 값). <em class="rc r1">0.5↑</em> <em class="rc r2">0.65↑</em> <em class="rc r3">0.8↑</em> 분기 6개 미만은 참고만.</li>' +
+        "<li><b>갱신</b> — 지표가 새로 들어오면 다시 계산합니다. 같은 지표·같은 달은 한 번만 알림(텔레그램 연결 예정).</li>" +
+        "</ol></div></details>" +
+        '<div class="card rv"><div class="card-h ovf"><div class="seg" id="spside">' + Object.keys(SIDE).map(function (k) { return '<button data-v="' + k + '" title="' + esc(SIDE[k][1]) + '">' + SIDE[k][0] + " <small>" + ((d[k] || []).length) + "</small></button>"; }).join("") + "</div>" +
+        '<div class="seg" id="splane"><button data-v="">전체</button>' + Object.keys(LANE).map(function (k) { return '<button data-v="' + k + '">' + LANE[k][0] + " " + LANE[k][1] + "</button>"; }).join("") + "</div>" +
+        '<label class="ovchk"><input type="checkbox" id="spr3"> R 0.3 이상만</label><label class="ovchk"><input type="checkbox" id="spfav"> 즐겨찾기만</label><input id="spq" type="search" placeholder="지표·기업 검색" autocomplete="off"></div>' +
+        '<div class="card-b" id="splist"></div></div>';
+      function fmt(g, v) { return g.kind === "level" ? (v == null ? "—" : (v > 0 ? "+" : v < 0 ? "−" : "") + nf(Math.abs(v), 1) + "%p") : pct(v, 1); }
+      function dd(g, k, v) { return "<div><dt>" + k + '</dt><dd class="' + ((v || 0) >= 0 ? "u" : "d") + '">' + fmt(g, v) + "</dd></div>"; }
+      function draw() {
+        try { localStorage.setItem("leadSpikeF", JSON.stringify({ lane: st.lane, r3: st.r3 })); } catch (e) {}
+        document.querySelectorAll("#spside button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.v === st.side); });
+        document.querySelectorAll("#splane button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.v === st.lane); });
+        var fav = st.fav ? FAV.list() : null, q = st.q.toLowerCase(), up = st.side === "up";
+        var rows = (d[st.side] || []).map(function (g) {
+          var cos = g.cos.filter(function (x) { return S.idx.cos[x.c] && (!st.r3 || (x.r != null && Math.abs(x.r) >= 0.3)) && (!fav || fav.indexOf(x.c) >= 0); });
+          if (!cos.length || (st.lane && g.lanes.indexOf(st.lane) < 0)) return null;
+          if (q && (g.name + " " + cos.map(function (x) { return x.c + " " + x.n; }).join(" ")).toLowerCase().indexOf(q) < 0) return null;
+          return { g: g, cos: cos };
+        }).filter(Boolean);
+        document.getElementById("splist").innerHTML = rows.length ? rows.map(function (x) {
+          var g = x.g, zz = Math.max(g.lanes.indexOf("fast") >= 0 ? Math.abs(g.z1) : 0, Math.abs(g.z3)), rising = g.d3 >= 0;
+          return '<div class="spr' + (up ? "" : st.side === "hot" ? " hot" : st.side === "dem" ? " dim" : " warn") + '"><div class="spr-h"><div><b>' + esc(g.name) + "</b>" + (g.cost ? '<em class="chip dim">원가 지표</em>' : "") + '<small class="mono">' + esc(g.ym.replace("-", ".")) + "</small></div>" +
+            '<div class="spr-l">' + g.lanes.map(function (k) { return '<span class="lane" title="' + esc(LANE[k][2]) + '">' + LANE[k][0] + " " + LANE[k][1] + "</span>"; }).join("") + "</div></div>" +
+            '<div class="spr-b">' + spkSvg(g.spark, rising) +
+            "<dl>" + dd(g, "전월비", g.d1) + dd(g, "3개월선", g.d3) + dd(g, "YoY", g.yoy3) + "<div><dt>평소의</dt><dd>" + (zz >= 99 ? "99+" : nf(zz, 1)) + "배</dd></div></dl>" +
+            '<div class="spr-c">' + x.cos.map(function (o) {
+              var a = o.r == null ? 0 : Math.abs(o.r), lv = o.rn < 6 ? 0 : a >= 0.8 ? 3 : a >= 0.65 ? 2 : a >= 0.5 ? 1 : 0;
+              return '<a class="spco" href="#c/' + o.c + '" data-pick="' + o.c + ":" + esc(o.id) + '">' + (o.key ? '<em class="kd">키</em>' : "") + "<b>" + esc(o.n) + '</b><small class="mono">' + o.c + "</small>" + (o.r != null ? '<em class="rc r' + lv + '">R ' + nf(o.r, 2) + "</em>" : "") + "</a>";
+            }).join("") + "</div></div></div>";
+        }).join("") : '<div class="empty">조건에 맞는 지표가 없습니다</div>';
+      }
+      document.getElementById("spside").onclick = function (e) { var b = e.target.closest("button"); if (b) { st.side = b.dataset.v; draw(); } };
+      document.getElementById("splane").onclick = function (e) { var b = e.target.closest("button"); if (b) { st.lane = b.dataset.v; draw(); } };
+      var r3 = document.getElementById("spr3"); r3.checked = st.r3; r3.onchange = function () { st.r3 = this.checked; draw(); };
+      document.getElementById("spfav").onchange = function () { st.fav = this.checked; draw(); };
+      document.getElementById("spq").addEventListener("input", function () { st.q = this.value.trim(); draw(); });
+      document.getElementById("splist").addEventListener("click", function (e) { var a = e.target.closest("[data-pick]"); if (a) { try { sessionStorage.setItem("leadPick", a.dataset.pick); } catch (er) {} } });
+      draw(); reveal(main);
+    }).catch(function () { main.innerHTML = '<div class="empty">튄 지표 목록을 불러오지 못했습니다.</div>'; });
+  }
+
   /* ---------- 라우팅 ---------- */
   function cur() { var m = /^#c\/(\w+)/.exec(location.hash); return m ? m[1] : null; }
   function route() {
@@ -922,6 +1133,7 @@
     var h = location.hash.replace(/^#\/?/, ""), p = h.split("/");
     if (p[0] === "c" && p[1] && S.idx.cos[p[1]]) { renderTree({ sec: S.idx.cos[p[1]].sec, c: p[1] }); main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>'; ensureCo([p[1]], true).then(function () { return attachMacro(S.co[p[1]]); }).then(function () { if (cur() === p[1]) viewCompany(p[1]); }); }
     else if (p[0] === "all") { renderTree(null); viewAll(); }
+    else if (p[0] === "spike") { renderTree(null); viewSpike(); }
     else if (p[0] === "s" && p[2]) { renderTree({ sec: p[1] + "/" + p[2] }); viewSector(p[1], p[2]); }
     else { renderTree(null); viewHome(); }
     window.scrollTo(0, 0);
