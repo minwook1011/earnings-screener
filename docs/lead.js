@@ -1062,9 +1062,11 @@
       if (location.hash !== "#spike") return;
       var st = { side: "up", lane: "", r3: false, fav: false, q: "" };
       try { var sv = JSON.parse(localStorage.getItem("leadSpikeF") || "null"); if (sv) { st.lane = sv.lane || ""; st.r3 = !!sv.r3; } } catch (e) {}
-      var COND = { fast: "원값 기울기 z ≥ 3 · 전월비 + · YoY ≥ 0", conf: "3개월선 기울기 z ≥ 2 · 3개월선 상승 · YoY(3개월선) ≥ 0", cross: "3개월선이 12개월선을 아래→위로 뚫음 · YoY ≥ 0" };
-      var MEAN = { fast: "이번 달 크게 튐 — 빨리 아는 게 가치", conf: "오름세가 자리 잡음 — 가격·단가처럼 들쭉날쭉한 지표의 기본", cross: "바닥 찍고 돌아섬(주가 골든크로스와 같은 개념)" };
-      var APPLY = { fast: "월차 · 구글트렌드만", conf: "전부", cross: "전부" };
+      var COND = { fast: "원값 기울기 z ≥ 3 · 전월비 + · YoY ≥ 0", conf: "3개월선 기울기 z ≥ 1.5(원가 경고는 2.5) · 3개월선 상승 · YoY(3개월선) ≥ 0(원가 경고는 +5%)", cross: "3개월선이 12개월선을 아래→위로 뚫음 · YoY ≥ 0" };
+      var MEAN = { fast: "이번 달 원값이 확 튐 — 백테스트에서 오히려 주가가 빠져 「과열 주의」로 따로 모음", conf: "오름세가 자리 잡음 — 가격·단가처럼 들쭉날쭉한 지표의 기본", cross: "바닥 찍고 돌아섬(주가 골든크로스와 같은 개념)" };
+      var APPLY = { fast: "월차 · 구글트렌드만 → 과열 주의", conf: "개선 · 원가 경고", cross: "개선 · 원가 경고" };
+      var SIDE = { up: ["개선 신호", "R ≥ +0.6 지표가 ✅·🔄로 오름"], cost: ["원가 급등 경고", "원가 지표가 z ≥ 2.5 · YoY ≥ +5%로 오름 — 백테스트에서 가장 확실"], hot: ["⚡ 과열 주의", "원값이 평소의 3배 넘게 튐 — 이미 주가에 반영된 경우가 많았음"], dem: ["수요 하락(참고)", "수요·판가 지표가 꺾임 — 백테스트 효과 없음, 참고만"] };
+      var BT = [["개선 신호(지금 기준)", "+1.4% · t 1.6", "+0.7% · t 0.4", "중앙 +2.1%p · 승률 +5.3%p"], ["원가 급등 경고", "−2.2% · t −2.8", "−2.6% · t −2.5", "평균 −7.8% · 승률 −7.0%p"], ["⚡ 과열 주의", "−0.3% · t 0.0", "−5.1% · t −1.8", "평균 −10.0% · 승률 −7.3%p"], ["수요 하락(참고)", "−0.5% · t −0.1", "−0.5% · t −0.7", "평균 −1.8%"], ["처음 기준(R 조건 없음·⚡ 포함)", "+0.1% · t 0.4", "+0.5% · t 0.1", "평균 0.0%"]];
       var lanesTbl = Object.keys(LANE).map(function (k) { return "<tr><td>" + LANE[k][0] + " <b>" + LANE[k][1] + "</b></td><td>" + COND[k] + "</td><td>" + MEAN[k] + "</td><td>" + APPLY[k] + "</td></tr>"; }).join("");
       main.innerHTML = '<div class="crumb rv"><a href="#">선행지표</a><i>›</i><b>튄 지표</b></div>' +
         '<div class="sec-t rv"><span class="n">SPIKE</span><h2>튄 지표</h2><p>' + esc(d.updated) + " 기준 · 선행지표가 회사에 좋은 쪽으로 의미 있게 꺾여 오른 것(개선)과 나빠진 것(경고)</p></div>" +
@@ -1078,12 +1080,14 @@
         "<li><b>최소 크기</b> — 기울기가 이보다 작으면 z가 커도 무시: 구글트렌드 15% · 수출입 금액·물량 20% · 그 밖 지표 3% · %·전년비 지표 2%p (3개월선은 그 절반).</li>" +
         "<li><b>거름</b> — 자료 25개월 미만 · 마지막 값이 4개월보다 오래됨 · 최근 13개월에 0 이하 값(기저가 0 근처라 +600% 같은 착시) · 대수·척·건 단위인데 12개월 평균 20 미만.</li>" +
         "<li><b>원가 지표는 개선에서 뺌</b> — 같은 지표라도 회사마다 역할이 다릅니다(냉연 강판 물가는 제철사엔 판가, 자동차엔 원가). 기업×지표마다 ① 직접 지정한 역할 ② 지표 YoY와 매출 YoY 상관 ≤ −0.3 ③ 단가·물가류인데 영업이익 YoY 상관 ≤ −0.3(전력·가스처럼 원가를 판가에 넘겨 매출과는 같이 오르는 경우) ④ 이름 단서(수입 단가·원료·연료·운임·임금) 순서로 판정. 원가 지표가 튀어 오르면 경고로 갑니다.</li>" +
-        "<li><b>경고</b> — 위 규칙을 뒤집은 것: 수요·판가 지표가 z ≤ −2(⚡는 −3)로 꺾이고 YoY < 0, 3개월선이 12개월선 아래로 뚫림, 원가 지표 급등.</li>" +
+        "<li><b>네 묶음</b> — " + Object.keys(SIDE).map(function (k) { return "<b>" + SIDE[k][0] + "</b>: " + SIDE[k][1]; }).join(" · ") + ". 수요 하락은 위 규칙을 뒤집은 것(z ≤ −2, ⚡는 −3, YoY < 0, 3개월선이 12개월선 아래로 뚫림).</li>" +
+        '<li><b>백테스트</b>(2026-11-18, 3번 수정) — 매달 그때까지 나온 지표·실적만으로 신호를 다시 내고(R·원가 판정도 그 시점 실적으로), 데이터 달 다음 달 25일에 샀다고 보고 668곳 평균 대비 초과수익을 쟀습니다. 기준은 2023-08~2025-06(조정용)에서만 고치고 2025-07~2026-07(검증용)로 확인. t = 달별 평균으로 낸 값, 대략 2 넘어야 우연이 아님.<table class="spk-lane"><thead><tr><th>묶음</th><th>조정용 60일</th><th>검증용 60일</th><th>검증용 120일</th></tr></thead><tbody>' + BT.map(function (r) { return "<tr><td>" + r.join("</td><td>") + "</td></tr>"; }).join("") + "</tbody></table>" +
+        "읽는 법: 원가 급등 경고는 두 기간 모두 뚜렷하게 맞았고(빠짐), 개선 신호는 플러스지만 아직 통계적으로 확실하지는 않습니다. 신호 전 주가가 이미 오른 종목 거르기·같은 회사 지표 여러 개 동시 조건은 검증용에서 나아지지 않아 넣지 않았습니다. 한계: 지표 고르기 자체는 지금 리포트 기준(미래 정보 일부) · 발표일 일괄 25일 가정 · 거래비용 없음.</li>" +
         "<li><b>점수(정렬)</b> = min(z, 10) × 갈래 가중(🔄 1.2 · ✅ 1.0 · ⚡ 0.8) × R 가중(|R| ≥ 0.6 1.5 · ≥ 0.3 1.0 · 그 밖 0.5) × 키 데이터 1.3.</li>" +
         '<li><b>R</b> = 분기 평균 지표와 분기 매출의 상관(기업 화면 칩과 같은 값). <em class="rc r1">0.5↑</em> <em class="rc r2">0.65↑</em> <em class="rc r3">0.8↑</em> 분기 6개 미만은 참고만.</li>' +
         "<li><b>갱신</b> — 지표가 새로 들어오면 다시 계산합니다. 같은 지표·같은 달은 한 번만 알림(텔레그램 연결 예정).</li>" +
         "</ol></div></details>" +
-        '<div class="card rv"><div class="card-h ovf"><div class="seg" id="spside"><button data-v="up">개선 신호 <small>' + d.up.length + '</small></button><button data-v="down">경고 <small>' + d.down.length + "</small></button></div>" +
+        '<div class="card rv"><div class="card-h ovf"><div class="seg" id="spside">' + Object.keys(SIDE).map(function (k) { return '<button data-v="' + k + '" title="' + esc(SIDE[k][1]) + '">' + SIDE[k][0] + " <small>" + ((d[k] || []).length) + "</small></button>"; }).join("") + "</div>" +
         '<div class="seg" id="splane"><button data-v="">전체</button>' + Object.keys(LANE).map(function (k) { return '<button data-v="' + k + '">' + LANE[k][0] + " " + LANE[k][1] + "</button>"; }).join("") + "</div>" +
         '<label class="ovchk"><input type="checkbox" id="spr3"> R 0.3 이상만</label><label class="ovchk"><input type="checkbox" id="spfav"> 즐겨찾기만</label><input id="spq" type="search" placeholder="지표·기업 검색" autocomplete="off"></div>' +
         '<div class="card-b" id="splist"></div></div>';
@@ -1102,7 +1106,7 @@
         }).filter(Boolean);
         document.getElementById("splist").innerHTML = rows.length ? rows.map(function (x) {
           var g = x.g, zz = Math.max(g.lanes.indexOf("fast") >= 0 ? Math.abs(g.z1) : 0, Math.abs(g.z3)), rising = g.d3 >= 0;
-          return '<div class="spr' + (up ? "" : " warn") + '"><div class="spr-h"><div><b>' + esc(g.name) + "</b>" + (g.cost ? '<em class="chip dim">원가 지표</em>' : "") + '<small class="mono">' + esc(g.ym.replace("-", ".")) + "</small></div>" +
+          return '<div class="spr' + (up ? "" : st.side === "hot" ? " hot" : st.side === "dem" ? " dim" : " warn") + '"><div class="spr-h"><div><b>' + esc(g.name) + "</b>" + (g.cost ? '<em class="chip dim">원가 지표</em>' : "") + '<small class="mono">' + esc(g.ym.replace("-", ".")) + "</small></div>" +
             '<div class="spr-l">' + g.lanes.map(function (k) { return '<span class="lane" title="' + esc(LANE[k][2]) + '">' + LANE[k][0] + " " + LANE[k][1] + "</span>"; }).join("") + "</div></div>" +
             '<div class="spr-b">' + spkSvg(g.spark, rising) +
             "<dl>" + dd(g, "전월비", g.d1) + dd(g, "3개월선", g.d3) + dd(g, "YoY", g.yoy3) + "<div><dt>평소의</dt><dd>" + (zz >= 99 ? "99+" : nf(zz, 1)) + "배</dd></div></dl>" +

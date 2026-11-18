@@ -677,3 +677,5 @@ em.rc.r3 { color: #0b1a12; background: #34c77d; border-color: #34c77d; }
 .spk .spk-ma { fill: none; stroke-width: 2; } .spk .spk-ma.up { stroke: #34c77d; } .spk .spk-ma.dn { stroke: #e5484d; }
 .spk .spk-pt.up { fill: #34c77d; } .spk .spk-pt.dn { fill: #e5484d; }
 @media (max-width: 640px) { .spr-b dl { gap: 10px; } #spq { margin-left: 0; width: 100%; } }
+
+.spr.hot { border-left-color: #f5c542; } .spr.dim { border-left-color: var(--ink-4); opacity: .85; }

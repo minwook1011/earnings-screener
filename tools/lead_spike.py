@@ -161,16 +161,17 @@ def evaluate(pts, unit, nm, kd):
             "spark": [[ymz[i], v[i], round(s3[i], 4)] for i in range(max(0, len(v) - 24), len(v))]}
 
 
-def lanes(e, kd, fast_ok, sign):
-    """sign=+1 개선(오름), −1 악화(내림)"""
+def lanes(e, kd, fast_ok, sign, zf=3, zc=2, yoy_min=0, use=("fast", "conf", "cross")):
+    """sign=+1 오름, −1 내림 — 갈래별 조건(백테스트로 고른 문턱은 main 에서 넘김)"""
     mn = MIN[kd]
     out = []
     y1, y3 = e["yoy1"], e["yoy3"]
-    if fast_ok and sign * e["z1"] >= 3 and sign * e["d1"] > 0 and abs(e["d1"]) >= mn and y1 is not None and sign * y1 >= 0 - (0 if sign > 0 else 1e-9):
+    ok = (lambda y: y is not None and (y >= yoy_min if sign > 0 else y < 0))
+    if "fast" in use and fast_ok and sign * e["z1"] >= zf and sign * e["d1"] > 0 and abs(e["d1"]) >= mn and ok(y1):
         out.append("fast")
-    if sign * e["z3"] >= 2 and sign * e["d3"] > 0 and abs(e["d3"]) >= mn / 2 and y3 is not None and (y3 >= 0 if sign > 0 else y3 < 0):
+    if "conf" in use and sign * e["z3"] >= zc and sign * e["d3"] > 0 and abs(e["d3"]) >= mn / 2 and ok(y3):
         out.append("conf")
-    if (e["up_x"] if sign > 0 else e["dn_x"]) and y3 is not None and (y3 >= 0 if sign > 0 else y3 < 0):
+    if "cross" in use and (e["up_x"] if sign > 0 else e["dn_x"]) and ok(y3):
         out.append("cross")
     return out
 
@@ -269,11 +270,20 @@ def main():
                     role = "수요"
             e = evaluate(pts, unit, nm, kd)
             fast_ok = it["kind"] in ("monthly", "trends") or kd == "trend"
-            up, dn = lanes(e, kd, fast_ok, +1), lanes(e, kd, fast_ok, -1)
-            if role == "원가":   # 원가는 오르면 경고, 개선 신호엔 안 넣음
-                side, hit = ("down", up) if up else (None, [])
+            # 백테스트(2026-11-18, 3차)로 고른 기준 — 개선: R≥+0.6(분기 6개↑) · ✅(z≥1.5)+🔄 · YoY≥0 / 원가 급등: z≥2.5 · YoY≥+5% / ⚡는 과열 주의로
+            side, hit = None, []
+            if role == "원가":
+                h = lanes(e, kd, fast_ok, +1, zf=3, zc=2.5, yoy_min=5)
+                if h: side, hit = "cost", h
             else:
-                side, hit = ("up", up) if up else (("down", dn) if dn else (None, []))
+                h = lanes(e, kd, fast_ok, +1, zc=1.5, use=("conf", "cross")) if (r is not None and rn >= 6 and r >= 0.6) else []
+                if h: side, hit = "up", h
+                else:
+                    h = lanes(e, kd, fast_ok, +1, use=("fast",))
+                    if h: side, hit = "hot", h
+                    else:
+                        h = lanes(e, kd, fast_ok, -1)
+                        if h: side, hit = "dem", h
             if not side:
                 continue
             gk = it["gkey"] or ("S:" + nm + "|" + unit + "|" + "|".join(f"{x:.6g}" for x in v[-6:]))
@@ -293,15 +303,15 @@ def main():
     out = sorted(groups.values(), key=lambda g: -g["score"])
     for g in out:
         g["cos"].sort(key=lambda x: -x["score"])
-    res = {"updated": today.isoformat(), "rules_ver": 1, "stats": dict(stats),
-           "up": [g for g in out if g["side"] == "up"], "down": [g for g in out if g["side"] == "down"]}
+    res = {"updated": today.isoformat(), "rules_ver": 2, "stats": dict(stats)}
+    for sd in ("up", "cost", "hot", "dem"):
+        res[sd] = [g for g in out if g["side"] == sd]
     with open(os.path.join(L, "alerts.json"), "w", encoding="utf-8") as f:
         json.dump(res, f, ensure_ascii=False, separators=(",", ":"))
-    print("개선", len(res["up"]), "지표 /", sum(len(g["cos"]) for g in res["up"]), "곳 · 경고", len(res["down"]), "지표 /",
-          sum(len(g["cos"]) for g in res["down"]), "곳")
+    print({sd: (len(res[sd]), sum(len(g["cos"]) for g in res[sd])) for sd in ("up", "cost", "hot", "dem")})
     print(dict(stats))
     top = int(sys.argv[sys.argv.index("--top") + 1]) if "--top" in sys.argv else 0
-    for side in ("up", "down"):
+    for side in ("up", "cost", "hot", "dem"):
         for g in res[side][:top]:
             print(side, g["score"], g["name"], g["ym"], g["lanes"], "z", g["z1"], g["z3"], "전월", g["d1"], "YoY", g["yoy3"],
                   [(x["c"], x["r"]) for x in g["cos"][:4]])
