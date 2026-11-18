@@ -266,9 +266,10 @@
     if (S.fin[c]) return Promise.resolve(S.fin[c]);
     return getJSON("data/jp/lead/fin/" + c + ".json").then(function (d) {
       var q = (d.q || []).filter(function (r) { return r && r.p; }), by = {};
-      q.forEach(function (r) { by[r.p] = r; });
-      q.forEach(function (r) {   // YoY = 전년 같은 분기(라벨 YY-1)
-        var pv = by[pad(+r.p.slice(0, 2) - 1) + r.p.slice(2)];
+      q.forEach(function (r) { if (r.end) by[r.end] = r; });
+      q.forEach(function (r) {   // YoY = 1년 전 같은 달에 끝난 분기(결산월을 바꿔 라벨이 겹치는 회사도 맞게)
+        var pv = r.end ? by[(+r.end.slice(0, 4) - 1) + r.end.slice(4)] : null;
+        if (pv && r.end_m && pv.end_m && r.end_m !== pv.end_m) pv = null;
         r.sy = pv && r.s != null && pv.s ? (r.s / pv.s - 1) * 100 : null;
         r.oy = pv && r.o != null && pv.o && pv.o > 0 && r.o != null ? (r.o / pv.o - 1) * 100 : null;
         r.om = r.s ? (r.o != null ? r.o / r.s * 100 : null) : null;
