@@ -185,10 +185,10 @@
    * 검색어가 있으면 트리 대신 맞는 기업만 평평하게(최대 40) — 이름·일본명·코드·섹터 이름.
    * 검색어가 없으면: 「지표 발표 임박」 몇 곳 + 대분류(접힘) → 세부 섹터(기업 수) → 펼친 섹터의 기업(많으면 안에서 스크롤). */
   function secName(c) { var o = S.idx.cos[c], p = (o.sec || "").split("/"), g = S.idx.tree.filter(function (x) { return x.id === p[0]; })[0], k = g && g.kids.filter(function (x) { return x.id === p[1]; })[0]; return k ? k.n : ""; }
-  function coLink(c, active, showSec) {
-    var co = S.co[c], o = S.idx.cos[c], ln = co && co.lead ? co.lead.next.date : o.ln, d = ln ? dday(ln) : null;
+  function coLink(c, active, showSec, earn) {   // earn = 실적 발표까지 남은 날(실적 발표 임박 목록)
+    var co = S.co[c], o = S.idx.cos[c], ln = co && co.lead ? co.lead.next.date : o.ln, d = earn != null ? earn : ln ? dday(ln) : null;
     return '<a class="tco' + (active && active.c === c ? " on" : "") + '" href="#c/' + c + '"><span class="nm">' + esc(o.n) + (showSec ? "<small>" + esc(secName(c)) + "</small>" : "") + "</span>" +
-      (d != null && d >= 0 ? '<span class="dd" title="다음 선행지표 발표">' + (d === 0 ? "오늘" : "D-" + d) + "</span>" : "") + '<span class="mono">' + c + "</span></a>";
+      (d != null && d >= 0 ? '<span class="dd" title="' + (earn != null ? "실적 발표까지" : "다음 선행지표 발표") + '">' + (earn != null ? "실적 " : "") + (d === 0 ? "오늘" : "D-" + d) + "</span>" : "") + '<span class="mono">' + c + "</span></a>";
   }
   function renderTree(active) {
     var q = (document.getElementById("q").value || "").trim().toLowerCase(), box = document.getElementById("tree"), all = Object.keys(S.idx.cos);
@@ -199,7 +199,9 @@
       return;
     }
     var soon = all.filter(function (c) { return S.idx.cos[c].nd; }).map(function (c) { return { c: c, d: dday(S.idx.cos[c].nd) }; }).filter(function (x) { return x.d >= 0 && x.d <= 30; }).sort(function (a, b) { return a.d - b.d; });
-    var h = '<div class="tg soon-box"><div class="tg-h"><b>실적 발표 임박</b><span>30일 안 ' + soon.length + "곳</span></div>" + (soon.length ? '<div class="clist">' + soon.slice(0, 6).map(function (x) { return coLink(x.c, active, true); }).join("") + "</div>" : '<p class="hint">없음</p>') + "</div>";
+    var soonOpen = (function () { try { return localStorage.getItem("leadSoonOpen") !== "0"; } catch (e) { return true; } })();
+    var h = '<div class="tg soon-box' + (soonOpen ? " open" : "") + '"><button type="button" class="tg-h tg-btn soon-btn" aria-expanded="' + soonOpen + '"><b>실적 발표 임박</b><span>30일 안 ' + soon.length + "곳 <i>▾</i></span></button>" +
+      (soonOpen ? (soon.length ? '<div class="clist soon-list">' + soon.map(function (x) { return coLink(x.c, active, true, x.d); }).join("") + "</div>" : '<p class="hint">없음</p>') : "") + "</div>";
     h += S.idx.tree.map(function (g) {
       var n = g.kids.reduce(function (s, k) { return s + k.cos.length; }, 0), open = !!S.open[g.id];
       return '<div class="tg' + (open ? " open" : "") + '"><button type="button" class="tg-h tg-btn" data-g="' + g.id + '" aria-expanded="' + open + '"><b>' + esc(g.n) + '</b><span>' + n + "곳 <i>▾</i></span></button>" +
@@ -210,7 +212,9 @@
         }).join("") : "") + "</div>";
     }).join("");
     box.innerHTML = h;
-    box.querySelectorAll(".tg-btn").forEach(function (b) { b.onclick = function () { S.open[b.dataset.g] = !S.open[b.dataset.g]; renderTree(active); }; });
+    box.querySelectorAll(".tg-btn:not(.soon-btn)").forEach(function (b) { b.onclick = function () { S.open[b.dataset.g] = !S.open[b.dataset.g]; renderTree(active); }; });
+    var sb = box.querySelector(".soon-btn");
+    if (sb) sb.onclick = function () { var o = sb.getAttribute("aria-expanded") !== "true"; try { localStorage.setItem("leadSoonOpen", o ? "1" : "0"); } catch (e) {} renderTree(active); };
     box.querySelectorAll(".tsub").forEach(function (a2) {   // 펼친 세부 섹터를 다시 누르면 기업 목록 접기(2026-11-16 사용자)
       a2.onclick = function (e) {
         var sec = a2.getAttribute("href").slice(3);
@@ -834,13 +838,29 @@
     var K = "leadFav.v1", d = null;
     function load() {
       if (d) return d;
-      try { d = JSON.parse(localStorage.getItem(K) || "null"); } catch (e) { d = null; }
+      var cands = [];
+      try { cands.push(localStorage.getItem(K)); } catch (e) {}
+      try { cands.push(localStorage.getItem(K + ".bak")); } catch (e) {}
+      try { var m = document.cookie.match(/(?:^|; )leadFav=([^;]*)/); if (m) cands.push(decodeURIComponent(m[1])); } catch (e) {}
+      d = null;
+      cands.forEach(function (s) {   // 가장 많이 담긴 사본을 쓴다(한 곳이 지워져도 복구)
+        try { var x = JSON.parse(s || "null"); if (!x || !x.users) return;
+          var n = Object.keys(x.lists || {}).reduce(function (a, k) { return a + (x.lists[k] || []).length; }, 0);
+          if (!d || n > d._n) { x._n = n; d = x; } } catch (e) {}
+      });
+      if (d) delete d._n;
+      try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
       if (!d || !d.users) d = { users: ["민욱", "제현", "민용"], cur: "민욱", lists: {} };
       d.users.forEach(function (u) { d.lists[u] = d.lists[u] || []; });
       if (d.users.indexOf(d.cur) < 0) d.cur = d.users[0];
       return d;
     }
-    function save() { try { localStorage.setItem(K, JSON.stringify(d)); } catch (e) {} }
+    function save() {
+      var s = JSON.stringify(d);
+      try { localStorage.setItem(K, s); } catch (e) {}
+      try { localStorage.setItem(K + ".bak", s); } catch (e) {}
+      try { if (s.length < 3800) document.cookie = "leadFav=" + encodeURIComponent(s) + "; max-age=315360000; path=/; SameSite=Lax"; } catch (e) {}
+    }
     return {
       list: function () { return load().lists[load().cur] || []; },
       has: function (c) { return this.list().indexOf(c) >= 0; },
@@ -849,6 +869,8 @@
       cur: function () { return load().cur; },
       use: function (u) { load().cur = u; save(); },
       add: function (u) { u = String(u || "").trim().slice(0, 12); if (!u || load().users.indexOf(u) >= 0) return false; d.users.push(u); d.lists[u] = []; d.cur = u; save(); return true; },
+      dump: function () { return btoa(unescape(encodeURIComponent(JSON.stringify(load())))); },
+      restore: function (code) { try { var x = JSON.parse(decodeURIComponent(escape(atob(String(code).trim())))); if (!x || !x.users || !x.lists) return false; d = x; load(); save(); return true; } catch (e) { return false; } },
       remove: function (u) { var x = load(); if (x.users.length <= 1) return; x.users = x.users.filter(function (v) { return v !== u; }); delete x.lists[u]; if (x.cur === u) x.cur = x.users[0]; save(); }
     };
   })();
@@ -859,6 +881,7 @@
     host.innerHTML = '<div class="fav-h"><b>즐겨찾기</b><span>' + l.length + "곳</span></div>" +
       '<div class="fav-u">' + FAV.users().map(function (u) { return '<button type="button" data-fu="' + esc(u) + '" aria-pressed="' + (u === cur) + '">' + esc(u) + "</button>"; }).join("") +
       '<button type="button" class="add" data-fadd="1" title="이름 추가">＋</button></div>' +
+      '<div class="fav-bk"><button type="button" data-fexp="1" title="즐겨찾기 전체를 코드로 복사 — 다른 기기·브라우저에서 불러오기에 붙여 넣기">백업 복사</button><button type="button" data-fimp="1" title="백업 코드 붙여 넣어 되살리기">불러오기</button></div>' +
       (l.length ? '<div class="fav-l">' + l.map(function (c) { var o = S.idx.cos[c]; return '<a href="#c/' + c + '"' + (cur && location.hash === "#c/" + c ? ' class="on"' : "") + '><span>' + esc(o.n) + '</span><small class="mono">' + c + "</small>" + starBtn(c) + "</a>"; }).join("") + "</div>"
         : '<p class="fav-e">' + esc(cur) + "님 즐겨찾기가 비어 있습니다. 기업 화면이나 카드의 ☆을 누르면 여기에 모입니다.</p>");
   }
@@ -870,11 +893,13 @@
     if (b) { e.preventDefault(); e.stopPropagation(); var on = FAV.toggle(b.dataset.fav); renderFav(); syncStars(); toast((on ? "★ " : "☆ ") + FAV.cur() + " 즐겨찾기" + (on ? "에 넣음" : "에서 뺌")); return; }
     var u = e.target.closest("[data-fu]");
     if (u) { e.preventDefault(); if (e.detail === 2 || e.altKey) return; FAV.use(u.dataset.fu); renderFav(); syncStars(); return; }
+    if (e.target.closest("[data-fexp]")) { e.preventDefault(); var code = FAV.dump(); (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject()).then(function () { toast("백업 코드를 복사했습니다 — 메모장 등에 보관하세요"); }, function () { window.prompt("이 코드를 복사해 보관하세요", code); }); return; }
+    if (e.target.closest("[data-fimp]")) { e.preventDefault(); var cd = window.prompt("백업 코드를 붙여 넣으세요 (지금 즐겨찾기를 이 코드 내용으로 바꿉니다)"); if (cd) { if (FAV.restore(cd)) { renderFav(); syncStars(); toast("즐겨찾기를 되살렸습니다"); } else toast("코드가 맞지 않습니다"); } return; }
     if (e.target.closest("[data-fadd]")) { e.preventDefault(); var n = window.prompt("즐겨찾기에 추가할 이름"); if (n && FAV.add(n)) { renderFav(); syncStars(); } return; }
   }, true);
   document.addEventListener("contextmenu", function (e) {
     var u = e.target.closest("[data-fu]"); if (!u) return;
-    e.preventDefault(); if (window.confirm("「" + u.dataset.fu + "」 이름과 그 즐겨찾기를 지울까요?")) { FAV.remove(u.dataset.fu); renderFav(); syncStars(); }
+    e.preventDefault(); if (window.confirm("「" + u.dataset.fu + "」 이름과 그 즐겨찾기를 지울까요?") && window.prompt("정말 지우려면 이름을 그대로 입력하세요: " + u.dataset.fu) === u.dataset.fu) { FAV.remove(u.dataset.fu); renderFav(); syncStars(); }
   });
   function toast(msg) { var tp = document.getElementById("tip"); if (!tp) return; tp.textContent = msg; tp.classList.add("on", "toast"); clearTimeout(toast._t); toast._t = setTimeout(function () { tp.classList.remove("on", "toast"); }, 1400); }
 

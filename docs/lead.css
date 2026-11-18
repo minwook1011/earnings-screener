@@ -594,3 +594,10 @@ em.vol { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--g
 .star.big { font-size: 26px; margin-left: 10px; }
 .fav-l .star { margin-left: 0; font-size: 13px; }
 .tip.toast { left: 50% !important; top: auto !important; bottom: 28px; transform: translateX(-50%); }
+
+.fav-bk { display: flex; gap: 6px; margin: 2px 0 6px; }
+.fav-bk button { flex: 1; border: 1px dashed var(--line-2); background: transparent; color: var(--ink-4); border-radius: 8px; padding: 3px 6px; font: inherit; font-size: 11px; cursor: pointer; }
+.fav-bk button:hover { color: var(--ink-2); border-color: var(--acc); }
+.soon-box .soon-btn { width: 100%; }
+.soon-box:not(.open) .soon-btn i { transform: rotate(-90deg); display: inline-block; }
+.soon-list { max-height: 360px; overflow: auto; }
