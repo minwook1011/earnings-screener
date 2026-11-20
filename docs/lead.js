@@ -362,7 +362,7 @@
 
     var lead = '<div class="sec-t rv"><span class="n">01</span><h2>선행지표</h2><p>회사 발표가 아닌 외부 월간 데이터 — 실적보다 먼저 나옴</p></div>' +
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
-        return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko && (it.short || "").indexOf(it.term_ko) < 0 ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
+        return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko && it.kind !== "trends" ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
@@ -575,7 +575,7 @@
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
       var sr = i.pts && i.pts.length ? stat(co, i) : null, rTag = sr && sr.r != null ? '<em class="rv' + (Math.abs(sr.r) >= 0.6 && sr.n >= 6 ? " hi" : Math.abs(sr.r) >= 0.4 ? " mid" : "") + '" title="분기 평균 지표 vs 분기 매출 상관 · ' + sr.n + '개 분기">R ' + nf(sr.r, 2) + "<small> n=" + sr.n + "</small></em>" : (i.pts && i.pts.length ? '<em class="rv na">R 계산 중(분기 부족)</em>' : "");
-      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko && (i.t || i.short || "").indexOf(i.term_ko) < 0 ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko && i.kind !== "trends" ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
     }).join("") + "</ol>" + ((co.lead.macro || []).filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).length ? '<p class="pn wait"><b>수집 대기</b> ' + co.lead.macro.filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).map(function (m) { return esc(m.name) + (m.volatile ? ' <em class="vol">변동 가능</em>' : ""); }).join(" · ") + "</p>" : "") + "</div>";
   }
   function mapBlock(co) {
