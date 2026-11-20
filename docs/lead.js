@@ -17,7 +17,8 @@
   var REDUCE = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- 공통 ---------- */
-  function getJSON(u) { return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(u + " " + r.status); return r.json(); }); }
+  function getJSON(u) { u += (u.indexOf("?") < 0 ? "?" : "&") + "t=" + Math.floor(Date.now() / 60000);   // 깃허브 페이지 CDN 10분 캐시 우회(2026-11-20 — 올린 게 바로 안 보임)
+    return fetch(u, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error(u + " " + r.status); return r.json(); }); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (m) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]; }); }
   function nf(v, d) { if (v == null || isNaN(v)) return "—"; return (+v).toLocaleString("ko-KR", { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }); }
   function pct(v, d) { if (v == null || isNaN(v)) return "—"; return (v > 0 ? "+" : v < 0 ? "−" : "") + nf(Math.abs(v), d == null ? 1 : d) + "%"; }
