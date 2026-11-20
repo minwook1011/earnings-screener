@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """브랜드 구글트렌드 넣기(2026-11-17 사용자: 브랜드 있는 것들은 웬만하면 트렌드) — out_*.json → 원장 lead.items(kind trends)
 
-  입력 {코드: {term, term_ko(한국어 이름 — 라벨에 씀, 2026-11-20 사용자), region, why, pts:[[YYYY-MM, v]…]} | null}
+  입력 {코드: {term, term_ko(한국어 뜻 — 라벨은 원래 검색어 그대로, 옆에 한국어 뜻을 작게. 2026-11-20 사용자), region, why, pts:[[YYYY-MM, v]…]} | null}
   - 같은 회사의 「gt:」 수집 대기 항목은 지운다(받았든 못 받았든 이번 결과로 대체).
   - pts 없으면(도구 실패) 수집 대기로 남긴다.
 
   python tools/lead_trends.py out_1.json …
 """
 import json
-import re
 import os
 import sys
 
@@ -33,7 +32,7 @@ for f in sys.argv[1:]:
           gid = "gt" if not have and k == 0 else "gt%d" % (len(have) + k + 1)
           if x.get("pts"):
             pts = [[q[0], round(q[1], 1), "gt"] for q in x["pts"] if q and q[1] is not None]
-            co["lead"]["items"].append({"id": gid, "kind": "trends", "rank": 0.5 + k * 0.1, "t": "구글트렌드: " + (x.get("term_ko") or term), "short": "구글트렌드: " + (x.get("term_ko") or term), "nm": re.sub(r"\s*[(（].*", "", x.get("term_ko") or term)[:14], "term_ko": x.get("term_ko", ""), "unit": "지수",
+            co["lead"]["items"].append({"id": gid, "kind": "trends", "rank": 0.5 + k * 0.1, "t": "구글트렌드: " + term, "short": "구글트렌드: " + term, "nm": term[:14], "term_ko": x.get("term_ko", ""), "unit": "지수",
                                         "term": term, "entity": "구글 트렌드(%s)" % ("일본" if x.get("region", "JP") == "JP" else "전 세계"), "corp": term,
                                         "note": "0~100 상대 지수(5년 중 최고 = 100). 주별 값을 월평균으로", "why": x.get("why", ""), "pts": pts,
                                         "src": [{"doc": "Google Trends (region=%s, 5년)" % x.get("region", "JP"), "where": "검색어 「%s」 주별 → 월평균" % term, "freq": "주 단위(월로 묶음)", "auto": "반자동", "how": "월 1회 다시 받기"}]})
