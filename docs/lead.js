@@ -415,7 +415,8 @@
     document.getElementById("lnote").innerHTML = it.why || it.note ? "<b>" + esc(it.short) + "</b> — " + esc(it.why || it.note) : "";
     var last = it.pts[it.pts.length - 1][0], pq = co.next.q, endYm = qMonthsList(co, pq)[2], first = it.pts[0][0];
     if (endYm <= last) endYm = ymAdd(last, 1);
-    if (ymAdd(first, 24) < endYm) first = ymAdd(endYm, -24);
+    var span = it.kind === "trends" ? 36 : 24;   // 구글트렌드는 3년(2026-11-20 사용자), 나머지 2년
+    if (ymAdd(first, span) < endYm) first = ymAdd(endYm, -span);
     if (ymAdd(first, 6) > endYm) first = ymAdd(endYm, -6);
     if (it.stack) first = ymAdd(endYm, -11);
     var months = []; for (var ym = first; ym <= endYm; ym = ymAdd(ym, 1)) months.push(ym);
@@ -475,7 +476,8 @@
       var y4 = function (v) { return top + 12 + (1 - (v - ilo) / ((ihi - ilo) || 1)) * (h1 * 0.3); };
       var gi4 = el("g", {}, svg);
       if (iy.length > 1) el("path", { d: iy.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y4(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--l1)", "stroke-width": 2, "class": "draw" }, gi4);
-      iy.forEach(function (d) { el("circle", { cx: d.x, cy: y4(d.v), r: 4, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 2, "class": "fade" }, gi4); txt(gi4, d.x, y4(d.v) - 8, pct(d.v, 1), "ibar-lab cs fade", "middle"); });
+      var ik = Math.ceil(iy.length / 16);   // 3년 창에서 라벨 겹침 — 16개 안팎만, 마지막 값은 늘
+      iy.forEach(function (d, j) { el("circle", { cx: d.x, cy: y4(d.v), r: 4, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 2, "class": "fade" }, gi4); if ((iy.length - 1 - j) % ik === 0) txt(gi4, d.x, y4(d.v) - 8, pct(d.v, ik > 1 ? 0 : 1), "ibar-lab cs fade", "middle"); });
     } else txt(gT, pL + 8, top + 8, NM(it) + " YoY: 1년 전 값이 쌓이면 표시", "apr", "start");
 
     // 아래: 분기 매출(회사 발표 결과) + 이번 분기 추정
