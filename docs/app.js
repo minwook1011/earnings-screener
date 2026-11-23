@@ -628,13 +628,14 @@
       '<span class="pc-ovl"><em class="r">매출 YoY</em><em class="o">영업이익 YoY</em></span></div>';
   }
   function pcard(o) {
-    var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
+    var p = (S.px.items || {})[o.c] || {}, x = (S.scr.items || {})[o.c] || {}, mc = scv(o, "mc") != null ? scv(o, "mc") : ((((S.sec || {}).items || {})[o.c] || {}).mc != null ? S.sec.items[o.c].mc : p.mc), q = (S.qy[o.c] || []).slice(-1)[0] || {}, per = scv(o, "per"), B = S.board;
     var tag = B === "turn" ? "정배열 전환 " + md(p.turn) : B === "new" ? "52주 신고가 " + md(p.hid) : "고점 대비 " + pctTxt(p.off);
     if (B === "turn" && p.cl2) p = Object.assign({}, p, { cl: p.cl2, m10: p.a10, m20: p.a20, m60: p.a60, m120: p.a120, tix: p.tix2, d0: p.d02 });
     var mal = B === "turn" ? '<span class="pc-mal"><em class="m10">10일선</em><em class="m20">20일선</em><em class="m60">60일선</em><em class="m120">120일선</em></span>' : "";
     return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button"><button type="button" class="star pc-star' + (FAV[o.c] ? " on" : "") + '" data-fav="' + esc(o.c) + '" aria-pressed="' + !!FAV[o.c] + '" title="즐겨찾기">' + (FAV[o.c] ? "★" : "☆") + "</button>" +
       '<div class="pc-ch">' + pchart(p, B) + mal + '<span class="pc-tag">' + esc(tag) + "</span></div>" + pcDx(p) +
-      '<div class="pc-nm"><b>' + esc(o.n) + (secOf(o.c) ? '<em class="pc-sec2">' + esc(secOf(o.c)) + "</em>" : "") + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
+      // 이름 · 티커 · 섹터, 오른쪽은 주가 대신 시가총액(2026-11-23 사용자)
+      '<div class="pc-nm"><b>' + esc(o.n) + '<i class="pc-tk">' + esc(o.c) + "</i>" + (secOf(o.c) ? '<em class="pc-sec2">' + esc(secOf(o.c)) + "</em>" : "") + "</b><span>" + (mc == null ? "" : "시총 " + mcap(mc) + (mc >= 10000 ? "엔" : "억엔")) + "</span></div>" +
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + (q.e ? " <u>" + esc(qper(q.e)) + "</u>" : "") + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
       "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c, p, B === "turn") + "</div>";
   }
