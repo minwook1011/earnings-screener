@@ -348,3 +348,7 @@ html.lk .pc-ch .pm20 { stroke: var(--qy-r); } html.lk .pc-ch .pm60 { stroke: #4c
 .pc-qy .hv .tp rect { fill: var(--surface); stroke: var(--line); stroke-width: .8; }
 .pc-qy .hv .tp text { font: 700 9.5px var(--mono); } .pc-qy .hv .tp text.hq { fill: var(--ink-mid); font-weight: 600; }
 .pc-qy .hv .tp text.r { fill: var(--qy-r); } .pc-qy .hv .tp text.o { fill: var(--qy-o); }
+/* 분기 YoY — 매출·영업이익 y축 따로(2026-11-23 사용자). 눈금 글자·0 선을 각 색으로 */
+.pc-qy text.tk { font: 500 7.5px var(--mono); opacity: .85; }
+.pc-qy line.z.r { stroke: color-mix(in srgb, var(--qy-r) 45%, transparent); stroke-dasharray: 1 2; }
+.pc-qy line.z.o { stroke: color-mix(in srgb, var(--qy-o) 45%, transparent); stroke-dasharray: 1 2; }

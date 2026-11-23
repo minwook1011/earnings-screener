@@ -541,23 +541,29 @@
   function qyc(c, p, wide) {   // 카드 아래 — 최근 10분기(턴어라운드 넓은 카드는 16분기) YoY, 결산기 분기 같은 간격. 띠 = 위 주가 차트 기간
     var q = (S.qy[c] || []).slice(wide ? -16 : -10);
     if (q.length < 3) return "";   // 2026-11-18 사용자: 모든 카드에
-    var W = wide ? 600 : 300, H = wide ? 78 : 96, L = 14, R = 34, T = 12, Bm = 26, CL = 120;
+    // y축 따로 — 매출은 왼쪽 눈금, 영업이익은 오른쪽 눈금(2026-11-23 사용자: 영업이익 폭이 커서 매출이 납작해짐)
+    var W = wide ? 600 : 300, H = wide ? 78 : 96, L = 30, R = 62, T = 12, Bm = 26, CL = 120;
     function cl(v) { return v == null ? null : Math.max(-CL, Math.min(CL, v)); }
-    var vs = [0];
-    q.forEach(function (x) { if (x.r != null) vs.push(cl(x.r)); if (x.o != null) vs.push(cl(x.o)); });
-    var lo = Math.min.apply(null, vs), hi = Math.max.apply(null, vs), k = (hi - lo) || 1, st = (W - L - R) / (q.length - 1);
+    var rg = {};
+    ["r", "o"].forEach(function (key) {
+      var vs = [0];
+      q.forEach(function (x) { if (x[key] != null) vs.push(cl(x[key])); });
+      var lo = Math.min.apply(null, vs), hi = Math.max.apply(null, vs), pad = Math.max(2, (hi - lo) * 0.06);
+      rg[key] = { lo: lo < 0 ? lo - pad : 0, hi: hi + pad };
+    });
+    var st = (W - L - R) / (q.length - 1);
     function X(i) { return L + i * st; }
-    function Y(v) { return T + (hi - cl(v)) / k * (H - T - Bm); }
+    function Y(v, key) { var g = rg[key]; return T + (g.hi - cl(v)) / ((g.hi - g.lo) || 1) * (H - T - Bm); }
     function ser(key, cls) {
       var pts = [], dots = "";
       q.forEach(function (x, i) {
         var v = x[key];
         if (v == null) return;
-        pts.push(X(i).toFixed(1) + "," + Y(v).toFixed(1));
-        dots += '<circle class="' + (Math.abs(v) > CL ? "out" : "") + '" cx="' + X(i).toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="2.6"><title>' + esc(x.p) + " (" + esc(qper(x.e)) + ")" + (key === "r" ? " 매출 YoY " : " 영업이익 YoY ") + esc(pctTxt(v)) + "</title></circle>";
+        pts.push(X(i).toFixed(1) + "," + Y(v, key).toFixed(1));
+        dots += '<circle class="' + (Math.abs(v) > CL ? "out" : "") + '" cx="' + X(i).toFixed(1) + '" cy="' + Y(v, key).toFixed(1) + '" r="2.6"><title>' + esc(x.p) + " (" + esc(qper(x.e)) + ")" + (key === "r" ? " 매출 YoY " : " 영업이익 YoY ") + esc(pctTxt(v)) + "</title></circle>";
       });
-      var last = q[q.length - 1][key], ly = last == null ? 0 : Y(last) + 3.5, oth = q[q.length - 1][key === "r" ? "o" : "r"];
-      if (last != null && oth != null && Math.abs(Y(last) - Y(oth)) < 10) ly += (cl(last) >= cl(oth) ? -5 : 5) * (key === "r" && cl(last) === cl(oth) ? -1 : 1);
+      var ok = key === "r" ? "o" : "r", last = q[q.length - 1][key], ly = last == null ? 0 : Y(last, key) + 3.5, oth = q[q.length - 1][ok];
+      if (last != null && oth != null && Math.abs(Y(last, key) - Y(oth, ok)) < 10) ly += (Y(last, key) <= Y(oth, ok) ? -5 : 5) * (key === "r" && Y(last, key) === Y(oth, ok) ? -1 : 1);
       var lab = last == null ? "" : '<text x="' + (W - R + 5) + '" y="' + ly.toFixed(1) + '">' + esc(yoyTxt(last) + "%") + "</text>";
       return '<g class="' + cls + '"><polyline points="' + pts.join(" ") + '"/>' + dots + lab + "</g>";
     }
@@ -574,17 +580,24 @@
       var x = q[i], an = i ? "end" : "start", xx = (i ? X(i) + 4 : X(i) - 4).toFixed(1);
       return '<text class="ax" text-anchor="' + an + '" x="' + xx + '" y="' + (H - 16) + '">' + esc(x.p) + '</text><text class="ax2" text-anchor="' + an + '" x="' + xx + '" y="' + (H - 6) + '">' + esc(qper(x.e)) + "</text>";
     }).join("");
-    var z = Y(0).toFixed(1);
+    function tk(key, x, an) {   // 축 눈금 — 위·0·아래(0 과 겹치면 뺌)
+      var g = rg[key], vs = [Math.round(g.hi), 0].concat(g.lo < 0 ? [Math.round(g.lo)] : []), out = "";
+      vs.forEach(function (v, j) { var y = Y(v, key); if (j !== 1 && Math.abs(y - Y(0, key)) < 8) return; out += '<text class="tk" text-anchor="' + an + '" x="' + x + '" y="' + (y + 3).toFixed(1) + '">' + (v > 0 ? "+" : "") + v + "</text>"; });
+      return '<g class="' + key + '">' + out + "</g>";
+    }
+    var zr = Y(0, "r").toFixed(1), zo = Y(0, "o").toFixed(1);
+    var zl = '<line class="z r" x1="' + (L - 4) + '" x2="' + (W - R) + '" y1="' + zr + '" y2="' + zr + '"/>' + (Math.abs(zr - zo) > 1 ? '<line class="z o" x1="' + (L - 4) + '" x2="' + (W - R) + '" y1="' + zo + '" y2="' + zo + '"/>' : "") +
+      tk("r", L - 6, "end");
     // 마우스 올리면 그 분기 매출·영업이익 YoY(2026-11-18 사용자)
     var hv = q.map(function (x, i) {
       var xx = X(i), rx = Math.max(0, xx - st / 2), rw = Math.min(W, xx + st / 2) - rx, left = xx > W / 2, tx = left ? xx - 112 : xx + 6;
       function ln(key, lab, y) { var v = x[key]; return '<text class="' + key + '" x="' + (tx + 6) + '" y="' + y + '">' + lab + " " + esc(v == null ? "—" : pctTxt(v)) + "</text>"; }
-      var dt = ["r", "o"].map(function (key) { var v = x[key]; return v == null ? "" : '<circle class="hd ' + key + '" cx="' + xx.toFixed(1) + '" cy="' + Y(v).toFixed(1) + '" r="4.2"/>'; }).join("");
+      var dt = ["r", "o"].map(function (key) { var v = x[key]; return v == null ? "" : '<circle class="hd ' + key + '" cx="' + xx.toFixed(1) + '" cy="' + Y(v, key).toFixed(1) + '" r="4.2"/>'; }).join("");
       return '<g class="hv"><rect class="hit" x="' + rx.toFixed(1) + '" y="0" width="' + rw.toFixed(1) + '" height="' + H + '"/><line class="gl" x1="' + xx.toFixed(1) + '" x2="' + xx.toFixed(1) + '" y1="2" y2="' + (H - Bm + 2) + '"/>' + dt +
         '<g class="tp"><rect x="' + tx.toFixed(1) + '" y="2" width="106" height="42" rx="4"/><text class="hq" x="' + (tx + 6) + '" y="14">' + esc(x.p) + " · " + esc(qper(x.e)) + "</text>" + ln("r", "매출", 26) + ln("o", "영업이익", 38) + "</g></g>";
     }).join("");
-    return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>결산기 분기 · ±' + CL + '% 밖은 빈 점</small></div>' +
-      '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true">' + band + '<line class="z" x1="' + (L - 8) + '" x2="' + (W - R) + '" y1="' + z + '" y2="' + z + '"/>' +
+    return '<div class="pc-qy"><div class="pc-qyh"><b>분기 YoY</b><span class="r">매출</span><span class="o">영업이익</span><small>왼쪽 눈금 매출 · 오른쪽 영업이익 · ±' + CL + '% 밖은 빈 점</small></div>' +
+      '<svg viewBox="0 0 ' + W + " " + H + '" aria-hidden="true">' + band + zl + tk("o", W, "end") +
       ser("r", "r") + ser("o", "o") + ax + hv + "</svg></div>";
   }
   function qyov(c, p) {   // 주가 차트 위에 겹침 — 차트 기간 안에 끝난 분기만, 점 = 분기가 끝난 달 말, 차트 아래쪽 띠(45~92%)에 따로 눈금
