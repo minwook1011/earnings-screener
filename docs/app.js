@@ -621,7 +621,7 @@
     var mal = B === "turn" ? '<span class="pc-mal"><em class="m10">10일선</em><em class="m20">20일선</em><em class="m60">60일선</em><em class="m120">120일선</em></span>' : "";
     return '<div class="pcard" data-px="' + esc(o.c) + '" tabindex="0" role="button"><button type="button" class="star pc-star' + (FAV[o.c] ? " on" : "") + '" data-fav="' + esc(o.c) + '" aria-pressed="' + !!FAV[o.c] + '" title="즐겨찾기">' + (FAV[o.c] ? "★" : "☆") + "</button>" +
       '<div class="pc-ch">' + pchart(p, B) + mal + '<span class="pc-tag">' + esc(tag) + "</span></div>" + pcDx(p) +
-      '<div class="pc-nm"><b>' + esc(o.n) + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
+      '<div class="pc-nm"><b>' + esc(o.n) + (secOf(o.c) ? '<em class="pc-sec2">' + esc(secOf(o.c)) + "</em>" : "") + "</b><span>" + esc(o.c) + " · " + num(p.px, p.px < 100 ? 1 : 0) + "엔</span></div>" +
       '<div class="pc-st"><span><i>YTD</i>' + pct(x.ytd) + "</span><span" + (q.p ? ' title="최근 분기 ' + esc(q.p) + ' 매출 YoY"' : "") + "><i>매출성장" + (q.p ? "<small>" + esc(q.p) + (q.e ? " <u>" + esc(qper(q.e)) + "</u>" : "") + "</small>" : "") + "</i>" + (q.r == null ? "—" : pct(q.r)) + "</span>" +
       "<span><i>PER</i>" + (per == null ? "—" : per < 0 ? '<b class="na">적자</b>' : per.toFixed(1)) + "</span></div>" + qyc(o.c, p, B === "turn") + "</div>";
   }
@@ -637,7 +637,7 @@
   S.aboard = (function () { try { var b = localStorage.getItem("es-aboard"); return ABOARDS.some(function (x) { return x.k === b; }) ? b : "all"; } catch (e) { return "all"; } })();
   S.aq = ""; S.amin = 0; S.asort = "mc"; S.asec = "";
   /* 섹터 — data/jp/sectors.json(tools/sector.py, 2026-10-30 사용자). 종목마다 섹터 하나, 맨 앞 '전체' = 모든 섹터 */
-  function secOf(c) { return (((S.sec || {}).items || {})[c] || {}).s || ""; }
+  function secOf(c) { var t = S.sec || {}; return ((t.items || {})[c] || {}).s || (t.x || {})[c] || ""; }   // x = 100억 목록 밖 사이트 회사(JPX 업종)
   /* 최근·다음 실적 발표일 — 최근 = 카부탄 결산 발표일(ann.json, tools/build_ann.py)과 JPX 캘린더 중 늦은 날, 다음 = JPX 캘린더(cal.json)에서 오늘 뒤 첫 날 */
   function calIdx() {
     if (S.cidx) return S.cidx;
@@ -1918,9 +1918,10 @@
     getJSON("data/jp/scr.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/px/index.json").catch(function () { return { items: {} }; }),
     getJSON("data/jp/pdf.json").catch(function () { return { items: {} }; }),
-    getJSON("data/jp/study.json").catch(function () { return { items: [] }; })
+    getJSON("data/jp/study.json").catch(function () { return { items: [] }; }),
+    getJSON("data/jp/sectors.json").catch(function () { return null; })
   ]).then(function (r) {
-    S.study = r[14];
+    S.study = r[14]; if (r[15] && !S.sec) S.sec = r[15];
     S.scr = r[11]; S.px = r[12]; S.pdf = r[13]; S.s1rows = {}; (r[0].rows || []).forEach(function (x) { S.s1rows[x.c] = x; });
     S.upd1 = r[0].updated || ""; S.upd2 = r[1].updated || "—"; S.qy = r[3]; S.fs = r[4]; S.bm = r[5]; S.mo = r[6]; S.res = r[2]; S.xl = r[7]; S.room = r[8]; S.ret = r[9]; S.irc = r[10]; S.upc = {}; (r[0].upcoming || []).forEach(function (u) { if (!u.est && !S.upc[u.c]) S.upc[u.c] = u.d; });
     S.cos = build(r[0], r[1], r[2]);
