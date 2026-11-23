@@ -174,6 +174,12 @@ def main():
         except Exception:
             pass
     json.dump(idx, open(os.path.join(LEAD, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    try:   # 주가 선행 백테스트(일치율) — 하루 한 번(2026-11-23 사용자). 실패해도 갱신은 그대로
+        bt = json.load(open(os.path.join(LEAD, "bt.json"), encoding="utf-8")).get("updated", "")
+    except (OSError, ValueError):
+        bt = ""
+    if not bt.startswith(dt.date.today().isoformat()):
+        subprocess.run([sys.executable, os.path.join(ROOT, "tools", "lead_bt.py")], cwd=ROOT)
     if "--push" in sys.argv:
         paths = ["docs/data/jp/lead"] + [f"docs/data/jp/px/{c}.json" for c in codes if os.path.exists(os.path.join(PX, f"{c}.json"))]
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "gpush.py"), f"data: 선행지표 갱신 {dt.date.today()}"] + paths, cwd=ROOT)
