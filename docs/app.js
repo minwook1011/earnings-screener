@@ -1317,7 +1317,7 @@
   }
   function closePanel() { panel.classList.remove("on"); scrim.classList.remove("on"); document.body.style.overflow = ""; }
   function back() { return S.mode === "jps" ? "jps" : "jp/" + S.stage; }
-  function shut() { if (S.mode === "jpcal") closePanel(); else location.hash = back(); }   // 캘린더 요약 재무는 주소 없이 열림
+  function shut() { if (/^#jps?\/c\//.test(location.hash)) location.hash = back(); else closePanel(); }   // 일본 회사(#jp/c/…)만 주소로 열림 — 캘린더·미국 전체 종목 패널은 주소 없이 열려 그냥 닫는다(2026-11-24 사용자: 미국에서 esc → 일본으로 넘어감)
   scrim.onclick = shut;
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && panel.classList.contains("on")) shut(); });
 
