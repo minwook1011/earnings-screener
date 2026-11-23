@@ -736,6 +736,33 @@
   }
   /* ---------- 일본 소비재 — 소형주까지 소비하는 모든 업종을 분류해 훑어보는 칸(2026-10-30 사용자). data/jp/consumer_all.json ---------- */
   S.ccat = ""; S.cq = "";
+  /* 일본 주요 전 종목 실적 스크리닝(#jpx) — 다음 실적 시즌부터 전 종목에 돌릴 1단계 기준(2026-11-24 사용자). 지금은 기준만 */
+  var JPX = {
+    send: [["매출 성장", "당분기 매출 +20% 이상, 영업이익은 작년보다 안 줄어듦"],
+      ["이익 성장", "당분기 영업이익 +30% 이상, 매출 +5% 이상"],
+      ["성장 가속", "당분기 영업이익 +10~30%이고, 증가율이 직전 분기보다 20%p 이상 빨라짐"],
+      ["턴어라운드", "매출 +10% 이상이면서 흑자 전환(전년 같은 분기, 또는 직전 2개 분기 연속 적자)"],
+      ["수주잔고 가속", "설명회 자료의 수주잔고 YoY 증가율이 3개 분기 연속 높아짐(수주잔고를 공개하는 회사만)"]],
+    drop: ["매출 증가율과 영업이익 증가율이 둘 다 직전 분기보다 낮아진 회사", "매출이 2개 분기 연속 직전 분기보다 줄어든 회사",
+      "당분기 GPM(매출총이익률) 20% 미만", "분기 영업이익 1억 엔 미만"],
+    exc: ["SW 업종은 분기 매출 5억 엔 이상이면 봄"],
+    sec: [["금융", "은행·증권·보험·기타 금융"], ["의약품", "제약·바이오"], ["철강", ""], ["펄프·종이", "제지·포장재"], ["목재", ""], ["화학", "반도체 소재 관련과 생활용품·화장품만 남김"]]
+  };
+  function renderJpx() {
+    var n = S.pxa && S.pxa.n_universe;
+    function ol(a, f) { return '<ol class="jx-ol">' + a.map(function (x) { return "<li>" + f(x) + "</li>"; }).join("") + "</ol>"; }
+    var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · All Majors · Earnings Screen</div>' +
+      '<h1><span class="kanji">選</span>전 종목 실적 스크리닝<a class="calbtn" href="#jpa">‹ 일본 주요 전 종목</a></h1>' +
+      '<div class="sub">일본 주요 전 종목' + (n ? " " + n + "개" : "") + "에 다음 실적 발표부터 아래 1단계 기준을 돌립니다. 걸린 회사는 이 탭에 발표일 순으로 쌓입니다.</div></div></div></header>";
+    var body = '<div class="jx">' +
+      '<section class="jx-c jx-send"><h3>1단계 발송 기준 <small>하나라도 맞으면 발송</small></h3>' + ol(JPX.send, function (x) { return "<b>" + esc(x[0]) + "</b> — " + esc(x[1]); }) + "</section>" +
+      '<section class="jx-c jx-drop"><h3>제외 조건 <small>하나라도 해당하면 뺌</small></h3>' + ol(JPX.drop, esc) +
+      '<h3 class="jx-h2">예외</h3>' + ol(JPX.exc, esc) + "</section>" +
+      '<section class="jx-c jx-sec"><h3>제외 섹터</h3>' + ol(JPX.sec, function (x) { return "<b>" + esc(x[0]) + "</b>" + (x[1] ? " — " + esc(x[1]) : ""); }) + "</section>" +
+      '<section class="jx-c jx-wait"><h3>스크리닝 결과</h3><p class="na">아직 돌리지 않았습니다. 다음 실적 시즌 결산단신이 올라오면 여기에 걸린 회사가 쌓입니다.</p></section></div>';
+    app.innerHTML = head + body;
+  }
+
   function renderCon() {
     if (!S.con || !S.pxa) {
       app.innerHTML = '<div class="loading">불러오는 중…</div>';
@@ -1917,7 +1944,7 @@
     document.getElementById("px").onclick = closePanel;
   }
   /* 일본 스크리닝 쪽 화면 = 선행지표 모양(어두운 바탕 기본, 2026-11-17 사용자). 다른 탭은 원래대로 */
-  var LK = { jps: 1, jpa: 1, jpc: 1, jpcal: 1 }, THEME0 = document.documentElement.getAttribute("data-theme");
+  var LK = { jps: 1, jpa: 1, jpc: 1, jpcal: 1, jpx: 1 }, THEME0 = document.documentElement.getAttribute("data-theme");
   if (document.documentElement.classList.contains("lk")) THEME0 = null;
   function lkTheme() { var t = "dark"; try { t = localStorage.getItem("ld-theme") || "dark"; } catch (e) {} return t === "light" ? "light" : "dark"; }
   function lkApply(m) {
@@ -1939,6 +1966,7 @@
     if (m === "room") { closePanel(); S.roomTab = ["watch", "res", "pre", "mo"].indexOf(h[1]) >= 0 ? h[1] : "watch"; renderRoom(); return; }
     if (m === "jpa") { closePanel(); S.mode = "jpa"; renderAll(); return; }
     if (m === "jpc") { closePanel(); S.mode = "jpc"; renderCon(); return; }
+    if (m === "jpx") { closePanel(); S.mode = "jpx"; renderJpx(); return; }
     if (m === "jpcal") { closePanel(); S.mode = "jpcal"; renderCal(); return; }
     var md0 = m === "jps" ? "jps" : "jp", sw = S.mode !== md0;
     S.mode = md0;
