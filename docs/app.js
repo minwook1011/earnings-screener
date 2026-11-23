@@ -1010,6 +1010,41 @@
     return head + '<div class="tblwrap"><table class="main-t scr-t"><thead>' + th + "</thead><tbody>" + body + "</tbody></table></div>";
   }
 
+  /* 2단계 발표일 — 한 주(월~금, 주말은 발표 있을 때만)씩 넘기고, 달력에서 날을 누르면 그 주·그 날로(2026-11-24 사용자) */
+  function wkMon(d) { var t = new Date(d + "T00:00:00"), w = (t.getDay() + 6) % 7; return addDays(d, -w); }
+  function dayWeek(keys, dates) {
+    S.dkeys = keys;
+    var mon = wkMon(S.day || kstYmd()), td = kstYmd(), sun = addDays(mon, 6);
+    var prev = keys.filter(function (k) { return k < mon; }).pop(), next = keys.filter(function (k) { return k > sun; })[0];
+    if (prev) { var pm0 = wkMon(prev); prev = keys.filter(function (k) { return k >= pm0; })[0]; }   // 이전 주로 가면 그 주 첫 발표일
+    var days = [0, 1, 2, 3, 4, 5, 6].map(function (i) { return addDays(mon, i); }).filter(function (d, i) { return i < 5 || dates[d]; });
+    var tot = days.reduce(function (a, d) { return a + (dates[d] || 0); }, 0);
+    return '<div class="dwk"><button class="dwk-n" data-dgo="' + (prev || "") + '"' + (prev ? "" : " disabled") + '>‹ 이전 주</button>' +
+      '<div class="dwk-d">' + days.map(function (d) {
+        var n = dates[d] || 0;
+        return "<button " + (n ? 'data-dd="' + d + '"' : "disabled") + ' aria-pressed="' + (d === S.day) + '"' + (d === td ? ' class="now"' : "") + "><b>" + dlab(d) + "</b><span>" + n + "개</span></button>";
+      }).join("") + "</div>" +
+      '<button class="dwk-n" data-dgo="' + (next || "") + '"' + (next ? "" : " disabled") + '>다음 주 ›</button>' +
+      '<span class="dwk-t">' + md(mon) + " ~ " + md(sun) + " · " + tot + "개</span>" +
+      '<button class="dwk-c" id="dcalb" aria-pressed="' + !!S.dcal + '">달력 보기</button></div>';
+  }
+  function dayMonth(dates) {
+    var ym = S.dcalM || (S.day || kstYmd()).slice(0, 7), y = +ym.slice(0, 4), m = +ym.slice(5, 7);
+    var start = wkMon(ym + "-01"), td = kstYmd(), mx = 0;
+    Object.keys(dates).forEach(function (k) { if (k.slice(0, 7) === ym && dates[k] > mx) mx = dates[k]; });
+    var pm = m === 1 ? (y - 1) + "-12" : y + "-" + ("0" + (m - 1)).slice(-2), nm = m === 12 ? (y + 1) + "-01" : y + "-" + ("0" + (m + 1)).slice(-2);
+    var mtot = 0, cells = "";
+    for (var i = 0; i < 42; i++) {
+      var d = addDays(start, i);
+      if (i % 7 === 0 && i > 0 && d.slice(0, 7) !== ym) break;
+      var n = dates[d] || 0, inm = d.slice(0, 7) === ym; if (inm) mtot += n;
+      var lv = n ? Math.min(4, 1 + Math.floor(3 * n / Math.max(1, mx))) : 0;
+      cells += '<button class="dm-c' + (inm ? "" : " out") + (d === td ? " now" : "") + (lv ? " lv" + lv : "") + '"' + (n ? ' data-dd="' + d + '"' : " disabled") + ' aria-pressed="' + (d === S.day) + '"><b>' + (+d.slice(8)) + "</b>" + (n ? "<span>" + n + "개</span>" : "") + "</button>";
+    }
+    return '<div class="dmon"><div class="dmon-h"><button data-dcm="' + pm + '" aria-label="이전 달">‹</button><b>' + y + "년 " + m + "월</b><span>" + mtot + '개 발표</span><button data-dcm="' + nm + '" aria-label="다음 달">›</button></div>' +
+      '<div class="dmon-g">' + "월화수목금토일".split("").map(function (w, i) { return "<i" + (i > 4 ? ' class="we"' : "") + ">" + w + "</i>"; }).join("") + cells + "</div></div>";
+  }
+
   function stageN(st) {
     var q = S.q.trim().toLowerCase();
     var rows = S.list.filter(function (o) { return (st === 2 ? o.stage >= 2 : stOf(o) === st) && (!q || [o.n, o.en, o.tn, o.c].join(" ").toLowerCase().indexOf(q) >= 0); });
@@ -1022,9 +1057,7 @@
       var di = keys.indexOf(S.day);
       if (day) {
         rows = byGrade(sorted(rows.filter(function (o) { return o.d === S.day; })));
-        nav = '<div class="cal"><div class="weeks" id="weeks">' + keys.map(function (k) {
-          return '<button data-dd="' + k + '" aria-pressed="' + (k === S.day) + '"' + (k === kstYmd() ? ' class="now"' : "") + "><b>" + dlab(k) + "</b><span>" + dates[k] + "개</span></button>";
-        }).join("") + "</div>" +
+        nav = '<div class="cal">' + dayWeek(keys, dates) + (S.dcal ? dayMonth(dates) : "") +
           '<div class="wnav"><button data-dstep="-1"' + (di <= 0 ? " disabled" : "") + ">‹ 이전 날</button><b>" + (S.day ? dlab(S.day) + " 발표" : "발표일 없음") + "</b><span>" + rows.length + '개</span><button data-dstep="1"' + (di >= keys.length - 1 ? " disabled" : "") + ">다음 날 ›</button></div></div>";
       } else {
         rows = rows.slice().sort(function (a, b) { return S.dir * String(a.d || "0").localeCompare(String(b.d || "0")) || grOf(a.c) - grOf(b.c) || (b.mc || 0) - (a.mc || 0); });
@@ -1562,9 +1595,13 @@
       };
     });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
-    app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { S.day = b.dataset.dd; try { sessionStorage.setItem("es-day", S.day); } catch (e) {} rerender(); }; });
+    function setDay(d) { if (!d) return; S.day = d; S.dcalM = null; try { sessionStorage.setItem("es-day", S.day); } catch (e) {} rerender(); }
+    app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { if (b.classList.contains("dm-c")) S.dcal = false; setDay(b.dataset.dd); }; });
+    app.querySelectorAll("[data-dgo]").forEach(function (b) { b.onclick = function () { setDay(b.dataset.dgo); }; });
+    var dcb = document.getElementById("dcalb"); if (dcb) dcb.onclick = function () { S.dcal = !S.dcal; S.dcalM = null; rerender(); };
+    app.querySelectorAll("[data-dcm]").forEach(function (b) { b.onclick = function () { S.dcalM = b.dataset.dcm; rerender(); }; });
     app.querySelectorAll("[data-dstep]").forEach(function (b) {
-      b.onclick = function () { var k = [].map.call(app.querySelectorAll("[data-dd]"), function (x) { return x.dataset.dd; }); S.day = k[Math.max(0, Math.min(k.length - 1, k.indexOf(S.day) + +b.dataset.dstep))]; try { sessionStorage.setItem("es-day", S.day); } catch (e) {} rerender(); };
+      b.onclick = function () { var k = S.dkeys || []; setDay(k[Math.max(0, Math.min(k.length - 1, k.indexOf(S.day) + +b.dataset.dstep))]); };
     });
     var q = document.getElementById("q");
     // 한글 조합 중(ㄱ→가)엔 다시 그리지 않음 — 그리면 입력칸이 새로 생겨 'ㄱ교ㅅ세' 처럼 깨짐(2026-10-29 사용자)
