@@ -4,8 +4,10 @@
   원천  VANTAGE docs/data/jp/monthly/<코드>.json (TDnet·회사 IR 월차 원장, 매일 갱신)
         tools/monthly_extra/<코드>.json         (VANTAGE 에 없는 회사 — jp_monthly 도구로 받아 넣음)
   번역  VANTAGE jp-screener.js 의 MO_DICT(일본어 → 한국어, 긴 낱말부터 바꿈)
-  대상  사이트에 나오는 회사(1단계 목록·발표 예정·텔레 단계) 전부
+  대상  원장에 있는 회사 전부(2026-11-24 사용자: 월차 탭 — 월차 내는 회사 모두. 전에는 사이트 회사만)
   결과  docs/data/jp/monthly/<코드>.json + index.json(월차 있는 코드 목록·최신 달)
+        + hub.json  월차 탭 목록 {updated, items:[{c, n, sec, m(최신 달), pub(발표일), pre(속보), src, k(최신 달 값)}]}
+  VANTAGE 폴더가 없으면 깃허브 원본(raw.githubusercontent.com)에서 읽는다(노트북, 2026-11-24).
 
   실행  python tools/build_monthly.py [--vantage C:\\dev\\vantage-0910]
 """
@@ -49,33 +51,93 @@ def universe():
     return codes
 
 
+GH = "https://raw.githubusercontent.com/minwook1011/vantage-0910/main/"
+GH_LIST = "https://api.github.com/repos/minwook1011/vantage-0910/contents/docs/data/jp/monthly"
+
+
+def _get(url):
+    import urllib.request
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    return urllib.request.urlopen(req, timeout=60).read().decode("utf-8")
+
+
+def sources(vantage):
+    """{코드: 원장 dict} — VANTAGE 폴더 → 없으면 깃허브. tools/monthly_extra 가 덮어씀."""
+    out = {}
+    if os.path.isdir(os.path.join(vantage, "docs", "data", "jp", "monthly")):
+        for f in glob.glob(os.path.join(vantage, "docs", "data", "jp", "monthly", "*.json")):
+            out[os.path.basename(f)[:-5]] = load(f)
+    else:
+        for it in json.loads(_get(GH_LIST)):
+            if it["name"].endswith(".json") and it["name"] != "index.json":
+                try:
+                    out[it["name"][:-5]] = json.loads(_get(GH + "docs/data/jp/monthly/" + it["name"]))
+                except Exception as e:  # noqa: BLE001
+                    print("  못 받음", it["name"], e)
+    for f in glob.glob(os.path.join(EXTRA, "*.json")):
+        out[os.path.basename(f)[:-5]] = load(f)
+    return out
+
+
+def ko_names():
+    """한국어 회사 이름·섹터 — 100억 전 종목(sectors.json) · 리포트 · 1단계 · 텔레 단계"""
+    d = os.path.join(ROOT, "docs", "data", "jp")
+    nm, sec = {}, {}
+    try:
+        sj = load(os.path.join(d, "sectors.json"))
+        for c, v in sj.get("items", {}).items():
+            nm[c], sec[c] = v.get("n"), v.get("s")
+        sec.update({c: v for c, v in sj.get("x", {}).items() if c not in sec})
+    except (OSError, ValueError):
+        pass
+    for f, get in (("stage1.json", lambda j: [(r["c"], r.get("n")) for r in j.get("rows", []) + j.get("upcoming", [])]),
+                   ("pipeline.json", lambda j: [(c, v.get("n")) for c, v in j.get("companies", {}).items()])):
+        try:
+            for c, n in get(load(os.path.join(d, f))):
+                if n and not nm.get(c):
+                    nm[c] = n
+        except (OSError, ValueError):
+            pass
+    return nm, sec
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--vantage", default=r"C:\dev\vantage-0910")
+    ap.add_argument("--vantage", default=r"C:\devantage-0910")
     a = ap.parse_args()
-    pairs = mo_dict(a.vantage)
+    if os.path.exists(os.path.join(a.vantage, "docs", "jp-screener.js")):
+        js = open(os.path.join(a.vantage, "docs", "jp-screener.js"), encoding="utf-8").read()
+    else:
+        js = _get(GH + "docs/jp-screener.js")
+    m = re.search(r"const MO_DICT=(\[.*?\]);", js, re.S)
+    pairs = sorted(json.loads(m.group(1)) if m else [], key=lambda p: -len(p[0]))
     os.makedirs(OUT, exist_ok=True)
-    want = universe()
-    index = {}
-    src = {os.path.basename(f)[:-5]: f for f in glob.glob(os.path.join(a.vantage, "docs", "data", "jp", "monthly", "*.json"))}
-    src.update({os.path.basename(f)[:-5]: f for f in glob.glob(os.path.join(EXTRA, "*.json"))})
-    for c, f in src.items():
-        if c not in want:
-            continue
-        d = load(f)
+    nm, sec = ko_names()
+    index, hub = {}, []
+    for c, d in sorted(sources(a.vantage).items()):
         cols = d.get("cols") or []
         if "rows" in d:
             rows = d["rows"]
         else:
             rows = [[m] + [d["data"][m].get(k) for k in cols] for m in sorted(d.get("data", {}), reverse=True)]
         rows = sorted(rows, key=lambda r: r[0])[-N:]
+        if not rows:
+            continue
         units = d.get("units") or {}
         ratio = [("전년比" in k) or ("伸長率" in k) or (units.get(k, units.get("*", "")).startswith("전년")) for k in cols]
-        out = {"c": c, "cols": [ko(k, pairs) for k in cols], "ratio": ratio, "rows": rows,
-               "note": d.get("note"), "src": (d.get("latest") or {}).get("url") or (d.get("latest") or {}).get("pdf")}
+        kcols = [ko(k, pairs) for k in cols]
+        lt = d.get("latest") or {}
+        out = {"c": c, "cols": kcols, "ratio": ratio, "rows": rows, "units": [ko(units.get(k, units.get("*", "")), pairs) for k in cols],
+               "note": d.get("note"), "src": lt.get("url") or lt.get("pdf"), "pub": lt.get("published"), "fy": d.get("fy_end_month")}
         json.dump(out, open(os.path.join(OUT, f"{c}.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
-        index[c] = rows[-1][0] if rows else None
+        index[c] = rows[-1][0]
+        hub.append({"c": c, "n": nm.get(c) or d.get("name_en") or c, "sec": sec.get(c, ""), "m": rows[-1][0],
+                    "pub": lt.get("published") if lt.get("month") == rows[-1][0] else None, "pre": bool(lt.get("preliminary")),
+                    "src": out["src"], "cols": kcols, "ratio": ratio, "k": rows[-1][1:], "p": rows[-13][1:] if len(rows) >= 13 else None})
     json.dump(index, open(os.path.join(OUT, "index.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+    from datetime import datetime, timedelta, timezone
+    json.dump({"updated": datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M"), "items": hub},
+              open(os.path.join(OUT, "hub.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     print(f"월차 {len(index)}곳 →", OUT)
 
 
