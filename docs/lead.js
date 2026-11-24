@@ -788,13 +788,18 @@
       var py = isPct ? [] : shown.map(function (p) { var b = mm(it)[ymAdd(p[0], -12)]; return b && b[1] ? { x: x(ymT(p[0])), v: (p[1] / b[1] - 1) * 100 } : null; }).filter(Boolean);
       var lineH = py.length ? (bandBot - bandTop) * 0.34 : 0, barTop = bandTop + lineH + 16;
       var vs = (shown.length ? shown : it.pts).map(function (p) { return p[1]; }), vmax = Math.max.apply(null, vs), vmin = Math.min.apply(null, vs), rng = (vmax - vmin) || Math.abs(vmax) || 1;
-      var base = vmin - rng * 0.35, top = vmax + rng * 0.05;
+      var base = isPct ? vmin - rng * 0.12 : vmin - rng * 0.35, top = vmax + rng * (isPct ? 0.12 : 0.05);
       var bh = function (v) { return Math.max(0, (v - base) / ((top - base) || 1)) * (bandBot - barTop); };
       var bw = Math.max(2, Math.min(26, 30 * DAY / (xEnd - from) * IW * 0.62));
       var every = Math.max(1, Math.ceil(34 / Math.max(1, IW / Math.max(1, shown.length))));
+      if (isPct) {   // 전년비(%) 지표는 꺾은선(2026-11-25 사용자 — 막대는 잘 안 보임)
+        if (base < 0 && top > 0) el("line", { x1: pL, x2: pL + IW, y1: bandBot - bh(0), y2: bandBot - bh(0), stroke: "var(--ink-4)", "stroke-dasharray": "2 3" }, L.ind);
+        if (shown.length > 1) el("path", { d: shown.map(function (p, i) { return (i ? "L" : "M") + x(ymT(p[0])).toFixed(1) + "," + (bandBot - bh(p[1])).toFixed(1); }).join(""), fill: "none", stroke: "var(--b1)", "stroke-width": 2, "stroke-linejoin": "round" }, L.ind);
+      }
       shown.forEach(function (p, i) {
         var cx = x(ymT(p[0])), h = Math.max(2, bh(p[1]));
-        el("rect", { x: cx - bw / 2, y: bandBot - h, width: bw, height: h, rx: Math.min(3, bw / 4), "class": "ibar grow" }, L.ind);
+        if (isPct) el("circle", { cx: cx, cy: bandBot - bh(p[1]), r: shown.length > 40 ? 1.8 : 3, fill: "var(--b1)", stroke: "var(--panel)", "stroke-width": 1 }, L.ind);
+        else el("rect", { x: cx - bw / 2, y: bandBot - h, width: bw, height: h, rx: Math.min(3, bw / 4), "class": "ibar grow" }, L.ind);
         if (cx > pL + 16 && cx < pL + IW - 12 && ((shown.length - 1 - i) % every === 0)) txt(L.lab, cx, bandBot - h - 4, isPct ? pct(p[1], 1) : nf(p[1]), "ibar-lab fade", "middle");
       });
       [vmin, vmax].forEach(function (v) { txt(L.ax, W - pR + 8, bandBot - bh(v) + 3.5, isPct ? pct(v, 1) : nf(v), "ibar-lab"); });
