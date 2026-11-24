@@ -1069,3 +1069,19 @@ html.pxm-open { overflow: hidden; }
 .jx-drop { border-left: 3px solid var(--ink-mute); }
 .jx-wait .na { margin: 0; font-size: 13px; color: var(--ink-mute); }
 @media (max-width: 760px) { .jx { grid-template-columns: 1fr; } }
+
+/* 전 종목 실적 스크리닝 결과표(2026-11-24 사용자) */
+.jx-det { margin-top: 14px; }
+.jx-det > summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--s2); padding: 6px 0; }
+.jx-det .jx { margin-top: 6px; }
+.jx-n { margin: 8px 0 0; font-size: 12.5px; line-height: 1.65; color: var(--ink-mute); }
+.jx-pv { align-self: flex-end; padding-bottom: 8px; }
+.jx-t td { vertical-align: top; }
+.jx-t th small { font-weight: 500; color: var(--ink-mute); }
+.jx-tags { max-width: 320px; }
+.jx-tags i { display: inline-block; font-style: normal; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 4px; margin: 0 4px 3px 0; white-space: nowrap; }
+.jx-h { background: color-mix(in srgb, var(--s2) 16%, transparent); color: var(--s2); }
+.jx-x { background: var(--surface-2); color: var(--ink-mute); box-shadow: inset 0 0 0 1px var(--line); }
+.jx-pvb { font-style: normal; font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 999px; background: color-mix(in srgb, #e3a63a 18%, transparent); color: #c98a16; white-space: nowrap; }
+.jx-more { margin: 10px 0 30px; border: 1px solid var(--line); background: var(--surface); color: var(--s2); border-radius: 6px; padding: 8px 14px; font-weight: 600; cursor: pointer; }
+.jx-pv { display: inline-flex; gap: 6px; align-items: center; font-size: 12.5px; color: var(--ink-mid); cursor: pointer; }

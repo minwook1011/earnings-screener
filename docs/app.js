@@ -748,19 +748,64 @@
     exc: ["SW 업종은 분기 매출 5억 엔 이상이면 봄"],
     sec: [["금융", "은행·증권·보험·기타 금융"], ["의약품", "제약·바이오"], ["철강", ""], ["펄프·종이", "제지·포장재"], ["목재", ""], ["화학", "반도체 소재 관련과 생활용품·화장품만 남김"]]
   };
+  var JXS = { st: "pass", q: "", prev: false, sort: "d", n: 200 };
+  var JXST = { pass: ["통과", "기준 충족 · 제외 조건 없음"], drop: ["충족했지만 제외", "발송 기준은 맞지만 제외 조건에 걸림"], none: ["기준 미달", "발송 기준 하나도 안 맞음"],
+    exsec: ["제외 섹터", "금융·의약품·철강·펄프종이·목재·화학"], nodata: ["자료 없음", "결산단신 XBRL 을 못 읽음"], all: ["전체", ""] };
+  var JXH = { 1: "① 매출 성장", 2: "② 이익 성장", 3: "③ 성장 가속", 4: "④ 턴어라운드" };
+  var JXD = { a: "ⓐ 매출·이익 증가율 둘 다 둔화", b: "ⓑ 매출 2분기 연속 감소", c: "ⓒ GPM 20% 미만", d: "ⓓ 분기 영업이익 1억 엔 미만" };
   function renderJpx() {
-    var n = S.pxa && S.pxa.n_universe;
+    if (!S.jx) {
+      app.innerHTML = '<div class="loading">불러오는 중…</div>';
+      getJSON("data/jp/jx.json").catch(function () { return { items: {} }; }).then(function (d) { S.jx = d; if (S.mode === "jpx") renderJpx(); });
+      return;
+    }
+    var D = S.jx, it = D.items || {}, codes = Object.keys(it), q = JXS.q.trim().toLowerCase();
     function ol(a, f) { return '<ol class="jx-ol">' + a.map(function (x) { return "<li>" + f(x) + "</li>"; }).join("") + "</ol>"; }
+    var cnt = { all: codes.length }; codes.forEach(function (c) { var t = it[c].st; cnt[t] = (cnt[t] || 0) + 1; });
+    var prevN = codes.filter(function (c) { return it[c].prev && (JXS.st === "all" || it[c].st === JXS.st); }).length;
+    var rows = codes.filter(function (c) { var o = it[c]; return (JXS.st === "all" || o.st === JXS.st) && (!JXS.prev || o.prev) && (!q || [o.n, c, o.s, o.ind].join(" ").toLowerCase().indexOf(q) >= 0); })
+      .map(function (c) { return Object.assign({ c: c }, it[c]); });
+    var K = JXS.sort;
+    rows.sort(function (a, b) { return K === "mc" ? (b.mc || 0) - (a.mc || 0) : K === "gs" ? (b.gs == null ? -1e9 : b.gs) - (a.gs == null ? -1e9 : a.gs) : K === "go" ? (b.go == null ? -1e9 : b.go) - (a.go == null ? -1e9 : a.go) : String(b.d || "").localeCompare(String(a.d || "")) || (b.mc || 0) - (a.mc || 0); });
     var head = '<header class="jhd"><div class="hd"><div class="jbrand"><div class="eyebrow">Tokyo Stock Exchange · All Majors · Earnings Screen</div>' +
       '<h1><span class="kanji">選</span>전 종목 실적 스크리닝<a class="calbtn" href="#jpa">‹ 일본 주요 전 종목</a></h1>' +
-      '<div class="sub">일본 주요 전 종목' + (n ? " " + n + "개" : "") + "에 다음 실적 발표부터 아래 1단계 기준을 돌립니다. 걸린 회사는 이 탭에 발표일 순으로 쌓입니다.</div></div></div></header>";
-    var body = '<div class="jx">' +
-      '<section class="jx-c jx-send"><h3>1단계 발송 기준 <small>하나라도 맞으면 발송</small></h3>' + ol(JPX.send, function (x) { return "<b>" + esc(x[0]) + "</b> — " + esc(x[1]); }) + "</section>" +
-      '<section class="jx-c jx-drop"><h3>제외 조건 <small>하나라도 해당하면 뺌</small></h3>' + ol(JPX.drop, esc) +
-      '<h3 class="jx-h2">예외</h3>' + ol(JPX.exc, esc) + "</section>" +
+      '<div class="sub">일본 주요 전 종목 ' + (D.n_universe || codes.length) + '개의 가장 최근 분기 결산단신에 1단계 기준을 돌린 결과 &nbsp;|&nbsp; 갱신 <span class="mono">' + esc(D.updated || "—") + "</span></div></div>" +
+      '<div class="stats"><div class="stat"><b>' + (cnt.pass || 0) + '</b><span>통과</span></div><div class="stat"><b>' + codes.filter(function (c) { return it[c].prev && it[c].st === "pass"; }).length + "</b><span>통과 중 " + esc(D.prev_label || "3Q26") + " 스크리닝과 겹침</span></div></div></div></header>";
+    var crit = '<details class="jx-det"' + (codes.length ? "" : " open") + '><summary>스크리닝 기준 보기</summary><div class="jx">' +
+      '<section class="jx-c jx-send"><h3>1단계 발송 기준 <small>하나라도 맞으면 발송</small></h3>' + ol(JPX.send, function (x) { return "<b>" + esc(x[0]) + "</b> — " + esc(x[1]); }) + '<p class="jx-n">⑤ 수주잔고는 설명회 자료 숫자라 아직 자동 판정하지 않습니다.</p></section>' +
+      '<section class="jx-c jx-drop"><h3>제외 조건 <small>하나라도 해당하면 뺌</small></h3>' + ol(JPX.drop, esc) + '<h3 class="jx-h2">예외</h3>' + ol(JPX.exc, esc) + "</section>" +
       '<section class="jx-c jx-sec"><h3>제외 섹터</h3>' + ol(JPX.sec, function (x) { return "<b>" + esc(x[0]) + "</b>" + (x[1] ? " — " + esc(x[1]) : ""); }) + "</section>" +
-      '<section class="jx-c jx-wait"><h3>스크리닝 결과</h3><p class="na">아직 돌리지 않았습니다. 다음 실적 시즌 결산단신이 올라오면 여기에 걸린 회사가 쌓입니다.</p></section></div>';
-    app.innerHTML = head + body;
+      '<section class="jx-c"><h3>계산 방법</h3><p class="jx-n">회사마다 가장 최근 결산단신(XBRL)의 누계를 분기 단독으로 바꿔 계산합니다. 증가율은 전년 같은 분기 대비(YoY), "직전 분기보다 빨라짐·둔화"는 직전 분기의 YoY 와 비교. 분기 이름(3Q26)은 그 분기가 끝난 달의 달력 분기. 매일 새 결산단신이 올라온 회사만 다시 계산합니다.</p></section></div></details>';
+    var ctl = '<div class="ctl"><div class="fld"><span>판정</span><div class="seg" id="jxst">' + ["pass", "drop", "none", "exsec", "nodata", "all"].map(function (k) { return '<button data-v="' + k + '" aria-pressed="' + (JXS.st === k) + '" title="' + esc(JXST[k][1]) + '">' + JXST[k][0] + " " + (cnt[k] || 0) + "</button>"; }).join("") + "</div></div>" +
+      '<div class="fld"><label for="jxsort">정렬</label><select id="jxsort">' + [["d", "발표일 최근 순"], ["mc", "시가총액"], ["gs", "매출 YoY"], ["go", "영업이익 YoY"]].map(function (x) { return '<option value="' + x[0] + '"' + (K === x[0] ? " selected" : "") + ">" + x[1] + "</option>"; }).join("") + "</select></div>" +
+      '<label class="ovchk jx-pv"><input type="checkbox" id="jxprev"' + (JXS.prev ? " checked" : "") + "> " + esc(D.prev_label || "3Q26") + " 스크리닝과 겹친 곳만 (" + prevN + ")</label>" +
+      '<div class="fld q"><label for="jxq">검색</label><input type="search" id="jxq" placeholder="종목명 · 코드 · 섹터" value="' + esc(JXS.q) + '"></div>' +
+      '<div class="count"><b>' + rows.length + "</b>개 종목</div></div>";
+    function yy(v) { return v == null ? '<span class="na">—</span>' : pct(v); }
+    function ok(v) { return v == null ? "—" : num(v / 100, Math.abs(v) < 1000 ? 1 : 0); }
+    var shown = rows.slice(0, JXS.n);
+    var body = !codes.length ? '<div class="empty">아직 스크리닝을 돌리지 않았습니다.</div>' : !rows.length ? '<div class="empty">조건에 맞는 종목이 없습니다.</div>' :
+      '<div class="tbl-wrap"><table class="con-t jx-t"><thead><tr><th>종목</th><th>섹터</th><th>분기 · 발표일</th><th class="r">매출 YoY</th><th class="r">영업이익 YoY</th><th class="r">직전 분기 YoY<br><small>매출 · 영업이익</small></th><th class="r">GPM</th><th class="r">분기 영업이익<br><small>억엔</small></th><th>걸린 기준 · 제외 사유</th><th>결산단신</th></tr></thead><tbody>' +
+      shown.map(function (o) {
+        var tags = (o.hit || []).map(function (h) { return '<i class="jx-h">' + JXH[h] + "</i>"; }).join("") + (o.drop || []).map(function (d) { return '<i class="jx-x">' + JXD[d] + "</i>"; }).join("") +
+          (o.st === "exsec" ? '<i class="jx-x">제외 섹터 · ' + esc(o.why) + "</i>" : o.st === "nodata" ? '<i class="jx-x">' + esc(o.why || "자료 없음") + "</i>" : "");
+        return "<tr><td><b>" + esc(o.n || o.c) + '</b> <span class="mono na">' + esc(o.c) + "</span>" + (o.prev ? ' <i class="jx-pvb" title="일본 스크리닝 ' + esc(D.prev_label || "3Q26") + ' 판에도 있던 회사">' + esc(D.prev_label || "3Q26") + " 겹침</i>" : "") + "</td>" +
+          '<td class="sc">' + esc(o.s || "—") + "</td>" +
+          '<td class="an">' + (o.cq ? "<b>" + esc(o.cq) + "</b> " : "") + '<span class="mono na">' + (o.d ? esc(o.d.slice(5).replace("-", "/")) : "—") + "</span></td>" +
+          '<td class="r mono">' + yy(o.gs) + '</td><td class="r mono">' + yy(o.go) + '</td><td class="r mono na">' + (o.gs1 == null ? "—" : (o.gs1 > 0 ? "+" : "") + o.gs1.toFixed(1)) + " · " + (o.go1 == null ? "—" : (o.go1 > 0 ? "+" : "") + o.go1.toFixed(1)) + "</td>" +
+          '<td class="r mono">' + (o.gpm == null ? "—" : o.gpm.toFixed(1) + "%") + '</td><td class="r mono">' + ok(o.o0) + "</td>" +
+          '<td class="jx-tags">' + (tags || '<span class="na">—</span>') + "</td>" +
+          "<td>" + (o.pdf ? '<a class="kbl" href="' + esc(o.pdf) + '" target="_blank" rel="noopener noreferrer" download>PDF ↓</a>' : "") + ' <a class="kbl" href="https://kabutan.jp/stock/?code=' + encodeURIComponent(o.c) + '" target="_blank" rel="noopener noreferrer">카부탄↗</a></td></tr>';
+      }).join("") + "</tbody></table></div>" + (rows.length > JXS.n ? '<button class="more jx-more" id="jxmore">+' + Math.min(300, rows.length - JXS.n) + "개 더 보기 (" + (rows.length - JXS.n) + "개 남음)</button>" : "");
+    app.innerHTML = head + crit + ctl + body;
+    app.querySelectorAll("#jxst button").forEach(function (b) { b.onclick = function () { JXS.st = b.dataset.v; JXS.n = 200; renderJpx(); }; });
+    document.getElementById("jxsort").onchange = function () { JXS.sort = this.value; renderJpx(); };
+    document.getElementById("jxprev").onchange = function () { JXS.prev = this.checked; JXS.n = 200; renderJpx(); };
+    var qi = document.getElementById("jxq"), comp = false;
+    qi.addEventListener("compositionstart", function () { comp = true; });
+    qi.addEventListener("compositionend", function () { comp = false; JXS.q = qi.value; renderJpx(); var n = document.getElementById("jxq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); });
+    qi.oninput = function () { if (comp) return; JXS.q = qi.value; renderJpx(); var n = document.getElementById("jxq"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); };
+    var mb = document.getElementById("jxmore"); if (mb) mb.onclick = function () { JXS.n += 300; renderJpx(); };
   }
 
   function renderCon() {
@@ -1148,14 +1193,14 @@
     return head + '<div class="tblwrap"><table class="main-t scr-t"><thead>' + th + "</thead><tbody>" + body + "</tbody></table></div>";
   }
 
-  /* 2단계 발표일 — 한 주(월~금, 주말은 발표 있을 때만)씩 넘기고, 달력에서 날을 누르면 그 주·그 날로(2026-11-24 사용자) */
+  /* 2단계 발표일 — 달력은 늘 위에, 그 아래 한 주(월~토, 일요일은 발표 있을 때만). 달력에서 날을 누르면 그 주·그 날로(2026-11-24 사용자) */
   function wkMon(d) { var t = new Date(d + "T00:00:00"), w = (t.getDay() + 6) % 7; return addDays(d, -w); }
   function dayWeek(keys, dates) {
     S.dkeys = keys;
     var mon = wkMon(S.day || kstYmd()), td = kstYmd(), sun = addDays(mon, 6);
     var prev = keys.filter(function (k) { return k < mon; }).pop(), next = keys.filter(function (k) { return k > sun; })[0];
     if (prev) { var pm0 = wkMon(prev); prev = keys.filter(function (k) { return k >= pm0; })[0]; }   // 이전 주로 가면 그 주 첫 발표일
-    var days = [0, 1, 2, 3, 4, 5, 6].map(function (i) { return addDays(mon, i); }).filter(function (d, i) { return i < 5 || dates[d]; });
+    var days = [0, 1, 2, 3, 4, 5, 6].map(function (i) { return addDays(mon, i); }).filter(function (d, i) { return i < 6 || dates[d]; });   // 월~토 항상, 일요일은 발표 있을 때만
     var tot = days.reduce(function (a, d) { return a + (dates[d] || 0); }, 0);
     return '<div class="dwk"><button class="dwk-n" data-dgo="' + (prev || "") + '"' + (prev ? "" : " disabled") + '>‹ 이전 주</button>' +
       '<div class="dwk-d">' + days.map(function (d) {
@@ -1163,8 +1208,7 @@
         return "<button " + (n ? 'data-dd="' + d + '"' : "disabled") + ' aria-pressed="' + (d === S.day) + '"' + (d === td ? ' class="now"' : "") + "><b>" + dlab(d) + "</b><span>" + n + "개</span></button>";
       }).join("") + "</div>" +
       '<button class="dwk-n" data-dgo="' + (next || "") + '"' + (next ? "" : " disabled") + '>다음 주 ›</button>' +
-      '<span class="dwk-t">' + md(mon) + " ~ " + md(sun) + " · " + tot + "개</span>" +
-      '<button class="dwk-c" id="dcalb" aria-pressed="' + !!S.dcal + '">달력 보기</button></div>';
+      '<span class="dwk-t">' + md(mon) + " ~ " + md(sun) + " · " + tot + "개</span></div>";
   }
   function dayMonth(dates) {
     var ym = S.dcalM || (S.day || kstYmd()).slice(0, 7), y = +ym.slice(0, 4), m = +ym.slice(5, 7);
@@ -1195,7 +1239,7 @@
       var di = keys.indexOf(S.day);
       if (day) {
         rows = byGrade(sorted(rows.filter(function (o) { return o.d === S.day; })));
-        nav = '<div class="cal">' + dayWeek(keys, dates) + (S.dcal ? dayMonth(dates) : "") +
+        nav = '<div class="cal">' + dayMonth(dates) + dayWeek(keys, dates) +
           '<div class="wnav"><button data-dstep="-1"' + (di <= 0 ? " disabled" : "") + ">‹ 이전 날</button><b>" + (S.day ? dlab(S.day) + " 발표" : "발표일 없음") + "</b><span>" + rows.length + '개</span><button data-dstep="1"' + (di >= keys.length - 1 ? " disabled" : "") + ">다음 날 ›</button></div></div>";
       } else {
         rows = rows.slice().sort(function (a, b) { return S.dir * String(a.d || "0").localeCompare(String(b.d || "0")) || grOf(a.c) - grOf(b.c) || (b.mc || 0) - (a.mc || 0); });
@@ -1734,9 +1778,8 @@
     });
     app.querySelectorAll("#vw button").forEach(function (b) { b.onclick = function () { S.view = b.dataset.v; S.dir = -1; rerender(); }; });
     function setDay(d) { if (!d) return; S.day = d; S.dcalM = null; try { sessionStorage.setItem("es-day", S.day); } catch (e) {} rerender(); }
-    app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { if (b.classList.contains("dm-c")) S.dcal = false; setDay(b.dataset.dd); }; });
+    app.querySelectorAll("[data-dd]").forEach(function (b) { b.onclick = function () { setDay(b.dataset.dd); }; });
     app.querySelectorAll("[data-dgo]").forEach(function (b) { b.onclick = function () { setDay(b.dataset.dgo); }; });
-    var dcb = document.getElementById("dcalb"); if (dcb) dcb.onclick = function () { S.dcal = !S.dcal; S.dcalM = null; rerender(); };
     app.querySelectorAll("[data-dcm]").forEach(function (b) { b.onclick = function () { S.dcalM = b.dataset.dcm; rerender(); }; });
     app.querySelectorAll("[data-dstep]").forEach(function (b) {
       b.onclick = function () { var k = S.dkeys || []; setDay(k[Math.max(0, Math.min(k.length - 1, k.indexOf(S.day) + +b.dataset.dstep))]); };
