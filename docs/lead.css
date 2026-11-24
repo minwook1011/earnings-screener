@@ -631,6 +631,47 @@ em.btg.b2 { color: #2e9d5b; background: rgba(46,157,91,.1); border: 1px solid rg
 /* 겹칠 지표가 많으면 카드 밖으로 넘치던 것(2026-11-25) — 한 줄을 다 쓰고 줄바꿈 */
 #mc .card-h > .ctl:first-child { flex: 1 1 100%; min-width: 0; }
 #ovsel { flex-wrap: wrap; max-width: 100%; }
+/* 「자세히」 지표별 분석 사이드바(2026-11-25) — 화면 거의 전체를 덮는 오른쪽 판 */
+.dbtn { margin-left: 10px; font-size: 11.5px; font-weight: 700; color: var(--ind-2); background: var(--ind-soft); border: 1px solid var(--ind-fade); border-radius: 8px; padding: 2px 10px; cursor: pointer; }
+.dbtn:hover { filter: brightness(1.15); }
+.dpanel { position: fixed; inset: 0; z-index: 90; }
+.dpanel[hidden] { display: none; }
+.dp-back { position: absolute; inset: 0; background: rgba(0,0,0,.55); }
+.dp-box { position: absolute; top: 0; right: 0; bottom: 0; width: min(96vw, 1280px); background: var(--bg); border-left: 1px solid var(--line); display: flex; flex-direction: column; box-shadow: -20px 0 60px rgba(0,0,0,.45); animation: dpin .22s ease-out; }
+@keyframes dpin { from { transform: translateX(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+body.dp-on { overflow: hidden; }
+.dp-h { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 18px 24px 12px; border-bottom: 1px solid var(--line); }
+.dp-h h2 { margin: 4px 0 0; font-size: 19px; letter-spacing: -.4px; }
+.dp-x { border: 1px solid var(--line); background: var(--panel); color: var(--ink-2); border-radius: 10px; width: 34px; height: 34px; cursor: pointer; font-size: 15px; }
+.dp-b { overflow-y: auto; padding: 16px 24px 60px; }
+.dp-lead { font-size: 12.5px; color: var(--ink-3); line-height: 1.7; margin: 0 0 12px; }
+.dp-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; position: sticky; top: -16px; background: var(--bg); padding: 10px 0; z-index: 2; }
+.dp-nav a { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-2); text-decoration: none; border: 1px solid var(--line); background: var(--panel); border-radius: 9px; padding: 4px 10px; }
+.dp-nav a small { color: var(--ink-4); font-family: "IBM Plex Mono", monospace; }
+.dp-it { border: 1px solid var(--line); background: var(--panel); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; scroll-margin-top: 60px; }
+.dp-it h3 { margin: 0 0 6px; font-size: 15.5px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.dp-it h4 { margin: 14px 0 6px; font-size: 12px; color: var(--ink-3); font-weight: 700; }
+.dp-why { margin: 0 0 8px; font-size: 12.5px; color: var(--ink-3); line-height: 1.6; }
+.dp-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; align-items: start; }
+@media (max-width: 860px) { .dp-grid { grid-template-columns: 1fr; } .dp-box { width: 100vw; } }
+.dp-side h4:first-child { margin-top: 0; }
+.dp-lag div { display: grid; grid-template-columns: 92px 1fr 40px; grid-template-rows: auto auto; align-items: center; column-gap: 8px; margin-bottom: 7px; font-size: 12px; color: var(--ink-3); }
+.dp-lag i { display: block; height: 8px; border-radius: 5px; background: var(--b1); opacity: .45; }
+.dp-lag div.on i { opacity: 1; } .dp-lag div.on span { color: var(--ink); font-weight: 700; }
+.dp-lag b { font-family: "IBM Plex Mono", monospace; text-align: right; color: var(--ink); }
+.dp-lag small { grid-column: 2 / 4; font-size: 10.5px; color: var(--ink-4); font-family: "IBM Plex Mono", monospace; }
+.dp-yr { display: flex; flex-wrap: wrap; gap: 5px; }
+.dp-yr span { font-family: "IBM Plex Mono", monospace; font-size: 11px; border-radius: 7px; padding: 2px 7px; border: 1px solid var(--line); color: var(--ink-2); }
+.dp-yr span b { margin-right: 5px; font-weight: 600; color: var(--ink-4); }
+.dp-yr .g { background: rgba(46,157,91,.16); border-color: rgba(46,157,91,.4); } .dp-yr .b { background: rgba(229,72,77,.14); border-color: rgba(229,72,77,.4); }
+.dp-rec { margin-top: 12px; font-size: 12px; color: var(--ink-3); line-height: 1.7; }
+.dp-txt { margin: 12px 0 0; padding-left: 18px; font-size: 13px; line-height: 1.75; color: var(--ink-2); }
+.dp-txt li { margin-bottom: 3px; }
+.dp-miss { width: 100%; border-collapse: collapse; font-size: 12px; }
+.dp-miss th, .dp-miss td { padding: 5px 8px; border-bottom: 1px solid var(--line); text-align: right; } .dp-miss th:first-child, .dp-miss td:first-child { text-align: left; }
+.dp-miss th { color: var(--ink-4); font-weight: 600; }
+.dp-miss .up { color: #e5484d; } .dp-miss .dn { color: #4b7fe0; }
+.legend i.dp-o { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; } .legend i.dp-o.g { background: #2e9d5b; } .legend i.dp-o.b { background: #e5484d; }
 /* 선행지표 차트 기간·모양(2026-11-25) */
 .lctl { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 6px; }
 .lctl .seg button { padding: 4px 10px; font-size: 12px; }

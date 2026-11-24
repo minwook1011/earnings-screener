@@ -180,6 +180,7 @@ def main():
         bt = ""
     if not bt.startswith(dt.date.today().isoformat()):
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "lead_bt.py")], cwd=ROOT)
+        subprocess.run([sys.executable, os.path.join(ROOT, "tools", "lead_detail.py")], cwd=ROOT)   # 「자세히」 지표별 분석(2026-11-25)
     if "--push" in sys.argv:
         paths = ["docs/data/jp/lead"] + [f"docs/data/jp/px/{c}.json" for c in codes if os.path.exists(os.path.join(PX, f"{c}.json"))]
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "gpush.py"), f"data: 선행지표 갱신 {dt.date.today()}"] + paths, cwd=ROOT)
