@@ -158,10 +158,10 @@ def excess(px, bx, start, pub):
 
 
 # ---------- 분기 ----------
-def quarters(c, co, kq):
-    """fin 분기 + 발표일 보정(원장 rel · 카부탄 kq 중 가장 이른 날)"""
+def quarters(c, co, kq, fin_path=None):
+    """fin 분기 + 발표일 보정(원장 rel · 카부탄 kq 중 가장 이른 날). fin_path 를 주면 그 파일(예: 40분기 캐시)"""
     try:
-        q = json.load(open(os.path.join(LEAD, "fin", c + ".json"), encoding="utf-8"))["q"]
+        q = json.load(open(fin_path or os.path.join(LEAD, "fin", c + ".json"), encoding="utf-8"))["q"]
     except (OSError, ValueError, KeyError):
         return []
     rel = (co or {}).get("rel") or {}
