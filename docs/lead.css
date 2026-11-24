@@ -572,6 +572,9 @@ em.vol { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--g
 .pc-key small { margin-left: auto; color: var(--ink-4); font-size: 11px; display: inline-flex; align-items: center; gap: 4px; }
 .pc-key .kb { display: inline-block; width: 8px; height: 10px; background: var(--b1); border-radius: 2px; opacity: .8; }
 .pc-key .kl { display: inline-block; width: 12px; height: 2px; background: var(--ink); margin-left: 6px; }
+em.btg { font-style: normal; font-size: 10.5px; font-weight: 700; border-radius: 6px; padding: 0 5px; margin-left: 6px; white-space: nowrap; }
+em.btg.b1 { color: #fff; background: #2e9d5b; border: 1px solid #2e9d5b; }
+em.btg.b2 { color: #2e9d5b; background: rgba(46,157,91,.1); border: 1px solid rgba(46,157,91,.45); }
 .kd { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--ind-2); border: 1px solid var(--ind-fade); background: var(--ind-soft); border-radius: 6px; padding: 0 6px; margin-right: 6px; white-space: nowrap; }
 
 /* 즐겨찾기 */

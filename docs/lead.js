@@ -103,6 +103,10 @@
     var a = Math.abs(s.r); return { r: s.r, n: s.n, lv: s.n < 6 ? 0 : a >= 0.8 ? 3 : a >= 0.65 ? 2 : a >= 0.5 ? 1 : 0 };
   }
   function rChip(co, it) { var x = rLv(co, it); return x ? '<em class="rc r' + x.lv + '" title="분기 평균 지표와 분기 매출의 상관 · ' + x.n + '개 분기' + (x.n < 6 ? " (분기가 적어 참고만)" : "") + '">R ' + nf(x.r, 2) + "</em>" : ""; }
+  function btChip(it) {   // 기업별 백테스트(2026-11-24) — 그 분기 지표 변화가 매출 전년비 가속·감속을 맞힌 비율
+    var b = it && it.bt; if (!b) return "";
+    return '<em class="btg ' + (b.g === "확정" ? "b1" : "b2") + '" title="백테스트 ' + b.g + " — 그 분기 지표 변화가 매출 전년비 가속·감속을 " + b.n + "개 분기 중 " + b.h + "번 맞힘 (" + b.d + ')">' + b.g + " " + b.er + "%</em>";
+  }
   function rCls(co, it) { var x = rLv(co, it); return x && x.lv ? " rg" + x.lv : ""; }
   function refLink(co, id, label) {
     var r = co.refs[id]; if (!r) return "";
@@ -362,7 +366,7 @@
 
     var lead = '<div class="sec-t rv"><span class="n">01</span><h2>선행지표</h2><p>회사 발표가 아닌 외부 월간 데이터 — 실적보다 먼저 나옴</p></div>' +
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
-        return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko && it.kind !== "trends" ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
+        return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + btChip(it) + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko && it.kind !== "trends" ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
       '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
@@ -575,7 +579,7 @@
     if (!rows.length && !co.lead.pick_note) return "";
     return '<div class="whyl"><h4>이 지표들을 고른 이유</h4>' + (co.lead.pick_note ? '<p class="pn">' + esc(co.lead.pick_note) + "</p>" : "") + "<ol>" + rows.map(function (i) {
       var sr = i.pts && i.pts.length ? stat(co, i) : null, rTag = sr && sr.r != null ? '<em class="rv' + (Math.abs(sr.r) >= 0.6 && sr.n >= 6 ? " hi" : Math.abs(sr.r) >= 0.4 ? " mid" : "") + '" title="분기 평균 지표 vs 분기 매출 상관 · ' + sr.n + '개 분기">R ' + nf(sr.r, 2) + "<small> n=" + sr.n + "</small></em>" : (i.pts && i.pts.length ? '<em class="rv na">R 계산 중(분기 부족)</em>' : "");
-      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko && i.kind !== "trends" ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
+      return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko && i.kind !== "trends" ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + btChip(i) + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
     }).join("") + "</ol>" + ((co.lead.macro || []).filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).length ? '<p class="pn wait"><b>수집 대기</b> ' + co.lead.macro.filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).map(function (m) { return esc(m.name) + (m.volatile ? ' <em class="vol">변동 가능</em>' : ""); }).join(" · ") + "</p>" : "") + "</div>";
   }
   function mapBlock(co) {
@@ -932,7 +936,7 @@
         if (co.lead.items.some(function (x) { return x.id === "m" + i; })) return;
         var useY = n.at.yoy && se.yoy && se.yoy.length;
         if (d.next) { var nx = /(\d{4}-\d{2}-\d{2})/.exec(d.next); if (nx && dday(nx[1]) >= 0 && (!co._lnx || nx[1] < co._lnx)) co._lnx = nx[1]; }
-        co.lead.items.push({ id: "m" + i, rank: n.m.rank, kind: "macro", volatile: !!n.m.volatile, t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (n.m.name || se.name || d.name).slice(0, 26) + (useY ? " YoY" : ""), nm: (n.m.name || se.name || d.name).slice(0, 18), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
+        co.lead.items.push({ id: "m" + i, rank: n.m.rank, kind: "macro", volatile: !!n.m.volatile, bt: n.m.bt || null, t: d.name + (se.name ? " — " + se.name : "") + (useY ? "(전년비)" : ""), short: (n.m.name || se.name || d.name).slice(0, 26) + (useY ? " YoY" : ""), nm: (n.m.name || se.name || d.name).slice(0, 18), unit: useY ? "%" : (se.unit || ""), entity: d.src || "", corp: d.id, note: n.m.why || "", why: n.m.why || "",
           pts: (useY ? se.yoy : se.pts).filter(function (p) { return p && p[1] != null; }).map(function (p) { return [p[0], p[1], "mc"]; }), src: [{ doc: d.src || d.name, where: (se.name || "") + " · " + (d.url || ""), freq: d.freq || "월", auto: "반자동", how: "공용 시장 통계 data/jp/lead/macro/" + n.at.file + " — 다음 공표 " + (d.next || "") }] });
         co.refs.mc = { date: "", t: d.src || d.name, url: d.url || "" };
       });

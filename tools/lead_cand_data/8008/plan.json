@@ -1,0 +1,35 @@
+{
+ "c": "8008",
+ "made": "2026-11-24",
+ "note": "데이터를 보기 전에 정한 후보. 주얼리 4℃(매출 2/3)·중고 명품시계 긴자 라신. 국내 소매(쇼핑센터·백화점·EC).",
+ "cands": [
+  {
+   "id": "dept_mimawari",
+   "name": "백화점 身の回り品 기존점 전년비",
+   "dir": 1,
+   "why": "주얼리·액세서리 소비 경기",
+   "src": "e-Stat 商業動態統計 백화점 身の回り品(공용 캐시 estat_sd_dept_mimawari_ex)"
+  },
+  {
+   "id": "kakei_mimawari",
+   "name": "가계 지출: 身の回り用品",
+   "dir": 1,
+   "why": "장신구·가방 등 소비",
+   "src": "e-Stat 総務省 家計調査 0004023601 身の回り用品(공용 캐시 estat_kakei_mimawari)"
+  },
+  {
+   "id": "kakei_watch",
+   "name": "가계 지출: 腕時計",
+   "dir": 1,
+   "why": "시계 소비 — 긴자 라신",
+   "src": "e-Stat 総務省 家計調査 0004023601 930 腕時計(공용 캐시 estat_kakei_watch)"
+  },
+  {
+   "id": "r_apparel",
+   "name": "織物・衣服・身の回り品小売業 판매액",
+   "dir": 1,
+   "why": "패션·장신구 소매 경기",
+   "src": "e-Stat 商業動態統計 業種別 小売(공용 캐시 estat_sd_gyoshu_r_apparel)"
+  }
+ ]
+}
