@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """기업별 선행지표 한눈에(2026-11-17 사용자) — docs/data/jp/lead/overview.json
 
-  rows: [코드, 기업명, 대분류, 세부, [[지표 이름, 종류, 개월 수, 마지막 달], …], 메모]
+  rows: [코드, 기업명, 대분류, 세부, [[지표 이름, 종류, 개월 수, 마지막 달, 변동, 백테스트 키], …], 메모]
+  백테스트 키 = data/jp/lead/bt.json 의 cos[코드] 키(tools/lead_bt.py, 2026-11-23)
   종류: 고유(이 회사 전용·두 곳 이하) · 공통(세 곳 이상이 같이 씀) · 연금 · 월차 · 대기(이름만, 데이터 없음)
 """
 import collections
@@ -50,22 +51,22 @@ for c, co in sorted(cos.items(), key=lambda kv: (order.index(tuple(kv[1]["sec"].
     g, k = co["sec"].split("/")
     ind = []
     if os.path.exists(os.path.join(MON, c + ".json")) and not any(i.get("kind") == "monthly" for i in co["lead"]["items"]):
-        ind.append(["월차데이터", "월차", None, None])
+        ind.append(["월차데이터", "월차", None, None, 0, "mon"])
     for it in sorted(co["lead"]["items"], key=lambda i: i.get("rank") or 9):
         n, last = span(it.get("pts") or [])
         if it.get("kind") == "pension":
-            ind.append(["연금 가입자 수", "연금", n, last])
+            ind.append(["연금 가입자 수", "연금", n, last, 0, "i:" + str(it.get("id"))])
         elif it.get("kind") == "monthly":
-            ind.append([it.get("t"), "월차", n, last])
+            ind.append([it.get("t"), "월차", n, last, 0, "i:" + str(it.get("id"))])
         else:
-            ind.append([it.get("t") or it.get("short"), "고유" if n else "대기", n, last, 1 if it.get("volatile") else 0])
+            ind.append([it.get("t") or it.get("short"), "고유" if n else "대기", n, last, 1 if it.get("volatile") else 0, "i:" + str(it.get("id"))])
     for m in sorted(co["lead"].get("macro") or [], key=lambda i: i.get("rank") or 9):
         s = series(m["id"])
         if s:
             n, last = span(s[1])
-            ind.append([m.get("name") or m["id"], "고유" if use[s[0]] <= 2 else "공통", n, last, 1 if m.get("volatile") else 0])
+            ind.append([m.get("name") or m["id"], "고유" if use[s[0]] <= 2 else "공통", n, last, 1 if m.get("volatile") else 0, "m:" + m["id"]])
         else:
-            ind.append([m.get("name") or m["id"], "대기", 0, "", 1 if m.get("volatile") else 0])
+            ind.append([m.get("name") or m["id"], "대기", 0, "", 1 if m.get("volatile") else 0, "m:" + m["id"]])
     rows.append([c, co["n"], grp.get(g, ("", {}))[0], grp.get(g, ("", {}))[1].get(k, k), ind, co["lead"].get("pick_note") or ""])
 json.dump({"updated": ix.get("updated"), "rows": rows}, open(os.path.join(LEAD, "overview.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 print("overview", len(rows), "곳")

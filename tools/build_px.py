@@ -98,6 +98,46 @@ def judge(b):
     return out
 
 
+SHARES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "px_shares.json")
+
+
+def fill_mc(idx):
+    """카드 오른쪽 시가총액(2026-11-23 사용자) — scr.json·sectors.json 에 시총이 없는 회사만.
+    카부탄 「時価総額」(억엔)에서 주식 수를 거꾸로 구해 tools/px_shares.json 에 30일 보관, 매번 주식 수 × 마지막 종가."""
+    jp = os.path.join(os.path.dirname(OUT))
+    known = set()
+    for f, key in (("scr.json", "items"), ("sectors.json", "items")):
+        try:
+            known |= {c for c, v in json.load(open(os.path.join(jp, f), encoding="utf-8"))[key].items() if v.get("mc") is not None}
+        except (OSError, ValueError, KeyError):
+            pass
+    try:
+        sh = json.load(open(SHARES, encoding="utf-8"))
+    except (OSError, ValueError):
+        sh = {}
+    old = (datetime.now(KST) - timedelta(days=30)).strftime("%Y-%m-%d")
+    import re
+    for c, it in idx["items"].items():
+        it.pop("mc", None)
+        px = it.get("px")
+        if c in known or not px:
+            continue
+        if c not in sh or sh[c][1] < old:
+            try:
+                req = urllib.request.Request(f"https://kabutan.jp/stock/?code={c}", headers={"User-Agent": "Mozilla/5.0"})
+                h = re.sub(r"<[^>]+>", " ", urllib.request.urlopen(req, timeout=20).read().decode("utf-8", "replace"))
+                m = re.search(r"時価総額\s+(?:([\d,]+)\s*兆)?\s*([\d,.]+)?\s*億円", h)
+                if m:
+                    oku = int((m.group(1) or "0").replace(",", "")) * 10000 + float((m.group(2) or "0").replace(",", ""))
+                    sh[c] = [round(oku * 1e8 / px), datetime.now(KST).strftime("%Y-%m-%d")]
+                time.sleep(0.4)
+            except Exception as e:  # noqa: BLE001
+                print(f"  [시총] {c}: {e}")
+        if c in sh:
+            it["mc"] = round(sh[c][0] * px / 1e8, 1)
+    json.dump(sh, open(SHARES, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     codes = sys.argv[1:] or targets()
@@ -123,6 +163,7 @@ def main():
         idx["items"][code] = judge(b)
         ok += 1
         time.sleep(0.3)
+    fill_mc(idx)
     idx["updated"] = datetime.now(KST).strftime("%Y-%m-%d %H:%M")
     json.dump(idx, open(idx_p, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
     it = idx["items"].values()

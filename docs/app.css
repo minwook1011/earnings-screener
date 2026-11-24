@@ -1014,3 +1014,74 @@ html.pxm-open { overflow: hidden; }
 .st-my { border-top: 1px solid var(--line-soft); padding-top: 8px; }
 .st-myh { display: block; font-size: 11px; font-weight: 700; color: #0f766e; margin-bottom: 4px; }
 @media (max-width: 760px) { .stcard { grid-template-columns: 1fr; } .st-score { border-right: 0; border-bottom: 1px solid var(--line-soft); } }
+/* 일본 스크리닝 카드 — 이름 옆 섹터(2026-11-23 사용자) */
+.pc-sec2 { font: 500 11.5px var(--sans, inherit); font-style: normal; color: var(--ink-mute); margin-left: 7px; padding: 1px 6px; border: 1px solid var(--line, rgba(127,127,127,.3)); border-radius: 999px; vertical-align: 2px; }
+.pc-tk { font: 500 11.5px var(--mono, monospace); font-style: normal; color: var(--ink-mute); margin-left: 7px; }
+
+/* 2단계 발표일 — 주 단위 넘기기 · 달력(2026-11-24 사용자) */
+.dwk { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 2px 0 8px; }
+.dwk-d { display: flex; gap: 6px; flex-wrap: wrap; }
+.dwk-d button { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-width: 92px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-mid); border-radius: 8px; padding: 7px 12px; cursor: pointer; text-align: left; }
+.dwk-d button b { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.dwk-d button span { font: 10.5px var(--mono); color: var(--ink-mute); }
+.dwk-d button:hover:not(:disabled) { border-color: color-mix(in srgb, var(--s2) 50%, transparent); }
+.dwk-d button:disabled { opacity: .4; cursor: default; }
+.dwk-d button.now b::after { content: " · 오늘"; font-weight: 500; color: var(--s2); }
+.dwk-d button[aria-pressed="true"] { background: var(--s2-soft); border-color: color-mix(in srgb, var(--s2) 45%, transparent); }
+.dwk-d button[aria-pressed="true"] b { color: var(--s2); }
+.dwk-n, .dwk-c { border: 1px solid var(--line); background: var(--surface); color: var(--ink-mid); border-radius: 6px; padding: 8px 12px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.dwk-n:hover:not(:disabled), .dwk-c:hover { color: var(--ink); border-color: color-mix(in srgb, var(--s2) 50%, transparent); }
+.dwk-n:disabled { opacity: .35; cursor: default; }
+.dwk-t { font: 12px var(--mono); color: var(--ink-mute); }
+.dwk-c { margin-left: auto; }
+.dwk-c[aria-pressed="true"] { background: var(--s2-soft); color: var(--s2); border-color: color-mix(in srgb, var(--s2) 45%, transparent); }
+.dmon { max-width: 560px; margin: 4px 0 12px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.dmon-h { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.dmon-h b { font-size: 14px; color: var(--ink); }
+.dmon-h span { font: 12px var(--mono); color: var(--ink-mute); margin-right: auto; }
+.dmon-h button { border: 1px solid var(--line); background: var(--surface); color: var(--ink-mid); border-radius: 6px; width: 30px; height: 28px; cursor: pointer; font-size: 14px; }
+.dmon-g { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.dmon-g i { font-style: normal; text-align: center; font-size: 11.5px; color: var(--ink-mute); padding: 2px 0; }
+.dmon-g i.we { opacity: .7; }
+.dm-c { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; min-height: 48px; border: 1px solid var(--line-soft); background: none; border-radius: 6px; padding: 5px 7px; cursor: pointer; text-align: left; color: var(--ink); }
+.dm-c b { font: 600 12px var(--mono); }
+.dm-c span { font: 600 11px var(--mono); color: var(--s2); }
+.dm-c:disabled { cursor: default; color: var(--ink-mute); }
+.dm-c.out { opacity: .35; }
+.dm-c.lv1 { background: color-mix(in srgb, var(--s2) 8%, transparent); }
+.dm-c.lv2 { background: color-mix(in srgb, var(--s2) 16%, transparent); }
+.dm-c.lv3 { background: color-mix(in srgb, var(--s2) 26%, transparent); }
+.dm-c.lv4 { background: color-mix(in srgb, var(--s2) 38%, transparent); }
+.dm-c.now { box-shadow: inset 0 0 0 1px var(--s2); }
+.dm-c[aria-pressed="true"] { outline: 2px solid var(--s2); outline-offset: -1px; }
+.dm-c:hover:not(:disabled) { border-color: var(--s2); }
+
+/* 전 종목 실적 스크리닝 기준(#jpx, 2026-11-24 사용자) */
+.jx { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+.jx-c { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 10px; padding: 16px 18px; }
+.jx-c h3 { margin: 0 0 10px; font-size: 15px; color: var(--ink); }
+.jx-c h3 small { font-size: 12px; font-weight: 500; color: var(--ink-mute); margin-left: 6px; }
+.jx-c .jx-h2 { margin-top: 16px; }
+.jx-ol { margin: 0; padding-left: 22px; font-size: 13.5px; line-height: 1.75; color: var(--ink-mid); }
+.jx-ol li { margin-bottom: 4px; }
+.jx-ol b { color: var(--ink); }
+.jx-send { border-left: 3px solid var(--s2); }
+.jx-drop { border-left: 3px solid var(--ink-mute); }
+.jx-wait .na { margin: 0; font-size: 13px; color: var(--ink-mute); }
+@media (max-width: 760px) { .jx { grid-template-columns: 1fr; } }
+
+/* 전 종목 실적 스크리닝 결과표(2026-11-24 사용자) */
+.jx-det { margin-top: 14px; }
+.jx-det > summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--s2); padding: 6px 0; }
+.jx-det .jx { margin-top: 6px; }
+.jx-n { margin: 8px 0 0; font-size: 12.5px; line-height: 1.65; color: var(--ink-mute); }
+.jx-pv { align-self: flex-end; padding-bottom: 8px; }
+.jx-t td { vertical-align: top; }
+.jx-t th small { font-weight: 500; color: var(--ink-mute); }
+.jx-tags { max-width: 320px; }
+.jx-tags i { display: inline-block; font-style: normal; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 4px; margin: 0 4px 3px 0; white-space: nowrap; }
+.jx-h { background: color-mix(in srgb, var(--s2) 16%, transparent); color: var(--s2); }
+.jx-x { background: var(--surface-2); color: var(--ink-mute); box-shadow: inset 0 0 0 1px var(--line); }
+.jx-pvb { font-style: normal; font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 999px; background: color-mix(in srgb, #e3a63a 18%, transparent); color: #c98a16; white-space: nowrap; }
+.jx-more { margin: 10px 0 30px; border: 1px solid var(--line); background: var(--surface); color: var(--s2); border-radius: 6px; padding: 8px 14px; font-weight: 600; cursor: pointer; }
+.jx-pv { display: inline-flex; gap: 6px; align-items: center; font-size: 12.5px; color: var(--ink-mid); cursor: pointer; }

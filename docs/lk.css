@@ -348,3 +348,44 @@ html.lk .pc-ch .pm20 { stroke: var(--qy-r); } html.lk .pc-ch .pm60 { stroke: #4c
 .pc-qy .hv .tp rect { fill: var(--surface); stroke: var(--line); stroke-width: .8; }
 .pc-qy .hv .tp text { font: 700 9.5px var(--mono); } .pc-qy .hv .tp text.hq { fill: var(--ink-mid); font-weight: 600; }
 .pc-qy .hv .tp text.r { fill: var(--qy-r); } .pc-qy .hv .tp text.o { fill: var(--qy-o); }
+/* 분기 YoY — 매출·영업이익 y축 따로(2026-11-23 사용자). 눈금 글자·0 선을 각 색으로 */
+.pc-qy text.tk { font: 500 7.5px var(--mono); opacity: .85; }
+.pc-qy line.z.r { stroke: color-mix(in srgb, var(--qy-r) 45%, transparent); stroke-dasharray: 1 2; }
+.pc-qy line.z.o { stroke: color-mix(in srgb, var(--qy-o) 45%, transparent); stroke-dasharray: 1 2; }
+/* ---------- 월차 업데이트 탭(2026-11-24 사용자) ---------- */
+.mo-day { margin: 18px 0 6px; }
+.mo-day > header { display: flex; align-items: baseline; gap: 10px; padding: 0 4px 6px; border-bottom: 1px solid var(--line); }
+.mo-day > header b { font: 700 14px var(--jsans); color: var(--ink); }
+.mo-day > header span { font: 500 12px var(--mono); color: var(--ink-mute); }
+.mo-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(440px, 1fr)); gap: 8px; margin-top: 8px; }
+.mo-row { width: 100%; display: flex; flex-direction: column; gap: 8px; text-align: left; padding: 11px 13px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); cursor: pointer; font: inherit; }
+.mo-row:hover { border-color: var(--ink-mute); }
+.mo-nm { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; }
+.mo-nm b { font: 700 14px var(--jsans); }
+.mo-nm i { font: 500 11.5px var(--mono); font-style: normal; color: var(--ink-mute); }
+.mo-nm em { font: 500 11.5px var(--jsans); font-style: normal; color: var(--ink-mid); padding: 0 6px; border: 1px solid var(--line); border-radius: 999px; }
+.mo-nm small { margin-left: auto; font: 600 11px var(--mono); color: var(--ink-mute); }
+.mo-ks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.mo-k { display: flex; flex-direction: column; gap: 2px; padding: 6px 8px; border-radius: 8px; background: var(--surface-2); min-width: 0; }
+.mo-k i { font: 500 10.5px var(--jsans); font-style: normal; color: var(--ink-mute); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mo-k b { font: 700 15px var(--mono); color: var(--ink); }
+.mo-k em { font: 600 10.5px var(--mono); font-style: normal; }
+.mo-k .up { color: var(--up); } .mo-k .dn { color: var(--down); } .mo-k .na { color: var(--ink-mid); }
+.mo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.mo-ch { margin: 0; padding: 8px 8px 2px; border-radius: 10px; background: var(--surface-2); min-width: 0; }
+.mo-ch figcaption { font: 700 12px var(--jsans); color: var(--ink); display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; }
+.mo-ch figcaption small { font: 500 10px var(--jsans); color: var(--ink-mute); }
+.mo-ch svg { display: block; width: 100%; height: auto; overflow: visible; }
+.mo-ch polyline { fill: none; stroke: var(--qy-r, #e0b341); stroke-width: 1.6; stroke-linejoin: round; }
+.mo-ch circle.up { fill: var(--up); } .mo-ch circle.dn { fill: var(--down); }
+.mo-ch rect.bar { fill: color-mix(in srgb, var(--qy-o, #a78bfa) 70%, transparent); }
+.mo-ch line.b { stroke: var(--ink-mute); stroke-dasharray: 2 3; stroke-width: .8; }
+.mo-ch text { font: 600 9px var(--mono); fill: var(--ink-mid); }
+.mo-ch text.lv { fill: var(--ink); font-weight: 700; }
+.mo-ch text.ax, .mo-ch text.bl { fill: var(--ink-mute); font-weight: 500; font-size: 8px; }
+.mo-t th.l small { display: block; font: 500 9.5px var(--jsans); color: var(--ink-mute); }
+@media (max-width: 640px) {
+  .mo-list { grid-template-columns: 1fr; }
+  .mo-ks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mo-grid { grid-template-columns: 1fr; }
+}

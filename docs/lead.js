@@ -1015,22 +1015,27 @@
   /* ---------- 기업별 지표 한눈에 ---------- */
   function viewAll() {
     main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>';
-    (S.ov ? Promise.resolve(S.ov) : getJSON("data/jp/lead/overview.json").then(function (d) { S.ov = d; return d; })).then(function (d) {
+    Promise.all([S.ov ? S.ov : getJSON("data/jp/lead/overview.json").then(function (d) { S.ov = d; return d; }),
+      S.bt !== undefined ? S.bt : getJSON("data/jp/lead/bt.json").then(function (d) { S.bt = d; return d; }).catch(function () { S.bt = null; return null; })]).then(function (rr) {
+      var d = rr[0], bt = rr[1];
       if (location.hash !== "#all") return;
       var groups = []; d.rows.forEach(function (r) { if (groups.indexOf(r[2]) < 0) groups.push(r[2]); });
       var cnt = { "고유": 0, "공통": 0 }; d.rows.forEach(function (r) { var u = r[4].some(function (x) { return x[1] === "고유"; }); cnt[u ? "고유" : "공통"]++; });
       main.innerHTML = '<div class="crumb rv"><a href="#">선행지표</a><i>›</i><b>기업별 지표 한눈에</b></div>' +
         '<div class="sec-t rv"><span class="n">ALL</span><h2>기업별 선행지표 한눈에</h2><p>' + d.rows.length + '곳 · 회사 고유 데이터 있는 곳 ' + cnt["고유"] + '곳 · 공통 지표만 ' + cnt["공통"] + '곳</p></div>' +
         '<div class="card rv"><div class="card-h ovf"><input id="ovq" type="search" placeholder="기업·코드·지표 이름 검색" autocomplete="off"><div class="seg" id="ovg"><button data-v="" aria-pressed="true">전체</button>' + groups.map(function (g) { return '<button data-v="' + esc(g) + '" aria-pressed="false">' + esc(g) + "</button>"; }).join("") + '</div>' +
-        '<label class="ovchk"><input type="checkbox" id="ovw"> 고유 데이터 없는 곳만</label></div>' +
+        '<label class="ovchk"><input type="checkbox" id="ovw"> 고유 데이터 없는 곳만</label>' +
+        (bt ? '<div class="seg" id="ovbt"><button data-v="" aria-pressed="true">판정 전체</button><button data-v="weak" aria-pressed="false">교체 후보 있는 곳</button><button data-v="strong" aria-pressed="false">선행 유력 있는 곳</button></div>' : "") + '</div>' +
+        btSummary(bt) +
         '<div class="ovleg"><span class="chip acc">고유</span> 이 회사(또는 두 곳까지)만 쓰는 데이터 <span class="chip">공통</span> 세 곳 이상 같이 쓰는 시장 통계 <span class="chip gold">월차</span> 회사 월차(선확인) <span class="chip ind">연금</span> 후생연금 가입자 <span class="chip dim">대기</span> 이름만 있고 데이터 없음</div>' +
         '<div class="card-b ovwrap"><table class="ovt"><thead><tr><th>기업</th><th>섹터</th><th>선행지표 (개월 · 마지막 달)</th></tr></thead><tbody id="ovb"></tbody></table></div></div>';
-      var st = { q: "", g: "", w: false };
+      var st = { q: "", g: "", w: false, b: "" };
       function draw() {
         var q = st.q.toLowerCase();
         var rs = d.rows.filter(function (r) {
           if (st.g && r[2] !== st.g) return false;
           if (st.w && r[4].some(function (x) { return x[1] === "고유"; })) return false;
+          if (st.b && !r[4].some(function (x) { var b = btOf(bt, r[0], x[5]); return b && b[0] === st.b; })) return false;
           if (!q) return true;
           return (r[0] + " " + r[1] + " " + r[3] + " " + r[4].map(function (x) { return x[0]; }).join(" ")).toLowerCase().indexOf(q) >= 0;
         });
@@ -1038,16 +1043,95 @@
           return '<tr><td><a href="#c/' + r[0] + '"><b>' + esc(r[1]) + '</b><small class="mono">' + r[0] + '</small></a></td><td><span class="ovs">' + esc(r[2]) + "</span>" + esc(r[3]) + "</td><td>" +
             (r[4].length ? r[4].map(function (x) {
               var cls = { "고유": "acc", "공통": "", "월차": "gold", "연금": "ind", "대기": "dim" }[x[1]] || "";
-              return '<span class="chip ' + cls + '" title="' + esc(x[1]) + '">' + esc(x[0]) + (x[4] ? '<em class="vol">변동</em>' : "") + (x[2] ? "<small>" + x[2] + "개월 · " + esc(String(x[3]).slice(2).replace("-", ".")) + "</small>" : "") + "</span>";
+              var b = btOf(bt, r[0], x[5]);
+              return '<span class="chip ' + cls + (b && b[0] === "weak" ? " repl" : "") + '" title="' + esc(x[1]) + '">' + esc(x[0]) + (x[4] ? '<em class="vol">변동</em>' : "") + (x[2] ? "<small>" + x[2] + "개월 · " + esc(String(x[3]).slice(2).replace("-", ".")) + "</small>" : "") + btBadge(b, r[0], x[5]) + "</span>";
             }).join(" ") : '<span class="chip dim">아직 없음</span>') + (r[5] ? '<p class="ovn">' + esc(r[5]) + "</p>" : "") + "</td></tr>";
         }).join("") || '<tr><td colspan="3" class="empty">맞는 기업이 없습니다</td></tr>';
       }
       document.getElementById("ovq").addEventListener("input", function () { st.q = this.value.trim(); draw(); });
       document.querySelectorAll("#ovg button").forEach(function (b) { b.onclick = function () { st.g = b.dataset.v; document.querySelectorAll("#ovg button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); draw(); }; });
       document.getElementById("ovw").onchange = function () { st.w = this.checked; draw(); };
+      document.querySelectorAll("#ovbt button").forEach(function (b) { b.onclick = function () { st.b = b.dataset.v; document.querySelectorAll("#ovbt button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); draw(); }; });
+      document.getElementById("ovb").addEventListener("click", function (e) { var b = e.target.closest("[data-bt]"); if (!b) return; e.preventDefault(); var k = b.dataset.bt.split("|"); btOpen(bt, k[0], k.slice(1).join("|")); });
       draw(); reveal(main);
     }).catch(function () { main.innerHTML = '<div class="empty">목록을 불러오지 못했습니다.</div>'; });
   }
+
+  /* ---------- 선행지표 백테스트(2026-11-23 사용자) — data/jp/lead/bt.json(요약) · bt/<코드>.json(상세), tools/lead_bt.py ---------- */
+  var BTG = { strong: ["선행 유력", "g-strong"], mid: ["약한 선행", "g-mid"], weak: ["교체 후보", "g-weak"], hold: ["판정 보류", "g-hold"], na: ["데이터 없음", "g-na"] };
+  function btOf(bt, c, k) { return bt && bt.s && bt.s[c] ? bt.s[c][k] : null; }
+  function btBadge(b, c, k) {
+    if (!b || b[0] === "na") return "";
+    var g = BTG[b[0]], rate = b[1] == null ? "" : " " + nf(b[1], 0) + "%";
+    return '<button type="button" class="btg ' + g[1] + '" data-bt="' + esc(c + "|" + k) + '" title="' + esc(g[0] + " — 누르면 분석 방법과 결과") + '">' + (b[0] === "hold" ? "보류" + rate : (b[0] === "weak" ? "교체 후보" : "일치") + rate) + "</button>";
+  }
+  function btSummary(bt) {
+    if (!bt) return "";
+    var n = { strong: 0, mid: 0, weak: 0, hold: 0, na: 0 };
+    Object.keys(bt.s).forEach(function (c) { Object.keys(bt.s[c]).forEach(function (k) { n[bt.s[c][k][0]]++; }); });
+    var pl = bt.placebo || {}, c68 = (pl.count || {})["68"] || [0, 0], c58 = (pl.count || {})["58"] || [0, 0];
+    return '<div class="btsum"><div class="btsum-h"><b>주가 선행 백테스트</b><span>' + esc(bt.updated) + " · 기준 " + esc(bt.bench) + '</span><button type="button" class="btq" id="btHow">어떻게 쟀나 ›</button></div>' +
+      '<div class="btsum-n">' + ["strong", "mid", "weak", "hold", "na"].map(function (g) { return '<span class="btg ' + BTG[g][1] + '">' + BTG[g][0] + " <b>" + n[g] + "</b></span>"; }).join("") + "</div>" +
+      '<p class="btsum-p">지표마다 <b>일치율</b> = 지표가 좋아졌나·나빠졌나로 그다음 3개월 주가가 TOPIX보다 강할지·약할지를 맞힌 비율(50%면 동전 던지기). 배지를 누르면 분석 방법과 결과 전체가 나옵니다. ' +
+      "무작위 신호로 똑같이 돌린 위약 검사와 비교하면 일치율 68% 이상은 진짜 지표 " + c68[0] + "개 대 무작위 " + c68[1] + "개, 58% 이상은 " + c58[0] + "개 대 " + c58[1] + "개 — " +
+      "<b>지표 전체로 보면 주가 방향 예측력은 우연보다 조금 나은 수준</b>이라 '선행 유력'도 확정이 아니라 우선순위로 보고, 교체 후보부터 바꾸는 게 맞습니다.</p></div>";
+  }
+  function btModal() {
+    var m = document.getElementById("btm");
+    if (m) return m;
+    m = document.createElement("div"); m.id = "btm"; m.className = "btm"; m.hidden = true;
+    m.innerHTML = '<div class="btm-bg" data-x="1"></div><div class="btm-box" role="dialog" aria-modal="true"><button type="button" class="btm-x" data-x="1" aria-label="닫기">✕</button><div id="btmb"></div></div>';
+    document.body.appendChild(m);
+    m.addEventListener("click", function (e) { if (e.target.closest("[data-x]")) m.hidden = true; });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") m.hidden = true; });
+    return m;
+  }
+  function btHowHtml(bt) {
+    var me = (bt && bt.method) || {};
+    return '<h4>어떻게 쟀나</h4><ol class="btm-ol">' +
+      "<li><b>월 단위로 맞춤</b> — 같은 달 값이 여러 개면 평균.</li>" +
+      "<li><b>성장률로 바꿈</b> — 이미 전년비(%)면 그대로, 수준 값이면 전년 같은 달 대비 %, 음수가 섞인 지수는 전년 같은 달과의 차이. 계절성을 없애기 위해서다.</li>" +
+      "<li><b>신호</b> — 3개월 평균 성장률이 3개월 전보다 좋아졌으면 +, 나빠졌으면 −.</li>" +
+      "<li><b>발표 지연 " + (me.pub || 1) + "개월</b> — m월 자료는 (m+1)월 말에야 쓸 수 있다고 본다(미래 정보 차단).</li>" +
+      "<li><b>맞힐 대상</b> — 그 뒤 " + (me.h || 3) + "개월 동안 이 종목 수익률 − " + esc((bt && bt.bench) || "TOPIX") + " 수익률(초과수익)이 +인지 −인지. 시차 0~6개월을 모두 본다.</li>" +
+      "<li><b>일치율 = 걸어가며 검증</b> — 매달, 그때까지 결과가 끝난 과거만 보고 가장 잘 맞던 시차·방향을 골라 이번 신호로 예측하고 맞았는지 센다. 사후에 고른 '최고 설정'보다 낮게 나오지만 정직한 값이다. 이 예측이 12번이 안 되면 고정 설정(발표 직후·정방향) 적중률을 쓰고, 그 표본도 24개 미만이면 판정 보류.</li>" +
+      "<li><b>위약 검사</b> — 지표 대신 무작위 숫자를 넣고 같은 검사를 세 번 돌려 일치율이 우연히 얼마나 나오는지 잰다. 판정 문턱(68% · 58%)은 이걸로 정했다.</li></ol>" +
+      '<p class="btm-note">판정: <span class="btg g-strong">선행 유력</span> 68% 이상 · <span class="btg g-mid">약한 선행</span> 58~68% · <span class="btg g-weak">교체 후보</span> 58% 미만 · <span class="btg g-hold">판정 보류</span> 자료 기간이 짧음. ' +
+      "주가는 야후 10년 월봉(수정주가). 3개월 수익률이 겹치므로 실질 독립 표본은 대략 표본÷3.</p>";
+  }
+  function btOpen(bt, c, k) {
+    var m = btModal(), body = document.getElementById("btmb");
+    m.hidden = false; body.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>';
+    S.btd = S.btd || {};
+    (S.btd[c] ? Promise.resolve(S.btd[c]) : getJSON("data/jp/lead/bt/" + c + ".json").then(function (d) { S.btd[c] = d; return d; })).then(function (d) {
+      var r = d[k]; if (!r) { body.innerHTML = '<div class="empty">결과가 없습니다.</div>'; return; }
+      var co = ((S.ov && S.ov.rows) || []).filter(function (x) { return x[0] === c; })[0] || [c, c];
+      var g = BTG[r.grade] || ["", ""], tail = null;
+      if (r.rate != null && bt && bt.placebo && bt.placebo.tail && bt.placebo.tail[r.rm]) { var t = bt.placebo.tail[r.rm], i = Math.round(r.rate) - bt.placebo.from; tail = t[Math.max(0, Math.min(t.length - 1, i))]; }
+      var h = '<div class="btm-h"><small>' + esc(co[1]) + " · " + esc(c) + "</small><h3>" + esc(r.name) + '</h3><span class="btg ' + g[1] + '">' + g[0] + "</span></div>";
+      if (r.grade === "na") { body.innerHTML = h + '<p class="btm-why">' + esc(r.why) + "</p>" + btHowHtml(bt); return; }
+      h += '<div class="btm-k">' +
+        "<div><b>" + (r.rate == null ? "—" : nf(r.rate, 1) + "%") + "</b><span>일치율 · " + (r.rm === "wf" ? "걸어가며 검증 " + r.nwf + "회" : r.rm === "fx" ? "고정 설정 표본 " + r.nfx + "개" : "표본 부족") + "</span></div>" +
+        "<div><b>" + (tail == null ? "—" : nf(tail, 0) + "%") + "</b><span>무작위 신호가 이 이상 맞을 비율</span></div>" +
+        "<div><b>" + (r.hit == null ? "—" : nf(r.hit, 1) + "%") + "</b><span>사후 최고 설정(참고 · 과대평가됨)</span></div>" +
+        "<div><b>" + (r.oos == null ? "—" : nf(r.oos, 1) + "%") + "</b><span>앞 절반으로 고른 설정 → 뒤 절반</span></div></div>";
+      h += '<p class="btm-why">' + esc(r.why || "") + "</p>";
+      h += '<div class="btm-meta"><span>변환 · ' + esc(r.tf || "—") + "</span><span>기간 · " + (r.period ? esc(r.period[0]) + " ~ " + esc(r.period[1]) : "—") + "</span>" +
+        (r.L != null ? "<span>최고 설정 · 시차 " + r.L + "개월 · " + (r.s > 0 ? "정방향" : "역방향") + "</span>" : "") +
+        (r.up != null ? "<span>최고 설정이 강세로 본 달 초과수익 평균 " + (r.up > 0 ? "+" : "") + nf(r.up, 1) + "%p · 약세로 본 달 " + (r.dn > 0 ? "+" : "") + nf(r.dn, 1) + "%p</span>" : "") +
+        (r.h1 != null ? "<span>최고 설정의 앞 · 뒤 절반 일치 " + nf(r.h1, 0) + "% · " + nf(r.h2, 0) + "%</span>" : "") + "</div>";
+      if (r.lags && r.lags.length) {
+        h += '<h4>시차별 결과(정방향 기준)</h4><table class="btm-t"><thead><tr><th>시차</th><th>표본</th><th>방향 일치율</th><th>순위상관</th></tr></thead><tbody>' +
+          r.lags.map(function (x) {
+            return "<tr" + (x[0] === r.L ? ' class="on"' : "") + "><td>" + (x[0] ? "발표 " + x[0] + "개월 뒤" : "발표 직후") + "</td><td>" + x[1] + '</td><td><div class="btbar"><i data-w="' + (x[2] == null ? 0 : x[2]) + '"></i><em></em><span>' + (x[2] == null ? "—" : nf(x[2], 1) + "%") + "</span></div></td><td>" + (x[3] == null ? "—" : (x[3] > 0 ? "+" : "") + nf(x[3], 2)) + "</td></tr>";
+          }).join("") + '</tbody></table><p class="btm-note">막대 가운데 점선 = 50%(동전 던지기). 역방향 지표는 50% 아래로 짧게 나온다. 굵은 줄 = 전체 기간 최고 설정.</p>';
+      }
+      h += btHowHtml(bt);
+      body.innerHTML = h;
+      body.querySelectorAll(".btbar i").forEach(function (x) { x.style.width = Math.max(0, Math.min(100, +x.dataset.w)) + "%"; });
+    }).catch(function () { body.innerHTML = '<div class="empty">상세 결과를 불러오지 못했습니다.</div>'; });
+  }
+  document.addEventListener("click", function (e) { if (e.target && e.target.id === "btHow") { var m = btModal(); document.getElementById("btmb").innerHTML = btHowHtml(S.bt); m.hidden = false; } });
 
   /* ---------- 튄 지표(2026-11-18 사용자) ---------- */
   var LANE = { fast: ["⚡", "빠른 신호", "원값이 평소의 3배 넘게 튐"], conf: ["✅", "확인 신호", "3개월선 기울기가 평소의 2배 넘게 꺾임"], cross: ["🔄", "추세 전환", "3개월선이 12개월선을 뚫음"] };
