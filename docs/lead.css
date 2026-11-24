@@ -672,6 +672,16 @@ body.dp-on { overflow: hidden; }
 .dp-miss th { color: var(--ink-4); font-weight: 600; }
 .dp-miss .up { color: #e5484d; } .dp-miss .dn { color: #4b7fe0; }
 .legend i.dp-o { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; } .legend i.dp-o.g { background: #2e9d5b; } .legend i.dp-o.b { background: #e5484d; }
+/* 사이클: 업황 현황(2026-11-25) */
+.cyc-peers { display: flex; flex-wrap: wrap; gap: 5px; }
+.cyc-peers a { font-size: 11.5px; color: var(--ink-2); text-decoration: none; border: 1px solid var(--line); background: var(--bg-2); border-radius: 8px; padding: 2px 8px; }
+.cyc-peers a small { margin-left: 5px; color: var(--ink-4); }
+#cyc .card-h > .ctl:first-child { flex: 1 1 60%; min-width: 0; }
+.cy-h { margin: 16px 0 6px; font-size: 12.5px; color: var(--ink-3); }
+.legend i.cy-l { display: inline-block; width: 16px; height: 0; border-top: 2.4px solid; vertical-align: middle; margin-right: 6px; }
+.legend i.cy-l.a { border-color: var(--b1); } .legend i.cy-l.b { border-color: var(--b2); border-top-style: dashed; } .legend i.cy-l.c { border-color: var(--gold); }
+.legend i.cy-l.d { border-color: var(--b1); border-top-style: dotted; } .legend i.cy-l.e { border-color: var(--b1); } .legend i.cy-l.f { border-color: var(--gold); } .legend i.cy-l.g { border-color: var(--ink-4); border-top-style: dashed; }
+.legend i.cy-l.h { border-color: #2e9d5b; border-top-width: 6px; }
 /* 선행지표 차트 기간·모양(2026-11-25) */
 .lctl { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 6px; }
 .lctl .seg button { padding: 4px 10px; font-size: 12px; }

@@ -400,6 +400,7 @@
       '<div class="sec-t rv"><span class="n">08</span><h2>수정 이력</h2><p>나중에 텔레그램으로 말한 수정이 여기에 쌓입니다</p></div><div class="card rv"><div class="card-b log">' +
       co.log.map(function (l) { return '<div><span class="d">' + esc(l.d) + '</span><span class="by">' + esc(l.by) + "</span><span>" + esc(l.t) + "</span></div>"; }).join("") + "</div></div>";
 
+    price += '<div id="cyc-sec"></div>';   // 사이클: 업황 현황 — 사이클 업종만(data/jp/lead/cycle/<코드>.json 있을 때)
     var fin = '<div class="sec-t rv"><span class="n">03</span><h2>재무제표 · 최근 20분기</h2><p>결산단신 분기 단독 · 억 엔 · 오른쪽이 최신 · 빨간 칸 = 가장 최근 발표</p></div><section class="card rv" id="fin"><div class="card-b"><div class="empty">불러오는 중…</div></div></section>';
     main.innerHTML = hero + lead + price + fin + ref + rep + ir + map;
     finSection(co);
@@ -413,6 +414,7 @@
     PC.co = null; NV.co = null; drawMain(co, true); bindMain(co);
     main.querySelectorAll("[data-pv]").forEach(function (b) { b.onclick = function () { openLb(b.getAttribute("data-pv"), b.getAttribute("data-cap")); }; });
     var dob = document.getElementById("dopen"); if (dob) dob.onclick = function () { openDetail(co); };
+    cycleSection(co);
     reveal(main);
   }
 
@@ -626,6 +628,69 @@
       return "<li>" + (i === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + "<b>" + esc(i.kind === "macro" ? i.short : (i.t || i.short)) + "</b>" + (i.term_ko && i.kind !== "trends" ? '<small class="tko">' + esc(i.term_ko) + "</small>" : "") + (i.volatile ? '<em class="vol">변동 가능</em>' : "") + btChip(i) + (i.why || i.note ? "<span>" + esc(i.why || i.note) + "</span>" : "") + "</li>";
     }).join("") + "</ol>" + ((co.lead.macro || []).filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).length ? '<p class="pn wait"><b>수집 대기</b> ' + co.lead.macro.filter(function (m) { return String(m.id).indexOf("wait:") === 0 || String(m.id).indexOf("gt:") === 0; }).map(function (m) { return esc(m.name) + (m.volatile ? ' <em class="vol">변동 가능</em>' : ""); }).join(" · ") + "</p>" : "") + "</div>";
   }
+  /* ---------- 사이클: 업황 현황(2026-11-25 사용자) — 선행지표가 아니라 업황 판단용. data/jp/lead/cycle/<코드>.json, tools/lead_cycle.py ---------- */
+  function cycleSection(co) {
+    var host = document.getElementById("cyc-sec"); if (!host) return;
+    (S.cycIx !== undefined ? Promise.resolve(S.cycIx) : getJSON("data/jp/lead/cycle/index.json").then(function (d) { return (S.cycIx = d); }).catch(function () { return (S.cycIx = null); })).then(function (ix) {
+      if (!ix || ix.cos.indexOf(co.c) < 0) return;
+      return getJSON("data/jp/lead/cycle/" + co.c + ".json").then(function (d) {
+        if (location.hash !== "#c/" + co.c) return;
+        var ph = d.phase || {}, st = S.st[co.c], cr = st.cr || "ALL";
+        var box = function (lab, val, sub, cls) { return '<div class="ls-box ' + (cls || "") + '"><span>' + lab + '</span><b class="mono">' + val + '</b><div class="ls-sub"><span>' + (sub || "") + "</span></div></div>"; };
+        host.innerHTML = '<div class="sec-t rv in"><span class="n">02+</span><h2>사이클: 업황 현황</h2><p>선행지표 아님 — 산업 전체가 올라오는지 · ' + esc(d.type_ko) + (d.cust_ko.length ? " · 고객 산업 " + esc(d.cust_ko.join("·")) : "") + "</p></div>" +
+          '<section class="card rv in" id="cyc"><div class="card-h"><div class="ctl"><span class="lab">밸류체인</span><div class="cyc-peers">' + d.peers.map(function (p) { return '<a href="#c/' + p[0] + '">' + esc(p[1]) + '<small class="mono">' + p[0] + "</small></a>"; }).join("") + '</div></div><span class="sp"></span><div class="seg" id="cyrange">' + ["3Y", "5Y", "ALL"].map(function (r) { return '<button data-v="' + r + '" aria-pressed="' + (cr === r) + '">' + (r === "ALL" ? "전체" : r) + "</button>"; }).join("") + "</div></div>" +
+          '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="cyw"></div><div class="legend"><span><i class="cy-l a"></i>밸류체인 매출 YoY</span><span><i class="cy-l b"></i>밸류체인 영업이익 YoY</span><span><i class="cy-l c"></i>이 회사 매출 YoY</span><span><i class="cy-l d"></i>업계 바닥</span><span><i class="cy-l e"></i>주가: 밸류체인 지수</span><span><i class="cy-l f"></i>주가: 이 회사</span><span><i class="cy-l g"></i>TOPIX</span>' + (d.cust.length ? '<span><i class="cy-l h"></i>고객 산업 출하−재고 갭</span>' : "") + "</div></div>" +
+          '<div class="lstats">' + box("밸류체인 매출 YoY · " + esc((ph.q || "").slice(0, 7)), ph.peer_yoy != null ? pct(ph.peer_yoy) : "—", (ph.dir ? "반년 전보다 " + ph.dir : "") + " · " + d.peers.length + "곳 합산", ph.dir === "상승" ? "est" : "") +
+          box("업계 바닥 뒤", ph.since_trough != null ? ph.since_trough + "분기" : "—", ph.last_trough ? "바닥 " + ph.last_trough.slice(0, 7) + (ph.ret_since != null ? " · 그 뒤 TOPIX 대비 " + pct(ph.ret_since, 0) : "") : "") +
+          (ph.gap != null ? box("고객 재고 갭(출하−재고) · " + esc(ph.gap_m), (ph.gap > 0 ? "+" : "") + nf(ph.gap, 1) + "%p", "석 달 전보다 " + (ph.gap_dir || "—"), ph.gap_dir === "개선" ? "est" : "") : "") +
+          (d.beta != null ? box("업계 대비 매출 민감도", "×" + nf(d.beta, 2), "업계 매출 성장률 10%p당 " + pct(d.beta * 10, 0) + "p · 상관 " + (d.r != null ? nf(d.r, 2) : "—")) : "") + "</div></div>" +
+          '<ul class="dp-txt">' + d.text.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ul>" +
+          (d.troughs.length ? '<h4 class="cy-h">과거 업계 매출 성장률 바닥과 이 회사 주가(TOPIX 대비 초과수익)</h4><div class="tw"><table class="dp-miss"><thead><tr><th>업계 바닥 분기</th><th>그때 업계 매출 YoY</th><th>바닥 전 반년</th><th>바닥 뒤 반년</th><th>바닥 뒤 1년</th></tr></thead><tbody>' + d.troughs.map(function (e) { var f = function (v) { return '<td class="mono ' + (v == null ? "" : v > 0 ? "up" : "dn") + '">' + (v == null ? "—" : pct(v, 0) + "p") + "</td>"; }; return "<tr><td>" + e.q.slice(0, 7) + '</td><td class="mono">' + pct(e.v) + "</td>" + f(e.pre) + f(e.post2) + f(e.post4) + "</tr>"; }).join("") + "</tbody></table></div>" : "") +
+          '<p class="hint">밸류체인 = 리포트로 고른 동종·고객·공급 회사들의 분기 실적을 합산(같은 회사끼리만 전년과 비교). 주가 지수 = 그 회사들 월 수익률 동일가중. 고객 재고 갭 = 경제산업성 광공업지수 ' + esc(d.cust_ko[0] || "") + " 출하 YoY − 재고 YoY(재고 사이클). 바닥 = 앞뒤 2분기 안에서 가장 낮고 다음 분기에 돌아선 곳. 계산일 " + esc(d.d) + "</p></div></section>";
+        host.querySelectorAll("#cyrange button").forEach(function (b) { b.onclick = function () { st.cr = b.dataset.v; host.querySelectorAll("#cyrange button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); cycChart(d, st.cr); }; });
+        cycChart(d, cr);
+      });
+    }).catch(function () {});
+  }
+  function cycChart(d, cr) {
+    var host = document.getElementById("cyw"); if (!host) return;
+    var all = d.m.map(function (r) { return r[0]; }); d.q.forEach(function (r) { if (all.indexOf(r[0]) < 0) all.push(r[0]); }); all.sort();
+    var last = all[all.length - 1], first = cr === "3Y" ? ymAdd(last, -36) : cr === "5Y" ? ymAdd(last, -60) : all[0];
+    var months = []; for (var ym = first; ym <= last; ym = ymAdd(ym, 1)) months.push(ym);
+    var n = months.length, W = Math.max(320, host.clientWidth), pL = 46, pR = 46, IW = W - pL - pR, bw = IW / n;
+    var h1 = 180, h2 = 140, h3 = d.cust.length ? 100 : 0, g = 26, top = 14, H = top + h1 + g + h2 + (h3 ? g + h3 : 0) + 24;
+    var X = function (ym) { return pL + bw * (months.indexOf(ym) + 0.5); };
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }), gg = el("g", { "class": "g-grid" }, svg), ga = el("g", { "class": "g-ax" }, svg);
+    var clip = function (vs) { var s = vs.filter(function (v) { return v != null; }).sort(function (a, b) { return a - b; }); if (!s.length) return [-10, 10]; var q = function (f) { return s[Math.round(f * (s.length - 1))]; }, ex = Math.max(4, (q(0.92) - q(0.08)) * 0.4); return [Math.min(0, q(0.08) - ex), Math.max(1, q(0.92) + ex)]; };
+    var panel = function (y0, h, rng, fmt) { var lo = rng[0], hi = rng[1], y = function (v) { v = Math.max(lo, Math.min(hi, v)); return y0 + (1 - (v - lo) / (hi - lo)) * h; }; nice(lo, hi, 4).forEach(function (v) { if (v < lo || v > hi) return; el("line", { x1: pL, x2: W - pR, y1: y(v), y2: y(v) }, gg); txt(ga, pL - 6, y(v) + 3.5, fmt(v), null, "end"); }); if (lo < 0 && hi > 0) el("line", { x1: pL, x2: W - pR, y1: y(0), y2: y(0), stroke: "var(--ink-4)", "stroke-dasharray": "3 3" }, gg); return y; };
+    var path = function (pts, y, col, w, dash) { var dd = "", on = false; pts.forEach(function (p) { if (p[1] == null || months.indexOf(p[0]) < 0) { on = false; return; } dd += (on ? "L" : "M") + X(p[0]).toFixed(1) + "," + y(p[1]).toFixed(1); on = true; }); if (dd) el("path", { d: dd, fill: "none", stroke: col, "stroke-width": w || 2, "stroke-dasharray": dash || null, "stroke-linejoin": "round" }, svg); };
+    // 1) 분기 성장률
+    var qs = d.q.filter(function (r) { return r[0] >= first; });
+    var y1 = panel(top, h1, clip([].concat(qs.map(function (r) { return r[1]; }), qs.map(function (r) { return r[3]; }))), function (v) { return nf(v) + "%"; });
+    txt(ga, pL, top + 10, "분기 매출·이익 YoY", "sub-ax", "start");
+    path(qs.map(function (r) { return [r[0], r[2]]; }), y1, "var(--b2)", 1.6, "4 3");
+    path(qs.map(function (r) { return [r[0], r[3]]; }), y1, "var(--gold)", 2);
+    path(qs.map(function (r) { return [r[0], r[1]]; }), y1, "var(--b1)", 2.6);
+    d.troughs.forEach(function (e) { if (months.indexOf(e.q) < 0) return; el("line", { x1: X(e.q), x2: X(e.q), y1: top, y2: H - 24, stroke: "var(--b1)", "stroke-dasharray": "2 4", opacity: ".5" }, gg); el("circle", { cx: X(e.q), cy: y1(e.v), r: 5, fill: "var(--panel)", stroke: "var(--b1)", "stroke-width": 2 }, svg); });
+    // 2) 주가 지수(구간 처음 = 100)
+    var t2 = top + h1 + g, ms = d.m.filter(function (r) { return r[0] >= first; }), b0 = ms[0] || [];
+    var nz = function (k) { var b = null; return ms.map(function (r) { if (b == null && r[k] != null) b = r[k]; return [r[0], r[k] != null && b ? r[k] / b * 100 : null]; }); };
+    var s1 = nz(1), s2 = nz(2), s3 = nz(3), vs = [].concat(s1, s2, s3).map(function (p) { return p[1]; }).filter(function (v) { return v != null; });
+    var lo2 = Math.min.apply(null, vs.concat([100])), hi2 = Math.max.apply(null, vs.concat([100])), pd2 = (hi2 - lo2) * 0.08;
+    var y2 = panel(t2, h2, [lo2 - pd2, hi2 + pd2], function (v) { return nf(v); });
+    txt(ga, pL, t2 + 10, "주가(구간 처음 = 100)", "sub-ax", "start");
+    path(s3, y2, "var(--ink-4)", 1.4, "3 3"); path(s1, y2, "var(--b1)", 2); path(s2, y2, "var(--gold)", 2.2);
+    // 3) 고객 산업 재고 갭
+    if (h3) {
+      var t3 = t2 + h2 + g, gp = ms.map(function (r) { return [r[0], r[4]]; }).filter(function (p) { return p[1] != null; });
+      var y3 = panel(t3, h3, clip(gp.map(function (p) { return p[1]; })), function (v) { return nf(v) + "p"; });
+      txt(ga, pL, t3 + 10, "고객 산업(" + d.cust_ko[0] + ") 출하−재고 갭", "sub-ax", "start");
+      gp.forEach(function (p) { var x = X(p[0]); el("rect", { x: x - Math.max(1, bw * 0.35), y: Math.min(y3(p[1]), y3(0)), width: Math.max(2, bw * 0.7), height: Math.max(1, Math.abs(y3(p[1]) - y3(0))), fill: p[1] >= 0 ? "#2e9d5b" : "#e5484d", opacity: ".6" }, svg); });
+    }
+    months.forEach(function (m, i) { if ((n - 1 - i) % Math.ceil(n / 12) === 0) txt(ga, X(m), H - 6, ymLab(m), null, "middle"); });
+    host.innerHTML = ""; host.appendChild(svg);
+  }
+
   /* ---------- 「자세히」 — 지표별 분석 사이드바(2026-11-25 사용자). data/jp/lead/detail/<코드>.json, tools/lead_detail.py ---------- */
   function openDetail(co) {
     var pn = document.getElementById("dpanel");
@@ -653,7 +718,7 @@
         return '<section class="dp-it" id="dp-' + i + '"><h3>' + esc(it.t || x.name) + (x.bt ? ' <em class="btg ' + (x.bt.g === "확정" ? "b1" : "b2") + '">' + x.bt.g + " " + x.bt.er + "%</em>" : "") + (x.dir < 0 ? ' <em class="vol">역방향(원가·경쟁)</em>' : "") + "</h3>" +
           (it.why || it.note ? '<p class="dp-why">' + esc(it.why || it.note) + "</p>" : "") +
           '<div class="dp-grid"><div class="dp-ch" data-i="' + i + '"></div><div class="dp-side">' +
-          '<h4>시차별 일치율</h4><div class="dp-lag">' + x.lags.map(function (s) { var r = s.n ? s.h / s.n : 0; return '<div class="' + (x.best === s.L ? "on" : "") + '"><span>' + (s.L ? s.L + "개월 앞당김" : "같은 분기") + '</span><i style="width:' + Math.round(r * 100) + '%"></i><b>' + (s.n ? Math.round(r * 100) + "%" : "—") + "</b><small>" + s.h + "/" + s.n + (s.r != null ? " · 상관 " + (s.r > 0 ? "+" : "") + s.r.toFixed(2) : "") + "</small></div>"; }).join("") + "</div>" +
+          '<h4>시차별 일치율</h4><div class="dp-lag">' + x.lags.map(function (s) { var r = s.n ? s.h / s.n : 0; return '<div class="' + (x.best === s.L ? "on" : "") + '"><span>' + (s.L ? s.L + "개월 앞당김" : "같은 분기") + '</span><i data-w="' + Math.round(r * 100) + '"></i><b>' + (s.n ? Math.round(r * 100) + "%" : "—") + "</b><small>" + s.h + "/" + s.n + (s.r != null ? " · 상관 " + (s.r > 0 ? "+" : "") + s.r.toFixed(2) : "") + "</small></div>"; }).join("") + "</div>" +
           '<h4>연도별</h4><div class="dp-yr">' + (x.years.length ? x.years.map(function (y) { var r = y[1] / y[2]; return '<span class="' + (r >= 0.7 ? "g" : r < 0.5 ? "b" : "m") + '"><b>' + y[0] + "</b>" + y[1] + "/" + y[2] + "</span>"; }).join("") : "<small>—</small>") + "</div>" +
           '<div class="dp-rec">최근 4분기 <b>' + x.rec4[0] + "/" + x.rec4[1] + "</b> · 최근 8분기 <b>" + x.rec8[0] + "/" + x.rec8[1] + "</b>" + (x.ld != null ? " · 실적 발표까지 <b>" + (x.ld > 0 ? x.ld + "일 먼저" : x.ld === 0 ? "같은 때" : -x.ld + "일 늦게") + "</b>" : "") + "</div>" +
           "</div></div>" +
@@ -661,6 +726,7 @@
           (x.miss.length ? '<h4>어긋난 분기</h4><table class="dp-miss"><thead><tr><th>분기</th><th>지표 분기 평균 성장률</th><th>지표 변화</th><th>매출 YoY</th><th>매출 성장 변화</th></tr></thead><tbody>' + x.miss.map(function (m) { return "<tr><td>" + esc(m.p) + '</td><td class="mono">' + pct(m.ig) + '</td><td class="mono ' + (m.chg * x.dir > 0 ? "up" : "dn") + '">' + (m.chg > 0 ? "+" : "") + nf(m.chg, 1) + '%p</td><td class="mono">' + pct(m.sg) + '</td><td class="mono ' + (m.acc > 0 ? "up" : "dn") + '">' + (m.acc > 0 ? "+" : "") + nf(m.acc, 1) + "%p</td></tr>"; }).join("") + "</tbody></table>" : "") +
           "</section>";
       }).join("");
+    host.querySelectorAll(".dp-lag i[data-w]").forEach(function (i) { i.style.width = i.getAttribute("data-w") + "%"; });   // CSP 가 style 속성을 막아 JS 로 넣음
     host.querySelectorAll(".dp-ch").forEach(function (c) { detChart(c, items[+c.dataset.i]); });
     host.querySelectorAll(".dp-nav a").forEach(function (a) { a.onclick = function (e) { e.preventDefault(); var t = host.querySelector(a.getAttribute("href")); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }; });
   }
