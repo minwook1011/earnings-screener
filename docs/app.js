@@ -249,13 +249,13 @@
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || "{}") || {}; } catch (e) { return {}; } }
   var GRADE = load("es-grade");
   function stOf(o) { return o.stage; }
-  function grOf(c) { return GRADE[c] || 9; }
+  function grOf(c) { return GRADE[c] ? 5 - GRADE[c] : 9; }   // 4 → 3 → 2 → 1 → 분류 안 함 순으로 위에(2026-11-24 사용자)
   function byGrade(rows) { return rows.map(function (o, i) { return [o, i]; }).sort(function (a, b) { return grOf(a[0].c) - grOf(b[0].c) || a[1] - b[1]; }).map(function (x) { return x[0]; }); }
   function mehBtn(c) {
     var o = S.cos[c] || {}, g = GRADE[c] || 0;
     if (!(o.stage >= 2)) return "";
     return '<span class="picks grades">' + [1, 2, 3, 4].map(function (n) {
-      return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 " + n + " 분류를 지웁니다" : n + "로 분류 — 목록에서 1·2·3·4 순서로 올라갑니다") + '">' + n + "</button>";
+      return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 " + n + " 분류를 지웁니다" : n + "로 분류 — 목록에서 4·3·2·1 순서로 올라갑니다") + '">' + n + "</button>";
     }).join("") + "</span>";
   }
   /* 메모 — 2단계 목록 시총·PER 아래 작은 글씨 메모 칸, 이 브라우저에 저장(es-memo, 2026-11-12 사용자) */
@@ -788,7 +788,7 @@
       '<div class="tbl-wrap"><table class="con-t jx-t"><thead><tr><th>종목</th><th>섹터</th><th>분기 · 발표일</th><th class="r">매출 YoY</th><th class="r">영업이익 YoY</th><th class="r">직전 분기 YoY<br><small>매출 · 영업이익</small></th><th class="r">GPM</th><th class="r">분기 영업이익<br><small>억엔</small></th><th>걸린 기준 · 제외 사유</th><th>결산단신</th></tr></thead><tbody>' +
       shown.map(function (o) {
         var tags = (o.hit || []).map(function (h) { return '<i class="jx-h">' + JXH[h] + "</i>"; }).join("") + (o.drop || []).map(function (d) { return '<i class="jx-x">' + JXD[d] + "</i>"; }).join("") +
-          (o.st === "exsec" ? '<i class="jx-x">제외 섹터 · ' + esc(o.why) + "</i>" : o.st === "nodata" ? '<i class="jx-x">' + esc(o.why || "자료 없음") + "</i>" : "");
+          (o.cum ? '<i class="jx-x" title="직전 분기 결산단신이 없어 단독 분기 대신 누계끼리 비교">누계 YoY</i>' : "") + (o.st === "exsec" ? '<i class="jx-x">제외 섹터 · ' + esc(o.why) + "</i>" : o.st === "nodata" ? '<i class="jx-x">' + esc(o.why || "자료 없음") + "</i>" : "");
         return "<tr><td><b>" + esc(o.n || o.c) + '</b> <span class="mono na">' + esc(o.c) + "</span>" + (o.prev ? ' <i class="jx-pvb" title="일본 스크리닝 ' + esc(D.prev_label || "3Q26") + ' 판에도 있던 회사">' + esc(D.prev_label || "3Q26") + " 겹침</i>" : "") + "</td>" +
           '<td class="sc">' + esc(o.s || "—") + "</td>" +
           '<td class="an">' + (o.cq ? "<b>" + esc(o.cq) + "</b> " : "") + '<span class="mono na">' + (o.d ? esc(o.d.slice(5).replace("-", "/")) : "—") + "</span></td>" +
@@ -1701,7 +1701,7 @@
         return '<button data-v="' + o[0] + '" aria-pressed="' + (key === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div></div>" +
       '<div class="fld q"><label for="q">검색</label><input type="search" id="q" placeholder="회사 이름 · 티커 · 섹터 · 담당" value="' + esc(S.q) + '"></div>' +
       '<div class="count">팀 대시보드 ' + esc(S.study.updated || "") + " 기준 · <b>" + rows.length + "</b>개 기업 · <button type=\"button\" class=\"chip\" data-memoio=\"out\">메모 내보내기</button> <button type=\"button\" class=\"chip\" data-memoio=\"in\">메모 불러오기</button></div></div>" +
-      '<p class="stage-note">팀 대시보드 3단계에 올라온 회사입니다. 맨 앞 칸이 팀 점수(평균)와 코멘트, 1·2·3·4는 내 분류(2단계와 같이 저장, 1부터 위로), 아래 칸은 내 코멘트(2단계 목록 메모와 같은 칸 — 어느 쪽에 써도 양쪽에 보임)입니다. 이름을 누르면 재무·주가가 열립니다.</p>';
+      '<p class="stage-note">팀 대시보드 3단계에 올라온 회사입니다. 맨 앞 칸이 팀 점수(평균)와 코멘트, 1·2·3·4는 내 분류(2단계와 같이 저장, 4부터 위로), 아래 칸은 내 코멘트(2단계 목록 메모와 같은 칸 — 어느 쪽에 써도 양쪽에 보임)입니다. 이름을 누르면 재무·주가가 열립니다.</p>';
     if (!rows.length) return ctl + '<div class="empty">' + (q ? "검색과 맞는 기업이 없습니다." : "가져온 종목이 없습니다.") + "</div>";
     function scoreCls(v) { return v == null ? "" : v >= 7 ? " hi" : v >= 5 ? " mid" : " lo"; }
     function cms(x) {
@@ -1716,7 +1716,7 @@
     function picks(c) {
       var g = GRADE[c] || 0;
       return '<span class="picks grades">' + [1, 2, 3, 4].map(function (n) {
-        return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 지웁니다" : n + "로 분류 — 1·2·3·4 순서로 위로") + '">' + n + "</button>";
+        return '<button type="button" class="gr g' + n + (g === n ? " on" : "") + '" data-pick="' + n + '" data-pc="' + esc(c) + '" aria-pressed="' + (g === n) + '" title="' + (g === n ? "다시 누르면 지웁니다" : n + "로 분류 — 4·3·2·1 순서로 위로") + '">' + n + "</button>";
       }).join("") + "</span>";
     }
     return ctl + '<div class="stlist">' + rows.map(function (x, i) {

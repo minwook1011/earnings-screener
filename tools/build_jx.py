@@ -32,7 +32,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 J = os.path.join(ROOT, "docs", "data", "jp")
 OUT = os.path.join(J, "jx.json")
 KST = timezone(timedelta(hours=9))
-NF = 4
+NF = 5
 EXSEC = {"銀行業": "금융", "証券、商品先物取引業": "금융", "保険業": "금융", "その他金融業": "금융", "医薬品": "의약품",
          "鉄鋼": "철강", "パルプ・紙": "펄프·종이"}
 CHEM_KEEP = {"반도체", "화장품·퍼스널케어", "생활·홈"}
@@ -80,18 +80,31 @@ def facts(code):
         op = bx.pick(PL, cand[:1]) if cand else {}
     gp = bx.pick(PL, bx.PLMAP["gp"])
     if not rev or not op:
-        return {"d": used[0]["date"], "doc": used[0]["doc"], "t": used[0]["title"], "err": "매출·영업이익 없음"}
+        return {"d": used[0]["date"], "doc": used[0]["doc"], "t": used[0]["title"], "err": "영업이익 줄 없음(IFRS 영업이익 미공시)" if rev else "매출 줄을 못 찾음"}
     end_m = (fsm - 2) % 12 + 1 if fsm else 3
-    mt = re.search(r"(\d{4})年\s*(\d{1,2})月期", unicodedata.normalize("NFKC", used[0]["title"]))
+    t = unicodedata.normalize("NFKC", used[0]["title"])
+    mt = re.search(r"(\d{4})年\s*(\d{1,2})月期", t)
+    last = max(rev)
     if mt:
         end_m = int(mt.group(2))   # 결산월은 제목(「2027年3月期」)이 가장 확실
-    last = max(rev)
+        mq = re.search(r"第\s*(\d)\s*四半期", t)
+        tq = int(mq.group(1)) if mq else 2 if "中間" in t else 4
+        # 결산단신의 통기 예상(予想)이 4Q 누계로 잡혀 max() 가 미래 분기를 고르는 일 막기(2026-11-24 시마무라)
+        if (int(mt.group(1)), tq) in rev:
+            last = (int(mt.group(1)), tq)
     seq = bx.qseq(last, 7)[::-1]          # 이번 분기부터 과거로 7개
     S = [bx.standalone(rev, *k) for k in seq]
     O = [bx.standalone(op, *k) for k in seq]
     G = [bx.standalone(gp, *k) if gp else None for k in seq]
     m = lambda v: None if v is None else round(v / 1e6)   # 백만엔
-    return {"d": used[0]["date"], "doc": used[0]["doc"], "t": used[0]["title"], "fy": last[0], "q": last[1], "em": end_m,
+    cum = 0
+    if S[0] is None and rev.get(last) is not None and rev.get((last[0] - 1, last[1])) is not None and op.get(last) is not None and op.get((last[0] - 1, last[1])) is not None:
+        # 직전 분기 결산단신이 없어(1Q 단신 안 내는 회사) 단독 분기를 못 만들면 누계끼리 YoY(2026-11-24 도에이애니메이션)
+        py = (last[0] - 1, last[1])
+        S, O = [rev[last], None, None, None, rev[py], None, None], [op[last], None, None, None, op[py], None, None]
+        G = [gp.get(last) if gp else None, None, None, None, None, None, None]
+        cum = 1
+    return {"cum": cum, "d": used[0]["date"], "doc": used[0]["doc"], "t": used[0]["title"], "fy": last[0], "q": last[1], "em": end_m,
             "S": [m(x) for x in S], "O": [m(x) for x in O], "G": [m(x) for x in G]}
 
 
@@ -158,6 +171,8 @@ def one(code, info, ind):
     base.update({"cq": cq_of(f["fy"], f["em"], f["q"]), "fq": f"{f['fy']}/{f['em']} {f['q']}Q",
                  "s0": f["S"][0], "o0": f["O"][0], "S": f["S"][:6], "O": f["O"][:6]})
     base.update(judge(f, info, ind))
+    if f.get("cum"):
+        base["cum"] = 1
     return base
 
 
