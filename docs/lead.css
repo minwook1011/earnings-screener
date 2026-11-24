@@ -628,6 +628,14 @@ em.btg.b2 { color: #2e9d5b; background: rgba(46,157,91,.1); border: 1px solid rg
 .fin-up { fill: #e5484d; opacity: .8; } .fin-dn { fill: #4b7fe0; opacity: .8; }
 .fin-bl { font-size: 10px; fill: var(--ink-3); } .fin-v { font-size: 10px; fill: var(--ink-3); font-family: "IBM Plex Mono", monospace; }
 #ovsel button { white-space: nowrap; }
+/* 겹칠 지표가 많으면 카드 밖으로 넘치던 것(2026-11-25) — 한 줄을 다 쓰고 줄바꿈 */
+#mc .card-h > .ctl:first-child { flex: 1 1 100%; min-width: 0; }
+#ovsel { flex-wrap: wrap; max-width: 100%; }
+/* 선행지표 차트 기간·모양(2026-11-25) */
+.lctl { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-bottom: 6px; }
+.lctl .seg button { padding: 4px 10px; font-size: 12px; }
+.legend i.lg-iq { display: inline-block; width: 16px; height: 0; border-top: 2px dashed var(--b1); vertical-align: middle; margin-right: 6px; position: relative; }
+.legend i.lg-iq::after { content: ""; position: absolute; left: 5px; top: -5px; width: 6px; height: 6px; background: var(--b1); }
 
 /* 고른 이유 R값 · 한국어 검색어 */
 em.rv { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 11px; font-weight: 600; color: var(--ink-3); border: 1px solid var(--line-2); border-radius: 6px; padding: 0 6px; margin-left: 6px; white-space: nowrap; }

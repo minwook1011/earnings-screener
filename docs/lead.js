@@ -287,6 +287,14 @@
         r.om = r.s ? (r.o != null ? r.o / r.s * 100 : null) : null;
         r.t = r.pub ? tOf(r.pub) : null;
       });
+      var co = S.co[c];   // 원장 매출이 최근 몇 분기뿐이면 20분기 재무로 빈 분기를 채움 — 3Y·5Y 창에서 매출·성장률을 겹쳐 보려고(2026-11-25 사용자)
+      if (co) {
+        var ss = co.series.sales = co.series.sales || { n: "매출", unit: "억엔", kind: "money", src: {}, pts: [] }, have = {};
+        ss.pts.forEach(function (p) { have[p[0]] = 1; });
+        q.forEach(function (r) { if (r.s != null && !have[r.p]) ss.pts.push([r.p, r.s, "fin", 1]); });
+        ss.pts.sort(function (a, b) { return qi(a[0]) - qi(b[0]); });
+        if (co._m) delete co._m.sales;
+      }
       return (S.fin[c] = q);
     }).catch(function () { return (S.fin[c] = []); });
   }
@@ -368,7 +376,7 @@
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
         return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + btChip(it) + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko && it.kind !== "trends" ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
-      '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
+      '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="lctl"><div class="seg" id="lrange" role="group" aria-label="기간">' + ["YTD", "1Y", "3Y", "5Y"].map(function (r) { return '<button data-v="' + r + '" aria-pressed="' + ((st.lr || "3Y") === r) + '">' + r + "</button>"; }).join("") + '</div><div class="seg" id="lmode" role="group" aria-label="모양">' + [["auto", "자동"], ["bar", "막대"], ["line", "선"]].map(function (r) { return '<button data-v="' + r[0] + '" aria-pressed="' + ((st.lm || "auto") === r[0]) + '">' + r[1] + "</button>"; }).join("") + '</div></div><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
     var whyBlk = '<div class="card-b lwhy"><p><b>주의</b> ' + esc(co.lead.caveat || "") + '</p></div>';
 
@@ -400,6 +408,7 @@
     countUp(main);
     drawLead(co, true);
     document.querySelectorAll("#lchips .ichip").forEach(function (b) { b.onclick = function () { st.li = st.ov = b.dataset.li; syncSel(); drawLead(co, true); drawMain(co, true); }; });
+    [["lrange", "lr"], ["lmode", "lm"]].forEach(function (g) { document.querySelectorAll("#" + g[0] + " button").forEach(function (b) { b.onclick = function () { st[g[1]] = b.dataset.v; document.querySelectorAll("#" + g[0] + " button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); drawLead(co, true); }; }); });
     if (st.from == null) setRange(co, st.range);
     PC.co = null; NV.co = null; drawMain(co, true); bindMain(co);
     main.querySelectorAll("[data-pv]").forEach(function (b) { b.onclick = function () { openLb(b.getAttribute("data-pv"), b.getAttribute("data-cap")); }; });
@@ -420,12 +429,14 @@
     document.getElementById("lnote").innerHTML = it.why || it.note ? "<b>" + esc(it.short) + "</b> — " + esc(it.why || it.note) : "";
     var last = it.pts[it.pts.length - 1][0], pq = co.next.q, endYm = qMonthsList(co, pq)[2], first = it.pts[0][0];
     if (endYm <= last) endYm = ymAdd(last, 1);
-    var span = it.kind === "trends" ? 36 : 24;   // 구글트렌드는 3년(2026-11-20 사용자), 나머지 2년
+    var lr = st.lr || "3Y";   // 기간 YTD·1Y·3Y·5Y(2026-11-25 사용자 — 매출·성장률과 겹쳐 보려면 길게)
+    var span = lr === "1Y" ? 12 : lr === "5Y" ? 60 : 36;
+    if (lr === "YTD") { var y0 = last.slice(0, 4) + "-01"; span = Math.max(6, (+endYm.slice(0, 4) - +y0.slice(0, 4)) * 12 + +endYm.slice(5) - 1); }   // 최신 값의 해 1월부터
     if (ymAdd(first, span) < endYm) first = ymAdd(endYm, -span);
     if (ymAdd(first, 6) > endYm) first = ymAdd(endYm, -6);
     if (it.stack) first = ymAdd(endYm, -11);
     var months = []; for (var ym = first; ym <= endYm; ym = ymAdd(ym, 1)) months.push(ym);
-    var W = Math.max(320, host.clientWidth), pL = 50, pR = 12, IW = W - pL - pR, n = months.length, bw = IW / n;
+    var W = Math.max(320, host.clientWidth), pL = 50, pR = 44, IW = W - pL - pR, n = months.length, bw = IW / n, lk = Math.ceil(n / 14);   // lk = 값 라벨 간격(겹침 방지)
     var top = 30, h1 = W < 600 ? 170 : 210, gap = 34, h2 = W < 600 ? 130 : 160, yTop = top + h1 + gap, sTop = yTop, H = sTop + h2 + 26;
     var x = function (i) { return pL + bw * (i + 0.5); };
     var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H });
@@ -442,26 +453,37 @@
     var Qs = []; months.forEach(function (m, i) { var q = qOfYm(co, m); if (!Qs.length || Qs[Qs.length - 1].q !== q) Qs.push({ q: q, a: i, b: i }); else Qs[Qs.length - 1].b = i; });
     Qs.forEach(function (Q, k) {
       if (k % 2 === 0) el("rect", { x: pL + bw * Q.a, y: top - 24, width: bw * (Q.b - Q.a + 1), height: H - top - 2, fill: "var(--panel-2)", opacity: ".75", rx: 6 }, gB);
-      txt(gT, pL + bw * (Q.a + Q.b + 1) / 2, top - 10, Q.q, "q-lab" + (Q.q === pq ? " cur" : ""), "middle");
+      if (Q.q === pq || (Qs.length - 1 - k) % Math.ceil(Qs.length / 10) === 0) txt(gT, pL + bw * (Q.a + Q.b + 1) / 2, top - 10, Q.q, "q-lab" + (Q.q === pq ? " cur" : ""), "middle");
     });
     months.forEach(function (m, i) { if (m.slice(5) === "04") txt(gT, x(i), top + h1 + 13, "신졸 입사", "apr", "middle"); });
 
     // 위: 월 막대
-    var vals = it.pts.map(function (p) { return p[1]; }), vmax = Math.max.apply(null, vals), vmin = Math.min.apply(null, vals);
-    var lo = it.stack ? 0 : Math.max(0, vmin - (vmax - vmin) * 0.55), hi = vmax + (vmax - lo) * 0.2;
-    if (hi - lo < 1) { lo = Math.max(0, vmin * 0.6); hi = vmax * 1.15; }
-    var pctU = it.unit === "%"; if (pctU) { lo = Math.min(0, vmin * 1.15); hi = Math.max(0, vmax) * 1.2 + 1; }
-    var b0 = pctU ? 0 : lo;
+    // 축 범위는 화면에 보이는 달만으로(전체 이력 쓰면 코로나 -40% 같은 옛 값에 눌려 납작해짐 — 2026-11-25 사용자)
+    var vis = months.map(function (m) { var p = mm(it)[m]; return p ? p[1] : null; }).filter(function (v) { return v != null; });
+    if (!vis.length) vis = it.pts.map(function (p) { return p[1]; });
+    var vmax = Math.max.apply(null, vis), vmin = Math.min.apply(null, vis), pctU = it.unit === "%";
+    var rel = (vmax - vmin) / (Math.max(Math.abs(vmax), Math.abs(vmin)) || 1);
+    var asLine = !it.stack && (st.lm === "line" || (st.lm !== "bar" && (pctU || rel < 0.3)));   // 차이가 작으면 좁은 축 꺾은선
+    var lo, hi;
+    if (asLine) { var pd = (vmax - vmin) * 0.18 || Math.abs(vmax) * 0.05 || 1; lo = vmin - pd; hi = vmax + pd; if (pctU && lo > 0 && lo < pd * 2) lo = 0; }
+    else {
+      lo = it.stack ? 0 : Math.max(0, vmin - (vmax - vmin) * 0.55); hi = vmax + (vmax - lo) * 0.2;
+      if (hi - lo < 1) { lo = Math.max(0, vmin * 0.6); hi = vmax * 1.15; }
+      if (pctU) { lo = Math.min(0, vmin * 1.15); hi = Math.max(0, vmax) * 1.2 + 1; }
+    }
+    var b0 = pctU && !asLine ? 0 : lo;
     var y1 = function (v) { return top + (1 - (v - lo) / (hi - lo)) * h1; };
     nice(lo, hi, 4).forEach(function (v) { if (v < lo || v > hi) return; el("line", { x1: pL, x2: W - pR, y1: y1(v), y2: y1(v) }, gg); txt(ga, pL - 6, y1(v) + 3.5, nf(v), null, "end"); });
-    var bwr = Math.min(34, bw * 0.62), hits = [], stackCols = ["var(--ind)", "var(--acc)", "var(--gold)"];
+    if (pctU && lo < 0 && hi > 0) el("line", { x1: pL, x2: W - pR, y1: y1(0), y2: y1(0), stroke: "var(--ink-4)", "stroke-dasharray": "3 3" }, gg);
+    var bwr = Math.min(34, bw * 0.62), hits = [], stackCols = ["var(--ind)", "var(--acc)", "var(--gold)"], lpts = [];
     months.forEach(function (m, i) {
       var p = mm(it)[m], q = qOfYm(co, m);
       if (p) {
         if (it.stack && p[3]) { var acc = 0; it.stack.forEach(function (sk, j) { var v = p[3][sk[0]]; el("rect", { x: x(i) - bwr / 2, y: y1(acc + v), width: bwr, height: Math.max(1, y1(acc) - y1(acc + v) - 1.5), rx: 2, fill: stackCols[j], opacity: j ? ".8" : ".92", "class": "grow" }, gB); acc += v; }); }
+        else if (asLine) lpts.push({ x: x(i), y: y1(p[1]), v: p[1] });
         else el("rect", { x: x(i) - bwr / 2, y: Math.min(y1(p[1]), y1(b0)), width: bwr, height: Math.max(1, Math.abs(y1(b0) - y1(p[1]))), rx: Math.min(4, bwr / 4), fill: p[1] < 0 && pctU ? "var(--down)" : "url(#gLI)", "class": "grow" }, gB);
         var prev = mm(it)[ymAdd(m, -1)], yy = mm(it)[ymAdd(m, -12)];
-        txt(gT, x(i), y1(p[1]) - 6, nf(p[1]), "ibar-lab fade", "middle");
+        if (!asLine && ((n - 1 - i) % lk === 0 || m === last)) txt(gT, x(i), y1(p[1]) - 6, nf(p[1]), "ibar-lab fade", "middle");
         hits.push({ a: i, b: i, up: 1, h: "<h5>" + ymLab(m) + " 무렵<span>" + esc(it.short) + "</span></h5>" + row(NM(it), nf(p[1], DG(it)) + U(it), "ind") + (prev ? row("전월 대비", sgn(p[1] - prev[1]) + U(it)) : "") + (yy ? row("전년 대비", pct((p[1] / yy[1] - 1) * 100)) : "") +
           (p[3] && it.stack ? "<hr>" + it.stack.map(function (sk) { return row(sk[1], nf(p[3][sk[0]]) + U(it)); }).join("") : "") + "<hr>" + row("분기", q + " (" + qMonths(co, q) + ")") + row("출처", esc(co.refs[p[2]] ? co.refs[p[2]].t.split(" — ")[0] : p[2])) });
       } else if (m > last) {
@@ -471,11 +493,17 @@
         if (isNext) { txt(gT, x(i), y1(lo) - gh + 16, md(tOf(co.lead.next.date)).slice(3), "ibar-lab cs fade", "middle"); txt(gT, x(i), y1(lo) - gh + 28, "발표", "ibar-lab cs fade", "middle"); }
         hits.push({ a: i, b: i, up: 1, h: "<h5>" + ymLab(m) + " 무렵<span>미발표</span></h5>" + row("발표 예정", isNext ? md(tOf(co.lead.next.date)) + " (" + dlab(co.lead.next.date) + ")" : "그다음 갱신일") + row("분기", q) });
       } else hits.push({ a: i, b: i, up: 1, h: "<h5>" + ymLab(m) + "<span>기록 전</span></h5>" + row(it.short, "이 달부터 쌓는 중 아님") });
-      if (n <= 18 || i % 2 === 0) txt(ga, x(i), H - 6, ymLab(m), null, "middle");
+      if ((n - 1 - i) % Math.ceil(n / 16) === 0) txt(ga, x(i), H - 6, ymLab(m), null, "middle");
     });
+    if (lpts.length) {   // 꺾은선 모양 — 차이가 작은 지표를 좁은 축으로
+      var gl = el("g", {}, svg);
+      el("path", { d: lpts.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + d.y.toFixed(1); }).join("") + "L" + lpts[lpts.length - 1].x.toFixed(1) + "," + (top + h1) + "L" + lpts[0].x.toFixed(1) + "," + (top + h1) + "Z", fill: "url(#gLI)", opacity: ".18", stroke: "none", "class": "fade" }, gl);
+      el("path", { d: lpts.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + d.y.toFixed(1); }).join(""), fill: "none", stroke: "var(--b1)", "stroke-width": 2.2, "stroke-linejoin": "round", "class": "draw" }, gl);
+      lpts.forEach(function (d, j) { if (n <= 24) el("circle", { cx: d.x, cy: d.y, r: 3, fill: "var(--b1)", stroke: "var(--panel)", "stroke-width": 1.5, "class": "fade" }, gl); if ((lpts.length - 1 - j) % lk === 0) txt(gl, d.x, d.y - 8, nf(d.v, Math.abs(d.v) < 20 ? 1 : 0), "ibar-lab fade", "middle"); });
+    }
 
     // 가입자 YoY — 월 막대 위에 겹친 꺾은선(l1, 2026-11-16 사용자: 절댓값 막대엔 웬만하면 YoY 를 같이)
-    var iy = it.unit === "%" ? [] : months.map(function (m, i) { var p = mm(it)[m], b = mm(it)[ymAdd(m, -12)]; return p && b && b[1] ? { x: x(i), v: (p[1] / b[1] - 1) * 100 } : null; }).filter(Boolean);
+    var iy = it.unit === "%" || asLine ? [] : months.map(function (m, i) { var p = mm(it)[m], b = mm(it)[ymAdd(m, -12)]; return p && b && b[1] ? { x: x(i), v: (p[1] / b[1] - 1) * 100 } : null; }).filter(Boolean);
     if (iy.length) {
       var iv = iy.map(function (d) { return d.v; }), ilo = Math.min.apply(null, iv.concat([0])), ihi = Math.max.apply(null, iv.concat([1])) * 1.1;
       var y4 = function (v) { return top + 12 + (1 - (v - ilo) / ((ihi - ilo) || 1)) * (h1 * 0.3); };
@@ -483,7 +511,7 @@
       if (iy.length > 1) el("path", { d: iy.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y4(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--l1)", "stroke-width": 2, "class": "draw" }, gi4);
       var ik = Math.ceil(iy.length / 16);   // 3년 창에서 라벨 겹침 — 16개 안팎만, 마지막 값은 늘
       iy.forEach(function (d, j) { el("circle", { cx: d.x, cy: y4(d.v), r: 4, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 2, "class": "fade" }, gi4); if ((iy.length - 1 - j) % ik === 0) txt(gi4, d.x, y4(d.v) - 8, pct(d.v, ik > 1 ? 0 : 1), "ibar-lab cs fade", "middle"); });
-    } else txt(gT, pL + 8, top + 8, NM(it) + " YoY: 1년 전 값이 쌓이면 표시", "apr", "start");
+    } else if (!pctU && !asLine) txt(gT, pL + 8, top + 8, NM(it) + " YoY: 1년 전 값이 쌓이면 표시", "apr", "start");
 
     // 아래: 분기 매출(회사 발표 결과) + 이번 분기 추정
     var sv2 = Qs.map(function (Q) { return sv(co, "sales", Q.q); }).filter(function (v) { return v != null; });
@@ -493,10 +521,10 @@
     txt(ga, pL - 6, sTop + 12, "매출", "sub-ax", "end"); txt(ga, pL - 6, sTop + 24, "억엔", "sub-ax", "end");
     el("line", { x1: pL, x2: W - pR, y1: base2, y2: base2, stroke: "var(--line-2)" }, gg);
     Qs.forEach(function (Q) {
-      var a = pL + bw * Q.a + 6, w = bw * (Q.b - Q.a + 1) - 12, v = sv(co, "sales", Q.q), cx = a + w / 2, r0 = s.rows.filter(function (r) { return r.q === Q.q; })[0];
+      var qp = Math.min(6, bw * 0.4), a = pL + bw * Q.a + qp, w = Math.max(2, bw * (Q.b - Q.a + 1) - qp * 2), v = sv(co, "sales", Q.q), cx = a + w / 2, r0 = s.rows.filter(function (r) { return r.q === Q.q; })[0];
       if (v != null) {
         el("rect", { x: a, y: y2(v), width: w, height: base2 - y2(v), rx: 4, fill: "url(#gLS)", "class": "grow" }, gB);
-        txt(gT, cx, base2 - 8, nf(v, v < 100 ? 1 : 0), "ibar-lab in fade", "middle");
+        if (w >= 26 || (Qs.length - 1 - Qs.indexOf(Q)) % 2 === 0) txt(gT, cx, base2 - 8, nf(v, v < 100 ? 1 : 0), "ibar-lab in fade", "middle");
         hits.push({ a: Q.a, b: Q.b, up: 0, h: "<h5>" + Q.q + "<span>" + qMonths(co, Q.q) + "</span></h5>" + row("매출(회사 발표)", nf(v, 1) + "억엔") + row("매출 YoY", pct(yoy(co, "sales", Q.q))) + (r0 ? "<hr>" + row(NM(it) + " 분기 평균", nf(r0.avg, DG(it)) + U(it) + " (" + r0.n + "/3개월)", "ind") + (r0.ratio ? row(NM(it) + " 1" + U(it) + "당 월매출", nf(r0.ratio, 1) + "만엔") : "") : "") });
       } else if (Q.q === pq && s.est && main1) {
         el("rect", { x: a, y: y2(s.est.mid), width: w, height: base2 - y2(s.est.mid), rx: 4, fill: "url(#hLS)", stroke: "var(--b2)", "stroke-dasharray": "3 2", "class": "grow" }, gB);
@@ -510,14 +538,29 @@
     // 매출 YoY — 매출 막대 위에 겹친 꺾은선(2026-11-16 사용자). 축 없이 점마다 값
     var sy = Qs.map(function (Q) { var v = yoy(co, "sales", Q.q); return v != null ? { x: pL + bw * (Q.a + Q.b + 1) / 2, v: v } : null; }).filter(Boolean);
     var ey = s.est && main1 && s.est.yoy != null ? Qs.filter(function (Q) { return Q.q === s.est.q; }).map(function (Q) { return { x: pL + bw * (Q.a + Q.b + 1) / 2, v: s.est.yoy }; })[0] : null;
-    var yv = sy.map(function (d) { return d.v; }).concat(ey ? [ey.v] : []);
+    // 지표 분기 평균 YoY(전년비 지표면 분기 평균 값) — 매출 YoY 와 같은 축에 겹쳐 성장률끼리 비교(2026-11-25 사용자)
+    var iq = it.stack ? [] : Qs.map(function (Q) {
+      var vs = []; for (var k = Q.a; k <= Q.b; k++) { var m = months[k], p = mm(it)[m]; if (!p) continue; if (pctU) vs.push(p[1]); else { var b = mm(it)[ymAdd(m, -12)]; if (b && b[1]) vs.push((p[1] / b[1] - 1) * 100); } }
+      return vs.length ? { x: pL + bw * (Q.a + Q.b + 1) / 2, v: vs.reduce(function (a, b) { return a + b; }, 0) / vs.length, n: vs.length, q: Q.q } : null;
+    }).filter(Boolean);
+    var yv = sy.map(function (d) { return d.v; }).concat(ey ? [ey.v] : []).concat(iq.map(function (d) { return d.v; }));
     if (yv.length) {
-      var ylo = Math.min.apply(null, yv.concat([0])), yhi = Math.max.apply(null, yv) * 1.08;
-      var y3 = function (v) { return sTop + 22 + (1 - (v - ylo) / ((yhi - ylo) || 1)) * (h2 * 0.42); };
+      // 축은 튀는 값(코로나 기저 +180% 등)을 빼고 잡는다 — 10~90% 구간을 넓혀 쓰고, 넘는 점은 축 끝에 붙이고 값만 글자로
+      var srt = yv.slice().sort(function (a, b) { return a - b; }), pq_ = function (f) { return srt[Math.min(srt.length - 1, Math.max(0, Math.round(f * (srt.length - 1))))]; };
+      var p10 = pq_(0.1), p90 = pq_(0.9), ext = Math.max(5, (p90 - p10) * 0.6);
+      var ylo = Math.max(Math.min.apply(null, yv.concat([0])), p10 - ext), yhi = Math.min(Math.max.apply(null, yv.concat([1])) * 1.08, p90 + ext);
+      if (ylo > 0) ylo = 0;
+      var y3 = function (v) { v = Math.max(ylo, Math.min(yhi, v)); return sTop + 22 + (1 - (v - ylo) / ((yhi - ylo) || 1)) * (h2 * 0.5); };
       var gy = el("g", { "class": "yov" }, svg);
+      if (iq.length) {
+        if (iq.length > 1) el("path", { d: iq.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y3(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--b1)", "stroke-width": 2, "stroke-dasharray": "5 3", "class": "draw" }, gy);
+        iq.forEach(function (d) { el("rect", { x: d.x - 3.5, y: y3(d.v) - 3.5, width: 7, height: 7, fill: d.n === 3 ? "var(--b1)" : "var(--panel)", stroke: "var(--b1)", "stroke-width": 1.5, "class": "fade" }, gy); });
+        if (ylo < 0) el("line", { x1: pL, x2: W - pR, y1: y3(0), y2: y3(0), stroke: "var(--ink-4)", "stroke-dasharray": "2 3", opacity: ".6" }, gy);
+      }
       if (sy.length > 1) el("path", { d: sy.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + y3(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--l1)", "stroke-width": 2, "stroke-linejoin": "round", "class": "draw" }, gy);
       if (ey && sy.length) { var lp = sy[sy.length - 1]; el("path", { d: "M" + lp.x + "," + y3(lp.v) + "L" + ey.x + "," + y3(ey.v), fill: "none", stroke: "var(--l1)", "stroke-width": 1.6, "stroke-dasharray": "4 3" }, gy); }
-      sy.forEach(function (d) { el("circle", { cx: d.x, cy: y3(d.v), r: 4, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 2, "class": "fade" }, gy); txt(gy, d.x, y3(d.v) - 9, pct(d.v, 1), "ibar-lab cs fade", "middle"); });
+      var sk = Math.ceil(sy.length / 10);
+      sy.forEach(function (d, j) { el("circle", { cx: d.x, cy: y3(d.v), r: 4, fill: "var(--l1)", stroke: "var(--panel)", "stroke-width": 2, "class": "fade" }, gy); if ((sy.length - 1 - j) % sk === 0) txt(gy, d.x, y3(d.v) - 9, pct(d.v, sk > 1 ? 0 : 1), "ibar-lab cs fade", "middle"); });
       if (ey) { el("circle", { cx: ey.x, cy: y3(ey.v), r: 4.5, fill: "var(--panel)", stroke: "var(--l1)", "stroke-width": 2, "class": "fade" }, gy); txt(gy, ey.x, y3(ey.v) - 9, pct(ey.v, 0) + " 추정", "ibar-lab cs fade", "middle"); }
     }
     var hl = el("rect", { fill: "var(--ink)", opacity: 0, rx: 6 }, gB);
@@ -530,7 +573,7 @@
     host.innerHTML = ""; host.appendChild(svg);
     if (anim) animate(svg);
     document.getElementById("llg").innerHTML = (it.stack ? it.stack.map(function (sk, j) { return '<span><i class="lg-s' + j + '"></i>' + esc(sk[1]) + "</span>"; }).join("") : '<span><i class="lg-ind"></i>' + esc(it.short) + " (월)</span>") +
-      '<span><i class="lg-ghost"></i>미발표 달</span><span><i class="lg-l1"></i>' + esc(NM(it)) + ' YoY · 매출 YoY(각 막대 위 겹침)</span><span><i class="lg-sales"></i>분기 매출(회사 발표 결과)</span>' + (main1 ? '<span><i class="lg-est2"></i>이번 분기 매출 추정(' + esc(NM(it)) + ' 기준)</span>' : "") + (co.consensus ? '<span><i class="lg-cs"></i>컨센서스</span>' : "");
+      '<span><i class="lg-ghost"></i>미발표 달</span><span><i class="lg-l1"></i>매출 YoY</span>' + (iq.length ? '<span><i class="lg-iq"></i>' + esc(NM(it)) + (pctU ? " 분기 평균" : " 분기 평균 YoY") + " (아래 매출 YoY와 같은 축 · 빈 네모 = 3개월 다 안 참)</span>" : "") + '<span><i class="lg-sales"></i>분기 매출(회사 발표 결과)</span>' + (main1 ? '<span><i class="lg-est2"></i>이번 분기 매출 추정(' + esc(NM(it)) + ' 기준)</span>' : "") + (co.consensus ? '<span><i class="lg-cs"></i>컨센서스</span>' : "");
     drawStats(co, it, s);
   }
 
