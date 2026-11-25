@@ -894,3 +894,6 @@ body.home-wide .main { padding: 20px 24px 60px; }
 .cpanel .hc-h .hc-f { flex: 0 1 460px; }
 #hcMode { flex: 0 0 auto; } #hcMode button { white-space: nowrap; }
 .cpanel .hc-f { display: grid; grid-template-columns: minmax(140px, 1fr) auto minmax(140px, 1fr); gap: 6px; align-items: center; }
+
+/* 기업 카드 첫 화면 — 닫기 대신 달력 버튼(2026-11-26 사용자) */
+.dp-x.cp-cal { width: auto; padding: 0 12px; font-size: 13px; font-weight: 700; white-space: nowrap; }

@@ -251,18 +251,18 @@
         '<div class="cal-leg">' + Object.keys(CAT).map(function (k) { return '<span><i class="' + CAT[k] + '"></i>' + k + "</span>"; }).join("") + '<a class="chip acc" href="#all">기업별 지표 한눈에 ›</a><a class="chip gold" href="#spike">튄 지표 ›</a></div>' +
         '<div class="cal" id="cal"></div><div class="cal-day" id="calDay"></div></section>' +
         '<button type="button" class="hm-tab" id="hmTab" aria-label="기업 카드 열기">기업 ›</button>' +   // 오른쪽 끝 탭 → 옆 창(2026-11-25 사용자)
-        '<div class="cpanel" id="cpanel" hidden><div class="dp-back" id="cpBack"></div><aside class="cp-box hm-cards"><div class="hc-h"><div class="cp-t"><h2>기업 <small id="hcN"></small></h2><button type="button" class="dp-x" id="cpX" aria-label="닫기">✕</button></div><input id="hcQ" type="search" placeholder="기업 · 코드 · 지표 검색" value="' + esc(S.hm.q) + '">' +
+        '<div class="cpanel" id="cpanel" hidden><div class="dp-back" id="cpBack"></div><aside class="cp-box hm-cards"><div class="hc-h"><div class="cp-t"><h2>기업 <small id="hcN"></small></h2><button type="button" class="dp-x cp-cal" id="cpX" aria-label="선행지표 달력 보기">📅 달력</button></div><input id="hcQ" type="search" placeholder="기업 · 코드 · 지표 검색" value="' + esc(S.hm.q) + '">' +
         '<div class="hc-f"><select id="hcSec"><option value="">전체 섹터</option>' + S.idx.tree.map(function (g) { return '<optgroup label="' + esc(g.n) + '">' + g.kids.filter(function (k) { return k.cos.length; }).map(function (k) { var v = g.id + "/" + k.id; return '<option value="' + v + '"' + (S.hm.sec === v ? " selected" : "") + ">" + esc(k.n) + " (" + k.cos.length + ")</option>"; }).join("") + "</optgroup>"; }).join("") + "</select>" +
         '<div class="seg" id="hcMode" role="group" aria-label="카드 차트">' + [["sales", "매출액 × 지표"], ["px", "주가 × 지표"]].map(function (o) { return '<button type="button" data-v="' + o[0] + '" aria-pressed="' + ((S.hm.cm || "sales") === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div>" +
         '<select id="hcSort">' + [["mc", "시가총액 큰 순"], ["r1m", "1개월 수익률"], ["r3m", "3개월 수익률"], ["r1y", "1년 수익률"], ["nd", "실적 발표 가까운 순"], ["bt", "백테스트 등급 순"], ["n", "이름 순"]].map(function (o) { return '<option value="' + o[0] + '"' + (S.hm.sort === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></div></div><div class=\"hc-list\" id=\"hcList\"></div></aside></div></div>";
       calDraw(byD);
-      var cp = document.getElementById("cpanel"), cpOpen = function () { cp.hidden = false; document.body.classList.add("dp-on"); if (!cp._drawn) { cp._drawn = 1; cardsDraw(); } }, cpClose = function () { cp.hidden = true; document.body.classList.remove("dp-on"); };
+      var cp = document.getElementById("cpanel"), cpOpen = function () { cp.hidden = false; S.hm.showCal = false; document.body.classList.add("dp-on"); if (!cp._drawn) { cp._drawn = 1; cardsDraw(); } }, cpClose = function () { cp.hidden = true; S.hm.showCal = true; document.body.classList.remove("dp-on"); };
       document.getElementById("hmTab").onclick = document.getElementById("hmOpen").onclick = cpOpen;
       document.getElementById("cpBack").onclick = document.getElementById("cpX").onclick = cpClose;
       document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !cp.hidden) cpClose(); });
       cp.addEventListener("click", function (e) { if (e.target.closest("a[href^='#c/']")) { var hl = document.getElementById("hcList"), bx = cp.querySelector(".cp-box"); S.hm.cpRet = [hl ? hl.scrollTop : 0, bx ? bx.scrollTop : 0]; document.body.classList.remove("dp-on"); } });
-      if (S.hm.cpRet) {   // 기업 카드에서 기업을 눌렀다가 뒤로가기·Esc로 오면 카드 창을 그 자리 그대로 다시 엶(2026-11-26 사용자)
-        var rt = S.hm.cpRet; S.hm.cpRet = null; cpOpen();
+      if (S.hm.cpRet || !S.hm.showCal) {   // 첫 화면 = 기업 카드(2026-11-26 사용자). 닫으면(✕·Esc) 달력, 달력에서 연 기업은 뒤로 오면 달력   // 기업 카드에서 기업을 눌렀다가 뒤로가기·Esc로 오면 카드 창을 그 자리 그대로 다시 엶(2026-11-26 사용자)
+        var rt = S.hm.cpRet || [0, 0]; S.hm.cpRet = null; cpOpen();
         [0, 80, 250, 600].forEach(function (ms) { setTimeout(function () { var hl = document.getElementById("hcList"), bx = cp.querySelector(".cp-box"); if (hl && hl.scrollTop < rt[0]) hl.scrollTop = rt[0]; if (bx && bx.scrollTop < rt[1]) bx.scrollTop = rt[1]; }, ms); });
       }
       document.getElementById("calPrev").onclick = function () { S.hm.ym = ymAdd(S.hm.ym, -1); calDraw(byD); };
