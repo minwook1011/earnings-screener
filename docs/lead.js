@@ -260,7 +260,11 @@
       document.getElementById("hmTab").onclick = document.getElementById("hmOpen").onclick = cpOpen;
       document.getElementById("cpBack").onclick = document.getElementById("cpX").onclick = cpClose;
       document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !cp.hidden) cpClose(); });
-      cp.addEventListener("click", function (e) { if (e.target.closest("a[href^='#c/']")) { document.body.classList.remove("dp-on"); } });
+      cp.addEventListener("click", function (e) { if (e.target.closest("a[href^='#c/']")) { var hl = document.getElementById("hcList"), bx = cp.querySelector(".cp-box"); S.hm.cpRet = [hl ? hl.scrollTop : 0, bx ? bx.scrollTop : 0]; document.body.classList.remove("dp-on"); } });
+      if (S.hm.cpRet) {   // 기업 카드에서 기업을 눌렀다가 뒤로가기·Esc로 오면 카드 창을 그 자리 그대로 다시 엶(2026-11-26 사용자)
+        var rt = S.hm.cpRet; S.hm.cpRet = null; cpOpen();
+        [0, 80, 250, 600].forEach(function (ms) { setTimeout(function () { var hl = document.getElementById("hcList"), bx = cp.querySelector(".cp-box"); if (hl && hl.scrollTop < rt[0]) hl.scrollTop = rt[0]; if (bx && bx.scrollTop < rt[1]) bx.scrollTop = rt[1]; }, ms); });
+      }
       document.getElementById("calPrev").onclick = function () { S.hm.ym = ymAdd(S.hm.ym, -1); calDraw(byD); };
       document.getElementById("calNext").onclick = function () { S.hm.ym = ymAdd(S.hm.ym, 1); calDraw(byD); };
       document.getElementById("calToday").onclick = function () { S.hm.ym = new Date().toISOString().slice(0, 7); S.hm.day = new Date().toISOString().slice(0, 10); calDraw(byD); };
@@ -1613,6 +1617,8 @@
   function route() {
     hideTip(); renderFav();
     var h = location.hash.replace(/^#\/?/, ""), p = h.split("/");
+    S.prevH = S.curH; S.curH = location.hash;
+    if (S.hm && p[0] !== "c" && h) S.hm.cpRet = null;
     document.body.classList.remove("home-wide");   // 첫 화면만 왼쪽 목록을 숨기고 넓게
     if (p[0] === "c" && p[1] && S.idx.cos[p[1]]) { renderTree({ sec: S.idx.cos[p[1]].sec, c: p[1] }); main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>'; ensureCo([p[1]], true).then(function () { return attachMacro(S.co[p[1]]); }).then(function () { if (cur() === p[1]) viewCompany(p[1]); }); }
     else if (p[0] === "all") { renderTree(null); viewAll(); }
@@ -1621,6 +1627,12 @@
     else { renderTree(null); viewHome(); }
     window.scrollTo(0, 0);
   }
+  /* 기업 화면에서 Esc = 뒤로(열린 창·확대 이미지가 있으면 그것부터 닫힘) — 2026-11-26 사용자 */
+  window.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !cur() || /^(INPUT|TEXTAREA|SELECT)$/.test((e.target || {}).tagName || "")) return;
+    if (["lb", "btm", "dpanel", "cpanel"].some(function (id) { var x = document.getElementById(id); return x && !x.hidden; })) return;
+    if (S.prevH !== undefined) history.back(); else location.hash = "";
+  }, true);
   var rT = null;
   window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(function () { var c = cur(); if (!c || !S.co[c]) return; drawLead(S.co[c], false); drawMain(S.co[c], false); }, 150); });
   document.getElementById("sideTg").onclick = function () { var sd = document.getElementById("side"), o = sd.classList.toggle("open"); this.setAttribute("aria-expanded", o); };
