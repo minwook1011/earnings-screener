@@ -182,6 +182,7 @@ def main():
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "lead_bt.py")], cwd=ROOT)
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "lead_detail.py")], cwd=ROOT)   # 「자세히」 지표별 분석(2026-11-25)
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "lead_cycle.py")], cwd=ROOT)    # 사이클: 업황 현황(2026-11-25)
+    subprocess.run([sys.executable, os.path.join(ROOT, "tools", "lead_home.py")], cwd=ROOT)         # 첫 화면 달력·기업 카드(2026-11-25) — 주가 수익률이 바뀌니 매번
     if "--push" in sys.argv:
         paths = ["docs/data/jp/lead"] + [f"docs/data/jp/px/{c}.json" for c in codes if os.path.exists(os.path.join(PX, f"{c}.json"))]
         subprocess.run([sys.executable, os.path.join(ROOT, "tools", "gpush.py"), f"data: 선행지표 갱신 {dt.date.today()}"] + paths, cwd=ROOT)

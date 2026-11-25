@@ -236,8 +236,104 @@
     });
   }
 
-  /* ---------- 홈 ---------- */
+  /* ---------- 홈(2026-11-25 사용자) — 왼쪽 큰 달력(언제 어떤 지표가 나오나 → 누르면 해당 기업) + 오른쪽 기업 카드 ---------- */
+  var CAT = { "통계": "c1", "무역": "c2", "다른 회사 월차": "c3", "월차": "c4", "트렌드": "c5", "연금": "c6" };
   function viewHome() {
+    document.body.classList.add("home-wide");
+    main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>';
+    Promise.all([S.cal || getJSON("data/jp/lead/calendar.json").then(function (d) { return (S.cal = d); }), S.cards || getJSON("data/jp/lead/cards.json").then(function (d) { return (S.cards = d); })]).then(function () {
+      if (location.hash.replace(/^#\/?/, "")) return;
+      var byD = {}; S.cal.ev.forEach(function (e) { (byD[e.d] = byD[e.d] || []).push(e); });
+      S.hm = S.hm || { ym: new Date().toISOString().slice(0, 7), day: null, q: "", sec: "", sort: "mc", n: 40 };
+      if (!S.hm.day) { var t0 = new Date().toISOString().slice(0, 10); S.hm.day = Object.keys(byD).sort().filter(function (d) { return d >= t0; })[0] || t0; }
+      main.innerHTML = '<div class="hm"><section class="hm-cal"><div class="hm-h"><div><span class="eyebrow">LEADING INDICATORS · CALENDAR</span><h1>선행지표 달력</h1><p>날짜마다 나오는 외부 지표 — 누르면 그 지표를 쓰는 기업. 점선 테두리 = 공표 규칙으로 추정한 날</p></div>' +
+        '<div class="hm-nav"><button type="button" id="calPrev" aria-label="이전 달">‹</button><b id="calYm"></b><button type="button" id="calNext" aria-label="다음 달">›</button><button type="button" id="calToday">오늘</button></div></div>' +
+        '<div class="cal-leg">' + Object.keys(CAT).map(function (k) { return '<span><i class="' + CAT[k] + '"></i>' + k + "</span>"; }).join("") + '<a class="chip acc" href="#all">기업별 지표 한눈에 ›</a><a class="chip gold" href="#spike">튄 지표 ›</a></div>' +
+        '<div class="cal" id="cal"></div><div class="cal-day" id="calDay"></div></section>' +
+        '<aside class="hm-cards"><div class="hc-h"><h2>기업 <small id="hcN"></small></h2><input id="hcQ" type="search" placeholder="기업 · 코드 · 지표 검색" value="' + esc(S.hm.q) + '">' +
+        '<div class="hc-f"><select id="hcSec"><option value="">전체 섹터</option>' + S.idx.tree.map(function (g) { return '<optgroup label="' + esc(g.n) + '">' + g.kids.filter(function (k) { return k.cos.length; }).map(function (k) { var v = g.id + "/" + k.id; return '<option value="' + v + '"' + (S.hm.sec === v ? " selected" : "") + ">" + esc(k.n) + " (" + k.cos.length + ")</option>"; }).join("") + "</optgroup>"; }).join("") + "</select>" +
+        '<select id="hcSort">' + [["mc", "시가총액 큰 순"], ["r1m", "1개월 수익률"], ["r3m", "3개월 수익률"], ["r1y", "1년 수익률"], ["nd", "실적 발표 가까운 순"], ["bt", "백테스트 등급 순"], ["n", "이름 순"]].map(function (o) { return '<option value="' + o[0] + '"' + (S.hm.sort === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></div></div><div class=\"hc-list\" id=\"hcList\"></div></aside></div>";
+      calDraw(byD); cardsDraw();
+      document.getElementById("calPrev").onclick = function () { S.hm.ym = ymAdd(S.hm.ym, -1); calDraw(byD); };
+      document.getElementById("calNext").onclick = function () { S.hm.ym = ymAdd(S.hm.ym, 1); calDraw(byD); };
+      document.getElementById("calToday").onclick = function () { S.hm.ym = new Date().toISOString().slice(0, 7); S.hm.day = new Date().toISOString().slice(0, 10); calDraw(byD); };
+      document.getElementById("hcQ").oninput = function () { S.hm.q = this.value; S.hm.n = 40; cardsDraw(); };
+      document.getElementById("hcSec").onchange = function () { S.hm.sec = this.value; S.hm.n = 40; cardsDraw(); };
+      document.getElementById("hcSort").onchange = function () { S.hm.sort = this.value; cardsDraw(); };
+    }).catch(function (e) { main.innerHTML = '<div class="empty">첫 화면 데이터를 불러오지 못했습니다(tools/lead_home.py) — ' + esc(e.message || e) + "</div>"; });
+  }
+  function calDraw(byD) {
+    var ym = S.hm.ym, y = +ym.slice(0, 4), m = +ym.slice(5, 7), first = new Date(Date.UTC(y, m - 1, 1)), start = first.getUTCDay(), nd = new Date(Date.UTC(y, m, 0)).getUTCDate(), today = new Date().toISOString().slice(0, 10);
+    document.getElementById("calYm").textContent = y + "년 " + m + "월";
+    var h = ["일", "월", "화", "수", "목", "금", "토"].map(function (w, i) { return '<div class="cw' + (i === 0 ? " sun" : i === 6 ? " sat" : "") + '">' + w + "</div>"; }).join("");
+    for (var i = 0; i < start; i++) h += '<div class="cd out"></div>';
+    for (var d = 1; d <= nd; d++) {
+      var ds = ym + "-" + pad(d), es = (byD[ds] || []).slice().sort(function (a, b) { return b.cos.length - a.cos.length; }), wd = (start + d - 1) % 7, nCo = {};
+      es.forEach(function (e) { e.cos.forEach(function (c) { nCo[c] = 1; }); });
+      h += '<button type="button" class="cd' + (ds === today ? " today" : "") + (ds === S.hm.day ? " sel" : "") + (es.length ? " has" : "") + (wd === 0 ? " sun" : wd === 6 ? " sat" : "") + '" data-d="' + ds + '"><span class="dn">' + d + "</span>" +
+        (es.length ? '<span class="cn">' + es.length + "개 지표 · " + Object.keys(nCo).length + "곳</span>" + es.slice(0, 4).map(function (e) { return '<span class="ce ' + (CAT[e.cat] || "c1") + (e.est ? " est" : "") + '">' + esc(e.n.length > 18 ? e.n.slice(0, 17) + "…" : e.n) + "<b>" + e.cos.length + "</b></span>"; }).join("") + (es.length > 4 ? '<span class="cm">+' + (es.length - 4) + "</span>" : "") : "") + "</button>";
+    }
+    var cal = document.getElementById("cal"); cal.innerHTML = h;
+    cal.querySelectorAll(".cd[data-d]").forEach(function (b) { b.onclick = function () { S.hm.day = b.dataset.d; cal.querySelectorAll(".cd.sel").forEach(function (x) { x.classList.remove("sel"); }); b.classList.add("sel"); calDay(byD); }; });
+    calDay(byD);
+  }
+  function calDay(byD) {
+    var box = document.getElementById("calDay"), d = S.hm.day, es = (byD[d] || []).slice().sort(function (a, b) { return b.cos.length - a.cos.length; });
+    if (!es.length) { box.innerHTML = '<div class="cdh"><b>' + md(tOf(d)) + " (" + dlab(d) + ')</b><span>이 날 나오는 지표가 없습니다.</span></div>'; return; }
+    var nm = function (c) { var o = S.idx.cos[c]; return o ? o.n : c; };
+    box.innerHTML = '<div class="cdh"><b>' + md(tOf(d)) + " (" + dlab(d) + ")</b><span>" + es.length + "개 지표 · 누르면 해당 기업</span></div>" + es.map(function (e, i) {
+      return '<details class="cde"' + (i < 2 ? " open" : "") + '><summary><i class="' + (CAT[e.cat] || "c1") + '"></i><b>' + esc(e.n) + "</b>" + (e.m ? '<small>' + esc(e.m.replace("-", ".")) + "월 자료</small>" : "") + (e.est ? '<em class="est">추정</em>' : '<em class="fix">확정</em>') + '<span class="cc">' + e.cos.length + "곳" + (e.bt.length ? ' · <em class="btg b1">등급 ' + e.bt.length + "</em>" : "") + "</span></summary>" +
+        (e.src ? '<p class="cds">' + esc(e.src) + "</p>" : "") + '<div class="cdc">' + e.cos.map(function (c) { return '<a href="#c/' + c + '">' + esc(nm(c)) + '<small class="mono">' + c + "</small>" + (e.bt.indexOf(c) >= 0 ? '<em class="btg b1">등급</em>' : "") + "</a>"; }).join("") + "</div></details>";
+    }).join("");
+  }
+  function cardsDraw() {
+    var q = (S.hm.q || "").trim().toLowerCase(), gr = { "확정": 0, "유망": 1 };
+    var L = S.cards.cards.filter(function (x) { return (!S.hm.sec || x.sec === S.hm.sec) && (!q || (x.n + " " + (x.jp || "") + " " + x.c + " " + (x.key || "") + " " + x.s).toLowerCase().indexOf(q) >= 0); });
+    var k = S.hm.sort;
+    L.sort(function (a, b) {
+      if (k === "n") return a.n.localeCompare(b.n, "ko");
+      if (k === "nd") return (a.nd && dday(a.nd) >= 0 ? a.nd : "9") < (b.nd && dday(b.nd) >= 0 ? b.nd : "9") ? -1 : 1;
+      if (k === "bt") return (a.bt ? gr[a.bt] : 2) - (b.bt ? gr[b.bt] : 2) || (b.bter || 0) - (a.bter || 0);
+      return (b[k] == null ? -1e9 : b[k]) - (a[k] == null ? -1e9 : a[k]);
+    });
+    document.getElementById("hcN").textContent = L.length + "곳";
+    var r = function (v) { return '<b class="mono ' + (v == null ? "" : v > 0 ? "up" : v < 0 ? "dn" : "") + '">' + (v == null ? "—" : pct(v, 1)) + "</b>"; };
+    var box = document.getElementById("hcList");
+    box.innerHTML = L.slice(0, S.hm.n).map(function (x) {
+      var d = x.nd ? dday(x.nd) : null;
+      return '<article class="hcard" data-c="' + x.c + '"><header><div class="hn"><a href="#c/' + x.c + '"><b>' + esc(x.n) + '</b></a><small class="mono">' + x.c + "</small><span>" + esc(x.s) + "</span></div>" + (d != null && d >= 0 ? '<span class="hd">실적 ' + (d === 0 ? "오늘" : "D-" + d) + "</span>" : "") + "</header>" +
+        '<dl class="hm4"><div><dt>시총</dt><dd class="mono">' + (x.mc != null ? nf(x.mc) + "<small>억엔</small>" : "—") + "</dd></div><div><dt>PER</dt><dd class=\"mono\">" + (x.per != null ? nf(x.per, 1) + "<small>배</small>" : "—") + "</dd></div><div><dt>1개월</dt><dd>" + r(x.r1m) + "</dd></div><div><dt>3개월</dt><dd>" + r(x.r3m) + "</dd></div><div><dt>1년</dt><dd>" + r(x.r1y) + "</dd></div></dl>" +
+        '<div class="hk"><span>키 데이터</span><b>' + esc(x.key || "—") + "</b>" + (x.bt ? '<em class="btg ' + (x.bt === "확정" ? "b1" : "b2") + '">' + x.bt + " " + x.bter + "%</em>" : x.weak ? '<em class="vol">외부지표 약함</em>' : "") + '<button type="button" class="hx" aria-expanded="false">차트 ▾</button></div><div class="hch"></div></article>';
+    }).join("") + (L.length > S.hm.n ? '<button type="button" class="hmore" id="hcMore">더 보기 (' + (L.length - S.hm.n) + "곳 남음)</button>" : "");
+    var mb = document.getElementById("hcMore"); if (mb) mb.onclick = function () { S.hm.n += 60; cardsDraw(); };
+    box.querySelectorAll(".hcard .hx").forEach(function (b) { b.onclick = function () { var card = b.closest(".hcard"), o = card.classList.toggle("open"); b.setAttribute("aria-expanded", o); b.textContent = o ? "차트 ▴" : "차트 ▾"; if (o) cardChart(card); }; });
+  }
+  function cardChart(card) {   // 카드 안 작은 차트 — 주가(주봉, 2년) + 키 데이터(월) 겹치기
+    var c = card.dataset.c, host = card.querySelector(".hch");
+    if (host._done) return; host.innerHTML = '<div class="boot sm"><i></i><i></i><i></i></div>';
+    ensureCo([c], true).then(function () { return attachMacro(S.co[c]); }).then(function () {
+      host._done = 1;
+      var co = S.co[c], px = weekly(S.px[c] || []), it = co && co.lead ? bestIt(co) : null;
+      if (!px.length) { host.innerHTML = '<p class="hint">주가 없음</p>'; return; }
+      var t1 = px[px.length - 1].t, t0 = t1 - 730 * DAY; px = px.filter(function (r) { return r.t >= t0; });
+      var W = Math.max(260, host.clientWidth || 300), H = 150, pL = 8, pR = 8, top = 10, bot = 18, X = function (t) { return pL + (t - t0) / (t1 - t0) * (W - pL - pR); };
+      var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H });
+      var cs = px.map(function (r) { return r.c; }), lo = Math.min.apply(null, cs), hi = Math.max.apply(null, cs), Y = function (v) { return top + (1 - (v - lo) / ((hi - lo) || 1)) * (H - top - bot); };
+      el("path", { d: px.map(function (r, i) { return (i ? "L" : "M") + X(r.t).toFixed(1) + "," + Y(r.c).toFixed(1); }).join(""), fill: "none", stroke: "var(--gold)", "stroke-width": 1.8 }, svg);
+      if (it && it.pts && it.pts.length) {
+        var ip = it.pts.filter(function (p) { return ymT(p[0]) >= t0 && ymT(p[0]) <= t1 + 40 * DAY && p[1] != null; });
+        if (ip.length > 1) {
+          var iv = ip.map(function (p) { return p[1]; }), ilo = Math.min.apply(null, iv), ihi = Math.max.apply(null, iv), YI = function (v) { return top + (1 - (v - ilo) / ((ihi - ilo) || 1)) * (H - top - bot); };
+          el("path", { d: ip.map(function (p, i) { return (i ? "L" : "M") + X(ymT(p[0])).toFixed(1) + "," + YI(p[1]).toFixed(1); }).join(""), fill: "none", stroke: "var(--b1)", "stroke-width": 1.8, "stroke-dasharray": "4 2" }, svg);
+        }
+      }
+      txt(svg, pL, H - 4, ymLab(new Date(t0).toISOString().slice(0, 7)), "ibar-lab", "start"); txt(svg, W - pR, H - 4, ymLab(new Date(t1).toISOString().slice(0, 7)), "ibar-lab", "end");
+      host.innerHTML = ""; host.appendChild(svg);
+      var lg = document.createElement("div"); lg.className = "hlg"; lg.innerHTML = '<span><i class="g"></i>주가(주봉 2년)</span>' + (it ? '<span><i class="b"></i>' + esc(it.short || it.t || "") + (it.unit ? " (" + esc(it.unit) + ")" : "") + "</span>" : "") + '<a href="#c/' + c + '">자세히 ›</a>'; host.appendChild(lg);
+    }).catch(function () { host.innerHTML = '<p class="hint">불러오지 못함</p>'; });
+  }
+
+  function viewHomeOld() {
     var cos = Object.keys(S.idx.cos).map(function (c) { var o = S.idx.cos[c]; return { c: c, n: o.n, ln: o.ln, nd: o.nd, nq: o.nq }; });
     var nPts = S.idx.tree.reduce(function (s, g) { return s + g.kids.filter(function (k) { return k.cos.length; }).length; }, 0);
     var ev = [];
@@ -1399,6 +1495,7 @@
   function route() {
     hideTip(); renderFav();
     var h = location.hash.replace(/^#\/?/, ""), p = h.split("/");
+    document.body.classList.remove("home-wide");   // 첫 화면만 왼쪽 목록을 숨기고 넓게
     if (p[0] === "c" && p[1] && S.idx.cos[p[1]]) { renderTree({ sec: S.idx.cos[p[1]].sec, c: p[1] }); main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>'; ensureCo([p[1]], true).then(function () { return attachMacro(S.co[p[1]]); }).then(function () { if (cur() === p[1]) viewCompany(p[1]); }); }
     else if (p[0] === "all") { renderTree(null); viewAll(); }
     else if (p[0] === "spike") { renderTree(null); viewSpike(); }
