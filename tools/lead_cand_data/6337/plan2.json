@@ -1,0 +1,25 @@
+{
+ "c": "6337",
+ "made": "2026-11-25",
+ "lag": 9,
+ "lag_why": "리포트(stage2) — 수주잔고 43.7억 엔, 최근 연도 매출 55.7억 엔 → 잔고 약 9개월치 → 9개월",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_my_im_8486",
+   "name": "말레이시아 반도체 장비(HS8486) 수입",
+   "dir": 1,
+   "lag": 9,
+   "why": "말레이시아 OSAT 설비투자 — 핸들러 주 고객 지역",
+   "src": "malaysia_trade(DOSM METS, 가공 사내) import hs=8486 전세계 value_myr 2019-01~2023-09 + 2023-10~ 원장 1969 r3 같은 출처 값 (_shared/my_im_8486_world)"
+  },
+  {
+   "id": "lag_tw_3711",
+   "name": "ASE(일월광, 후공정) 월매출",
+   "dir": 1,
+   "lag": 9,
+   "why": "OSAT 매출 → 후공정 장비 증설",
+   "src": "tw_monthly_revenue 3711(2018-05 지주사 설립~) (_shared/tw_3711_rev)"
+  }
+ ]
+}

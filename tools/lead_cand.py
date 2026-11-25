@@ -47,11 +47,18 @@ def score(c, D=DEF_D, quiet=False):
     cp = os.path.join(D, c, "cands.json")
     if os.path.exists(cp):
         for x in json.load(open(cp, encoding="utf-8")):
-            cands.append(("new:" + str(x["id"]), x.get("name") or x["id"], x.get("kind") or "", x.get("pts") or [], x.get("unit") or "",
+            pts = x.get("pts") or []
+            lag = int(x.get("lag") or 0)   # 시차(개월, 2026-11-25) — 수주형: 업계 수주가 L개월 뒤 매출로. 데이터 보기 전에 리포트로 정한 값만
+            if lag:
+                pts = [[B.ms(B.mi(p[0]) + lag), p[1]] for p in pts if p and len(p) > 1]
+            cands.append(("new:" + str(x["id"]), (x.get("name") or x["id"]) + (f" ({lag}개월 앞 값)" if lag else ""), x.get("kind") or "", pts, x.get("unit") or "",
                           int(x.get("dir") or 1), x.get("release") or "", x.get("why") or "", x.get("src") or ""))
     roles = {("i:" + str(it.get("id"))): it.get("role") for it in co["lead"]["items"]}
     roles.update({("m:" + m["id"]): m.get("role") for m in co["lead"].get("macro") or []})
+    newids = {k[0][4:] for k in cands}
     for key, name, kind, pts, unit in B.indicators(c, co, alias, {}):
+        if key.startswith("i:bt_") and key[5:] in newids:   # 백테스트로 원장에 넣은 지표 = 같은 후보 — 한 번만 센다(2026-11-25)
+            continue
         d, _ = Q.direction(name, kind, roles.get(key))
         rel = ""
         if key.startswith("m:") and alias.get(key[2:]):

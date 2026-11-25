@@ -1,0 +1,25 @@
+{
+ "c": "6364",
+ "made": "2026-11-25",
+ "lag": 3,
+ "lag_why": "리포트에 수주→매출 기간 근거 없음(수주잔고 미공시, 북미 렌털사 판매) — 업종 관행(렌털용 소형 건설기계, 재고 판매) 3개월",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_kk_construction",
+   "name": "기계 수주(기종별): 産業機械_建設機械",
+   "dir": 1,
+   "lag": 3,
+   "why": "건설기계 기종별 수주 — 엔진 컴프레서·발전기 포함 건설기계 발주",
+   "src": "e-Stat 내각부 機械受注統計 0003355226 機種別 原系列 産業機械_建設機械(2005-04~, 2013-01~ 사용) (_shared/estat_kikai_kishu_construction)"
+  },
+  {
+   "id": "lag_fred_TLHWYCONS",
+   "name": "미국 도로 건설 지출(총, 계절조정 연율, 백만 USD)",
+   "dir": 1,
+   "lag": 3,
+   "why": "미국 도로 건설 지출 — 북미 렌털사 공사 현장 수요",
+   "src": "FRED TLHWYCONS(Census Construction Spending, 2013-01~) (_shared/fred_TLHWYCONS)"
+  }
+ ]
+}

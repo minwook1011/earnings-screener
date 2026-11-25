@@ -1,0 +1,33 @@
+{
+ "c": "6728",
+ "made": "2026-11-25",
+ "lag": 9,
+ "lag_why": "리포트(stage2) — 수주잔고(두 사업 합) 2,212억 엔, 진공기기 잔고 2,013억 엔 vs 연간 예상 매출 2,830억 엔 ≒ 약 9개월치, 「매출은 높은 수주잔고가 끌었다」 → 9개월",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_trade_ex_g70131_cn",
+   "name": "반도체 등 제조장비(概況品 70131) 중국 수출액",
+   "dir": 1,
+   "lag": 9,
+   "why": "반도체 등 제조장비 중국 수출 — 알박 진공 장비 주력 고객국 설비투자",
+   "src": "e-Stat 재무성 무역통계 概況品別国別表 輸出(0003228192·0003313967·0003425295·0004049327) 70131 × 中 합 月別 金額(2013-01~) (_shared/estat_trade_ex_g70131_cn)"
+  },
+  {
+   "id": "lag_kr_im_8486",
+   "name": "한국 반도체 장비(HS8486) 수입",
+   "dir": 1,
+   "lag": 9,
+   "why": "한국 반도체 장비 수입 — 한국 메모리 설비투자",
+   "src": "trade_stats hs=8486 전체국 import_usd(관세청, 2017-01~) (_shared/kr_im_8486)"
+  },
+  {
+   "id": "lag_census_vip_priv_mfg_comp_elec_sa",
+   "name": "미국 민간 컴퓨터·전자·전기 공장 건설 지출(계절조정 연율)",
+   "dir": 1,
+   "lag": 9,
+   "why": "미국 민간 전자 공장 건설 지출 — 신규 팹 착공 뒤 장비 발주",
+   "src": "US Census Construction Spending(VIP) privsatime.xlsx Manufacturing: Computer/electronic/electrical (2008-09~, 2013-01~ 사용) (_shared/census_vip_priv_mfg_comp_elec_sa)"
+  }
+ ]
+}

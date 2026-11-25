@@ -1,0 +1,25 @@
+{
+ "c": "6871",
+ "made": "2026-11-25",
+ "lag": 3,
+ "lag_why": "리포트에 기간 근거 없음(수주잔고 이력 미확보, HBM·DRAM 프로브카드) — 업종 관행(프로브카드 3개월)",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_kr_ex_8542321010_dram",
+   "name": "한국 디램(HS8542321010) 수출",
+   "dir": 1,
+   "lag": 3,
+   "why": "한국 DRAM 수출 — HBM·DRAM 증산(프로브카드 수요)",
+   "src": "trade_stats hs=854232 hs10_monthly_export_usd 8542321010(관세청, 2017-01~) (_shared/kr_ex_8542321010_dram)"
+  },
+  {
+   "id": "lag_kr_im_8486",
+   "name": "한국 반도체 장비(HS8486) 수입",
+   "dir": 1,
+   "lag": 3,
+   "why": "한국 반도체 장비 수입 — 새 라인 투자",
+   "src": "trade_stats hs=8486 전체국 import_usd(관세청, 2017-01~) (_shared/kr_im_8486)"
+  }
+ ]
+}

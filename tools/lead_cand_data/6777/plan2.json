@@ -1,0 +1,25 @@
+{
+ "c": "6777",
+ "made": "2026-11-25",
+ "lag": 3,
+ "lag_why": "리포트(stage2) — 「수주잔고는 공시하지 않음」, 기간 근거 없음 — 업종 관행(광측정기·광부품 단납기, 3개월)",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_census_im_854470_th",
+   "name": "광케이블(HS8544.70) 미국 수입액(태국산)",
+   "dir": 1,
+   "lag": 3,
+   "why": "미국 광케이블 태국산 수입 — 북미 데이터센터 광트랜시버·케이블 증산",
+   "src": "US Census 수입통계 HS854470 × Thailand GEN_VAL 월별(us_trade 원장, 2019-01~) (_shared/census_im_854470_th)"
+  },
+  {
+   "id": "lag_tw_6442_rev",
+   "name": "光聖(Ezconn) 월매출",
+   "dir": 1,
+   "lag": 3,
+   "why": "Ezconn 월매출 — 광커넥터 생산",
+   "src": "tw_monthly_revenue 6442 光聖 월매출(천TWD→억TWD, 2017-01~) (_shared/tw_6442_rev)"
+  }
+ ]
+}

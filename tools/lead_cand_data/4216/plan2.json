@@ -1,0 +1,33 @@
+{
+ "c": "4216",
+ "made": "2026-11-25",
+ "lag": 6,
+ "lag_why": "리포트(stage2)에 수주잔고·리드타임 공시 없음 — 업종 관행(반도체 장비·설비 부품 6~9개월, 공장 건설에 들어가는 배관·밸브) 6개월",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_census_fab",
+   "name": "미국 민간 컴퓨터·전자·전기 공장 건설 지출",
+   "dir": 1,
+   "lag": 6,
+   "why": "리포트 핵심 — 미국 반도체 공장 건설이 수지 밸브·배관 수요로",
+   "src": "US Census Construction Spending(VIP) privsatime.xlsx Manufacturing: Computer/electronic/electrical (2008-09~, 2013-01~ 사용) (_shared/census_vip_priv_mfg_comp_elec_sa)"
+  },
+  {
+   "id": "lag_kc_mfg",
+   "name": "민간 제조업용 착공 바닥면적",
+   "dir": 1,
+   "lag": 6,
+   "why": "국내 공장 착공 → 배관 자재 납품",
+   "src": "e-Stat 국토교통성 建築着工統計 KC-hikyoju 製造業用(民間) 床面積(2004~, 2013-01~ 사용) (_shared/kc_hikyoju_mfg)"
+  },
+  {
+   "id": "lag_kk_chem",
+   "name": "기계 수주(기종별): 産業機械_化学機械",
+   "dir": 1,
+   "lag": 6,
+   "why": "화학 설비 수주 — 수지 밸브 둘째 고객군",
+   "src": "e-Stat 내각부 機械受注統計 0003355226 機種別 原系列 産業機械_化学機械(2005-04~, 2013-01~ 사용) (_shared/estat_kikai_kishu_chem)"
+  }
+ ]
+}

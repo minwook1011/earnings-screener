@@ -20,13 +20,24 @@ if hasattr(sys.stdout, "reconfigure"):
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEAD = os.path.join(ROOT, "docs", "data", "jp", "lead")
 D = os.path.join(ROOT, "tools", "lead_cand_data")
-DAY = "2026-11-24"
+DAY = "2026-11-25"
 DRY = "--dry" in sys.argv
 
 R = json.load(open(os.path.join(D, "_result_all.json"), encoding="utf-8"))
 st = {"co": 0, "new": 0, "old_top": 0, "old_tag": 0, "miss": 0}
 for r in R:
     if r["grade"] not in ("확정", "유망") or not r["items"]:
+        # 다시 채점해 미달·보류가 된 곳은 예전 등급 표시를 지운다(2026-11-25 2차 — 긴 이력으로 우연이 드러난 곳)
+        p = os.path.join(LEAD, r["c"] + ".json")
+        co = json.load(open(p, encoding="utf-8"))
+        n0 = sum(1 for i in co["lead"]["items"] + (co["lead"].get("macro") or []) if i.get("bt"))
+        if n0:
+            for i in co["lead"]["items"] + (co["lead"].get("macro") or []):
+                i.pop("bt", None)
+            co["log"] = [{"d": DAY, "by": "Claude", "t": "긴 이력으로 다시 채점 — 백테스트 등급 해제(%s)" % r["grade"]}] + co.get("log", [])
+            if not DRY:
+                json.dump(co, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            st["cleared"] = st.get("cleared", 0) + 1
         continue
     c = r["c"]
     p = os.path.join(LEAD, c + ".json")

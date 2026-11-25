@@ -1,0 +1,25 @@
+{
+ "c": "6432",
+ "made": "2026-11-25",
+ "lag": 3,
+ "lag_why": "리포트(stage2) — 2Q 말 수주잔고 572억 엔 ≒ 분기 매출 약 1분기치(수주 557억), 딜러 재고 판매 → 3개월",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_kk_construction",
+   "name": "기계 수주(기종별): 産業機械_建設機械",
+   "dir": 1,
+   "lag": 3,
+   "why": "건설기계 기종별 수주 — 미니 굴착기 포함",
+   "src": "e-Stat 내각부 機械受注統計 0003355226 機種別 原系列 産業機械_建設機械(2005-04~, 2013-01~ 사용) (_shared/estat_kikai_kishu_construction)"
+  },
+  {
+   "id": "lag_fred_HOUST",
+   "name": "미국 주택 착공 건수(계절조정 연율, 천 호)",
+   "dir": 1,
+   "lag": 3,
+   "why": "미국 주택 착공 — 미니 굴착기 최대 수요처(북미 주택·인프라)",
+   "src": "FRED HOUST(미 센서스국 New Residential Construction, 2013-01~) (_shared/fred_HOUST)"
+  }
+ ]
+}

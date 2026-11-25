@@ -1,0 +1,25 @@
+{
+ "c": "7970",
+ "made": "2026-11-25",
+ "lag": 3,
+ "lag_why": "리포트에 기간 근거 없음(웨이퍼 운반·공정 용기) — 업종 관행(소재·부품 3개월)",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_seaj_jp_semi_equip_billings_3mma",
+   "name": "일본제 반도체 제조장비 판매액(3개월 이동평균, SEAJ)",
+   "dir": 1,
+   "lag": 3,
+   "why": "일본제 반도체 장비 판매액 — 팹 증설(공정 용기 수요)",
+   "src": "SEAJ 日本製半導体製造装置 販売高 3ヶ月移動平均 백넘버 엑셀(seaj.or.jp/statistics 89972120443704.xls, 2005~; 2017-03까지는 受注·販売 중 販売 칸) 百万円→億円 (_shared/seaj_jp_semi_equip_billings_3mma)"
+  },
+  {
+   "id": "lag_tw_2330",
+   "name": "TSMC 월매출",
+   "dir": 1,
+   "lag": 3,
+   "why": "TSMC 월매출 — 팹 가동",
+   "src": "tw_monthly_revenue 2330(2017-01~) (_shared/tw_2330)"
+  }
+ ]
+}

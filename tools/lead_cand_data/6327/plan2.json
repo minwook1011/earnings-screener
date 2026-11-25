@@ -1,0 +1,25 @@
+{
+ "c": "6327",
+ "made": "2026-11-25",
+ "lag": 12,
+ "lag_why": "리포트(stage2) — 산업기계 수주잔고 121.7억 엔이 「통기 매출 가이던스를 넘었다」, 1Q 매출 32.3억 엔 ≒ 약 4분기치, 「적층 프레스는 건마다 맞춤 설계라 매출은 납기 따라 출렁임」 → 12개월",
+ "note": "데이터를 보기 전에 리포트로 시차를 정함(BRIEF2 2절). 채점은 하지 않음",
+ "cands": [
+  {
+   "id": "lag_tw_2383_rev",
+   "name": "台光電(EMC) 월매출",
+   "dir": 1,
+   "lag": 12,
+   "why": "EMC 월매출 — CCL 업체 증산(적층 프레스 발주)",
+   "src": "tw_monthly_revenue 2383 台光電 월매출(천TWD→억TWD, 2017-01~) (_shared/tw_2383_rev)"
+  },
+  {
+   "id": "lag_tw_3167",
+   "name": "大量(Taiwan Taking, PCB 드릴링 장비) 월매출",
+   "dir": 1,
+   "lag": 12,
+   "why": "Taiwan Taking 월매출 — PCB 설비 업계 수주·출하",
+   "src": "tw_monthly_revenue 3167 大量(2017-01~, 천TWD→억TWD) (_shared/tw_3167)"
+  }
+ ]
+}

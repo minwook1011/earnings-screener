@@ -128,8 +128,9 @@ for f in glob.glob(os.path.join(LEAD, "*.json")):
         if it.get("kind") == "pension":
             names.append("연금 가입자 수")
         elif it.get("kind") == "trends" or (it.get("short") or "").startswith("구글") or (it.get("t") or "").startswith("구글트렌드"):
-            tm = re.sub(r"^구글트렌드:\s*", "", it.get("short") or it.get("t") or "")
-            names.append("구글트렌드: " + re.sub(r"\(.*?\)", "", tm).strip())
+            # 26자로 잘린 short 는 괄호가 중간에 끊겨 「着付け教室 교실)」처럼 깨짐 → 전체 이름(t)으로, 닫히지 않은 괄호·남은 괄호 조각도 정리(2026-11-25)
+            tm = re.sub(r"^구글트렌드:\s*", "", it.get("t") or it.get("short") or "")
+            names.append("구글트렌드: " + re.split(r"[（(]", tm)[0].strip())   # 괄호 설명(겹괄호 포함)은 통째로 뗌
         elif it.get("short"):
             names.append(it["short"])
     for m in co["lead"].get("macro") or []:
