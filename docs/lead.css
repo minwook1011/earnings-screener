@@ -853,3 +853,12 @@ body.home-wide .main { padding: 20px 24px 60px; }
 .hlg { display: flex; gap: 10px; font-size: 10.5px; color: var(--ink-3); flex-wrap: wrap; align-items: center; } .hlg i { display: inline-block; width: 12px; height: 0; border-top: 2px solid; margin-right: 4px; vertical-align: middle; } .hlg i.g { border-color: var(--gold); } .hlg i.b { border-color: var(--b1); border-top-style: dashed; } .hlg a { margin-left: auto; color: var(--b1); }
 .hmore { width: 100%; border: 1px dashed var(--line-2); background: transparent; color: var(--ink-3); border-radius: 10px; padding: 8px; cursor: pointer; }
 .boot.sm { transform: scale(.6); }
+
+/* 01 선행지표 × 매출(2026-11-25 사용자) — 차트를 넓게, 숫자 칸은 차트 아래 한 줄 */
+#lc .lead-grid { grid-template-columns: minmax(0, 1fr); }
+#lc .lstats { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+#lc .lstats .ls-box { padding: 10px 12px; }
+.g-ax text.yax { fill: var(--gold); }
+.ibar-lab.ind-lab { fill: var(--b1); font-weight: 700; }
+.legend i.lg-syoy { display: inline-block; width: 18px; height: 0; border-top: 2px dashed var(--gold); vertical-align: middle; margin-right: 6px; }
+.legend i.lg-ind2 { display: inline-block; width: 18px; height: 0; border-top: 3px solid var(--b1); vertical-align: middle; margin-right: 6px; border-radius: 2px; }

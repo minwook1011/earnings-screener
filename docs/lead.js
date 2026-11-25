@@ -383,15 +383,18 @@
         r.om = r.s ? (r.o != null ? r.o / r.s * 100 : null) : null;
         r.t = r.pub ? tOf(r.pub) : null;
       });
-      var co = S.co[c];   // 원장 매출이 최근 몇 분기뿐이면 20분기 재무로 빈 분기를 채움 — 3Y·5Y 창에서 매출·성장률을 겹쳐 보려고(2026-11-25 사용자)
-      if (co) {
-        var ss = co.series.sales = co.series.sales || { n: "매출", unit: "억엔", kind: "money", src: {}, pts: [] }, have = {};
-        ss.pts.forEach(function (p) { have[p[0]] = 1; });
-        q.forEach(function (r) { if (r.s != null && !have[r.p]) ss.pts.push([r.p, r.s, "fin", 1]); });
-        ss.pts.sort(function (a, b) { return qi(a[0]) - qi(b[0]); });
-        if (co._m) delete co._m.sales;
-      }
-      return (S.fin[c] = q);
+      return getJSON("data/jp/lead/fin40/" + c + ".json").catch(function () { return { q: [] }; }).then(function (f40) {
+        var co = S.co[c];   // 원장 매출이 최근 몇 분기뿐이면 20분기(결산단신)·40분기(10년, 2026-11-25) 재무로 빈 분기를 채움 — 매출 차트를 길게
+        if (co) {
+          var ss = co.series.sales = co.series.sales || { n: "매출", unit: "억엔", kind: "money", src: {}, pts: [] }, have = {};
+          ss.pts.forEach(function (p) { have[p[0]] = 1; });
+          q.forEach(function (r) { if (r.s != null && !have[r.p]) { ss.pts.push([r.p, r.s, "fin", 1]); have[r.p] = 1; } });
+          (f40.q || []).forEach(function (r) { if (r.s != null && r.p && !have[r.p] && /^\d{2}\.\dQ$/.test(r.p)) { ss.pts.push([r.p, r.s, "fin40", 1]); have[r.p] = 1; } });
+          ss.pts.sort(function (a, b) { return qi(a[0]) - qi(b[0]); });
+          if (co._m) delete co._m.sales;
+        }
+        return (S.fin[c] = q);
+      });
     }).catch(function () { return (S.fin[c] = []); });
   }
   function viewSector(gid, kid) {
@@ -472,7 +475,7 @@
       '<section class="card rv" id="lc"><div class="card-h"><div class="ichips" id="lchips">' + co.lead.items.map(function (it) {
         return '<button type="button" class="ichip' + rCls(co, it) + '" data-li="' + it.id + '" aria-pressed="' + (st.li === it.id) + '"><i class="dot"></i>' + (it === bestIt(co) ? '<em class="kd">키 데이터</em>' : "") + esc(it.short) + (it.volatile ? '<em class="vol" title="IP·인물 등 지금 잘 나가서 고른 지표 — 바뀔 수 있음">변동</em>' : "") + btChip(it) + rChip(co, it) + "<small>" + it.pts.length + "개월</small>" + (it.term_ko && it.kind !== "trends" ? '<span class="tko">' + esc(it.term_ko) + "</span>" : "") + "</button>";
       }).join("") + '</div><span class="sp"></span><span class="chip ind" id="lnext"></span></div>' +
-      '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="lctl"><div class="seg" id="lrange" role="group" aria-label="기간">' + ["YTD", "1Y", "3Y", "5Y"].map(function (r) { return '<button data-v="' + r + '" aria-pressed="' + ((st.lr || "3Y") === r) + '">' + r + "</button>"; }).join("") + '</div><div class="seg" id="lmode" role="group" aria-label="모양">' + [["auto", "자동"], ["bar", "막대"], ["line", "선"]].map(function (r) { return '<button data-v="' + r[0] + '" aria-pressed="' + ((st.lm || "auto") === r[0]) + '">' + r[1] + "</button>"; }).join("") + '</div></div><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
+      '<div class="card-b"><div class="lead-grid"><div class="lead-chart"><div class="lctl"><div class="seg" id="lrange" role="group" aria-label="기간">' + [["ALL", "전체(최대 10년)"], ["5Y", "5년"], ["3Y", "3년"]].map(function (r) { return '<button data-v="' + r[0] + '" aria-pressed="' + ((st.lr || "ALL") === r[0]) + '">' + r[1] + "</button>"; }).join("") + '</div><div class="seg" id="lmode" role="group" aria-label="지표 보기">' + [["val", "지표 값"], ["yoy", "지표 YoY"]].map(function (r) { return '<button data-v="' + r[0] + '" aria-pressed="' + ((st.lm === "yoy" ? "yoy" : "val") === r[0]) + '">' + r[1] + "</button>"; }).join("") + '</div></div><div class="chart-wrap" id="lw"></div><div class="legend" id="llg"></div></div><div class="lstats" id="ls"></div></div>' +
       '<div class="lwhy"><p id="lnote"></p></div>' + whyList(co) + '</div></section>';
     var whyBlk = '<div class="card-b lwhy"><p><b>주의</b> ' + esc(co.lead.caveat || "") + '</p></div>';
 
@@ -520,7 +523,85 @@
     document.querySelectorAll("#lchips .ichip").forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.li === st.li); });
     document.querySelectorAll("#ovsel button").forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.v === (st.ov || "")); });
   }
+  /* 선행지표 × 매출(2026-11-25 사용자) — 분기 매출 막대 + 매출 YoY 점선 꺾은선(최대 10년, 매출 있는 만큼) 위에 선행지표를 굵은 꺾은선으로(있는 곳부터) */
   function drawLead(co, anim) {
+    var host = document.getElementById("lw"); if (!host) return;
+    var st = S.st[co.c], it = item(co, st.li), s = stat(co, it), nd = dday(co.lead.next.date), main1 = it.id === co.lead.items[0].id;
+    document.getElementById("lnext").textContent = "다음 발표 " + md(tOf(co.lead.next.date)) + " (" + (nd > 0 ? "D-" + nd : nd === 0 ? "오늘" : "갱신 대기") + ") · " + (co.lead.next.basis ? co.lead.next.basis.slice(5).replace("-", "/") + " 무렵 기준" : "공표 예정");
+    document.getElementById("lnote").innerHTML = it.why || it.note ? "<b>" + esc(it.short) + "</b> — " + esc(it.why || it.note) : "";
+    var sq = qsOf(co, "sales").filter(function (q) { return sv(co, "sales", q) != null && qi(q) != null; }).sort(function (a, b) { return qi(a) - qi(b); });
+    var pq = co.next.q, i0 = sq.length ? qi(sq[0]) : (qi(pq) || 0) - 8, i1 = Math.max(sq.length ? qi(sq[sq.length - 1]) : i0, qi(pq) || i0);
+    var lr = st.lr || "ALL"; if (lr === "5Y") i0 = Math.max(i0, i1 - 19); else if (lr === "3Y") i0 = Math.max(i0, i1 - 11);
+    var Qs = []; for (var k = i0; k <= i1; k++) Qs.push(qs(k));
+    var months = []; Qs.forEach(function (q) { months = months.concat(qMonthsList(co, q)); });
+    var mIdx = {}; months.forEach(function (m, i) { mIdx[m] = i; });
+    var W = Math.max(320, host.clientWidth), pL = 56, pR = 50, IW = W - pL - pR, n = months.length, bw = IW / n, top = 30, h1 = W < 600 ? 260 : 340, H = top + h1 + 34;
+    var X = function (i) { return pL + bw * (i + 0.5); };
+    var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H }), gg = el("g", { "class": "g-grid" }, svg), ga = el("g", { "class": "g-ax" }, svg), gB = el("g", {}, svg), gT = el("g", {}, svg);
+    var defs = el("defs", {}, svg), gs = el("linearGradient", { id: "gLS", x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+    el("stop", { offset: "0", "stop-color": "var(--b2)", "stop-opacity": ".75" }, gs); el("stop", { offset: "1", "stop-color": "var(--b2)", "stop-opacity": ".22" }, gs);
+    var hp = el("pattern", { id: "hLS", width: 6, height: 6, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
+    el("rect", { width: 6, height: 6, fill: "var(--acc-soft)" }, hp); el("line", { x1: 0, y1: 0, x2: 0, y2: 6, stroke: "var(--b2)", "stroke-width": 2, "stroke-opacity": ".7" }, hp);
+    // 매출(왼쪽 축)
+    var svs = Qs.map(function (q) { return sv(co, "sales", q); }).filter(function (v) { return v != null; }); if (s.est && main1) svs.push(s.est.hi);
+    var smax = Math.max.apply(null, svs.concat([1])) * 1.12, base = top + h1, Ys = function (v) { return base - v / smax * h1; };
+    nice(0, smax, 5).forEach(function (v) { if (v > smax) return; el("line", { x1: pL, x2: W - pR, y1: Ys(v), y2: Ys(v) }, gg); txt(ga, pL - 6, Ys(v) + 3.5, nf(v), null, "end"); });
+    txt(ga, pL - 6, top - 12, "매출 억엔", "sub-ax", "end");
+    // YoY(오른쪽 축, %) — 매출 YoY 와 (전년비 보기일 때) 지표 YoY 를 같은 축에
+    var pctU = it.unit === "%", ymode = st.lm === "yoy" || pctU;
+    var sy = Qs.map(function (q, j) { var v = yoy(co, "sales", q); return v == null ? null : { x: pL + bw * (j * 3 + 1.5), v: v, q: q }; }).filter(Boolean);
+    var ind = []; months.forEach(function (m, i) { var p = mm(it)[m]; if (!p || p[1] == null) return; var v = p[1]; if (ymode && !pctU) { var b = mm(it)[ymAdd(m, -12)]; v = b && b[1] ? (p[1] / b[1] - 1) * 100 : null; } if (v != null) ind.push({ x: X(i), v: v, m: m }); });
+    var yv = sy.map(function (d) { return d.v; }).concat(ymode ? ind.map(function (d) { return d.v; }) : []);
+    var srt = yv.slice().sort(function (a, b) { return a - b; }), qf = function (f) { return srt.length ? srt[Math.round(f * (srt.length - 1))] : 0; }, ex = Math.max(5, (qf(0.9) - qf(0.1)) * 0.5);
+    var ylo = Math.min(0, qf(0.1) - ex), yhi = Math.max(5, qf(0.9) + ex), Yy = function (v) { v = Math.max(ylo, Math.min(yhi, v)); return top + (1 - (v - ylo) / ((yhi - ylo) || 1)) * h1; };
+    nice(ylo, yhi, 5).forEach(function (v) { if (v < ylo || v > yhi) return; txt(ga, W - pR + 6, Yy(v) + 3.5, (v > 0 ? "+" : "") + nf(v) + "%", "yax", "start"); });
+    txt(ga, W - pR + 6, top - 12, "YoY", "sub-ax", "start");
+    if (ylo < 0) el("line", { x1: pL, x2: W - pR, y1: Yy(0), y2: Yy(0), stroke: "var(--ink-4)", "stroke-dasharray": "2 4", opacity: ".7" }, gg);
+    // 분기 띠·막대
+    var lk = Math.ceil(Qs.length / 14), hits = [];
+    Qs.forEach(function (q, j) {
+      var a = pL + bw * j * 3, w = bw * 3, v = sv(co, "sales", q), qp = Math.min(5, w * 0.14);
+      if (q.slice(3) === "1Q" || j === 0) { el("line", { x1: a, x2: a, y1: top - 4, y2: base, stroke: "var(--line)", "stroke-dasharray": "2 4" }, gg); }
+      if ((Qs.length - 1 - j) % lk === 0 || q === pq) txt(gT, a + w / 2, base + 16, q, "q-lab" + (q === pq ? " cur" : ""), "middle");
+      var r0 = s.rows.filter(function (r) { return r.q === q; })[0];
+      if (v != null) {
+        el("rect", { x: a + qp, y: Ys(v), width: Math.max(2, w - qp * 2), height: base - Ys(v), rx: 3, fill: "url(#gLS)", "class": "grow" }, gB);
+        if ((Qs.length - 1 - j) % Math.max(1, Math.ceil(40 / w)) === 0) txt(gT, a + w / 2, base - 6, nf(v, v < 100 ? 1 : 0), "ibar-lab in fade", "middle");   // 막대 폭에 맞춰 띄엄띄엄(겹침 방지)
+      } else if (q === pq && s.est && main1) {
+        el("rect", { x: a + qp, y: Ys(s.est.mid), width: Math.max(2, w - qp * 2), height: base - Ys(s.est.mid), rx: 3, fill: "url(#hLS)", stroke: "var(--b2)", "stroke-dasharray": "3 2" }, gB);
+        txt(gT, a + w / 2, Ys(s.est.mid) - 6, "추정 " + nf(s.est.mid, s.est.mid < 100 ? 1 : 0), "ibar-lab est2 fade", "middle");
+      } else if (q === pq) {
+        el("rect", { x: a + qp, y: top + h1 * 0.5, width: Math.max(2, w - qp * 2), height: h1 * 0.5, rx: 3, fill: "none", stroke: "var(--gold)", "stroke-dasharray": "4 3" }, gB);
+        txt(gT, a + w / 2, top + h1 * 0.75, "?", "ibar-lab cs", "middle");
+      }
+      hits.push({ a: a, w: w, h: "<h5>" + q + "<span>" + qMonths(co, q) + "</span></h5>" + row("매출(회사 발표)", v != null ? nf(v, 1) + "억엔" : "미발표") + row("매출 YoY", pct(yoy(co, "sales", q))) + (r0 ? "<hr>" + row(NM(it) + " 분기 평균", nf(r0.avg, DG(it)) + U(it) + " (" + r0.n + "/3개월)", "ind") : "") + (q === pq && s.est && main1 ? row("매출 추정", nf(s.est.mid, 1) + "억엔 (" + nf(s.est.lo, 1) + "~" + nf(s.est.hi, 1) + ")") : "") });
+    });
+    // 매출 YoY — 점선 꺾은선 + 점
+    var gy = el("g", {}, svg);
+    if (sy.length > 1) el("path", { d: sy.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + Yy(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--gold)", "stroke-width": 1.8, "stroke-dasharray": "5 4", "class": "draw" }, gy);
+    var sk = Math.ceil(sy.length / 12);
+    sy.forEach(function (d, j) { el("circle", { cx: d.x, cy: Yy(d.v), r: 3.6, fill: "var(--gold)", stroke: "var(--panel)", "stroke-width": 1.5, "class": "fade" }, gy); if ((sy.length - 1 - j) % sk === 0) txt(gy, d.x, Yy(d.v) - 8, pct(d.v, 0), "ibar-lab cs fade", "middle"); });
+    // 선행지표 — 굵은 꺾은선(있는 곳부터)
+    if (ind.length) {
+      var Yi = Yy;
+      if (!ymode) { var iv = ind.map(function (d) { return d.v; }), ilo = Math.min.apply(null, iv), ihi = Math.max.apply(null, iv), ip = (ihi - ilo) * 0.12 || Math.abs(ihi) * 0.05 || 1; Yi = function (v) { return top + 8 + (1 - (v - (ilo - ip)) / ((ihi - ilo + 2 * ip) || 1)) * (h1 - 16); }; }
+      var seg = [], cur2 = [];
+      ind.forEach(function (d, i) { if (i && mIdx[d.m] - mIdx[ind[i - 1].m] > 2) { seg.push(cur2); cur2 = []; } cur2.push(d); }); seg.push(cur2);
+      var gi = el("g", {}, svg);
+      seg.forEach(function (sg) { if (sg.length > 1) el("path", { d: sg.map(function (d, i) { return (i ? "L" : "M") + d.x.toFixed(1) + "," + Yi(d.v).toFixed(1); }).join(""), fill: "none", stroke: "var(--b1)", "stroke-width": 3, "stroke-linejoin": "round", "stroke-linecap": "round", "class": "draw" }, gi); });
+      var la = ind[ind.length - 1]; el("circle", { cx: la.x, cy: Yi(la.v), r: 5, fill: "var(--b1)", stroke: "var(--panel)", "stroke-width": 2 }, gi);
+      txt(gi, la.x - 6, Yi(la.v) - 9, (ymode ? pct(la.v, 1) : nf(la.v, DG(it)) + U(it)) + " · " + ymLab(la.m), "ibar-lab ind-lab", "end");
+      if (!ymode) { var mx = ind.reduce(function (a, b) { return b.v > a.v ? b : a; }), mn = ind.reduce(function (a, b) { return b.v < a.v ? b : a; }); [mx, mn].forEach(function (d) { if (d !== la) txt(gi, d.x, Yi(d.v) + (d === mx ? -8 : 15), nf(d.v, DG(it)), "ibar-lab ind-lab", "middle"); }); }
+      txt(gT, ind[0].x, top - 12, "▸ " + NM(it) + (ymode ? " YoY(오른쪽 축)" : " 값(자체 눈금)") + " " + ymLab(ind[0].m) + "부터", "ibar-lab ind-lab", "start");
+    } else txt(gT, pL + 8, top + 12, NM(it) + ": 이 기간에 값 없음", "apr", "start");
+    var hl = el("rect", { fill: "var(--ink)", opacity: 0, rx: 6 }, gB);
+    hits.forEach(function (h) { var r = el("rect", { x: h.a, y: top - 6, width: h.w, height: h1 + 10, fill: "transparent" }, svg); r.addEventListener("mousemove", function (ev) { hl.setAttribute("x", h.a); hl.setAttribute("y", top - 6); hl.setAttribute("width", h.w); hl.setAttribute("height", h1 + 10); hl.setAttribute("opacity", ".05"); showTip(h.h, ev); }); r.addEventListener("mouseleave", function () { hl.setAttribute("opacity", 0); hideTip(); }); });
+    host.innerHTML = ""; host.appendChild(svg);
+    if (anim) animate(svg);
+    document.getElementById("llg").innerHTML = '<span><i class="lg-sales"></i>분기 매출(회사 발표)</span><span><i class="lg-syoy"></i>매출 YoY(점선, 오른쪽 축)</span><span><i class="lg-ind2"></i>' + esc(it.short) + (ymode ? " YoY(오른쪽 축)" : " (월, 자체 눈금)") + "</span>" + (main1 && s.est ? '<span><i class="lg-est2"></i>이번 분기 매출 추정</span>' : "") + '<span class="hint">' + Qs[0] + "~" + Qs[Qs.length - 1] + " · " + Qs.length + "분기</span>";
+    drawStats(co, it, s);
+  }
+  function drawLeadOld(co, anim) {
     var host = document.getElementById("lw"); if (!host) return;
     var st = S.st[co.c], it = item(co, st.li), s = stat(co, it), nd = dday(co.lead.next.date), main1 = it.id === co.lead.items[0].id;
     if (!it.pts.length) { host.innerHTML = '<div class="empty">아직 수집 전입니다 — 다음 갱신(' + md(tOf(co.lead.next.date)) + ')부터 쌓입니다.</div>'; document.getElementById("ls").innerHTML = ""; return; }
