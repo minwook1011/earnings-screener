@@ -253,6 +253,7 @@
         '<button type="button" class="hm-tab" id="hmTab" aria-label="기업 카드 열기">기업 ›</button>' +   // 오른쪽 끝 탭 → 옆 창(2026-11-25 사용자)
         '<div class="cpanel" id="cpanel" hidden><div class="dp-back" id="cpBack"></div><aside class="cp-box hm-cards"><div class="hc-h"><div class="cp-t"><h2>기업 <small id="hcN"></small></h2><button type="button" class="dp-x" id="cpX" aria-label="닫기">✕</button></div><input id="hcQ" type="search" placeholder="기업 · 코드 · 지표 검색" value="' + esc(S.hm.q) + '">' +
         '<div class="hc-f"><select id="hcSec"><option value="">전체 섹터</option>' + S.idx.tree.map(function (g) { return '<optgroup label="' + esc(g.n) + '">' + g.kids.filter(function (k) { return k.cos.length; }).map(function (k) { var v = g.id + "/" + k.id; return '<option value="' + v + '"' + (S.hm.sec === v ? " selected" : "") + ">" + esc(k.n) + " (" + k.cos.length + ")</option>"; }).join("") + "</optgroup>"; }).join("") + "</select>" +
+        '<div class="seg" id="hcMode" role="group" aria-label="카드 차트">' + [["sales", "매출액 × 지표"], ["px", "주가 × 지표"]].map(function (o) { return '<button type="button" data-v="' + o[0] + '" aria-pressed="' + ((S.hm.cm || "sales") === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div>" +
         '<select id="hcSort">' + [["mc", "시가총액 큰 순"], ["r1m", "1개월 수익률"], ["r3m", "3개월 수익률"], ["r1y", "1년 수익률"], ["nd", "실적 발표 가까운 순"], ["bt", "백테스트 등급 순"], ["n", "이름 순"]].map(function (o) { return '<option value="' + o[0] + '"' + (S.hm.sort === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></div></div><div class=\"hc-list\" id=\"hcList\"></div></aside></div></div>";
       calDraw(byD);
       var cp = document.getElementById("cpanel"), cpOpen = function () { cp.hidden = false; document.body.classList.add("dp-on"); if (!cp._drawn) { cp._drawn = 1; cardsDraw(); } }, cpClose = function () { cp.hidden = true; document.body.classList.remove("dp-on"); };
@@ -266,6 +267,7 @@
       document.getElementById("hcQ").oninput = function () { S.hm.q = this.value; S.hm.n = 120; cardsDraw(); };
       document.getElementById("hcSec").onchange = function () { S.hm.sec = this.value; S.hm.n = 120; cardsDraw(); };
       document.getElementById("hcSort").onchange = function () { S.hm.sort = this.value; cardsDraw(); };
+      document.querySelectorAll("#hcMode button").forEach(function (b) { b.onclick = function () { S.hm.cm = b.dataset.v; document.querySelectorAll("#hcMode button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); cardsDraw(); }; });
     }).catch(function (e) { main.innerHTML = '<div class="empty">첫 화면 데이터를 불러오지 못했습니다(tools/lead_home.py) — ' + esc(e.message || e) + "</div>"; });
   }
   function calDraw(byD) {
@@ -320,6 +322,7 @@
   function cardChart(card) {   // 카드 안 작은 차트 — 주가(주봉, 2년) + 키 데이터(월) 겹치기
     var c = card.dataset.c, host = card.querySelector(".hch");
     if (host._done) return; host.innerHTML = '<div class="boot sm"><i></i><i></i><i></i></div>';
+    if ((S.hm.cm || "sales") === "sales") { cardSales(card, host, c); return; }
     ensureCo([c], true).then(function () { return attachMacro(S.co[c]); }).then(function () {
       host._done = 1;
       var co = S.co[c], px = weekly(S.px[c] || []), it = co && co.lead ? bestIt(co) : null;
@@ -339,6 +342,31 @@
       txt(svg, pL, H - 4, ymLab(new Date(t0).toISOString().slice(0, 7)), "ibar-lab", "start"); txt(svg, W - pR, H - 4, ymLab(new Date(t1).toISOString().slice(0, 7)), "ibar-lab", "end");
       host.innerHTML = ""; host.appendChild(svg);
       var lg = document.createElement("div"); lg.className = "hlg"; lg.innerHTML = '<span><i class="g"></i>주가(주봉 2년)</span>' + (it ? '<span><i class="b"></i>' + esc(it.short || it.t || "") + (it.unit ? " (" + esc(it.unit) + ")" : "") + "</span>" : "") + '<a href="#c/' + c + '">자세히 ›</a>'; host.appendChild(lg);
+    }).catch(function () { host.innerHTML = '<p class="hint">불러오지 못함</p>'; });
+  }
+
+  function cardSales(card, host, c) {   // 카드 작은 차트 — 분기 매출 막대(5년) + 키 데이터(월) 겹치기(2026-11-25 사용자: 매출이 더 잘 맞음)
+    ensureCo([c], false).then(function () { return attachMacro(S.co[c]); }).then(function () { return loadFin(c); }).then(function () {
+      host._done = 1;
+      var co = S.co[c], it = co && co.lead ? bestIt(co) : null;
+      var sq = qsOf(co, "sales").filter(function (q) { return sv(co, "sales", q) != null && qi(q) != null; }).sort(function (a, b) { return qi(a) - qi(b); }).slice(-20);
+      if (!sq.length) { host.innerHTML = '<p class="hint">매출 없음</p>'; return; }
+      var months = []; sq.forEach(function (q) { months = months.concat(qMonthsList(co, q)); });
+      var mIdx = {}; months.forEach(function (m, i) { mIdx[m] = i; });
+      var W = Math.max(260, host.clientWidth || 300), H = 96, pL = 4, pR = 4, top = 6, bot = 14, n = months.length, bw = (W - pL - pR) / n, base = H - bot;
+      var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H });
+      var vs = sq.map(function (q) { return sv(co, "sales", q); }), mx = Math.max.apply(null, vs) * 1.08;
+      sq.forEach(function (q, j) { var v = sv(co, "sales", q), x = pL + bw * j * 3, w = bw * 3; el("rect", { x: x + w * 0.12, y: base - v / mx * (base - top), width: w * 0.76, height: v / mx * (base - top), rx: 1.5, fill: "var(--b2)", opacity: ".55" }, svg); });
+      if (it && it.pts && it.pts.length) {
+        var ip = it.pts.filter(function (p) { return mIdx[p[0]] != null && p[1] != null; });
+        if (ip.length > 1) {
+          var iv = ip.map(function (p) { return p[1]; }), ilo = Math.min.apply(null, iv), ihi = Math.max.apply(null, iv), YI = function (v) { return top + (1 - (v - ilo) / ((ihi - ilo) || 1)) * (base - top); };
+          el("path", { d: ip.map(function (p, i) { return (i ? "L" : "M") + (pL + bw * (mIdx[p[0]] + 0.5)).toFixed(1) + "," + YI(p[1]).toFixed(1); }).join(""), fill: "none", stroke: "var(--b1)", "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+        }
+      }
+      txt(svg, pL, H - 3, sq[0], "ibar-lab", "start"); txt(svg, W - pR, H - 3, sq[sq.length - 1], "ibar-lab", "end");
+      host.innerHTML = ""; host.appendChild(svg);
+      var lg = document.createElement("div"); lg.className = "hlg"; lg.innerHTML = '<span><i class="s"></i>분기 매출(' + sq.length + "분기)</span>" + (it ? '<span><i class="b2"></i>' + esc(it.short || it.t || "") + "</span>" : "") + '<a href="#c/' + c + '">자세히 ›</a>'; host.appendChild(lg);
     }).catch(function () { host.innerHTML = '<p class="hint">불러오지 못함</p>'; });
   }
 

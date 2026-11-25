@@ -884,3 +884,13 @@ body.home-wide .main { padding: 20px 24px 60px; }
 .hcard .hch { display: block; margin-top: 5px; min-height: 96px; }
 .cpanel .hcard.open { grid-column: auto; }
 .hlg { font-size: 10px; gap: 8px; }
+/* 카드 차트 매출액/주가 선택(2026-11-25 사용자) */
+#hcMode button { font-size: 12px; padding: 4px 10px; }
+.cpanel .hc-h { grid-template-columns: auto minmax(200px, 1fr) auto minmax(320px, 460px); }
+@media (max-width: 1000px) { .cpanel .hc-h { grid-template-columns: 1fr; } }
+.hlg i.s { border-top: 6px solid var(--b2); opacity: .7; } .hlg i.b2 { border-color: var(--b1); }
+.cpanel .hc-h { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.cpanel .hc-h > input { flex: 1 1 220px; width: auto; }
+.cpanel .hc-h .hc-f { flex: 0 1 460px; }
+#hcMode { flex: 0 0 auto; } #hcMode button { white-space: nowrap; }
+.cpanel .hc-f { display: grid; grid-template-columns: minmax(140px, 1fr) auto minmax(140px, 1fr); gap: 6px; align-items: center; }
