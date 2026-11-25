@@ -862,3 +862,21 @@ body.home-wide .main { padding: 20px 24px 60px; }
 .ibar-lab.ind-lab { fill: var(--b1); font-weight: 700; }
 .legend i.lg-syoy { display: inline-block; width: 18px; height: 0; border-top: 2px dashed var(--gold); vertical-align: middle; margin-right: 6px; }
 .legend i.lg-ind2 { display: inline-block; width: 18px; height: 0; border-top: 3px solid var(--b1); vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+
+/* 첫 화면 기업 카드 → 옆 창(2026-11-25 사용자): 달력은 전체 폭, 오른쪽 끝 탭을 누르면 카드 창이 열림 */
+.hm { grid-template-columns: minmax(0, 1fr); }
+.hm-open { border-color: var(--b1) !important; color: var(--b1) !important; font-weight: 700; }
+.hm-tab { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 40; writing-mode: vertical-rl; border: 1px solid var(--b1); border-right: 0; background: var(--panel); color: var(--b1); font-weight: 700; font-size: 13px; letter-spacing: 2px; padding: 16px 8px; border-radius: 12px 0 0 12px; cursor: pointer; box-shadow: -6px 0 20px rgba(0,0,0,.3); }
+.hm-tab:hover { background: var(--panel-2); }
+.cpanel { position: fixed; inset: 0; z-index: 90; } .cpanel[hidden] { display: none; }
+.cpanel .cp-box { position: absolute; top: 0; right: 0; bottom: 0; width: min(560px, 96vw); max-height: none; border-radius: 0; border-width: 0 0 0 1px; animation: dpin .22s ease-out; }
+.cp-t { display: flex; justify-content: space-between; align-items: center; }
+/* 기업 카드 창 = 전체 화면, 카드 격자로 한눈에(2026-11-25 사용자) */
+.cpanel .cp-box { left: 0; width: auto; border-width: 0; }
+.cpanel .hc-h { grid-template-columns: auto minmax(220px, 1fr) minmax(360px, 520px); align-items: center; padding: 12px 20px; }
+.cpanel .hc-h .cp-t { gap: 14px; justify-content: flex-start; } .cpanel .hc-h .cp-t .dp-x { order: -1; }
+@media (max-width: 900px) { .cpanel .hc-h { grid-template-columns: 1fr; } }
+.cpanel .hc-list { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); align-content: start; gap: 10px; padding: 14px 20px 40px; }
+.cpanel .hcard.open { grid-column: span 2; }
+@media (max-width: 700px) { .cpanel .hcard.open { grid-column: auto; } }
+.cpanel .hmore { grid-column: 1 / -1; }
