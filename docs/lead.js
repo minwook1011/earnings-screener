@@ -271,7 +271,7 @@
       document.getElementById("calToday").onclick = function () { S.hm.ym = new Date().toISOString().slice(0, 7); S.hm.day = new Date().toISOString().slice(0, 10); calDraw(byD); };
       document.getElementById("hcQ").oninput = function () { S.hm.q = this.value; S.hm.n = 120; cardsDraw(); };
       document.querySelectorAll("#hcView button").forEach(function (b) { b.onclick = function () { S.hm.view = b.dataset.v; document.querySelectorAll("#hcView button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); cardsDraw(); }; });
-      document.getElementById("hcSx").onclick = function (e) { if (e.target.closest("[data-close]")) { S.hm.og = null; sxDraw(); return; } var b = e.target.closest("[data-s]"); if (b) sxToggle(b.dataset.s); };
+      document.getElementById("hcSx").onclick = function (e) { var b = e.target.closest("[data-s]"); if (b) sxToggle(b.dataset.s); };
       document.getElementById("hcChips").onclick = function (e) { var b = e.target.closest("[data-s]"); if (b) sxToggle(b.dataset.s); };
       document.getElementById("hcSort").onchange = function () { S.hm.sort = this.value; cardsDraw(); };
       document.querySelectorAll("#hcMode button").forEach(function (b) { b.onclick = function () { S.hm.cm = b.dataset.v; document.querySelectorAll("#hcMode button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); cardsDraw(); }; });
@@ -309,47 +309,38 @@
   function hmHeat(v, k) { if (v == null) return "h-na"; var f = { r1m: 1, r3m: 1.8, r1y: 3.5 }[k] || 1, a = Math.abs(v) / f, s = v > 0 ? "u" : "d"; return a < 0.5 ? "h-0" : "h-" + s + (a < 4 ? 1 : a < 10 ? 2 : 3); }
   function hmPc(v) { return '<em class="mono ' + (v == null ? "" : v > 0 ? "up" : v < 0 ? "dn" : "") + '">' + (v == null ? "—" : pct(v, 1)) + "</em>"; }
   function sxLab(v) { var g = S.idx.tree.filter(function (g) { return g.id === v.split("/")[0]; })[0]; if (!g) return v; if (v.indexOf("/") < 0) return g.n + " 전체"; var k = g.kids.filter(function (k) { return g.id + "/" + k.id === v; })[0]; return k ? k.n : v; }
-  function sxToggle(v, sub) {   // 위쪽 섹터 칩(2026-11-26 사용자: 왼쪽 말고 위로) — 1줄 큰 단위, 누르면 2줄에 그 아래 작은 단위
+  function sxToggle(v) {
     var ss = (S.hm.ss || []).slice();
-    if (!v) { ss = []; S.hm.og = null; }
-    else if (v.indexOf("/") < 0) {
-      S.hm.og = v;
-      if (ss.indexOf(v) >= 0) ss.splice(ss.indexOf(v), 1);
-      else { ss = ss.filter(function (x) { return x.split("/")[0] !== v; }); ss.push(v); }   // 큰 단위를 켜면 그 아래 작은 단위 선택은 합침
-    } else {
+    if (!v) ss = [];
+    else if (ss.indexOf(v) >= 0) ss.splice(ss.indexOf(v), 1);
+    else if (v.indexOf("/") < 0) { ss = ss.filter(function (x) { return x.split("/")[0] !== v; }); ss.push(v); }   // 큰 단위를 켜면 그 아래 작은 단위 선택은 합침
+    else {
       var g = v.split("/")[0], gi = ss.indexOf(g);
-      if (gi >= 0) { ss.splice(gi, 1); ss.push(v); }   // 큰 단위 전체가 켜진 상태에서 작은 단위를 누르면 그것만 남김
-      else if (ss.indexOf(v) >= 0) ss.splice(ss.indexOf(v), 1);
-      else ss.push(v);
+      if (gi >= 0) {   // 큰 단위가 켜진 상태에서 작은 단위를 누르면 그것만 뺌
+        ss.splice(gi, 1);
+        S.idx.tree.filter(function (t) { return t.id === g; })[0].kids.forEach(function (k) { var w = g + "/" + k.id; if (w !== v && S.cards.cards.some(function (x) { return x.sec === w; })) ss.push(w); });
+      } else ss.push(v);
     }
     S.hm.ss = ss; S.hm.n = 120; cardsDraw();
   }
   function sxDraw() {
     var k = hmMet(), kl = { r1m: "1개월", r3m: "3개월", r1y: "1년" }[k], ss = S.hm.ss || [], B = S.cards.cards.filter(hmQ);
-    var nSel = function (gid) { return ss.filter(function (x) { return x.split("/")[0] === gid && x !== gid; }).length; };
-    var h = '<div class="sx-r1"><button type="button" class="sx-c sx-all' + (ss.length ? "" : " on") + '" data-s=""><span>전체</span><b>' + B.length + "</b></button>";
+    var h = '<div class="sx-h"><span>섹터</span><small>기업 수 · 주가 ' + kl + " 수익률 중앙값</small></div>" + '<button type="button" class="sx-a' + (ss.length ? "" : " on") + '" data-s=""><span>전체</span><b>' + B.length + "</b>" + hmPc(hmMed(B, k)) + "</button>";
     S.idx.tree.forEach(function (g) {
       var GL = B.filter(function (x) { return (x.sec || "").indexOf(g.id + "/") === 0; }); if (!GL.length) return;
-      var on = ss.indexOf(g.id) >= 0, part = nSel(g.id);
-      h += '<button type="button" class="sx-c g-' + g.id + (on ? " on" : part ? " part" : "") + (S.hm.og === g.id ? " open" : "") + '" data-s="' + g.id + '" aria-pressed="' + on + '"><i></i><span>' + esc(g.n) + "</span><b>" + GL.length + "</b>" + hmPc(hmMed(GL, k)) + (part ? '<u>' + part + "</u>" : "") + "</button>";
+      var gOn = ss.indexOf(g.id) >= 0;
+      h += '<div class="sx-g g-' + g.id + '"><button type="button" class="sx-gh' + (gOn ? " on" : "") + '" data-s="' + g.id + '" aria-pressed="' + gOn + '"><i></i><span>' + esc(g.n) + "</span><b>" + GL.length + "</b>" + hmPc(hmMed(GL, k)) + '</button><div class="sx-k">' +
+        g.kids.map(function (kd) { var v = g.id + "/" + kd.id, KL = GL.filter(function (x) { return x.sec === v; }); if (!KL.length) return ""; var on = gOn || ss.indexOf(v) >= 0; return '<button type="button" class="sx-kb' + (on ? " on" : "") + '" data-s="' + v + '" aria-pressed="' + on + '" title="' + esc(kd.n) + '"><span>' + esc(kd.n) + "</span><b>" + KL.length + "</b>" + hmPc(hmMed(KL, k)) + "</button>"; }).join("") + "</div></div>";
     });
-    h += '<span class="sx-note">중앙값 ' + kl + "</span></div>";
-    var og = S.idx.tree.filter(function (g) { return g.id === S.hm.og; })[0];
-    if (og) {
-      var GL = B.filter(function (x) { return (x.sec || "").indexOf(og.id + "/") === 0; }), gOn = ss.indexOf(og.id) >= 0;
-      h += '<div class="sx-r2 g-' + og.id + '"><span class="sx-r2t"><i></i>' + esc(og.n) + "</span>" +
-        og.kids.map(function (kd) { var v = og.id + "/" + kd.id, KL = GL.filter(function (x) { return x.sec === v; }); if (!KL.length) return ""; var on = gOn || ss.indexOf(v) >= 0; return '<button type="button" class="sx-c sx-sub' + (on ? " on" : "") + '" data-s="' + v + '" data-sub="1" aria-pressed="' + on + '"><span>' + esc(kd.n) + "</span><b>" + KL.length + "</b>" + hmPc(hmMed(KL, k)) + "</button>"; }).join("") +
-        '<button type="button" class="sx-x" data-close="1" aria-label="작은 단위 닫기">▴</button></div>';
-    }
     document.getElementById("hcSx").innerHTML = h;
-    document.getElementById("hcChips").innerHTML = ss.length ? '<span class="hc-cl">고른 섹터 ' + ss.length + "</span>" + ss.map(function (v) { return '<button type="button" class="hc-chip g-' + v.split("/")[0] + '" data-s="' + v + '"><i></i>' + esc(sxLab(v)) + "<span>✕</span></button>"; }).join("") + '<button type="button" class="hc-chip clr" data-s="">모두 지우기</button>' : "";
+    document.getElementById("hcChips").innerHTML = ss.length ? '<span class="hc-cl">고른 섹터</span>' + ss.map(function (v) { return '<button type="button" class="hc-chip g-' + v.split("/")[0] + '" data-s="' + v + '"><i></i>' + esc(sxLab(v)) + "<span>✕</span></button>"; }).join("") + '<button type="button" class="hc-chip clr" data-s="">모두 지우기</button>' : "";
   }
   function mapDraw(L, box) {   // 섹터 지도 — 섹터별로 기업을 작은 타일로 한 화면에(색 = 수익률, 크기 = 시총)
     var k = hmMet(), kl = { r1m: "1개월", r3m: "3개월", r1y: "1년" }[k];
     var h = '<div class="mp-leg"><span>색 = 주가 ' + kl + ' 수익률</span><span class="sc"><i class="h-d3"></i><i class="h-d2"></i><i class="h-d1"></i><i class="h-0"></i><i class="h-u1"></i><i class="h-u2"></i><i class="h-u3"></i></span><span>하락 ← → 상승</span><span>크기 = 시총</span><span class="hint">타일 → 기업 화면 · 섹터 이름 → 그 섹터 카드</span></div>';
     S.idx.tree.forEach(function (g) {
       var GL = L.filter(function (x) { return (x.sec || "").indexOf(g.id + "/") === 0; }); if (!GL.length) return;
-      h += '<section class="mg g-' + g.id + '"><header><button type="button" data-s="' + g.id + '"><i></i>' + esc(g.n) + "</button><small>" + GL.length + "곳 · 중앙값</small>" + hmPc(hmMed(GL, k)) + "</header>";
+      h += '<section class="mg g-' + g.id + '"><header><button type="button" data-s="' + g.id + '"><i></i>' + esc(g.n) + "</button><small>" + GL.length + "곳 · 주가 중앙값</small>" + hmPc(hmMed(GL, k)) + "</header>";
       g.kids.forEach(function (kd) {
         var v = g.id + "/" + kd.id, KL = GL.filter(function (x) { return x.sec === v; }).sort(function (a, b) { return (b.mc || 0) - (a.mc || 0); }); if (!KL.length) return;
         h += '<div class="ms"><button type="button" class="ms-l" data-s="' + v + '"><span>' + esc(kd.n) + "</span><small>" + KL.length + "곳 · " + hmPc(hmMed(KL, k)) + '</small></button><div class="mt-w">' +

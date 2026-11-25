@@ -966,33 +966,3 @@ body.home-wide .main { padding: 20px 24px 60px; }
   .ms { grid-template-columns: 1fr; gap: 4px; }
   .mp-leg .hint { margin-left: 0; }
 }
-
-/* 섹터 고르기를 왼쪽 → 위쪽 칩 두 줄로(2026-11-26 사용자) */
-.cp-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
-.sx { overflow: visible; border-right: 0; border-bottom: 1px solid var(--line); padding: 10px 20px; background: var(--bg-2); max-height: none; }
-.sx-r1, .sx-r2 { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.sx-r2 { margin-top: 8px; padding: 8px 10px; border-radius: 12px; background: color-mix(in srgb, var(--gc) 7%, transparent); border: 1px solid color-mix(in srgb, var(--gc) 28%, transparent); }
-.sx-r2t { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; color: var(--ink); margin-right: 4px; }
-.sx-r2t i { width: 8px; height: 8px; border-radius: 2px; background: var(--gc); }
-.sx .sx-c { width: auto; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border: 1px solid var(--line-2); background: var(--panel); border-radius: 999px; font-size: 12.5px; font-weight: 600; color: var(--ink-2); grid-template-columns: none; position: relative; }
-.sx .sx-c span { overflow: visible; }
-.sx .sx-c b { font-size: 11px; color: var(--ink-4); font-weight: 600; }
-.sx .sx-c em { font-size: 10.5px; text-align: left; }
-.sx .sx-c i { width: 8px; height: 8px; border-radius: 2px; background: var(--gc); }
-.sx .sx-c:hover { border-color: color-mix(in srgb, var(--gc, var(--acc)) 70%, transparent); color: var(--ink); background: var(--panel-2); }
-.sx .sx-c.on { background: color-mix(in srgb, var(--gc, var(--acc)) 20%, var(--panel)); border-color: var(--gc, var(--acc)); color: var(--ink); }
-.sx .sx-c.part { border-color: color-mix(in srgb, var(--gc) 60%, transparent); border-style: dashed; }
-.sx .sx-c.open:not(.on) { box-shadow: 0 0 0 1px color-mix(in srgb, var(--gc) 50%, transparent) inset; }
-.sx .sx-c u { text-decoration: none; font-size: 10px; font-weight: 800; background: var(--gc); color: #0b0e14; border-radius: 999px; padding: 0 5px; }
-.sx .sx-all.on { background: var(--acc-soft); border-color: var(--acc); }
-.sx .sx-sub { font-size: 12px; padding: 4px 10px; }
-.sx .sx-sub.on span::before { content: "✓ "; color: var(--gc); font-weight: 800; }
-.sx-note { margin-left: auto; font-size: 10.5px; color: var(--ink-4); }
-.sx .sx-x { width: auto; margin-left: auto; border: 0; background: none; color: var(--ink-3); cursor: pointer; font-size: 13px; padding: 2px 6px; display: inline; }
-.hc-chips { padding: 8px 20px 0; }
-@media (max-width: 900px) {
-  .sx { padding: 8px 12px; max-height: none; }
-  .sx-r1, .sx-r2 { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-  .sx .sx-c { flex: 0 0 auto; }
-  .sx-note { display: none; }
-}
