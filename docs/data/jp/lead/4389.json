@@ -12,7 +12,7 @@
  },
  "updated": "2026-11-25",
  "about": "부동산 자산관리·시설관리 클라우드 '@プロパティ'를 부동산 펀드·기업·공공에 월정액으로 제공하는 SaaS 회사.",
- "thesis": "핵심지표: 부동산 임대·관리업 매출, 정보통신업용 건축 착공면적(월), J-REIT 물건 취득액(월간), J-REIT 운용자산액(취득가격 합계, 월말)",
+ "thesis": "핵심지표: J-REIT 물건 취득액(월간)",
  "tags": [
   "부동산 SaaS",
   "자산관리"
@@ -172,30 +172,10 @@
   "items": [],
   "macro": [
    {
-    "id": "mic_service_industry_detail#re_rent",
-    "name": "부동산 임대·관리업 매출",
-    "why": "@プロパティ 고객은 부동산 임대·관리 회사 — 업종 매출이 늘면 관리 물건 수와 ID가 는다",
-    "rank": 1
-   },
-   {
-    "id": "mlit_starts_nonres_ict#ict",
-    "name": "정보통신업용 건축 착공면적(월)",
-    "why": "솔루션의 새 축인 데이터센터 설비관리(@cmms) 수요 — DC 착공이 늘면 BIM 연계 설비관리 도입 안건이 는다.",
-    "rank": 2.0,
-    "volatile": false
-   },
-   {
     "id": "ares_jreit#acq",
     "name": "J-REIT 물건 취득액(월간)",
     "why": "@property 핵심 고객인 J-REIT의 관리 물건 수 증가(=등록 물건·ID)를 직접 반영.",
     "rank": 2.1,
-    "volatile": false
-   },
-   {
-    "id": "ares_jreit#aum",
-    "name": "J-REIT 운용자산액(취득가격 합계, 월말)",
-    "why": "@property 핵심 고객인 J-REIT의 관리 물건 수 증가(=등록 물건·ID)를 직접 반영.",
-    "rank": 2.2,
     "volatile": false
    }
   ],
@@ -229,6 +209,11 @@
  },
  "note": "맞는 외부 월간 지표가 사실상 없음.",
  "log": [
+  {
+   "d": "2026-11-25",
+   "by": "Claude",
+   "t": "매출과 관련 없는 지표 3개 뺌(일치율 55% 이하·상관 0.3 미만, 사용자 승인)"
+  },
   {
    "d": "2026-11-17",
    "by": "Claude",
