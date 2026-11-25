@@ -309,10 +309,13 @@
       var d = x.nd ? dday(x.nd) : null;
       return '<article class="hcard" data-c="' + x.c + '"><header><div class="hn"><a href="#c/' + x.c + '"><b>' + esc(x.n) + '</b></a><small class="mono">' + x.c + "</small><span>" + esc(x.s) + "</span></div>" + (d != null && d >= 0 ? '<span class="hd">실적 ' + (d === 0 ? "오늘" : "D-" + d) + "</span>" : "") + "</header>" +
         '<dl class="hm4"><div><dt>시총</dt><dd class="mono">' + (x.mc != null ? nf(x.mc) + "<small>억엔</small>" : "—") + "</dd></div><div><dt>PER</dt><dd class=\"mono\">" + (x.per != null ? nf(x.per, 1) + "<small>배</small>" : "—") + "</dd></div><div><dt>1개월</dt><dd>" + r(x.r1m) + "</dd></div><div><dt>3개월</dt><dd>" + r(x.r3m) + "</dd></div><div><dt>1년</dt><dd>" + r(x.r1y) + "</dd></div></dl>" +
-        '<div class="hk"><span>키 데이터</span><b>' + esc(x.key || "—") + "</b>" + (x.bt ? '<em class="btg ' + (x.bt === "확정" ? "b1" : "b2") + '">' + x.bt + " " + x.bter + "%</em>" : x.weak ? '<em class="vol">외부지표 약함</em>' : "") + '<button type="button" class="hx" aria-expanded="false">차트 ▾</button></div><div class="hch"></div></article>';
+        '<div class="hk"><span>키 데이터</span><b>' + esc(x.key || "—") + "</b>" + (x.bt ? '<em class="btg ' + (x.bt === "확정" ? "b1" : "b2") + '">' + x.bt + " " + x.bter + "%</em>" : x.weak ? '<em class="vol">외부지표 약함</em>' : "") + '</div><div class="hch"></div></article>';
     }).join("") + (L.length > S.hm.n ? '<button type="button" class="hmore" id="hcMore">더 보기 (' + (L.length - S.hm.n) + "곳 남음)</button>" : "");
     var mb = document.getElementById("hcMore"); if (mb) mb.onclick = function () { S.hm.n += 120; cardsDraw(); };
-    box.querySelectorAll(".hcard .hx").forEach(function (b) { b.onclick = function () { var card = b.closest(".hcard"), o = card.classList.toggle("open"); b.setAttribute("aria-expanded", o); b.textContent = o ? "차트 ▴" : "차트 ▾"; if (o) cardChart(card); }; });
+    // 작은 차트는 늘 펼쳐 둠 — 화면에 들어온 카드부터 그림(668곳 주가를 한꺼번에 받지 않게, 2026-11-25 사용자)
+    if (S.cardIO) S.cardIO.disconnect();
+    S.cardIO = "IntersectionObserver" in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { S.cardIO.unobserve(e.target); cardChart(e.target); } }); }, { root: box, rootMargin: "200px" }) : null;
+    box.querySelectorAll(".hcard").forEach(function (c) { if (S.cardIO) S.cardIO.observe(c); else cardChart(c); });
   }
   function cardChart(card) {   // 카드 안 작은 차트 — 주가(주봉, 2년) + 키 데이터(월) 겹치기
     var c = card.dataset.c, host = card.querySelector(".hch");
@@ -322,7 +325,7 @@
       var co = S.co[c], px = weekly(S.px[c] || []), it = co && co.lead ? bestIt(co) : null;
       if (!px.length) { host.innerHTML = '<p class="hint">주가 없음</p>'; return; }
       var t1 = px[px.length - 1].t, t0 = t1 - 730 * DAY; px = px.filter(function (r) { return r.t >= t0; });
-      var W = Math.max(260, host.clientWidth || 300), H = 150, pL = 8, pR = 8, top = 10, bot = 18, X = function (t) { return pL + (t - t0) / (t1 - t0) * (W - pL - pR); };
+      var W = Math.max(260, host.clientWidth || 300), H = 96, pL = 4, pR = 4, top = 6, bot = 14, X = function (t) { return pL + (t - t0) / (t1 - t0) * (W - pL - pR); };
       var svg = el("svg", { viewBox: "0 0 " + W + " " + H, width: W, height: H });
       var cs = px.map(function (r) { return r.c; }), lo = Math.min.apply(null, cs), hi = Math.max.apply(null, cs), Y = function (v) { return top + (1 - (v - lo) / ((hi - lo) || 1)) * (H - top - bot); };
       el("path", { d: px.map(function (r, i) { return (i ? "L" : "M") + X(r.t).toFixed(1) + "," + Y(r.c).toFixed(1); }).join(""), fill: "none", stroke: "var(--gold)", "stroke-width": 1.8 }, svg);

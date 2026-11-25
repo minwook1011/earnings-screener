@@ -880,3 +880,7 @@ body.home-wide .main { padding: 20px 24px 60px; }
 .cpanel .hcard.open { grid-column: span 2; }
 @media (max-width: 700px) { .cpanel .hcard.open { grid-column: auto; } }
 .cpanel .hmore { grid-column: 1 / -1; }
+/* 카드 작은 차트 늘 펼침(2026-11-25 사용자) */
+.hcard .hch { display: block; margin-top: 5px; min-height: 96px; }
+.cpanel .hcard.open { grid-column: auto; }
+.hlg { font-size: 10px; gap: 8px; }
