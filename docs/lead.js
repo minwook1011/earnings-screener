@@ -244,7 +244,7 @@
     Promise.all([S.cal || getJSON("data/jp/lead/calendar.json").then(function (d) { return (S.cal = d); }), S.cards || getJSON("data/jp/lead/cards.json").then(function (d) { return (S.cards = d); })]).then(function () {
       if (location.hash.replace(/^#\/?/, "")) return;
       var byD = {}; S.cal.ev.forEach(function (e) { (byD[e.d] = byD[e.d] || []).push(e); });
-      S.hm = S.hm || { ym: new Date().toISOString().slice(0, 7), day: null, q: "", sec: "", sort: "mc", n: 120 };
+      S.hm = S.hm || { ym: new Date().toISOString().slice(0, 7), day: null, q: "", ss: [], sort: "mc", n: 120, view: "card" };
       if (!S.hm.day) { var t0 = new Date().toISOString().slice(0, 10); S.hm.day = Object.keys(byD).sort().filter(function (d) { return d >= t0; })[0] || t0; }
       main.innerHTML = '<div class="hm"><section class="hm-cal"><div class="hm-h"><div><span class="eyebrow">LEADING INDICATORS · CALENDAR</span><h1>선행지표 달력</h1><p>날짜마다 나오는 외부 지표 — 누르면 그 지표를 쓰는 기업. 점선 테두리 = 공표 규칙으로 추정한 날</p></div>' +
         '<div class="hm-nav"><button type="button" id="calPrev" aria-label="이전 달">‹</button><b id="calYm"></b><button type="button" id="calNext" aria-label="다음 달">›</button><button type="button" id="calToday">오늘</button><button type="button" class="hm-open" id="hmOpen">기업 카드 ' + S.cards.cards.length + "곳 ›</button></div></div>" +
@@ -252,9 +252,10 @@
         '<div class="cal" id="cal"></div><div class="cal-day" id="calDay"></div></section>' +
         '<button type="button" class="hm-tab" id="hmTab" aria-label="기업 카드 열기">기업 ›</button>' +   // 오른쪽 끝 탭 → 옆 창(2026-11-25 사용자)
         '<div class="cpanel" id="cpanel" hidden><div class="dp-back" id="cpBack"></div><aside class="cp-box hm-cards"><div class="hc-h"><div class="cp-t"><h2>기업 <small id="hcN"></small></h2><button type="button" class="dp-x cp-cal" id="cpX" aria-label="선행지표 달력 보기">📅 달력</button></div><input id="hcQ" type="search" placeholder="기업 · 코드 · 지표 검색" value="' + esc(S.hm.q) + '">' +
-        '<div class="hc-f"><select id="hcSec"><option value="">전체 섹터</option>' + S.idx.tree.map(function (g) { return '<optgroup label="' + esc(g.n) + '">' + g.kids.filter(function (k) { return k.cos.length; }).map(function (k) { var v = g.id + "/" + k.id; return '<option value="' + v + '"' + (S.hm.sec === v ? " selected" : "") + ">" + esc(k.n) + " (" + k.cos.length + ")</option>"; }).join("") + "</optgroup>"; }).join("") + "</select>" +
+        '<div class="hc-f"><div class="seg" id="hcView" role="group" aria-label="보기">' + [["card", "카드"], ["map", "섹터 지도"]].map(function (o) { return '<button type="button" data-v="' + o[0] + '" aria-pressed="' + ((S.hm.view || "card") === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div>" +
         '<div class="seg" id="hcMode" role="group" aria-label="카드 차트">' + [["sales", "매출액 × 지표"], ["px", "주가 × 지표"]].map(function (o) { return '<button type="button" data-v="' + o[0] + '" aria-pressed="' + ((S.hm.cm || "sales") === o[0]) + '">' + o[1] + "</button>"; }).join("") + "</div>" +
-        '<select id="hcSort">' + [["mc", "시가총액 큰 순"], ["r1m", "1개월 수익률"], ["r3m", "3개월 수익률"], ["r1y", "1년 수익률"], ["nd", "실적 발표 가까운 순"], ["bt", "백테스트 등급 순"], ["n", "이름 순"]].map(function (o) { return '<option value="' + o[0] + '"' + (S.hm.sort === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></div></div><div class=\"hc-list\" id=\"hcList\"></div></aside></div></div>";
+        '<select id="hcSort">' + [["mc", "시가총액 큰 순"], ["r1m", "1개월 수익률"], ["r3m", "3개월 수익률"], ["r1y", "1년 수익률"], ["nd", "실적 발표 가까운 순"], ["bt", "백테스트 등급 순"], ["n", "이름 순"]].map(function (o) { return '<option value="' + o[0] + '"' + (S.hm.sort === o[0] ? " selected" : "") + ">" + o[1] + "</option>"; }).join("") + "</select></div></div>" +
+        '<div class="cp-body"><nav class="sx" id="hcSx" aria-label="섹터 고르기"></nav><div class="hc-main"><div class="hc-chips" id="hcChips"></div><div class="hc-list" id="hcList"></div></div></div></aside></div></div>';
       calDraw(byD);
       var cp = document.getElementById("cpanel"), cpOpen = function () { cp.hidden = false; S.hm.showCal = false; document.body.classList.add("dp-on"); if (!cp._drawn) { cp._drawn = 1; cardsDraw(); } }, cpClose = function () { cp.hidden = true; S.hm.showCal = true; document.body.classList.remove("dp-on"); };
       document.getElementById("hmTab").onclick = document.getElementById("hmOpen").onclick = cpOpen;
@@ -269,7 +270,9 @@
       document.getElementById("calNext").onclick = function () { S.hm.ym = ymAdd(S.hm.ym, 1); calDraw(byD); };
       document.getElementById("calToday").onclick = function () { S.hm.ym = new Date().toISOString().slice(0, 7); S.hm.day = new Date().toISOString().slice(0, 10); calDraw(byD); };
       document.getElementById("hcQ").oninput = function () { S.hm.q = this.value; S.hm.n = 120; cardsDraw(); };
-      document.getElementById("hcSec").onchange = function () { S.hm.sec = this.value; S.hm.n = 120; cardsDraw(); };
+      document.querySelectorAll("#hcView button").forEach(function (b) { b.onclick = function () { S.hm.view = b.dataset.v; document.querySelectorAll("#hcView button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); cardsDraw(); }; });
+      document.getElementById("hcSx").onclick = function (e) { var b = e.target.closest("[data-s]"); if (b) sxToggle(b.dataset.s); };
+      document.getElementById("hcChips").onclick = function (e) { var b = e.target.closest("[data-s]"); if (b) sxToggle(b.dataset.s); };
       document.getElementById("hcSort").onchange = function () { S.hm.sort = this.value; cardsDraw(); };
       document.querySelectorAll("#hcMode button").forEach(function (b) { b.onclick = function () { S.hm.cm = b.dataset.v; document.querySelectorAll("#hcMode button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); cardsDraw(); }; });
     }).catch(function (e) { main.innerHTML = '<div class="empty">첫 화면 데이터를 불러오지 못했습니다(tools/lead_home.py) — ' + esc(e.message || e) + "</div>"; });
@@ -298,9 +301,63 @@
         (e.src ? '<p class="cds">' + esc(e.src) + "</p>" : "") + '<div class="cdc">' + e.cos.map(function (c) { return '<a href="#c/' + c + '">' + esc(nm(c)) + '<small class="mono">' + c + "</small>" + (e.bt.indexOf(c) >= 0 ? '<em class="btg b1">등급</em>' : "") + "</a>"; }).join("") + "</div></details>";
     }).join("");
   }
+  /* 섹터 고르기(2026-11-26 사용자) — 왼쪽 섹터 목록: 큰 단위(소비재 등)·작은 단위(외식 등) 모두 누르면 켜고 끔, 여러 개 함께 가능 */
+  function hmQ(x) { var q = (S.hm.q || "").trim().toLowerCase(); return !q || (x.n + " " + (x.jp || "") + " " + x.c + " " + (x.key || "") + " " + x.s + " " + x.g).toLowerCase().indexOf(q) >= 0; }
+  function hmIn(x, ss) { ss = ss || S.hm.ss || []; return !ss.length || ss.some(function (v) { return x.sec === v || (x.sec || "").indexOf(v + "/") === 0; }); }
+  function hmMet() { return /^r(1m|3m|1y)$/.test(S.hm.sort) ? S.hm.sort : "r1m"; }
+  function hmMed(L, k) { var a = L.map(function (x) { return x[k]; }).filter(function (v) { return v != null; }).sort(function (a, b) { return a - b; }); return a.length ? (a.length % 2 ? a[(a.length - 1) / 2] : (a[a.length / 2 - 1] + a[a.length / 2]) / 2) : null; }
+  function hmHeat(v, k) { if (v == null) return "h-na"; var f = { r1m: 1, r3m: 1.8, r1y: 3.5 }[k] || 1, a = Math.abs(v) / f, s = v > 0 ? "u" : "d"; return a < 0.5 ? "h-0" : "h-" + s + (a < 4 ? 1 : a < 10 ? 2 : 3); }
+  function hmPc(v) { return '<em class="mono ' + (v == null ? "" : v > 0 ? "up" : v < 0 ? "dn" : "") + '">' + (v == null ? "—" : pct(v, 1)) + "</em>"; }
+  function sxLab(v) { var g = S.idx.tree.filter(function (g) { return g.id === v.split("/")[0]; })[0]; if (!g) return v; if (v.indexOf("/") < 0) return g.n + " 전체"; var k = g.kids.filter(function (k) { return g.id + "/" + k.id === v; })[0]; return k ? k.n : v; }
+  function sxToggle(v) {
+    var ss = (S.hm.ss || []).slice();
+    if (!v) ss = [];
+    else if (ss.indexOf(v) >= 0) ss.splice(ss.indexOf(v), 1);
+    else if (v.indexOf("/") < 0) { ss = ss.filter(function (x) { return x.split("/")[0] !== v; }); ss.push(v); }   // 큰 단위를 켜면 그 아래 작은 단위 선택은 합침
+    else {
+      var g = v.split("/")[0], gi = ss.indexOf(g);
+      if (gi >= 0) {   // 큰 단위가 켜진 상태에서 작은 단위를 누르면 그것만 뺌
+        ss.splice(gi, 1);
+        S.idx.tree.filter(function (t) { return t.id === g; })[0].kids.forEach(function (k) { var w = g + "/" + k.id; if (w !== v && S.cards.cards.some(function (x) { return x.sec === w; })) ss.push(w); });
+      } else ss.push(v);
+    }
+    S.hm.ss = ss; S.hm.n = 120; cardsDraw();
+  }
+  function sxDraw() {
+    var k = hmMet(), kl = { r1m: "1개월", r3m: "3개월", r1y: "1년" }[k], ss = S.hm.ss || [], B = S.cards.cards.filter(hmQ);
+    var h = '<div class="sx-h"><span>섹터</span><small>기업 수 · 중앙값 ' + kl + "</small></div>" + '<button type="button" class="sx-a' + (ss.length ? "" : " on") + '" data-s=""><span>전체</span><b>' + B.length + "</b>" + hmPc(hmMed(B, k)) + "</button>";
+    S.idx.tree.forEach(function (g) {
+      var GL = B.filter(function (x) { return (x.sec || "").indexOf(g.id + "/") === 0; }); if (!GL.length) return;
+      var gOn = ss.indexOf(g.id) >= 0;
+      h += '<div class="sx-g g-' + g.id + '"><button type="button" class="sx-gh' + (gOn ? " on" : "") + '" data-s="' + g.id + '" aria-pressed="' + gOn + '"><i></i><span>' + esc(g.n) + "</span><b>" + GL.length + "</b>" + hmPc(hmMed(GL, k)) + '</button><div class="sx-k">' +
+        g.kids.map(function (kd) { var v = g.id + "/" + kd.id, KL = GL.filter(function (x) { return x.sec === v; }); if (!KL.length) return ""; var on = gOn || ss.indexOf(v) >= 0; return '<button type="button" class="sx-kb' + (on ? " on" : "") + '" data-s="' + v + '" aria-pressed="' + on + '" title="' + esc(kd.n) + '"><span>' + esc(kd.n) + "</span><b>" + KL.length + "</b>" + hmPc(hmMed(KL, k)) + "</button>"; }).join("") + "</div></div>";
+    });
+    document.getElementById("hcSx").innerHTML = h;
+    document.getElementById("hcChips").innerHTML = ss.length ? '<span class="hc-cl">고른 섹터</span>' + ss.map(function (v) { return '<button type="button" class="hc-chip g-' + v.split("/")[0] + '" data-s="' + v + '"><i></i>' + esc(sxLab(v)) + "<span>✕</span></button>"; }).join("") + '<button type="button" class="hc-chip clr" data-s="">모두 지우기</button>' : "";
+  }
+  function mapDraw(L, box) {   // 섹터 지도 — 섹터별로 기업을 작은 타일로 한 화면에(색 = 수익률, 크기 = 시총)
+    var k = hmMet(), kl = { r1m: "1개월", r3m: "3개월", r1y: "1년" }[k];
+    var h = '<div class="mp-leg"><span>색 = ' + kl + ' 수익률</span><span class="sc"><i class="h-d3"></i><i class="h-d2"></i><i class="h-d1"></i><i class="h-0"></i><i class="h-u1"></i><i class="h-u2"></i><i class="h-u3"></i></span><span>하락 ← → 상승</span><span>크기 = 시총</span><span class="hint">타일 → 기업 화면 · 섹터 이름 → 그 섹터 카드</span></div>';
+    S.idx.tree.forEach(function (g) {
+      var GL = L.filter(function (x) { return (x.sec || "").indexOf(g.id + "/") === 0; }); if (!GL.length) return;
+      h += '<section class="mg g-' + g.id + '"><header><button type="button" data-s="' + g.id + '"><i></i>' + esc(g.n) + "</button><small>" + GL.length + "곳 · 중앙값</small>" + hmPc(hmMed(GL, k)) + "</header>";
+      g.kids.forEach(function (kd) {
+        var v = g.id + "/" + kd.id, KL = GL.filter(function (x) { return x.sec === v; }).sort(function (a, b) { return (b.mc || 0) - (a.mc || 0); }); if (!KL.length) return;
+        h += '<div class="ms"><button type="button" class="ms-l" data-s="' + v + '"><span>' + esc(kd.n) + "</span><small>" + KL.length + "곳 · " + hmPc(hmMed(KL, k)) + '</small></button><div class="mt-w">' +
+          KL.map(function (x) { var sz = x.mc >= 30000 ? "s3" : x.mc >= 3000 ? "s2" : "s1"; return '<a class="smt ' + sz + " " + hmHeat(x[k], k) + '" href="#c/' + x.c + '" title="' + esc(x.n + " " + x.c + " · 시총 " + (x.mc != null ? nf(x.mc) + "억엔" : "—") + " · 키 데이터 " + (x.key || "—")) + '"><b>' + esc(x.n) + '</b><span class="mono">' + (x[k] == null ? "—" : pct(x[k], 1)) + "</span></a>"; }).join("") + "</div></div>";
+      });
+      h += "</section>";
+    });
+    box.innerHTML = L.length ? h : '<div class="empty">조건에 맞는 기업이 없습니다.</div>';
+    box.querySelectorAll("button[data-s]").forEach(function (b) { b.onclick = function () { S.hm.ss = [b.dataset.s]; S.hm.view = "card"; document.querySelectorAll("#hcView button").forEach(function (x) { x.setAttribute("aria-pressed", x.dataset.v === "card"); }); S.hm.n = 120; cardsDraw(); box.scrollTop = 0; }; });
+  }
   function cardsDraw() {
-    var q = (S.hm.q || "").trim().toLowerCase(), gr = { "확정": 0, "유망": 1 };
-    var L = S.cards.cards.filter(function (x) { return (!S.hm.sec || x.sec === S.hm.sec) && (!q || (x.n + " " + (x.jp || "") + " " + x.c + " " + (x.key || "") + " " + x.s).toLowerCase().indexOf(q) >= 0); });
+    var gr = { "확정": 0, "유망": 1 };
+    sxDraw();
+    var L = S.cards.cards.filter(function (x) { return hmIn(x) && hmQ(x); });
+    var box0 = document.getElementById("hcList"), isMap = S.hm.view === "map";
+    box0.classList.toggle("map", isMap); document.getElementById("hcMode").hidden = isMap;
+    if (isMap) { if (S.cardIO) S.cardIO.disconnect(); document.getElementById("hcN").textContent = L.length + "곳"; mapDraw(L, box0); return; }
     var k = S.hm.sort;
     L.sort(function (a, b) {
       if (k === "n") return a.n.localeCompare(b.n, "ko");
