@@ -1,6 +1,6 @@
 @echo off
-rem 일본 주요 전 종목 판(신고가·근접·턴어라운드·상한가)·섹터·실적 캘린더·최근 발표일 — 윈도 작업 스케줄러가 매일 9~16시 매시 부름(2026-11-23 사용자). 클로드 토큰 안 씀.
 chcp 65001 >nul
+rem Japan all-stock board (new high, near, turnaround, limit-up), sectors, earnings calendar, last report dates. Task Scheduler: daily 09-16 hourly (2026-11-23). No Claude tokens.
 cd /d "%~dp0.."
 python tools\gpush.py --pull
 python -X utf8 tools\build_pxall.py || exit /b 1
