@@ -110,7 +110,11 @@ def main():
     else:
         js = _get(GH + "docs/jp-screener.js")
     m = re.search(r"const MO_DICT=(\[.*?\]);", js, re.S)
-    pairs = sorted(json.loads(m.group(1)) if m else [], key=lambda p: -len(p[0]))
+    # 100억 MO_DICT 에 없는 낱말(2026-11-26, 료힌케이카쿠 해외 지역별 등)
+    more = [["東南アジア・オセアニア", "동남아·오세아니아"], ["東アジア", "동아시아"], ["欧米", "유럽·미주"], ["中国大陸", "중국 대륙"], ["全世界", "전 세계"],
+            ["衣服・雑貨", "의류·잡화"], ["生活雑貨", "생활잡화"], ["月末店舗数", "월말 점포 수"], ["店舗数", "점포 수"], ["大陸", "대륙"], ["数", " 수"],
+            ["食品", "식품"], ["店頭", "매장"], ["冷蔵庫", "냉장고"], ["携帯電話", "휴대전화"], ["支店", "지점"], ["リフォーム", "리폼"], ["寮", "기숙사"]]
+    pairs = sorted((json.loads(m.group(1)) if m else []) + more, key=lambda p: -len(p[0]))
     os.makedirs(OUT, exist_ok=True)
     nm, sec = ko_names()
     index, hub = {}, []
