@@ -1675,6 +1675,8 @@
     hideTip(); renderFav();
     var h = location.hash.replace(/^#\/?/, ""), p = h.split("/");
     S.prevH = S.curH; S.curH = location.hash;
+    document.body.classList.remove("dp-on");   // 옆 창(기업 카드·자세히)이 열린 채 화면이 바뀌면 스크롤이 잠기던 것(2026-11-26)
+    var dpn = document.getElementById("dpanel"); if (dpn) dpn.hidden = true;
     if (S.hm && p[0] !== "c" && h) S.hm.cpRet = null;
     document.body.classList.remove("home-wide");   // 첫 화면만 왼쪽 목록을 숨기고 넓게
     if (p[0] === "c" && p[1] && S.idx.cos[p[1]]) { renderTree({ sec: S.idx.cos[p[1]].sec, c: p[1] }); main.innerHTML = '<div class="boot"><i></i><i></i><i></i></div>'; ensureCo([p[1]], true).then(function () { return attachMacro(S.co[p[1]]); }).then(function () { if (cur() === p[1]) viewCompany(p[1]); }); }
