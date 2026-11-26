@@ -979,6 +979,19 @@
     return '<figure class="mo-ch"><figcaption>' + esc(moShort(m.cols[i])) + "<small>" + (rat ? "전년 대비 · 100 기준" : esc(m.units && m.units[i] || "")) + "</small></figcaption>" +
       '<svg viewBox="0 0 ' + W + " " + H + '" class="' + (rat ? "rat" : "abs") + '" role="img" aria-label="' + esc(moShort(m.cols[i])) + '">' + g + "</svg></figure>";
   }
+  /* 지역별 묶음(2026-11-26 사용자) — 해외 지역으로 시작하는 지표는 지역마다 접어 둔다. 펼치면 그 묶음 위에 '2025년 11월' 처럼 연·월 줄을 다시 */
+  var MO_REG = /^(동남아·오세아니아|동아시아|중국 대륙|중국|대만|홍콩|한국|유럽·미주|유럽|북미|미국|해외|전 세계|글로벌)( 사업)?\s/;
+  function moGroups(cols) {
+    var main = { key: "", idx: [] }, out = [main], by = {};
+    cols.forEach(function (k, i) {
+      var r = MO_REG.exec(k);
+      if (!r) { main.idx.push(i); return; }
+      var key = r[0].trim();
+      if (!by[key]) { by[key] = { key: key, idx: [] }; out.push(by[key]); }
+      by[key].idx.push(i);
+    });
+    return out;
+  }
   function moPanel(c) {
     var h = (S.moh.items || []).filter(function (x) { return x.c === c; })[0] || { c: c, n: c };
     pin.innerHTML = '<div class="ptop"><div><div class="dtk">TSE : ' + esc(c) + "</div>" + '<h2 class="dnm" id="d-title">' + esc(h.n) + "</h2>" +
@@ -986,22 +999,41 @@
       (h.src && /^https:\/\//.test(h.src) ? '<a class="chip" href="' + esc(h.src) + '" target="_blank" rel="noopener noreferrer">월차 원문 ↗</a>' : "") +
       '<a class="chip" href="' + kb(c) + '" target="_blank" rel="noopener noreferrer">카부탄 ↗</a></div></div><button class="x" id="px" aria-label="닫기">✕</button></div>' +
       '<div class="dsec">월차 · 최근 24개월<span class="hint">전년 같은 달 = 100 · 오른쪽이 최근</span></div><div id="mo24"><p class="na">불러오는 중…</p></div>' +
-      '<div class="dsec">그래프</div><div class="mo-grid" id="mo-ch"></div>' +
+      '<div class="dsec">그래프</div><div id="mo-ch"></div>' +
       '<div id="mo-kdw"><div class="dsec">실적에서 딴 사업 지표<span class="hint">결산단신·설명회 자료</span></div><div class="charts" id="kd-key"></div><div id="kd-main"><p class="na">불러오는 중…</p></div></div>';
     panel.classList.add("on"); scrim.classList.add("on"); document.body.style.overflow = "hidden"; panel.focus();
     document.getElementById("px").onclick = closePanel;
     getJSON("data/jp/monthly/" + c + ".json").then(function (m) {
       var rows = m.rows, box = document.getElementById("mo24"); if (!box) return;
       var hd = '<tr><th class="l"></th>' + rows.map(function (r) { return "<th>" + esc(r[0].slice(2).replace("-", ".")) + "</th>"; }).join("") + "</tr>";
-      var bd = m.cols.map(function (col, i) {
-        return '<tr><th class="l">' + esc(moShort(col)) + (m.ratio[i] ? "" : "<small>" + esc(m.units && m.units[i] || "") + "</small>") + "</th>" + rows.map(function (r) {
+      var gs = moGroups(m.cols);
+      function tr(i, key) {
+        return '<tr' + (key ? ' class="mo-gr" data-gk="' + esc(key) + '" hidden' : "") + '><th class="l">' + esc(moShort(key ? m.cols[i].slice(key.length) : m.cols[i])) + (m.ratio[i] ? "" : "<small>" + esc(m.units && m.units[i] || "") + "</small>") + "</th>" + rows.map(function (r) {
           var v = r[i + 1];
           return v == null ? '<td class="na">—</td>' : m.ratio[i] ? '<td class="mo-c ' + tone(v - 100) + '">' + v.toFixed(1) + "</td>" : "<td>" + moNum(v) + "</td>";
         }).join("") + "</tr>";
+      }
+      var bd = gs.map(function (g) {
+        var body = g.idx.map(function (i) { return tr(i, g.key); }).join("");
+        if (!g.key) return body;
+        return '<tr class="mo-gh"><th class="l"><button type="button" data-g="' + esc(g.key) + '" aria-expanded="false">▸ ' + esc(g.key) + " <small>" + g.idx.length + "개</small></button></th><td colspan=\"" + rows.length + '"></td></tr>' +
+          '<tr class="mo-gm" data-gk="' + esc(g.key) + '" hidden><th class="l"></th>' + rows.map(function (r) { return "<th>" + esc("20" + r[0].slice(2, 4) + "년 " + (+r[0].slice(5)) + "월") + "</th>"; }).join("") + "</tr>" + body;
       }).join("");
       box.innerHTML = '<div class="mo-wrap"><table class="mo-t"><thead>' + hd + "</thead><tbody>" + bd + "</tbody></table></div>" + (m.note ? '<p class="note">' + esc(m.note) + "</p>" : "");
       var w = box.querySelector(".mo-wrap"); w.scrollLeft = w.scrollWidth;
-      document.getElementById("mo-ch").innerHTML = m.cols.map(function (x, i) { return moChart(m, i); }).join("") || '<p class="na">그릴 값이 모자랍니다.</p>';
+      box.querySelectorAll(".mo-gh button").forEach(function (b) {
+        b.onclick = function () {
+          var on = b.getAttribute("aria-expanded") !== "true", g = b.dataset.g;
+          b.setAttribute("aria-expanded", on); b.firstChild.nodeValue = (on ? "▾ " : "▸ ") + g + " ";
+          box.querySelectorAll("[data-gk]").forEach(function (r) { if (r.dataset.gk === g) r.hidden = !on; });
+        };
+      });
+      // 그래프도 지역별로 접어 둔다 — 국내·전사는 늘 펼침
+      document.getElementById("mo-ch").innerHTML = gs.map(function (g) {
+        var ch = g.idx.map(function (i) { return moChart(m, i); }).join("");
+        if (!ch) return "";
+        return g.key ? '<details class="mo-gch"><summary>' + esc(g.key) + " <small>" + g.idx.length + "개</small></summary><div class=\"mo-grid\">" + ch + "</div></details>" : '<div class="mo-grid">' + ch + "</div>";
+      }).join("") || '<p class="na">그릴 값이 모자랍니다.</p>';
     }).catch(function () { var b = document.getElementById("mo24"); if (b) b.innerHTML = '<p class="na">월차를 못 불러왔습니다.</p>'; });
     getJSON("data/jp/kd/index.json").catch(function () { return {}; }).then(function (ix) {
       var w = document.getElementById("mo-kdw"); if (!w) return;
